@@ -27,32 +27,19 @@ class User
     const USR_GUEST      = 8;
 
     // Свойства пользователя
-    private $props  = array();
-
-    // В переменной будет содержаться побитная информация об ошибках
-    private $_errors = 0;
+    private $_props  = array();
 
     /**
-     * @fn      __construct
-     * @brief   Конструктор класса User
-     * @details Авторизует пользователя по кукам. Если пользователь не авторизован,
-     * создаётся экземпляр Guest.\n Если пользователь прислал GET-данные авторизации
-     * через AJAX-форму, устанавливаем куки пользователю.
+     * @fn      auth
+     * @brief   Метод для авторизации пользователя
+     *
+     * @return  bool
      */
-    final public function __construct()
+    final public function auth()
     {
-        switch (true) {
-            // Пользователь авторизуеся через ajax-форму
-            case (isset($_GET['ln']) && isset($_GET['ps'])) :
-                Auth::byAjax();
-                break;
-            // Пользователь уже авторизовался ранее
-            case (isset($_COOKIE['id']) && isset($_COOKIE['ps'])) :
-                Auth::byCookie();
-                break;
-            default:
-                $this->props = array('group' => self::USR_GUEST);
-        }
+        $auth = new Auth($this);
+
+        return $auth;
     }
 
     /**
@@ -68,7 +55,7 @@ class User
         // Проверяем есть ли в группах пользователя определённый бит,
         // соответствующий нужной группе.
         foreach ($groups as $group)
-            if (($this->props['group'] & $group) === $group)
+            if (($this->_props['group'] & $group) === $group)
                 $result = TRUE;
         return $result;
     }
@@ -84,7 +71,7 @@ class User
      * @param   array Массив, полученный из формы.
      * @return  bool
      */
-    final public static function save(&$data)
+    final public function save(&$data)
     {
         $sql = '
             INSERT `user`
@@ -98,58 +85,58 @@ class User
     }
 
      /**
-     * @fn      getById
-     * @brief   Метод для получения авторизационных данных пользователя
+     * @fn      getByParam
+     * @brief   Метод для получения данных пользователя
      *
-     * @param   int id пользователя
+     * @param   array id либо email пользователя
      * @return  bool
      */
-    final public static function getById()
+    final public function getByParam($param)
     {
-        $sql = '
-            SELECT
-                `id`, `email`, `hash`, `salt`, `group`, `last_login`
-            FROM
-                `user`
-            WHERE
-                `id` = ' . $_COOKIE['id'] . '
-            LIMIT 1
-        ';
+        foreach ($params as $key => $value) {
+            $sql = '
+                SELECT
+                    `id`, `email`, `hash`, `salt`, `group`, `last_login`
+                FROM
+                    `user`
+                WHERE
+                    `' . $key . '` = ' . $value . '
+                LIMIT 1
+            ';
+        }
 
-        $this->$props = Db::q($sql)->fetch_all();
+        $this->_props = Db::q($sql)->fetch_all();
 
-        if (empty($this->$props))
-            return FALSE;
-
-        return TRUE;
-    }
-
-     /**
-     * @fn      getByEmail
-     * @brief   Метод для получения авторизационных данных пользователя, если
-     * пользователь авторизуется из формы
-     *
-     * @param   int id пользователя
-     * @return  array
-     */
-    final public static function getByEmail(&$mail)
-    {
-
+        return $this->_props;
     }
 
     /**
-     * @fn      getByEmail
+     * @fn      getProperties
      * @brief   Метод для получения параметров пользователя
      *
      * @param   array Массив с требуемыми параметрами в ключах массива
      * @return  array
      */
-    final public static function getProperties(&$properties)
+    final public function getProperties(&$properties)
     {
         foreach ($properties as $property_name => $value) {
-            if (isset($this->prop[$property_name])) {
-                $properties[$property_name] = $this->prop[$property_name];
+            if (isset($this->_props[$property_name])) {
+                $properties[$property_name] = $this->_props[$property_name];
             }
+        }
+    }
+
+    /**
+     * @fn      setProperties
+     * @brief   Метод для получения параметров пользователя
+     *
+     * @param   array Массив с требуемыми параметрами в ключах массива
+     * @return  array
+     */
+    final public function setProperties(&$properties)
+    {
+        foreach ($properties as $property_name => $value) {
+            $this->_props[$property_name] = $properties[$property_name];
         }
     }
 
@@ -160,7 +147,7 @@ class User
      * @param   int id пользователя
      * @return  bool
      */
-    final public static function delete(&$id)
+    final public function delete(&$id)
     {
 
     }

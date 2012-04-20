@@ -28,13 +28,6 @@ class Db {
     private static $db;
     private static $_debug = array();
 
-    private static function getCallingMethod()
-    {
-        $e = new Exception();
-        $trace = $e->getTrace();
-        return $trace;
-    }
-
     /**
      * @fn    connect
      * @brief Метод создаёт экземпляр mysqli класса и сохраняет его в self::$db.
@@ -51,10 +44,10 @@ class Db {
             );
 
             if (!self::$db instanceof mysqli) {
-                throw new Exception('Не удалось создать экземпляр класса mysqli');
+                throw new DbException('Не удалось создать экземпляр класса mysqli');
             }
         }
-        catch (Exception $e) {
+        catch (DbException $e) {
             self::$_debug[] = $e;
         }
     }
@@ -66,7 +59,7 @@ class Db {
      * @param   string Sql-запрос
      * @return  bool Если запрос выполенен без ошибок, возвращает TRUE
      */
-    public static function q($sql)
+    final public static function q($sql)
     {
         if (!self::$db instanceof mysqli)
             self::connect();
@@ -92,7 +85,7 @@ class Db {
      *
      * @return  array $_debug
      */
-    public static function getDebugData()
+    final public static function getDebugData()
     {
         return self::$_debug;
     }

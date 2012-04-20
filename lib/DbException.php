@@ -39,7 +39,7 @@ class DbException extends Exception
      * @param   string Текст sql-ошибки
      * @author  Yancharuk Alexander <alex@itvault.info>
      */
-    public function __construct($msg, $db)
+    final public function __construct($msg, $db)
     {
         parent::__construct($msg);
         $this->setConnectError($db->connect_error);
@@ -52,7 +52,7 @@ class DbException extends Exception
      *
      * @return  string
      */
-    public function getConnectError()
+    final public function getConnectError()
     {
         return $this->connect_error;
     }
@@ -63,7 +63,7 @@ class DbException extends Exception
      *
      * @return  string
      */
-    public function getSqlError()
+    final public function getSqlError()
     {
         return $this->sql_error;
     }

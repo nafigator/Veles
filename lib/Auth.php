@@ -28,12 +28,40 @@ final class Auth
     private $_errors = 0;
 
     /**
-     * @fn      _setCookie
+     * @fn      __construct
+     * @brief   Конструктор класса User
+     * @details Авторизует пользователя по кукам. Если пользователь не авторизован,
+     * создаётся экземпляр Guest.\n Если пользователь прислал GET-данные авторизации
+     * через AJAX-форму, устанавливаем куки пользователю.
+     */
+    final public function __construct(&$user)
+    {
+        $auth = FALSE;
+
+        switch (true) {
+            // Пользователь авторизуеся через ajax-форму
+            case (isset($_GET['ln']) && isset($_GET['ps'])) :
+                $auth = $this->byAjax($user);
+                break;
+            // Пользователь уже авторизовался ранее
+            case (isset($_COOKIE['id']) && isset($_COOKIE['ps'])) :
+                $auth = $this->byCookie($user);
+                break;
+        }
+
+        if (!$auth) {
+            $props = array('group' => $user::USR_GUEST);
+            $user->setProperties($props);
+        }
+    }
+
+    /**
+     * @fn      setCookie
      * @brief   Установка авторизационных кук
      *
      * @return  void
      */
-    private static function _setCookie($id, $hash)
+    final public static function setCookie($id, $hash)
     {
         // Делаем куки на 1 год (3600*24*365)
         setcookie(
@@ -46,12 +74,12 @@ final class Auth
     }
 
     /**
-     * @fn      _delCookie
+     * @fn      delCookie
      * @brief   Удаление авторизационных кук
      *
      * @return  void
      */
-    private static function _delCookie()
+    final public static function delCookie()
     {
         setcookie('id', '', time() - 3600, '/', $_SERVER['HTTP_HOST'], FALSE, FALSE);
         setcookie('ps', '', time() - 3600, '/', $_SERVER['HTTP_HOST'], FALSE, FALSE);
@@ -63,7 +91,7 @@ final class Auth
      *
      * @return  void
      */
-    private static function secureVars($auth_type)
+    private function secureVars($auth_type)
     {
         switch ($auth_type) {
             case 'cookie':
@@ -89,25 +117,25 @@ final class Auth
      *
      * @return  bool
      */
-    public static function byCookie()
+    final public function byCookie(&$user)
     {
-        self::secureVars('cookie');
+        $this->secureVars('cookie');
 
         // Некорректные куки
         if ($this->_errors !== 0)
             return FALSE;
 
         // Пользователь с таким id не найден
-        if (!User::getById($_COOKIE['id'])) {
+        if (!$user->getByParam(array('id' => $_COOKIE['id']))) {
             // Удаляем куки
-            self::_delCookie();
+            self::delCookie();
             $this->_errors |= self::ERR_USER_NOT_FOUND;
             return FALSE;
         }
 
         // Если хэш пароля не совпадает, удаляем куки
         if (!Password::check('cookie')) {
-            $this->_delCookie();
+            self::delCookie();
             $this->_errors |= self::ERR_WRONG_PASSWORD;
             return FALSE;
         }
@@ -119,9 +147,9 @@ final class Auth
      * @fn      byAjax
      * @brief   Метод для авторизация пользователя AJAX-методом ($_GET)
      */
-    public static function byAjax()
+    final public function byAjax(&$user)
     {
-        self::secureVars('ajax');
+        $this->secureVars('ajax');
 
         // Некорректные $_GET
         if ($this->_errors !== 0)
@@ -132,7 +160,7 @@ final class Auth
             self::_delCookie();
 
         // Пользователь с таким логином найден
-        if (!User::getByEmail($_GET['ln'])) {
+        if (!$user->getByParam(array('email' => $_GET['email']))) {
             $this->_errors |= self::ERR_USER_NOT_FOUND;
             return FALSE;
         }
@@ -143,7 +171,7 @@ final class Auth
             return FALSE;
         }
 
-        self::_setCookie(User::getId(), User::getHash());
+        self::setCookie($user->getId(), $user->getHash());
 
         return TRUE;
     }
@@ -154,7 +182,7 @@ final class Auth
      *
      * @return  int Побитовые значения ошибок авторизации
      */
-    public static function getErrors()
+    final public function getErrors()
     {
         return $this->_errors;
     }
