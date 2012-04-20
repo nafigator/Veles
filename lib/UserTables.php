@@ -36,7 +36,7 @@ final class UserTables {
                 `email`         char(48) NOT NULL,
                 `hash`          char(48) NOT NULL,
                 `salt`          char(22) NOT NULL,
-                `group`         tinyint unsigned NOT NULL DEFAULT "8",
+                `group`         tinyint unsigned NOT NULL DEFAULT "4",
                 `last_login`    timestamp NOT NULL DEFAULT "0000-00-00 00:00:00",
                 PRIMARY KEY (`id`),
                 UNIQUE KEY (`email`)
@@ -53,7 +53,7 @@ final class UserTables {
                 `last_name`     varchar(30) NOT NULL,
                 `short_name`    varchar(30) NOT NULL,
                 `about`         varchar(255) NOT NULL,
-                `birth_date`    DATE NOT NULL,
+                `birth_date`    date NOT NULL,
                 `icq`           varchar(30) NOT NULL,
                 `skype`         varchar(30) NOT NULL,
                 `created`       timestamp NOT NULL DEFAULT "0000-00-00 00:00:00",
@@ -67,7 +67,7 @@ final class UserTables {
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8
         ';
 
-        Db::q($sql);        
+        Db::q($sql);
     }
 
     /**
@@ -77,7 +77,7 @@ final class UserTables {
     public function cleanup()
     {
         Db::q('TRUNCATE TABLE `' . self::TBL_USER . '`');
-        Db::q('TRUNCATE TABLE `' . self::TBL_USER_INFO . '`');        
+        Db::q('TRUNCATE TABLE `' . self::TBL_USER_INFO . '`');
     }
 
     /**
