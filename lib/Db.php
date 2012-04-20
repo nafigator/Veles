@@ -32,7 +32,6 @@ class Db {
     {
         $e = new Exception();
         $trace = $e->getTrace();
-        //position 0 would be the line that called this function so we ignore it
         return $trace;
     }
 
