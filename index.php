@@ -24,7 +24,7 @@ $user_tables->drop();
 
 $user = new User;
 var_dump($user);
-$groups = array(8,3,2);
-var_dump($user->hasCredentials($groups));
+$groups = array(8, 3, 2);
+var_dump($user->hasAccess($groups));
 
 var_dump(Db::getDebugData());
