@@ -20,13 +20,6 @@ if (basename(__FILE__) === basename($_SERVER['PHP_SELF'])) exit();
  */
 class User
 {
-    const ERR_INVALID_EMAIL    = 1; // login
-    const ERR_INVALID_PASSWORD = 2;
-    const ERR_INVALID_ID       = 4;
-    const ERR_INVALID_HASH     = 8;
-    const ERR_USER_NOT_FOUND   = 16;
-    const ERR_WRONG_PASSWORD   = 32;
-
     // Группы пользователя
     const USR_ADMIN      = 1;
     const USR_MODERATOR  = 2;
@@ -48,20 +41,22 @@ class User
      */
     final public function __construct()
     {
-        // Пользователь авторизуеся через ajax-форму
-        if (isset($_GET['ln']) && isset($_GET['ps'])) {
-            Auth::byAjax();
+        switch (true) {
+            // Пользователь авторизуеся через ajax-форму
+            case (isset($_GET['ln']) && isset($_GET['ps'])) :
+                Auth::byAjax();
+                break;
+            // Пользователь уже авторизовался ранее
+            case (isset($_COOKIE['id']) && isset($_COOKIE['ps'])) :
+                Auth::byCookie();
+                break;
+            default:
+                $this->props = array('group' => self::USR_GUEST);
         }
-        // Пользователь уже авторизовался ранее
-        elseif (isset($_COOKIE['id']) && isset($_COOKIE['ps'])) {
-            Auth::byCookie();
-        }
-        else
-            $this->props = array('group' => self::USR_GUEST);
     }
 
     /**
-     * @fn      hasCredentials
+     * @fn      hasAccess
      * @brief   Метод для проверки состоит ли пользователь в определённых группах
      * @param   array
      *

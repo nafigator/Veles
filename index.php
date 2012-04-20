@@ -7,7 +7,7 @@ define('DEBUG', TRUE);
 
 function __autoload($name) {
     try {
-        require_once "lib/$name.class.inc";
+        require_once "lib/$name.php";
     }
     catch (Exception $e){
         print $e->getMessage();
