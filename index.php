@@ -23,6 +23,7 @@ $user_tables->drop();
 
 
 $user = new User;
+$user->auth();
 var_dump($user);
 $groups = array(8, 3, 2);
 var_dump($user->hasAccess($groups));

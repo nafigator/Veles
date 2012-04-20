@@ -28,7 +28,7 @@ final class UserTables {
      *
      * @return  bool В случае отсутствия ошибок возвращает TRUE
      */
-    public function create()
+    final public function create()
     {
         $sql = '
             CREATE TABLE `' . self::TBL_USER . '` (
@@ -74,7 +74,7 @@ final class UserTables {
      * @fn      cleanup
      * @brief   Метод очистки данных sql-таблиц для класса User
      */
-    public function cleanup()
+    final public function cleanup()
     {
         Db::q('TRUNCATE TABLE `' . self::TBL_USER . '`');
         Db::q('TRUNCATE TABLE `' . self::TBL_USER_INFO . '`');
@@ -84,7 +84,7 @@ final class UserTables {
      * @fn      drop
      * @brief   Метод удаления sql-таблиц для класса User
      */
-    public function drop()
+    final public function drop()
     {
         $sql = '
             DROP TABLE IF EXISTS
