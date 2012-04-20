@@ -21,8 +21,6 @@ if (basename(__FILE__) === basename($_SERVER['PHP_SELF'])) exit();
 final class UserTables {
     const TBL_USER      = 'user';
     const TBL_USER_INFO = 'user_info';
-    const TBL_BRUTFORCE = 'brutforce';
-    const TBL_IP_BANNED = 'banned_ip';
 
     /**
      * @fn      create
@@ -34,12 +32,12 @@ final class UserTables {
     {
         $sql = '
             CREATE TABLE `' . self::TBL_USER . '` (
-                `id`            INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-                `email`         CHAR(48) NOT NULL,
-                `hash`          CHAR(48) NOT NULL,
-                `salt`          CHAR(22) NOT NULL,
-                `group`         TINYINT(4) UNSIGNED NOT NULL DEFAULT "8",
-                `last_login`    TIMESTAMP NOT NULL DEFAULT "0000-00-00 00:00:00",
+                `id`            int unsigned NOT NULL AUTO_INCREMENT,
+                `email`         char(48) NOT NULL,
+                `hash`          char(48) NOT NULL,
+                `salt`          char(22) NOT NULL,
+                `group`         tinyint unsigned NOT NULL DEFAULT "8",
+                `last_login`    timestamp NOT NULL DEFAULT "0000-00-00 00:00:00",
                 PRIMARY KEY (`id`),
                 UNIQUE KEY (`email`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8
@@ -49,57 +47,27 @@ final class UserTables {
 
         $sql = '
             CREATE TABLE `' . self::TBL_USER_INFO . '` (
-                `id`            INT(10) UNSIGNED NOT NULL,
-                `first_name`    VARCHAR(30) NOT NULL,
-                `middle_name`   VARCHAR(30) NOT NULL,
-                `last_name`     VARCHAR(30) NOT NULL,
-                `short_name`    VARCHAR(30) NOT NULL,
-                `about`         VARCHAR(255) NOT NULL,
+                `id`            int unsigned NOT NULL,
+                `first_name`    varchar(30) NOT NULL,
+                `middle_name`   varchar(30) NOT NULL,
+                `last_name`     varchar(30) NOT NULL,
+                `short_name`    varchar(30) NOT NULL,
+                `about`         varchar(255) NOT NULL,
                 `birth_date`    DATE NOT NULL,
-                `icq`           VARCHAR(30) NOT NULL,
-                `skype`         VARCHAR(30) NOT NULL,
-                `created`       TIMESTAMP NOT NULL DEFAULT "0000-00-00 00:00:00",
-                `updated`       TIMESTAMP NOT NULL DEFAULT "0000-00-00 00:00:00"
+                `icq`           varchar(30) NOT NULL,
+                `skype`         varchar(30) NOT NULL,
+                `created`       timestamp NOT NULL DEFAULT "0000-00-00 00:00:00",
+                `updated`       timestamp NOT NULL DEFAULT "0000-00-00 00:00:00"
                     ON UPDATE CURRENT_TIMESTAMP,
-                `active`        BIT(1) NOT NULL DEFAULT b\'0\',
-                `act_key`       CHAR(48),
+                `active`        tinyint(1) NOT NULL DEFAULT "0",
+                `act_key`       char(48),
                 FOREIGN KEY (`id`) REFERENCES `' . self::TBL_USER . '` (`id`)
                     ON DELETE CASCADE
                     ON UPDATE CASCADE
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8
         ';
 
-        Db::q($sql);
-
-        $sql = '
-            CREATE TABLE `' . self::TBL_BRUTFORCE . '` (
-                `id`            INT(10) UNSIGNED NOT NULL,
-                `ip`            INT(10) UNSIGNED NOT NULL,
-                `attempts`      TINYINT(1) UNSIGNED NOT NULL,
-                `first_attempt` TIMESTAMP NOT NULL DEFAULT "0000-00-00 00:00:00",
-                FOREIGN KEY (`id`) REFERENCES `' . self::TBL_USER . '` (`id`)
-                    ON DELETE CASCADE
-                    ON UPDATE CASCADE
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8
-        ';
-
-        Db::q($sql);
-
-        //TODO: Сделать функцию mysql, которая бы периодически проверяла таблицу
-        // на наличие записей, которые необходимо разбанить и удаляла эти записи??
-        $sql = '
-            CREATE TABLE `' . self::TBL_IP_BANNED . '` (
-                `id`            INT(10) UNSIGNED NOT NULL,
-                `ip`            INT(10) UNSIGNED NOT NULL,
-                `unban_time`    TIMESTAMP NOT NULL DEFAULT "0000-00-00 00:00:00",
-                FOREIGN KEY (`id`) REFERENCES `' . self::TBL_USER . '` (`id`)
-                    ON DELETE CASCADE
-                    ON UPDATE CASCADE,
-                KEY (`unban_time`)
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8
-        ';
-
-        Db::q($sql);
+        Db::q($sql);        
     }
 
     /**
@@ -109,9 +77,7 @@ final class UserTables {
     public function cleanup()
     {
         Db::q('TRUNCATE TABLE `' . self::TBL_USER . '`');
-        Db::q('TRUNCATE TABLE `' . self::TBL_USER_INFO . '`');
-        Db::q('TRUNCATE TABLE `' . self::TBL_BRUTFORCE . '`');
-        Db::q('TRUNCATE TABLE `' . self::TBL_IP_BANNED . '`');
+        Db::q('TRUNCATE TABLE `' . self::TBL_USER_INFO . '`');        
     }
 
     /**
@@ -123,8 +89,6 @@ final class UserTables {
         $sql = '
             DROP TABLE IF EXISTS
                 `' . self::TBL_USER_INFO . '`,
-                `' . self::TBL_BRUTFORCE . '`,
-                `' . self::TBL_IP_BANNED . '`,
                 `' . self::TBL_USER . '`
         ';
 

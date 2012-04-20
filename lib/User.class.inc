@@ -33,8 +33,6 @@ class User
     const USR_REGISTERED = 4;
     const USR_GUEST      = 8;
 
-    // Авторизационные свойства пользователя
-    private $credentials = array();
     // Свойства пользователя
     private $props  = array();
 
@@ -69,7 +67,7 @@ class User
      *
      * @return  bool
      */
-    final public function hasCredentials($groups)
+    final public function hasAccess($groups)
     {
         $result = FALSE;
         // Проверяем есть ли в группах пользователя определённый бит,
@@ -93,7 +91,15 @@ class User
      */
     final public static function save(&$data)
     {
-
+        $sql = '
+            INSERT `user`
+                `email`, `hash`, `salt`, `group`, `last_login`
+            FROM
+                `user`
+            WHERE
+                `id` = ' . $_COOKIE['id'] . '
+            LIMIT 1
+        ';
     }
 
      /**
@@ -146,8 +152,9 @@ class User
     final public static function getProperties(&$properties)
     {
         foreach ($properties as $property_name => $value) {
-            if (isset(self::$prop[$property_name]))
-                $properties[$property_name] = self::$prop[$property_name];
+            if (isset($this->prop[$property_name])) {
+                $properties[$property_name] = $this->prop[$property_name];
+            }
         }
     }
 
