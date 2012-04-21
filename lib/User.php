@@ -15,11 +15,13 @@ if (basename(__FILE__) === basename($_SERVER['PHP_SELF'])) exit();
 
 /**
  * @class   User
- * @brief   Класс реализующий авторизацию и управление пользователями. Перед
- * авторизацией проверяется таблица
+ * @brief   Модель пользователя
  */
 class User
 {
+    const TBL_USER      = 'users';
+    const TBL_USER_INFO = 'users_info';
+
     // Группы пользователя
     const USR_ADMIN      = 1;
     const USR_MODERATOR  = 2;
@@ -77,7 +79,7 @@ class User
             INSERT `user`
                 `email`, `hash`, `salt`, `group`, `last_login`
             FROM
-                `user`
+                `' . self::TBL_USER . '`
             WHERE
                 `id` = ' . $_COOKIE['id'] . '
             LIMIT 1
@@ -93,19 +95,19 @@ class User
      */
     final public function getByParam($param)
     {
-        foreach ($params as $key => $value) {
+        foreach ($param as $key => $value) {
             $sql = '
                 SELECT
                     `id`, `email`, `hash`, `salt`, `group`, `last_login`
                 FROM
-                    `user`
+                    `' . self::TBL_USER . '`
                 WHERE
-                    `' . $key . '` = ' . $value . '
+                    `' . $key . '` = "' . $value . '"
                 LIMIT 1
             ';
         }
 
-        $this->_props = Db::q($sql)->fetch_all();
+        $this->_props = Db::q($sql);
 
         return $this->_props;
     }

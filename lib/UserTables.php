@@ -19,9 +19,6 @@ if (basename(__FILE__) === basename($_SERVER['PHP_SELF'])) exit();
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
 final class UserTables {
-    const TBL_USER      = 'user';
-    const TBL_USER_INFO = 'user_info';
-
     /**
      * @fn      create
      * @brief   Метод для создания инфраструктуры данных для пользователя
@@ -31,11 +28,10 @@ final class UserTables {
     final public function create()
     {
         $sql = '
-            CREATE TABLE `' . self::TBL_USER . '` (
+            CREATE TABLE `' . User::TBL_USER . '` (
                 `id`            int unsigned NOT NULL AUTO_INCREMENT,
                 `email`         char(48) NOT NULL,
                 `hash`          char(48) NOT NULL,
-                `salt`          char(22) NOT NULL,
                 `group`         tinyint unsigned NOT NULL DEFAULT "4",
                 `last_login`    timestamp NOT NULL DEFAULT "0000-00-00 00:00:00",
                 PRIMARY KEY (`id`),
@@ -46,7 +42,7 @@ final class UserTables {
         Db::q($sql);
 
         $sql = '
-            CREATE TABLE `' . self::TBL_USER_INFO . '` (
+            CREATE TABLE `' . User::TBL_USER_INFO . '` (
                 `id`            int unsigned NOT NULL,
                 `first_name`    varchar(30) NOT NULL,
                 `middle_name`   varchar(30) NOT NULL,
@@ -61,7 +57,7 @@ final class UserTables {
                     ON UPDATE CURRENT_TIMESTAMP,
                 `active`        tinyint(1) NOT NULL DEFAULT "0",
                 `act_key`       char(48),
-                FOREIGN KEY (`id`) REFERENCES `' . self::TBL_USER . '` (`id`)
+                FOREIGN KEY (`id`) REFERENCES `' . User::TBL_USER . '` (`id`)
                     ON DELETE CASCADE
                     ON UPDATE CASCADE
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8
@@ -76,8 +72,8 @@ final class UserTables {
      */
     final public function cleanup()
     {
-        Db::q('TRUNCATE TABLE `' . self::TBL_USER . '`');
-        Db::q('TRUNCATE TABLE `' . self::TBL_USER_INFO . '`');
+        Db::q('TRUNCATE TABLE `' . User::TBL_USER . '`');
+        Db::q('TRUNCATE TABLE `' . User::TBL_USER_INFO . '`');
     }
 
     /**
@@ -88,8 +84,8 @@ final class UserTables {
     {
         $sql = '
             DROP TABLE IF EXISTS
-                `' . self::TBL_USER_INFO . '`,
-                `' . self::TBL_USER . '`
+                `' . User::TBL_USER_INFO . '`,
+                `' . User::TBL_USER . '`
         ';
 
         Db::q($sql);

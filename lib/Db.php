@@ -36,7 +36,7 @@ class Db {
     private static function connect()
     {
         try {
-            self::$db = new mysqli (
+            self::$db = mysqli_connect(
                 self::MYSQL_SERVER,
                 self::MYSQL_USER,
                 self::MYSQL_PASSWORD,
@@ -44,7 +44,7 @@ class Db {
             );
 
             if (!self::$db instanceof mysqli) {
-                throw new DbException('Не удалось создать экземпляр класса mysqli');
+                throw new DbException('Не удалось подключиться к mysql');
             }
         }
         catch (DbException $e) {
@@ -65,8 +65,8 @@ class Db {
             self::connect();
 
         try {
-            $result = self::$db->query($sql);
-            if ( $result !== TRUE) {
+            $result = mysqli_query(self::$db, $sql, MYSQLI_USE_RESULT);
+            if ($result === FALSE) {
                 throw new DbException(
                     'Не удалось выполнить запрос', self::$db, $sql
                 );
@@ -76,7 +76,18 @@ class Db {
             self::$_debug[] = $e;
         }
 
-        return $result;
+        if ($result instanceof MySQLi_Result) {
+            if ($result->num_rows > 1)
+                while ($return[] = mysqli_fetch_assoc($result));
+            else
+                $return = mysqli_fetch_assoc($result);
+
+            $result->free();
+        }
+        else
+            return $result;
+
+        return $return;
     }
 
     /**

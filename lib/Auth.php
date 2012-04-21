@@ -12,20 +12,25 @@
 
 final class Auth
 {
-    const ERR_INVALID_EMAIL    = 1; // login
+    const ERR_INVALID_EMAIL    = 1; // ajax login
     const ERR_INVALID_PASSWORD = 2;
-    const ERR_INVALID_ID       = 4;
+    const ERR_INVALID_ID       = 4; // cookie
     const ERR_INVALID_HASH     = 8;
-    const ERR_USER_NOT_FOUND   = 16;
+    const ERR_USER_NOT_FOUND   = 16;// auth
     const ERR_WRONG_PASSWORD   = 32;
 
     const PREG_ID       = '/^\d{1,10}$/';
     const PREG_PS       = '/^[a-z0-9]{48}$/';
-    const PREG_EMAIL    = '';
-    const PREG_PASSWORD = '[a-zA-Z0-9]{20}';
+    const PREG_EMAIL    = '/^([a-zA-Z0-9]|_|\-|\.)+@(([a-z0-9_]|\-)+\.)+[a-z]{2,6}$/';
+    const PREG_PASSWORD = '/^[a-zA-Z0-9]{1,20}$/';
 
     // В переменной будет содержаться побитная информация об ошибках
     private $_errors = 0;
+
+    private $_id;
+    private $_hash;
+    private $_email;
+    private $_password;
 
     /**
      * @fn      __construct
@@ -38,13 +43,19 @@ final class Auth
     {
         $auth = FALSE;
 
-        switch (true) {
+        switch (TRUE) {
             // Пользователь авторизуеся через ajax-форму
             case (isset($_GET['ln']) && isset($_GET['ps'])) :
+                $this->_email    =& $_GET['ln'];
+                $this->_password =& $_GET['ps'];
+
                 $auth = $this->byAjax($user);
                 break;
             // Пользователь уже авторизовался ранее
             case (isset($_COOKIE['id']) && isset($_COOKIE['ps'])) :
+                $this->_id   =& $_COOKIE['id'];
+                $this->_hash =& $_COOKIE['ps'];
+
                 $auth = $this->byCookie($user);
                 break;
         }
@@ -95,17 +106,17 @@ final class Auth
     {
         switch ($auth_type) {
             case 'cookie':
-                if (!preg_match(PREG_ID, $_COOKIE['id']))
+                if (!preg_match(self::PREG_ID, $this->_id))
                     $this->_errors |= self::ERR_INVALID_ID;
 
-                if (!preg_match(PREG_PS, $_COOKIE['ps']))
+                if (!preg_match(self::PREG_PS, $this->_hash))
                     $this->_errors |= self::ERR_INVALID_HASH;
                 break;
             case 'ajax':
-                if (!preg_match(PREG_EMAIL, $_GET['email']))
+                if (!preg_match(self::PREG_EMAIL, $this->_email))
                     $this->_errors |= self::ERR_INVALID_EMAIL;
 
-                if (!preg_match(PREG_PASSWORD, $_GET['password']))
+                if (!preg_match(self::PREG_PASSWORD, $this->_password))
                     $this->_errors |= self::ERR_INVALID_PASSWORD;
                 break;
         }
@@ -126,7 +137,7 @@ final class Auth
             return FALSE;
 
         // Пользователь с таким id не найден
-        if (!$user->getByParam(array('id' => $_COOKIE['id']))) {
+        if (!$user->getByParam(array('id' => $this->_id))) {
             // Удаляем куки
             self::delCookie();
             $this->_errors |= self::ERR_USER_NOT_FOUND;
@@ -134,7 +145,7 @@ final class Auth
         }
 
         // Если хэш пароля не совпадает, удаляем куки
-        if (!Password::check('cookie')) {
+        if (!Password::checkHash($user)) {
             self::delCookie();
             $this->_errors |= self::ERR_WRONG_PASSWORD;
             return FALSE;
@@ -160,13 +171,13 @@ final class Auth
             self::_delCookie();
 
         // Пользователь с таким логином найден
-        if (!$user->getByParam(array('email' => $_GET['email']))) {
+        if (!$user->getByParam(array('email' => $_GET['ln']))) {
             $this->_errors |= self::ERR_USER_NOT_FOUND;
             return FALSE;
         }
 
         // Если хэш пароля совпадает, устанавливаем авторизационные куки
-        if (!Password::check('ajax')) {
+        if (!Password::checkHash('ajax')) {
             $this->_errors |= self::ERR_WRONG_PASSWORD;
             return FALSE;
         }
