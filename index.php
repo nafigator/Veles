@@ -14,11 +14,11 @@ function __autoload($name) {
     }
 }
 
-$user_tables = new UserTables();
+//$user_tables = new UserTables();
 
-$user_tables->create();
+//$user_tables->create();
 
-$user_tables->drop();
+//$user_tables->drop();
 
 
 
@@ -26,6 +26,8 @@ $user = new User;
 $user->auth();
 var_dump($user);
 $groups = array(8, 3, 2);
-var_dump($user->hasAccess($groups));
 
-var_dump(Db::getDebugData());
+var_dump(
+    'in group 8,3,2: ', $user->hasAccess($groups),
+    'Debug data: ', Db::getDebugData()
+);
