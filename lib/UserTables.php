@@ -1,6 +1,6 @@
 <?php
 /**
- * @file    UserTables.class.inc
+ * @file    UserTables.php
  * @brief   Класс управления инфраструктурой данных для класса User
  *
  * PHP version 5.3+
@@ -31,11 +31,12 @@ final class UserTables {
             CREATE TABLE `' . User::TBL_USER . '` (
                 `id`            int unsigned NOT NULL AUTO_INCREMENT,
                 `email`         char(48) NOT NULL,
-                `hash`          char(48) NOT NULL,
+                `hash`          char(60) NOT NULL,
                 `group`         tinyint unsigned NOT NULL DEFAULT "4",
                 `last_login`    timestamp NOT NULL DEFAULT "0000-00-00 00:00:00",
                 PRIMARY KEY (`id`),
-                UNIQUE KEY (`email`)
+                UNIQUE KEY (`email`),
+                KEY `group` (`group`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8
         ';
 
