@@ -106,6 +106,8 @@ class Db {
         catch (DbException $e) {
             self::$debug[] = $e;
         }
+
+        return $result;
     }
 
     /**
