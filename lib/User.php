@@ -60,7 +60,7 @@ class User
         foreach ($groups as $group)
             if (($this->props['group'] & $group) === $group)
                 $result = TRUE;
-                
+
         return $result;
     }
 
