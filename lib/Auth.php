@@ -67,33 +67,6 @@ final class Auth
     }
 
     /**
-     * @fn     checkEmail
-     * @brief  Валидация email
-     *
-     * @param  string $email
-     * @return bool
-     */
-    final public function checkEmail($email, $check_domain = FALSE)
-    {
-        if (preg_match(self::PREG_EMAIL, $email)) {
-            if ($check_domain) {
-                list($username, $domain) = explode('@', $email);
-
-                if (!(checkdnsrr($domain, 'MX') || checkdnsrr($domain, 'A'))) {
-                    $this->errors |= self::ERR_WRONG_DOMAIN;
-                    return FALSE;
-                }
-            }
-
-            return TRUE;
-        }
-        else {
-            $this->errors |= self::ERR_INVALID_EMAIL;
-            return FALSE;
-        }
-    }
-
-    /**
      * @fn      setCookie
      * @brief   Установка авторизационных кук
      *
