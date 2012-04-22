@@ -25,7 +25,7 @@ class Db {
     const MYSQL_BASE     = 'ts';
 
     private static $db;
-    private static $debug = array();
+    private static $errors = array();
 
     /**
      * @fn    connect
@@ -47,7 +47,7 @@ class Db {
             }
         }
         catch (DbException $e) {
-            self::$debug[] = $e;
+            self::$errors[] = $e;
         }
     }
 
@@ -72,7 +72,7 @@ class Db {
             }
         }
         catch (DbException $e) {
-            self::$debug[] = $e;
+            self::$errors[] = $e;
         }
 
         if ($result instanceof MySQLi_Result) {
@@ -104,20 +104,20 @@ class Db {
             }
         }
         catch (DbException $e) {
-            self::$debug[] = $e;
+            self::$errors[] = $e;
         }
 
         return $result;
     }
 
     /**
-     * @fn      getDebugData
+     * @fn      getErrors
      * @brief   Метод возвращает массив с ошибками
      *
-     * @return  array $_debug
+     * @return  array $errors
      */
-    final public static function getDebugData()
+    final public static function getErrors()
     {
-        return self::$debug;
+        return self::$errors;
     }
 }
