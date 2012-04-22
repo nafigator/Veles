@@ -10,6 +10,9 @@
  * @version
  */
 
+// Не допускаем обращения к файлу напрямую
+if (basename(__FILE__) === basename($_SERVER['PHP_SELF'])) exit();
+
 final class Auth
 {
     const ERR_INVALID_EMAIL    = 1; // ajax login
