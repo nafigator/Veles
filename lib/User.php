@@ -60,41 +60,45 @@ class User
         foreach ($groups as $group)
             if (($this->props['group'] & $group) === $group)
                 $result = TRUE;
+                
         return $result;
     }
 
     /**
      * @fn      save
      * @brief   Метод для сохранения данных пользователя
-     * @par     Best practicies:
-     * Использовать AJAX + GET (POST требует дополнительного заголовка)\n
-     * Поля формы называть следующим образом: name="user[firstname]". Получится
-     * массив $_GET['user']['firstname'] и т.д.
      *
-     * @param   array Массив, полученный из формы.
      * @return  bool
      */
-    final public function save(&$data)
+    final public function save()
     {
+        $values = '"' . $this->props['email'] . '", "' . $this->props['hash'] . '",
+            ' . $this->props['group'];
+
         $sql = '
-            INSERT `user`
-                `email`, `hash`, `group`, `last_login`
-            FROM
+            INSERT
                 `' . self::TBL_USER . '`
-            WHERE
-                `id` = ' . $_COOKIE['id'] . '
-            LIMIT 1
+                (`email`, `hash`, `group`)
+            VALUES
+                (' . $values . ')
+            ON DUPLICATE KEY UPDATE
+                `id`    = LAST_INSERT_ID(`id`)
+                `email` = VALUES(`email`),
+                `hash`  = VALUES(`hash`),
+                `group` = VALUES(`group`)
         ';
+
+        return (Db::q($sql)) ? Db::getLastInsertId() : FALSE;
     }
 
      /**
-     * @fn      getByParam
-     * @brief   Метод для получения данных пользователя
+     * @fn      findActive
+     * @brief   Метод для получения данных не удалённого пользователя
      *
      * @param   array $params id либо email пользователя
      * @return  bool
      */
-    final public function getActive($params)
+    final public function findActive($params)
     {
         $where = '';
         foreach ($params as $key => $value) {
@@ -192,11 +196,11 @@ class User
      * @fn      delete
      * @brief   Метод для удаления пользователя
      *
-     * @param   int id пользователя
      * @return  bool
      */
-    final public function delete(&$id)
+    final public function delete()
     {
-
+        $this->props['group'] |= self::DELETED;
+        return $this->save();
     }
 }
