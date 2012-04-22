@@ -1,6 +1,6 @@
 <?php
 /**
- * @file    Db.class.inc
+ * @file    Db.php
  * @brief   Класс соединения с базой. Для использования необходимо в php наличие
  * mysqli расширения.
  *
@@ -17,7 +17,6 @@ if (basename(__FILE__) === basename($_SERVER['PHP_SELF'])) exit();
 /**
  * @class   Db
  * @brief   Класс соединения с базой
- * @author  Yancharuk Alexander <alex@itvault.info>
  */
 class Db {
     const MYSQL_SERVER   = 'localhost';
@@ -26,7 +25,7 @@ class Db {
     const MYSQL_BASE     = 'ts';
 
     private static $db;
-    private static $_debug = array();
+    private static $debug = array();
 
     /**
      * @fn    connect
@@ -48,7 +47,7 @@ class Db {
             }
         }
         catch (DbException $e) {
-            self::$_debug[] = $e;
+            self::$debug[] = $e;
         }
     }
 
@@ -73,7 +72,7 @@ class Db {
             }
         }
         catch (DbException $e) {
-            self::$_debug[] = $e;
+            self::$debug[] = $e;
         }
 
         if ($result instanceof MySQLi_Result) {
@@ -98,6 +97,6 @@ class Db {
      */
     final public static function getDebugData()
     {
-        return self::$_debug;
+        return self::$debug;
     }
 }

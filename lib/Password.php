@@ -1,6 +1,6 @@
 <?php
 /**
- * @file    Password
+ * @file    Password.php
  * @brief   Класс управления паролем пользователя
  *
  * PHP version 5.3+
@@ -21,8 +21,20 @@ class Password {
      *
      * @param $user
      */
-    final public static function checkHash($user)
+    final public static function checkCookieHash(&$user, &$cookie_hash)
     {
+        return $user->getCookieHash() === $cookie_hash;
+    }
 
+    /**
+     * @fn    check
+     * @brief Проверка пароля пользователя при ajax-авторизации
+     *
+     * @param object $user     User
+     * @param string $password Пароль полученый ajax'ом
+     */
+    final public static function check(&$user, &$password)
+    {
+        return $user->getHash() === crypt($password, $user->getSalt());
     }
 }

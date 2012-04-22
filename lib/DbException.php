@@ -1,6 +1,6 @@
 <?php
 /**
- * @file    DbException.class.php
+ * @file    DbException.php
  * @brief   Exception содержащий код, текст и запрос sql-ошибки
  *
  * PHP version 5.3+
@@ -13,8 +13,6 @@
 /**
  * @class   DbException
  * @brief   Exception содержащий код и текст sql-ошибки
- *
- * @author  Yancharuk Alexander <alex@itvault.info>
  */
 class DbException extends Exception
 {

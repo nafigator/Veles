@@ -1,6 +1,6 @@
 <?php
 /**
- * @file    User.class.inc
+ * @file    User.php
  * @brief   Класс User
  *
  * PHP version 5.3+
@@ -23,13 +23,14 @@ class User
     const TBL_USER_INFO = 'users_info';
 
     // Группы пользователя
-    const USR_ADMIN      = 1;
-    const USR_MODERATOR  = 2;
-    const USR_REGISTERED = 4;
-    const USR_GUEST      = 8;
+    const ADMIN      = 1;
+    const MODERATOR  = 2;
+    const REGISTERED = 4;
+    const GUEST      = 8;
+    const DELETED    = 16;
 
     // Свойства пользователя
-    private $_props  = array();
+    private $props = array();
 
     /**
      * @fn      auth
@@ -57,7 +58,7 @@ class User
         // Проверяем есть ли в группах пользователя определённый бит,
         // соответствующий нужной группе.
         foreach ($groups as $group)
-            if (($this->_props['group'] & $group) === $group)
+            if (($this->props['group'] & $group) === $group)
                 $result = TRUE;
         return $result;
     }
@@ -77,7 +78,7 @@ class User
     {
         $sql = '
             INSERT `user`
-                `email`, `hash`, `salt`, `group`, `last_login`
+                `email`, `hash`, `group`, `last_login`
             FROM
                 `' . self::TBL_USER . '`
             WHERE
@@ -90,26 +91,35 @@ class User
      * @fn      getByParam
      * @brief   Метод для получения данных пользователя
      *
-     * @param   array id либо email пользователя
+     * @param   array $params id либо email пользователя
      * @return  bool
      */
-    final public function getByParam($param)
+    final public function getActive($params)
     {
-        foreach ($param as $key => $value) {
-            $sql = '
-                SELECT
-                    `id`, `email`, `hash`, `salt`, `group`, `last_login`
-                FROM
-                    `' . self::TBL_USER . '`
-                WHERE
-                    `' . $key . '` = "' . $value . '"
-                LIMIT 1
-            ';
+        $where = '';
+        foreach ($params as $key => $value) {
+            if (is_string($value))
+                $value = "'$value'";
+
+            $where .= "`$key` = $value && ";
         }
 
-        $this->_props = Db::q($sql);
+        $where .= '`group` & ' . self::DELETED . ' = 0';
 
-        return $this->_props;
+        $sql = '
+            SELECT
+                `id`, `email`, `hash`, `group`, `last_login`
+            FROM
+                `' . self::TBL_USER . '`
+            WHERE
+                ' . $where . '
+            LIMIT 1
+        ';
+
+
+        $this->props = Db::q($sql);
+
+        return $this->props;
     }
 
     /**
@@ -122,10 +132,46 @@ class User
     final public function getProperties(&$properties)
     {
         foreach ($properties as $property_name => $value) {
-            if (isset($this->_props[$property_name])) {
-                $properties[$property_name] = $this->_props[$property_name];
+            if (isset($this->props[$property_name])) {
+                $properties[$property_name] = $this->props[$property_name];
             }
         }
+    }
+
+    /**
+     * @fn    getId
+     * @brief Метод для получения ID пользователя
+     */
+    final public function getId()
+    {
+        return (isset($this->props['id'])) ? $this->props['id'] : FALSE;
+    }
+
+    /**
+     * @fn    getHash
+     * @brief Метод для получения хэша пользователя, взятого из базы
+     */
+    final public function getHash()
+    {
+        return (isset($this->props['hash'])) ? $this->props['hash'] : FALSE;
+    }
+
+    /**
+     * @fn    getCookieHash
+     * @brief Метод для получения хэша для кук
+     */
+    final public function getCookieHash()
+    {
+        return (isset($this->props['hash'])) ? substr($this->props['hash'], 29) : FALSE;
+    }
+
+    /**
+     * @fn    getSalt
+     * @brief Метод для получения соли хэша
+     */
+    final public function getSalt()
+    {
+        return (isset($this->props['hash'])) ? substr($this->props['hash'], 0, 28) : FALSE;
     }
 
     /**
@@ -138,7 +184,7 @@ class User
     final public function setProperties(&$properties)
     {
         foreach ($properties as $property_name => $value) {
-            $this->_props[$property_name] = $properties[$property_name];
+            $this->props[$property_name] = $properties[$property_name];
         }
     }
 
