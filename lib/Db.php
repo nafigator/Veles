@@ -90,6 +90,25 @@ class Db {
     }
 
     /**
+     * @fn    getLastInsertId
+     * @brief Функция получения LAST_INSERT_ID()
+     */
+    final public static function getLastInsertId()
+    {
+        try {
+            $result = mysqli_insert_id(self::$db);
+            if ($result === FALSE) {
+                throw new DbException(
+                    'Не удалось выполнить запрос', self::$db, $sql
+                );
+            }
+        }
+        catch (DbException $e) {
+            self::$debug[] = $e;
+        }
+    }
+
+    /**
      * @fn      getDebugData
      * @brief   Метод возвращает массив с ошибками
      *

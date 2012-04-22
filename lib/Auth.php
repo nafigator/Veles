@@ -135,7 +135,7 @@ final class Auth
             return FALSE;
 
         // Пользователь с таким id не найден
-        if (!$user->getActive(array('id' => $this->cookie_id))) {
+        if (!$user->findActive(array('id' => $this->cookie_id))) {
             // Удаляем куки
             self::delCookie();
             $this->errors |= self::ERR_USER_NOT_FOUND;
@@ -169,7 +169,7 @@ final class Auth
             self::delCookie();
 
         // Пользователь с таким логином найден
-        if (!$user->getActive(array('email' => $this->email))) {
+        if (!$user->findActive(array('email' => $this->email))) {
             $this->errors |= self::ERR_USER_NOT_FOUND;
             return FALSE;
         }
