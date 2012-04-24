@@ -29,7 +29,7 @@ var_dump($user);
 
 var_dump(
     'in group 8,3,2: ', $user->hasAccess(array(8,3,2)),
-    'Debug data: ', Db::getDebugData()
+    'Debug data: ', Db::getErrors()
 );
 /*$time = $stop = 0;
 

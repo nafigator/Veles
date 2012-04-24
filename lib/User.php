@@ -17,9 +17,9 @@ if (basename(__FILE__) === basename($_SERVER['PHP_SELF'])) exit();
  * @class   User
  * @brief   Модель пользователя
  */
-class User
+class User extends AbstractModel
 {
-    const TBL_USER      = 'users';
+    const TBL_NAME      = 'users';
     const TBL_USER_INFO = 'users_info';
 
     // Группы пользователя
@@ -28,9 +28,6 @@ class User
     const REGISTERED = 4;
     const GUEST      = 8;
     const DELETED    = 16;
-
-    // Свойства пользователя
-    private $props = array();
 
     /**
      * @fn      auth
@@ -57,38 +54,13 @@ class User
         $result = FALSE;
         // Проверяем есть ли в группах пользователя определённый бит,
         // соответствующий нужной группе.
-        foreach ($groups as $group)
-            if (($this->props['group'] & $group) === $group)
+        foreach ($groups as $group) {
+            if (($this->group & $group) === $group) {
                 $result = TRUE;
+            }
+        }
 
         return $result;
-    }
-
-    /**
-     * @fn      save
-     * @brief   Метод для сохранения данных пользователя
-     *
-     * @return  bool
-     */
-    final public function save()
-    {
-        $values = '"' . $this->props['email'] . '", "' . $this->props['hash'] . '",
-            ' . $this->props['group'];
-
-        $sql = '
-            INSERT
-                `' . self::TBL_USER . '`
-                (`email`, `hash`, `group`)
-            VALUES
-                (' . $values . ')
-            ON DUPLICATE KEY UPDATE
-                `id`    = LAST_INSERT_ID(`id`)
-                `email` = VALUES(`email`),
-                `hash`  = VALUES(`hash`),
-                `group` = VALUES(`group`)
-        ';
-
-        return (Db::q($sql)) ? Db::getLastInsertId() : FALSE;
     }
 
      /**
@@ -114,32 +86,18 @@ class User
             SELECT
                 `id`, `email`, `hash`, `group`, `last_login`
             FROM
-                `' . self::TBL_USER . '`
+                `' . self::TBL_NAME . '`
             WHERE
                 ' . $where . '
             LIMIT 1
         ';
 
+        $result = Db::q($sql);
 
-        $this->props = Db::q($sql);
+        foreach ($result as $name => $value)
+            $this->$name = $value;
 
-        return $this->props;
-    }
-
-    /**
-     * @fn      getProperties
-     * @brief   Метод для получения параметров пользователя
-     *
-     * @param   array Массив с требуемыми параметрами в ключах массива
-     * @return  array
-     */
-    final public function getProperties(&$properties)
-    {
-        foreach ($properties as $property_name => $value) {
-            if (isset($this->props[$property_name])) {
-                $properties[$property_name] = $this->props[$property_name];
-            }
-        }
+        return $result;
     }
 
     /**
@@ -148,7 +106,7 @@ class User
      */
     final public function getId()
     {
-        return (isset($this->props['id'])) ? $this->props['id'] : FALSE;
+        return (isset($this->id)) ? $this->id : FALSE;
     }
 
     /**
@@ -157,7 +115,7 @@ class User
      */
     final public function getHash()
     {
-        return (isset($this->props['hash'])) ? $this->props['hash'] : FALSE;
+        return (isset($this->hash)) ? $this->hash : FALSE;
     }
 
     /**
@@ -166,7 +124,7 @@ class User
      */
     final public function getCookieHash()
     {
-        return (isset($this->props['hash'])) ? substr($this->props['hash'], 29) : FALSE;
+        return (isset($this->hash)) ? substr($this->hash, 29) : FALSE;
     }
 
     /**
@@ -175,21 +133,7 @@ class User
      */
     final public function getSalt()
     {
-        return (isset($this->props['hash'])) ? substr($this->props['hash'], 0, 28) : FALSE;
-    }
-
-    /**
-     * @fn      setProperties
-     * @brief   Метод для получения параметров пользователя
-     *
-     * @param   array Массив с требуемыми параметрами в ключах массива
-     * @return  array
-     */
-    final public function setProperties(&$properties)
-    {
-        foreach ($properties as $property_name => $value) {
-            $this->props[$property_name] = $properties[$property_name];
-        }
+        return (isset($this->hash)) ? substr($this->hash, 0, 28) : FALSE;
     }
 
      /**
@@ -200,7 +144,7 @@ class User
      */
     final public function delete()
     {
-        $this->props['group'] |= self::DELETED;
+        $this->group |= self::DELETED;
         return $this->save();
     }
 }
