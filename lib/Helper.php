@@ -51,7 +51,7 @@ class Helper {
      */
     final public static function checkEmailDomain($email)
     {
-        list($u, $domain) = explode('@', $email);
+        list(, $domain) = explode('@', $email);
 
         return checkdnsrr($domain, 'MX') || checkdnsrr($domain, 'A');
     }
