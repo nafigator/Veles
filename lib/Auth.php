@@ -157,7 +157,7 @@ final class Auth
 
     /**
      * @fn      byAjax
-     * @brief   Метод для авторизация пользователя AJAX-методом ($_GET)
+     * @brief   Метод для авторизации пользователя AJAX-методом ($_GET)
      */
     final public function byAjax(&$user)
     {
