@@ -99,14 +99,14 @@ abstract class AbstractModel {
 
     /**
      * @fn    getSqlParams
-     * @brief Получения имен свойств модели для сохранения
+     * @brief Получение sql-параметров
      *
      * @return array $return
      */
     private function getSqlParams()
     {
         $return = array();
-        foreach ($data as $name => $value) {
+        foreach ($this->data as $name => $value) {
             $return['fields'] .= "`$name`, ";
             $return['values'] .= (is_string($value)) ? "'$value', " : "$value, ";
             $return['update'] .= "`$name` = VALUES(`$name`), ";
