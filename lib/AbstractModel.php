@@ -102,6 +102,7 @@ abstract class AbstractModel {
      * @brief Получение sql-параметров
      *
      * @return array $return
+     * @todo протестировать алгоритм на время. Попробовать варианты с iterator, implode
      */
     private function getSqlParams()
     {
