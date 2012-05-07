@@ -1,8 +1,8 @@
 <?php
 /**
+ * Класс соединения с базой.
+ * Для использования необходимо в php наличие mysqli расширения.
  * @file    Db.php
- * @brief   Класс соединения с базой. Для использования необходимо в php наличие
- * mysqli расширения.
  *
  * PHP version 5.3+
  *
@@ -15,22 +15,21 @@
 if (basename(__FILE__) === basename($_SERVER['PHP_SELF'])) exit();
 
 /**
- * @class   Db
- * @brief   Класс соединения с базой
+ * Класс соединения с базой
+ * @author  Yancharuk Alexander <alex@itvault.info>
  */
 class Db {
     const MYSQL_SERVER   = 'localhost';
     const MYSQL_USER     = 'root';
     const MYSQL_PASSWORD = '';
-    const MYSQL_BASE     = 'ts';
+    const MYSQL_BASE     = 'parser';
 
     private static $db;
     private static $errors = array();
 
     /**
-     * @fn    connect
-     * @brief Метод создаёт экземпляр mysqli класса и сохраняет его в self::$db.
-     * Нечто наподобие классического синглтона.
+     * Соединение с базой.
+     * Метод создаёт экземпляр mysqli класса и сохраняет его в self::$db. Нечто наподобие классического синглтона.
      */
     private static function connect()
     {
@@ -52,9 +51,7 @@ class Db {
     }
 
     /**
-     * @fn      q
-     * @brief   Метод для выполнения запросов
-     *
+     * Метод для выполнения запросов
      * @param   string Sql-запрос
      * @return  bool Если запрос выполенен без ошибок, возвращает TRUE
      */
@@ -90,14 +87,13 @@ class Db {
     }
 
     /**
-     * @fn    getLastInsertId
-     * @brief Функция получения LAST_INSERT_ID()
+     * Функция получения LAST_INSERT_ID()
      */
     final public static function getLastInsertId()
     {
         try {
             $result = mysqli_insert_id(self::$db);
-            if ($result === FALSE) {
+            if (FALSE === $result) {
                 throw new DbException(
                     'Не удалось выполнить запрос', self::$db, $sql
                 );
@@ -111,9 +107,7 @@ class Db {
     }
 
     /**
-     * @fn      getErrors
-     * @brief   Метод возвращает массив с ошибками
-     *
+     * Метод возвращает массив с ошибками
      * @return  array $errors
      */
     final public static function getErrors()

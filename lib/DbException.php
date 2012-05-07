@@ -1,7 +1,7 @@
 <?php
 /**
+ * Exception содержащий код, текст и запрос sql-ошибки
  * @file    DbException.php
- * @brief   Exception содержащий код, текст и запрос sql-ошибки
  *
  * PHP version 5.3+
  *
@@ -14,8 +14,8 @@
 if (basename(__FILE__) === basename($_SERVER['PHP_SELF'])) exit();
 
 /**
- * @class   DbException
- * @brief   Exception содержащий код и текст sql-ошибки
+ * Exception содержащий код и текст sql-ошибки
+ * @author  Yancharuk Alexander <alex@itvault.info>
  */
 class DbException extends Exception
 {
@@ -33,9 +33,8 @@ class DbException extends Exception
     }
 
     /**
-     * @fn
-     * @brief
-     *
+     * Конструктор
+     * К стандартному Exception добавляется ошибка коннекта и текст ошибки запроса
      * @param   string Станадртный текст Exception
      * @param   string Текст sql-ошибки
      * @author  Yancharuk Alexander <alex@itvault.info>
@@ -48,9 +47,7 @@ class DbException extends Exception
     }
 
     /**
-     * @fn      getConnectError
-     * @brief   Возвращает ошибку соединения с базой
-     *
+     * Возвращает ошибку соединения с базой
      * @return  string
      */
     final public function getConnectError()
@@ -59,9 +56,7 @@ class DbException extends Exception
     }
 
     /**
-     * @fn      getSqlError
-     * @brief   Возвращает ошибку соединения с базой
-     *
+     * Возвращает ошибку соединения с базой
      * @return  string
      */
     final public function getSqlError()
