@@ -1,7 +1,7 @@
 <?php
 /**
- * @file    AbstractModel
- * @brief   Класс модели
+ * Класс модели
+ * @file    AbstractModel.php
  *
  * PHP version 5.3+
  *
@@ -14,8 +14,8 @@
 if (basename(__FILE__) === basename($_SERVER['PHP_SELF'])) exit();
 
 /**
- * @class AbstractModel
- * @brief Класс модели
+ * Класс модели
+ * @author Yancharuk Alexander <alex@itvault.info>
  */
 abstract class AbstractModel {
     // Данные модели
@@ -25,9 +25,7 @@ abstract class AbstractModel {
     const TBL_NAME = '';
 
     /**
-     * @fn    __set
-     * @brief Магия для создания свойств модели
-     *
+     * Магия для создания свойств модели
      * @param stirng $name
      * @param mixed  $value
      */
@@ -37,9 +35,7 @@ abstract class AbstractModel {
     }
 
     /**
-     * @fn    __get
-     * @brief Магия для доступа к свойствам модели
-     *
+     * Магия для доступа к свойствам модели
      * @param string $name
      */
     final public function __get($name)
@@ -50,9 +46,7 @@ abstract class AbstractModel {
     }
 
     /**
-     * @fn    __isset
-     * @brief Магия для проверки свойства
-     *
+     * Магия для проверки свойства
      * @param string $name
      */
     final public function __isset($name)
@@ -61,9 +55,7 @@ abstract class AbstractModel {
     }
 
     /**
-     * @fn    getById
-     * @brief Получение данных по id
-     *
+     * Получение данных по id
      * @param int $id
      */
     protected function getById($id)
@@ -71,7 +63,7 @@ abstract class AbstractModel {
         $sql = '
             SELECT *
             FROM
-                ' . $this::TBL_NAME . '
+                ' . self::TBL_NAME . '
             WHERE
                 `id` = ' . $id . '
             LIMIT 1
@@ -87,9 +79,7 @@ abstract class AbstractModel {
     }
 
     /**
-     * @fn    getByParams
-     * @brief Получение данных по заданным параметрам
-     *
+     * Получение данных по заданным параметрам
      * @param array $params
      */
     protected function getByParams($params)
@@ -98,9 +88,7 @@ abstract class AbstractModel {
     }
 
     /**
-     * @fn    getSqlParams
-     * @brief Получение sql-параметров
-     *
+     * Получение sql-параметров
      * @return array $return
      * @todo протестировать алгоритм на время. Попробовать варианты с iterator, implode
      */
@@ -119,9 +107,7 @@ abstract class AbstractModel {
     }
 
     /**
-     * @fn    save
-     * @brief Сохранение данных
-     *
+     * Сохранение данных
      * @param array $params
      */
     protected function save()
@@ -130,7 +116,7 @@ abstract class AbstractModel {
 
         $sql = '
             INSERT
-                `' . $this::TBL_NAME . '`
+                `' . self::TBL_NAME . '`
                 ' . $params['fields'] . '
             VALUES
                 (' . $params['values'] . ')
@@ -142,9 +128,7 @@ abstract class AbstractModel {
     }
 
     /**
-     * @fn      setProperties
-     * @brief   Метод для инициализации параметров модели
-     *
+     * Метод для инициализации параметров модели
      * @param   array Массив с требуемыми параметрами в ключах массива
      * @return  array
      */
@@ -156,9 +140,7 @@ abstract class AbstractModel {
     }
 
     /**
-     * @fn      getProperties
-     * @brief   Метод для получения параметров модели
-     *
+     * Метод для получения параметров модели
      * @param   array Массив с требуемыми параметрами в ключах массива
      * @return  array
      */
@@ -172,9 +154,7 @@ abstract class AbstractModel {
     }
 
     /**
-     * @fn    deleteById
-     * @brief Удаление данных
-     *
+     * Удаление данных
      * @param int $id
      */
     protected function deleteById($id)
