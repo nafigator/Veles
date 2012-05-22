@@ -1,7 +1,7 @@
 <?php
 /**
+ * Класс управления паролем пользователя
  * @file    Password.php
- * @brief   Класс управления паролем пользователя
  *
  * PHP version 5.3+
  *
@@ -10,18 +10,13 @@
  * @version
  */
 
-// Не допускаем обращения к файлу напрямую
-if (basename(__FILE__) === basename($_SERVER['PHP_SELF'])) exit();
-
 /**
- * @class Password
- * @brief Управление паролем пользователя
+ * Управление паролем пользователя
+ * @author  Yancharuk Alexander <alex@itvault.info>
  */
 class Password {
     /**
-     * @fn    checkHash
-     * @brief Проверка хэша пользователя
-     *
+     * Проверка хэша пользователя
      * @param $user
      */
     final public static function checkCookieHash(&$user, &$cookie_hash)
@@ -30,9 +25,7 @@ class Password {
     }
 
     /**
-     * @fn    check
-     * @brief Проверка пароля пользователя при ajax-авторизации
-     *
+     * Проверка пароля пользователя при ajax-авторизации
      * @param object $user     User
      * @param string $password Пароль полученый ajax'ом
      */

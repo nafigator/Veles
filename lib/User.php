@@ -1,7 +1,7 @@
 <?php
 /**
+ * Класс User
  * @file    User.php
- * @brief   Класс User
  *
  * PHP version 5.3+
  *
@@ -10,12 +10,8 @@
  * @version
  */
 
-// Не допускаем обращения к файлу напрямую
-if (basename(__FILE__) === basename($_SERVER['PHP_SELF'])) exit();
-
 /**
- * @class   User
- * @brief   Модель пользователя
+ * Модель пользователя
  */
 class User extends AbstractModel
 {
@@ -30,9 +26,7 @@ class User extends AbstractModel
     const DELETED    = 16;
 
     /**
-     * @fn      auth
-     * @brief   Метод для авторизации пользователя
-     *
+     * Метод для авторизации пользователя
      * @return  bool
      */
     final public function auth()
@@ -43,10 +37,8 @@ class User extends AbstractModel
     }
 
     /**
-     * @fn      hasAccess
-     * @brief   Метод для проверки состоит ли пользователь в определённых группах
+     * Метод для проверки состоит ли пользователь в определённых группах
      * @param   array
-     *
      * @return  bool
      */
     final public function hasAccess($groups)
@@ -64,9 +56,7 @@ class User extends AbstractModel
     }
 
      /**
-     * @fn      findActive
-     * @brief   Метод для получения данных не удалённого пользователя
-     *
+     * Метод для получения данных не удалённого пользователя
      * @param   array $params id либо email пользователя
      * @return  bool
      */
@@ -101,8 +91,7 @@ class User extends AbstractModel
     }
 
     /**
-     * @fn    getId
-     * @brief Метод для получения ID пользователя
+     * Метод для получения ID пользователя
      */
     final public function getId()
     {
@@ -110,8 +99,7 @@ class User extends AbstractModel
     }
 
     /**
-     * @fn    getHash
-     * @brief Метод для получения хэша пользователя, взятого из базы
+     * Метод для получения хэша пользователя, взятого из базы
      */
     final public function getHash()
     {
@@ -119,8 +107,7 @@ class User extends AbstractModel
     }
 
     /**
-     * @fn    getCookieHash
-     * @brief Метод для получения хэша для кук
+     * Метод для получения хэша для кук
      */
     final public function getCookieHash()
     {
@@ -128,8 +115,7 @@ class User extends AbstractModel
     }
 
     /**
-     * @fn    getSalt
-     * @brief Метод для получения соли хэша
+     * Метод для получения соли хэша
      */
     final public function getSalt()
     {
@@ -137,9 +123,7 @@ class User extends AbstractModel
     }
 
      /**
-     * @fn      delete
-     * @brief   Метод для удаления пользователя
-     *
+     * Метод для удаления пользователя
      * @return  bool
      */
     final public function delete()

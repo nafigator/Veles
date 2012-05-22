@@ -10,9 +10,6 @@
  * @version
  */
 
-// Не допускаем обращения к файлу напрямую
-if (basename(__FILE__) === basename($_SERVER['PHP_SELF'])) exit();
-
 /**
  * Класс модели
  * @author Yancharuk Alexander <alex@itvault.info>

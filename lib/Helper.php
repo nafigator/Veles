@@ -1,7 +1,7 @@
 <?php
 /**
+ * Набор полезных функций
  * @file    Helper.php
- * @brief   Набор полезных функций
  *
  * PHP version 5.3+
  *
@@ -10,12 +10,9 @@
  * @version
  */
 
-// Не допускаем обращения к файлу напрямую
-if (basename(__FILE__) === basename($_SERVER['PHP_SELF'])) exit();
-
 /**
- * @class Helper
- * @brief Набор полезных функций
+ * Набор полезных функций
+ * @author  Yancharuk Alexander <alex@itvault.info>
  */
 class Helper {
     /**
@@ -33,9 +30,7 @@ class Helper {
     }
 
     /**
-     * @fn    validateEmail
-     * @brief Метод для проверки email
-     *
+     * Метод для проверки email
      * @param string $email
      */
     final public static function validateEmail($email)
@@ -44,9 +39,7 @@ class Helper {
     }
 
     /**
-     * @fn    checkEmailDomain
-     * @brief Метод для проверки mail-домена
-     *
+     * Метод для проверки mail-домена
      * @param string $email
      */
     final public static function checkEmailDomain($email)
