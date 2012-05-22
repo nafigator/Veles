@@ -6,6 +6,7 @@
 define('DEBUG', TRUE);
 
 function __autoload($name) {
+    $name = str_replace('_', '/', $name);
     try {
         require_once "lib/$name.php";
     }

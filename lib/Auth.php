@@ -1,7 +1,7 @@
 <?php
 /**
+ * Класс аторизации пользователя
  * @file    Auth.php
- * @brief   Класс аторизации пользователя
  *
  * PHP version 5.3+
  *
@@ -10,16 +10,17 @@
  * @version
  */
 
-// Не допускаем обращения к файлу напрямую
-if (basename(__FILE__) === basename($_SERVER['PHP_SELF'])) exit();
-
+/**
+ * Класс авторизации пользователя
+ * @author  Yancharuk Alexander <alex@itvault.info>
+ */
 final class Auth
 {
-    const ERR_INVALID_EMAIL    = 1; // ajax login
+    const ERR_INVALID_EMAIL    = 1;  // ajax login
     const ERR_INVALID_PASSWORD = 2;
-    const ERR_INVALID_ID       = 4; // cookie
+    const ERR_INVALID_ID       = 4;  // cookie
     const ERR_INVALID_HASH     = 8;
-    const ERR_USER_NOT_FOUND   = 16;// auth
+    const ERR_USER_NOT_FOUND   = 16; // auth
     const ERR_WRONG_PASSWORD   = 32;
     const ERR_WRONG_DOMAIN     = 64;
 
@@ -36,9 +37,8 @@ final class Auth
     private $password;
 
     /**
-     * @fn      __construct
-     * @brief   Конструктор класса User
-     * @details Авторизует пользователя по кукам. Если пользователь не авторизован,
+     * Конструктор класса User.
+     * Авторизует пользователя по кукам. Если пользователь не авторизован,
      * создаётся экземпляр Guest.\n Если пользователь прислал GET-данные авторизации
      * через AJAX-форму, устанавливаем куки пользователю.
      */
@@ -70,10 +70,7 @@ final class Auth
     }
 
     /**
-     * @fn      setCookie
-     * @brief   Установка авторизационных кук
-     *
-     * @return  void
+     * Установка авторизационных кук
      */
     final public static function setCookie($id, $hash)
     {
@@ -88,10 +85,7 @@ final class Auth
     }
 
     /**
-     * @fn      delCookie
-     * @brief   Удаление авторизационных кук
-     *
-     * @return  void
+     * Удаление авторизационных кук
      */
     final public static function delCookie()
     {
@@ -100,10 +94,7 @@ final class Auth
     }
 
     /**
-     * @fn      secureVars
-     * @brief   Установка авторизационных кук
-     *
-     * @return  void
+     * Установка авторизационных кук
      */
     private function secureVars($auth_type)
     {
@@ -124,9 +115,7 @@ final class Auth
     }
 
     /**
-     * @fn      byCookie
-     * @brief   Метод для авторизация пользователя с помощью кук
-     *
+     * Метод для авторизация пользователя с помощью кук
      * @return  bool
      */
     final public function byCookie(&$user)
@@ -134,7 +123,7 @@ final class Auth
         $this->secureVars('cookie');
 
         // Некорректные куки
-        if ($this->errors !== 0)
+        if (0 !== $this->errors)
             return FALSE;
 
         // Пользователь с таким id не найден
@@ -156,15 +145,14 @@ final class Auth
     }
 
     /**
-     * @fn      byAjax
-     * @brief   Метод для авторизации пользователя AJAX-методом ($_GET)
+     * Метод для авторизации пользователя AJAX-методом ($_GET)
      */
     final public function byAjax(&$user)
     {
         $this->secureVars('ajax');
 
         // Некорректные $_GET
-        if ($this->errors !== 0)
+        if (0 !== $this->errors)
             return FALSE;
 
         // Пользователь уже авторизовался ранее, удаляем куки
@@ -189,9 +177,7 @@ final class Auth
     }
 
     /**
-     * @fn      getErrors
-     * @brief   Метод возвращает побитовые значения ошибок
-     *
+     * Метод возвращает побитовые значения ошибок
      * @return  int Побитовые значения ошибок авторизации
      */
     final public function getErrors()

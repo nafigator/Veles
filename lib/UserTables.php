@@ -1,7 +1,7 @@
 <?php
 /**
+ * Класс управления инфраструктурой данных для класса User
  * @file    UserTables.php
- * @brief   Класс управления инфраструктурой данных для класса User
  *
  * PHP version 5.3+
  *
@@ -10,19 +10,13 @@
  * @version
  */
 
-// Не допускаем обращения к файлу напрямую
-if (basename(__FILE__) === basename($_SERVER['PHP_SELF'])) exit();
-
 /**
- * @class   UserTables
- * @brief   Класс управления инфраструктурой данных для класса User
+ * Класс управления инфраструктурой данных для класса User
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
 final class UserTables {
     /**
-     * @fn      create
-     * @brief   Метод для создания инфраструктуры данных для пользователя
-     *
+     * Метод для создания инфраструктуры данных для пользователя
      * @return  bool В случае отсутствия ошибок возвращает TRUE
      */
     final public function create()
@@ -68,8 +62,7 @@ final class UserTables {
     }
 
     /**
-     * @fn      cleanup
-     * @brief   Метод очистки данных sql-таблиц для класса User
+     * Метод очистки данных sql-таблиц для класса User
      */
     final public function cleanup()
     {
@@ -78,8 +71,7 @@ final class UserTables {
     }
 
     /**
-     * @fn      drop
-     * @brief   Метод удаления sql-таблиц для класса User
+     * Метод удаления sql-таблиц для класса User
      */
     final public function drop()
     {
