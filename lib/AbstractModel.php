@@ -19,7 +19,7 @@ abstract class AbstractModel {
     private $data = array();
 
     // Имя таблицы
-    const TBL_NAME = '';
+    const TBL_NAME = NULL;
 
     /**
      * Магия для создания свойств модели
@@ -85,17 +85,17 @@ abstract class AbstractModel {
     }
 
     /**
-     * Получение sql-параметров
+     * Получение sql-параметров для insert
      * @return array $return
      * @todo протестировать алгоритм на время. Попробовать варианты с iterator, implode
      */
-    private function getSqlParams()
+    private function getInsertParams()
     {
         $return = array();
+
         foreach ($this->data as $name => $value) {
             $return['fields'] .= "`$name`, ";
             $return['values'] .= (is_string($value)) ? "'$value', " : "$value, ";
-            $return['update'] .= "`$name` = VALUES(`$name`), ";
         }
 
         foreach ($return as $name => $value) {
@@ -104,24 +104,62 @@ abstract class AbstractModel {
     }
 
     /**
+     * Получение sql-параметров для update
+     * @return array $return
+     * @todo протестировать алгоритм на время. Попробовать варианты с iterator, implode
+     */
+    private function getUpdateParams()
+    {
+        $return = array();
+        $return['update'] .= "`$name` = " . (is_string($value)) ? "'$value', " : "$value, ";
+
+        return  substr($return[$name], 0, -2);
+    }
+
+    /**
      * Сохранение данных
-     * @param array $params
+     * @return bool|int
      */
     protected function save()
     {
-        $params = self::getSqlParams();
+        return (isset($this->data['id'])) ? $this->update() : $this->insert();
+    }
+
+    /**
+     * Вставка данных непосредственно в базу
+     * @return bool
+     */
+    private function insert()
+    {
+        $params = self::getInsertParams();
 
         $sql = '
             INSERT
                 `' . self::TBL_NAME . '`
                 ' . $params['fields'] . '
             VALUES
-                (' . $params['values'] . ')
-            ON DUPLICATE KEY UPDATE
-                `id` = LAST_INSERT_ID(`id`),
-                ' . $params['update'];
+                (' . $params['values'] . ')';
 
         return (Db::q($sql)) ? Db::getLastInsertId() : FALSE;
+    }
+
+    /**
+     * Обновление данных в базе
+     * @return bool
+     */
+    private function update()
+    {
+        $params = self::getUpdateParams();
+
+        $sql = '
+            UPDATE
+                `' . self::TBL_NAME . '`
+            SET
+                ' . $params['update'] . '
+            WHERE
+                id = ' . $this->data['id'];
+
+        return Db::q($sql);
     }
 
     /**
@@ -156,6 +194,12 @@ abstract class AbstractModel {
      */
     protected function deleteById($id)
     {
+        $sql = '
+            DELETE FROM
+                `' . self::TBL_NAME . '`
+            WHERE
+                id = ' . $id;
 
+        return Db::q($sql);
     }
 }
