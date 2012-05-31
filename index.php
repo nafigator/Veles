@@ -24,9 +24,9 @@ function __autoload($name) {
 
 
 $user = new User;
-var_dump($user->auth());
+var_dump('$user->auth()', $user->auth());
 
-var_dump($user);
+var_dump('$user', $user);
 
 var_dump(
     'in group 8,3,2: ', $user->hasAccess(array(8,3,2)),
