@@ -5,15 +5,8 @@
 
 define('DEBUG', TRUE);
 
-function __autoload($name) {
-    $name = str_replace('_', '/', $name);
-    try {
-        require_once "lib/$name.php";
-    }
-    catch (Exception $e) {
-        print $e->getMessage();
-    }
-}
+require_once 'lib/AutoLoader.php';
+AutoLoader::init();
 
 //$user_tables = new UserTables();
 
@@ -32,6 +25,9 @@ var_dump(
     'in group 8,3,2: ', $user->hasAccess(array(8,3,2)),
     'Debug data: ', Db::getErrors()
 );
+
+$user->group = 18;
+$user->save();
 /*$time = $stop = 0;
 
 for ($i = 0; $i < 10000; ++$i) {

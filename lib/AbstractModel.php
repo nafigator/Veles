@@ -60,7 +60,7 @@ abstract class AbstractModel {
         $sql = '
             SELECT *
             FROM
-                ' . self::TBL_NAME . '
+                ' . $this::TBL_NAME . '
             WHERE
                 `id` = ' . $id . '
             LIMIT 1
@@ -91,7 +91,8 @@ abstract class AbstractModel {
      */
     private function getInsertParams()
     {
-        $return = array();
+        $return['fields'] = '';
+        $return['values'] = '';
 
         foreach ($this->data as $name => $value) {
             $return['fields'] .= "`$name`, ";
@@ -101,6 +102,8 @@ abstract class AbstractModel {
         foreach ($return as $name => $value) {
             $return[$name] = substr($return[$name], 0, -2);
         }
+
+        return $return;
     }
 
     /**
@@ -110,17 +113,21 @@ abstract class AbstractModel {
      */
     private function getUpdateParams()
     {
-        $return = array();
-        $return['update'] .= "`$name` = " . (is_string($value)) ? "'$value', " : "$value, ";
+        $return['update'] = '';
 
-        return  substr($return[$name], 0, -2);
+        foreach ($this->data as $name => $value) {
+            $value = (is_string($value)) ? "'$value', " : "$value, ";
+            $return['update'] .= "`$name` = $value";
+        }
+
+        return  substr($return['update'], 0, -2);
     }
 
     /**
      * Сохранение данных
      * @return bool|int
      */
-    protected function save()
+    final public function save()
     {
         return (isset($this->data['id'])) ? $this->update() : $this->insert();
     }
@@ -135,7 +142,7 @@ abstract class AbstractModel {
 
         $sql = '
             INSERT
-                `' . self::TBL_NAME . '`
+                `' . $this::TBL_NAME . '`
                 ' . $params['fields'] . '
             VALUES
                 (' . $params['values'] . ')';
@@ -153,9 +160,9 @@ abstract class AbstractModel {
 
         $sql = '
             UPDATE
-                `' . self::TBL_NAME . '`
+                `' . $this::TBL_NAME . '`
             SET
-                ' . $params['update'] . '
+                ' . $params . '
             WHERE
                 id = ' . $this->data['id'];
 
@@ -196,7 +203,7 @@ abstract class AbstractModel {
     {
         $sql = '
             DELETE FROM
-                `' . self::TBL_NAME . '`
+                `' . $this::TBL_NAME . '`
             WHERE
                 id = ' . $id;
 
