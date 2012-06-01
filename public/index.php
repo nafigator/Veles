@@ -5,7 +5,7 @@
 
 define('DEBUG', TRUE);
 
-require_once 'lib/AutoLoader.php';
+require '../lib/AutoLoader.php';
 AutoLoader::init();
 
 //$user_tables = new UserTables();
