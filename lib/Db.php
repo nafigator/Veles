@@ -19,7 +19,7 @@ class Db {
     const MYSQL_SERVER   = 'localhost';
     const MYSQL_USER     = 'root';
     const MYSQL_PASSWORD = '';
-    const MYSQL_BASE     = 'parser';
+    const MYSQL_BASE     = 'ts';
 
     private static $db;
     private static $errors = array();

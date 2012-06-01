@@ -76,7 +76,7 @@ class User extends AbstractModel
             SELECT
                 `id`, `email`, `hash`, `group`, `last_login`
             FROM
-                `' . self::TBL_NAME . '`
+                `' . $this::TBL_NAME . '`
             WHERE
                 ' . $where . '
             LIMIT 1
