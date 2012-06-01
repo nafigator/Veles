@@ -24,7 +24,7 @@ AutoLoader::init();
 
 
 
-$user = new User;
+$user = new CurrentUser;
 var_dump('$user->auth()', $user->auth());
 
 var_dump('$user', $user);
@@ -34,7 +34,7 @@ var_dump(
     'Debug data: ', Db::getErrors()
 );
 
-$user->group = 18;
+$user->group = 4;
 $user->save();
 /*$time = $stop = 0;
 
