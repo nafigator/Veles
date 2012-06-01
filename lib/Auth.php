@@ -98,7 +98,7 @@ final class Auth
      */
     private function secureVars($auth_type)
     {
-        if ($auth_type === 'cookie') {
+        if ('cookie' === $auth_type) {
             if (!preg_match(self::PREG_COOKIE_ID, $this->cookie_id))
                 $this->errors |= self::ERR_INVALID_ID;
 
