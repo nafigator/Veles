@@ -84,8 +84,11 @@ class CurrentUser extends AbstractModel
 
         $result = Db::q($sql);
 
-        foreach ($result as $name => $value)
-            $this->$name = $value;
+        if (!empty($result)) {
+            foreach ($result as $name => $value) {
+                $this->$name = $value;
+            }
+        }
 
         return $result;
     }
