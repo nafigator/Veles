@@ -32,7 +32,7 @@ class AutoLoader
     {
         $name = str_replace('_', '/', $name);
         try {
-            require "lib/$name.php";
+            require "$name.php";
         }
         catch (Exception $e) {
             print $e->getMessage();

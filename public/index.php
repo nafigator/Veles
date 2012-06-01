@@ -5,7 +5,15 @@
 
 define('DEBUG', TRUE);
 
-require '../lib/AutoLoader.php';
+set_include_path(implode(PATH_SEPARATOR,
+    array(realpath('../lib'), get_include_path())
+));
+
+set_include_path(implode(PATH_SEPARATOR,
+    array(realpath('../project'), get_include_path())
+));
+//var_dump(get_include_path());
+require('AutoLoader.php');
 AutoLoader::init();
 
 //$user_tables = new UserTables();
