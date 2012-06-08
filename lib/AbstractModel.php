@@ -18,6 +18,9 @@ abstract class AbstractModel {
     // Данные модели
     private $data = array();
 
+    // Карта типов данных объекта
+    protected static $map = array();
+
     // Имя таблицы
     const TBL_NAME = NULL;
 
@@ -95,6 +98,7 @@ abstract class AbstractModel {
         $return['values'] = '';
 
         foreach ($this->data as $name => $value) {
+            self::sanitize($name, $value);
             $return['fields'] .= "`$name`, ";
             $return['values'] .= (is_string($value)) ? "'$value', " : "$value, ";
         }
@@ -116,11 +120,36 @@ abstract class AbstractModel {
         $return['update'] = '';
 
         foreach ($this->data as $name => $value) {
+            self::sanitize($name, $value);
             $value = (is_string($value)) ? "'$value', " : "$value, ";
             $return['update'] .= "`$name` = $value";
         }
 
         return  substr($return['update'], 0, -2);
+    }
+
+    /**
+     * Функция безопасности переменных
+     * @param  $arg
+     */
+    private function sanitize(&$name, &$value) {
+        if (!isset($this::$map[$name])) {
+            throw new Exception ("Неизвестное свойство $name модели");
+        }
+
+        switch ($this::$map[$name]) {
+            case 'int':
+                $value = (int) $value;
+                break;
+            case 'string':
+                $value = mysql_real_escape_string((string) $value);
+                break;
+            default:
+                throw new Exception (
+                    "Неизвестный тип данных {$this::$map[$name]} в запросе"
+                );
+            break;
+        }
     }
 
     /**

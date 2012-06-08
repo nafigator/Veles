@@ -25,6 +25,14 @@ class CurrentUser extends AbstractModel
     const GUEST      = 8;
     const DELETED    = 16;
 
+    protected static $map = array(
+        'id'         => 'int',
+        'email'      => 'string',
+        'hash'       => 'string',
+        'group'      => 'int',
+        'last_login' => 'string'
+    );
+
     /**
      * Метод для авторизации пользователя
      * @return  bool
@@ -55,7 +63,7 @@ class CurrentUser extends AbstractModel
         return $result;
     }
 
-     /**
+    /**
      * Метод для получения данных не удалённого пользователя
      * @param   array $params id либо email пользователя
      * @return  bool
@@ -129,7 +137,7 @@ class CurrentUser extends AbstractModel
         return (isset($this->hash)) ? substr($this->hash, 0, 28) : FALSE;
     }
 
-     /**
+    /**
      * Метод для удаления пользователя
      * @return  bool
      */
