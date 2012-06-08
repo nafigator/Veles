@@ -1,6 +1,5 @@
 <?php
 
-//require_once 'includes/db_connect.inc';
 //require_once 'includes/UserTables.class.inc';
 
 define('DEBUG', TRUE);
@@ -34,7 +33,7 @@ var_dump(
     'Debug data: ', Db::getErrors()
 );
 
-$user->group = 4;
+$user->group = 3;
 $user->save();
 /*$time = $stop = 0;
 
