@@ -20,10 +20,11 @@ class CurrentUser extends AbstractModel
 
     // Группы пользователя
     const ADMIN      = 1;
-    const MODERATOR  = 2;
-    const REGISTERED = 4;
-    const GUEST      = 8;
-    const DELETED    = 16;
+    const MANAGER    = 2;
+    const MODERATOR  = 4;
+    const REGISTERED = 8;
+    const GUEST      = 16;
+    const DELETED    = 32;
 
     protected static $map = array(
         'id'         => 'int',

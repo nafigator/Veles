@@ -134,13 +134,22 @@ abstract class AbstractModel {
      */
     private function sanitize(&$name, &$value) {
         if (!isset($this::$map[$name])) {
-            throw new Exception ("Неизвестное свойство $name модели");
+            throw new Exception (
+                "Неизвестное свойство $name модели " . get_class($this)
+            );
         }
 
         switch ($this::$map[$name]) {
             case 'int':
+            case 'tinyint':
+            case 'smallint':
+            case 'mediumint':
+            case 'bigint':
                 $value = (int) $value;
                 break;
+            case 'char':
+            case 'varchar':
+            case 'text':
             case 'string':
                 $value = mysql_real_escape_string((string) $value);
                 break;
@@ -148,7 +157,7 @@ abstract class AbstractModel {
                 throw new Exception (
                     "Неизвестный тип данных {$this::$map[$name]} в запросе"
                 );
-            break;
+                break;
         }
     }
 
