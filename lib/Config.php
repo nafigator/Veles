@@ -27,6 +27,30 @@ class Config
         self::checkDefaults();
         $config = parse_ini_file(CONFIG_FILE, TRUE);
 
+        self::initInheritance($config);
+
+        try {
+            if (!isset($config[ENVIRONMENT])) {
+                throw new Exception('Не найдена секция окружения в конфиг-файле!');
+            }
+
+            self::$data = $config[ENVIRONMENT];
+        }
+        catch(Exception $e) {
+            //TODO: Редирект на 500
+            die($e->getMessage());
+        }
+
+        unset($config);
+    }
+
+    /**
+     * Проверка секций конфига на наследование и
+     * инициализация наследуемых параметров
+     * @param array $config
+     */
+    private static function initInheritance(&$config)
+    {
         foreach ($config as $namespace => $param) {
             $section = explode(':', $namespace);
 
@@ -44,20 +68,6 @@ class Config
 
             $config[ENVIRONMENT] = array_merge($config[$section[1]], $config[$namespace]);
         }
-
-        try {
-            if (!isset($config[ENVIRONMENT])) {
-                throw new Exception('Не найдена секция окружения в конфиг-файле!');
-            }
-
-            self::$data = $config[ENVIRONMENT];
-        }
-        catch(Exception $e) {
-            //TODO: Редирект на 500
-            die($e->getMessage());
-        }
-
-        unset($config);
     }
 
     /**
