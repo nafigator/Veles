@@ -25,23 +25,53 @@ class Config
     private static function read()
     {
         self::checkDefaults();
-        $config = parse_ini_file(CONFIG_FILE, TRUE);
+        $tmp_config = parse_ini_file(CONFIG_FILE, TRUE);
 
-        self::initInheritance($config);
+        self::initInheritance($tmp_config);
 
         try {
-            if (!isset($config[ENVIRONMENT])) {
+            if (!isset($tmp_config[ENVIRONMENT])) {
                 throw new Exception('Не найдена секция окружения в конфиг-файле!');
             }
 
-            self::$data = $config[ENVIRONMENT];
+            self::$data = $tmp_config[ENVIRONMENT];
         }
         catch(Exception $e) {
             //TODO: Редирект на 500
             die($e->getMessage());
         }
 
-        unset($config);
+        unset($tmp_config);
+
+        self::buildPramsTree(self::$data);
+    }
+
+    /**
+     * Построение массива параметров
+     * @todo Упростить, придумать более понятный алгоритм
+     */
+    private static function buildPramsTree(&$config)
+    {
+        foreach ($config as $name => $value) {
+            $params = explode('.', $name);
+
+            if (1 === count($params))
+                continue;
+
+            $ptr =& $config;
+
+            foreach ($params as $key => $param) {
+                if (end($params) !== $param) {
+                    $ptr[$param][$params[++$key]] = TRUE;
+                    $ptr =& $ptr[$param];
+                }
+                else {
+                    $ptr[$param] = $value;
+                }
+            }
+
+            unset($config[$name]);
+        }
     }
 
     /**
@@ -84,7 +114,6 @@ class Config
 
     /**
      * Получение параметров конфиг-файла
-     * @param string $category
      * @param string $param
      * @return mixed
      */
