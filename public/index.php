@@ -1,8 +1,18 @@
 <?php
+/**
+ * Файл-инициализатор проекта
+ * @file    index.php
+ *
+ * PHP version 5.3+
+ *
+ * @author  Yancharuk Alexander <alex@itvault.info>
+ * @date    Птн Июн 08 08:19:06 2012
+ * @version
+ */
 
-//require_once 'includes/UserTables.class.inc';
-
-define('DEBUG', TRUE);
+// окружение: development, production
+define('ENVIRONMENT', 'development');
+define('CONFIG_PATH', realpath('../project'));
 
 set_include_path(implode(PATH_SEPARATOR,
     array(realpath('../lib'), get_include_path())
@@ -11,10 +21,11 @@ set_include_path(implode(PATH_SEPARATOR,
 set_include_path(implode(PATH_SEPARATOR,
     array(realpath('../project'), get_include_path())
 ));
-//var_dump(get_include_path());
+
 require('AutoLoader.php');
 AutoLoader::init();
 
+Mvc::run();
 //$user_tables = new UserTables();
 
 //$user_tables->create();
@@ -35,6 +46,8 @@ var_dump(
 
 $user->group = 3;
 $user->save();
+
+//var_dump(Db::getErrors());
 /*$time = $stop = 0;
 
 for ($i = 0; $i < 10000; ++$i) {

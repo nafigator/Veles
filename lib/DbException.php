@@ -19,11 +19,19 @@ class DbException extends Exception
     private $connect_error;
     private $sql_error;
 
+    /**
+     * Установка ошибки коннекта
+     * @param   string Станадртный текст Exception
+     */
     private function setConnectError($err)
     {
         $this->connect_error = $err;
     }
 
+    /**
+     * Установка ошибки SQL
+     * @param   string Станадртный текст Exception
+     */
     private function setSqlError($err)
     {
         $this->sql_error = $err;
