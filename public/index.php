@@ -27,7 +27,7 @@ AutoLoader::init();
 
 Mvc::run();
 
-//Config::getParams('php.log_errors');
+//var_dump(Config::getParams('navigation'));
 //$user_tables = new UserTables();
 
 //$user_tables->create();
