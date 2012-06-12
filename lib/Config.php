@@ -20,6 +20,7 @@ class Config
 
     /**
      * Парсер конфиг файла
+     * @throws Exception
      */
     private static function read()
     {
@@ -75,6 +76,7 @@ class Config
      * Получение параметров конфиг-файла
      * @param string $category
      * @param string $param
+     * @return mixed
      */
     final public static function getParams ($param)
     {
