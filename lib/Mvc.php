@@ -21,6 +21,7 @@ class Mvc
      */
     final public static function run()
     {
+        self::initPhpSettings();
         // Получаем имя контроллера и метода
         /*$action = Route::getAction();
 
@@ -34,5 +35,18 @@ class Mvc
 
         // Запускаем view
         $view->show();*/
+    }
+
+    /**
+     * Устанавливаем настройки php, прописанные в конфиге
+     */
+    private static function initPhpSettings()
+    {
+        if (NULL === ($settings = Config::getParams('php')))
+            return;
+
+        foreach ($settings as $param => $value) {
+            $result = ini_set($param, $value);
+        }
     }
 }
