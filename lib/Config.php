@@ -60,9 +60,8 @@ class Config
 
             $ptr =& $config;
 
-            foreach ($params as $key => $param) {
-                if (end($params) !== $param) {
-                    $ptr[$param][$params[++$key]] = TRUE;
+            foreach ($params as $param) {
+                if ($param !== end($params)) {
                     $ptr =& $ptr[$param];
                 }
                 else {
