@@ -12,7 +12,7 @@
 
 // окружение: development, production
 define('ENVIRONMENT', 'development');
-define('CONFIG_PATH', realpath('../project'));
+define('CONFIG_FILE', realpath('../project/settings.ini'));
 
 set_include_path(implode(PATH_SEPARATOR,
     array(realpath('../lib'), get_include_path())
@@ -26,6 +26,8 @@ require('AutoLoader.php');
 AutoLoader::init();
 
 Mvc::run();
+
+Config::getParams('php.log_errors');
 //$user_tables = new UserTables();
 
 //$user_tables->create();
