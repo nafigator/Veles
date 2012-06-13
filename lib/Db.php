@@ -16,11 +16,6 @@
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
 class Db {
-    const MYSQL_SERVER   = 'localhost';
-    const MYSQL_USER     = 'root';
-    const MYSQL_PASSWORD = '';
-    const MYSQL_BASE     = 'ts';
-
     private static $db;
     private static $errors = array();
 
@@ -32,11 +27,15 @@ class Db {
     private static function connect()
     {
         try {
+            if (NULL === ($db_params = Config::getParams('db'))) {
+                throw new DbException('Не найдены параметры подключения к базе!');
+            }
+
             self::$db = mysqli_connect(
-                self::MYSQL_SERVER,
-                self::MYSQL_USER,
-                self::MYSQL_PASSWORD,
-                self::MYSQL_BASE
+                $db_params['host'],
+                $db_params['user'],
+                $db_params['password'],
+                $db_params['base']
             );
 
             if (!self::$db instanceof mysqli) {
@@ -45,6 +44,7 @@ class Db {
         }
         catch (DbException $e) {
             self::$errors[] = $e;
+            //TODO: редирект на 500
         }
     }
 
