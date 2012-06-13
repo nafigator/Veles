@@ -46,7 +46,7 @@ class Mvc
             return;
 
         foreach ($settings as $param => $value) {
-            $result = ini_set($param, $value);
+            ini_set($param, $value);
         }
     }
 }
