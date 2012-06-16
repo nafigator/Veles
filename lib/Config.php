@@ -74,8 +74,7 @@ class Config
     }
 
     /**
-     * Проверка секций конфига на наследование и
-     * инициализация наследуемых параметров
+     * Наследование секций конфига
      * @param array $config
      */
     private static function initInheritance(&$config)
