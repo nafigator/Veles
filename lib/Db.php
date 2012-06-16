@@ -23,12 +23,13 @@ class Db {
      * Соединение с базой.
      * Метод создаёт экземпляр mysqli класса и сохраняет его в self::$db.
      * Нечто наподобие классического синглтона.
+     * @throws Exception
      */
     private static function connect()
     {
         try {
             if (NULL === ($db_params = Config::getParams('db'))) {
-                throw new DbException('Не найдены параметры подключения к базе!');
+                throw new Exception('Не найдены параметры подключения к базе!');
             }
 
             self::$db = mysqli_connect(
@@ -39,10 +40,10 @@ class Db {
             );
 
             if (!self::$db instanceof mysqli) {
-                throw new DbException('Не удалось подключиться к mysql');
+                throw new Exception('Не удалось подключиться к mysql');
             }
         }
-        catch (DbException $e) {
+        catch (Exception $e) {
             self::$errors[] = $e;
             //TODO: редирект на 500
         }
