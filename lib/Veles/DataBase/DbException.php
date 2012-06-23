@@ -10,7 +10,7 @@
  * @version
  */
 
-namespace Veles;
+namespace Veles\DataBase;
 
 use \Exception;
 

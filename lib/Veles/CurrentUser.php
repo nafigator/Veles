@@ -12,7 +12,8 @@
 
 namespace Veles;
 
-use Veles\Model\AbstractModel;
+use \Veles\Model\AbstractModel,
+    \Veles\DataBase\Db;
 
 /**
  * Модель пользователя

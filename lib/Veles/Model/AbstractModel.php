@@ -12,7 +12,8 @@
 
 namespace Veles\Model;
 
-use \Exception;
+use \Exception,
+    \Veles\DataBase\Db;
 
 /**
  * Класс модели

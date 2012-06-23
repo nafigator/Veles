@@ -18,11 +18,8 @@ namespace Veles;
  */
 class Helper {
     /**
-     * @fn    genStr
-     * @brief Генерирует случайный набор символов заданной длины
-     *
+     * Генерирует случайный набор символов заданной длины.
      * По-умолчанию настройки для генерации blowfish соли
-     *
      * @param int $length
      */
     final public static function genStr($length = 21,
