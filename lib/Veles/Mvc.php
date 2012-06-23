@@ -10,6 +10,10 @@
  * @version
  */
 
+namespace Veles;
+
+use Veles\Routing\Route;
+
 /**
  * Класс Mvc
  * @author  Yancharuk Alexander <alex@itvault.info>

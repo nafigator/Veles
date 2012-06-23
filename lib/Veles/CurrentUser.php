@@ -10,6 +10,8 @@
  * @version
  */
 
+namespace Veles;
+
 /**
  * Модель пользователя
  */

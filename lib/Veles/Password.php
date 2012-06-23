@@ -10,6 +10,8 @@
  * @version
  */
 
+namespace Veles;
+
 /**
  * Управление паролем пользователя
  * @author  Yancharuk Alexander <alex@itvault.info>

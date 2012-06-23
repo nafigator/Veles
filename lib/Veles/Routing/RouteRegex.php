@@ -10,6 +10,8 @@
  * @version
  */
 
+namespace Veles\Routing;
+
 /**
  * Класс RouteRegex
  * @author  Yancharuk Alexander <alex@itvault.info>

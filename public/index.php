@@ -10,6 +10,11 @@
  * @version
  */
 
+use Veles\AutoLoader,
+    Veles\CurrentUser,
+    Veles\Mvc,
+    Veles\Db;
+
 // окружение: development, production
 define('ENVIRONMENT', 'development');
 define('CONFIG_FILE', realpath('../project/settings.ini'));
@@ -22,7 +27,7 @@ set_include_path(implode(PATH_SEPARATOR,
     array(realpath('../project'), get_include_path())
 ));
 
-require('AutoLoader.php');
+require('Veles/AutoLoader.php');
 AutoLoader::init();
 
 new CurrentUser;

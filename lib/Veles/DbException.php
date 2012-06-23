@@ -10,6 +10,10 @@
  * @version
  */
 
+namespace Veles;
+
+use \Exception;
+
 /**
  * Exception содержащий код и текст sql-ошибки
  * @author  Yancharuk Alexander <alex@itvault.info>

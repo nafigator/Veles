@@ -10,6 +10,8 @@
  * @version
  */
 
+namespace Veles;
+
 /**
  * Класс управления инфраструктурой данных для класса User
  * @author  Yancharuk Alexander <alex@itvault.info>
