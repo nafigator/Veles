@@ -39,32 +39,32 @@ final class Auth
     /**
      * Конструктор класса User.
      * Авторизует пользователя по кукам. Если пользователь не авторизован,
-     * создаётся экземпляр Guest.\n Если пользователь прислал GET-данные авторизации
-     * через AJAX-форму, устанавливаем куки пользователю.
+     * создаётся экземпляр Guest.\n Если пользователь прислал данные авторизации
+     * через форму, устанавливаем куки пользователю.
      */
     final public function __construct(&$user)
     {
         $auth = FALSE;
 
         switch (TRUE) {
-            // Пользователь авторизуеся через ajax-форму
-            case (isset($_GET['ln']) && isset($_GET['ps'])) :
-                $this->email    =& $_GET['ln'];
-                $this->password =& $_GET['ps'];
-
-                $auth = $this->byAjax($user);
-                break;
             // Пользователь уже авторизовался ранее
-            case (isset($_COOKIE['id']) && isset($_COOKIE['ps'])) :
+            case (isset($_COOKIE['id']) && isset($_COOKIE['pw'])) :
                 $this->cookie_id   =& $_COOKIE['id'];
-                $this->cookie_hash =& $_COOKIE['ps'];
+                $this->cookie_hash =& $_COOKIE['pw'];
 
                 $auth = $this->byCookie($user);
+                break;
+            // Пользователь авторизуеся через запрос
+            case (isset($_REQUEST['ln']) && isset($_REQUEST['pw'])) :
+                $this->email    =& $_REQUEST['ln'];
+                $this->password =& $_REQUEST['pw'];
+
+                $auth = $this->byRequest($user);
                 break;
         }
 
         if (!$auth) {
-            $props = array('group' => User::GUEST);
+            $props = array('group' => CurrentUser::GUEST);
             $user->setProperties($props);
         }
     }
@@ -118,7 +118,7 @@ final class Auth
      * Метод для авторизация пользователя с помощью кук
      * @return  bool
      */
-    final public function byCookie(&$user)
+    final private function byCookie(&$user)
     {
         $this->secureVars('cookie');
 
@@ -145,9 +145,9 @@ final class Auth
     }
 
     /**
-     * Метод для авторизации пользователя AJAX-методом ($_GET)
+     * Метод для авторизации пользователя через запрос
      */
-    final public function byAjax(&$user)
+    final private function byRequest(&$user)
     {
         $this->secureVars('ajax');
 

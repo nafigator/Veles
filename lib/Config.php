@@ -48,7 +48,7 @@ class Config
 
     /**
      * Построение массива параметров
-     * @todo Упростить, придумать более понятный алгоритм
+     * @param array &$config
      */
     private static function buildPramsTree(&$config)
     {
@@ -61,12 +61,10 @@ class Config
             $ptr =& $config;
 
             foreach ($params as $param) {
-                if ($param !== end($params)) {
+                if ($param !== end($params))
                     $ptr =& $ptr[$param];
-                }
-                else {
+                else
                     $ptr[$param] = $value;
-                }
             }
 
             unset($config[$name]);
@@ -117,8 +115,7 @@ class Config
      */
     final public static function getParams ($param)
     {
-        if (NULL === self::$data)
-            self::read();
+        if (NULL === self::$data) self::read();
 
         return (isset(self::$data[$param])) ? self::$data[$param] : NULL;
     }

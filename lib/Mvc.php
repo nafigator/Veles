@@ -23,10 +23,11 @@ class Mvc
     {
         self::setPhpSettings();
         // Получаем имя контроллера и метода
-        /*$action = Route::getAction();
+        /*
+        $controller = Route::getController();
+        $action     = Route::getAction();
 
         // Запускаем контроллер
-        $controller = new $controller_name;
         $variables  = $controller->$action();
 
         // Инициализируем переменные во view
