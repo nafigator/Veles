@@ -113,10 +113,10 @@ class Config
      * @param string $param
      * @return mixed
      */
-    final public static function getParams ($param)
+    final public static function getParams($param)
     {
         if (NULL === self::$data) self::read();
 
-        return (isset(self::$data[$param])) ? self::$data[$param] : NULL;
+        return isset(self::$data[$param]) ? self::$data[$param] : NULL;
     }
 }

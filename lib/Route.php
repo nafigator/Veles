@@ -16,13 +16,41 @@
  */
 class Route
 {
+    private static $page_name  = NULL;
+    private static $config     = NULL;
+
     /**
-     * Инициализация контроллера
+     * Парсинг конфига и инициализация переменных контроллера и экшена
+     */
+    final public static function init()
+    {
+        $routes = Config::getParams('routes');
+        $q_pos = strpos($_SERVER['REQUEST_URI'], '?');
+
+        $url = ($q_pos)
+            ? substr($_SERVER['REQUEST_URI'], 0, $q_pos)
+            : $_SERVER['REQUEST_URI'];
+
+        foreach ($routes as $name => $route) {
+            if ($route['class']::check($route['route'], $url)) {
+                self::$config   = $route;
+                self::$page_name = $name;
+                return;
+            }
+        }
+
+        throw new Exception ("URL $url не найден в конфиге роутинга!");
+    }
+
+    /**
+     * Получение и инициалзация контроллера
      * @return object
      */
     final public static function getController()
     {
-        return new $controller;
+        if (!isset(self::$controller)) self::init();
+
+        return self::$config['controller'];
     }
 
     /**
@@ -31,6 +59,8 @@ class Route
      */
     final public static function getAction()
     {
-        return $action;
+        if (!isset(self::$action)) self::init();
+
+        return self::$config['action'];
     }
 }
