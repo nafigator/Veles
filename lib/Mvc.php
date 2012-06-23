@@ -3,7 +3,7 @@
  * Класс реализующий MVC-архитектуру проекта
  * @file    Mvc.php
  *
- * PHP version 5.3+
+ * PHP version 5.3.9+
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
  * @date    Птн Июн 08 18:10:37 2012

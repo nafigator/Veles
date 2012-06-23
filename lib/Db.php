@@ -4,7 +4,7 @@
  * Для использования необходимо в php наличие mysqli расширения.
  * @file    Db.php
  *
- * PHP version 5.3+
+ * PHP version 5.3.9+
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
  * @date    Птн Мар 09 03:25:07 2012

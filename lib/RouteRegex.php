@@ -3,7 +3,7 @@
  * Обработка шаблонов regex-роутов
  * @file    RouteRegex.php
  *
- * PHP version 5.3+
+ * PHP version 5.3.9+
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
  * @date    Сбт Июн 23 10:47:39 2012

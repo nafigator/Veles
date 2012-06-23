@@ -3,7 +3,7 @@
  * Класс-парсер конфигурации проекта
  * @file    Config.php
  *
- * PHP version 5.3+
+ * PHP version 5.3.9+
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
  * @date    Птн Июн 08 17:28:22 2012

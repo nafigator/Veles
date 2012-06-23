@@ -3,7 +3,7 @@
  * Файл-инициализатор проекта
  * @file    index.php
  *
- * PHP version 5.3+
+ * PHP version 5.3.9+
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
  * @date    Птн Июн 08 08:19:06 2012
@@ -25,6 +25,8 @@ set_include_path(implode(PATH_SEPARATOR,
 require('AutoLoader.php');
 AutoLoader::init();
 
+new CurrentUser;
+
 Mvc::run();
 
 //var_dump(Config::getParams('navigation'));
@@ -36,20 +38,20 @@ Mvc::run();
 
 
 
-$user = new CurrentUser;
-var_dump('$user->auth()', $user->auth());
 
-var_dump('$user', $user);
+//unset($user);
+$user = CurrentUser::instance();
+var_dump('$user', $user, 'getAuth', $user->getAuth());
 
-var_dump(
+/*var_dump(
     'in group 8,3,2: ', $user->hasAccess(array(8,3,2)),
     'Debug data: ', Db::getErrors()
-);
+);*/
 
-$user->group = 3;
-$user->save();
+/*$user->group = 3;
+$user->save();*/
 
-//var_dump(Db::getErrors());
+var_dump(Db::getErrors());
 /*$time = $stop = 0;
 
 for ($i = 0; $i < 10000; ++$i) {
