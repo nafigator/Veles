@@ -11,6 +11,12 @@
  * @version
  */
 
+namespace Veles;
+
+use \Exception,
+    \mysqli,
+    \MySQLi_Result;
+
 /**
  * Класс соединения с базой
  * @author  Yancharuk Alexander <alex@itvault.info>

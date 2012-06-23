@@ -10,6 +10,8 @@
  * @version
  */
 
+namespace Veles\Routing;
+
 /**
  * Класс iRouteStrategy
  * @author  Yancharuk Alexander <alex@itvault.info>

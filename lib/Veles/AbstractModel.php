@@ -10,6 +10,10 @@
  * @version
  */
 
+namespace Veles;
+
+use \Exception;
+
 /**
  * Класс модели
  * @author Yancharuk Alexander <alex@itvault.info>

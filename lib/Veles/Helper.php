@@ -10,6 +10,8 @@
  * @version
  */
 
+namespace Veles;
+
 /**
  * Набор полезных функций
  * @author  Yancharuk Alexander <alex@itvault.info>

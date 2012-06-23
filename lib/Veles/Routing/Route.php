@@ -10,6 +10,11 @@
  * @version
  */
 
+namespace Veles\Routing;
+
+use Veles\Config,
+    \Exception;
+
 /**
  * Класс Route
  * @author  Yancharuk Alexander <alex@itvault.info>

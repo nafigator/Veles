@@ -10,6 +10,8 @@
  * @version
  */
 
+namespace Veles;
+
 /**
  * Класс AutoLoader
  * @author  Yancharuk Alexander <alex@itvault.info>
@@ -21,7 +23,7 @@ class AutoLoader
      */
     final public static function init()
     {
-        spl_autoload_register('AutoLoader::load');
+        spl_autoload_register(__NAMESPACE__ . '\AutoLoader::load');
     }
 
     /**
@@ -30,7 +32,7 @@ class AutoLoader
      */
     final public static function load($name)
     {
-        $name = str_replace('_', '/', $name);
+        $name = str_replace('\\', DIRECTORY_SEPARATOR, $name);
 
         require "$name.php";
     }

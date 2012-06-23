@@ -9,6 +9,9 @@
  * @date    Сбт Июн 23 10:42:18 2012
  * @version
  */
+
+namespace Veles\Routing;
+
 /**
  * Класс RouteStatic
  * @author  Yancharuk Alexander <alex@itvault.info>
