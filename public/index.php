@@ -13,7 +13,7 @@
 use Veles\AutoLoader,
     Veles\CurrentUser,
     Veles\Mvc,
-    Veles\Db;
+    Veles\DataBase\Db;
 
 // окружение: development, production
 define('ENVIRONMENT', 'development');

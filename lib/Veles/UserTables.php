@@ -12,6 +12,8 @@
 
 namespace Veles;
 
+use \Veles\DataBase\Db;
+
 /**
  * Класс управления инфраструктурой данных для класса User
  * @author  Yancharuk Alexander <alex@itvault.info>
@@ -24,7 +26,7 @@ final class UserTables {
     final public function create()
     {
         $sql = '
-            CREATE TABLE `' . User::TBL_USER . '` (
+            CREATE TABLE `' . CurrentUser::TBL_USER . '` (
                 `id`            int unsigned NOT NULL AUTO_INCREMENT,
                 `email`         char(48) NOT NULL,
                 `hash`          char(60) NOT NULL,
@@ -39,7 +41,7 @@ final class UserTables {
         Db::q($sql);
 
         $sql = '
-            CREATE TABLE `' . User::TBL_USER_INFO . '` (
+            CREATE TABLE `' . CurrentUser::TBL_USER_INFO . '` (
                 `id`            int unsigned NOT NULL,
                 `first_name`    varchar(30) NOT NULL,
                 `middle_name`   varchar(30) NOT NULL,
@@ -54,7 +56,7 @@ final class UserTables {
                     ON UPDATE CURRENT_TIMESTAMP,
                 `active`        tinyint(1) NOT NULL DEFAULT "0",
                 `act_key`       char(48),
-                FOREIGN KEY (`id`) REFERENCES `' . User::TBL_USER . '` (`id`)
+                FOREIGN KEY (`id`) REFERENCES `' . CurrentUser::TBL_USER . '` (`id`)
                     ON DELETE CASCADE
                     ON UPDATE CASCADE
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8
@@ -68,8 +70,8 @@ final class UserTables {
      */
     final public function cleanup()
     {
-        Db::q('TRUNCATE TABLE `' . User::TBL_USER . '`');
-        Db::q('TRUNCATE TABLE `' . User::TBL_USER_INFO . '`');
+        Db::q('TRUNCATE TABLE `' . CurrentUser::TBL_USER . '`');
+        Db::q('TRUNCATE TABLE `' . CurrentUser::TBL_USER_INFO . '`');
     }
 
     /**
@@ -79,8 +81,8 @@ final class UserTables {
     {
         $sql = '
             DROP TABLE IF EXISTS
-                `' . User::TBL_USER_INFO . '`,
-                `' . User::TBL_USER . '`
+                `' . CurrentUser::TBL_USER_INFO . '`,
+                `' . CurrentUser::TBL_USER . '`
         ';
 
         Db::q($sql);

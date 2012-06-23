@@ -12,7 +12,7 @@
 
 namespace Veles\Routing;
 
-use Veles\Config,
+use \Veles\Config,
     \Exception;
 
 /**

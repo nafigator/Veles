@@ -11,11 +11,12 @@
  * @version
  */
 
-namespace Veles;
+namespace Veles\DataBase;
 
 use \Exception,
     \mysqli,
-    \MySQLi_Result;
+    \MySQLi_Result,
+    \Veles\Config;
 
 /**
  * Класс соединения с базой
