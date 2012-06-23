@@ -3,7 +3,7 @@
  * Класс управления паролем пользователя
  * @file    Password.php
  *
- * PHP version 5.3+
+ * PHP version 5.3.9+
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
  * @date    Сбт Апр 21 15:49:49 2012

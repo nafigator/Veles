@@ -3,7 +3,7 @@
  * Класс аторизации пользователя
  * @file    Auth.php
  *
- * PHP version 5.3+
+ * PHP version 5.3.9+
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
  * @date    Птн Мар 16 21:45:26 2012
@@ -41,8 +41,9 @@ final class Auth
      * Авторизует пользователя по кукам. Если пользователь не авторизован,
      * создаётся экземпляр Guest.\n Если пользователь прислал данные авторизации
      * через форму, устанавливаем куки пользователю.
+     * @param CurrentUser $user
      */
-    final public function __construct(&$user)
+    final public function __construct(CurrentUser $user)
     {
         $auth = FALSE;
 
@@ -71,6 +72,8 @@ final class Auth
 
     /**
      * Установка авторизационных кук
+     * @param int $id
+     * @param int $hash
      */
     final public static function setCookie($id, $hash)
     {
@@ -80,7 +83,7 @@ final class Auth
         );
         // Пароль не шифруем, т.к. передан в функцию взятый из базы хэш пароля
         setcookie(
-            'ps', $hash, time() + 31536000, '/', $_SERVER['HTTP_HOST'], FALSE, FALSE
+            'pw', $hash, time() + 31536000, '/', $_SERVER['HTTP_HOST'], FALSE, FALSE
         );
     }
 
@@ -90,11 +93,12 @@ final class Auth
     final public static function delCookie()
     {
         setcookie('id', '', time() - 3600, '/', $_SERVER['HTTP_HOST'], FALSE, FALSE);
-        setcookie('ps', '', time() - 3600, '/', $_SERVER['HTTP_HOST'], FALSE, FALSE);
+        setcookie('pw', '', time() - 3600, '/', $_SERVER['HTTP_HOST'], FALSE, FALSE);
     }
 
     /**
      * Установка авторизационных кук
+     * @param string $auth_type
      */
     private function secureVars($auth_type)
     {
@@ -118,7 +122,7 @@ final class Auth
      * Метод для авторизация пользователя с помощью кук
      * @return  bool
      */
-    final private function byCookie(&$user)
+    final private function byCookie(CurrentUser $user)
     {
         $this->secureVars('cookie');
 
@@ -147,7 +151,7 @@ final class Auth
     /**
      * Метод для авторизации пользователя через запрос
      */
-    final private function byRequest(&$user)
+    final private function byRequest(CurrentUser $user)
     {
         $this->secureVars('ajax');
 
@@ -156,7 +160,7 @@ final class Auth
             return FALSE;
 
         // Пользователь уже авторизовался ранее, удаляем куки
-        if (isset($_COOKIE['id']) || isset($_COOKIE['ps']))
+        if (isset($_COOKIE['id']) || isset($_COOKIE['pw']))
             self::delCookie();
 
         // Пользователь с таким логином найден

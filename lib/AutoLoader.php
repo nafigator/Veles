@@ -3,7 +3,7 @@
  * Класс AutoLoader
  * @file    AutoLoader.php
  *
- * PHP version 5.3+
+ * PHP version 5.3.9+
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
  * @date    Птн Июн 01 10:19:04 2012
@@ -31,11 +31,7 @@ class AutoLoader
     final public static function load($name)
     {
         $name = str_replace('_', '/', $name);
-        try {
-            require "$name.php";
-        }
-        catch (Exception $e) {
-            print $e->getMessage();
-        }
+
+        require "$name.php";
     }
 }

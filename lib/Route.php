@@ -3,7 +3,7 @@
  * Класс роутинга
  * @file    Route.php
  *
- * PHP version 5.3+
+ * PHP version 5.3.9+
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
  * @date    Сбт Июн 23 08:52:41 2012
@@ -22,10 +22,10 @@ class Route
     /**
      * Парсинг конфига и инициализация переменных контроллера и экшена
      */
-    final public static function init()
+    private static function init()
     {
         $routes = Config::getParams('routes');
-        $q_pos = strpos($_SERVER['REQUEST_URI'], '?');
+        $q_pos  = strpos($_SERVER['REQUEST_URI'], '?');
 
         $url = ($q_pos)
             ? substr($_SERVER['REQUEST_URI'], 0, $q_pos)
@@ -33,13 +33,14 @@ class Route
 
         foreach ($routes as $name => $route) {
             if ($route['class']::check($route['route'], $url)) {
-                self::$config   = $route;
+                self::$config    = $route;
                 self::$page_name = $name;
                 return;
             }
         }
 
-        throw new Exception ("URL $url не найден в конфиге роутинга!");
+        //TODO: go to 404!
+        throw new Exception("URL $url не найден в конфиге роутинга!");
     }
 
     /**
@@ -48,7 +49,7 @@ class Route
      */
     final public static function getController()
     {
-        if (!isset(self::$controller)) self::init();
+        if (!isset(self::$config)) self::init();
 
         return self::$config['controller'];
     }
@@ -59,7 +60,7 @@ class Route
      */
     final public static function getAction()
     {
-        if (!isset(self::$action)) self::init();
+        if (!isset(self::$config)) self::init();
 
         return self::$config['action'];
     }

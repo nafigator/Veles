@@ -3,7 +3,7 @@
  * Класс CurrentUser
  * @file    CurrentUser.php
  *
- * PHP version 5.3+
+ * PHP version 5.3.9+
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
  * @date    Пнд Мар 05 21:39:43 2012
@@ -26,6 +26,9 @@ class CurrentUser extends AbstractModel
     const GUEST      = 16;
     const DELETED    = 32;
 
+    private static $instance = NULL;
+    private static $auth     = NULL;
+
     protected static $map = array(
         'id'         => 'int',
         'email'      => 'string',
@@ -35,14 +38,29 @@ class CurrentUser extends AbstractModel
     );
 
     /**
-     * Метод для авторизации пользователя
-     * @return  bool
+     * Конструктор
      */
-    final public function auth()
+    final public function __construct()
     {
-        $auth = new Auth($this);
+        self::$auth     = new Auth($this);
+        self::$instance = $this;
+    }
 
-        return $auth;
+    /**
+     * Доступ к объекту текущего пользователя
+     * @return  CurrentUser
+     */
+    final public static function instance()
+    {
+        return self::$instance;
+    }
+
+    /**
+     * Доступ к авторизации пользователя
+     */
+    final public function getAuth()
+    {
+        return self::$auth;
     }
 
     /**
@@ -56,7 +74,7 @@ class CurrentUser extends AbstractModel
         // Проверяем есть ли в группах пользователя определённый бит,
         // соответствующий нужной группе.
         foreach ($groups as $group) {
-            if (($this->group & $group) === $group) {
+            if ($group === ($this->group & $group)) {
                 $result = TRUE;
             }
         }

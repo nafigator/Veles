@@ -3,7 +3,7 @@
  * Класс модели
  * @file    AbstractModel.php
  *
- * PHP version 5.3+
+ * PHP version 5.3.9+
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
  * @date    Втр Апр 24 21:53:04 2012

@@ -3,7 +3,7 @@
  * Класс управления инфраструктурой данных для класса User
  * @file    UserTables.php
  *
- * PHP version 5.3+
+ * PHP version 5.3.9+
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
  * @date    Чтв Мар 08 18:58:09 2012
