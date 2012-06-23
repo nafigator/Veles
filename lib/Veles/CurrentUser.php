@@ -12,6 +12,8 @@
 
 namespace Veles;
 
+use Veles\Model\AbstractModel;
+
 /**
  * Модель пользователя
  */
