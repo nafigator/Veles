@@ -34,7 +34,7 @@ class Helper {
      */
     final public static function validateEmail($email)
     {
-        return preg_match('/^([a-zA-Z0-9]|_|\-|\.)+@(([a-z0-9_]|\-)+\.)+[a-z]{2,6}$/', $email);
+        return preg_match('/^(?:[a-zA-Z0-9]|_|\-|\.)+@(?:(?:[a-z0-9_]|\-)+\.)+[a-z]{2,6}$/', $email);
     }
 
     /**

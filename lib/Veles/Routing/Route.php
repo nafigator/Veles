@@ -54,7 +54,11 @@ class Route
      */
     final public static function getController()
     {
-        if (!isset(self::$config)) self::init();
+        if (!isset(self::$config))
+            self::init();
+
+        if (!isset(self::$config['controller']))
+            throw new Exception("Не указан контроллер для URL: $url");
 
         return self::$config['controller'];
     }
@@ -65,8 +69,23 @@ class Route
      */
     final public static function getAction()
     {
-        if (!isset(self::$config)) self::init();
+        if (!isset(self::$config))
+             self::init();
+
+        if (!isset(self::$config['action']))
+            throw new Exception("Не указан экшен для URL: $url");
 
         return self::$config['action'];
+    }
+
+    /**
+     * Получение имени страницы
+     * @return string
+     */
+    final public static function getPageName()
+    {
+        if (!isset(self::$page_name)) self::init();
+
+        return self::$page_name;
     }
 }
