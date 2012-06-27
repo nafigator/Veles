@@ -22,8 +22,10 @@ class Helper {
      * По-умолчанию настройки для генерации blowfish соли
      * @param int $length
      */
-    final public static function genStr($length = 21,
-        $letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./')
+    final public static function genStr(
+        $letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./',
+        $length  = 21
+    )
     {
         return substr(str_shuffle(str_repeat($letters, 5)), 0, $length);
     }

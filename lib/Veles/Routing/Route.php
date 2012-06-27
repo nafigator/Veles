@@ -60,6 +60,7 @@ class Route
         if (!isset(self::$config['controller']))
             throw new Exception("Не указан контроллер для URL: $url");
 
+        //TODO: new self::$config['controller'];
         return self::$config['controller'];
     }
 

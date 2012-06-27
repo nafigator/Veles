@@ -12,7 +12,7 @@
 
 use Veles\AutoLoader,
     Veles\CurrentUser,
-    Veles\Mvc,
+    Veles\Application,
     Veles\DataBase\Db;
 
 // окружение: development, production
@@ -30,9 +30,7 @@ set_include_path(implode(PATH_SEPARATOR,
 require('Veles/AutoLoader.php');
 AutoLoader::init();
 
-new CurrentUser;
-
-Mvc::run();
+Application::run();
 
 //var_dump(Config::getParams('navigation'));
 //$user_tables = new UserTables();
@@ -48,10 +46,10 @@ Mvc::run();
 $user = CurrentUser::instance();
 var_dump('$user', $user, 'getAuth', $user->getAuth());
 
-/*var_dump(
+var_dump(
     'in group 8,3,2: ', $user->hasAccess(array(8,3,2)),
     'Debug data: ', Db::getErrors()
-);*/
+);
 
 /*$user->group = 3;
 $user->save();*/
