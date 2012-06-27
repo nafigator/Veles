@@ -1,7 +1,7 @@
 <?php
 /**
  * Класс реализующий MVC-архитектуру проекта
- * @file    Mvc.php
+ * @file    Application.php
  *
  * PHP version 5.3.9+
  *
@@ -15,10 +15,10 @@ namespace Veles;
 use \Veles\Routing\Route;
 
 /**
- * Класс Mvc
+ * Класс Application
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
-class Mvc
+class Application
 {
     /**
      * Старт приложения
@@ -26,8 +26,10 @@ class Mvc
     final public static function run()
     {
         self::setPhpSettings();
-        // Получаем имя контроллера и метода
 
+        new CurrentUser;
+
+        // Получаем имя контроллера и метода
         $controller = Route::getController();
         $action     = Route::getAction();
 

@@ -75,16 +75,12 @@ class CurrentUser extends AbstractModel
      */
     final public function hasAccess($groups)
     {
-        $result = FALSE;
         // Проверяем есть ли в группах пользователя определённый бит,
         // соответствующий нужной группе.
         foreach ($groups as $group) {
-            if ($group === ($this->group & $group)) {
-                $result = TRUE;
-            }
+            if ($group === ($this->group & $group))
+                return TRUE;
         }
-
-        return $result;
     }
 
     /**

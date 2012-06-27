@@ -172,7 +172,7 @@ abstract class AbstractModel {
      */
     final public function save()
     {
-        return (isset($this->data['id'])) ? $this->update() : $this->insert();
+        return isset($this->data['id']) ? $this->update() : $this->insert();
     }
 
     /**
@@ -190,7 +190,7 @@ abstract class AbstractModel {
             VALUES
                 (' . $params['values'] . ')';
 
-        return (Db::q($sql)) ? Db::getLastInsertId() : FALSE;
+        return Db::q($sql) ? Db::getLastInsertId() : FALSE;
     }
 
     /**
