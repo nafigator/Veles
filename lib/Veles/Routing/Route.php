@@ -32,7 +32,7 @@ class Route
     final public static function instance()
     {
         if (NULL === self::$instance)
-            self::$instance = new Route();
+            self::$instance = new Route;
 
         return self::$instance;
     }
@@ -47,7 +47,7 @@ class Route
             throw new Exception("В конфиге не найдены роуты!");
         }
 
-        $q_pos  = strpos($_SERVER['REQUEST_URI'], '?');
+        $q_pos = strpos($_SERVER['REQUEST_URI'], '?');
 
         $url = ($q_pos)
             ? substr($_SERVER['REQUEST_URI'], 0, $q_pos)

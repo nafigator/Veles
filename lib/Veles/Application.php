@@ -35,7 +35,7 @@ class Application
         $action     = $route->getAction();
 
         if (!$route->isAjax()) {
-            Navigation::init($route->getPageName());
+            Navigation::instance($route->getPageName());
         }
 
         // Запускаем контроллер
