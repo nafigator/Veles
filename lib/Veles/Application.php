@@ -30,8 +30,13 @@ class Application
         new CurrentUser;
 
         // Получаем имя контроллера и метода
-        $controller = Route::getController();
-        $action     = Route::getAction();
+        $route      = Route::getInstance();
+        $controller = $route->getController();
+        $action     = $route->getAction();
+
+        if (!$route->isAjax()) {
+            Navigation::init($route->getPageName());
+        }
 
         // Запускаем контроллер
         //$variables  = $controller->$action();
