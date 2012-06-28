@@ -130,7 +130,7 @@ abstract class AbstractModel {
             $return['update'] .= "`$name` = $value";
         }
 
-        return  substr($return['update'], 0, -2);
+        return substr($return['update'], 0, -2);
     }
 
     /**
