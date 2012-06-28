@@ -44,8 +44,6 @@ class Navigation
         if (NULL === ($config = Config::getParams('navigation'))) {
             throw new Exception("В конфиге не найдена навигация!");
         }
-        /*self::$menu        = self::buildMenu();
-        self::$breadcrumbs = self::buildBreadCrumbs();*/
     }
 
     /**
