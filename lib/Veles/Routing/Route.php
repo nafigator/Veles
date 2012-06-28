@@ -21,13 +21,27 @@ use \Veles\Config,
  */
 class Route
 {
-    private static $page_name  = NULL;
-    private static $config     = NULL;
+    private static $instance   = NULL;
+    private $page_name         = NULL;
+    private $config            = NULL;
+
+    /**
+     * Доступ к объекту
+     * @return Route
+     */
+    final public static function getInstance()
+    {
+        if (NULL === self::$instance)
+            self::$instance = new Route();
+
+        return self::$instance;
+    }
 
     /**
      * Парсинг конфига и инициализация переменных контроллера и экшена
+     * @throws Exception
      */
-    private static function init()
+    private function __construct()
     {
         $routes = Config::getParams('routes');
         $q_pos  = strpos($_SERVER['REQUEST_URI'], '?');
@@ -38,8 +52,8 @@ class Route
 
         foreach ($routes as $name => $route) {
             if ($route['class']::check($route['route'], $url)) {
-                self::$config    = $route;
-                self::$page_name = $name;
+                $this->config    = $route;
+                $this->page_name = $name;
                 return;
             }
         }
@@ -50,43 +64,51 @@ class Route
 
     /**
      * Получение и инициалзация контроллера
+     * @throws Exception
      * @return object
      */
-    final public static function getController()
+    final public function getController()
     {
-        if (!isset(self::$config))
-            self::init();
-
-        if (!isset(self::$config['controller']))
-            throw new Exception("Не указан контроллер для URL: $url");
+        if (!isset($this->config['controller']))
+            throw new Exception("Не указан контроллер!");
 
         //TODO: new self::$config['controller'];
-        return self::$config['controller'];
+        return $this->config['controller'];
     }
 
     /**
      * Получение имени метода
+     * @throws Exception
      * @return string
      */
-    final public static function getAction()
+    final public function getAction()
     {
-        if (!isset(self::$config))
-             self::init();
+        if (!isset($this->config['action']))
+            throw new Exception("Не указан экшен!");
 
-        if (!isset(self::$config['action']))
-            throw new Exception("Не указан экшен для URL: $url");
+        return $this->config['action'];
+    }
 
-        return self::$config['action'];
+    /**
+     * Получение ajax-флага
+     * @throws Exception
+     * @return string
+     */
+    final public function isAjax()
+    {
+        return isset($this->config['ajax']) ? $this->config['ajax'] : FALSE;
     }
 
     /**
      * Получение имени страницы
+     * @throws Exception
      * @return string
      */
-    final public static function getPageName()
+    final public function getPageName()
     {
-        if (!isset(self::$page_name)) self::init();
+        if (!isset($this->page_name))
+            throw new Exception("Не найдено имя страницы!");
 
-        return self::$page_name;
+        return $this->page_name;
     }
 }

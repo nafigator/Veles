@@ -119,7 +119,8 @@ class Config
      */
     final public static function getParams($param)
     {
-        if (NULL === self::$data) self::read();
+        if (NULL === self::$data)
+            self::read();
 
         return isset(self::$data[$param]) ? self::$data[$param] : NULL;
     }
