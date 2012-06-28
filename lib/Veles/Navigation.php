@@ -18,18 +18,51 @@ namespace Veles;
  */
 class Navigation
 {
-    private static $menu;
-    private static $breadcrumbs;
+    private $menu            = NULL;
+    private $config          = NULL;
+    private $breadcrumbs     = NULL;
+    private static $instance = NULL;
+
+    /**
+     * Доступ к объекту
+     * @return Navigation
+     */
+    final public static function instance($page_name)
+    {
+        if (NULL === self::$instance)
+            self::$instance = new Navigation($page_name);
+
+        return self::$instance;
+    }
 
     /**
      * Создание дерева-массива меню и хлебных крошек
      * @param string $page_name
      */
-    final public static function init($page_name)
+    private function __construct($page_name)
     {
-        $config = Config::getParams('routes');
-
+        if (NULL === ($config = Config::getParams('navigation'))) {
+            throw new Exception("В конфиге не найдена навигация!");
+        }
         /*self::$menu        = self::buildMenu();
         self::$breadcrumbs = self::buildBreadCrumbs();*/
+    }
+
+    /**
+     * Получение массива меню
+     * @return array
+     */
+    final public function getMenuItems()
+    {
+
+    }
+
+    /**
+     * Получение массива хлебных крошек
+     * @return array
+     */
+    final public function getBreadCrumbs()
+    {
+
     }
 }
