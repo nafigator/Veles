@@ -27,10 +27,10 @@ class Application
     {
         self::setPhpSettings();
 
-        new CurrentUser;
+        CurrentUser::instance();
 
         // Получаем имя контроллера и метода
-        $route      = Route::getInstance();
+        $route      = Route::instance();
         $controller = $route->getController();
         $action     = $route->getAction();
 
