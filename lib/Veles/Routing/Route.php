@@ -29,7 +29,7 @@ class Route
      * Доступ к объекту
      * @return Route
      */
-    final public static function getInstance()
+    final public static function instance()
     {
         if (NULL === self::$instance)
             self::$instance = new Route();
@@ -43,7 +43,10 @@ class Route
      */
     private function __construct()
     {
-        $routes = Config::getParams('routes');
+        if (NULL === ($routes = Config::getParams('routes'))) {
+            throw new Exception("В конфиге не найдены роуты!");
+        }
+
         $q_pos  = strpos($_SERVER['REQUEST_URI'], '?');
 
         $url = ($q_pos)
