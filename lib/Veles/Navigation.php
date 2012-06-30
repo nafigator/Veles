@@ -18,7 +18,7 @@ namespace Veles;
  */
 class Navigation
 {
-    private $menu            = NULL;
+    private $menu_items      = NULL;
     private $config          = NULL;
     private $breadcrumbs     = NULL;
     private static $instance = NULL;
@@ -27,10 +27,10 @@ class Navigation
      * Доступ к объекту
      * @return Navigation
      */
-    final public static function instance($page_name)
+    final public static function instance()
     {
         if (NULL === self::$instance)
-            self::$instance = new Navigation($page_name);
+            self::$instance = new Navigation();
 
         return self::$instance;
     }
@@ -39,7 +39,7 @@ class Navigation
      * Создание дерева-массива меню и хлебных крошек
      * @param string $page_name
      */
-    private function __construct($page_name)
+    private function __construct()
     {
         if (NULL === ($config = Config::getParams('navigation'))) {
             throw new Exception("В конфиге не найдена навигация!");
@@ -52,7 +52,10 @@ class Navigation
      */
     final public function getMenuItems()
     {
+        if (NULL !== $this->menu_items)
+            return $this->menu_items;
 
+        //$this->menu_items = array_walk_recursive();
     }
 
     /**
