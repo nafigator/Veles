@@ -21,7 +21,7 @@ use \Veles\DataBase\Db;
 final class UserTables {
     /**
      * Метод для создания инфраструктуры данных для пользователя
-     * @return  bool В случае отсутствия ошибок возвращает TRUE
+     * @return  bool В случае отсутствия ошибок возвращает true
      */
     final public function create()
     {

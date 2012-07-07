@@ -11,29 +11,31 @@
  */
 
 namespace Veles;
+
+use Veles\Routing\Route;
+
 /**
  * Класс View
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
 class View
 {
-    private static $variables;
-    private static $page_name;
+    private static $variables = array();
+    private static $route     = null;
 
     /**
      * Метод для установки переменных в выводе
      * @param array $vars Массив переменных для вывода
      */
-    final public static function set($name, $vars)
+    final public static function set($vars)
     {
-        self::$page_name = is_string($name) ? $name : (string) $name;
-        self::$variables = is_array($vars)  ? $vars : (array)  $vars;
+        self::$variables = array_merge(self::$variables, (array) $vars);
     }
 
     /**
      * Метод вывода
      */
-    final public static function show()
+    final public static function show($route_name, $tpl_name)
     {
         foreach (self::$variables as $var_name => $value) {
             $$var_name = $value;
@@ -41,7 +43,7 @@ class View
 
         $template_name = implode(
             DIRECTORY_SEPARATOR,
-            array(TEMPLATE_PATH, self::$page_name, 'index.tpl')
+            array(TEMPLATE_PATH, $route_name, $tpl_name . '.tpl')
         );
 
         require $template_name;

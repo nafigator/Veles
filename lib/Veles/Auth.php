@@ -47,9 +47,9 @@ final class Auth
      */
     final public function __construct(CurrentUser $user)
     {
-        $auth = FALSE;
+        $auth = false;
 
-        switch (TRUE) {
+        switch (true) {
             // Пользователь уже авторизовался ранее
             case (isset($_COOKIE['id']) && isset($_COOKIE['pw'])) :
                 $this->cookie_id   =& $_COOKIE['id'];
@@ -81,11 +81,11 @@ final class Auth
     {
         // Делаем куки на 1 год (3600*24*365)
         setcookie(
-            'id', $id, time() + 31536000, '/', $_SERVER['HTTP_HOST'], FALSE, FALSE
+            'id', $id, time() + 31536000, '/', $_SERVER['HTTP_HOST'], false, false
         );
         // Пароль не шифруем, т.к. передан в функцию взятый из базы хэш пароля
         setcookie(
-            'pw', $hash, time() + 31536000, '/', $_SERVER['HTTP_HOST'], FALSE, FALSE
+            'pw', $hash, time() + 31536000, '/', $_SERVER['HTTP_HOST'], false, false
         );
     }
 
@@ -94,8 +94,8 @@ final class Auth
      */
     final public static function delCookie()
     {
-        setcookie('id', '', time() - 3600, '/', $_SERVER['HTTP_HOST'], FALSE, FALSE);
-        setcookie('pw', '', time() - 3600, '/', $_SERVER['HTTP_HOST'], FALSE, FALSE);
+        setcookie('id', '', time() - 3600, '/', $_SERVER['HTTP_HOST'], false, false);
+        setcookie('pw', '', time() - 3600, '/', $_SERVER['HTTP_HOST'], false, false);
     }
 
     /**
@@ -130,24 +130,24 @@ final class Auth
 
         // Некорректные куки
         if (0 !== $this->errors)
-            return FALSE;
+            return false;
 
         // Пользователь с таким id не найден
         if (!$user->findActive(array('id' => $this->cookie_id))) {
             // Удаляем куки
             self::delCookie();
             $this->errors |= self::ERR_USER_NOT_FOUND;
-            return FALSE;
+            return false;
         }
 
         // Если хэш пароля не совпадает, удаляем куки
         if (!Password::checkCookieHash($user, $this->cookie_hash)) {
             self::delCookie();
             $this->errors |= self::ERR_WRONG_PASSWORD;
-            return FALSE;
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 
     /**
@@ -159,7 +159,7 @@ final class Auth
 
         // Некорректные $_GET
         if (0 !== $this->errors)
-            return FALSE;
+            return false;
 
         // Пользователь уже авторизовался ранее, удаляем куки
         if (isset($_COOKIE['id']) || isset($_COOKIE['pw']))
@@ -168,18 +168,18 @@ final class Auth
         // Пользователь с таким логином найден
         if (!$user->findActive(array('email' => $this->email))) {
             $this->errors |= self::ERR_USER_NOT_FOUND;
-            return FALSE;
+            return false;
         }
 
         // Если хэш пароля совпадает, устанавливаем авторизационные куки
         if (!Password::check($user, $this->password)) {
             $this->errors |= self::ERR_WRONG_PASSWORD;
-            return FALSE;
+            return false;
         }
 
         self::setCookie($user->getId(), $user->getCookieHash());
 
-        return TRUE;
+        return true;
     }
 
     /**

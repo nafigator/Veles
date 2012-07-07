@@ -21,9 +21,9 @@ use \Veles\Config,
  */
 class Route
 {
-    private static $instance   = NULL;
-    private $page_name         = NULL;
-    private $config            = NULL;
+    private static $instance   = null;
+    private $page_name         = null;
+    private $config            = null;
 
     /**
      * Доступ к объекту
@@ -31,7 +31,7 @@ class Route
      */
     final public static function instance()
     {
-        if (NULL === self::$instance)
+        if (null === self::$instance)
             self::$instance = new Route;
 
         return self::$instance;
@@ -43,7 +43,7 @@ class Route
      */
     private function __construct()
     {
-        if (NULL === ($routes = Config::getParams('routes'))) {
+        if (null === ($routes = Config::getParams('routes'))) {
             throw new Exception("В конфиге не найдены роуты!");
         }
 
@@ -100,7 +100,7 @@ class Route
      */
     final public function isAjax()
     {
-        return isset($this->config['ajax']) ? $this->config['ajax'] : FALSE;
+        return isset($this->config['ajax']) ? $this->config['ajax'] : false;
     }
 
     /**

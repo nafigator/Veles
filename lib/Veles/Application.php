@@ -30,23 +30,23 @@ class Application
         CurrentUser::instance();
 
         // Получаем имя контроллера и метода
-        $route      = Route::instance();
-        $controller = $route->getController();
-        $action     = $route->getAction();
-        $page_name  = $route->getPageName();
+        $route       = Route::instance();
+        $controller  = $route->getController();
+        $action_name = $route->getAction();
+        $page_name   = $route->getPageName();
 
         if (!$route->isAjax()) {
             Navigation::instance($route->getPageName());
         }
 
         // Запускаем контроллер
-        $variables = $controller->$action();
+        $variables = $controller->$action_name();
 
         // Инициализируем переменные во view
-        View::set($page_name, $variables);
+        View::set($variables);
 
         // Запускаем view
-        View::show();
+        View::show($page_name, $action_name);
     }
 
     /**
@@ -54,7 +54,7 @@ class Application
      */
     private static function setPhpSettings()
     {
-        if (NULL === ($settings = Config::getParams('php')))
+        if (null === ($settings = Config::getParams('php')))
             return;
 
         foreach ($settings as $param => $value) {

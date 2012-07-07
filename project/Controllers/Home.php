@@ -12,6 +12,8 @@
 
 namespace Controllers;
 
+use Veles\CurrentUser;
+
 /**
  * Класс Home
  * @author  Yancharuk Alexander <alex@itvault.info>
@@ -24,7 +26,7 @@ class Home
     final public function index()
     {
         $return['text'] = 'Главная страница!';
-        $return['const'] = get_defined_constants();
+        $return['user'] = CurrentUser::instance();
         return $return;
     }
 }
