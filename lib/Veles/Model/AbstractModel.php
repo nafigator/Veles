@@ -27,7 +27,7 @@ abstract class AbstractModel {
     protected static $map = array();
 
     // Имя таблицы
-    const TBL_NAME = NULL;
+    const TBL_NAME = null;
 
     /**
      * Магия для создания свойств модели
@@ -190,7 +190,7 @@ abstract class AbstractModel {
             VALUES
                 (' . $params['values'] . ')';
 
-        return Db::q($sql) ? Db::getLastInsertId() : FALSE;
+        return Db::q($sql) ? Db::getLastInsertId() : false;
     }
 
     /**

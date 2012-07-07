@@ -35,7 +35,7 @@ class Db {
     private static function connect()
     {
         try {
-            if (NULL === ($db_params = Config::getParams('db'))) {
+            if (null === ($db_params = Config::getParams('db'))) {
                 throw new Exception('Не найдены параметры подключения к базе!');
             }
 
@@ -59,7 +59,7 @@ class Db {
     /**
      * Метод для выполнения запросов
      * @param   string Sql-запрос
-     * @return  bool Если запрос выполенен без ошибок, возвращает TRUE
+     * @return  bool Если запрос выполенен без ошибок, возвращает true
      */
     final public static function q($sql)
     {
@@ -68,7 +68,7 @@ class Db {
 
         try {
             $result = mysqli_query(self::$db, $sql, MYSQLI_USE_RESULT);
-            if (FALSE === $result) {
+            if (false === $result) {
                 throw new DbException(
                     'Не удалось выполнить запрос', self::$db, $sql
                 );
@@ -99,7 +99,7 @@ class Db {
     {
         try {
             $result = mysqli_insert_id(self::$db);
-            if (FALSE === $result) {
+            if (false === $result) {
                 throw new DbException(
                     'Не удалось получить LAST_INSERT_ID()', self::$db, $sql
                 );

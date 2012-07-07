@@ -20,7 +20,7 @@ use \Exception;
  */
 class Config
 {
-    private static $data = NULL;
+    private static $data = null;
 
     /**
      * Парсер конфиг файла
@@ -29,7 +29,7 @@ class Config
     private static function read()
     {
         self::checkDefaults();
-        $tmp_config = parse_ini_file(CONFIG_FILE, TRUE);
+        $tmp_config = parse_ini_file(CONFIG_FILE, true);
 
         self::initInheritance($tmp_config);
 
@@ -105,10 +105,10 @@ class Config
      */
     private static function checkDefaults()
     {
-        if (NULL === ENVIRONMENT)
+        if (null === ENVIRONMENT)
             define('ENVIRONMENT', 'production');
 
-        if (NULL === CONFIG_FILE)
+        if (null === CONFIG_FILE)
             define('CONFIG_PATH', realpath('../project/settings.ini'));
     }
 
@@ -119,9 +119,9 @@ class Config
      */
     final public static function getParams($param)
     {
-        if (NULL === self::$data)
+        if (null === self::$data)
             self::read();
 
-        return isset(self::$data[$param]) ? self::$data[$param] : NULL;
+        return isset(self::$data[$param]) ? self::$data[$param] : null;
     }
 }

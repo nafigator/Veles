@@ -18,10 +18,10 @@ namespace Veles;
  */
 class Navigation
 {
-    private $menu_items      = NULL;
-    private $config          = NULL;
-    private $breadcrumbs     = NULL;
-    private static $instance = NULL;
+    private $menu_items      = null;
+    private $config          = null;
+    private $breadcrumbs     = null;
+    private static $instance = null;
 
     /**
      * Доступ к объекту
@@ -29,7 +29,7 @@ class Navigation
      */
     final public static function instance()
     {
-        if (NULL === self::$instance)
+        if (null === self::$instance)
             self::$instance = new Navigation();
 
         return self::$instance;
@@ -41,7 +41,7 @@ class Navigation
      */
     private function __construct()
     {
-        if (NULL === ($config = Config::getParams('navigation'))) {
+        if (null === ($config = Config::getParams('navigation'))) {
             throw new Exception("В конфиге не найдена навигация!");
         }
     }
@@ -52,7 +52,7 @@ class Navigation
      */
     final public function getMenuItems()
     {
-        if (NULL !== $this->menu_items)
+        if (null !== $this->menu_items)
             return $this->menu_items;
 
         //$this->menu_items = array_walk_recursive();

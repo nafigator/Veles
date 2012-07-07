@@ -31,8 +31,8 @@ class CurrentUser extends AbstractModel
     const GUEST      = 16;
     const DELETED    = 32;
 
-    private static $instance = NULL;
-    private static $auth     = NULL;
+    private static $instance = null;
+    private static $auth     = null;
 
     protected static $map = array(
         'id'         => 'int',
@@ -56,7 +56,7 @@ class CurrentUser extends AbstractModel
      */
     final public static function instance()
     {
-        if (NULL === self::$instance)
+        if (null === self::$instance)
             self::$instance = new CurrentUser;
 
         return self::$instance;
@@ -81,7 +81,7 @@ class CurrentUser extends AbstractModel
         // соответствующий нужной группе.
         foreach ($groups as $group) {
             if ($group === ($this->group & $group))
-                return TRUE;
+                return true;
         }
     }
 
@@ -129,7 +129,7 @@ class CurrentUser extends AbstractModel
      */
     final public function getId()
     {
-        return (isset($this->id)) ? $this->id : FALSE;
+        return (isset($this->id)) ? $this->id : false;
     }
 
     /**
@@ -138,7 +138,7 @@ class CurrentUser extends AbstractModel
      */
     final public function getHash()
     {
-        return (isset($this->hash)) ? $this->hash : FALSE;
+        return (isset($this->hash)) ? $this->hash : false;
     }
 
     /**
@@ -147,7 +147,7 @@ class CurrentUser extends AbstractModel
      */
     final public function getCookieHash()
     {
-        return (isset($this->hash)) ? substr($this->hash, 29) : FALSE;
+        return (isset($this->hash)) ? substr($this->hash, 29) : false;
     }
 
     /**
@@ -156,7 +156,7 @@ class CurrentUser extends AbstractModel
      */
     final public function getSalt()
     {
-        return (isset($this->hash)) ? substr($this->hash, 0, 28) : FALSE;
+        return (isset($this->hash)) ? substr($this->hash, 0, 28) : false;
     }
 
     /**
