@@ -75,8 +75,9 @@ class Route
         if (!isset($this->config['controller']))
             throw new Exception("Не указан контроллер!");
 
-        //TODO: new self::$config['controller'];
-        return $this->config['controller'];
+        $controller_name = 'Controllers\\' . $this->config['controller'];
+
+        return new $controller_name;
     }
 
     /**
