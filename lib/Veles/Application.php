@@ -33,20 +33,20 @@ class Application
         $route      = Route::instance();
         $controller = $route->getController();
         $action     = $route->getAction();
+        $page_name  = $route->getPageName();
 
         if (!$route->isAjax()) {
             Navigation::instance($route->getPageName());
         }
 
         // Запускаем контроллер
-        //$variables  = $controller->$action();
+        $variables = $controller->$action();
 
         // Инициализируем переменные во view
-        /*$view = new View();
-        $view->set($variables);
+        View::set($page_name, $variables);
 
         // Запускаем view
-        $view->show();*/
+        View::show();
     }
 
     /**

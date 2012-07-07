@@ -18,14 +18,12 @@ use Veles\AutoLoader,
 // окружение: development, production
 define('ENVIRONMENT', 'development');
 define('CONFIG_FILE', realpath('../project/settings.ini'));
+define('TEMPLATE_PATH', realpath('../project/Templates'));
 
 set_include_path(implode(PATH_SEPARATOR,
-    array(realpath('../lib'), get_include_path())
+    array(realpath('../project'), realpath('../lib'), get_include_path())
 ));
 
-set_include_path(implode(PATH_SEPARATOR,
-    array(realpath('../project'), get_include_path())
-));
 
 require('Veles/AutoLoader.php');
 AutoLoader::init();
@@ -43,7 +41,7 @@ Application::run();
 
 
 //unset($user);
-$user = CurrentUser::instance();
+/*$user = CurrentUser::instance();
 var_dump('$user', $user, 'getAuth', $user->getAuth());
 
 var_dump(
