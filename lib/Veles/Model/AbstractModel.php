@@ -102,8 +102,9 @@ abstract class AbstractModel {
         $return['fields'] = '';
         $return['values'] = '';
 
-        foreach ($this->data as $name => $value) {
-            self::sanitize($name, $value);
+        foreach ($this::$map as $name => $value) {
+            self::sanitize($name);
+            $value =& $this->data[$name];
             $return['fields'] .= "`$name`, ";
             $return['values'] .= (is_string($value)) ? "'$value', " : "$value, ";
         }
@@ -124,8 +125,9 @@ abstract class AbstractModel {
     {
         $return['update'] = '';
 
-        foreach ($this->data as $name => $value) {
-            self::sanitize($name, $value);
+        foreach ($this::$map as $name => $value) {
+            self::sanitize($name);
+            $value =& $this->data[$name];
             $value = (is_string($value)) ? "'$value', " : "$value, ";
             $return['update'] .= "`$name` = $value";
         }
@@ -137,12 +139,14 @@ abstract class AbstractModel {
      * Функция безопасности переменных
      * @param  $arg
      */
-    private function sanitize(&$name, &$value) {
-        if (!isset($this::$map[$name])) {
+    private function sanitize(&$name) {
+        if (empty($this->data[$name]) && isset($this::$required_fields[$name])) {
             throw new Exception (
-                "Неизвестное свойство $name модели " . get_class($this)
+                "Обязательное поле $name модели " . get_class($this) . ' - пустое'
             );
         }
+
+        $value =& $this->data[$name];
 
         switch ($this::$map[$name]) {
             case 'int':

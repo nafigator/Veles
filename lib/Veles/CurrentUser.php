@@ -42,6 +42,11 @@ class CurrentUser extends AbstractModel
         'last_login' => 'string'
     );
 
+    protected static $required_fields = array(
+        'email'      => true,
+        'hash'       => true
+    );
+
     /**
      * Конструктор
      */
