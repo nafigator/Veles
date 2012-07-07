@@ -32,7 +32,7 @@ class Application
         // Получаем имя контроллера и метода
         $route       = Route::instance();
         $controller  = $route->getController();
-        $action_name = $route->getAction();
+        $action_name = $route->getActionName();
         $page_name   = $route->getPageName();
 
         if (!$route->isAjax()) {

@@ -85,7 +85,7 @@ class Route
      * @throws Exception
      * @return string
      */
-    final public function getAction()
+    final public function getActionName()
     {
         if (!isset($this->config['action']))
             throw new Exception("Не указан экшен!");
