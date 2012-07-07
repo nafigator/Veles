@@ -49,8 +49,8 @@ var_dump(
     'Debug data: ', Db::getErrors()
 );
 
-/*$user->group = 3;
-//$user->save();
+$user->group = 3;
+$user->save();
 
 var_dump(Db::getErrors());
 /*$time = $stop = 0;
