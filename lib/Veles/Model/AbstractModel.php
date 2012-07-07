@@ -186,7 +186,7 @@ abstract class AbstractModel {
         $sql = '
             INSERT
                 `' . $this::TBL_NAME . '`
-                ' . $params['fields'] . '
+                (' . $params['fields'] . ')
             VALUES
                 (' . $params['values'] . ')';
 
