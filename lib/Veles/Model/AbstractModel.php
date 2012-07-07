@@ -127,7 +127,7 @@ abstract class AbstractModel {
 
         foreach ($this::$map as $name => $value) {
             self::sanitize($name);
-            $value =& $this->data[$name];
+            $value = $this->data[$name];
             $value = (is_string($value)) ? "'$value', " : "$value, ";
             $return['update'] .= "`$name` = $value";
         }
@@ -146,7 +146,7 @@ abstract class AbstractModel {
             );
         }
 
-        $value =& $this->data[$name];
+        $value = $this->data[$name];
 
         switch ($this::$map[$name]) {
             case 'int':
