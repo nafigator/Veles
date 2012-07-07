@@ -34,8 +34,10 @@ class View
 
     /**
      * Метод вывода
+     * @param string $page_name Имя странички
+     * @param string $tpl_name Имя шаблона
      */
-    final public static function show($route_name, $tpl_name)
+    final public static function show($page_name, $tpl_name)
     {
         foreach (self::$variables as $var_name => $value) {
             $$var_name = $value;
@@ -43,7 +45,7 @@ class View
 
         $template_name = implode(
             DIRECTORY_SEPARATOR,
-            array(TEMPLATE_PATH, $route_name, $tpl_name . '.tpl')
+            array(TEMPLATE_PATH, $page_name, $tpl_name . '.tpl')
         );
 
         require $template_name;
