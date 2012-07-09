@@ -13,7 +13,8 @@
 namespace Veles\Model;
 
 use \Exception,
-    \Veles\DataBase\Db;
+    \Veles\DataBase\Db,
+    \Veles\DataBase\Query;
 
 /**
  * Класс модели
@@ -21,10 +22,10 @@ use \Exception,
  */
 abstract class AbstractModel {
     // Данные модели
-    private $data = array();
+    public $data = array();
 
     // Карта типов данных объекта
-    protected static $map = array();
+    public static $map = array();
 
     // Имя таблицы
     const TBL_NAME = null;
@@ -60,19 +61,34 @@ abstract class AbstractModel {
     }
 
     /**
+     * Вставка данных непосредственно в базу
+     * @return bool
+     */
+    private function insert()
+    {
+        $sql = Query::buildInsert($this);
+
+        return Db::q($sql) ? Db::getLastInsertId() : false;
+    }
+
+    /**
+     * Обновление данных в базе
+     * @return bool
+     */
+    private function update()
+    {
+        $sql = Query::buildUpdate($this);
+
+        return Db::q($sql);
+    }
+
+    /**
      * Получение данных по id
      * @param int $id
      */
-    protected function getById($id)
+    protected function select()
     {
-        $sql = '
-            SELECT *
-            FROM
-                ' . $this::TBL_NAME . '
-            WHERE
-                `id` = ' . $id . '
-            LIMIT 1
-        ';
+        $sql = Query::buildSelect($this);
 
         $result = Db::q($sql);
 
@@ -81,93 +97,6 @@ abstract class AbstractModel {
         }
 
         return $result;
-    }
-
-    /**
-     * Получение данных по заданным параметрам
-     * @param array $params
-     */
-    protected function getByParams($params)
-    {
-
-    }
-
-    /**
-     * Получение sql-параметров для insert
-     * @return array $return
-     * @todo протестировать алгоритм на время. Попробовать варианты с iterator, implode
-     */
-    private function getInsertParams()
-    {
-        $return['fields'] = '';
-        $return['values'] = '';
-
-        foreach ($this::$map as $name => $value) {
-            self::sanitize($name);
-            $value =& $this->data[$name];
-            $return['fields'] .= "`$name`, ";
-            $return['values'] .= (is_string($value)) ? "'$value', " : "$value, ";
-        }
-
-        foreach ($return as $name => $value) {
-            $return[$name] = substr($return[$name], 0, -2);
-        }
-
-        return $return;
-    }
-
-    /**
-     * Получение sql-параметров для update
-     * @return array $return
-     * @todo протестировать алгоритм на время. Попробовать варианты с iterator, implode
-     */
-    private function getUpdateParams()
-    {
-        $return['update'] = '';
-
-        foreach ($this::$map as $name => $value) {
-            self::sanitize($name);
-            $value = $this->data[$name];
-            $value = (is_string($value)) ? "'$value', " : "$value, ";
-            $return['update'] .= "`$name` = $value";
-        }
-
-        return substr($return['update'], 0, -2);
-    }
-
-    /**
-     * Функция безопасности переменных
-     * @param  $arg
-     */
-    private function sanitize(&$name) {
-        if (empty($this->data[$name]) && isset($this::$required_fields[$name])) {
-            throw new Exception (
-                "Обязательное поле $name модели " . get_class($this) . ' - пустое'
-            );
-        }
-
-        $value = $this->data[$name];
-
-        switch ($this::$map[$name]) {
-            case 'int':
-            case 'tinyint':
-            case 'smallint':
-            case 'mediumint':
-            case 'bigint':
-                $value = (int) $value;
-                break;
-            case 'char':
-            case 'varchar':
-            case 'text':
-            case 'string':
-                $value = mysql_real_escape_string((string) $value);
-                break;
-            default:
-                throw new Exception (
-                    "Неизвестный тип данных {$this::$map[$name]} в запросе"
-                );
-                break;
-        }
     }
 
     /**
@@ -180,38 +109,12 @@ abstract class AbstractModel {
     }
 
     /**
-     * Вставка данных непосредственно в базу
-     * @return bool
+     * Удаление данных
+     * @param int $id
      */
-    private function insert()
+    protected function delete()
     {
-        $params = self::getInsertParams();
-
-        $sql = '
-            INSERT
-                `' . $this::TBL_NAME . '`
-                (' . $params['fields'] . ')
-            VALUES
-                (' . $params['values'] . ')';
-
-        return Db::q($sql) ? Db::getLastInsertId() : false;
-    }
-
-    /**
-     * Обновление данных в базе
-     * @return bool
-     */
-    private function update()
-    {
-        $params = self::getUpdateParams();
-
-        $sql = '
-            UPDATE
-                `' . $this::TBL_NAME . '`
-            SET
-                ' . $params . '
-            WHERE
-                id = ' . $this->data['id'];
+        $sql = Query::buildDelete($this);
 
         return Db::q($sql);
     }
@@ -240,20 +143,5 @@ abstract class AbstractModel {
                 $properties[$property_name] = $this->$property_name;
             }
         }
-    }
-
-    /**
-     * Удаление данных
-     * @param int $id
-     */
-    protected function deleteById($id)
-    {
-        $sql = '
-            DELETE FROM
-                `' . $this::TBL_NAME . '`
-            WHERE
-                id = ' . $id;
-
-        return Db::q($sql);
     }
 }
