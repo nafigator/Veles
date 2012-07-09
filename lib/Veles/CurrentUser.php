@@ -34,7 +34,7 @@ class CurrentUser extends AbstractModel
     private static $instance = null;
     private static $auth     = null;
 
-    protected static $map = array(
+    public static $map = array(
         'id'         => 'int',
         'email'      => 'string',
         'hash'       => 'string',
@@ -42,7 +42,7 @@ class CurrentUser extends AbstractModel
         'last_login' => 'string'
     );
 
-    protected static $required_fields = array(
+    public static $required_fields = array(
         'email'      => true,
         'hash'       => true
     );
