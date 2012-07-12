@@ -45,7 +45,7 @@ class View
 
         $template_name = implode(
             DIRECTORY_SEPARATOR,
-            array(TEMPLATE_PATH, $page_name, $tpl_name . '.tpl')
+            array(TEMPLATE_PATH, $page_name, $tpl_name . '.phtml')
         );
 
         require $template_name;
