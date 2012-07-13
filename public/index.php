@@ -7,7 +7,7 @@
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
  * @date    Птн Июн 08 08:19:06 2012
- * @version
+ * @copyright The BSD 2-Clause License. http://opensource.org/licenses/bsd-license.php
  */
 
 use \Veles\AutoLoader,
@@ -29,65 +29,3 @@ require('Veles/AutoLoader.php');
 AutoLoader::init();
 
 Application::run();
-
-//var_dump(Config::getParams('navigation'));
-//$user_tables = new UserTables();
-
-//$user_tables->create();
-
-//$user_tables->drop();
-
-
-
-
-//unset($user);
-$user = CurrentUser::instance();
-var_dump('$user', $user, 'getAuth', $user->getAuth());
-
-var_dump(
-    'in group 8,3,2: ', $user->hasAccess(array(8,3,2)),
-    'Debug data: ', Db::getErrors()
-);
-
-$user->group = 3;
-$user->save();
-
-var_dump(Db::getErrors());
-/*$time = $stop = 0;
-
-for ($i = 0; $i < 10000; ++$i) {
-    $start = xdebug_time_index();
-    $string = Helper::genStr();
-    $stop = xdebug_time_index() - $start;
-    (float)$time += (float) $stop;
-    //echo '<br>', '*** ', $stop, ' ***';
-} echo $string;
-echo '<br>Среднее время Helper::genStr(): ', (float)$time / (float)10000;*/
-
-/*$time1 = $stop = 0;
-
-for ($i = 0; $i < 10000; ++$i) {
-    $start = xdebug_time_index();
-    $string = Helper::genStr2();
-    $stop = xdebug_time_index() - $start;
-    (float)$time1 += (float) $stop;
-    //echo '<br>', '*** ', $stop, ' ***';
-} echo $string;
-echo '<br>Среднее время Helper::genStr2(): ', (float)$time1 / (float)10000;
-
-if ((float)$time1 > (float)$time) {
-    echo '<br>Скрипт Helper::genStr() быстрее на ', (float) $time1 / (float) $time * (float) 100, '%';
-}
-else {
-    echo '<br>Скрипт Helper::genStr2() быстрее на ', (float) $time / (float) $time1 * (float) 100, '%';
-}*/
-/*$salt = /*'$2a$07$CLdaPl/5tI8Ka9U3U/M9jQ';*/ /*'$2a$07$' . $string;
-$hash = crypt('lider', $salt);
-
-$db_hash = substr($hash, 29);
-
-echo '<br>', 'Соль: ', $salt,
-     '<br>', 'Хэш: ', $hash,
-     '<br>', 'Хэш в базе: ', $db_hash, '<br>',
-     '<br>', strlen($hash), '<br>';
-    (crypt('lider', $salt) === $salt . '.' . $db_hash) ? 'Успешная автризация!' : 'Пользователь не авторизован';*/
