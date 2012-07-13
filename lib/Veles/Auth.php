@@ -24,7 +24,6 @@ final class Auth
     const ERR_INVALID_HASH     = 8;
     const ERR_USER_NOT_FOUND   = 16; // auth
     const ERR_WRONG_PASSWORD   = 32;
-    const ERR_WRONG_DOMAIN     = 64;
 
     const PREG_COOKIE_ID   = '/^\d{1,10}$/';
     const PREG_COOKIE_HASH = '/^[a-zA-Z0-9\.\/]{31}$/';
@@ -50,19 +49,19 @@ final class Auth
         $auth = false;
 
         switch (true) {
-            // Пользователь уже авторизовался ранее
-            case (isset($_COOKIE['id']) && isset($_COOKIE['pw'])) :
-                $this->cookie_id   =& $_COOKIE['id'];
-                $this->cookie_hash =& $_COOKIE['pw'];
-
-                $auth = $this->byCookie($user);
-                break;
             // Пользователь авторизуеся через запрос
             case (isset($_REQUEST['ln']) && isset($_REQUEST['pw'])) :
                 $this->email    =& $_REQUEST['ln'];
                 $this->password =& $_REQUEST['pw'];
 
                 $auth = $this->byRequest($user);
+                break;
+            // Пользователь уже авторизовался ранее
+            case (isset($_COOKIE['id']) && isset($_COOKIE['pw'])) :
+                $this->cookie_id   =& $_COOKIE['id'];
+                $this->cookie_hash =& $_COOKIE['pw'];
+
+                $auth = $this->byCookie($user);
                 break;
         }
 

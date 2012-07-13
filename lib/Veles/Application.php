@@ -39,13 +39,10 @@ class Application
             Navigation::instance($route->getPageName());
         }
 
-        // Запускаем контроллер
         $variables = $controller->$action_name();
 
-        // Инициализируем переменные во view
         View::set($variables);
 
-        // Запускаем view
         View::show($page_name, $action_name);
     }
 

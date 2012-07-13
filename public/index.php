@@ -10,10 +10,10 @@
  * @version
  */
 
-use Veles\AutoLoader,
-    Veles\CurrentUser,
-    Veles\Application,
-    Veles\DataBase\Db;
+use \Veles\AutoLoader,
+    \Veles\CurrentUser,
+    \Veles\Application,
+    \Veles\DataBase\Db;
 
 // окружение: development, production
 define('ENVIRONMENT', 'development');

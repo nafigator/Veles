@@ -14,7 +14,7 @@ namespace Veles\Model;
 
 use \Exception,
     \Veles\DataBase\Db,
-    \Veles\DataBase\Query;
+    \Veles\DataBase\QueryBuilder;
 
 /**
  * Класс модели
@@ -66,7 +66,7 @@ abstract class AbstractModel {
      */
     private function insert()
     {
-        $sql = Query::buildInsert($this);
+        $sql = QueryBuilder::insert($this);
 
         return Db::q($sql) ? Db::getLastInsertId() : false;
     }
@@ -77,7 +77,7 @@ abstract class AbstractModel {
      */
     private function update()
     {
-        $sql = Query::buildUpdate($this);
+        $sql = QueryBuilder::update($this);
 
         return Db::q($sql);
     }
@@ -88,7 +88,7 @@ abstract class AbstractModel {
      */
     protected function select()
     {
-        $sql = Query::buildSelect($this);
+        $sql = QueryBuilder::select($this);
 
         $result = Db::q($sql);
 
@@ -114,7 +114,7 @@ abstract class AbstractModel {
      */
     protected function delete()
     {
-        $sql = Query::buildDelete($this);
+        $sql = QueryBuilder::delete($this);
 
         return Db::q($sql);
     }

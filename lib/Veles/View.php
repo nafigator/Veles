@@ -12,7 +12,7 @@
 
 namespace Veles;
 
-use Veles\Routing\Route;
+use \Veles\Routing\Route;
 
 /**
  * Класс View

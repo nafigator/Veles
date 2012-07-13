@@ -12,7 +12,7 @@
 
 namespace Controllers;
 
-use Veles\CurrentUser;
+use \Veles\CurrentUser;
 
 /**
  * Класс Home

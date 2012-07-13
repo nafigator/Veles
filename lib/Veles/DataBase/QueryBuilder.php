@@ -1,7 +1,7 @@
 <?php
 /**
  * Вспомогательный класс для формирования запросов
- * @file    Query.php
+ * @file    QueryBuilder.php
  *
  * PHP version 5.3.9+
  *
@@ -15,10 +15,10 @@ namespace Veles\DataBase;
 use \Exception;
 
 /**
- * Класс Query
+ * Класс QueryBuilder
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
-class Query
+class QueryBuilder
 {
     /**
      * Построение sql-запроса для insert
@@ -26,7 +26,7 @@ class Query
      * @return array $sql
      * @todo протестировать алгоритм на время. Попробовать варианты с iterator, implode
      */
-    final public static function buildInsert($model)
+    final public static function insert($model)
     {
         $arr['fields'] = '';
         $arr['values'] = '';
@@ -57,7 +57,7 @@ class Query
      * @return array $sql
      * @todo протестировать алгоритм на время. Попробовать варианты с iterator, implode
      */
-    final public static function buildUpdate($model)
+    final public static function update($model)
     {
         $params = '';
 
@@ -84,9 +84,8 @@ class Query
      * Построение sql-запроса для select
      * @param AbstractModel $model Экземпляр модели
      * @return array $sql
-     * @todo протестировать алгоритм на время. Попробовать варианты с iterator, implode
      */
-    final public static function buildSelect($model)
+    final public static function select($model)
     {
         $sql = '
             SELECT *
@@ -105,7 +104,7 @@ class Query
      * @param AbstractModel $model Экземпляр модели
      * @return array $sql
      */
-    final public static function buildDelete($model)
+    final public static function delete($model)
     {
         $sql = '
             DELETE FROM
