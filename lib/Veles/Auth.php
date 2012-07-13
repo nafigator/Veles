@@ -7,7 +7,7 @@
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
  * @date    Птн Мар 16 21:45:26 2012
- * @version
+ * @copyright The BSD 2-Clause License. http://opensource.org/licenses/bsd-license.php
  */
 
 namespace Veles;
