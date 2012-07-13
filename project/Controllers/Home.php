@@ -25,8 +25,8 @@ class Home
      */
     final public function index()
     {
-        $return['text'] = 'Главная страница!';
-        $return['user'] = CurrentUser::instance();
+        $return['text']  = 'Главная страница!';
+        $return['about'] = 'Veles - PHP micro framework.';
         return $return;
     }
 }
