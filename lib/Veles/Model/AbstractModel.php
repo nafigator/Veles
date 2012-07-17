@@ -12,8 +12,7 @@
 
 namespace Veles\Model;
 
-use \Exception,
-    \Veles\DataBase\Db,
+use \Veles\DataBase\Db,
     \Veles\DataBase\QueryBuilder;
 
 /**

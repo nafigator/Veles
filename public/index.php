@@ -11,9 +11,8 @@
  */
 
 use \Veles\AutoLoader,
-    \Veles\CurrentUser,
-    \Veles\Application,
-    \Veles\DataBase\Db;
+    \Veles\Error,
+    \Veles\Application;
 
 // окружение: development, production
 define('ENVIRONMENT', 'development');
@@ -28,4 +27,9 @@ set_include_path(implode(PATH_SEPARATOR,
 require('Veles/AutoLoader.php');
 AutoLoader::init();
 
-Application::run();
+try {
+    Application::run();
+}
+catch (Exception $e) {
+    Error::init($e);
+}

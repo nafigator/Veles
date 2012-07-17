@@ -34,25 +34,19 @@ class Db {
      */
     private static function connect()
     {
-        try {
-            if (null === ($db_params = Config::getParams('db'))) {
-                throw new Exception('Не найдены параметры подключения к базе!');
-            }
-
-            self::$db = mysqli_connect(
-                $db_params['host'],
-                $db_params['user'],
-                $db_params['password'],
-                $db_params['base']
-            );
-
-            if (!self::$db instanceof mysqli) {
-                throw new Exception('Не удалось подключиться к mysql');
-            }
+        if (null === ($db_params = Config::getParams('db'))) {
+            throw new Exception('Не найдены параметры подключения к базе!');
         }
-        catch (Exception $e) {
-            self::$errors[] = $e;
-            //TODO: редирект на 500
+
+        self::$db = @mysqli_connect(
+            $db_params['host'],
+            $db_params['user'],
+            $db_params['password'],
+            $db_params['base']
+        );
+
+        if (!self::$db instanceof mysqli) {
+            throw new Exception('Не удалось подключиться к mysql');
         }
     }
 
@@ -66,16 +60,11 @@ class Db {
         if (!self::$db instanceof mysqli)
             self::connect();
 
-        try {
-            $result = mysqli_query(self::$db, $sql, MYSQLI_USE_RESULT);
-            if (false === $result) {
-                throw new DbException(
-                    'Не удалось выполнить запрос', self::$db, $sql
-                );
-            }
-        }
-        catch (DbException $e) {
-            self::$errors[] = $e;
+        $result = mysqli_query(self::$db, $sql, MYSQLI_USE_RESULT);
+        if (false === $result) {
+            throw new DbException(
+                'Не удалось выполнить запрос', self::$db, $sql
+            );
         }
 
         if ($result instanceof MySQLi_Result) {
@@ -97,16 +86,11 @@ class Db {
      */
     final public static function getLastInsertId()
     {
-        try {
-            $result = mysqli_insert_id(self::$db);
-            if (false === $result) {
-                throw new DbException(
-                    'Не удалось получить LAST_INSERT_ID()', self::$db, $sql
-                );
-            }
-        }
-        catch (DbException $e) {
-            self::$errors[] = $e;
+        $result = mysqli_insert_id(self::$db);
+        if (false === $result) {
+            throw new DbException(
+                'Не удалось получить LAST_INSERT_ID()', self::$db, $sql
+            );
         }
 
         return $result;
