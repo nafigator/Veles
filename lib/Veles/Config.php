@@ -33,17 +33,11 @@ class Config
 
         self::initInheritance($tmp_config);
 
-        try {
-            if (!isset($tmp_config[ENVIRONMENT])) {
-                throw new Exception('Не найдена секция окружения в конфиг-файле!');
-            }
+        if (!isset($tmp_config[ENVIRONMENT])) {
+            throw new Exception('Не найдена секция окружения в конфиг-файле!');
+        }
 
-            self::$data = $tmp_config[ENVIRONMENT];
-        }
-        catch(Exception $e) {
-            //TODO: Редирект на 500
-            die($e->getMessage());
-        }
+        self::$data = $tmp_config[ENVIRONMENT];
 
         unset($tmp_config);
 
