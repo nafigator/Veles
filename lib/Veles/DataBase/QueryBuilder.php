@@ -75,7 +75,7 @@ class QueryBuilder
             SET
                 ' . $params . '
             WHERE
-                id = ' . $model->data['id'];
+                id = ' . $model->id;
 
         return $sql;
     }
@@ -92,7 +92,7 @@ class QueryBuilder
             FROM
                 ' . $model::TBL_NAME . '
             WHERE
-                `id` = ' . $model->data['id'] . '
+                `id` = ' . $model->id . '
             LIMIT 1
         ';
 
@@ -110,7 +110,7 @@ class QueryBuilder
             DELETE FROM
                 `' . $model::TBL_NAME . '`
             WHERE
-                id = ' . $model->data['id'];
+                id = ' . $model->id;
 
         return $sql;
     }
@@ -120,13 +120,13 @@ class QueryBuilder
      * @param  $arg
      */
     private static function sanitize($model, &$name) {
-        if (empty($model->data[$name]) && isset($model::$required_fields[$name])) {
+        if (empty($model->$name) && isset($model::$required_fields[$name])) {
             throw new Exception (
                 "Обязательное поле $name модели " . get_class($model) . ' - пустое'
             );
         }
 
-        $value = isset($model->data[$name]) ? $model->data[$name] : false;
+        $value = isset($model->$name) ? $model->$name : false;
 
         switch ($model::$map[$name]) {
             case 'int':

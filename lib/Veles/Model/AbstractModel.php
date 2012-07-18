@@ -21,7 +21,7 @@ use \Veles\DataBase\Db,
  */
 abstract class AbstractModel {
     // Данные модели
-    public $data = array();
+    protected $data = array();
 
     // Карта типов данных объекта
     public static $map = array();
