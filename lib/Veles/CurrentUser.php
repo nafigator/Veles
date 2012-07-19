@@ -48,21 +48,15 @@ class CurrentUser extends AbstractModel
     );
 
     /**
-     * Конструктор
-     */
-    public function __construct()
-    {
-        self::$auth = new Auth($this);
-    }
-
-    /**
      * Доступ к объекту текущего пользователя
      * @return  CurrentUser
      */
     final public static function instance()
     {
-        if (null === self::$instance)
+        if (null === self::$instance) {
             self::$instance = new CurrentUser;
+            self::$auth     = new Auth(self::$instance);
+        }
 
         return self::$instance;
     }

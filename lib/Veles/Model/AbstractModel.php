@@ -62,7 +62,7 @@ abstract class AbstractModel {
     /**
      * Конструктор модели
      */
-    public function __construct($id = null)
+    final protected function __construct($id = null)
     {
         if (null !== $id) {
             $this->find($id);
