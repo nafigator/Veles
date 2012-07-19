@@ -60,6 +60,16 @@ abstract class AbstractModel {
     }
 
     /**
+     * Конструктор модели
+     */
+    public function __construct($id = null)
+    {
+        if (null !== $id) {
+            $this->find($id);
+        }
+    }
+
+    /**
      * Вставка данных непосредственно в базу
      * @return bool
      */
@@ -85,17 +95,25 @@ abstract class AbstractModel {
      * Получение данных по id
      * @param int $id
      */
-    protected function select()
+    final public function find($id)
     {
-        $sql = QueryBuilder::select($this);
+        if ((int) $id < 1) {
+            throw new Exception('Некорректный id!');
+        }
+
+        $sql = QueryBuilder::find($this, $id);
 
         $result = Db::q($sql);
+
+        if (empty($result)) {
+            return false;
+        }
 
         foreach ($result as $name => $value) {
             $this->$name = $value;
         }
 
-        return $result;
+        return true;
     }
 
     /**
@@ -104,7 +122,7 @@ abstract class AbstractModel {
      */
     final public function save()
     {
-        return isset($this->data['id']) ? $this->update() : $this->insert();
+        return isset($this->id) ? $this->update() : $this->insert();
     }
 
     /**

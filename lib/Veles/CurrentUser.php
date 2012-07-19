@@ -50,7 +50,7 @@ class CurrentUser extends AbstractModel
     /**
      * Конструктор
      */
-    private function __construct()
+    public function __construct()
     {
         self::$auth = new Auth($this);
     }

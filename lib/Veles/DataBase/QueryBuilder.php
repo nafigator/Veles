@@ -31,9 +31,9 @@ class QueryBuilder
         $arr['fields'] = '';
         $arr['values'] = '';
 
-        foreach ($model::$map as $name => $value) {
-            $value = self::sanitize($model, $name);
-            $arr['fields'] .= "`$name`, ";
+        foreach ($model::$map as $property => $value) {
+            $value = self::sanitize($model, $property);
+            $arr['fields'] .= "`$property`, ";
             $arr['values'] .= (is_string($value)) ? "'$value', " : "$value, ";
         }
 
@@ -61,8 +61,8 @@ class QueryBuilder
     {
         $params = '';
 
-        foreach ($model::$map as $name => $value) {
-            $value = self::sanitize($model, $name);
+        foreach ($model::$map as $property => $value) {
+            $value = self::sanitize($model, $property);
             $value = (is_string($value)) ? "'$value', " : "$value, ";
             $params .= "`$name` = $value";
         }
@@ -83,16 +83,19 @@ class QueryBuilder
     /**
      * Построение sql-запроса для select
      * @param AbstractModel $model Экземпляр модели
+     * @param int $id primary key
      * @return array $sql
      */
-    final public static function select($model)
+    final public static function find($model, $id)
     {
+        $id = self::sanitize($model, 'id');
+
         $sql = '
             SELECT *
             FROM
                 ' . $model::TBL_NAME . '
             WHERE
-                `id` = ' . $model->id . '
+                `id` = ' . $id . '
             LIMIT 1
         ';
 
@@ -102,15 +105,18 @@ class QueryBuilder
     /**
      * Построение sql-запроса для delete
      * @param AbstractModel $model Экземпляр модели
+     * @param int $id primary key
      * @return array $sql
      */
-    final public static function delete($model)
+    final public static function delete($model, $id)
     {
+        $id = self::sanitize($model, 'id');
+
         $sql = '
             DELETE FROM
                 `' . $model::TBL_NAME . '`
             WHERE
-                id = ' . $model->id;
+                id = ' . $id;
 
         return $sql;
     }
@@ -119,22 +125,31 @@ class QueryBuilder
      * Функция безопасности переменных
      * @param  $arg
      */
-    private static function sanitize($model, &$name) {
-        if (empty($model->$name) && isset($model::$required_fields[$name])) {
+    private static function sanitize($model, $property) {
+        if (!isset($model::$map[$property])) {
             throw new Exception (
-                "Обязательное поле $name модели " . get_class($model) . ' - пустое'
+                "Неизвестное свойство \"$property\" модели " . get_class($model)
             );
         }
 
-        $value = isset($model->$name) ? $model->$name : false;
+        if (empty($model->$property) && isset($model::$required_fields[$property])) {
+            throw new Exception (
+                "Обязательное свойство \"$property\" модели " . get_class($model) . ' - пустое'
+            );
+        }
 
-        switch ($model::$map[$name]) {
+        $value = isset($model->$property) ? $model->$property : false;
+
+        switch ($model::$map[$property]) {
             case 'int':
             case 'tinyint':
             case 'smallint':
             case 'mediumint':
             case 'bigint':
                 $value = (int) $value;
+                break;
+            case 'float':
+                $value = (float) $value;
                 break;
             case 'char':
             case 'varchar':
@@ -144,7 +159,7 @@ class QueryBuilder
                 break;
             default:
                 throw new Exception (
-                    "Неизвестный тип данных {$model::$map[$name]} в запросе"
+                    "Неизвестный тип данных {$model::$map[$property]} в запросе"
                 );
                 break;
         }
