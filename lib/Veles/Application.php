@@ -39,9 +39,9 @@ class Application
             Navigation::instance($route->getPageName());
         }
 
-        $variables = $controller->$action_name();
+        $vars = $controller->$action_name();
 
-        View::set($variables);
+        View::set($vars);
 
         View::show($page_name, $action_name);
     }

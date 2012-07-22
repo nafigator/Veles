@@ -1,4 +1,44 @@
 <? require 'header.phtml'?>
-<body>
-    <?=$error?>
+<body style="font-family: Arial,Helvetica,Sans-Serif;">
+    <h4><?=$time?></h4>
+    <table cellspacing="1" cellpadding="1" border="1" style="border-collapse: collapse">
+        <tr>
+            <th bgcolor="#f57900" align="left" colspan="3">
+                <span style="background-color: #cc0000; color: #fce94f; font-size: x-large;">( ! )</span>
+                <?=$type?> : <?=$message?> in <?=$file?> on line <?=$line?>
+            </th>
+        </tr>
+        <tr>
+            <th bgcolor="#e9b96e" align="left" colspan="3">Call Stack :</th>
+        </tr>
+        <tr>
+            <th bgcolor="#eeeeec" align="center">#</th>
+            <th bgcolor="#eeeeec" align="left">Function</th>
+            <th bgcolor="#eeeeec" align="left">File</th>
+        </tr>
+        <? foreach ($stack as $num => $call) { ?>
+        <tr>
+            <td><?=++$num?></td>
+            <td><?=$call['function']?>()</td>
+            <td><?=$call['file']?></td>
+        </tr>
+        <? } ?>
+        <tr>
+            <th bgcolor="#e9b96e" align="left" colspan="3">Variables in scope :</th>
+        </tr>
+        <tr>
+            <th bgcolor="#eeeeec" align="center">#</th>
+            <th bgcolor="#eeeeec" align="left">Name</th>
+            <th bgcolor="#eeeeec" align="left">Value</th>
+        </tr>
+        <? $num = 0?>
+        <? foreach ($defined as $var_name => $var_value) { ?>
+        <tr>
+            <td><?=++$num?></td>
+            <td style="color: blue"><b>$<?=$var_name?></b></td>
+            <td><?var_dump($var_value)?></td>
+        </tr>
+        <? } ?>
+    </table>
 </body>
+</html>

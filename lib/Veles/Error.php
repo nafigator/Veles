@@ -1,6 +1,6 @@
 <?php
 /**
- * Обработка исключений
+ * Обработка ошибок проекта
  * @file    Error.php
  *
  * PHP version 5.3.9+
@@ -13,7 +13,8 @@
 namespace Veles;
 
 use \SplSubject,
-    \SplObserver;
+    \SplObserver,
+    \Veles\Email\ErrorEmail;
 
 /**
  * Класс Error
@@ -21,33 +22,141 @@ use \SplSubject,
  */
 class Error implements SplSubject
 {
-    private static $error     = null;
-    private static $observers = array();
+    private $vars      = null;
+    private $observers = array();
+
+    /**
+     * Обработчик пользовательских ошибок
+     */
+    final public function error($type, $message, $file, $line, $defined)
+    {
+        $this->vars['type']    = $this->getErrorType($type);
+        $this->vars['time']    = strftime("%Y-%m-%d %H:%M:%S", time());
+        $this->vars['message'] = $message;
+        $this->vars['file']    = str_replace(BASE_PATH, '', $file);
+        $this->vars['line']    = $line;
+        $this->vars['stack']   = $this->getStack(array_reverse(debug_backtrace()));
+        $this->vars['defined'] = $defined;
+
+        $this->process();
+    }
+
+    /**
+     * Обработчик php ошибок
+     */
+    final public function fatal()
+    {
+        if (null === ($this->vars = error_get_last())) exit;
+
+        $this->vars['type']    = $this->getErrorType($this->vars['type']);
+        $this->vars['time']    = strftime("%Y-%m-%d %H:%M:%S", time());
+        $this->vars['file']    = str_replace(BASE_PATH, '', $this->vars['file']);
+        $this->vars['stack']   = array();
+        $this->vars['defined'] = array();
+
+        $this->process();
+    }
+
+    /**
+     * Обработчик исключений
+     * @param Exception $e Исключение
+     */
+    final public function exception($e)
+    {
+        $this->vars['type']    = $this->getErrorType($e->getCode());
+        $this->vars['time']    = strftime("%Y-%m-%d %H:%M:%S", time());
+        $this->vars['message'] = $e->getMessage();
+        $this->vars['file']    = str_replace(BASE_PATH, '', $e->getFile());
+        $this->vars['line']    = $e->getLine();
+        $this->vars['stack']   = $this->getStack(array_reverse($e->getTrace()));
+        $this->vars['defined'] = array();
+
+        $this->process();
+    }
 
     /**
      * Метод обработки исключений
-     * @param Exception $e
      */
-    final public static function init($e)
+    final public function process()
     {
         if ('development' === ENVIRONMENT) {
-            $error = isset($e->xdebug_message)
-                ? '<table>' . $e->xdebug_message . '</table>'
-                : '<pre>'   . $e->__toString()   . '</pre>';
-
-            $variables = array(
-                'title' => $e->getMessage(),
-                'error' => $error
-            );
-
-            View::set($variables);
+            View::set($this->vars);
             View::show('error', 'exception');
         }
         else {
-            self::$error = new Error;
-            //TODO: Запись в лог? Уведомление на email? SMS?
-            self::$error->notify();
+            ob_start();
+            View::set($this->vars);
+            View::show('error', 'exception');
+            $error_output = ob_get_flush();
+
+            //TODO: $this->attach(new ErrorSMS($this->vars));
+            $this->attach(new ErrorEmail($error_output));
+            $this->notify();
+
+            //TODO: go to custom error page;
         }
+    }
+
+    /**
+     * Получение типа ошибки
+     * @param string $type
+     * @return string
+     */
+    private function getErrorType($type)
+    {
+        switch ((int) $type) {
+            case E_ERROR:               // 1
+                return 'FATAL ERROR';
+            case E_WARNING:             // 2
+                return 'WARNING';
+            case E_PARSE:               // 4
+                return 'PARSE ERROR';
+            case E_NOTICE:              // 8
+                return 'NOTICE';
+            case E_CORE_ERROR:          // 16
+                return 'CORE ERROR';
+            case E_CORE_WARNING:        // 32
+                return 'CORE WARNING';
+            case E_CORE_ERROR:          // 64
+                return 'COMPILE ERROR';
+            case E_CORE_WARNING:        // 128
+                return 'COMPILE WARNING';
+            case E_USER_ERROR:          // 256
+                return 'USER ERROR';
+            case E_USER_WARNING:        // 512
+                return 'USER WARNING';
+            case E_USER_NOTICE:         // 1024
+                return 'USER NOTICE';
+            case E_STRICT:              // 2048
+                return 'STRICT NOTICE';
+            case E_RECOVERABLE_ERROR:   // 4096
+                return 'RECOVERABLE ERROR';
+            case E_DEPRECATED:          // 8192
+                return 'DEPRECATED WARNING';
+            case E_USER_DEPRECATED:     // 16384
+                return 'USER DEPRECATED WARNING';
+            case 0:
+                return 'EXCEPTION';
+        }
+    }
+
+    /**
+     * Форматирование стека вызовов
+     * @param array $stack Массив вызовов
+     */
+    private function getStack($stack)
+    {
+        foreach ($stack as $key => &$call) {
+            $call['function'] = (isset($call['class']))
+                ? $call['class'] . $call['type'] . $call['function']
+                : $call['function'];
+
+            $call['file'] = (isset($call['file']))
+                ? $call['file'] . '<b>:</b>' . $call['line']
+                : '';
+        }
+
+        return $stack;
     }
 
     /**
@@ -55,7 +164,9 @@ class Error implements SplSubject
      */
     final public function notify()
     {
-        echo 'Уведомление наблюдателей';
+        foreach ($this->observers as $observer) {
+            $observer->update($this);
+        }
     }
 
     /**
@@ -63,7 +174,7 @@ class Error implements SplSubject
      */
     final public function attach(SplObserver $observer)
     {
-        echo 'Добавление наблюдателей';
+        $this->observers[] = $observer;
     }
 
     /**
@@ -71,6 +182,6 @@ class Error implements SplSubject
      */
     final public function detach(SplObserver $observer)
     {
-        echo 'Удаление наблюдателей';
+
     }
 }
