@@ -59,10 +59,10 @@ class Config
             $ptr =& $config;
 
             foreach ($params as $param) {
-                if ($param !== end($params))
-                    $ptr =& $ptr[$param];
-                else
+                if ($param === end($params))
                     $ptr[$param] = $value;
+                else
+                    $ptr =& $ptr[$param];
             }
 
             unset($config[$name]);
