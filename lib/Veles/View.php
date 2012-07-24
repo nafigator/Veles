@@ -48,6 +48,33 @@ class View
             array(TEMPLATE_PATH, $page_name, $tpl_name . '.phtml')
         );
 
+        ob_start();
         require $template_name;
+        ob_end_flush();
+    }
+
+    /**
+     * Вывод View в буфер и сохранение в переменную
+     * @param string $page_name Имя странички
+     * @param string $tpl_name Имя шаблона
+     * @return string Вывод View
+     */
+    final public static function get($page_name, $tpl_name)
+    {
+        foreach (self::$variables as $var_name => $value) {
+            $$var_name = $value;
+        }
+
+        $template_name = implode(
+            DIRECTORY_SEPARATOR,
+            array(TEMPLATE_PATH, $page_name, $tpl_name . '.phtml')
+        );
+
+        ob_start();
+        require $template_name;
+        $output = ob_get_contents();
+        ob_end_clean();
+
+        return $output;
     }
 }

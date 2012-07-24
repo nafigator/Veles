@@ -84,16 +84,15 @@ class Error implements SplSubject
             View::show('error', 'exception');
         }
         else {
-            ob_start();
             View::set($this->vars);
-            View::show('error', 'exception');
-            $error_output = ob_get_flush();
+            $error_output = View::get('error', 'exception');
 
             //TODO: $this->attach(new ErrorSMS($this->vars));
             $this->attach(new ErrorEmail($error_output));
             $this->notify();
 
             //TODO: go to custom error page;
+            exit;
         }
     }
 

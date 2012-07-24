@@ -1,7 +1,7 @@
 <? require 'header.phtml'?>
 <body style="font-family: Arial,Helvetica,Sans-Serif;">
     <h4><?=$time?></h4>
-    <table cellspacing="1" cellpadding="1" border="1" style="border-collapse: collapse">
+    <table cellpadding="3" >
         <tr>
             <th bgcolor="#f57900" align="left" colspan="3">
                 <span style="background-color: #cc0000; color: #fce94f; font-size: x-large;">( ! )</span>
@@ -12,31 +12,31 @@
             <th bgcolor="#e9b96e" align="left" colspan="3">Call Stack :</th>
         </tr>
         <tr>
-            <th bgcolor="#eeeeec" align="center">#</th>
+            <th bgcolor="#eeeeec" align="center" width="24px" style="text-align: center">#</th>
             <th bgcolor="#eeeeec" align="left">Function</th>
             <th bgcolor="#eeeeec" align="left">File</th>
         </tr>
         <? foreach ($stack as $num => $call) { ?>
         <tr>
-            <td><?=++$num?></td>
-            <td><?=$call['function']?>()</td>
-            <td><?=$call['file']?></td>
+            <td bgcolor="#eeeeec" style="text-align: center"><?=++$num?></td>
+            <td bgcolor="#eeeeec" ><?=$call['function']?>()</td>
+            <td bgcolor="#eeeeec" ><?=$call['file']?></td>
         </tr>
         <? } ?>
         <tr>
             <th bgcolor="#e9b96e" align="left" colspan="3">Variables in scope :</th>
         </tr>
         <tr>
-            <th bgcolor="#eeeeec" align="center">#</th>
+            <th bgcolor="#eeeeec" align="center" style="text-align: center">#</th>
             <th bgcolor="#eeeeec" align="left">Name</th>
             <th bgcolor="#eeeeec" align="left">Value</th>
         </tr>
         <? $num = 0?>
         <? foreach ($defined as $var_name => $var_value) { ?>
         <tr>
-            <td><?=++$num?></td>
-            <td style="color: blue"><b>$<?=$var_name?></b></td>
-            <td><?var_dump($var_value)?></td>
+            <td bgcolor="#eeeeec" style="text-align: center"><?=++$num?></td>
+            <td bgcolor="#eeeeec" style="color: blue"><b>$<?=$var_name?></b></td>
+            <td bgcolor="#eeeeec" ><?var_dump($var_value)?></td>
         </tr>
         <? } ?>
     </table>
