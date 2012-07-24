@@ -67,16 +67,15 @@ class Db {
             );
         }
 
-        if ($result instanceof MySQLi_Result) {
-            if ($result->num_rows > 1)
-                while ($return[] = mysqli_fetch_assoc($result));
-            else
-                $return = mysqli_fetch_assoc($result);
-
-            $result->free();
-        }
-        else
+        if (!($result instanceof MySQLi_Result))
             return $result;
+
+        if ($result->num_rows > 1)
+            while ($return[] = mysqli_fetch_assoc($result));
+        else
+            $return = mysqli_fetch_assoc($result);
+
+        $result->free();
 
         return $return;
     }
