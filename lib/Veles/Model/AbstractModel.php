@@ -129,7 +129,7 @@ abstract class AbstractModel {
      * Удаление данных
      * @param int $id
      */
-    protected function delete()
+    final public function delete()
     {
         $sql = QueryBuilder::delete($this);
 
