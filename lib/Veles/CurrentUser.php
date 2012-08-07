@@ -157,14 +157,4 @@ class CurrentUser extends AbstractModel
     {
         return (isset($this->hash)) ? substr($this->hash, 0, 28) : false;
     }
-
-    /**
-     * Метод для удаления пользователя
-     * @return  bool
-     */
-    final public function delete()
-    {
-        $this->group |= self::DELETED;
-        return $this->save();
-    }
 }
