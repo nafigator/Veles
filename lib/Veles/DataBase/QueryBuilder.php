@@ -38,7 +38,7 @@ class QueryBuilder
         }
 
         foreach ($arr as $name => $value) {
-            $arr[$name] = substr($return[$name], 0, -2);
+            $arr[$name] = substr($value, 0, -2);
         }
 
         $sql = '
@@ -117,6 +117,49 @@ class QueryBuilder
                 `' . $model::TBL_NAME . '`
             WHERE
                 id = ' . $id;
+
+        return $sql;
+    }
+
+    /**
+     * Построение запроса получения списка объектов
+     * @param AbstractModel $model Экземпляр модели
+     * @param Pagination $pager Экземпляр пагинатора
+     */
+    final public static function getList($model, $pager, $filter)
+    {
+        $limit = '';
+        $where = '';
+
+        foreach ($model::$map as $property => $value) {
+            $value = self::sanitize($model, $property);
+            $fields .= "`$property`, ";
+        }
+
+        $fields = substr($value, 0, -2);
+
+        if ($filter instanceof AbstractFilter) {
+            foreach ($filter->condition as $field => $cond) {
+                $where .= " `$field` $cond[operation] $cond[value], ";
+            }
+
+            $where = substr($value, 0, -2);
+        }
+
+        if ($pager instanceof AbstractPagination) {
+            $where = 'id >= ' . $pager->offset . $where;
+            $limit = 'LIMIT ' . $pager->rows;
+        }
+
+        $sql = '
+            SELECT
+                ' . $fields . '
+            FROM
+                ' . $model::TBL_NAME . '
+            WHERE
+                ' . $where . '
+            ' . $limit . '
+        ';
 
         return $sql;
     }

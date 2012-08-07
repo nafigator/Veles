@@ -26,6 +26,9 @@ abstract class AbstractModel {
     // Карта типов данных объекта
     public static $map = array();
 
+    // Обязательные свойства объекта, без наличия которых запись в базу не происходит
+    public static $required_fields = array();
+
     // Имя таблицы
     const TBL_NAME = null;
 
@@ -160,5 +163,16 @@ abstract class AbstractModel {
                 $properties[$property_name] = $this->$property_name;
             }
         }
+    }
+
+    /**
+     * Получение списка объектов
+     * @param Pagination $pager Объект паганитора
+     */
+    final public function getList($pager = false, $filter = false)
+    {
+        $sql = QueryBuilder::getList($this, $pager, $filter);
+
+        return Db::q($sql);
     }
 }
