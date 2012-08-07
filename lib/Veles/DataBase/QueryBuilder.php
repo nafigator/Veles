@@ -139,7 +139,9 @@ class QueryBuilder
         $fields = substr($value, 0, -2);
 
         if ($filter instanceof AbstractFilter) {
-            foreach ($filter->condition as $field => $cond) {
+            $conditions = $filter->getConditions();
+
+            foreach ($conditions as $field => $cond) {
                 $where .= " `$field` $cond[operation] $cond[value], ";
             }
 
@@ -147,8 +149,8 @@ class QueryBuilder
         }
 
         if ($pager instanceof AbstractPagination) {
-            $where = 'id >= ' . $pager->offset . $where;
-            $limit = 'LIMIT ' . $pager->rows;
+            $where = 'id >= ' . $pager->getOffset() . $where;
+            $limit = 'LIMIT ' . $pager->getRows();
         }
 
         $sql = '
