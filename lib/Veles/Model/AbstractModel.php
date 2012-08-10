@@ -112,9 +112,7 @@ abstract class AbstractModel {
             return false;
         }
 
-        foreach ($result as $name => $value) {
-            $this->$name = $value;
-        }
+        $this->setProperties($result);
 
         return true;
     }
