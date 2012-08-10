@@ -35,13 +35,7 @@ class Application
         $action_name = $route->getActionName();
         $page_name   = $route->getPageName();
 
-        if (!$route->isAjax()) {
-            Navigation::instance($route->getPageName());
-        }
-
-        $vars = $controller->$action_name();
-
-        View::set($vars);
+        View::set($controller->$action_name());
 
         View::show($page_name, $action_name);
     }

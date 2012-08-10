@@ -23,7 +23,7 @@ class QueryBuilder
     /**
      * Построение sql-запроса для insert
      * @param AbstractModel $model Экземпляр модели
-     * @return array $sql
+     * @return array
      * @todo протестировать алгоритм на время. Попробовать варианты с iterator, implode
      */
     final public static function insert($model)
@@ -37,16 +37,17 @@ class QueryBuilder
             $arr['values'] .= (is_string($value)) ? "'$value', " : "$value, ";
         }
 
-        foreach ($arr as $name => $value) {
-            $arr[$name] = substr($value, 0, -2);
-        }
+        array_walk($arr, function(&$val) {
+            rtrim($val, ', ');
+        });
 
         $sql = '
             INSERT
-                `' . $model::TBL_NAME . '`
-                (' . $arr['fields'] . ')
+                `' . $model::TBL_NAME . "`
+                ($arr[fields])
             VALUES
-                (' . $arr['values'] . ')';
+                ($arr[values])
+        ";
 
         return $sql;
     }
@@ -63,19 +64,20 @@ class QueryBuilder
 
         foreach ($model::$map as $property => $value) {
             $value = self::sanitize($model, $property);
-            $value = (is_string($value)) ? "'$value', " : "$value, ";
-            $params .= "`$name` = $value";
+            $value = (is_string($value)) ? "'$value'" : $value;
+            $params .= "`$property` = $value, ";
         }
 
-        $params = substr($params, 0, -2);
+        $params = rtrim($params, ', ');
 
         $sql = '
             UPDATE
-                `' . $model::TBL_NAME . '`
+                `' . $model::TBL_NAME . "`
             SET
-                ' . $params . '
+                $params
             WHERE
-                id = ' . $model->id;
+                id = {$model->id}
+        ";
 
         return $sql;
     }
@@ -93,11 +95,11 @@ class QueryBuilder
         $sql = '
             SELECT *
             FROM
-                ' . $model::TBL_NAME . '
+                ' . $model::TBL_NAME . "
             WHERE
-                `id` = ' . $id . '
+                `id` = $id
             LIMIT 1
-        ';
+        ";
 
         return $sql;
     }
@@ -114,9 +116,10 @@ class QueryBuilder
 
         $sql = '
             DELETE FROM
-                `' . $model::TBL_NAME . '`
+                `' . $model::TBL_NAME . "`
             WHERE
-                id = ' . $id;
+                id = $id
+        ";
 
         return $sql;
     }
@@ -124,44 +127,49 @@ class QueryBuilder
     /**
      * Построение запроса получения списка объектов
      * @param AbstractModel $model Экземпляр модели
-     * @param Pagination $pager Экземпляр пагинатора
+     * @param Paginator $pager Экземпляр пагинатора
      */
     final public static function getList($model, $pager, $filter)
     {
-        $limit = '';
-        $where = '';
+        $fields = '';
+        $limit  = '';
+        $where  = '';
+        $order  = '';
+        $group  = '';
+        $having = '';
 
         foreach ($model::$map as $property => $value) {
-            $value = self::sanitize($model, $property);
             $fields .= "`$property`, ";
         }
 
-        $fields = substr($value, 0, -2);
+        $fields = rtrim($fields, ', ');
 
-        if ($filter instanceof AbstractFilter) {
-            $conditions = $filter->getConditions();
-
-            foreach ($conditions as $field => $cond) {
-                $where .= " `$field` $cond[operation] $cond[value], ";
-            }
-
-            $where = substr($value, 0, -2);
+        if ($filter instanceof DbFilter) {
+            $where  = $filter->getWhere();
+            $group  = $filter->getGroup();
+            $having = $filter->getHaving();
+            $order  = $filter->getOrder();
         }
 
-        if ($pager instanceof AbstractPagination) {
-            $where = 'id >= ' . $pager->getOffset() . $where;
-            $limit = 'LIMIT ' . $pager->getRows();
+        if ($pager instanceof DbPaginator) {
+            $where = (empty($where))
+                ? "WHERE id >= " . $pager->getOffset()
+                : "$where && id >= " . $pager->getOffset();
+
+            $limit = $pager->getLimit();
         }
 
-        $sql = '
+        $sql = "
             SELECT
-                ' . $fields . '
+                $fields
             FROM
-                ' . $model::TBL_NAME . '
-            WHERE
-                ' . $where . '
-            ' . $limit . '
-        ';
+                " . $model::TBL_NAME . "
+            $where
+            $group
+            $having
+            $order
+            $limit
+        ";
 
         return $sql;
     }

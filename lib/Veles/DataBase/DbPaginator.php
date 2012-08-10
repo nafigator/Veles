@@ -1,7 +1,7 @@
 <?php
 /**
  * Абстрактный класс для постраничного вывода
- * @file    AbstractPagination.php
+ * @file    DbPaginator.php
  *
  * PHP version 5.3.9+
  *
@@ -13,21 +13,29 @@
 namespace Veles\DataBase;
 
 /**
- * Класс AbstractPagination
+ * Класс DbPaginator
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
-abstract class AbstractPagination
+class DbPaginator
 {
     protected $offset = 0;
     protected $limit  = 5;
 
     /**
      * Метод получения offset
+     * @return int
      */
-    abstract public function getOffset();
+    final public function getOffset()
+    {
+        return $this->offset;
+    }
 
     /**
      * Метод получения limit
+     * @return int
      */
-    abstract public function getLimit();
+    final public function getLimit()
+    {
+        return "LIMIT {$this->limit}";
+    }
 }

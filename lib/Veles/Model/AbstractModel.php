@@ -173,6 +173,6 @@ abstract class AbstractModel {
     {
         $sql = QueryBuilder::getList($this, $pager, $filter);
 
-        return Db::q($sql);
+        return Db::q($sql, true);
     }
 }

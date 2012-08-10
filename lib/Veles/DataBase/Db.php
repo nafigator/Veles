@@ -52,10 +52,11 @@ class Db {
 
     /**
      * Метод для выполнения запросов
-     * @param   string Sql-запрос
-     * @return  bool Если запрос выполенен без ошибок, возвращает true
+     * @param string $sql Sql-запрос
+     * @param bool $list Флаг возврата значений в массиве
+     * @return bool Если запрос выполенен без ошибок, возвращает true
      */
-    final public static function q($sql)
+    final public static function q($sql, $list = false)
     {
         if (!self::$db instanceof mysqli)
             self::connect();
@@ -70,8 +71,11 @@ class Db {
         if (!($result instanceof MySQLi_Result))
             return $result;
 
-        if ($result->num_rows > 1)
-            while ($return[] = mysqli_fetch_assoc($result));
+        if ($list || $result->num_rows > 1) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $return[] = $row;
+            }
+        }
         else
             $return = mysqli_fetch_assoc($result);
 
