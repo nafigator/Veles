@@ -85,41 +85,6 @@ class CurrentUser extends AbstractModel
     }
 
     /**
-     * Метод для получения данных не удалённого пользователя
-     * @param   array $params id либо email пользователя
-     * @return  bool
-     */
-    /*final public function findActive($params)
-    {
-        $where = '';
-        foreach ($params as $key => $value) {
-            if (is_string($value))
-                $value = "'$value'";
-
-            $where .= "`$key` = $value && ";
-        }
-
-        $where .= '`group` & ' . self::DELETED . ' = 0';
-
-        $sql = '
-            SELECT
-                `id`, `email`, `hash`, `group`, `last_login`
-            FROM
-                `' . $this::TBL_NAME . "`
-            WHERE
-                $where
-            LIMIT 1
-        ";
-
-        $result = Db::q($sql);
-
-        if (!empty($result))
-            $this->setProperties($result);
-
-        return $result;
-    }*/
-
-    /**
      * Метод для получения ID пользователя
      * @return int|bool
      */
