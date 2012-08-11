@@ -105,11 +105,11 @@ class CurrentUser extends AbstractModel
             SELECT
                 `id`, `email`, `hash`, `group`, `last_login`
             FROM
-                `' . $this::TBL_NAME . '`
+                `' . $this::TBL_NAME . "`
             WHERE
-                ' . $where . '
+                $where
             LIMIT 1
-        ';
+        ";
 
         $result = Db::q($sql);
 

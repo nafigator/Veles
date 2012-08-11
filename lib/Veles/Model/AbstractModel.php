@@ -100,10 +100,6 @@ abstract class AbstractModel {
      */
     final public function find($id)
     {
-        if ((int) $id < 1) {
-            throw new Exception('Некорректный id!');
-        }
-
         $sql = QueryBuilder::find($this, $id);
 
         $result = Db::q($sql);
@@ -128,11 +124,11 @@ abstract class AbstractModel {
 
     /**
      * Удаление данных
-     * @param int $id
+     * @param array $ids
      */
-    final public function delete()
+    final public function delete($ids = false)
     {
-        $sql = QueryBuilder::delete($this);
+        $sql = QueryBuilder::delete($this, $ids);
 
         return Db::q($sql);
     }

@@ -28,8 +28,7 @@ class QueryBuilder
      */
     final public static function insert($model)
     {
-        $arr['fields'] = '';
-        $arr['values'] = '';
+        $arr = array('fields' => '', 'values' => '');
 
         foreach ($model::$map as $property => $value) {
             $value = self::sanitize($model, $property);
@@ -90,7 +89,7 @@ class QueryBuilder
      */
     final public static function find($model, $id)
     {
-        $id = self::sanitize($model, 'id');
+        $id = (int) $id;
 
         $sql = '
             SELECT *
@@ -107,18 +106,32 @@ class QueryBuilder
     /**
      * Построение sql-запроса для delete
      * @param AbstractModel $model Экземпляр модели
-     * @param int $id primary key
+     * @param array $ids Массив ID для удаления
      * @return array $sql
      */
-    final public static function delete($model, $id)
+    final public static function delete($model, $ids)
     {
-        $id = self::sanitize($model, 'id');
+        if (!$ids) {
+            if (!isset($model->id)) {
+                throw new Exception('Не найден id модели!');
+            }
+
+            $ids = $model->id;
+        }
+
+        if (!is_array($ids)) $ids = array($ids);
+
+        array_walk($ids, function(&$value) {
+            $value = (int) $value;
+        });
+
+        $ids = implode(',', $ids);
 
         $sql = '
             DELETE FROM
                 `' . $model::TBL_NAME . "`
             WHERE
-                id = $id
+                id IN ($ids)
         ";
 
         return $sql;
@@ -132,11 +145,11 @@ class QueryBuilder
     final public static function getList($model, $pager, $filter)
     {
         $fields = '';
-        $limit  = '';
         $where  = '';
-        $order  = '';
         $group  = '';
         $having = '';
+        $order  = '';
+        $limit  = '';
 
         foreach ($model::$map as $property => $value) {
             $fields .= "`$property`, ";
