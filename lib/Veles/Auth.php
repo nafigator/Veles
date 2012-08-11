@@ -51,13 +51,15 @@ final class Auth
     {
         $auth = false;
 
+        $this->filter = new DbFilter;
+
         switch (true) {
             // Пользователь авторизуеся через запрос
             case (isset($_REQUEST['ln']) && isset($_REQUEST['pw'])) :
                 $this->email    =& $_REQUEST['ln'];
                 $this->password =& $_REQUEST['pw'];
 
-                $this->filter = new DbFilter;
+                // Ищем среди не удалённых пользователей
                 $this->filter->setWhere("
                     `email` = '{$this->email}'
                     && `group` & " . $user::DELETED . ' = 0'
@@ -70,12 +72,18 @@ final class Auth
                 $this->cookie_id   =& $_COOKIE['id'];
                 $this->cookie_hash =& $_COOKIE['pw'];
 
+                // Ищем среди не удалённых пользователей
+                $this->filter->setWhere("
+                    `id` = '{$this->cookie_id}'
+                    && `group` & " . $user::DELETED . ' = 0'
+                );
+
                 $auth = $this->byCookie($user);
                 break;
         }
 
         if (!$auth) {
-            $props = array('group' => CurrentUser::GUEST);
+            $props = array('group' => $user::GUEST);
             $user->setProperties($props);
         }
     }
@@ -137,11 +145,13 @@ final class Auth
         $this->secureVars('cookie');
 
         // Некорректные куки
-        if (0 !== $this->errors)
+        if (0 !== $this->errors) {
+            self::delCookie();
             return false;
+        }
 
         // Пользователь с таким id не найден
-        if (!$user->getById($this->cookie_id)) {
+        if (!$user->find($this->filter)) {
             // Удаляем куки
             self::delCookie();
             $this->errors |= self::ERR_USER_NOT_FOUND;
