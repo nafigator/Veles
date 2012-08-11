@@ -57,12 +57,14 @@ class DbException extends Exception
      * @param resource Линк sql-соединения
      * @param string SQL-запрос
      */
-    final public function __construct($msg, $db, $sql)
+    final public function __construct($msg, $db, $sql = null)
     {
         parent::__construct($msg);
         $this->setConnectError($db->connect_error);
         $this->setSqlError($db->error);
-        $this->setSqlQuery($sql);
+
+        if (null !== $sql)
+            $this->setSqlQuery($sql);
     }
 
     /**

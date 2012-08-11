@@ -92,7 +92,7 @@ class Db {
         $result = mysqli_insert_id(self::$db);
         if (false === $result) {
             throw new DbException(
-                'Не удалось получить LAST_INSERT_ID()', self::$db, $sql
+                'Не удалось получить LAST_INSERT_ID()', self::$db
             );
         }
 
