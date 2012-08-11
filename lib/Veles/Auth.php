@@ -12,6 +12,8 @@
 
 namespace Veles;
 
+use \Veles\DataBase\DbFilter;
+
 /**
  * Класс авторизации пользователя
  * @author  Yancharuk Alexander <alex@itvault.info>
@@ -36,6 +38,7 @@ final class Auth
     private $cookie_hash;
     private $email;
     private $password;
+    private $filter;
 
     /**
      * Конструктор класса User.
@@ -53,6 +56,12 @@ final class Auth
             case (isset($_REQUEST['ln']) && isset($_REQUEST['pw'])) :
                 $this->email    =& $_REQUEST['ln'];
                 $this->password =& $_REQUEST['pw'];
+
+                $this->filter = new DbFilter;
+                $this->filter->setWhere("
+                    `email` = '{$this->email}'
+                    && `group` & " . $user::DELETED . ' = 0'
+                );
 
                 $auth = $this->byRequest($user);
                 break;
@@ -132,7 +141,7 @@ final class Auth
             return false;
 
         // Пользователь с таким id не найден
-        if (!$user->findActive(array('id' => $this->cookie_id))) {
+        if (!$user->getById($this->cookie_id)) {
             // Удаляем куки
             self::delCookie();
             $this->errors |= self::ERR_USER_NOT_FOUND;
@@ -165,7 +174,7 @@ final class Auth
             self::delCookie();
 
         // Пользователь с таким логином найден
-        if (!$user->findActive(array('email' => $this->email))) {
+        if (!$user->find($this->filter)) {
             $this->errors |= self::ERR_USER_NOT_FOUND;
             return false;
         }

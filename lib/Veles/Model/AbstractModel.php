@@ -19,7 +19,8 @@ use \Veles\DataBase\Db,
  * Класс модели
  * @author Yancharuk Alexander <alex@itvault.info>
  */
-abstract class AbstractModel {
+abstract class AbstractModel
+{
     // Данные модели
     protected $data = array();
 
@@ -68,7 +69,7 @@ abstract class AbstractModel {
     final protected function __construct($id = null)
     {
         if (null !== $id) {
-            $this->find($id);
+            $this->get($id);
         }
     }
 
@@ -98,9 +99,9 @@ abstract class AbstractModel {
      * Получение данных по id
      * @param int $id
      */
-    final public function find($id)
+    final public function getById($id)
     {
-        $sql = QueryBuilder::find($this, $id);
+        $sql = QueryBuilder::getById($this, $id);
 
         $result = Db::q($sql);
 
@@ -163,10 +164,21 @@ abstract class AbstractModel {
      * Получение списка объектов
      * @param Pagination $pager Объект паганитора
      */
-    final public function getList($pager = false, $filter = false)
+    final public function find($filter = false, $pager = false)
     {
-        $sql = QueryBuilder::getList($this, $pager, $filter);
+        $sql = QueryBuilder::find($this, $filter, $pager);
 
-        return Db::q($sql, true);
+        $result = Db::q($sql);
+
+        if (empty($result)) {
+            return false;
+        }
+
+        if (0 !== key($result)) {
+            $this->setProperties($result);
+            return true;
+        }
+
+        return $result;
     }
 }

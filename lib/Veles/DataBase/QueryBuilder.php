@@ -87,7 +87,7 @@ class QueryBuilder
      * @param int $id primary key
      * @return array $sql
      */
-    final public static function find($model, $id)
+    final public static function getById($model, $id)
     {
         $id = (int) $id;
 
@@ -140,9 +140,10 @@ class QueryBuilder
     /**
      * Построение запроса получения списка объектов
      * @param AbstractModel $model Экземпляр модели
-     * @param Paginator $pager Экземпляр пагинатора
+     * @param DbFilter $filter Экземпляр фильтра
+     * @param DbPaginator $pager Экземпляр пагинатора
      */
-    final public static function getList($model, $pager, $filter)
+    final public static function find($model, $filter, $pager)
     {
         $fields = '';
         $where  = '';

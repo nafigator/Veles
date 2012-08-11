@@ -89,7 +89,7 @@ class CurrentUser extends AbstractModel
      * @param   array $params id либо email пользователя
      * @return  bool
      */
-    final public function findActive($params)
+    /*final public function findActive($params)
     {
         $where = '';
         foreach ($params as $key => $value) {
@@ -117,7 +117,7 @@ class CurrentUser extends AbstractModel
             $this->setProperties($result);
 
         return $result;
-    }
+    }*/
 
     /**
      * Метод для получения ID пользователя
