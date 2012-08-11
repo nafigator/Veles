@@ -14,7 +14,8 @@ namespace Veles;
 
 use \SplSubject,
     \SplObserver,
-    \Veles\Email\ErrorEmail;
+    \Veles\Email\ErrorEmail,
+    \Veles\DataBase\DbException;
 
 /**
  * Класс Error
@@ -69,7 +70,14 @@ class Error implements SplSubject
         $this->vars['file']    = str_replace(BASE_PATH, '', $e->getFile());
         $this->vars['line']    = $e->getLine();
         $this->vars['stack']   = $this->getStack(array_reverse($e->getTrace()));
-        $this->vars['defined'] = array();
+        $this->vars['defined'] = ($e instanceof DbException)
+            ? array(
+                'connect_error' => $e->getConnectError(),
+                'sql_error'     => $e->getSqlError(),
+                'sql_query'     => $e->getSqlQuery()
+
+            )
+            : array();
 
         $this->process();
     }
