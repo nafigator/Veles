@@ -54,7 +54,7 @@ final class Auth
         $this->filter = new DbFilter;
 
         switch (true) {
-            // Пользователь авторизуеся через запрос
+            // Пользователь авторизуется через запрос
             case (isset($_REQUEST['ln']) && isset($_REQUEST['pw'])) :
                 $this->email    =& $_REQUEST['ln'];
                 $this->password =& $_REQUEST['pw'];
@@ -97,11 +97,11 @@ final class Auth
     {
         // Делаем куки на 1 год (3600*24*365)
         setcookie(
-            'id', $id, time() + 31536000, '/', $_SERVER['HTTP_HOST'], false, false
+            'id', $id, $_SERVER['REQUEST_TIME'] + 31536000, '/', $_SERVER['HTTP_HOST'], false, false
         );
         // Пароль не шифруем, т.к. передан в функцию взятый из базы хэш пароля
         setcookie(
-            'pw', $hash, time() + 31536000, '/', $_SERVER['HTTP_HOST'], false, false
+            'pw', $hash, $_SERVER['REQUEST_TIME'] + 31536000, '/', $_SERVER['HTTP_HOST'], false, false
         );
     }
 
@@ -110,8 +110,8 @@ final class Auth
      */
     final public static function delCookie()
     {
-        setcookie('id', '', time() - 3600, '/', $_SERVER['HTTP_HOST'], false, false);
-        setcookie('pw', '', time() - 3600, '/', $_SERVER['HTTP_HOST'], false, false);
+        setcookie('id', '', $_SERVER['REQUEST_TIME'] - 3600, '/', $_SERVER['HTTP_HOST'], false, false);
+        setcookie('pw', '', $_SERVER['REQUEST_TIME'] - 3600, '/', $_SERVER['HTTP_HOST'], false, false);
     }
 
     /**

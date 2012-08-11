@@ -32,7 +32,7 @@ class Error implements SplSubject
     final public function error($type, $message, $file, $line, $defined)
     {
         $this->vars['type']    = $this->getErrorType($type);
-        $this->vars['time']    = strftime("%Y-%m-%d %H:%M:%S", time());
+        $this->vars['time']    = strftime("%Y-%m-%d %H:%M:%S", $_SERVER['REQUEST_TIME']);
         $this->vars['message'] = $message;
         $this->vars['file']    = str_replace(BASE_PATH, '', $file);
         $this->vars['line']    = $line;
@@ -50,7 +50,7 @@ class Error implements SplSubject
         if (null === ($this->vars = error_get_last())) exit;
 
         $this->vars['type']    = $this->getErrorType($this->vars['type']);
-        $this->vars['time']    = strftime("%Y-%m-%d %H:%M:%S", time());
+        $this->vars['time']    = strftime("%Y-%m-%d %H:%M:%S", $_SERVER['REQUEST_TIME']);
         $this->vars['file']    = str_replace(BASE_PATH, '', $this->vars['file']);
         $this->vars['stack']   = array();
         $this->vars['defined'] = array();
@@ -65,7 +65,7 @@ class Error implements SplSubject
     final public function exception($e)
     {
         $this->vars['type']    = $this->getErrorType($e->getCode());
-        $this->vars['time']    = strftime("%Y-%m-%d %H:%M:%S", time());
+        $this->vars['time']    = strftime("%Y-%m-%d %H:%M:%S", $_SERVER['REQUEST_TIME']);
         $this->vars['message'] = $e->getMessage();
         $this->vars['file']    = str_replace(BASE_PATH, '', $e->getFile());
         $this->vars['line']    = $e->getLine();
@@ -74,9 +74,7 @@ class Error implements SplSubject
             ? array(
                 'connect_error' => $e->getConnectError(),
                 'sql_error'     => $e->getSqlError(),
-                'sql_query'     => $e->getSqlQuery()
-
-            )
+                'sql_query'     => $e->getSqlQuery())
             : array();
 
         $this->process();
