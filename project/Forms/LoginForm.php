@@ -26,6 +26,7 @@ class LoginForm extends AbstractForm
     protected $action = '/';
     protected $width  = 200;
     protected $map    = 232;
+    protected $method = 'post';
     protected $name   = 'login';
 
     /**

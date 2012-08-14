@@ -23,8 +23,8 @@ use \Veles\Form\Elements\iElement,
  */
 abstract class AbstractForm
 {
-    private $method = 'post';
     private $action;
+    protected $method = 'post';
     protected $width;
     protected $map;
     protected $name;
@@ -42,8 +42,8 @@ abstract class AbstractForm
      */
     final protected function init()
     {
-        $this->data   = ('GET' === $this->action) ? $_GET : $_POST;
-        $this->key    = crc32($this->name);
+        $this->data = ('get' === $this->method) ? $_GET : $_POST;
+        $this->key  = crc32($this->name);
 
         $this->addElement(
             new HiddenElement($this->key, '', new RegEx('/^$/'), true)
