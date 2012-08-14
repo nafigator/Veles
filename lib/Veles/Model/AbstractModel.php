@@ -69,7 +69,7 @@ abstract class AbstractModel
     final protected function __construct($id = null)
     {
         if (null !== $id) {
-            $this->get($id);
+            $this->getById($id);
         }
     }
 

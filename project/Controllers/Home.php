@@ -12,7 +12,8 @@
 
 namespace Controllers;
 
-use \Veles\CurrentUser;
+use \Veles\CurrentUser,
+    \Forms\LoginForm;
 
 /**
  * Класс Home
@@ -25,8 +26,20 @@ class Home
      */
     final public function index()
     {
-        $return['title'] = 'Главная страница!';
-        $return['text']  = 'Veles - PHP micro-framework';
+        $return['title']  = 'Главная страница!';
+        $return['text']   = 'Veles - PHP micro-framework';
+        $return['status'] = '';
+
+        $form = new LoginForm;
+        if ($form->submitted()) {
+            $return['status'] = 'Form submitted!<br/>';
+
+            if ($form->valid())
+                $return['status'] .= 'Form valid!<br/>';
+        }
+
+        $return['form'] = $form;
+
         return $return;
     }
 }
