@@ -20,15 +20,15 @@ class ButtonElement extends AbstractElement
 {
     /**
      * Конструктор Button элемента
-     * @param string $name Имя элемента
-     * @param mixed $value Значение элемента по-умолчанию
+     * @param string $value Надпись на кнопке
+     * @param string $type Тип кнопки
      * @param iValidator $validator Валидатор элемента
      * @param bool $required Является ли элемент обязательным
      */
-    final public function __construct($name, $value)
+    final public function __construct($value, $type)
     {
-        $this->name      = $name;
-        $this->value     = $value;
+        $this->value = $value;
+        $this->type  = $type;
     }
 
     /**
@@ -37,7 +37,7 @@ class ButtonElement extends AbstractElement
     final public function render()
     {
         $output = <<<FORM
-<input value="$this->name" type="$this->value">
+<input value="$this->value" type="$this->type">
 FORM;
 
         return $output;

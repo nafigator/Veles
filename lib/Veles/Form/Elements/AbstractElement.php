@@ -24,11 +24,6 @@ abstract class AbstractElement implements iElement
     protected $name;
 
     /**
-     * Конструктор
-     */
-    abstract public function __construct($name, $value, $validator, $required = false);
-
-    /**
      * Валидация элемента формы
      * @param mixed $value Значение для валидации
      */
@@ -59,7 +54,7 @@ abstract class AbstractElement implements iElement
     }
 
     /**
-     * Отрисовка элемента
+     * Отрисовка элемента реализуется для каждого элемента
      */
     abstract public function render();
 }

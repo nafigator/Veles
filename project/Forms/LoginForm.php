@@ -12,10 +12,12 @@
 
 namespace Forms;
 
-use \Veles\Form\AbstractForm,
+use \Veles\Validators\RegEx,
+    \Veles\Form\AbstractForm,
     \Veles\Form\Elements\TextElement,
     \Veles\Form\Elements\ButtonElement,
-    \Veles\Validators\RegEx;
+    \Veles\Form\Elements\PasswordElement;
+
 
 /**
  * Класс LoginForm
@@ -38,6 +40,9 @@ class LoginForm extends AbstractForm
 
         $this->addElement(
             new TextElement('login', null, new RegEx('/^\w{1,10}$/'), true)
+        );
+        $this->addElement(
+            new PasswordElement('password', null, new RegEx('/^\w{1,10}$/'), true)
         );
         $this->addElement(
             new ButtonElement('Submit', 'submit')

@@ -19,11 +19,6 @@ namespace Veles\Form\Elements;
 interface iElement
 {
     /**
-     * Конструктор
-     */
-    public function __construct($name, $value, $validator, $required = false);
-
-    /**
      * Валидация элемента формы
      * @param mixed $value Значение для валидации
      */
