@@ -19,26 +19,11 @@ namespace Veles\Form\Elements;
 class ButtonElement extends AbstractElement
 {
     /**
-     * Конструктор Button элемента
-     * @param string $value Надпись на кнопке
-     * @param string $type Тип кнопки
-     * @param iValidator $validator Валидатор элемента
-     * @param bool $required Является ли элемент обязательным
-     */
-    final public function __construct($value, $type)
-    {
-        $this->value = $value;
-        $this->type  = $type;
-    }
-
-    /**
      * Отрисовка элемента
      */
     final public function render()
     {
-        $output = <<<FORM
-<input value="$this->value" type="$this->type">
-FORM;
+        $output = '<input' . $this->attributes() . 'type="button">';
 
         return $output;
     }

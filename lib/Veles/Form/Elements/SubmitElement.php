@@ -1,29 +1,29 @@
 <?php
 /**
- * Hidden элемент формы
- * @file    HiddenElement.php
+ * Submit-кнопка формы
+ * @file    SubmitElement.php
  *
  * PHP version 5.3.9+
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
- * @date    Втр Авг 14 21:41:53 2012
+ * @date    Сбт Авг 18 21:36:33 2012
  * @version
  */
 
 namespace Veles\Form\Elements;
 
 /**
- * Класс HiddenElement
+ * Класс SubmitElement
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
-class HiddenElement extends AbstractElement
+class SubmitElement extends AbstractElement
 {
     /**
      * Отрисовка элемента
      */
     final public function render()
     {
-        $output = '<input' . $this->attributes() . 'type="hidden">';
+        $output = '<input' . $this->attributes() . 'type="submit">';
 
         return $output;
     }

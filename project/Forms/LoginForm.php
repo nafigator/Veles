@@ -15,7 +15,7 @@ namespace Forms;
 use \Veles\Validators\RegEx,
     \Veles\Form\AbstractForm,
     \Veles\Form\Elements\TextElement,
-    \Veles\Form\Elements\ButtonElement,
+    \Veles\Form\Elements\SubmitElement,
     \Veles\Form\Elements\PasswordElement;
 
 
@@ -27,7 +27,6 @@ class LoginForm extends AbstractForm
 {
     protected $action = '/';
     protected $width  = 200;
-    protected $map    = 232;
     protected $method = 'post';
     protected $name   = 'login';
 
@@ -38,14 +37,20 @@ class LoginForm extends AbstractForm
     {
         $this->init();
 
-        $this->addElement(
-            new TextElement('login', null, new RegEx('/^\w{1,10}$/'), true)
-        );
-        $this->addElement(
-            new PasswordElement('password', null, new RegEx('/^\w{1,10}$/'), true)
-        );
-        $this->addElement(
-            new ButtonElement('Submit', 'submit')
-        );
+        $this->addElement(new TextElement(array(
+            'label'      => 'Login:',
+            'validator'  => new RegEx('/^\w{1,10}$/'),
+            'required'   => true,
+            'attributes' => array('name' => 'login')
+        )));
+        $this->addElement(new PasswordElement(array(
+            'label'      => 'Password:',
+            'validator'  => new RegEx('/^\w{1,10}$/'),
+            'required'   => true,
+            'attributes' => array('name' => 'password')
+        )));
+        $this->addElement(new SubmitElement(array(
+            'attributes' => array('value' => 'Submit')
+        )));
     }
 }

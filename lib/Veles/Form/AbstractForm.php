@@ -12,10 +12,11 @@
 
 namespace Veles\Form;
 
-use \Veles\Form\Elements\iElement,
-    \Veles\Validators\RegEx,
+use \Veles\Validators\RegEx,
+    \Veles\Form\Elements\iElement,
+    \Veles\Form\Elements\ButtonElement,
     \Veles\Form\Elements\HiddenElement,
-    \Veles\Form\Elements\ButtonElement;
+    \Veles\Form\Elements\SubmitElement;
 
 /**
  * Класс AbstractForm
@@ -23,12 +24,12 @@ use \Veles\Form\Elements\iElement,
  */
 abstract class AbstractForm
 {
-    private $action;
     protected $method = 'post';
-    protected $width;
-    protected $map;
-    protected $name;
-    protected $key;
+    protected $width  = null;
+    protected $name   = null;
+    protected $key    = null;
+    protected $id     = null;
+    protected $class  = null;
 
     private $elements = array();
 
@@ -45,9 +46,11 @@ abstract class AbstractForm
         $this->data = ('get' === $this->method) ? $_GET : $_POST;
         $this->key  = crc32($this->name);
 
-        $this->addElement(
-            new HiddenElement($this->key, '', new RegEx('/^$/'), true)
-        );
+        $this->addElement(new HiddenElement(array(
+            'validator'  => new RegEx('/^$/'),
+            'required'   => true,
+            'attributes' => array('name' => $this->key)
+        )));
     }
 
     /**
@@ -67,7 +70,7 @@ abstract class AbstractForm
         $valid = true;
 
         foreach ($this->elements as $element) {
-            if ($element instanceof ButtonElement)
+            if ($element instanceof ButtonElement || $element instanceof SubmitElement)
                 continue;
 
             $name = $element->getName();
@@ -100,9 +103,17 @@ abstract class AbstractForm
      */
     final public function __toString()
     {
-        $output = <<<FORM
-<form name="$this->name" action="$this->action" method="$this->method">
-FORM;
+        $output  = '<form ';
+        if (null !== $this->id)
+            $output .= "id =\"$this->id\" ";
+
+        if (null !== $this->class)
+            $output .= "class =\"$this->class\" ";
+
+        if (null !== $this->name)
+            $output .= "name =\"$this->name\" ";
+
+        $output .= "action=\"$this->action\" method=\"$this->method\">";
 
         foreach ($this->elements as $element) {
             $output .= $element->render();

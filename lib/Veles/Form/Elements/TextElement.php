@@ -19,26 +19,11 @@ namespace Veles\Form\Elements;
 class TextElement extends AbstractElement
 {
     /**
-     * Конструктор Hidden элемента
-     * @param string $name Имя элемента
-     * @param mixed $value Значение элемента по-умолчанию
-     * @param iValidator $validator Валидатор элемента
-     * @param bool $required Является ли элемент обязательным
-     */
-    final public function __construct($name, $value, $validator, $required = false)
-    {
-        $this->name      = $name;
-        $this->value     = $value;
-        $this->validator = $validator;
-        $this->required  = $required;
-    }
-
-    /**
      * Отрисовка элемента
      */
     final public function render()
     {
-        $output = "<input name=\"{$this->name}\" type=\"text\" value={$this->value}>";
+        $output = '<input' . $this->attributes() . 'type="text">';
 
         return $output;
     }
