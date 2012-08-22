@@ -75,7 +75,7 @@ class QueryBuilder
             SET
                 $params
             WHERE
-                id = {$model->id}
+                id = $model->id
         ";
 
         return $sql;

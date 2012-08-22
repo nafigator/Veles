@@ -36,6 +36,6 @@ class DbPaginator
      */
     final public function getLimit()
     {
-        return "LIMIT {$this->limit}";
+        return "LIMIT $this->limit";
     }
 }

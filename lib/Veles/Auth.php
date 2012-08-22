@@ -61,7 +61,7 @@ final class Auth
 
                 // Ищем среди не удалённых пользователей
                 $this->filter->setWhere("
-                    `email` = '{$this->email}'
+                    `email` = '$this->email'
                     && `group` & " . $user::DELETED . ' = 0'
                 );
 
@@ -74,7 +74,7 @@ final class Auth
 
                 // Ищем среди не удалённых пользователей
                 $this->filter->setWhere("
-                    `id` = '{$this->cookie_id}'
+                    `id` = '$this->cookie_id'
                     && `group` & " . $user::DELETED . ' = 0'
                 );
 

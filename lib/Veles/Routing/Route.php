@@ -44,7 +44,7 @@ class Route
     private function __construct()
     {
         if (null === ($routes = Config::getParams('routes'))) {
-            throw new Exception("В конфиге не найдены роуты!");
+            throw new Exception('В конфиге не найдены роуты!');
         }
 
         $q_pos = strpos($_SERVER['REQUEST_URI'], '?');
@@ -73,7 +73,7 @@ class Route
     final public function getController()
     {
         if (!isset($this->config['controller']))
-            throw new Exception("Не указан контроллер!");
+            throw new Exception('Не указан контроллер!');
 
         $controller_name = 'Controllers\\' . $this->config['controller'];
 
@@ -88,7 +88,7 @@ class Route
     final public function getActionName()
     {
         if (!isset($this->config['action']))
-            throw new Exception("Не указан экшен!");
+            throw new Exception('Не указан экшен!');
 
         return $this->config['action'];
     }
@@ -111,7 +111,7 @@ class Route
     final public function getPageName()
     {
         if (!isset($this->page_name))
-            throw new Exception("Не найдено имя страницы!");
+            throw new Exception('Не найдено имя страницы!');
 
         return $this->page_name;
     }

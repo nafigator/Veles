@@ -42,7 +42,7 @@ class Navigation
     private function __construct()
     {
         if (null === ($config = Config::getParams('navigation'))) {
-            throw new Exception("В конфиге не найдена навигация!");
+            throw new Exception('В конфиге не найдена навигация!');
         }
     }
 

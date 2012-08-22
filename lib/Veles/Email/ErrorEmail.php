@@ -27,12 +27,12 @@ class ErrorEmail extends AbstractEmail implements SplObserver
     {
         $this->to = 'poligon@tut.by';
 
-        $this->headers =  'From: poligon@tut.by\n';
-        $this->headers .= 'X-Mailer: PHP/' . phpversion() . '\n';
-        $this->headers .= 'MIME-Version: 1.0\n';
-        $this->headers .= 'Content-type: text/html; charset=' . $this->charset . '\n';
-        $this->headers .= 'Content-Transfer-Encoding: ' . $this->encoding;
+        $this->headers  = "From: poligon@tut.by\n";
+        $this->headers .= 'X-Mailer: PHP/' . phpversion() . "\n";
+        $this->headers .= "MIME-Version: 1.0\n";
+        $this->headers .= "Content-type: text/html; charset=$this->charset \n";
+        $this->headers .= "Content-Transfer-Encoding: $this->encoding";
 
-        $this->subject =  '=?' . $this->charset . '?B?' . base64_encode('Новый комментарий') . '?=';
+        $this->subject  = '=?' . $this->charset . '?B?' . base64_encode('Новый комментарий') . '?=';
     }
 }

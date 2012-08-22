@@ -26,7 +26,7 @@ set_include_path(implode(PATH_SEPARATOR,
 
 setlocale(LC_ALL, 'ru_RU.utf8');
 
-require('Veles/AutoLoader.php');
+require 'Veles/AutoLoader.php';
 AutoLoader::init();
 
 $error = new Error;
