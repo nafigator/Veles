@@ -1,0 +1,36 @@
+<?php
+$i = 1;
+
+// Ссылка на первую страницу
+if ($this->curr_page > 4) {
+    echo '<a href="/index.php?page=',$i,'">&laquo;</a>';
+    $i = $this->curr_page - 3;
+}
+
+// Если страниц больше чем текущая на 3
+if ($this->page_nums > $this->curr_page + 3) {
+    $last_page = $this->page_nums;
+    $this->page_nums = $this->curr_page + 3;
+}
+
+while ($i <= $this->page_nums) {
+    // TODO: Реализовать более внятный код в условиях
+    if ($i == $this->curr_page) {
+        // Если это не первая ссылка рисуем отступ
+        if ($i > 1)
+            echo '<span class="curr lmargin7">',$i,'</span>';
+        else
+            echo '<span class="curr">',$i,'</span>';
+    }
+    // Если это не первая ссылка рисуем отступ
+    elseif ($i > 1)
+        if (isset($cat))
+            echo '<a href="',$_SERVER["DOCUMENT_URI"],'?cat=',$cat,'&amp;page=',$i,'" class="lmargin7">',$i,'</a>';
+        else
+            echo '<a href="',$_SERVER["DOCUMENT_URI"],'?page=',$i,'" class="lmargin7">',$i,'</a>';
+    else
+        echo '<a href="',$_SERVER["DOCUMENT_URI"],'?page=',$i,'">',$i,'</a>';
+    ++$i;
+}
+if (isset($last_page))
+    echo '<a href="',$_SERVER["DOCUMENT_URI"],'?page=',$last_page,'" class="lmargin7">&raquo;</a>';

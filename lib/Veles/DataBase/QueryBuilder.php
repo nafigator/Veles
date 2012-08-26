@@ -146,6 +146,7 @@ class QueryBuilder
     final public static function find($model, $filter, $pager)
     {
         $fields = '';
+        $select = 'SELECT';
         $where  = '';
         $group  = '';
         $having = '';
@@ -166,6 +167,7 @@ class QueryBuilder
         }
 
         if ($pager instanceof DbPaginator) {
+            $select .= ' SQL_CALC_FOUND_ROWS';
             $where = (empty($where))
                 ? "WHERE id >= " . $pager->getOffset()
                 : "$where && id >= " . $pager->getOffset();
@@ -174,7 +176,7 @@ class QueryBuilder
         }
 
         $sql = "
-            SELECT
+            $select
                 $fields
             FROM
                 " . $model::TBL_NAME . "

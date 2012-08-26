@@ -20,6 +20,22 @@ class DbPaginator
 {
     protected $offset = 0;
     protected $limit  = 5;
+    protected $page_nums;
+    protected $curr_page;
+    protected $template;
+
+    /**
+     * Конструктор
+     * @param string $template Путь к шаблону постраничной навигации
+     */
+    final public function __construct($template = false, $curr_page = 1)
+    {
+        $this->template = ($template)
+            ? $template
+            : BASE_PATH . 'lib/Veles/View/default.phtml';
+
+        $this->curr_page = $curr_page;
+    }
 
     /**
      * Метод получения offset
@@ -37,5 +53,13 @@ class DbPaginator
     final public function getLimit()
     {
         return "LIMIT $this->limit";
+    }
+
+    /**
+     * Рендеринг ссылок постраничной навигации
+     */
+    final public function render()
+    {
+        require $template;
     }
 }

@@ -100,6 +100,26 @@ class Db {
     }
 
     /**
+     * Функция получения FOUND_ROWS()
+     * Использовать только после запроса с DbPaginator
+     */
+    final public static function getFoundRows()
+    {
+        $sql = 'SELECT FOUND_ROWS()';
+
+        $result = mysqli_query(self::$db, $sql, MYSQLI_USE_RESULT);
+        if (false === $result) {
+            throw new DbException(
+                'Не удалось выполнить запрос', self::$db, $sql
+            );
+        }
+
+        $rows = mysqli_fetch_row($result);
+
+        return $rows[0];
+    }
+
+    /**
      * Метод возвращает массив с ошибками
      * @return  array $errors
      */
