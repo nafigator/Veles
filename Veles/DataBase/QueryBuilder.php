@@ -167,10 +167,11 @@ class QueryBuilder
         }
 
         if ($pager instanceof DbPaginator) {
+            $offset = (int) $pager->getOffset() - 1;
             $select .= ' SQL_CALC_FOUND_ROWS';
             $where = (empty($where))
-                ? "WHERE id >= " . $pager->getOffset()
-                : "$where && id >= " . $pager->getOffset();
+                ? "WHERE id > " . $offset
+                : "$where && id > " . $offset;
 
             $limit = $pager->getLimit();
         }

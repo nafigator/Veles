@@ -66,7 +66,7 @@ abstract class AbstractModel
     /**
      * Конструктор модели
      */
-    final protected function __construct($id = null)
+    final public function __construct($id = null)
     {
         if (null !== $id) {
             $this->getById($id);
@@ -168,7 +168,7 @@ abstract class AbstractModel
     {
         $sql = QueryBuilder::find($this, $filter, $pager);
 
-        $result = Db::q($sql);
+        $result = Db::q($sql, true);
 
         if (empty($result)) {
             return false;

@@ -18,7 +18,7 @@ namespace Veles\DataBase;
  */
 class DbPaginator
 {
-    protected $offset = 0;
+    protected $offset = 1;
     protected $limit  = 5;
     protected $page_nums;
     protected $curr_page;
@@ -61,5 +61,26 @@ class DbPaginator
     final public function render()
     {
         require $template;
+    }
+
+    /**
+     * Подсчёт кол-ва страниц
+     */
+    final public function getMaxPages()
+    {
+        if (null !== $this->page_nums)
+            return $this->page_nums;
+
+        $this->page_nums = Db::getFoundRows() / $this->limit;
+
+        return $this->page_nums;
+    }
+
+    /**
+     * Получение текущей страницы
+     */
+    final public function getCurrPage()
+    {
+        return $this->curr_page;
     }
 }
