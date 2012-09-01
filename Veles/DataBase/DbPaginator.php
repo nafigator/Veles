@@ -20,6 +20,7 @@ class DbPaginator
 {
     protected $offset = 1;
     protected $limit  = 5;
+    protected $key    = 'id';
     protected $page_nums;
     protected $curr_page;
     protected $template;
@@ -64,16 +65,24 @@ class DbPaginator
     }
 
     /**
-     * Подсчёт кол-ва страниц
+     * Получение кол-ва страниц
      */
     final public function getMaxPages()
     {
         if (null !== $this->page_nums)
             return $this->page_nums;
 
-        $this->page_nums = Db::getFoundRows() / $this->limit;
+        $this->calcMaxPages();
 
         return $this->page_nums;
+    }
+
+    /**
+     * Подсчёт кол-ва страниц
+     */
+    final public function calcMaxPages()
+    {
+        $this->page_nums = (int) ceil(Db::getFoundRows() / $this->limit);
     }
 
     /**
@@ -82,5 +91,22 @@ class DbPaginator
     final public function getCurrPage()
     {
         return $this->curr_page;
+    }
+
+    /**
+     * Получение primary key
+     */
+    final public function getPrimaryKey()
+    {
+        return $this->key;
+    }
+
+    /**
+     * Установка primary key
+     * @param string $key Имя primary key
+     */
+    final public function setPrimaryKey($key)
+    {
+        $this->key = $key;
     }
 }

@@ -13,6 +13,7 @@
 namespace Veles\Model;
 
 use \Veles\DataBase\Db,
+    \Veles\DataBase\DbPaginator,
     \Veles\DataBase\QueryBuilder;
 
 /**
@@ -68,9 +69,8 @@ abstract class AbstractModel
      */
     final public function __construct($id = null)
     {
-        if (null !== $id) {
+        if (null !== $id)
             $this->getById($id);
-        }
     }
 
     /**
@@ -105,9 +105,8 @@ abstract class AbstractModel
 
         $result = Db::q($sql);
 
-        if (empty($result)) {
+        if (empty($result))
             return false;
-        }
 
         $this->setProperties($result);
 
@@ -162,7 +161,8 @@ abstract class AbstractModel
 
     /**
      * Получение списка объектов
-     * @param Pagination $pager Объект паганитора
+     * @param DbFilter $filter Объект фильтра
+     * @param DbPagination $pager Объект паганитора
      */
     final public function find($filter = false, $pager = false)
     {
@@ -170,9 +170,34 @@ abstract class AbstractModel
 
         $result = Db::q($sql, true);
 
-        if (empty($result)) {
+        if (empty($result))
             return false;
+
+        if ($pager)
+            $pager->calcMaxPages();
+
+        if (0 !== key($result)) {
+            $this->setProperties($result);
+            return true;
         }
+
+        return $result;
+    }
+
+    /**
+     * Произвольный запрос с постраничным выводом
+     * @param DbPagination $pager Объект постраничного вывода
+     */
+    final protected function pagedQuery($sql, DbPaginator $pager)
+    {
+        $sql = QueryBuilder::setPage($sql, $pager);
+
+        $result = Db::q($sql, true);
+
+        if (empty($result))
+            return false;
+
+        $pager->calcMaxPages();
 
         if (0 !== key($result)) {
             $this->setProperties($result);
