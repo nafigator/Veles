@@ -186,18 +186,21 @@ abstract class AbstractModel
 
     /**
      * Произвольный запрос с постраничным выводом
+     * @param string $sql Запрос
      * @param DbPagination $pager Объект постраничного вывода
      */
-    final protected function pagedQuery($sql, DbPaginator $pager)
+    final protected function query($sql, $pager = false)
     {
-        $sql = QueryBuilder::setPage($sql, $pager);
+        if ($pager)
+            $sql = QueryBuilder::setPage($sql, $pager);
 
         $result = Db::q($sql, true);
 
         if (empty($result))
             return false;
 
-        $pager->calcMaxPages();
+        if ($pager)
+            $pager->calcMaxPages();
 
         if (0 !== key($result)) {
             $this->setProperties($result);
