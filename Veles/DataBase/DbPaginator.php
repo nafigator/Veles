@@ -33,9 +33,18 @@ class DbPaginator
     {
         $this->template = ($template)
             ? $template
-            : BASE_PATH . 'lib/Veles/View/default.phtml';
+            : BASE_PATH . 'lib/Veles/View/paginator_default.phtml';
 
         $this->curr_page = $curr_page;
+    }
+
+    /**
+     * Отрисовка постраничного вывода
+     */
+    final public function __toString()
+    {
+        require $this->template;
+        return '';
     }
 
     /**
