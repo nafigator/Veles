@@ -170,8 +170,8 @@ class QueryBuilder
             $offset = (int) $pager->getOffset() - 1;
             $select .= ' SQL_CALC_FOUND_ROWS';
             $where = (empty($where))
-                ? "WHERE id > " . $offset
-                : "$where && id > " . $offset;
+                ? "WHERE id > $offset"
+                : "$where && id > $offset";
 
             $limit = $pager->getLimit();
         }
@@ -187,6 +187,30 @@ class QueryBuilder
             $order
             $limit
         ";
+
+        return $sql;
+    }
+
+    /**
+     * Построение произвольного запроса с постраничным выводом
+     * @param string $sql Запрос
+     * @param DbPaginator $pager Экземпляр постраничного вывода
+     */
+    final public static function setPage($sql, $pager)
+    {
+        $offset = (int) $pager->getOffset() - 1;
+        $key    = $pager->getPrimaryKey();
+        $sql    = str_replace('SELECT', 'SELECT SQL_CALC_FOUND_ROWS', $sql);
+
+        $pattern = '/(WHERE\s(?:(?!GROUP|HAVING|ORDER|LIMIT).|\s)+)?((?:GROUP|HAVING|ORDER)(?:(?!LIMIT).|\s)+)*(LIMIT(?:\s|.)+)?$/i';
+        preg_match($pattern, $sql, $matches);
+        unset($matches[0]);
+
+        $where = (empty($matches[1]))
+            ? "WHERE $key > $offset $matches[2]"
+            : "$matches[1] && $key > $offset $matches[2]";
+
+        $sql = str_replace(implode('', $matches), $where, $sql) . $pager->getLimit();
 
         return $sql;
     }
