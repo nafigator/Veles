@@ -116,6 +116,16 @@ class Config
         if (null === self::$data)
             self::read();
 
-        return isset(self::$data[$param]) ? self::$data[$param] : null;
+        $array = explode('.', $param);
+
+        $return =& self::$data;
+        foreach($array as $value) {
+            if (isset($return[$value]))
+                $return =& $return[$value];
+            else
+                return null;
+        }
+
+        return $return;
     }
 }
