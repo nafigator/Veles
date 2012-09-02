@@ -20,12 +20,15 @@ class RouteRegex implements iRouteStrategy
 {
     /**
      * Проверка на соответствие роута шаблону
-     * @param string $pattern
-     * @param string $url
+     * @param string $pattern Шаблон из конфига для сопоставления
+     * @param string $url текущий $_SERVER['REQUEST_URI'] без параметров
      * @return bool
      */
     public static function check($pattern, $url)
     {
-        return (bool) preg_match($pattern, $url);
+        $result = (bool) preg_match($pattern, $url, $map);
+        Route::instance()->setMap($map);
+
+        return $result;
     }
 }

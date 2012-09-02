@@ -24,6 +24,7 @@ class Route
     private static $instance   = null;
     private $page_name         = null;
     private $config            = null;
+    private $map               = array();
 
     /**
      * Доступ к объекту
@@ -114,5 +115,29 @@ class Route
             throw new Exception('Не найдено имя страницы!');
 
         return $this->page_name;
+    }
+
+    /**
+     * Маппинг параметров url
+     * @param array $map
+     */
+    final public function setMap($map)
+    {
+        if (!is_array($map))
+            throw new Exception('Значение url-параметров должны быть в массиве!');
+
+        if (empty($this->map) || empty($this->config['map']))
+            throw new Exception('Пустые массивы URL-параметров!');
+
+        $this->map = array_combine($this->config['map'], $map);
+    }
+
+    /**
+     * Получение URL-параметров
+     * @return array
+     */
+    final public function getMap()
+    {
+        return $this->map;
     }
 }
