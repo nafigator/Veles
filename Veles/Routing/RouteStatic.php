@@ -26,6 +26,8 @@ class RouteStatic implements iRouteStrategy
      */
     public static function check($pattern, $url)
     {
-        return $pattern === $url || $pattern . 'index.php' === $url;
+        return $pattern === $url
+            || $pattern . 'index.php'  === $url
+            || $pattern . '/index.php' === $url;
     }
 }
