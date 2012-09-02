@@ -20,11 +20,12 @@ class Helper {
     /**
      * Генерирует случайный набор символов заданной длины.
      * По-умолчанию настройки для генерации blowfish соли
-     * @param int $length
+     * @param int $length Длина генерируемой строки
+     * @param string $letters Набор символов
      */
     final public static function genStr(
-        $letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./',
-        $length  = 21
+        $length  = 21,
+        $letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./'
     )
     {
         return substr(str_shuffle(str_repeat($letters, 5)), 0, $length);
