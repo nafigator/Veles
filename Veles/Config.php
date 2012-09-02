@@ -116,16 +116,16 @@ class Config
         if (null === self::$data)
             self::read();
 
-        $array = explode('.', $param);
+        $param_arr = explode('.', $param);
 
-        $return =& self::$data;
-        foreach($array as $value) {
-            if (isset($return[$value]))
-                $return =& $return[$value];
+        $ptr =& self::$data;
+        foreach($param_arr as $param_element) {
+            if (isset($ptr[$param_element]))
+                $ptr =& $ptr[$param_element];
             else
                 return null;
         }
 
-        return $return;
+        return $ptr;
     }
 }
