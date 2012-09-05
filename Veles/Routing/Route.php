@@ -58,6 +58,13 @@ class Route
             if ($route['class']::check($route['route'], $url)) {
                 $this->config    = $route;
                 $this->page_name = $name;
+
+                if (preg_match($route['route'], $url, $map)) {
+                    if (isset($route['map'])) {
+                        $this->map = array_combine($route['map'], $map);
+                    }
+                }
+
                 return;
             }
         }
@@ -115,21 +122,6 @@ class Route
             throw new Exception('Не найдено имя страницы!');
 
         return $this->page_name;
-    }
-
-    /**
-     * Маппинг параметров url
-     * @param array $map
-     */
-    final public function setMap($map)
-    {
-        if (!is_array($map))
-            throw new Exception('Значение url-параметров должны быть в массиве!');
-
-        if (empty($this->map) || empty($this->config['map']))
-            throw new Exception('Пустые массивы URL-параметров!');
-
-        $this->map = array_combine($this->config['map'], $map);
     }
 
     /**
