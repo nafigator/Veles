@@ -26,9 +26,6 @@ class RouteRegex implements iRouteStrategy
      */
     public static function check($pattern, $url)
     {
-        $result = (bool) preg_match($pattern, $url, $map);
-        Route::instance()->setMap($map);
-
-        return $result;
+        return (bool) preg_match($pattern, $url);
     }
 }
