@@ -59,7 +59,7 @@ class Route
                 $this->config    = $route;
                 $this->page_name = $name;
 
-                if (isset($route['map']) && preg_match_all($route['route'], $url, $map)) {
+                if (isset($route['map']) && preg_match($route['route'], $url, $map)) {
                     unset($map[0]);
                     $this->map = array_combine($route['map'], $map);
                 }

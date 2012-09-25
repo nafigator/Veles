@@ -168,18 +168,13 @@ abstract class AbstractModel
     {
         $sql = QueryBuilder::find($this, $filter, $pager);
 
-        $result = Db::q($sql, true);
+        $result = Db::q($sql);
 
         if (empty($result))
             return false;
 
         if ($pager)
             $pager->calcMaxPages();
-
-        if (0 !== key($result)) {
-            $this->setProperties($result);
-            return true;
-        }
 
         return $result;
     }
@@ -201,11 +196,6 @@ abstract class AbstractModel
 
         if ($pager)
             $pager->calcMaxPages();
-
-        if (0 !== key($result)) {
-            $this->setProperties($result);
-            return true;
-        }
 
         return $result;
     }
