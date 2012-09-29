@@ -204,7 +204,10 @@ class QueryBuilder
 
         $pattern = '/(WHERE\s(?:(?!GROUP|HAVING|ORDER|LIMIT).|\s)+)?((?:GROUP|HAVING|ORDER)(?:(?!LIMIT).|\s)+)*(LIMIT(?:\s|.)+)?$/i';
         preg_match($pattern, $sql, $matches);
+
         unset($matches[0]);
+        if (empty($matches[2]))
+            $matches[2] = '';
 
         $where = (empty($matches[1]))
             ? "WHERE $key > $offset $matches[2]"
