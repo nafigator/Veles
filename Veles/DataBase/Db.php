@@ -72,6 +72,8 @@ class Db {
             return $result;
 
         if ($list || $result->num_rows > 1) {
+            $return = array();
+
             while ($row = mysqli_fetch_assoc($result)) {
                 $return[] = $row;
             }

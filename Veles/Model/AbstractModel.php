@@ -160,9 +160,9 @@ abstract class AbstractModel
     }
 
     /**
-     * Получение списка объектов
+     * Получение списка
      * @param DbFilter $filter Объект фильтра
-     * @param DbPagination $pager Объект паганитора
+     * @param DbPagination $pager постраничного вывода
      */
     final public function find($filter = false, $pager = false)
     {
