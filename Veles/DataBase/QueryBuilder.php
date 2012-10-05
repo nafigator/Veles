@@ -201,7 +201,7 @@ class QueryBuilder
      */
     final public static function setPage($sql, $pager)
     {
-        $offset = (int) $pager->getOffset() - 1;
+        $offset = (int) $pager->getOffset();
         $key    = $pager->getPrimaryKey();
         $sql    = str_replace('SELECT', 'SELECT SQL_CALC_FOUND_ROWS', $sql);
 

@@ -61,7 +61,9 @@ class Route
 
                 if (isset($route['map']) && preg_match($route['route'], $url, $map)) {
                     unset($map[0]);
-                    $this->map = array_combine($route['map'], $map);
+
+                    if (!empty($map))
+                        $this->map = array_combine($route['map'], $map);
                 }
 
                 return;

@@ -53,7 +53,7 @@ class DbPaginator
      */
     final public function getOffset()
     {
-        return $this->offset;
+        return ($this->curr_page - 1) * $this->limit;
     }
 
     /**
