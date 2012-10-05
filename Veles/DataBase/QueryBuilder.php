@@ -32,12 +32,15 @@ class QueryBuilder
 
         foreach ($model::$map as $property => $value) {
             $value = self::sanitize($model, $property);
+
+            if (null === $value) continue;
+
             $arr['fields'] .= "`$property`, ";
             $arr['values'] .= (is_string($value)) ? "'$value', " : "$value, ";
         }
 
         array_walk($arr, function(&$val) {
-            rtrim($val, ', ');
+            $val = rtrim($val, ', ');
         });
 
         $sql = '
@@ -229,10 +232,13 @@ class QueryBuilder
             );
         }
 
-        if (empty($model->$property) && isset($model::$required_fields[$property])) {
-            throw new Exception (
-                "Обязательное свойство \"$property\" модели " . get_class($model) . ' - пустое'
-            );
+        if (empty($model->$property)) {
+            if (isset($model::$required_fields[$property])) {
+                throw new Exception (
+                    "Обязательное свойство \"$property\" модели " . get_class($model) . ' - пустое'
+                );
+            }
+            else return;
         }
 
         $value = isset($model->$property) ? $model->$property : false;
