@@ -62,7 +62,8 @@ class DbPaginator
      */
     final public function getLimit()
     {
-        return "LIMIT $this->limit";
+        $offset = $this->getOffset();
+        return " LIMIT $offset, $this->limit";
     }
 
     /**

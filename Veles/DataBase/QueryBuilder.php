@@ -201,24 +201,7 @@ class QueryBuilder
      */
     final public static function setPage($sql, $pager)
     {
-        $offset = (int) $pager->getOffset();
-        $key    = $pager->getPrimaryKey();
-        $sql    = str_replace('SELECT', 'SELECT SQL_CALC_FOUND_ROWS', $sql);
-
-        $pattern = '/(WHERE\s(?:(?!GROUP|HAVING|ORDER|LIMIT).|\s)+)?((?:GROUP|HAVING|ORDER)(?:(?!LIMIT).|\s)+)*(LIMIT(?:\s|.)+)?$/i';
-        preg_match($pattern, $sql, $matches);
-
-        unset($matches[0]);
-        if (empty($matches[2]))
-            $matches[2] = '';
-
-        $where = (empty($matches[1]))
-            ? "WHERE $key > $offset $matches[2]"
-            : "$matches[1] && $key > $offset $matches[2]";
-
-        $sql = str_replace(implode('', $matches), $where, $sql) . $pager->getLimit();
-
-        return $sql;
+        return str_replace('SELECT', 'SELECT SQL_CALC_FOUND_ROWS', $sql) . $pager->getLimit();
     }
 
     /**
