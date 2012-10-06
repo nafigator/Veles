@@ -53,7 +53,7 @@ class DbPaginator
      */
     final public function getOffset()
     {
-        return ($this->curr_page - 1) * $this->limit;
+        return ($this->curr_page - 1) * $this->getLimit();
     }
 
     /**
@@ -72,7 +72,8 @@ class DbPaginator
     final public function getSqlLimit()
     {
         $offset = $this->getOffset();
-        return " LIMIT $offset, $this->limit";
+        $limit  = $this->getLimit();
+        return " LIMIT $offset, $limit";
     }
 
     /**
@@ -101,7 +102,7 @@ class DbPaginator
      */
     final public function calcMaxPages()
     {
-        $this->page_nums = (int) ceil(Db::getFoundRows() / $this->limit);
+        $this->page_nums = (int) ceil(Db::getFoundRows() / $this->getLimit());
     }
 
     /**
