@@ -176,7 +176,7 @@ class QueryBuilder
                 ? "WHERE id > $offset"
                 : "$where && id > $offset";
 
-            $limit = $pager->getLimit();
+            $limit = $pager->getSqlLimit();
         }
 
         $sql = "
@@ -201,7 +201,7 @@ class QueryBuilder
      */
     final public static function setPage($sql, $pager)
     {
-        return str_replace('SELECT', 'SELECT SQL_CALC_FOUND_ROWS', $sql) . $pager->getLimit();
+        return str_replace('SELECT', 'SELECT SQL_CALC_FOUND_ROWS', $sql) . $pager->getSqlLimit();
     }
 
     /**

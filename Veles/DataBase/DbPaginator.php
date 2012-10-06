@@ -62,6 +62,15 @@ class DbPaginator
      */
     final public function getLimit()
     {
+        return $this->limit;
+    }
+
+    /**
+     * Метод получения limit для sql-запроса
+     * @return string
+     */
+    final public function getSqlLimit()
+    {
         $offset = $this->getOffset();
         return " LIMIT $offset, $this->limit";
     }
