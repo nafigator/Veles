@@ -168,7 +168,7 @@ abstract class AbstractModel
     {
         $sql = QueryBuilder::find($this, $filter, $pager);
 
-        $result = Db::q($sql);
+        $result = Db::q($sql, true);
 
         if (empty($result))
             return false;
