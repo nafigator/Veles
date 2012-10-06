@@ -64,7 +64,10 @@ class QueryBuilder
     {
         $params = '';
 
-        foreach ($model::$map as $property => $value) {
+        foreach ($model::$map as $property => $type) {
+            $value = $model->$property;
+            if (null === $value || 'id' === $property) continue;
+
             $value = self::sanitize($model, $property);
             $value = (is_string($value)) ? "'$value'" : $value;
             $params .= "`$property` = $value, ";

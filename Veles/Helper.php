@@ -73,8 +73,24 @@ class Helper {
             'ц'=>'ts','ч'=>'ch','ш'=>'sh','щ'=>'shh','ъ'=>'',
             'ы'=>'y','ь'=>'','э'=>'e','ю'=>'yu','я'=>'ya',
             ' '=>'-','"'=>'','.'=>'',','=>'','!'=>'','?'=>'',
-            '('=>'',')'=>'','#'=>'','@'=>'','*'=>'','&'=>''
+            '('=>'',')'=>'','#'=>'','@'=>'','*'=>'','&'=>'',
+            '['=>'',']'=>'',':'=>'',';'=>'','<'=>'','>'=>'',
+            '+'=>''
         );
         return strtr(mb_strtolower($string, 'UTF-8'), $tr);
+    }
+
+    /**
+     * Метод для генерации алиасов
+     * @param string &$header Заголовок статьи
+     */
+    final public static function makeAlias($header)
+    {
+        $header = htmlspecialchars_decode($header);
+        $header = preg_replace('/[^a-z^а-я^\d^ ^-]/iu', '', $header);
+        $header = Helper::translit($header);
+        $header = preg_replace('/\-+/', '-', $header);
+
+        return $header;
     }
 }
