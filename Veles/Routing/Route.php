@@ -59,6 +59,8 @@ class Route
                 $this->config    = $route;
                 $this->page_name = $name;
 
+                $this->checkAjax();
+
                 if (isset($route['map']) && preg_match($route['route'], $url, $map)) {
                     unset($map[0]);
 
@@ -132,5 +134,22 @@ class Route
     final public function getMap()
     {
         return $this->map;
+    }
+
+    /**
+     * Проверка является запрос AJAX-запросом
+     */
+    private function checkAjax()
+    {
+        if (!$this->isAjax())
+            return;
+
+        if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])
+            && 'XMLHttpRequest' === $_SERVER['HTTP_X_REQUESTED_WITH']
+        ) {
+            return;
+        }
+
+        throw new Exception('На AJAX-роут отправлен не ajax-запрос!');
     }
 }
