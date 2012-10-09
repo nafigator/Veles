@@ -160,23 +160,21 @@ abstract class AbstractModel
     }
 
     /**
-     * Получение списка
+     * Получение уникального объекта
      * @param DbFilter $filter Объект фильтра
-     * @param DbPagination $pager постраничного вывода
      */
-    final public function find($filter = false, $pager = false)
+    final public function find($filter = false)
     {
-        $sql = QueryBuilder::find($this, $filter, $pager);
+        $sql = QueryBuilder::find($this, $filter);
 
-        $result = Db::q($sql, true);
+        $result = Db::q($sql);
 
         if (empty($result))
             return false;
 
-        if ($pager)
-            $pager->calcMaxPages();
+        $this->setProperties($result);
 
-        return $result;
+        return true;
     }
 
     /**

@@ -149,7 +149,7 @@ class QueryBuilder
      * @param DbFilter $filter Экземпляр фильтра
      * @param DbPaginator $pager Экземпляр пагинатора
      */
-    final public static function find($model, $filter, $pager)
+    final public static function find($model, $filter)
     {
         $fields = '';
         $select = 'SELECT';
@@ -170,11 +170,6 @@ class QueryBuilder
             $group  = $filter->getGroup();
             $having = $filter->getHaving();
             $order  = $filter->getOrder();
-        }
-
-        if ($pager instanceof DbPaginator) {
-            $select .= ' SQL_CALC_FOUND_ROWS';
-            $limit   = $pager->getSqlLimit();
         }
 
         $sql = "
