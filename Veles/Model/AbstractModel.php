@@ -114,6 +114,28 @@ abstract class AbstractModel
     }
 
     /**
+     * Получение списка объектов по фильтру
+     * @param DbFilter $filter Объект фильтра
+     * @param DbPaginator $filter Объект постраничного вывода
+     * @return array Массив с найденными по фильтру данными
+     */
+    final public function getAll($filter = false, $pager = false)
+    {
+        $sql = QueryBuilder::find($this, $filter);
+        $sql = QueryBuilder::setPage($sql, $pager);
+
+        $result = Db::q($sql, true);
+
+        if (empty($result))
+            return false;
+
+        if ($pager instanceof DbPaginator)
+            $pager->calcMaxPages();
+
+        return $result;
+    }
+
+    /**
      * Сохранение данных
      * @return bool|int
      */
@@ -162,6 +184,7 @@ abstract class AbstractModel
     /**
      * Получение уникального объекта
      * @param DbFilter $filter Объект фильтра
+     * @return bool
      */
     final public function find($filter = false)
     {

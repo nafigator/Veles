@@ -12,7 +12,8 @@
 
 namespace Veles\DataBase;
 
-use \Exception;
+use \Exception,
+    \Veles\DataBase\DbPaginator;
 
 /**
  * Класс QueryBuilder
@@ -194,7 +195,11 @@ class QueryBuilder
      */
     final public static function setPage($sql, $pager)
     {
-        return str_replace('SELECT', 'SELECT SQL_CALC_FOUND_ROWS', $sql) . $pager->getSqlLimit();
+        if ($pager instanceof DbPaginator) {
+            return str_replace('SELECT', 'SELECT SQL_CALC_FOUND_ROWS', $sql) . $pager->getSqlLimit();
+        }
+
+        return $sql;
     }
 
     /**
