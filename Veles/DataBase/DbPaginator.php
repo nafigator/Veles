@@ -68,6 +68,18 @@ class DbPaginator
     }
 
     /**
+     * Метод установки кол-ва элементов на страницу
+     * @param int $limit Кол-во выводимых элементов на странице
+     */
+    final public function setLimit($limit)
+    {
+        if (!is_numeric($limit))
+            return;
+
+        $this->limit = (int) $limit;
+    }
+
+    /**
      * Метод получения limit для sql-запроса
      * @return string
      */
