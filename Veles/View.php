@@ -36,7 +36,7 @@ class View
      * Метод вывода
      * @param string &$path Путь к шаблону
      */
-    final public static function show(&$path)
+    final public static function show($path)
     {
         foreach (self::$variables as $var_name => $value) {
             $$var_name = $value;

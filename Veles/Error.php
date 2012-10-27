@@ -87,7 +87,7 @@ class Error implements SplSubject
     {
         if ('development' === ENVIRONMENT) {
             View::set($this->vars);
-            View::show('error', 'exception');
+            View::show('error/exception.phtml');
         }
         else {
             View::set($this->vars);
