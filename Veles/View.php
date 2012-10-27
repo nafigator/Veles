@@ -34,7 +34,7 @@ class View
 
     /**
      * Метод вывода
-     * @param string &$path Путь к шаблону
+     * @param string $path Путь к шаблону
      */
     final public static function show($path)
     {
@@ -49,23 +49,17 @@ class View
 
     /**
      * Вывод View в буфер и сохранение в переменную
-     * @param string $page_name Имя странички
-     * @param string $tpl_name Имя шаблона
+     * @param string $path Путь к шаблону
      * @return string Вывод View
      */
-    final public static function get($page_name, $tpl_name)
+    final public static function get($path)
     {
         foreach (self::$variables as $var_name => $value) {
             $$var_name = $value;
         }
 
-        $template_name = implode(
-            DIRECTORY_SEPARATOR,
-            array(TEMPLATE_PATH, $page_name, $tpl_name . '.phtml')
-        );
-
         ob_start();
-        require $template_name;
+        require TEMPLATE_PATH . $path;
         $output = ob_get_contents();
         ob_end_clean();
 

@@ -91,7 +91,7 @@ class Error implements SplSubject
         }
         else {
             View::set($this->vars);
-            $error_output = View::get('error', 'exception');
+            $error_output = View::get('error/exception.phtml');
 
             //TODO: $this->attach(new ErrorSMS($this->vars));
             $this->attach(new ErrorEmail($error_output));
