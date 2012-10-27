@@ -34,22 +34,16 @@ class View
 
     /**
      * Метод вывода
-     * @param string $page_name Имя странички
-     * @param string $tpl_name Имя шаблона
+     * @param string &$path Путь к шаблону
      */
-    final public static function show($page_name, $tpl_name)
+    final public static function show(&$path)
     {
         foreach (self::$variables as $var_name => $value) {
             $$var_name = $value;
         }
 
-        $template_name = implode(
-            DIRECTORY_SEPARATOR,
-            array(TEMPLATE_PATH, $page_name, $tpl_name . '.phtml')
-        );
-
         ob_start();
-        require $template_name;
+        require TEMPLATE_PATH . $path;
         ob_end_flush();
     }
 

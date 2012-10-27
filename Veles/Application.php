@@ -33,11 +33,11 @@ class Application
         $route       = Route::instance();
         $controller  = $route->getController();
         $action_name = $route->getActionName();
-        $page_name   = $route->getPageName();
+        $path        = $route->getPath();
 
         View::set($controller->$action_name());
 
-        View::show($page_name, $action_name);
+        View::show($path);
     }
 
     /**

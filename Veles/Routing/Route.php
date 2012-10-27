@@ -24,6 +24,7 @@ class Route
     private static $instance   = null;
     private $page_name         = null;
     private $config            = null;
+    private $path              = null;
     private $map               = array();
 
     /**
@@ -58,6 +59,9 @@ class Route
             if ($route['class']::check($route['route'], $url)) {
                 $this->config    = $route;
                 $this->page_name = $name;
+
+                if (isset($route['path']))
+                    $this->path = $route['path'];
 
                 $this->checkAjax();
 
@@ -134,6 +138,14 @@ class Route
     final public function getMap()
     {
         return $this->map;
+    }
+
+    /**
+     * Получение пути к view-шаблону
+     */
+    final public function getPath()
+    {
+        return $this->path;
     }
 
     /**
