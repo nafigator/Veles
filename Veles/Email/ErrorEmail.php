@@ -27,7 +27,7 @@ class ErrorEmail extends AbstractEmail implements SplObserver
     {
         $this->to = 'poligon@tut.by';
 
-        $this->headers  = "From: poligon@tut.by\n";
+        $this->headers  = "From: www@itvault.info\n";
         $this->headers .= 'X-Mailer: PHP/' . phpversion() . "\n";
         $this->headers .= "MIME-Version: 1.0\n";
         $this->headers .= "Content-type: text/html; charset=$this->charset \n";

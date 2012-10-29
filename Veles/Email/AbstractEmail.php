@@ -32,7 +32,7 @@ abstract class AbstractEmail
      * @param string $message Тело сообщения
      */
     final public function __construct($message) {
-        $this->message = $message;
+        $this->message = base64_encode($message);
     }
 
     /**
