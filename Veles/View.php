@@ -21,7 +21,6 @@ use \Veles\Routing\Route;
 class View
 {
     private static $variables = array();
-    private static $route     = null;
 
     /**
      * Метод для установки переменных в выводе

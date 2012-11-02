@@ -91,14 +91,6 @@ class DbPaginator
     }
 
     /**
-     * Рендеринг ссылок постраничной навигации
-     */
-    final public function render()
-    {
-        require $template;
-    }
-
-    /**
      * Получение кол-ва страниц
      */
     final public function getMaxPages()

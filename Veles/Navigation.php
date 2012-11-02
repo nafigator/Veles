@@ -64,6 +64,6 @@ class Navigation
      */
     final public function getBreadCrumbs()
     {
-
+        return $this->breadcrumbs;
     }
 }

@@ -28,9 +28,6 @@ abstract class AbstractModel
     // Карта типов данных объекта
     public static $map = array();
 
-    // Обязательные свойства объекта, без наличия которых запись в базу не происходит
-    public static $required_fields = array();
-
     // Имя таблицы
     const TBL_NAME = null;
 
@@ -174,7 +171,8 @@ abstract class AbstractModel
      */
     final public function getProperties(&$properties)
     {
-        foreach ($properties as $property_name => $value) {
+        $tmp_props = array_keys($properties);
+        foreach ($tmp_props as $property_name) {
             if (isset($this->$property_name)) {
                 $properties[$property_name] = $this->$property_name;
             }

@@ -24,7 +24,7 @@ class QueryBuilder
     /**
      * Построение sql-запроса для insert
      * @param AbstractModel $model Экземпляр модели
-     * @return array
+     * @return string
      * @todo протестировать алгоритм на время. Попробовать варианты с iterator, implode
      */
     final public static function insert($model)
@@ -58,18 +58,19 @@ class QueryBuilder
     /**
      * Построение sql-запроса для update
      * @param AbstractModel $model Экземпляр модели
-     * @return array $sql
+     * @return string $sql
      * @todo протестировать алгоритм на время. Попробовать варианты с iterator, implode
      */
     final public static function update($model)
     {
         $params = '';
 
-        foreach ($model::$map as $property => $type) {
-            $value = $model->$property;
+        $properties = array_keys($model::$map);
+        foreach ($properties as $property) {
+            $value = self::sanitize($model, $property);
+
             if (null === $value || 'id' === $property) continue;
 
-            $value = self::sanitize($model, $property);
             $value = (is_string($value)) ? "'$value'" : $value;
             $params .= "`$property` = $value, ";
         }
@@ -92,7 +93,7 @@ class QueryBuilder
      * Построение sql-запроса для select
      * @param AbstractModel $model Экземпляр модели
      * @param int $id primary key
-     * @return array $sql
+     * @return string $sql
      */
     final public static function getById($model, $id)
     {
@@ -114,7 +115,7 @@ class QueryBuilder
      * Построение sql-запроса для delete
      * @param AbstractModel $model Экземпляр модели
      * @param array $ids Массив ID для удаления
-     * @return array $sql
+     * @return string $sql
      */
     final public static function delete($model, $ids)
     {
@@ -149,6 +150,7 @@ class QueryBuilder
      * @param AbstractModel $model Экземпляр модели
      * @param DbFilter $filter Экземпляр фильтра
      * @param DbPaginator $pager Экземпляр пагинатора
+     * @return string
      */
     final public static function find($model, $filter)
     {
@@ -160,7 +162,8 @@ class QueryBuilder
         $order  = '';
         $limit  = '';
 
-        foreach ($model::$map as $property => $value) {
+        $properties = array_keys($model::$map);
+        foreach ($properties as $property) {
             $fields .= "`$property`, ";
         }
 
@@ -192,6 +195,7 @@ class QueryBuilder
      * Построение произвольного запроса с постраничным выводом
      * @param string $sql Запрос
      * @param DbPaginator $pager Экземпляр постраничного вывода
+     * @return string
      */
     final public static function setPage($sql, $pager)
     {
@@ -205,24 +209,18 @@ class QueryBuilder
     /**
      * Функция безопасности переменных
      * @param  $arg
+     * @return mixed
      */
-    private static function sanitize($model, $property) {
+    private static function sanitize($model, $property)
+    {
         if (!isset($model::$map[$property])) {
             throw new Exception (
                 "Неизвестное свойство \"$property\" модели " . get_class($model)
             );
         }
 
-        if (empty($model->$property)) {
-            if (isset($model::$required_fields[$property])) {
-                throw new Exception (
-                    "Обязательное свойство \"$property\" модели " . get_class($model) . ' - пустое'
-                );
-            }
-            else return;
-        }
-
-        $value = isset($model->$property) ? $model->$property : false;
+        if (!isset($model->$property))
+            return null;
 
         switch ($model::$map[$property]) {
             case 'int':
@@ -230,16 +228,16 @@ class QueryBuilder
             case 'smallint':
             case 'mediumint':
             case 'bigint':
-                $value = (int) $value;
+                $value = (int) $model->$property;
                 break;
             case 'float':
-                $value = (float) $value;
+                $value = (float) $model->$property;
                 break;
             case 'char':
             case 'varchar':
             case 'text':
             case 'string':
-                $value = mysql_real_escape_string((string) $value);
+                $value = mysql_real_escape_string((string) $model->$property);
                 break;
             default:
                 throw new Exception (

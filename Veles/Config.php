@@ -75,7 +75,8 @@ class Config
      */
     private static function initInheritance(&$config)
     {
-        foreach ($config as $namespace => $param) {
+        $namespaces = array_keys($config);
+        foreach ($namespaces as $namespace) {
             $section = explode(':', $namespace);
 
             array_walk($section, function(&$value) {

@@ -28,19 +28,12 @@ abstract class AbstractEmail
     protected $encoding = 'base64';   //8bit
 
     /**
-     * Конструктор
-     * @param string $message Тело сообщения
-     */
-    final public function __construct($message) {
-        $this->message = base64_encode($message);
-    }
-
-    /**
      * Вызов
      * @param array $vars Набор переменных
      */
     final public function update(SplSubject $subject)
     {
+        $this->message = base64_encode($subject->getMessage());
         $this->init();
         $this->send();
     }
