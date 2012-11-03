@@ -102,7 +102,7 @@ class QueryBuilder
         $sql = '
             SELECT *
             FROM
-                ' . $model::TBL_NAME . "
+                `' . $model::TBL_NAME . "`
             WHERE
                 `id` = $id
             LIMIT 1
@@ -180,7 +180,7 @@ class QueryBuilder
             $select
                 $fields
             FROM
-                " . $model::TBL_NAME . "
+                `" . $model::TBL_NAME . "`
             $where
             $group
             $having
