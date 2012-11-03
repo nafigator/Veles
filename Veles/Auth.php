@@ -12,7 +12,8 @@
 
 namespace Veles;
 
-use \Veles\DataBase\DbFilter;
+use \Veles\Model\User,
+    \Veles\DataBase\DbFilter;
 
 /**
  * Класс авторизации пользователя
@@ -31,6 +32,8 @@ final class Auth
     const PREG_COOKIE_HASH = '/^[a-zA-Z0-9\.\/]{31}$/';
     const PREG_PASSWORD    = '/^[a-zA-Z0-9]{1,20}$/';
 
+    private $user;
+
     // В переменной будет содержаться побитная информация об ошибках
     private $errors = 0;
 
@@ -38,53 +41,53 @@ final class Auth
     private $cookie_hash;
     private $email;
     private $password;
-    private $filter;
+
+    private static $instance;
 
     /**
-     * Конструктор класса User.
-     * Авторизует пользователя по кукам. Если пользователь не авторизован,
-     * создаётся экземпляр Guest.\n Если пользователь прислал данные авторизации
-     * через форму, устанавливаем куки пользователю.
-     * @param CurrentUser $user
+     * Инициализация класса
+     * @return Auth
      */
-    final public function __construct(CurrentUser $user)
+    final public static function instance()
+    {
+        if (null === self::$instance) {
+            self::$instance = new Auth();
+        }
+
+        return self::$instance;
+    }
+
+    /**
+     * Конструктор класса Auth
+     *
+     * Авторизует пользователя по кукам. Если пользователь не авторизован,
+     * создаётся экземпляр User с группой Guest.\n Если пользователь прислал
+     * данные авторизации через форму, устанавливаем куки пользователю.
+     */
+    final public function __construct()
     {
         $auth = false;
 
-        $this->filter = new DbFilter;
+        $this->user = new User;
 
-        switch (true) {
-            // Пользователь авторизуется через запрос
-            case (isset($_REQUEST['ln']) && isset($_REQUEST['pw'])) :
-                $this->email    =& $_REQUEST['ln'];
-                $this->password =& $_REQUEST['pw'];
+        // Пользователь авторизуется через запрос
+        if (isset($_REQUEST['ln']) && isset($_REQUEST['pw'])) {
+            $this->email    =& $_REQUEST['ln'];
+            $this->password =& $_REQUEST['pw'];
 
-                // Ищем среди не удалённых пользователей
-                $this->filter->setWhere("
-                    `email` = '$this->email'
-                    && `group` & " . $user::DELETED . ' = 0'
-                );
+            $auth = $this->byRequest();
+        }
+        // Пользователь уже авторизовался ранее
+        elseif (isset($_COOKIE['id']) && isset($_COOKIE['pw'])) {
+            $this->cookie_id   =& $_COOKIE['id'];
+            $this->cookie_hash =& $_COOKIE['pw'];
 
-                $auth = $this->byRequest($user);
-                break;
-            // Пользователь уже авторизовался ранее
-            case (isset($_COOKIE['id']) && isset($_COOKIE['pw'])) :
-                $this->cookie_id   =& $_COOKIE['id'];
-                $this->cookie_hash =& $_COOKIE['pw'];
-
-                // Ищем среди не удалённых пользователей
-                $this->filter->setWhere("
-                    `id` = '$this->cookie_id'
-                    && `group` & " . $user::DELETED . ' = 0'
-                );
-
-                $auth = $this->byCookie($user);
-                break;
+            $auth = $this->byCookie();
         }
 
         if (!$auth) {
-            $props = array('group' => $user::GUEST);
-            $user->setProperties($props);
+            $props = array('group' => User::GUEST);
+            $this->user->setProperties($props);
         }
     }
 
@@ -122,17 +125,17 @@ final class Auth
     {
         if ('cookie' === $auth_type) {
             if (!preg_match(self::PREG_COOKIE_ID, $this->cookie_id))
-                $this->errors |= self::ERR_INVALID_ID;
+                $this->errors |= Auth::ERR_INVALID_ID;
 
             if (!preg_match(self::PREG_COOKIE_HASH, $this->cookie_hash))
-                $this->errors |= self::ERR_INVALID_HASH;
+                $this->errors |= Auth::ERR_INVALID_HASH;
         }
         else {
             if (!Helper::validateEmail($this->email))
-                $this->errors |= self::ERR_INVALID_EMAIL;
+                $this->errors |= Auth::ERR_INVALID_EMAIL;
 
             if (!preg_match(self::PREG_PASSWORD, $this->password))
-                $this->errors |= self::ERR_INVALID_PASSWORD;
+                $this->errors |= Auth::ERR_INVALID_PASSWORD;
         }
     }
 
@@ -140,28 +143,34 @@ final class Auth
      * Метод для авторизация пользователя с помощью кук
      * @return  bool
      */
-    final private function byCookie(CurrentUser $user)
+    final private function byCookie()
     {
         $this->secureVars('cookie');
 
         // Некорректные куки
         if (0 !== $this->errors) {
-            self::delCookie();
+            Auth::delCookie();
             return false;
         }
 
+        $filter = new DbFilter;
+        // Ищем среди не удалённых пользователей
+        $filter->setWhere("
+            `id` = '$this->cookie_id'
+            && `group` & " . User::DELETED . ' = 0'
+        );
+
         // Пользователь с таким id не найден
-        if (!$user->find($this->filter)) {
-            // Удаляем куки
-            self::delCookie();
-            $this->errors |= self::ERR_USER_NOT_FOUND;
+        if (!$this->user->find($filter)) {
+            Auth::delCookie();
+            $this->errors |= Auth::ERR_USER_NOT_FOUND;
             return false;
         }
 
         // Если хэш пароля не совпадает, удаляем куки
-        if (!Password::checkCookieHash($user, $this->cookie_hash)) {
-            self::delCookie();
-            $this->errors |= self::ERR_WRONG_PASSWORD;
+        if (!Password::checkCookieHash($this->user, $this->cookie_hash)) {
+            Auth::delCookie();
+            $this->errors |= Auth::ERR_WRONG_PASSWORD;
             return false;
         }
 
@@ -170,8 +179,9 @@ final class Auth
 
     /**
      * Метод для авторизации пользователя через запрос
+     * @return bool
      */
-    final private function byRequest(CurrentUser $user)
+    final private function byRequest()
     {
         $this->secureVars('ajax');
 
@@ -181,31 +191,65 @@ final class Auth
 
         // Пользователь уже авторизовался ранее, удаляем куки
         if (isset($_COOKIE['id']) || isset($_COOKIE['pw']))
-            self::delCookie();
+            Auth::delCookie();
 
-        // Пользователь с таким логином найден
-        if (!$user->find($this->filter)) {
-            $this->errors |= self::ERR_USER_NOT_FOUND;
+        $filter = new DbFilter;
+        // Ищем среди не удалённых пользователей
+        $filter->setWhere("
+            `email` = '$this->email'
+            && `group` & " . User::DELETED . ' = 0'
+        );
+
+        // Пользователь с таким логином не найден
+        if (!$this->user->find($filter)) {
+            $this->errors |= Auth::ERR_USER_NOT_FOUND;
             return false;
         }
 
         // Если хэш пароля совпадает, устанавливаем авторизационные куки
-        if (!Password::check($user, $this->password)) {
-            $this->errors |= self::ERR_WRONG_PASSWORD;
+        if (!Password::check($this->user, $this->password)) {
+            $this->errors |= Auth::ERR_WRONG_PASSWORD;
             return false;
         }
 
-        self::setCookie($user->getId(), $user->getCookieHash());
+        Auth::setCookie($this->user->getId(), $this->user->getCookieHash());
 
         return true;
     }
 
     /**
      * Метод возвращает побитовые значения ошибок
-     * @return  int Побитовые значения ошибок авторизации
+     * @return int Побитовые значения ошибок авторизации
      */
     final public function getErrors()
     {
         return $this->errors;
+    }
+
+    /**
+     * Метод для проверки состоит ли пользователь в определённых группах
+     * @param   array
+     * @return  bool
+     */
+    final public function hasAccess($groups)
+    {
+        $user_group = $this->user->getGroup();
+
+        // Проверяем есть ли в группах пользователя определённый бит,
+        // соответствующий нужной группе.
+        foreach ($groups as $group) {
+            if ($group === ($user_group & $group))
+                return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Получение пользователя
+     */
+    final public function getUser()
+    {
+        return $this->user;
     }
 }

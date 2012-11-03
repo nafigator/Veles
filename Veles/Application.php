@@ -27,7 +27,7 @@ class Application
     {
         self::setPhpSettings();
 
-        CurrentUser::instance();
+        Auth::instance();
 
         // Получаем имя контроллера и метода
         $route       = Route::instance();

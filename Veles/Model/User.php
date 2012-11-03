@@ -1,7 +1,7 @@
 <?php
 /**
- * Класс CurrentUser
- * @file    CurrentUser.php
+ * Модель пользователя
+ * @file    User.php
  *
  * PHP version 5.3.9+
  *
@@ -10,15 +10,14 @@
  * @copyright The BSD 2-Clause License. http://opensource.org/licenses/bsd-license.php
  */
 
-namespace Veles;
+namespace Veles\Model;
 
-use \Veles\Model\AbstractModel,
-    \Veles\DataBase\Db;
+use \Veles\DataBase\Db;
 
 /**
  * Модель пользователя
  */
-class CurrentUser extends AbstractModel
+class User extends AbstractModel
 {
     const TBL_NAME      = 'users';
     const TBL_USER_INFO = 'users_info';
@@ -31,9 +30,6 @@ class CurrentUser extends AbstractModel
     const GUEST      = 16;
     const DELETED    = 32;
 
-    private static $instance = null;
-    private static $auth     = null;
-
     public static $map = array(
         'id'         => 'int',
         'email'      => 'string',
@@ -41,45 +37,6 @@ class CurrentUser extends AbstractModel
         'group'      => 'int',
         'last_login' => 'string'
     );
-
-    /**
-     * Доступ к объекту текущего пользователя
-     * @return  CurrentUser
-     */
-    final public static function instance()
-    {
-        if (null === self::$instance) {
-            self::$instance = new CurrentUser;
-            self::$auth     = new Auth(self::$instance);
-        }
-
-        return self::$instance;
-    }
-
-    /**
-     * Доступ к авторизации пользователя
-     */
-    final public function getAuth()
-    {
-        return self::$auth;
-    }
-
-    /**
-     * Метод для проверки состоит ли пользователь в определённых группах
-     * @param   array
-     * @return  bool
-     */
-    final public function hasAccess($groups)
-    {
-        // Проверяем есть ли в группах пользователя определённый бит,
-        // соответствующий нужной группе.
-        foreach ($groups as $group) {
-            if ($group === ($this->group & $group))
-                return true;
-        }
-
-        return false;
-    }
 
     /**
      * Метод для получения ID пользователя
@@ -115,5 +72,14 @@ class CurrentUser extends AbstractModel
     final public function getSalt()
     {
         return (isset($this->hash)) ? substr($this->hash, 0, 28) : false;
+    }
+
+    /**
+     * Метод для получения группы пользователя
+     * @return int
+     */
+    final public function getGroup()
+    {
+        return (isset($this->group)) ? $this->group : User::GUEST;
     }
 }
