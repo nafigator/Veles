@@ -42,11 +42,6 @@ class CurrentUser extends AbstractModel
         'last_login' => 'string'
     );
 
-    public static $required_fields = array(
-        'email'      => true,
-        'hash'       => true
-    );
-
     /**
      * Доступ к объекту текущего пользователя
      * @return  CurrentUser
@@ -82,6 +77,8 @@ class CurrentUser extends AbstractModel
             if ($group === ($this->group & $group))
                 return true;
         }
+
+        return false;
     }
 
     /**

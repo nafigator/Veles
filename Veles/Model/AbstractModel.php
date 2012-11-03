@@ -26,6 +26,7 @@ abstract class AbstractModel
     protected $data = array();
 
     // Карта типов данных объекта
+    // Values: int, float, string
     public static $map = array();
 
     // Имя таблицы

@@ -222,26 +222,13 @@ class QueryBuilder
         if (!isset($model->$property))
             return null;
 
-        $arr_types = array(
-            'int'       => 'int',
-            'tinyint'   => 'int',
-            'smallint'  => 'int',
-            'mediumint' => 'int',
-            'bigint'    => 'bigint',
-            'float'     => 'float',
-            'char'      => 'string',
-            'varchar'   => 'string',
-            'text'      => 'string',
-            'string'    => 'string'
-        );
-
-        if (!isset($arr_types[$model::$map[$property]])) {
+        if (!isset($model::$map[$property])) {
             throw new Exception (
                 "Неизвестный тип данных {$model::$map[$property]} в запросе"
             );
         }
 
-        switch ($arr_types[$model::$map[$property]]) {
+        switch ($model::$map[$property]) {
             case 'int':
                 $value = (int) $model->$property;
                 break;
