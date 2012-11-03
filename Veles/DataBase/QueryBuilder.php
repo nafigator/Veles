@@ -222,27 +222,34 @@ class QueryBuilder
         if (!isset($model->$property))
             return null;
 
-        switch ($model::$map[$property]) {
+        $arr_types = array(
+            'int'       => 'int',
+            'tinyint'   => 'int',
+            'smallint'  => 'int',
+            'mediumint' => 'int',
+            'bigint'    => 'bigint',
+            'float'     => 'float',
+            'char'      => 'string',
+            'varchar'   => 'string',
+            'text'      => 'string',
+            'string'    => 'string'
+        );
+
+        if (!isset($arr_types[$model::$map[$property]])) {
+            throw new Exception (
+                "Неизвестный тип данных {$model::$map[$property]} в запросе"
+            );
+        }
+
+        switch ($arr_types[$model::$map[$property]]) {
             case 'int':
-            case 'tinyint':
-            case 'smallint':
-            case 'mediumint':
-            case 'bigint':
                 $value = (int) $model->$property;
                 break;
             case 'float':
                 $value = (float) $model->$property;
                 break;
-            case 'char':
-            case 'varchar':
-            case 'text':
             case 'string':
                 $value = mysql_real_escape_string((string) $model->$property);
-                break;
-            default:
-                throw new Exception (
-                    "Неизвестный тип данных {$model::$map[$property]} в запросе"
-                );
                 break;
         }
 
