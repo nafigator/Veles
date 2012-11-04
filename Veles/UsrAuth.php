@@ -1,7 +1,7 @@
 <?php
 /**
  * Класс аторизации пользователя
- * @file    Auth.php
+ * @file    UsrAuth.php
  *
  * PHP version 5.3.9+
  *
@@ -19,7 +19,7 @@ use \Veles\Model\User,
  * Класс авторизации пользователя
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
-final class Auth
+final class UsrAuth
 {
     const ERR_INVALID_EMAIL    = 1;  // ajax login
     const ERR_INVALID_PASSWORD = 2;
@@ -46,19 +46,19 @@ final class Auth
 
     /**
      * Инициализация класса
-     * @return Auth
+     * @return UsrAuth
      */
     final public static function instance()
     {
         if (null === self::$instance) {
-            self::$instance = new Auth();
+            self::$instance = new UsrAuth();
         }
 
         return self::$instance;
     }
 
     /**
-     * Конструктор класса Auth
+     * Конструктор класса UsrAuth
      *
      * Авторизует пользователя по кукам. Если пользователь не авторизован,
      * создаётся экземпляр User с группой Guest.\n Если пользователь прислал
@@ -125,17 +125,17 @@ final class Auth
     {
         if ('cookie' === $auth_type) {
             if (!preg_match(self::PREG_COOKIE_ID, $this->cookie_id))
-                $this->errors |= Auth::ERR_INVALID_ID;
+                $this->errors |= UsrAuth::ERR_INVALID_ID;
 
             if (!preg_match(self::PREG_COOKIE_HASH, $this->cookie_hash))
-                $this->errors |= Auth::ERR_INVALID_HASH;
+                $this->errors |= UsrAuth::ERR_INVALID_HASH;
         }
         else {
             if (!Helper::validateEmail($this->email))
-                $this->errors |= Auth::ERR_INVALID_EMAIL;
+                $this->errors |= UsrAuth::ERR_INVALID_EMAIL;
 
             if (!preg_match(self::PREG_PASSWORD, $this->password))
-                $this->errors |= Auth::ERR_INVALID_PASSWORD;
+                $this->errors |= UsrAuth::ERR_INVALID_PASSWORD;
         }
     }
 
@@ -149,7 +149,7 @@ final class Auth
 
         // Некорректные куки
         if (0 !== $this->errors) {
-            Auth::delCookie();
+            UsrAuth::delCookie();
             return false;
         }
 
@@ -162,15 +162,15 @@ final class Auth
 
         // Пользователь с таким id не найден
         if (!$this->user->find($filter)) {
-            Auth::delCookie();
-            $this->errors |= Auth::ERR_USER_NOT_FOUND;
+            UsrAuth::delCookie();
+            $this->errors |= UsrAuth::ERR_USER_NOT_FOUND;
             return false;
         }
 
         // Если хэш пароля не совпадает, удаляем куки
         if (!Password::checkCookieHash($this->user, $this->cookie_hash)) {
-            Auth::delCookie();
-            $this->errors |= Auth::ERR_WRONG_PASSWORD;
+            UsrAuth::delCookie();
+            $this->errors |= UsrAuth::ERR_WRONG_PASSWORD;
             return false;
         }
 
@@ -191,7 +191,7 @@ final class Auth
 
         // Пользователь уже авторизовался ранее, удаляем куки
         if (isset($_COOKIE['id']) || isset($_COOKIE['pw']))
-            Auth::delCookie();
+            UsrAuth::delCookie();
 
         $filter = new DbFilter;
         // Ищем среди не удалённых пользователей
@@ -202,17 +202,17 @@ final class Auth
 
         // Пользователь с таким логином не найден
         if (!$this->user->find($filter)) {
-            $this->errors |= Auth::ERR_USER_NOT_FOUND;
+            $this->errors |= UsrAuth::ERR_USER_NOT_FOUND;
             return false;
         }
 
         // Если хэш пароля совпадает, устанавливаем авторизационные куки
         if (!Password::check($this->user, $this->password)) {
-            $this->errors |= Auth::ERR_WRONG_PASSWORD;
+            $this->errors |= UsrAuth::ERR_WRONG_PASSWORD;
             return false;
         }
 
-        Auth::setCookie($this->user->getId(), $this->user->getCookieHash());
+        UsrAuth::setCookie($this->user->getId(), $this->user->getCookieHash());
 
         return true;
     }
