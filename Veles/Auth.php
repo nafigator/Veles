@@ -86,7 +86,7 @@ final class Auth
         }
 
         if (!$auth) {
-            $props = array('group' => User::GUEST);
+            $props = array('group' => UsrGroup::GUEST);
             $this->user->setProperties($props);
         }
     }
@@ -157,7 +157,7 @@ final class Auth
         // Ищем среди не удалённых пользователей
         $filter->setWhere("
             `id` = '$this->cookie_id'
-            && `group` & " . User::DELETED . ' = 0'
+            && `group` & " . UsrGroup::DELETED . ' = 0'
         );
 
         // Пользователь с таким id не найден
@@ -197,7 +197,7 @@ final class Auth
         // Ищем среди не удалённых пользователей
         $filter->setWhere("
             `email` = '$this->email'
-            && `group` & " . User::DELETED . ' = 0'
+            && `group` & " . UsrGroup::DELETED . ' = 0'
         );
 
         // Пользователь с таким логином не найден

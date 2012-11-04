@@ -12,7 +12,8 @@
 
 namespace Veles\Model;
 
-use \Veles\DataBase\Db;
+use \Veles\UsrGroup,
+    \Veles\DataBase\Db;
 
 /**
  * Модель пользователя
@@ -21,14 +22,6 @@ class User extends AbstractModel
 {
     const TBL_NAME      = 'users';
     const TBL_USER_INFO = 'users_info';
-
-    // Группы пользователя
-    const ADMIN      = 1;
-    const MANAGER    = 2;
-    const MODERATOR  = 4;
-    const REGISTERED = 8;
-    const GUEST      = 16;
-    const DELETED    = 32;
 
     public static $map = array(
         'id'         => 'int',
@@ -80,6 +73,6 @@ class User extends AbstractModel
      */
     final public function getGroup()
     {
-        return (isset($this->group)) ? $this->group : User::GUEST;
+        return (isset($this->group)) ? $this->group : UsrGroup::GUEST;
     }
 }
