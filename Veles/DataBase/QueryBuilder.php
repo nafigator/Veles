@@ -37,7 +37,7 @@ class QueryBuilder
             if (null === $value) continue;
 
             $arr['fields'] .= "`$property`, ";
-            $arr['values'] .= (is_string($value)) ? "'$value', " : "$value, ";
+            $arr['values'] .= "$value, ";
         }
 
         array_walk($arr, function(&$val) {
@@ -71,7 +71,6 @@ class QueryBuilder
 
             if (null === $value || 'id' === $property) continue;
 
-            $value = (is_string($value)) ? "'$value'" : $value;
             $params .= "`$property` = $value, ";
         }
 
@@ -219,8 +218,7 @@ class QueryBuilder
             );
         }
 
-        if (!isset($model->$property))
-            return null;
+        if (!isset($model->$property)) return null;
 
         if (!isset($model::$map[$property])) {
             throw new Exception (
@@ -236,7 +234,7 @@ class QueryBuilder
                 $value = (float) $model->$property;
                 break;
             case 'string':
-                $value = mysql_real_escape_string((string) $model->$property);
+                $value = '\'' . mysql_real_escape_string((string) $model->$property) . '\'';
                 break;
         }
 
