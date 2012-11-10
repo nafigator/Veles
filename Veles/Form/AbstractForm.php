@@ -12,7 +12,8 @@
 
 namespace Veles\Form;
 
-use \Veles\Validators\RegEx,
+use \Veles\View,
+    \Veles\Validators\RegEx,
     \Veles\Form\Elements\iElement,
     \Veles\Form\Elements\ButtonElement,
     \Veles\Form\Elements\HiddenElement,
@@ -22,21 +23,23 @@ use \Veles\Validators\RegEx,
  * Класс AbstractForm
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
-abstract class AbstractForm
+abstract class AbstractForm implements iForm
 {
-    protected $method = 'post';
-    protected $width  = null;
-    protected $name   = null;
-    protected $key    = null;
-    protected $id     = null;
-    protected $class  = null;
+    protected $method   = 'post';
+    protected $template = null;
 
     private $elements = array();
 
     /**
      * Конструктор
+     * @param mixed $data Данные, которые могут понадобиться для генерации формы
      */
-    abstract public function __construct();
+    abstract public function __construct($data = false);
+
+    /**
+     * Сохранение формы
+     */
+    abstract public function save();
 
     /**
      * Инициализиция значений по-умолчанию
@@ -101,26 +104,25 @@ abstract class AbstractForm
     /**
      * Вывод формы
      */
-    final public function __toString()
+    public function __toString()
     {
-        $output  = '<form ';
-        if (null !== $this->id)
-            $output .= "id =\"$this->id\" ";
+        $elements = $tpl = array();
+        $output   = View::get('frontend/forms/comment.phtml');
 
-        if (null !== $this->class)
-            $output .= "class =\"$this->class\" ";
-
-        if (null !== $this->name)
-            $output .= "name =\"$this->name\" ";
-
-        $output .= "action=\"$this->action\" method=\"$this->method\">";
-
-        foreach ($this->elements as $element) {
-            $output .= $element->render();
+        foreach ($this->elements as $number => $element) {
+            $elements[] = $element->render($this);
+            $tpl[]      = "#$number#";
         }
 
-        $output .= '</form>';
+        return str_replace($tpl, $elements, $output);
+    }
 
-        return $output;
+    /**
+     * Получение общего шаблона для элементов
+     * @return string|bool
+     */
+    final public function getElementsTpl()
+    {
+        return $this->elements_template;
     }
 }

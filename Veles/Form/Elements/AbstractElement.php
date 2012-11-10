@@ -12,6 +12,8 @@
 
 namespace Veles\Form\Elements;
 
+use \Veles\Form\iForm;
+
 /**
  * Класс AbstractElement
  * @author  Yancharuk Alexander <alex@itvault.info>

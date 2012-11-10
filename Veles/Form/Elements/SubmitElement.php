@@ -23,8 +23,6 @@ class SubmitElement extends AbstractElement
      */
     final public function render()
     {
-        $output = '<input' . $this->attributes() . 'type="submit">';
-
-        return $output;
+        return '<input' . $this->attributes() . 'type="submit">';
     }
 }

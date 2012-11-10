@@ -1,28 +1,28 @@
 <?php
 /**
- * Hidden элемент формы
- * @file    HiddenElement.php
+ * TextArea элемент формы
+ * @file    TextAreaElement.php
  *
  * PHP version 5.3.9+
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
- * @date    Втр Авг 14 21:41:53 2012
+ * @date    Сбт Ноя 10 12:14:37 2012
  * @version
  */
 
 namespace Veles\Form\Elements;
 
 /**
- * Класс HiddenElement
+ * Класс TextAreaElement
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
-class HiddenElement extends AbstractElement
+class TextAreaElement extends AbstractElement
 {
     /**
      * Отрисовка элемента
      */
     final public function render()
     {
-        return '<input' . $this->attributes() . 'type="hidden">';
+        return '<textarea' . $this->attributes() . ">$this->value</textarea>";
     }
 }

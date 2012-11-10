@@ -23,8 +23,6 @@ class TextElement extends AbstractElement
      */
     final public function render()
     {
-        $output = '<input' . $this->attributes() . 'type="text">';
-
-        return $output;
+        return '<input' . $this->attributes() . 'type="text">';
     }
 }

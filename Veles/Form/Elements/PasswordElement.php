@@ -23,8 +23,6 @@ class PasswordElement extends AbstractElement
      */
     final public function render()
     {
-        $output = '<input' . $this->attributes() . 'type="password">';
-
-        return $output;
+        return '<input' . $this->attributes() . 'type="text">';
     }
 }
