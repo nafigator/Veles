@@ -27,6 +27,8 @@ abstract class AbstractForm implements iForm
 {
     protected $method   = 'post';
     protected $template = null;
+    protected $data     = null;
+    protected $key      = null;
 
     private $elements = array();
 
