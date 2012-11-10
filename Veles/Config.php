@@ -29,6 +29,12 @@ class Config
     private static function read()
     {
         self::checkDefaults();
+
+        if (apc_exists('config')) {
+            self::$data = apc_fetch('itvault_config');
+            return;
+        }
+
         $tmp_config = parse_ini_file(CONFIG_FILE, true);
 
         self::initInheritance($tmp_config);
@@ -42,6 +48,7 @@ class Config
         unset($tmp_config);
 
         self::buildPramsTree(self::$data);
+        apc_add('config', self::$data);
     }
 
     /**
