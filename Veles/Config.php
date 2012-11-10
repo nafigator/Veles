@@ -31,7 +31,7 @@ class Config
         self::checkDefaults();
 
         if (apc_exists('config')) {
-            self::$data = apc_fetch('itvault_config');
+            self::$data = apc_fetch('config');
             return;
         }
 
