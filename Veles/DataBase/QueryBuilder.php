@@ -234,7 +234,9 @@ class QueryBuilder
                 $value = (float) $model->$property;
                 break;
             case 'string':
-                $value = '\'' . mysql_real_escape_string((string) $model->$property) . '\'';
+                $value = '\'' . mysqli_real_escape_string(
+                    Db::link(), (string) $model->$property
+                ) . '\'';
                 break;
         }
 

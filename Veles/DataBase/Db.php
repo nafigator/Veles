@@ -27,6 +27,18 @@ class Db {
     private static $errors = array();
 
     /**
+     * Получение соединения с базой
+     * @return mysqli
+     */
+    final public static function link()
+    {
+        if (!self::$db instanceof mysqli)
+            self::connect();
+
+        return self::$db;
+    }
+
+    /**
      * Соединение с базой.
      * Метод создаёт экземпляр mysqli класса и сохраняет его в self::$db.
      * Нечто наподобие классического синглтона.
@@ -54,7 +66,7 @@ class Db {
      * Метод для выполнения запросов
      * @param string $sql Sql-запрос
      * @param bool $list Флаг возврата значений в массиве
-     * @return bool Если запрос выполенен без ошибок, возвращает true
+     * @return mixed
      */
     final public static function q($sql, $list = false)
     {
