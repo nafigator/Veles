@@ -12,7 +12,8 @@
 
 namespace Veles;
 
-use \Exception;
+use \Exception,
+    \Cache;
 
 /**
  * Класс Config
@@ -30,8 +31,8 @@ class Config
     {
         self::checkDefaults();
 
-        if (apc_exists('config')) {
-            self::$data = apc_fetch('config');
+        if (Cache::has('config')) {
+            self::$data = Cache::get('config');
             return;
         }
 
@@ -48,7 +49,7 @@ class Config
         unset($tmp_config);
 
         self::buildPramsTree(self::$data);
-        apc_add('config', self::$data);
+        Cache::set('config', self::$data);
     }
 
     /**

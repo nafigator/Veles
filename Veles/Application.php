@@ -43,12 +43,21 @@ class Application
     /**
      * Устанавливаем настройки php, прописанные в конфиге
      */
-    private static function setPhpSettings()
+    private static function setPhpSettings($keys = null)
     {
-        if (null === ($settings = Config::getParams('php')))
+        $config = (null === $keys)
+            ? Config::getParams('php')
+            : $keys;
+
+        if (null === $config)
             return;
 
-        foreach ($settings as $param => $value) {
+        foreach ($config as $param => $value) {
+            if (is_array($value)) {
+                self::setPhpSettings($value);
+                continue;
+            }
+
             ini_set($param, $value);
         }
     }

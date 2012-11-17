@@ -1,7 +1,7 @@
 <?php
 /**
  * Интерфейс кэша
- * @file    iCache.php
+ * @file    iCacheDriver.php
  *
  * PHP version 5.3.9+
  *
@@ -10,13 +10,13 @@
  * @version
  */
 
-namespace Veles\Cache;
+namespace Veles\Cache\Drivers;
 
 /**
- * Интерфейс iCache
+ * Интерфейс iCacheDriver
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
-interface iCache
+interface iCacheDriver
 {
     /**
      * Получение данных
@@ -29,6 +29,7 @@ interface iCache
      * Сохранение данных
      * @param stirng $key Ключ
      * @param mixed $value Данные
+     * @return mixed
      */
     public function set($key, $value);
 
