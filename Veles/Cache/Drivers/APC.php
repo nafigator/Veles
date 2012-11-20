@@ -42,11 +42,12 @@ class APC implements iCacheDriver
      * Сохранение данных
      * @param stirng $key Ключ
      * @param mixed $value Данные
+     * @param int $ttl Время хранения данных в секундах
      * @return mixed
      */
-    public function set($key, $value)
+    public function set($key, $value, $ttl = 0)
     {
-        return apc_add($key, $value);
+        return apc_add($key, $value, $ttl);
     }
 
     /**

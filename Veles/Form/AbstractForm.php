@@ -122,7 +122,7 @@ abstract class AbstractForm implements iForm
             $tpl[]      = "#$number#";
         }
 
-        Cache::set($this->name . $this->sid, true);
+        Cache::set($this->name . $this->sid, true, 7200);
 
         return str_replace($tpl, $elements, $output);
     }
