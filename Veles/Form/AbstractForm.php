@@ -12,7 +12,8 @@
 
 namespace Veles\Form;
 
-use \Veles\View,
+use \Cache,
+    \Veles\View,
     \Veles\Validators\RegEx,
     \Veles\Form\Elements\iElement,
     \Veles\Form\Elements\ButtonElement,
@@ -28,7 +29,7 @@ abstract class AbstractForm implements iForm
     protected $method   = 'post';
     protected $template = null;
     protected $data     = null;
-    protected $key      = null;
+    protected $sid      = null;
 
     private $elements = array();
 
@@ -49,12 +50,12 @@ abstract class AbstractForm implements iForm
     final protected function init()
     {
         $this->data = ('get' === $this->method) ? $_GET : $_POST;
-        $this->key  = crc32($this->name);
+        $this->sid  = str_shuffle(md5(mt_rand()));
 
         $this->addElement(new HiddenElement(array(
-            'validator'  => new RegEx('/^$/'),
+            'validator'  => new RegEx('/^[a-f\d]{32}$/'),
             'required'   => true,
-            'attributes' => array('name' => $this->key)
+            'attributes' => array('name' => 'sid', 'value' => $this->sid)
         )));
     }
 
@@ -72,8 +73,6 @@ abstract class AbstractForm implements iForm
      */
     final public function valid()
     {
-        $valid = true;
-
         foreach ($this->elements as $element) {
             if ($element instanceof ButtonElement || $element instanceof SubmitElement)
                 continue;
@@ -81,17 +80,19 @@ abstract class AbstractForm implements iForm
             $name = $element->getName();
 
             if (!isset($this->data[$name])) {
-                if ($element->required())
-                    $valid = false;
+                if ($element->required()) {
+                    return false;
+                }
 
                 continue;
             }
 
-            if (!$element->validate($this->data[$name]))
-                $valid = false;
+            if (!$element->validate($this->data[$name])) {
+                return false;
+            }
         }
 
-        return $valid;
+        return true;
     }
 
     /**
@@ -99,7 +100,12 @@ abstract class AbstractForm implements iForm
      */
     final public function submitted()
     {
-        return isset($this->data[$this->key]) && '' === $this->data[$this->key];
+        if (!isset($this->data['sid']))
+            return false;
+
+        $key = $this->name . $this->data['sid'];
+
+        return Cache::get($key);
     }
 
 
@@ -115,6 +121,8 @@ abstract class AbstractForm implements iForm
             $elements[] = $element->render($this);
             $tpl[]      = "#$number#";
         }
+
+        Cache::set($this->name . $this->sid, true);
 
         return str_replace($tpl, $elements, $output);
     }
