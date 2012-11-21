@@ -29,7 +29,7 @@ interface iCacheDriver
      * Сохранение данных
      * @param stirng $key Ключ
      * @param mixed $value Данные
-     * @return mixed
+     * @return bool
      */
     public function set($key, $value);
 
