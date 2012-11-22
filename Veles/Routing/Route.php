@@ -52,8 +52,8 @@ class Route
         $q_pos = strpos($_SERVER['REQUEST_URI'], '?');
 
         $url = ($q_pos)
-            ? substr($_SERVER['REQUEST_URI'], 0, $q_pos)
-            : $_SERVER['REQUEST_URI'];
+            ? urldecode(substr($_SERVER['REQUEST_URI'], 0, $q_pos))
+            : urldecode($_SERVER['REQUEST_URI']);
 
         foreach ($routes as $name => $route) {
             if ($route['class']::check($route['route'], $url)) {

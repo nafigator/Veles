@@ -80,7 +80,7 @@ class Db {
             );
         }
 
-        if (!($result instanceof MySQLi_Result))
+        if (!($result instanceof mysqli_result))
             return $result;
 
         if ($list || $result->num_rows > 1) {

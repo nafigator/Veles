@@ -82,15 +82,15 @@ class Helper {
 
     /**
      * Метод для генерации алиасов
-     * @param string &$header Заголовок статьи
+     * @param string $url URL для алиаса
      */
-    final public static function makeAlias($header)
+    final public static function makeAlias($url)
     {
-        $header = htmlspecialchars_decode($header);
-        $header = preg_replace('/[^a-z^а-я^\d^ ^-]/iu', '', $header);
-        $header = Helper::translit($header);
-        $header = preg_replace('/\-+/', '-', $header);
+        $alias = htmlspecialchars_decode($url);
+        $alias = preg_replace('/[^a-z^а-я^\d^ ^-]/iu', '', $alias);
+        $alias = Helper::translit($alias);
+        $alias = preg_replace('/\-+/', '-', $alias);
 
-        return $header;
+        return $alias;
     }
 }
