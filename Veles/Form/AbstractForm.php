@@ -105,7 +105,12 @@ abstract class AbstractForm implements iForm
 
         $key = $this->name . $this->data['sid'];
 
-        return Cache::get($key);
+        if (!Cache::get($key))
+            return false;
+
+        Cache::del($key);
+
+        return true;
     }
 
 
