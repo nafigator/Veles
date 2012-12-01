@@ -37,6 +37,9 @@ abstract class AbstractElement implements iElement
      */
     final public function validate($value)
     {
+        if (false ===  $this->validator)
+            return true;
+
         if ($this->validator->check($value)) {
             $this->params['attributes']['value'] = $value;
             return true;
