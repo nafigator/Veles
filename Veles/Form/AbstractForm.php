@@ -115,7 +115,7 @@ abstract class AbstractForm implements iForm
     public function __toString()
     {
         $elements = $tpl = array();
-        $output   = View::get('frontend/forms/comment.phtml');
+        $output   = View::get($this->template);
 
         foreach ($this->elements as $number => $element) {
             $elements[] = $element->render($this);
