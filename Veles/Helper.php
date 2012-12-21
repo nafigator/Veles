@@ -34,10 +34,13 @@ class Helper {
     /**
      * Метод для проверки email
      * @param string $email
+     * @return bool
      */
     final public static function validateEmail($email)
     {
-        return preg_match('/^(?:[a-zA-Z0-9]|_|\-|\.)+@(?:(?:[a-z0-9_]|\-)+\.)+[a-z]{2,6}$/', $email);
+        return (bool) preg_match(
+            '/^(?:[a-zA-Z0-9]|_|\-|\.)+@(?:(?:[a-z0-9_]|\-)+\.)+[a-z]{2,6}$/', $email
+        );
     }
 
     /**
