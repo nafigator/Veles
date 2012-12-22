@@ -2,9 +2,9 @@
 /**
  * Инициализация окружения для тестирования
  *
- * Запускать тесты в директории lib/Veles:
- * phpunit --bootstrap Tests/bootstrap.php Tests
- * Генерировать скелеты тестов так:
+ * Запускать тесты в директории lib или lib/Veles:
+ * phpunit
+ * Генерировать скелеты тестов в lib/Veles так:
  * phpunit-skelgen --test -- "Veles\Helper" Helper.php HelperTest Tests/HelperTest.php
  *
  * @file    bootstrap.php
