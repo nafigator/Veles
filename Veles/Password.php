@@ -12,6 +12,8 @@
 
 namespace Veles;
 
+use Veles\Model\User;
+
 /**
  * Управление паролем пользователя
  * @author  Yancharuk Alexander <alex@itvault.info>
@@ -21,7 +23,7 @@ class Password {
      * Проверка хэша пользователя
      * @param $user
      */
-    final public static function checkCookieHash(&$user, &$cookie_hash)
+    final public static function checkCookieHash(User $user, &$cookie_hash)
     {
         return $user->getCookieHash() === $cookie_hash;
     }
@@ -31,7 +33,7 @@ class Password {
      * @param object $user     User
      * @param string $password Пароль полученый ajax'ом
      */
-    final public static function check(&$user, &$password)
+    final public static function check(User $user, &$password)
     {
         return $user->getHash() === crypt($password, $user->getSalt());
     }
