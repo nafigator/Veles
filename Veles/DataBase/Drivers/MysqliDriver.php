@@ -96,8 +96,6 @@ class MysqliDriver implements iDbDriver
             );
         }
 
-        $result->free();
-
         return true;
     }
 
