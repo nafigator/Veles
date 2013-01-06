@@ -13,7 +13,7 @@
 namespace Veles\DataBase;
 
 use \Veles\DataBase\Drivers\iDbDriver,
-    \Veles\Config;
+    \Veles\DataBase\DbFabric;
 
 /**
  * Класс Db
@@ -30,21 +30,24 @@ class Db implements iDbDriver
     private static function getDriver()
     {
         if (!self::$driver instanceof iDbDriver) {
-            if (null === ($class = Config::getParams('dbDriver'))) {
-                throw new Exception('Нe указан драйвер для работы с базой!');
-            }
-
-            $class_name = "\\Veles\\DataBase\\Drivers\\$class";
-            self::$driver = new $class_name;
+            self::$driver = DbFabric::getDriver();
         }
 
         return self::$driver;
     }
 
     /**
+     * Получение текущего линка к базе
+     */
+    final public static function getLink()
+    {
+        return self::getDriver()->getLink();
+    }
+
+    /**
      * Метод для получения списка ошибок
      */
-    public static function getErrors()
+    final public static function getErrors()
     {
         return self::getDriver()->getErrors();
     }
@@ -53,7 +56,7 @@ class Db implements iDbDriver
      * Функция получения FOUND_ROWS()
      * Использовать только после запроса с DbPaginator
      */
-    public static function getFoundRows()
+    final public static function getFoundRows()
     {
         return self::getDriver()->getFoundRows();
     }
@@ -61,7 +64,7 @@ class Db implements iDbDriver
     /**
      * Функция получения LAST_INSERT_ID()
      */
-    public static function getLastInsertId()
+    final public static function getLastInsertId()
     {
         return self::getDriver()->getLastInsertId();
     }
@@ -72,7 +75,7 @@ class Db implements iDbDriver
      * @param string $server Имя сервера
      * @return bool
      */
-    public static function query($sql, $server = 'master')
+    final public static function query($sql, $server = 'master')
     {
         return self::getDriver()->query($sql, $server);
     }
@@ -83,7 +86,7 @@ class Db implements iDbDriver
      * @param string $server Имя сервера
      * @return mixed
      */
-    public static function getValue($sql, $server = 'master')
+    final public static function getValue($sql, $server = 'master')
     {
         return self::getDriver()->getValue($sql, $server);
     }
@@ -94,7 +97,7 @@ class Db implements iDbDriver
      * @param string $server Имя сервера
      * @return array
      */
-    public static function getRow($sql, $server = 'master')
+    final public static function getRow($sql, $server = 'master')
     {
         return self::getDriver()->getRow($sql, $server);
     }
@@ -105,7 +108,7 @@ class Db implements iDbDriver
      * @param string $server Имя сервера
      * @return array
      */
-    public static function getRows($sql, $server = 'master')
+    final public static function getRows($sql, $server = 'master')
     {
         return self::getDriver()->getRows($sql, $server);
     }

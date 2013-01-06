@@ -19,6 +19,12 @@ namespace Veles\DataBase\Drivers;
 interface iDbDriver
 {
     /**
+     * Получение соединения с базой
+     * @return mixed
+     */
+    public static function getLink();
+
+    /**
      * Метод для получения списка ошибок
      */
     public static function getErrors();

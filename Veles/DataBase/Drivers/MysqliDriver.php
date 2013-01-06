@@ -118,11 +118,11 @@ class MysqliDriver implements iDbDriver
             );
         }
 
-        $return = mysqli_fetch_row($result);
+        $row = mysqli_fetch_row($result);
 
         $result->free();
 
-        return $return[0];
+        return isset($row[0]) ? $row[0] : false;
     }
 
     /**
@@ -164,6 +164,8 @@ class MysqliDriver implements iDbDriver
                 'Не удалось выполнить запрос', self::$db, $sql
             );
         }
+
+        $return = array();
 
         while ($row = mysqli_fetch_assoc($result)) {
             $return[] = $row;
