@@ -26,7 +26,7 @@ class DbException extends Exception
 
     /**
      * Установка ошибки коннекта
-     * @param   string Станадртный текст Exception
+     * @param string $err Станадртный текст Exception
      */
     private function setConnectError($err)
     {
@@ -35,7 +35,7 @@ class DbException extends Exception
 
     /**
      * Установка ошибки SQL
-     * @param string Станадртный текст Exception
+     * @param string $err Станадртный текст Exception
      */
     private function setSqlError($err)
     {
@@ -44,7 +44,7 @@ class DbException extends Exception
 
     /**
      * Установка ошибки SQL-запроса, вызвавшего ошибку
-     * @param string Станадртный текст Exception
+     * @param string $sql Станадртный текст Exception
      */
     private function setSqlQuery($sql)
     {
@@ -53,15 +53,15 @@ class DbException extends Exception
 
     /**
      * К стандартному Exception добавляется ошибка коннекта и текст ошибки запроса
-     * @param string Текст ошибки
-     * @param resource Линк sql-соединения
-     * @param string SQL-запрос
+     * @param string $msg Текст ошибки
+     * @param resource $link Линк sql-соединения
+     * @param string $sql SQL-запрос
      */
-    final public function __construct($msg, $db, $sql = null)
+    final public function __construct($msg, $link, $sql = null)
     {
         parent::__construct($msg);
-        $this->setConnectError($db->connect_error);
-        $this->setSqlError($db->error);
+        $this->setConnectError($link->connect_error);
+        $this->setSqlError($link->error);
 
         if (null !== $sql)
             $this->setSqlQuery($sql);
@@ -69,7 +69,7 @@ class DbException extends Exception
 
     /**
      * Возвращает ошибку соединения с базой
-     * @return  string
+     * @return string
      */
     final public function getConnectError()
     {

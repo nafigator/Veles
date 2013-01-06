@@ -17,7 +17,6 @@ class HelperTest extends PHPUnit_Framework_TestCase
         $result          = Helper::genStr($length, $letters);
         $result_length   = strlen($result);
         $unknown_array   = array();
-        $unknown_symbols = '';
 
         $this->assertInternalType('string', $result, 'Wrong result type: ' . gettype($result));
         $this->assertEquals($length, $result_length, "Wrong result length: $result_length");

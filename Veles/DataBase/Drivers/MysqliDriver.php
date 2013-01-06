@@ -25,9 +25,9 @@ use \Exception,
  */
 class MysqliDriver implements iDbDriver
 {
-    private static $db     = null;
-    private static $links  = array();
-    private static $errors = array();
+    private static $curr_link = null;
+    private static $links     = array();
+    private static $errors    = array();
 
     /**
      * Получение соединения с базой
@@ -36,10 +36,10 @@ class MysqliDriver implements iDbDriver
      */
     private static function setLink($name)
     {
-        if (!isset($links[$name]))
+        if (!isset(self::$links[$name]))
             self::connect($name);
 
-        self::$db =& self::$links[$name];
+        self::$curr_link =& self::$links[$name];
     }
 
     /**
@@ -48,12 +48,12 @@ class MysqliDriver implements iDbDriver
      */
     public static function getLink()
     {
-        return self::$db;
+        return self::$curr_link;
     }
 
     /**
      * Соединение с базой.
-     * Метод создаёт экземпляр mysqli класса и сохраняет его в self::$db.
+     * Метод создаёт экземпляр mysqli класса и сохраняет его в self::$curr_link.
      * @param string $name Имя сервера
      * @throws Exception
      */
@@ -89,10 +89,10 @@ class MysqliDriver implements iDbDriver
     {
         self::setLink($server);
 
-        $result = mysqli_query(self::$db, $sql, MYSQLI_USE_RESULT);
+        $result = mysqli_query(self::$curr_link, $sql, MYSQLI_USE_RESULT);
         if (false === $result) {
             throw new DbException(
-                'Не удалось выполнить запрос', self::$db, $sql
+                'Не удалось выполнить запрос', self::$curr_link, $sql
             );
         }
 
@@ -109,10 +109,10 @@ class MysqliDriver implements iDbDriver
     {
         self::setLink($server);
 
-        $result = mysqli_query(self::$db, $sql, MYSQLI_USE_RESULT);
+        $result = mysqli_query(self::$curr_link, $sql, MYSQLI_USE_RESULT);
         if (false === $result) {
             throw new DbException(
-                'Не удалось выполнить запрос', self::$db, $sql
+                'Не удалось выполнить запрос', self::$curr_link, $sql
             );
         }
 
@@ -133,10 +133,10 @@ class MysqliDriver implements iDbDriver
     {
         self::setLink($server);
 
-        $result = mysqli_query(self::$db, $sql, MYSQLI_USE_RESULT);
+        $result = mysqli_query(self::$curr_link, $sql, MYSQLI_USE_RESULT);
         if (false === $result) {
             throw new DbException(
-                'Не удалось выполнить запрос', self::$db, $sql
+                'Не удалось выполнить запрос', self::$curr_link, $sql
             );
         }
 
@@ -156,10 +156,10 @@ class MysqliDriver implements iDbDriver
     {
         self::setLink($server);
 
-        $result = mysqli_query(self::$db, $sql, MYSQLI_USE_RESULT);
+        $result = mysqli_query(self::$curr_link, $sql, MYSQLI_USE_RESULT);
         if (false === $result) {
             throw new DbException(
-                'Не удалось выполнить запрос', self::$db, $sql
+                'Не удалось выполнить запрос', self::$curr_link, $sql
             );
         }
 
@@ -179,10 +179,10 @@ class MysqliDriver implements iDbDriver
      */
     final public static function getLastInsertId()
     {
-        $result = mysqli_insert_id(self::$db);
+        $result = mysqli_insert_id(self::$curr_link);
         if (false === $result) {
             throw new DbException(
-                'Не удалось получить LAST_INSERT_ID()', self::$db
+                'Не удалось получить LAST_INSERT_ID()', self::$curr_link
             );
         }
 
@@ -197,10 +197,10 @@ class MysqliDriver implements iDbDriver
     {
         $sql = 'SELECT FOUND_ROWS()';
 
-        $result = mysqli_query(self::$db, $sql, MYSQLI_USE_RESULT);
+        $result = mysqli_query(self::$curr_link, $sql, MYSQLI_USE_RESULT);
         if (false === $result) {
             throw new DbException(
-                'Не удалось выполнить запрос', self::$db, $sql
+                'Не удалось выполнить запрос', self::$curr_link, $sql
             );
         }
 
