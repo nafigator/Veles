@@ -42,6 +42,7 @@ class Application
 
     /**
      * Устанавливаем настройки php, прописанные в конфиге
+     * @todo Описать параметры
      */
     private static function setPhpSettings($keys = null)
     {

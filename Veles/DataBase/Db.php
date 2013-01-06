@@ -1,144 +1,112 @@
 <?php
 /**
- * Класс соединения с базой.
- * Для использования необходимо в php наличие mysqli расширения.
+ * Класс для работы с базой
  * @file    Db.php
  *
  * PHP version 5.3.9+
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
- * @date    Птн Мар 09 03:25:07 2012
- * @copyright The BSD 2-Clause License. http://opensource.org/licenses/bsd-license.php
+ * @date    Вск Янв 06 11:48:07 2013
+ * @version
  */
 
 namespace Veles\DataBase;
 
-use \Exception,
-    \mysqli,
-    \MySQLi_Result,
+use \Veles\DataBase\Drivers\iDbDriver,
     \Veles\Config;
 
 /**
- * Класс соединения с базой
+ * Класс Db
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
-class Db {
-    private static $db;
-    private static $errors = array();
+class Db implements iDbDriver
+{
+    private static $driver;
 
     /**
-     * Получение соединения с базой
-     * @return mysqli
+     * Инстанс драйвера
+     * @todo вынести код создания класса в отдельную фабрику
      */
-    final public static function link()
+    private static function getDriver()
     {
-        if (!self::$db instanceof mysqli)
-            self::connect();
-
-        return self::$db;
-    }
-
-    /**
-     * Соединение с базой.
-     * Метод создаёт экземпляр mysqli класса и сохраняет его в self::$db.
-     * Нечто наподобие классического синглтона.
-     * @throws Exception
-     */
-    private static function connect()
-    {
-        if (null === ($db_params = Config::getParams('db'))) {
-            throw new Exception('Не найдены параметры подключения к базе!');
-        }
-
-        self::$db = @mysqli_connect(
-            $db_params['host'],
-            $db_params['user'],
-            $db_params['password'],
-            $db_params['base']
-        );
-
-        if (!self::$db instanceof mysqli) {
-            throw new Exception('Не удалось подключиться к mysql');
-        }
-    }
-
-    /**
-     * Метод для выполнения запросов
-     * @param string $sql Sql-запрос
-     * @param bool $list Флаг возврата значений в массиве
-     * @return mixed
-     */
-    final public static function q($sql, $list = false)
-    {
-        if (!self::$db instanceof mysqli)
-            self::connect();
-
-        $result = mysqli_query(self::$db, $sql, MYSQLI_USE_RESULT);
-        if (false === $result) {
-            throw new DbException(
-                'Не удалось выполнить запрос', self::$db, $sql
-            );
-        }
-
-        if (!($result instanceof mysqli_result))
-            return $result;
-
-        if ($list || $result->num_rows > 1) {
-            $return = array();
-
-            while ($row = mysqli_fetch_assoc($result)) {
-                $return[] = $row;
+        if (!self::$driver instanceof iDbDriver) {
+            if (null === ($class = Config::getParams('dbDriver'))) {
+                throw new Exception('Нe указан драйвер для работы с базой!');
             }
+
+            $class_name = "\\Veles\\DataBase\\Drivers\\$class";
+            self::$driver = new $class_name;
         }
-        else
-            $return = mysqli_fetch_assoc($result);
 
-        $result->free();
-
-        return $return;
+        return self::$driver;
     }
 
     /**
-     * Функция получения LAST_INSERT_ID()
+     * Метод для получения списка ошибок
      */
-    final public static function getLastInsertId()
+    public static function getErrors()
     {
-        $result = mysqli_insert_id(self::$db);
-        if (false === $result) {
-            throw new DbException(
-                'Не удалось получить LAST_INSERT_ID()', self::$db
-            );
-        }
-
-        return $result;
+        return self::getDriver()->getErrors();
     }
 
     /**
      * Функция получения FOUND_ROWS()
      * Использовать только после запроса с DbPaginator
      */
-    final public static function getFoundRows()
+    public static function getFoundRows()
     {
-        $sql = 'SELECT FOUND_ROWS()';
-
-        $result = mysqli_query(self::$db, $sql, MYSQLI_USE_RESULT);
-        if (false === $result) {
-            throw new DbException(
-                'Не удалось выполнить запрос', self::$db, $sql
-            );
-        }
-
-        $rows = mysqli_fetch_row($result);
-
-        return $rows[0];
+        return self::getDriver()->getFoundRows();
     }
 
     /**
-     * Метод возвращает массив с ошибками
-     * @return  array $errors
+     * Функция получения LAST_INSERT_ID()
      */
-    final public static function getErrors()
+    public static function getLastInsertId()
     {
-        return self::$errors;
+        return self::getDriver()->getLastInsertId();
+    }
+
+    /**
+     * Метод для выполнения non-SELECT запросов
+     * @param string $sql SQL-запрос
+     * @param string $server Имя сервера
+     * @return bool
+     */
+    public static function query($sql, $server = 'master')
+    {
+        return self::getDriver()->query($sql, $server);
+    }
+
+    /**
+     * Метод для выполнения SELECT запросов возвращающих значение одного поля
+     * @param string $sql SQL-запрос
+     * @param string $server Имя сервера
+     * @return mixed
+     */
+    public static function getValue($sql, $server = 'master')
+    {
+        return self::getDriver()->getValue($sql, $server);
+    }
+
+    /**
+     * Метод для выполнения SELECT запросов возвращающих значение одной строки таблицы
+     * @param string $sql SQL-запрос
+     * @param string $server Имя сервера
+     * @return array
+     */
+    public static function getRow($sql, $server = 'master')
+    {
+        return self::getDriver()->getRow($sql, $server);
+    }
+
+    /**
+     * Метод для выполнения SELECT запросов возвращающих значение коллекцию результатов
+     * @param string $sql SQL-запрос
+     * @param string $server Имя сервера
+     * @return array
+     */
+    public static function getRows($sql, $server = 'master')
+    {
+        return self::getDriver()->getRows($sql, $server);
     }
 }

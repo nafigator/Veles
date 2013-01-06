@@ -79,7 +79,7 @@ abstract class AbstractModel
     {
         $sql = QueryBuilder::insert($this);
 
-        return Db::q($sql) ? Db::getLastInsertId() : false;
+        return Db::query($sql) ? Db::getLastInsertId() : false;
     }
 
     /**
@@ -90,7 +90,7 @@ abstract class AbstractModel
     {
         $sql = QueryBuilder::update($this);
 
-        return Db::q($sql);
+        return Db::query($sql);
     }
 
     /**
@@ -101,7 +101,7 @@ abstract class AbstractModel
     {
         $sql = QueryBuilder::getById($this, $id);
 
-        $result = Db::q($sql);
+        $result = Db::getRow($sql);
 
         if (empty($result))
             return false;
@@ -122,7 +122,7 @@ abstract class AbstractModel
         $sql = QueryBuilder::find($this, $filter);
         $sql = QueryBuilder::setPage($sql, $pager);
 
-        $result = Db::q($sql, true);
+        $result = Db::getRows($sql);
 
         if (empty($result))
             return false;
@@ -150,7 +150,7 @@ abstract class AbstractModel
     {
         $sql = QueryBuilder::delete($this, $ids);
 
-        return Db::q($sql);
+        return Db::query($sql);
     }
 
     /**
@@ -189,7 +189,7 @@ abstract class AbstractModel
     {
         $sql = QueryBuilder::find($this, $filter);
 
-        $result = Db::q($sql);
+        $result = Db::getRow($sql);
 
         if (empty($result))
             return false;
@@ -209,7 +209,7 @@ abstract class AbstractModel
         if ($pager)
             $sql = QueryBuilder::setPage($sql, $pager);
 
-        $result = Db::q($sql, true);
+        $result = Db::getRows($sql);
 
         if (empty($result))
             return false;
