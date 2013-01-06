@@ -235,7 +235,7 @@ class QueryBuilder
                 break;
             case 'string':
                 $value = '\'' . mysqli_real_escape_string(
-                    Db::link(), (string) $model->$property
+                    Db::getLink(), (string) $model->$property
                 ) . '\'';
                 break;
         }
