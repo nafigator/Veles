@@ -50,7 +50,7 @@ abstract class AbstractForm implements iForm
     final protected function init()
     {
         $this->data = ('get' === $this->method) ? $_GET : $_POST;
-        $this->sid  = str_shuffle(md5(mt_rand()));
+        $this->sid  = md5(mt_rand());
 
         $this->addElement(new HiddenElement(array(
             'validator'  => new RegEx('/^[a-f\d]{32}$/'),
@@ -108,11 +108,17 @@ abstract class AbstractForm implements iForm
         if (!Cache::get($key))
             return false;
 
-        Cache::del($key);
-
         return true;
     }
 
+    /**
+     * Очистка security-ключа формы
+     */
+    final public function cleanup()
+    {
+        $key = $this->name . $this->data['sid'];
+        Cache::del($key);
+    }
 
     /**
      * Вывод формы
