@@ -48,11 +48,15 @@ class MysqliDriver implements iDbDriver
      */
     public static function getLink()
     {
+        if (!self::$curr_link instanceof mysqli)
+            self::connect('master');
+
         return self::$curr_link;
     }
 
     /**
      * Соединение с базой.
+     *
      * Метод создаёт экземпляр mysqli класса и сохраняет его в self::$curr_link.
      * @param string $name Имя сервера
      * @throws Exception
