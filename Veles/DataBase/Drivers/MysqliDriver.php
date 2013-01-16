@@ -48,8 +48,10 @@ class MysqliDriver implements iDbDriver
      */
     public static function getLink()
     {
-        if (!self::$curr_link instanceof mysqli)
+        if (!self::$curr_link instanceof mysqli) {
             self::connect('master');
+            self::setLink('master');
+        }
 
         return self::$curr_link;
     }
