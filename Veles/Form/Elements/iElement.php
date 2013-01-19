@@ -7,7 +7,7 @@
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
  * @date    Втр Авг 14 05:36:37 2012
- * @version
+ * @copyright The BSD 3-Clause License
  */
 
 namespace Veles\Form\Elements;

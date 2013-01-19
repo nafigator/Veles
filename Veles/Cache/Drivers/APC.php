@@ -7,7 +7,7 @@
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
  * @date    Птн Ноя 16 22:09:28 2012
- * @version
+ * @copyright The BSD 3-Clause License
  */
 
 namespace Veles\Cache\Drivers;

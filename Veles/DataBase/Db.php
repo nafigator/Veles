@@ -7,7 +7,7 @@
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
  * @date    Вск Янв 06 11:48:07 2013
- * @version
+ * @copyright The BSD 3-Clause License
  */
 
 namespace Veles\DataBase;

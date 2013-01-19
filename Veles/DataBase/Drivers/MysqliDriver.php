@@ -8,7 +8,7 @@
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
  * @date    Птн Мар 09 03:25:07 2012
- * @copyright The BSD 2-Clause License. http://opensource.org/licenses/bsd-license.php
+ * @copyright The BSD 3-Clause License
  */
 
 namespace Veles\DataBase\Drivers;

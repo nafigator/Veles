@@ -7,7 +7,7 @@
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
  * @date    Вск Ноя 04 08:18:08 2012
- * @version
+ * @copyright The BSD 3-Clause License
  */
 
 namespace Veles;
