@@ -11,6 +11,7 @@
  */
 
 namespace Veles\DataBase;
+
 /**
  * Класс DbFilter
  * @author  Yancharuk Alexander <alex@itvault.info>

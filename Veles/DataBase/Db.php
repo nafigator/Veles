@@ -12,8 +12,8 @@
 
 namespace Veles\DataBase;
 
-use \Veles\DataBase\Drivers\iDbDriver,
-    \Veles\DataBase\DbFabric;
+use \Veles\DataBase\Drivers\iDbDriver;
+use \Veles\DataBase\DbFabric;
 
 /**
  * Класс Db

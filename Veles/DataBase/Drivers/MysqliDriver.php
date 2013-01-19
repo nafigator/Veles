@@ -13,11 +13,11 @@
 
 namespace Veles\DataBase\Drivers;
 
-use \Exception,
-    \mysqli,
-    \MySQLi_Result,
-    \Veles\Config,
-    \Veles\DataBase\Drivers\iDbDriver;
+use \Exception;
+use \mysqli;
+use \MySQLi_Result;
+use \Veles\Config;
+use \Veles\DataBase\Drivers\iDbDriver;
 
 /**
  * Класс соединения с базой

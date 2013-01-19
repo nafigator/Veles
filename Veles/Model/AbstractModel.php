@@ -12,9 +12,9 @@
 
 namespace Veles\Model;
 
-use \Veles\DataBase\Db,
-    \Veles\DataBase\DbPaginator,
-    \Veles\DataBase\QueryBuilder;
+use \Veles\DataBase\Db;
+use \Veles\DataBase\DbPaginator;
+use \Veles\DataBase\QueryBuilder;
 
 /**
  * Класс модели

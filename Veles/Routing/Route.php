@@ -12,8 +12,8 @@
 
 namespace Veles\Routing;
 
-use \Veles\Config,
-    \Exception;
+use \Veles\Config;
+use \Exception;
 
 /**
  * Класс Route

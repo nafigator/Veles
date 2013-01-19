@@ -12,9 +12,9 @@
 
 namespace Veles\Cache;
 
-use \Veles\Config,
-    \Veles\Cache\Drivers\iCacheDriver,
-    \Exception;
+use \Veles\Config;
+use \Veles\Cache\Drivers\iCacheDriver;
+use \Exception;
 
 /**
  * Класс AbstractCache
@@ -28,8 +28,6 @@ abstract class AbstractCache
      * Инициализация кэша
      *
      * В этом методе необходимо реализовать подключение\инициализацию кэша
-     * К сожалению, в PHP 5.3 при создании абстрактного статического метода
-     * выдаётся STRICT NOTICE
      */
     protected static function init() {}
 

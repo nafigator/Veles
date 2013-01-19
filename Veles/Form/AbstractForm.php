@@ -12,13 +12,13 @@
 
 namespace Veles\Form;
 
-use \Cache,
-    \Veles\View,
-    \Veles\Validators\RegEx,
-    \Veles\Form\Elements\iElement,
-    \Veles\Form\Elements\ButtonElement,
-    \Veles\Form\Elements\HiddenElement,
-    \Veles\Form\Elements\SubmitElement;
+use \Cache;
+use \Veles\View;
+use \Veles\Validators\RegEx;
+use \Veles\Form\Elements\iElement;
+use \Veles\Form\Elements\ButtonElement;
+use \Veles\Form\Elements\HiddenElement;
+use \Veles\Form\Elements\SubmitElement;
 
 /**
  * Класс AbstractForm

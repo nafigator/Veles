@@ -12,8 +12,8 @@
 
 namespace Veles\Model;
 
-use \Veles\UsrGroup,
-    \Veles\DataBase\Db;
+use \Veles\UsrGroup;
+use \Veles\DataBase\Db;
 
 /**
  * Модель пользователя

@@ -12,8 +12,8 @@
 
 namespace Veles;
 
-use \Exception,
-    \Cache;
+use \Exception;
+use \Cache;
 
 /**
  * Класс Config

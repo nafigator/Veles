@@ -12,8 +12,8 @@
 
 namespace Veles;
 
-use \Veles\Model\User,
-    \Veles\DataBase\DbFilter;
+use \Veles\Model\User;
+use \Veles\DataBase\DbFilter;
 
 /**
  * Класс авторизации пользователя

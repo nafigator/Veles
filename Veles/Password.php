@@ -12,7 +12,7 @@
 
 namespace Veles;
 
-use Veles\Model\User;
+use \Veles\Model\User;
 
 /**
  * Управление паролем пользователя

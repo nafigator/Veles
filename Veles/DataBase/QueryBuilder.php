@@ -12,8 +12,8 @@
 
 namespace Veles\DataBase;
 
-use \Exception,
-    \Veles\DataBase\DbPaginator;
+use \Exception;
+use \Veles\DataBase\DbPaginator;
 
 /**
  * Класс QueryBuilder
