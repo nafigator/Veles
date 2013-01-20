@@ -16,18 +16,20 @@ namespace Veles;
  * Набор полезных функций
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
-class Helper {
+class Helper
+{
     /**
      * Генерирует случайный набор символов заданной длины.
+     *
      * По-умолчанию настройки для генерации blowfish соли
      * @param int $length Длина генерируемой строки
      * @param string $letters Набор символов
+     * @return string
      */
     final public static function genStr(
         $length  = 21,
         $letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./'
-    )
-    {
+    ) {
         return substr(str_shuffle(str_repeat($letters, 5)), 0, $length);
     }
 
@@ -46,6 +48,7 @@ class Helper {
     /**
      * Метод для проверки mail-домена
      * @param string $email
+     * @return bool
      */
     final public static function checkEmailDomain($email)
     {
@@ -86,11 +89,12 @@ class Helper {
     /**
      * Метод для генерации алиасов
      * @param string $url URL для алиаса
+     * @return string
      */
     final public static function makeAlias($url)
     {
         $alias = htmlspecialchars_decode($url);
-        $alias = preg_replace('/[^a-z^а-я^\d^ ^-]/iu', '', $alias);
+        $alias = preg_replace('/[^a-z^а-яё^\d^ ^-]/iu', '', $alias);
         $alias = Helper::translit($alias);
         $alias = preg_replace('/\-+/', '-', $alias);
 

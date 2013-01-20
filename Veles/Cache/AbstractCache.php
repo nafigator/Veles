@@ -26,10 +26,11 @@ abstract class AbstractCache
 
     /**
      * Инициализация кэша
-     *
-     * В этом методе необходимо реализовать подключение\инициализацию кэша
      */
-    protected static function init() {}
+    protected static function init()
+    {
+        //В этом методе необходимо реализовать подключение\инициализацию кэша
+    }
 
     /**
      * Инстанс кэша
@@ -37,8 +38,9 @@ abstract class AbstractCache
      */
     final public static function getDriver()
     {
-        if (self::$driver instanceof iCacheDriver)
+        if (self::$driver instanceof iCacheDriver) {
             return static::$driver;
+        }
 
         return static::init();
     }

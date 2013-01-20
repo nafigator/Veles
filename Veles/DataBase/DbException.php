@@ -52,7 +52,7 @@ class DbException extends Exception
     }
 
     /**
-     * К стандартному Exception добавляется ошибка коннекта и текст ошибки запроса
+     * Exception с ошибкой коннекта и текстом ошибки запроса
      * @param string $msg Текст ошибки
      * @param resource $link Линк sql-соединения
      * @param string $sql SQL-запрос
@@ -63,8 +63,9 @@ class DbException extends Exception
         $this->setConnectError($link->connect_error);
         $this->setSqlError($link->error);
 
-        if (null !== $sql)
+        if (null !== $sql) {
             $this->setSqlQuery($sql);
+        }
     }
 
     /**

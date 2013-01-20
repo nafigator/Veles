@@ -28,10 +28,13 @@ class SelectElement extends AbstractElement
         foreach ($this->options as $option) {
             $selected = '';
 
-            if ($option['id'] == $this->selected)
+            if ($option['id'] == $this->selected) {
                 $selected = ' selected="true" ';
+            }
 
-            $html .= "<option $selected value=\"$option[id]\">$option[name]</option>";
+            $html .= "<option $selected value=\"$option[id]\">
+                        $option[name]
+                      </option>";
         }
 
         $html .= '</select>';

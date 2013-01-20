@@ -52,11 +52,12 @@ abstract class AbstractForm implements iForm
         $this->data = ('get' === $this->method) ? $_GET : $_POST;
         $this->sid  = md5(mt_rand());
 
-        $this->addElement(new HiddenElement(array(
+        $params = array(
             'validator'  => new RegEx('/^[a-f\d]{32}$/'),
             'required'   => true,
             'attributes' => array('name' => 'sid', 'value' => $this->sid)
-        )));
+        );
+        $this->addElement(new HiddenElement($params));
     }
 
     /**
@@ -74,21 +75,25 @@ abstract class AbstractForm implements iForm
     final public function valid()
     {
         foreach ($this->elements as $element) {
-            if ($element instanceof ButtonElement || $element instanceof SubmitElement)
-                continue;
+            switch (true) {
+                case ($element instanceof ButtonElement):
+                case ($element instanceof SubmitElement):
+                    continue;
+                    break;
+                default:
+                    $name = $element->getName();
 
-            $name = $element->getName();
+                    if (!isset($this->data[$name])) {
+                        if ($element->required()) {
+                            return false;
+                        }
 
-            if (!isset($this->data[$name])) {
-                if ($element->required()) {
-                    return false;
-                }
+                        continue;
+                    }
 
-                continue;
-            }
-
-            if (!$element->validate($this->data[$name])) {
-                return false;
+                    if (!$element->validate($this->data[$name])) {
+                        return false;
+                    }
             }
         }
 
@@ -100,13 +105,15 @@ abstract class AbstractForm implements iForm
      */
     final public function submitted()
     {
-        if (!isset($this->data['sid']))
+        if (!isset($this->data['sid'])) {
             return false;
+        }
 
         $key = $this->name . $this->data['sid'];
 
-        if (!Cache::get($key))
+        if (!Cache::get($key)) {
             return false;
+        }
 
         return true;
     }

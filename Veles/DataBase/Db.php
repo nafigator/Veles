@@ -81,7 +81,8 @@ class Db implements iDbDriver
     }
 
     /**
-     * Метод для выполнения SELECT запросов возвращающих значение одного поля
+     * Для SELECT, возвращающих значение одного поля
+     *
      * @param string $sql SQL-запрос
      * @param string $server Имя сервера
      * @return mixed
@@ -92,7 +93,8 @@ class Db implements iDbDriver
     }
 
     /**
-     * Метод для выполнения SELECT запросов возвращающих значение одной строки таблицы
+     * Для SELECT, возвращающих значение одной строки таблицы
+     *
      * @param string $sql SQL-запрос
      * @param string $server Имя сервера
      * @return array
@@ -103,7 +105,8 @@ class Db implements iDbDriver
     }
 
     /**
-     * Метод для выполнения SELECT запросов возвращающих значение коллекцию результатов
+     * Для SELECT, возвращающих значение коллекцию результатов
+     *
      * @param string $sql SQL-запрос
      * @param string $server Имя сервера
      * @return array

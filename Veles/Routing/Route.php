@@ -21,11 +21,11 @@ use \Exception;
  */
 class Route
 {
-    private static $instance   = null;
-    private $page_name         = null;
-    private $config            = null;
-    private $path              = null;
-    private $map               = array();
+    private static $instance = null;
+    private $page_name       = null;
+    private $config          = null;
+    private $path            = null;
+    private $map             = array();
 
     /**
      * Доступ к объекту
@@ -33,8 +33,9 @@ class Route
      */
     final public static function instance()
     {
-        if (null === self::$instance)
+        if (null === self::$instance) {
             self::$instance = new Route;
+        }
 
         return self::$instance;
     }
@@ -60,16 +61,18 @@ class Route
                 $this->config    = $route;
                 $this->page_name = $name;
 
-                if (isset($route['path']))
+                if (isset($route['path'])) {
                     $this->path = $route['path'];
+                }
 
                 $this->checkAjax();
 
                 if (isset($route['map']) && preg_match($route['route'], $url, $map)) {
                     unset($map[0]);
 
-                    if (!empty($map))
+                    if (!empty($map)) {
                         $this->map = array_combine($route['map'], $map);
+                    }
                 }
 
                 return;
@@ -87,8 +90,9 @@ class Route
      */
     final public function getController()
     {
-        if (!isset($this->config['controller']))
+        if (!isset($this->config['controller'])) {
             throw new Exception('Не указан контроллер!');
+        }
 
         $controller_name = 'Controllers\\' . $this->config['controller'];
 
@@ -102,8 +106,9 @@ class Route
      */
     final public function getActionName()
     {
-        if (!isset($this->config['action']))
+        if (!isset($this->config['action'])) {
             throw new Exception('Не указан экшен!');
+        }
 
         return $this->config['action'];
     }
@@ -125,8 +130,9 @@ class Route
      */
     final public function getPageName()
     {
-        if (!isset($this->page_name))
+        if (!isset($this->page_name)) {
             throw new Exception('Не найдено имя страницы!');
+        }
 
         return $this->page_name;
     }
@@ -153,8 +159,9 @@ class Route
      */
     private function checkAjax()
     {
-        if (!$this->isAjax())
+        if (!$this->isAjax()) {
             return;
+        }
 
         if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])
             && 'XMLHttpRequest' === $_SERVER['HTTP_X_REQUESTED_WITH']

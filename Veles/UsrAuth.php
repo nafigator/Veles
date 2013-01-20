@@ -76,9 +76,8 @@ final class UsrAuth
             $this->password =& $_REQUEST['pw'];
 
             $auth = $this->byRequest();
-        }
-        // Пользователь уже авторизовался ранее
-        elseif (isset($_COOKIE['id']) && isset($_COOKIE['pw'])) {
+        } elseif (isset($_COOKIE['id']) && isset($_COOKIE['pw'])) {
+            // Пользователь уже авторизовался ранее
             $this->cookie_id   =& $_COOKIE['id'];
             $this->cookie_hash =& $_COOKIE['pw'];
 
@@ -99,13 +98,9 @@ final class UsrAuth
     final public static function setCookie($id, $hash)
     {
         // Делаем куки на 1 год (3600*24*365)
-        setcookie(
-            'id', $id, $_SERVER['REQUEST_TIME'] + 31536000, '/', $_SERVER['HTTP_HOST'], false, false
-        );
+        setcookie('id', $id, $_SERVER['REQUEST_TIME'] + 31536000, '/', $_SERVER['HTTP_HOST'], false, false);
         // Пароль не шифруем, т.к. передан в функцию взятый из базы хэш пароля
-        setcookie(
-            'pw', $hash, $_SERVER['REQUEST_TIME'] + 31536000, '/', $_SERVER['HTTP_HOST'], false, false
-        );
+        setcookie('pw', $hash, $_SERVER['REQUEST_TIME'] + 31536000, '/', $_SERVER['HTTP_HOST'], false, false);
     }
 
     /**
@@ -124,18 +119,21 @@ final class UsrAuth
     private function secureVars($auth_type)
     {
         if ('cookie' === $auth_type) {
-            if (!preg_match(self::PREG_COOKIE_ID, $this->cookie_id))
+            if (!preg_match(self::PREG_COOKIE_ID, $this->cookie_id)) {
                 $this->errors |= UsrAuth::ERR_INVALID_ID;
+            }
 
-            if (!preg_match(self::PREG_COOKIE_HASH, $this->cookie_hash))
+            if (!preg_match(self::PREG_COOKIE_HASH, $this->cookie_hash)) {
                 $this->errors |= UsrAuth::ERR_INVALID_HASH;
-        }
-        else {
-            if (!Helper::validateEmail($this->email))
+            }
+        } else {
+            if (!Helper::validateEmail($this->email)) {
                 $this->errors |= UsrAuth::ERR_INVALID_EMAIL;
+            }
 
-            if (!preg_match(self::PREG_PASSWORD, $this->password))
+            if (!preg_match(self::PREG_PASSWORD, $this->password)) {
                 $this->errors |= UsrAuth::ERR_INVALID_PASSWORD;
+            }
         }
     }
 
@@ -155,10 +153,10 @@ final class UsrAuth
 
         $filter = new DbFilter;
         // Ищем среди не удалённых пользователей
-        $filter->setWhere("
+        $where = "
             `id` = '$this->cookie_id'
-            && `group` & " . UsrGroup::DELETED . ' = 0'
-        );
+            && `group` & " . UsrGroup::DELETED . ' = 0 ';
+        $filter->setWhere($where);
 
         // Пользователь с таким id не найден
         if (!$this->user->find($filter)) {
@@ -186,19 +184,21 @@ final class UsrAuth
         $this->secureVars('ajax');
 
         // Некорректные $_GET
-        if (0 !== $this->errors)
+        if (0 !== $this->errors) {
             return false;
+        }
 
         // Пользователь уже авторизовался ранее, удаляем куки
-        if (isset($_COOKIE['id']) || isset($_COOKIE['pw']))
+        if (isset($_COOKIE['id']) || isset($_COOKIE['pw'])) {
             UsrAuth::delCookie();
+        }
 
         $filter = new DbFilter;
         // Ищем среди не удалённых пользователей
-        $filter->setWhere("
+        $where = "
             `email` = '$this->email'
-            && `group` & " . UsrGroup::DELETED . ' = 0'
-        );
+            && `group` & " . UsrGroup::DELETED . ' = 0 ';
+        $filter->setWhere($where);
 
         // Пользователь с таким логином не найден
         if (!$this->user->find($filter)) {
@@ -238,8 +238,9 @@ final class UsrAuth
         // Проверяем есть ли в группах пользователя определённый бит,
         // соответствующий нужной группе.
         foreach ($groups as $group) {
-            if ($group === ($user_group & $group))
+            if ($group === ($user_group & $group)) {
                 return true;
+            }
         }
 
         return false;

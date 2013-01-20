@@ -25,7 +25,8 @@ class QueryBuilder
      * Построение sql-запроса для insert
      * @param AbstractModel $model Экземпляр модели
      * @return string
-     * @todo протестировать алгоритм на время. Попробовать варианты с iterator, implode
+     * @todo протестировать алгоритм на время.
+     * Попробовать варианты с iterator, implode
      */
     final public static function insert($model)
     {
@@ -34,15 +35,19 @@ class QueryBuilder
         foreach ($model::$map as $property => $value) {
             $value = self::sanitize($model, $property);
 
-            if (null === $value) continue;
+            if (null === $value) {
+                continue;
+            }
 
             $arr['fields'] .= "`$property`, ";
             $arr['values'] .= "$value, ";
         }
 
-        array_walk($arr, function(&$val) {
+        $closure = function (&$val) {
             $val = rtrim($val, ', ');
-        });
+        };
+
+        array_walk($arr, $closure);
 
         $sql = '
             INSERT
@@ -59,7 +64,8 @@ class QueryBuilder
      * Построение sql-запроса для update
      * @param AbstractModel $model Экземпляр модели
      * @return string $sql
-     * @todo протестировать алгоритм на время. Попробовать варианты с iterator, implode
+     * @todo протестировать алгоритм на время.
+     * Попробовать варианты с iterator, implode
      */
     final public static function update($model)
     {
@@ -69,7 +75,9 @@ class QueryBuilder
         foreach ($properties as $property) {
             $value = self::sanitize($model, $property);
 
-            if (null === $value || 'id' === $property) continue;
+            if (null === $value || 'id' === $property) {
+                continue;
+            }
 
             $params .= "`$property` = $value, ";
         }
@@ -126,11 +134,15 @@ class QueryBuilder
             $ids = $model->id;
         }
 
-        if (!is_array($ids)) $ids = array($ids);
+        if (!is_array($ids)) {
+            $ids = array($ids);
+        }
 
-        array_walk($ids, function(&$value) {
+        $closure = function (&$value) {
             $value = (int) $value;
-        });
+        };
+
+        array_walk($ids, $closure);
 
         $ids = implode(',', $ids);
 
@@ -199,7 +211,8 @@ class QueryBuilder
     final public static function setPage($sql, $pager)
     {
         if ($pager instanceof DbPaginator) {
-            return str_replace('SELECT', 'SELECT SQL_CALC_FOUND_ROWS', $sql) . $pager->getSqlLimit();
+            $sql = str_replace('SELECT', 'SELECT SQL_CALC_FOUND_ROWS', $sql);
+            return $sql . $pager->getSqlLimit();
         }
 
         return $sql;
@@ -213,15 +226,17 @@ class QueryBuilder
     private static function sanitize($model, $property)
     {
         if (!isset($model::$map[$property])) {
-            throw new Exception (
+            throw new Exception(
                 "Неизвестное свойство \"$property\" модели " . get_class($model)
             );
         }
 
-        if (!isset($model->$property)) return null;
+        if (!isset($model->$property)) {
+            return null;
+        }
 
         if (!isset($model::$map[$property])) {
-            throw new Exception (
+            throw new Exception(
                 "Неизвестный тип данных {$model::$map[$property]} в запросе"
             );
         }

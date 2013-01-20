@@ -67,8 +67,9 @@ abstract class AbstractModel
      */
     final public function __construct($id = null)
     {
-        if (null !== $id)
+        if (null !== $id) {
             $this->getById($id);
+        }
     }
 
     /**
@@ -103,8 +104,9 @@ abstract class AbstractModel
 
         $result = Db::getRow($sql);
 
-        if (empty($result))
+        if (empty($result)) {
             return false;
+        }
 
         $this->setProperties($result);
 
@@ -124,11 +126,13 @@ abstract class AbstractModel
 
         $result = Db::getRows($sql);
 
-        if (empty($result))
+        if (empty($result)) {
             return false;
+        }
 
-        if ($pager instanceof DbPaginator)
+        if ($pager instanceof DbPaginator) {
             $pager->calcMaxPages();
+        }
 
         return $result;
     }
@@ -191,8 +195,9 @@ abstract class AbstractModel
 
         $result = Db::getRow($sql);
 
-        if (empty($result))
+        if (empty($result)) {
             return false;
+        }
 
         $this->setProperties($result);
 
@@ -206,16 +211,19 @@ abstract class AbstractModel
      */
     final protected function query($sql, $pager = false)
     {
-        if ($pager)
+        if ($pager) {
             $sql = QueryBuilder::setPage($sql, $pager);
+        }
 
         $result = Db::getRows($sql);
 
-        if (empty($result))
+        if (empty($result)) {
             return false;
+        }
 
-        if ($pager)
+        if ($pager) {
             $pager->calcMaxPages();
+        }
 
         return $result;
     }

@@ -49,7 +49,8 @@ interface iDbDriver
     public static function query($sql, $server);
 
     /**
-     * Метод для выполнения SELECT запросов возвращающих значение одного поля
+     * Для SELECT, возвращающих значение одного поля
+     *
      * @param string $sql SQL-запрос
      * @param string $server Имя сервера
      * @return mixed
@@ -57,7 +58,8 @@ interface iDbDriver
     public static function getValue($sql, $server);
 
     /**
-     * Метод для выполнения SELECT запросов возвращающих значение одной строки таблицы
+     * Для SELECT, возвращающих значение одной строки таблицы
+     *
      * @param string $sql SQL-запрос
      * @param string $server Имя сервера
      * @return array
@@ -65,7 +67,8 @@ interface iDbDriver
     public static function getRow($sql, $server);
 
     /**
-     * Метод для выполнения SELECT запросов возвращающих значение коллекцию результатов
+     * Для SELECT, возвращающих значение коллекцию результатов
+     *
      * @param string $sql SQL-запрос
      * @param string $server Имя сервера
      * @return array

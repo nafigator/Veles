@@ -36,8 +36,9 @@ class MysqliDriver implements iDbDriver
      */
     private static function setLink($name)
     {
-        if (!isset(self::$links[$name]))
+        if (!isset(self::$links[$name])) {
             self::connect($name);
+        }
 
         self::$curr_link =& self::$links[$name];
     }
@@ -70,7 +71,9 @@ class MysqliDriver implements iDbDriver
         }
 
         if (!isset($db_params[$name])) {
-            throw new Exception("Не найдены параметры подключения к серверу $name");
+            throw new Exception(
+                "Не найдены параметры подключения к серверу $name"
+            );
         }
 
         self::$links[$name] = @mysqli_connect(
@@ -106,7 +109,8 @@ class MysqliDriver implements iDbDriver
     }
 
     /**
-     * Метод для выполнения SELECT запросов возвращающих значение одного поля
+     * Для SELECT, возвращающих значение одного поля
+     *
      * @param string $sql SQL-запрос
      * @param string $server Имя сервера
      * @return mixed
@@ -130,7 +134,8 @@ class MysqliDriver implements iDbDriver
     }
 
     /**
-     * Метод для выполнения SELECT запросов возвращающих значение одной строки таблицы
+     * Для SELECT, возвращающих значение одной строки таблицы
+     *
      * @param string $sql SQL-запрос
      * @param string $server Имя сервера
      * @return mixed
@@ -154,7 +159,8 @@ class MysqliDriver implements iDbDriver
     }
 
     /**
-     * Метод для выполнения SELECT запросов возвращающих значение коллекцию результатов
+     * Для SELECT, возвращающих значение коллекцию результатов
+     *
      * @param string $server Имя сервера
      * @return mixed
      */

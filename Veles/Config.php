@@ -61,16 +61,18 @@ class Config
         foreach ($config as $name => $value) {
             $params = explode('.', $name);
 
-            if (1 === count($params))
+            if (1 === count($params)) {
                 continue;
+            }
 
             $ptr =& $config;
 
             foreach ($params as $param) {
-                if ($param === end($params))
+                if ($param === end($params)) {
                     $ptr[$param] = $value;
-                else
+                } else {
                     $ptr =& $ptr[$param];
+                }
             }
 
             unset($config[$name]);
@@ -87,9 +89,11 @@ class Config
         foreach ($namespaces as $namespace) {
             $section = explode(':', $namespace);
 
-            array_walk($section, function(&$value) {
+            $closure = function (&$value) {
                 $value = trim($value);
-            });
+            };
+
+            array_walk($section, $closure);
 
             // Обработка наследования параметров только для секции окружения
             if (ENVIRONMENT !== $section[0]
@@ -99,7 +103,9 @@ class Config
                 continue;
             }
 
-            $config[ENVIRONMENT] = array_merge($config[$section[1]], $config[$namespace]);
+            $config[ENVIRONMENT] = array_merge(
+                $config[$section[1]], $config[$namespace]
+            );
         }
     }
 
@@ -108,11 +114,13 @@ class Config
      */
     private static function checkDefaults()
     {
-        if (null === ENVIRONMENT)
+        if (null === ENVIRONMENT) {
             define('ENVIRONMENT', 'production');
+        }
 
-        if (null === CONFIG_FILE)
+        if (null === CONFIG_FILE) {
             define('CONFIG_PATH', realpath('../project/settings.ini'));
+        }
     }
 
     /**
@@ -122,17 +130,19 @@ class Config
      */
     final public static function getParams($param)
     {
-        if (null === self::$data)
+        if (null === self::$data) {
             self::read();
+        }
 
         $param_arr = explode('.', $param);
 
         $ptr =& self::$data;
-        foreach($param_arr as $param_element) {
-            if (isset($ptr[$param_element]))
+        foreach ($param_arr as $param_element) {
+            if (isset($ptr[$param_element])) {
                 $ptr =& $ptr[$param_element];
-            else
+            } else {
                 return null;
+            }
         }
 
         return $ptr;

@@ -50,8 +50,9 @@ class Application
             ? Config::getParams('php')
             : $keys;
 
-        if (null === $config)
+        if (null === $config) {
             return;
+        }
 
         foreach ($config as $param => $value) {
             if (is_array($value)) {

@@ -73,8 +73,9 @@ class DbPaginator
      */
     final public function setLimit($limit)
     {
-        if (!is_numeric($limit))
+        if (!is_numeric($limit)) {
             return;
+        }
 
         $this->limit = (int) $limit;
     }
@@ -95,8 +96,9 @@ class DbPaginator
      */
     final public function getMaxPages()
     {
-        if (null !== $this->page_nums)
+        if (null !== $this->page_nums) {
             return $this->page_nums;
+        }
 
         $this->calcMaxPages();
 
