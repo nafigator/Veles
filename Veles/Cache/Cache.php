@@ -1,7 +1,7 @@
 <?php
 /**
  * Класс-фасад для кэша
- * @file    AbstractCache.php
+ * @file    Cache.php
  *
  * PHP version 5.3.9+
  *
@@ -20,16 +20,21 @@ use \Exception;
  * Класс AbstractCache
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
-abstract class AbstractCache
+class Cache
 {
-    protected static $driver;
+    private static $driver;
 
     /**
-     * Инициализация кэша
+     * Инициализация драйвера кэша
+     * @param string $driver_name Имя дравйвера
+     * @return iCache
      */
-    protected static function init()
+    final public static function init($driver_name)
     {
-        //В этом методе необходимо реализовать подключение\инициализацию кэша
+        $driver_class = "\\Veles\\Cache\\Drivers\\$driver_name";
+        static::$driver = new $driver_class;
+
+        return static::$driver;
     }
 
     /**

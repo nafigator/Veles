@@ -12,8 +12,8 @@
 
 namespace Veles\Form;
 
-use \Cache;
 use \Veles\View;
+use \Veles\Cache\Cache;
 use \Veles\Validators\RegEx;
 use \Veles\Form\Elements\iElement;
 use \Veles\Form\Elements\ButtonElement;
