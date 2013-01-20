@@ -92,13 +92,13 @@ final class UsrAuth
 
     /**
      * Установка авторизационных кук
-     * @param int $id
-     * @param int $hash
+     * @param int $identifier ID пользователя
+     * @param int $hash Хэш пароля
      */
-    final public static function setCookie($id, $hash)
+    final public static function setCookie($identifier, $hash)
     {
         // Делаем куки на 1 год (3600*24*365)
-        setcookie('id', $id, $_SERVER['REQUEST_TIME'] + 31536000, '/', $_SERVER['HTTP_HOST'], false, false);
+        setcookie('id', $identifier, $_SERVER['REQUEST_TIME'] + 31536000, '/', $_SERVER['HTTP_HOST'], false, false);
         // Пароль не шифруем, т.к. передан в функцию взятый из базы хэш пароля
         setcookie('pw', $hash, $_SERVER['REQUEST_TIME'] + 31536000, '/', $_SERVER['HTTP_HOST'], false, false);
     }

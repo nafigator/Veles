@@ -64,11 +64,12 @@ abstract class AbstractModel
 
     /**
      * Конструктор модели
+     * @param int $identifier ID модели
      */
-    final public function __construct($id = null)
+    final public function __construct($identifier = null)
     {
-        if (null !== $id) {
-            $this->getById($id);
+        if (null !== $identifier) {
+            $this->getById($identifier);
         }
     }
 
@@ -95,12 +96,12 @@ abstract class AbstractModel
     }
 
     /**
-     * Получение данных по id
-     * @param int $id
+     * Получение данных по ID
+     * @param int $identifier ID модели
      */
-    final public function getById($id)
+    final public function getById($identifier)
     {
-        $sql = QueryBuilder::getById($this, $id);
+        $sql = QueryBuilder::getById($this, $identifier);
 
         $result = Db::getRow($sql);
 

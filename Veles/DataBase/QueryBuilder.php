@@ -99,19 +99,19 @@ class QueryBuilder
     /**
      * Построение sql-запроса для select
      * @param AbstractModel $model Экземпляр модели
-     * @param int $id primary key
+     * @param int $identifier primary key
      * @return string $sql
      */
-    final public static function getById($model, $id)
+    final public static function getById($model, $identifier)
     {
-        $id = (int) $id;
+        $identifier = (int) $identifier;
 
         $sql = '
             SELECT *
             FROM
                 `' . $model::TBL_NAME . "`
             WHERE
-                `id` = $id
+                `id` = $identifier
             LIMIT 1
         ";
 

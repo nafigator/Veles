@@ -20,7 +20,7 @@ use \SplSubject;
  */
 abstract class AbstractEmail
 {
-    protected $to       = null;
+    protected $receiver = null;
     protected $headers  = null;
     protected $subject  = null;
     protected $message  = null;
@@ -48,6 +48,6 @@ abstract class AbstractEmail
      */
     final protected function send()
     {
-        mail($this->to, $this->subject, $this->message, $this->headers);
+        mail($this->receiver, $this->subject, $this->message, $this->headers);
     }
 }
