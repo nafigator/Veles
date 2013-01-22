@@ -29,7 +29,7 @@ class Cache
      * @param string $driver_name Имя дравйвера
      * @return iCache
      */
-    final public static function init($driver_name)
+    final public static function init($driver_name = 'APC')
     {
         $driver_class = "\\Veles\\Cache\\Drivers\\$driver_name";
         static::$driver = new $driver_class;

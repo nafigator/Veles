@@ -23,7 +23,7 @@ use \PHPUnit_Framework_TestCase;
 class PasswordTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Юнит-тест для Password::checkCookieHash
+     * Unit-test for Password::checkCookieHash
      * @group RootClasses
      * @covers Veles\Password::checkCookieHash
      * @dataProvider checkCookieHashProvider
@@ -56,7 +56,7 @@ class PasswordTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Юнит-тест для Password::check
+     * Unit-test for Password::check
      * @group RootClasses
      * @covers Veles\Password::check
      * @dataProvider checkProvider

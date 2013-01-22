@@ -13,6 +13,7 @@
 namespace Veles;
 
 use \Veles\Routing\Route;
+use \Exception;
 
 /**
  * Класс View
@@ -25,10 +26,15 @@ class View
     /**
      * Метод для установки переменных в выводе
      * @param array $vars Массив переменных для вывода
+     * @throws Exception
      */
     final public static function set($vars)
     {
-        self::$variables = array_merge(self::$variables, (array) $vars);
+        if (!is_array($vars)) {
+            throw new Exception('View can set variables only in arrays!');
+        }
+
+        self::$variables = array_merge(self::$variables, $vars);
     }
 
     /**

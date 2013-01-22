@@ -21,7 +21,7 @@ use \PHPUnit_Framework_TestCase;
 class HelperTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Юнит-тест для Helper::getStr
+     * Unit-test for Helper::getStr
      * @group RootClasses
      * @covers Veles\Helper::genStr
      * @dataProvider genStrProvider
@@ -62,7 +62,7 @@ class HelperTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Юнит-тест для Helper::validateEmail
+     * Unit-test for Helper::validateEmail
      * @group RootClasses
      * @covers Veles\Helper::validateEmail
      * @dataProvider validateEmailProvider
@@ -96,7 +96,7 @@ class HelperTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Юнит-тест для Helper::checkEmailDomain
+     * Unit-test for Helper::checkEmailDomain
      * @group RootClasses
      * @covers Veles\Helper::checkEmailDomain
      * @dataProvider checkEmailDomainProvider
@@ -127,8 +127,7 @@ class HelperTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Юнит-тест для Helper::translit
-     *
+     * Unit-test for Helper::translit
      * @group RootClasses
      * @covers Veles\Helper::translit
      * @dataProvider translitProvider
@@ -159,7 +158,7 @@ class HelperTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Юнит-тест для Helper::makeAlias
+     * Unit-test for Helper::makeAlias
      * @group RootClasses
      * @covers Veles\Helper::makeAlias
      * @depends testTranslit

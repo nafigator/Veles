@@ -248,6 +248,7 @@ final class UsrAuth
 
     /**
      * Получение пользователя
+     * @return Model
      */
     final public function getUser()
     {
