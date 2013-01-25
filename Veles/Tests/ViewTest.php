@@ -18,7 +18,7 @@ use \ReflectionObject;
 
 define(
     'TEMPLATE_PATH',
-    rtrim(sys_get_temp_dir(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR
+    __DIR__ . '/Project/View/'
 );
 
 /**
@@ -30,7 +30,7 @@ class ViewTest extends PHPUnit_Framework_TestCase
      * Container for View object
      * @var View
      */
-    protected static $object;
+    protected $object;
 
     /**
      * File name of template
@@ -50,46 +50,25 @@ class ViewTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        static::$object = new View;
-        $this->tpl = 'view.phtml';
-        $file_name = TEMPLATE_PATH . $this->tpl;
-
-        $fp = fopen($file_name, 'w+');
-
-        $phtml = <<<'EOF'
-<!DOCTYPE html>
-<html>
-<head>
-    <title>PHP Unit test template</title>
-</head>
-<body>
-    <div id="main_wrapper">
-        <?=$a?> Hello
-    </div>
-    <div id="main_wrapper">
-        <?=$b?> <?=$c?> World!!
-    </div>
-</body>
-</html>
-EOF;
-        fputs($fp, $phtml);
-        fclose($fp);
+        $this->object = new View;
+        $this->tpl = 'Frontend/index.phtml';
 
         $this->html = <<<EOF
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PHP Unit test template</title>
+    <title>Veles is a fast PHP framework</title>
 </head>
 <body>
     <div id="main_wrapper">
-        value Hello
+        Test complete!
     </div>
     <div id="main_wrapper">
-        1 c_value World!!
+        Hello World!
     </div>
 </body>
 </html>
+
 EOF;
     }
 
@@ -99,8 +78,6 @@ EOF;
      */
     protected function tearDown()
     {
-        $file_name = TEMPLATE_PATH . $this->tpl;
-        unlink($file_name);
     }
 
     /**
@@ -114,7 +91,7 @@ EOF;
      */
     public function testSetException($vars)
     {
-        static::$object->set($vars);
+        $this->object->set($vars);
     }
 
     /**
@@ -133,9 +110,9 @@ EOF;
      */
     public function testSet($vars, $expected)
     {
-        static::$object->set($vars);
+        $this->object->set($vars);
 
-        $object = new ReflectionObject(static::$object);
+        $object = new ReflectionObject($this->object);
         $prop = $object->getProperty('variables');
 
         $msg = 'Property View::$variables not private';
@@ -155,12 +132,12 @@ EOF;
     {
         return array(
             array(
-                array('a' => 'value', 'b' => 1),
-                array('a' => 'value', 'b' => 1)
+                array('a' => 'Test', 'b' => 'complete'),
+                array('a' => 'Test', 'b' => 'complete')
             ),
             array(
-                array('c' => 'c_value'),
-                array('a' => 'value', 'b' => 1, 'c' => 'c_value')
+                array('c' => 'Hello'),
+                array('a' => 'Test', 'b' => 'complete', 'c' => 'Hello')
             )
         );
     }
@@ -175,7 +152,7 @@ EOF;
     {
         $this->expectOutputString($this->html);
 
-        static::$object->show($this->tpl);
+        $this->object->show($this->tpl);
     }
 
     /**
@@ -188,7 +165,7 @@ EOF;
     {
         $expected =& $this->html;
 
-        $result = static::$object->get($this->tpl);
+        $result = $this->object->get($this->tpl);
 
         $msg = 'Wrong result type: ' . gettype($result);
         $this->assertInternalType('string', $result, $msg);

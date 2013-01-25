@@ -20,7 +20,9 @@ namespace Veles\Tests;
 
 use \Veles\AutoLoader;
 
-$paths = implode(PATH_SEPARATOR, array(realpath(__DIR__), get_include_path()));
+$paths = implode(PATH_SEPARATOR, array(
+    realpath(__DIR__), realpath(__DIR__ . '/Project/'), get_include_path())
+);
 set_include_path($paths);
 
 require 'Veles/AutoLoader.php';

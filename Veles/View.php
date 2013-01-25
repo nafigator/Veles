@@ -38,6 +38,23 @@ class View
     }
 
     /**
+     * Метод для очистки переменных в выводе
+     * @param array $vars Массив имён переменных для очистки
+     */
+    final public static function del($vars)
+    {
+        if (!is_array($vars)) {
+            throw new Exception('View can unset variables only in arrays!');
+        }
+
+        foreach ($vars as $var_name) {
+            if (isset(self::$variables[$var_name])) {
+                unset(self::$variables[$var_name]);
+            }
+        }
+    }
+
+    /**
      * Метод вывода
      * @param string $path Путь к шаблону
      */

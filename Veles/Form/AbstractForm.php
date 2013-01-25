@@ -75,25 +75,24 @@ abstract class AbstractForm implements iForm
     final public function valid()
     {
         foreach ($this->elements as $element) {
-            switch (true) {
-                case ($element instanceof ButtonElement):
-                case ($element instanceof SubmitElement):
-                    continue;
-                    break;
-                default:
-                    $name = $element->getName();
+            if ($element instanceof ButtonElement
+                || $element instanceof SubmitElement
+            ) {
+                continue;
+            }
 
-                    if (!isset($this->data[$name])) {
-                        if ($element->required()) {
-                            return false;
-                        }
+            $name = $element->getName();
 
-                        continue;
-                    }
+            if (!isset($this->data[$name])) {
+                if ($element->required()) {
+                    return false;
+                }
 
-                    if (!$element->validate($this->data[$name])) {
-                        return false;
-                    }
+                continue;
+            }
+
+            if (!$element->validate($this->data[$name])) {
+                return false;
             }
         }
 
