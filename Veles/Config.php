@@ -114,11 +114,11 @@ class Config
      */
     private static function checkDefaults()
     {
-        if (null === ENVIRONMENT) {
+        if (!defined('ENVIRONMENT')) {
             define('ENVIRONMENT', 'production');
         }
 
-        if (null === CONFIG_FILE) {
+        if (!defined('CONFIG_FILE')) {
             define('CONFIG_PATH', realpath('../project/settings.ini'));
         }
     }

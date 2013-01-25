@@ -120,9 +120,9 @@ class HelperTest extends PHPUnit_Framework_TestCase
     public function checkEmailDomainProvider()
     {
         return array(
-            array('mail@google.com', true),
-            array('mail@yandex.ru', true),
-            array('error@wrongdomain.opa-opa', false)
+            array('webmaster@itvault.info', true),
+            array('false@itvault.info', true),
+            array('error@wrongdomain.opa-opa-opa', false)
         );
     }
 
