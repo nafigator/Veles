@@ -71,7 +71,7 @@ class Route
             $this->checkAjax();
 
             if (isset($route['map'])
-                && false !== ($map = $route['class']::getMap())
+                && null !== ($map = $route['class']::getMap())
             ) {
                 $this->map = array_combine($route['map'], $map);
             }
@@ -84,7 +84,7 @@ class Route
     }
 
     /**
-     * Получение и инициалзация контроллера
+     * Получение и инициализация контроллера
      * @throws Exception
      * @return object
      */
