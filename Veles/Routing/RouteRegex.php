@@ -19,6 +19,12 @@ namespace Veles\Routing;
 class RouteRegex implements iRouteStrategy
 {
     /**
+     * Переменная содержит массив со значениями регулярных подмасок url
+     * @var array
+     */
+    private static $map = false;
+
+    /**
      * Проверка на соответствие роута шаблону
      * @param string $pattern Шаблон из конфига для сопоставления
      * @param string $url текущий $_SERVER['REQUEST_URI'] без параметров
@@ -26,6 +32,23 @@ class RouteRegex implements iRouteStrategy
      */
     public static function check($pattern, $url)
     {
-        return (bool) preg_match($pattern, $url);
+        $result = (bool) preg_match($pattern, $url, $matches);
+
+        if (isset($matches[1])) {
+            unset($matches[0]);
+
+            self::$map = $matches;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Получение url maps
+     * @return mixed
+     */
+    public static function getMap()
+    {
+        return self::$map;
     }
 }

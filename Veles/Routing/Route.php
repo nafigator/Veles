@@ -57,26 +57,26 @@ class Route
             : urldecode($_SERVER['REQUEST_URI']);
 
         foreach ($routes as $name => $route) {
-            if ($route['class']::check($route['route'], $url)) {
-                $this->config    = $route;
-                $this->page_name = $name;
-
-                if (isset($route['tpl'])) {
-                    $this->template = $route['tpl'];
-                }
-
-                $this->checkAjax();
-
-                if (isset($route['map']) && preg_match($route['route'], $url, $map)) {
-                    unset($map[0]);
-
-                    if (!empty($map)) {
-                        $this->map = array_combine($route['map'], $map);
-                    }
-                }
-
-                return;
+            if (!$route['class']::check($route['route'], $url)) {
+                continue;
             }
+
+            $this->config    = $route;
+            $this->page_name = $name;
+
+            if (isset($route['tpl'])) {
+                $this->template = $route['tpl'];
+            }
+
+            $this->checkAjax();
+
+            if (isset($route['map'])
+                && false !== ($map = $route['class']::getMap())
+            ) {
+                $this->map = array_combine($route['map'], $map);
+            }
+
+            return;
         }
 
         //TODO: go to 404!
