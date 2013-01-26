@@ -10,9 +10,9 @@
  * @copyright The BSD 3-Clause License.
  */
 
-namespace Veles\Tests;
+namespace Veles\Tests\Auth;
 
-use \Veles\Password;
+use \Veles\Auth\Password;
 use \Veles\Model\User;
 use \Veles\Helper;
 use \PHPUnit_Framework_TestCase;

@@ -10,7 +10,7 @@
  * @copyright The BSD 3-Clause License
  */
 
-namespace Veles;
+namespace Veles\Auth;
 
 /**
  * Класс UsrGroup

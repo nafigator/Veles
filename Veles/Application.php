@@ -13,6 +13,7 @@
 namespace Veles;
 
 use \Veles\Routing\Route;
+use \Veles\Auth\UsrAuth;
 
 /**
  * Класс Application

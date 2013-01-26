@@ -12,7 +12,7 @@
 
 namespace Veles\Model;
 
-use \Veles\UsrGroup;
+use \Veles\Auth\UsrGroup;
 use \Veles\DataBase\Db;
 
 /**

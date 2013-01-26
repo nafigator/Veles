@@ -10,9 +10,9 @@
  * @copyright The BSD 3-Clause License.
  */
 
-namespace Veles\Tests;
+namespace Veles\Tests\Auth;
 
-use \Veles\UsrGroup;
+use \Veles\Auth\UsrGroup;
 use \PHPUnit_Framework_TestCase;
 
 /**
