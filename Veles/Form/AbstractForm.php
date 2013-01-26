@@ -139,6 +139,16 @@ abstract class AbstractForm implements iForm
             $tpl[]      = "#$number#";
         }
 
+        $tpl      = array_merge($tpl, array("#method#", "#action#", "#name#"));
+        $elements = array_merge(
+            $elements,
+            array(
+                $this->method,
+                $this->action,
+                $this->name
+            )
+        );
+
         Cache::set($this->name . $this->sid, true, 7200);
 
         return str_replace($tpl, $elements, $output);
