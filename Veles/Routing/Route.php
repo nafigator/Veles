@@ -79,8 +79,7 @@ class Route
             return;
         }
 
-        //TODO: go to 404!
-        throw new Exception("URL $url не найден в конфиге роутинга!");
+        Route404::show($url);
     }
 
     /**
