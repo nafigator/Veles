@@ -40,7 +40,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         $result = Config::getParams($param);
 
         $msg = 'Config returned wrong params';
-        self::assertEquals($expected, $result);
+        self::assertEquals($expected, $result, $msg);
     }
 
     /**

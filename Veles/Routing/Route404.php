@@ -12,6 +12,8 @@
 
 namespace Veles\Routing;
 
+use \Veles\View;
+
 /**
  * Класс Route404
  * @author  Yancharuk Alexander <alex@itvault.info>
@@ -24,7 +26,8 @@ class Route404
      */
     final public static function show($url)
     {
+        header('HTTP/1.1 404 Not Found', true, 404);
         View::set(array('url' => $url));
-        echo View::get('error/404.phtml');
+        die(View::get('error/404.phtml'));
     }
 }

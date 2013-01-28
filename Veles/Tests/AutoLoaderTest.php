@@ -39,11 +39,11 @@ EOF;
         $method = $object->getMethod('init');
         $path   = $method->getFileName();
         $lines  = file($path);
-        $from   = $method->getStartLine() - 1;
-        $to     = $method->getEndLine();
-        $len    = $to - $from;
+        $start  = $method->getStartLine() - 1;
+        $end    = $method->getEndLine();
+        $len    = $end - $start;
 
-        $result = implode(array_slice($lines, $from, $len));
+        $result = implode(array_slice($lines, $start, $len));
 
         $msg = 'Wrong content of AutoLoader::init() method';
         $this->assertSame($expected, $result, $msg);
