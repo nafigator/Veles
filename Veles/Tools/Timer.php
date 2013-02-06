@@ -21,10 +21,11 @@ use \Exception;
 class Timer
 {
     // Точность измерения
-    const SECONDS      = 1;
-    const MILLISECONDS = 2;
-    const MICROSECONDS = 3;
-    const NANOSECONDS  = 4;
+    const SECONDS      = 0;
+    const MILLISECONDS = 3;
+    const MICROSECONDS = 6;
+    const NANOSECONDS  = 9;
+    const PICOSECONDS  = 12;
 
     private static $start_time = 0;
     private static $stop_time  = 0;
@@ -34,7 +35,7 @@ class Timer
      */
     public static function start()
     {
-        self::$start_time = array_sum(explode(' ', microtime()));
+        self::$start_time = microtime(true);
     }
 
     /**
@@ -42,7 +43,7 @@ class Timer
      */
     public static function stop()
     {
-        self::$stop_time = array_sum(explode(' ', microtime()));
+        self::$stop_time = microtime(true);
     }
 
     /**
@@ -56,16 +57,14 @@ class Timer
 
         switch ($precision) {
             case self::SECONDS:
-                return round($diff);
-                break;
             case self::MILLISECONDS:
-                return round($diff, 3);
-                break;
             case self::MICROSECONDS:
-                return round($diff, 6);
-                break;
             case self::NANOSECONDS:
-                return round($diff, 9);
+            case self::PICOSECONDS:
+                return round($diff, $precision);
+                break;
+            default:
+                return round($diff, 6);
                 break;
         }
     }
