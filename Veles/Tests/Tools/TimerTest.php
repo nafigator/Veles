@@ -36,6 +36,28 @@ class TimerTest extends PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        Timer::reset();
+    }
+
+    /**
+     * @covers Veles\Tools\Timer::start
+     */
+    public function testConstants()
+    {
+        $msg = 'Wrong value of Timer::SECONDS: ' . Timer::SECONDS;
+        $this->assertSame(Timer::SECONDS, 0, $msg);
+
+        $msg = 'Wrong value of Timer::MILLISECONDS: ' . Timer::MILLISECONDS;
+        $this->assertSame(Timer::MILLISECONDS, 3, $msg);
+
+        $msg = 'Wrong value of Timer::MICROSECONDS: ' . Timer::MICROSECONDS;
+        $this->assertSame(Timer::MICROSECONDS, 6, $msg);
+
+        $msg = 'Wrong value of Timer::NANOSECONDS: ' . Timer::NANOSECONDS;
+        $this->assertSame(Timer::NANOSECONDS, 9, $msg);
+
+        $msg = 'Wrong value of Timer::PICOSECONDS: ' . Timer::PICOSECONDS;
+        $this->assertSame(Timer::PICOSECONDS, 12, $msg);
     }
 
     /**
@@ -65,7 +87,6 @@ class TimerTest extends PHPUnit_Framework_TestCase
      */
     public function testStop()
     {
-        Timer::start();
         Timer::stop();
         $expected = round(microtime(true), 2);
 
@@ -89,17 +110,65 @@ class TimerTest extends PHPUnit_Framework_TestCase
     public function testGet()
     {
         Timer::start();
-        usleep(30000);
         Timer::stop();
-        $expected = 0.03;
 
-        $result = Timer::get(Timer::MILLISECONDS);
+        $object = new ReflectionObject(new Timer);
+        $start_time = $object->getProperty('start_time');
+        $stop_time = $object->getProperty('stop_time');
+
+        $start_time->setAccessible(true);
+        $start = $start_time->getValue();
+        $stop_time->setAccessible(true);
+        $stop = $stop_time->getValue();
+
+        $expected = round($stop - $start, Timer::MICROSECONDS);
+        $result = Timer::get();
 
         $this->assertInternalType('float', $result);
 
-        $result = round($result, 2);
         $msg = 'Wrong Timer result';
         $this->assertSame($result, $expected, $msg);
+    }
+
+    /**
+     * @covers  Veles\Tools\Timer::get
+     * @depends testStop
+     * @dataProvider getPrecisionProvider
+     */
+    public function testGetPrecision($precision)
+    {
+        Timer::start();
+        Timer::stop();
+
+        $object = new ReflectionObject(new Timer);
+        $start_time = $object->getProperty('start_time');
+        $stop_time = $object->getProperty('stop_time');
+
+        $start_time->setAccessible(true);
+        $start = $start_time->getValue();
+        $stop_time->setAccessible(true);
+        $stop = $stop_time->getValue();
+
+        $expected = round($stop - $start, $precision);
+
+        $result = Timer::get($precision);
+
+        $msg = 'Wrong Timer precision result';
+        $this->assertSame($result, $expected, $msg);
+    }
+
+    /**
+     * Data-provider for testGetPrecision
+     */
+    public function getPrecisionProvider()
+    {
+        return array(
+            array(Timer::SECONDS),
+            array(Timer::MILLISECONDS),
+            array(Timer::MICROSECONDS),
+            array(Timer::NANOSECONDS),
+            array(Timer::PICOSECONDS)
+        );
     }
 
     /**

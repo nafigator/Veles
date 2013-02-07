@@ -64,7 +64,7 @@ class Timer
                 return round($diff, $precision);
                 break;
             default:
-                return round($diff, 6);
+                return round($diff, self::MICROSECONDS);
                 break;
         }
     }
