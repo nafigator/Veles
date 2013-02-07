@@ -44,7 +44,7 @@ class TimerTest extends PHPUnit_Framework_TestCase
     public function testStart()
     {
         Timer::start();
-        $expected = round(microtime(true), 3);
+        $expected = round(microtime(true), 2);
 
         $object = new ReflectionObject(new Timer);
         $prop = $object->getProperty('start_time');
@@ -53,7 +53,7 @@ class TimerTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($prop->isPrivate(), $msg);
 
         $prop->setAccessible(true);
-        $result = round($prop->getValue(), 3);
+        $result = round($prop->getValue(), 2);
 
         $msg = 'Wrong result of Timer::$start_time property';
         $this->assertSame($result, $expected, $msg);
@@ -67,7 +67,7 @@ class TimerTest extends PHPUnit_Framework_TestCase
     {
         Timer::start();
         Timer::stop();
-        $expected = round(microtime(true), 3);
+        $expected = round(microtime(true), 2);
 
         $object = new ReflectionObject(new Timer);
         $prop = $object->getProperty('stop_time');
@@ -76,7 +76,7 @@ class TimerTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($prop->isPrivate(), $msg);
 
         $prop->setAccessible(true);
-        $result = round($prop->getValue(), 3);
+        $result = round($prop->getValue(), 2);
 
         $msg = 'Wrong result of Timer::$stop_time property';
         $this->assertSame($result, $expected, $msg);
@@ -84,27 +84,26 @@ class TimerTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Veles\Tools\Timer::get
-     * @depends testStart
      * @depends testStop
      */
     public function testGet()
     {
         Timer::start();
-        usleep(3000);
+        usleep(30000);
         Timer::stop();
-        $expected = 0.003;
+        $expected = 0.03;
 
         $result = Timer::get(Timer::MILLISECONDS);
 
         $this->assertInternalType('float', $result);
 
+        $result = round($result, 2);
         $msg = 'Wrong Timer result';
         $this->assertSame($result, $expected, $msg);
     }
 
     /**
      * @covers  Veles\Tools\Timer::reset
-     * @depends testStart
      * @depends testStop
      */
     public function testReset()
