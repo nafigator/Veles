@@ -1,7 +1,7 @@
 <?php
 /**
  * Класс реализующий MVC-архитектуру проекта
- * @file    Application.php
+ * @file    WebApplication.php
  *
  * PHP version 5.3.9+
  *
@@ -14,19 +14,21 @@ namespace Veles;
 
 use \Veles\Routing\Route;
 use \Veles\Auth\UsrAuth;
+use \Veles\ErrorHandler\ErrBase;
 
 /**
  * Класс Application
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
-class Application
+class WebApplication
 {
     /**
      * Старт приложения
      */
-    final public static function run()
+    public static function run()
     {
         self::setPhpSettings();
+        self::setErrorHandlers();
 
         UsrAuth::instance();
 
@@ -42,10 +44,21 @@ class Application
     }
 
     /**
+     * Инициализируем ErrorHandlers
+     */
+    protected static function setErrorHandlers()
+    {
+        $error = new ErrBase;
+        register_shutdown_function(array($error, 'fatal'));
+        set_error_handler(array($error, 'usrError'));
+        set_exception_handler(array($error, 'exception'));
+    }
+
+    /**
      * Устанавливаем настройки php, прописанные в конфиге
      * @todo Описать параметры
      */
-    private static function setPhpSettings($keys = null)
+    protected static function setPhpSettings($keys = null)
     {
         $config = (null === $keys)
             ? Config::getParams('php')
