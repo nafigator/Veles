@@ -25,7 +25,7 @@ class DbFabric
      */
     final public static function getDriver()
     {
-        if (null === ($class = Config::getParams('dbDriver'))) {
+        if (null === ($class = Config::getParams('db_driver'))) {
             throw new Exception('Нe указан драйвер для работы с базой!');
         }
 
