@@ -27,7 +27,7 @@ class CliColor
 
     private $string;
 
-    private $colors = array(
+    private static $colors = array(
         'black'  => '0',
         'red'    => '1',
         'green'  => '2',
@@ -38,7 +38,7 @@ class CliColor
         'white'  => '7'
     );
 
-    private $styles = array(
+    private static $styles = array(
         '0' => 'default',
         '1' => 'bold',
         '2' => 'dark',
@@ -75,7 +75,7 @@ class CliColor
             throw new Exception('Style parameter must be an array!');
         }
 
-        if (!isset($this->colors[$color])) {
+        if (!isset(self::$colors[$color])) {
             throw new Exception('Not valid color!');
         }
 
@@ -121,7 +121,7 @@ class CliColor
             throw new Exception('Not valid style!');
         }
 
-        $styles = array_flip($this->styles);
+        $styles = array_flip(self::$styles);
 
         foreach ($style as $value) {
             if (!isset($styles[$value])) {
@@ -142,11 +142,11 @@ class CliColor
             throw new Exception('Not valid color!');
         }
 
-        if (!isset($this->colors[$color])) {
+        if (!isset(self::$colors[$color])) {
             throw new Exception("Not valid color: '$color'!");
         }
 
-        return $this->colors[$this->color];
+        return self::$colors[$this->color];
     }
 
     /**
@@ -155,7 +155,7 @@ class CliColor
      */
     private function getStyle()
     {
-        $styles = array_keys(array_intersect($this->styles, $this->style));
+        $styles = array_keys(array_intersect(self::$styles, $this->style));
 
         return implode(';', $styles);
     }
@@ -166,6 +166,6 @@ class CliColor
      */
     private function getColor()
     {
-        return $this->colors[$this->color];
+        return self::$colors[$this->color];
     }
 }
