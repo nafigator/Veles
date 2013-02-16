@@ -10,17 +10,20 @@
  * @copyright The BSD 3-Clause License
  */
 
-namespace Veles;
+namespace Veles\Application;
 
+use \Veles\Config;
+use \Veles\View;
 use \Veles\Routing\Route;
 use \Veles\Auth\UsrAuth;
 use \Veles\ErrorHandler\ErrBase;
+use \Veles\Application\iApplication;
 
 /**
  * Класс Application
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
-class WebApplication
+class WebApplication implements iApplication
 {
     /**
      * Старт приложения
