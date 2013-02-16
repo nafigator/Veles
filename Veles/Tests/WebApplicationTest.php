@@ -12,10 +12,10 @@
 
 namespace Veles\Tests;
 
-use \Veles\WebApplication;
 use \Veles\View;
 use \Veles\Routing\Route;
 use \PHPUnit_Framework_TestCase;
+use \Veles\Application\WebApplication;
 
 if (!defined('ENVIRONMENT')) {
     define('ENVIRONMENT', 'development');
