@@ -101,6 +101,7 @@ class CliColor
     /**
      * Добавление строки
      * @param string $string Строка для последующего вывода в цвете
+     * @return CliColor
      */
     final public function setString($string = null)
     {
@@ -109,11 +110,14 @@ class CliColor
         }
 
         $this->string = $string;
+
+        return $this;
     }
 
     /**
      * Установка стиля
      * @param array $style Стиль
+     * @return CliColor
      */
     final public function setStyle($style = array())
     {
@@ -130,11 +134,14 @@ class CliColor
         }
 
         $this->style = $style;
+
+        return $this;
     }
 
     /**
      * Установка цвета
      * @param string $color Цвет
+     * @return CliColor
      */
     private function setColor($color = null)
     {
@@ -146,7 +153,9 @@ class CliColor
             throw new Exception("Not valid color: '$color'!");
         }
 
-        return self::$colors[$this->color];
+        $this->color = $color;
+
+        return $this;
     }
 
     /**
