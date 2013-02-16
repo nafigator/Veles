@@ -1,7 +1,7 @@
 <?php
 /**
  * Класс реализующий MVC-архитектуру проекта
- * @file    WebApplication.php
+ * @file    Application.php
  *
  * PHP version 5.3.9+
  *
@@ -23,7 +23,7 @@ use \Veles\Application\iApplication;
  * Класс Application
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
-class WebApplication implements iApplication
+class Application implements iApplication
 {
     /**
      * Старт приложения
