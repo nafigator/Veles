@@ -31,8 +31,8 @@ class Config
     {
         self::checkDefaults();
 
-        if (Cache::has('config')) {
-            self::$data = Cache::get('config');
+        if (Cache::has(CONFIG_FILE)) {
+            self::$data = Cache::get(CONFIG_FILE);
             return;
         }
 
@@ -49,7 +49,7 @@ class Config
         unset($tmp_config);
 
         self::buildPramsTree(self::$data);
-        Cache::set('config', self::$data);
+        Cache::set(CONFIG_FILE, self::$data);
     }
 
     /**
