@@ -56,7 +56,7 @@ class WebApplication
 
     /**
      * Устанавливаем настройки php, прописанные в конфиге
-     * @todo Описать параметры
+     * @param array $keys Макссив php-параметров и их значений
      */
     protected static function setPhpSettings($keys = null)
     {
