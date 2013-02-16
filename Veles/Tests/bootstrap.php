@@ -20,6 +20,10 @@ namespace Veles\Tests;
 
 use \Veles\AutoLoader;
 
+define('ENVIRONMENT', 'development');
+define('CONFIG_FILE', __DIR__ . '/Project/settings.ini');
+define('TEMPLATE_PATH', __DIR__ . '/Project/View/');
+
 $paths = implode(PATH_SEPARATOR, array(
     realpath(__DIR__), realpath(__DIR__ . '/Project/'), get_include_path())
 );
