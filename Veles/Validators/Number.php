@@ -25,7 +25,6 @@ class Number implements iValidator
      * Конструктор
      * @param int $max Максимальное значение
      * @param int $min Минимальное значение
-     * @return bool
      */
     final public function __construct($min = 1, $max = 2147483647)
     {

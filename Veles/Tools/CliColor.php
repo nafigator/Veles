@@ -105,11 +105,11 @@ class CliColor
      */
     final public function setString($string = null)
     {
-        if (null === $string || !is_string($string)) {
+        if (null === $string) {
             throw new Exception('Not valid string!');
         }
 
-        $this->string = $string;
+        $this->string = (string) $string;
 
         return $this;
     }

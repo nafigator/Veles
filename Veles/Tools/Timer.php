@@ -29,6 +29,7 @@ class Timer
 
     private static $start_time = 0;
     private static $stop_time  = 0;
+    private static $diff       = 0;
 
     /**
      * Старт таймера
@@ -44,6 +45,8 @@ class Timer
     public static function stop()
     {
         self::$stop_time = microtime(true);
+        self::$diff += self::$stop_time - self::$start_time;
+        self::reset(false);
     }
 
     /**
@@ -53,28 +56,31 @@ class Timer
      */
     public static function get($precision = self::MICROSECONDS)
     {
-        $diff = self::$stop_time - self::$start_time;
-
         switch ($precision) {
             case self::SECONDS:
             case self::MILLISECONDS:
             case self::MICROSECONDS:
             case self::NANOSECONDS:
             case self::PICOSECONDS:
-                return round($diff, $precision);
+                return round(self::$diff, $precision);
                 break;
             default:
-                return round($diff, self::MICROSECONDS);
+                return round(self::$diff, self::MICROSECONDS);
                 break;
         }
     }
 
     /**
      * Сброс значений
+     * @param bool $full Флаг полного сброса значений
      */
-    public static function reset()
+    public static function reset($full = true)
     {
         self::$stop_time  = 0;
         self::$start_time = 0;
+
+        if ($full) {
+            self::$diff = 0;
+        }
     }
 }
