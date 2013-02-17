@@ -16,7 +16,7 @@ use \SplObserver,
     \Veles\Email\AbstractEmail;
 
 /**
- * Класс ErrorEmail
+ * Класс ErrEmail
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
 class ErrMail extends AbstractEmail implements SplObserver
@@ -26,7 +26,7 @@ class ErrMail extends AbstractEmail implements SplObserver
      */
     final public function init()
     {
-        $this->to = 'poligon@tut.by';
+        $this->receiver = 'poligon@tut.by';
 
         $this->headers  = "From: www@itvault.info\n";
         $this->headers .= 'X-Mailer: PHP/' . phpversion() . "\n";

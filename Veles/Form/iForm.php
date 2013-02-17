@@ -27,7 +27,8 @@ interface iForm
 
     /**
      * Добавление элемента формы
-     * @param Element $element Экземпляр элемента формы
+     * @param iElement $element Экземпляр элемента формы
+     * @return
      */
     public function addElement(iElement $element);
 

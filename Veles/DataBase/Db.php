@@ -25,7 +25,7 @@ class Db implements iDbDriver
 
     /**
      * Инстанс драйвера
-     * @todo вынести код создания класса в отдельную фабрику
+     * @return iDbDriver
      */
     private static function getDriver()
     {

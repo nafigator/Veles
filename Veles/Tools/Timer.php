@@ -12,8 +12,6 @@
 
 namespace Veles\Tools;
 
-use \Exception;
-
 /**
  * Класс Timer
  * @author  Yancharuk Alexander <alex@itvault.info>

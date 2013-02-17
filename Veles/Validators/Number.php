@@ -35,7 +35,7 @@ class Number implements iValidator
     /**
      * Валидация числовых значений
      * @param mixed $value Валидируемое значение
-     * $return bool
+     * @return bool
      */
     final public function check($value)
     {

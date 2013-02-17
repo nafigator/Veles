@@ -51,7 +51,7 @@ class PasswordTest extends PHPUnit_Framework_TestCase
 
         return array(
             array($user, $user->getCookieHash(), true),
-            array($user, 'wronghash', false)
+            array($user, 'wrongHash', false)
         );
     }
 
@@ -84,7 +84,7 @@ class PasswordTest extends PHPUnit_Framework_TestCase
 
         return array(
             array($user, 'password', true),
-            array($user, 'wrongpassword', false)
+            array($user, 'wrongPassword', false)
         );
     }
 }

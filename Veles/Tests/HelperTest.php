@@ -88,9 +88,9 @@ class HelperTest extends PHPUnit_Framework_TestCase
         return array(
             array('nd_lk.test-pro@mail.ru', true),
             array('nd/lk@mail.ru', false),
-            array('длоndlk@mail.ru', false),
+            array('false/email@mail.ru', false),
             array('email@wrong-domain', false),
-            array('email@wrong_domain.wrongld', false),
+            array('email@wrong_domain.wrongLd', false),
             array('email@wrong_domain.wro-d', false)
         );
     }

@@ -14,6 +14,7 @@ namespace Veles\DataBase;
 
 use \Exception;
 use \Veles\DataBase\DbPaginator;
+use \Veles\Model\AbstractModel;
 
 /**
  * Класс QueryBuilder
@@ -122,6 +123,7 @@ class QueryBuilder
      * Построение sql-запроса для delete
      * @param AbstractModel $model Экземпляр модели
      * @param array $ids Массив ID для удаления
+     * @throws Exception
      * @return string $sql
      */
     final public static function delete($model, $ids)
@@ -160,7 +162,6 @@ class QueryBuilder
      * Построение запроса получения списка объектов
      * @param AbstractModel $model Экземпляр модели
      * @param DbFilter $filter Экземпляр фильтра
-     * @param DbPaginator $pager Экземпляр пагинатора
      * @return string
      */
     final public static function find($model, $filter)
@@ -220,7 +221,9 @@ class QueryBuilder
 
     /**
      * Функция безопасности переменных
-     * @param  $arg
+     * @param $model
+     * @param $property
+     * @throws Exception
      * @return mixed
      */
     private static function sanitize($model, $property)

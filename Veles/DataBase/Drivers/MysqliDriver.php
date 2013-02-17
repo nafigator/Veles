@@ -15,9 +15,9 @@ namespace Veles\DataBase\Drivers;
 
 use \Exception;
 use \mysqli;
-use \MySQLi_Result;
 use \Veles\Config;
 use \Veles\DataBase\Drivers\iDbDriver;
+use \Veles\DataBase\DbException;
 
 /**
  * Класс соединения с базой
@@ -32,7 +32,6 @@ class MysqliDriver implements iDbDriver
     /**
      * Получение соединения с базой
      * @param string $name Имя сервера
-     * @return mysqli
      */
     private static function setLink($name)
     {
@@ -91,10 +90,12 @@ class MysqliDriver implements iDbDriver
     /**
      * Метод для выполнения non-SELECT запросов
      * @param string $sql Sql-запрос
-     * @param string $name Имя сервера
+     * @param string $server
+     * @throws DbException
+     * @internal param string $name Имя сервера
      * @return mixed
      */
-    final public static function query($sql, $server)
+    final public static function query($sql, $server = 'master')
     {
         self::setLink($server);
 
@@ -113,9 +114,10 @@ class MysqliDriver implements iDbDriver
      *
      * @param string $sql SQL-запрос
      * @param string $server Имя сервера
+     * @throws DbException
      * @return mixed
      */
-    final public static function getValue($sql, $server)
+    final public static function getValue($sql, $server = 'master')
     {
         self::setLink($server);
 
@@ -138,9 +140,10 @@ class MysqliDriver implements iDbDriver
      *
      * @param string $sql SQL-запрос
      * @param string $server Имя сервера
+     * @throws DbException
      * @return mixed
      */
-    final public static function getRow($sql, $server)
+    final public static function getRow($sql, $server = 'master')
     {
         self::setLink($server);
 
@@ -161,10 +164,12 @@ class MysqliDriver implements iDbDriver
     /**
      * Для SELECT, возвращающих значение коллекцию результатов
      *
+     * @param string $sql
      * @param string $server Имя сервера
+     * @throws DbException
      * @return mixed
      */
-    final public static function getRows($sql, $server)
+    final public static function getRows($sql, $server = 'master')
     {
         self::setLink($server);
 

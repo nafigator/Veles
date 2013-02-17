@@ -22,7 +22,7 @@ class GuestStrategy extends AbstractAuthStrategy
 {
     /**
      * Гостевая авторизация
-     * @return User
+     * @return bool
      */
     final public function identify()
     {

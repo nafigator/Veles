@@ -14,6 +14,7 @@ namespace Veles\Model;
 
 use \Veles\DataBase\Db;
 use \Veles\DataBase\DbPaginator;
+use \Veles\DataBase\DbFilter;
 use \Veles\DataBase\QueryBuilder;
 
 /**
@@ -34,7 +35,7 @@ abstract class AbstractModel
 
     /**
      * Магия для создания свойств модели
-     * @param stirng $name
+     * @param string $name
      * @param mixed  $value
      */
     final public function __set($name, $value)
@@ -45,17 +46,21 @@ abstract class AbstractModel
     /**
      * Магия для доступа к свойствам модели
      * @param string $name
+     * @return mixed
      */
     final public function __get($name)
     {
         if (array_key_exists($name, $this->data)) {
             return $this->data[$name];
         }
+
+        return null;
     }
 
     /**
      * Магия для проверки свойства
      * @param string $name
+     * @return bool
      */
     final public function __isset($name)
     {
@@ -98,6 +103,7 @@ abstract class AbstractModel
     /**
      * Получение данных по ID
      * @param int $identifier ID модели
+     * @return bool
      */
     final public function getById($identifier)
     {
@@ -116,8 +122,8 @@ abstract class AbstractModel
 
     /**
      * Получение списка объектов по фильтру
-     * @param DbFilter $filter Объект фильтра
-     * @param DbPaginator $filter Объект постраничного вывода
+     * @param bool|DbFilter $filter Объект фильтра
+     * @param bool|DbPaginator $pager Объект постраничного вывода
      * @return array Массив с найденными по фильтру данными
      */
     final public function getAll($filter = false, $pager = false)
@@ -149,7 +155,8 @@ abstract class AbstractModel
 
     /**
      * Удаление данных
-     * @param array $ids
+     * @param array|bool $ids
+     * @return bool
      */
     final public function delete($ids = false)
     {
@@ -187,7 +194,7 @@ abstract class AbstractModel
 
     /**
      * Получение уникального объекта
-     * @param DbFilter $filter Объект фильтра
+     * @param bool|DbFilter $filter Объект фильтра
      * @return bool
      */
     final public function find($filter = false)
@@ -208,7 +215,8 @@ abstract class AbstractModel
     /**
      * Произвольный запрос с постраничным выводом
      * @param string $sql Запрос
-     * @param DbPagination $pager Объект постраничного вывода
+     * @param bool|DbPaginator $pager Объект постраничного вывода
+     * @return array|bool
      */
     final protected function query($sql, $pager = false)
     {

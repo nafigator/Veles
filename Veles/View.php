@@ -40,6 +40,7 @@ class View
     /**
      * Метод для очистки переменных в выводе
      * @param array $vars Массив имён переменных для очистки
+     * @throws Exception
      */
     final public static function del($vars)
     {
@@ -65,6 +66,7 @@ class View
         }
 
         ob_start();
+        /** @noinspection PhpIncludeInspection */
         require TEMPLATE_PATH . $path;
         ob_end_flush();
     }
@@ -81,6 +83,7 @@ class View
         }
 
         ob_start();
+        /** @noinspection PhpIncludeInspection */
         require TEMPLATE_PATH . $path;
         $output = ob_get_contents();
         ob_end_clean();

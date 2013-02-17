@@ -15,6 +15,7 @@ namespace Veles\Auth;
 use \Veles\Auth\Strategies\LoginFormStrategy;
 use \Veles\Auth\Strategies\CookieStrategy;
 use \Veles\Auth\Strategies\GuestStrategy;
+use \Veles\Auth\Strategies\AbstractAuthStrategy;
 
 /**
  * Класс UserAuthFactory
@@ -24,7 +25,7 @@ class UsrAuthFactory
 {
     /**
      * Алгритм выбора стратегии авторизации пользователя
-     * @return iUsrAuthStrategy
+     * @return AbstractAuthStrategy
      */
     final public static function create()
     {

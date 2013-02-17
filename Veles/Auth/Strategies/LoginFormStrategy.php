@@ -37,7 +37,7 @@ class LoginFormStrategy extends AbstractAuthStrategy
 
     /**
      * Авторизация пользователя через форму логина
-     * @return User
+     * @return bool
      */
     final public function identify()
     {

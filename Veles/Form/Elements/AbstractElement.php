@@ -12,8 +12,6 @@
 
 namespace Veles\Form\Elements;
 
-use \Veles\Form\iForm;
-
 /**
  * Класс AbstractElement
  * @author  Yancharuk Alexander <alex@itvault.info>
@@ -34,6 +32,7 @@ abstract class AbstractElement implements iElement
     /**
      * Валидация элемента формы
      * @param mixed $value Значение для валидации
+     * @return bool
      */
     final public function validate($value)
     {
@@ -72,7 +71,7 @@ abstract class AbstractElement implements iElement
 
     /**
      * Магия для создания свойств элемента
-     * @param stirng $name
+     * @param string $name
      * @param mixed  $value
      */
     final public function __set($name, $value)
@@ -83,12 +82,14 @@ abstract class AbstractElement implements iElement
     /**
      * Магия для доступа к свойствам элемента
      * @param string $name
+     * @return mixed
      */
     final public function __get($name)
     {
         if (array_key_exists($name, $this->params)) {
             return $this->params[$name];
         }
+        return null;
     }
 
     /**

@@ -12,8 +12,6 @@
 
 namespace Veles\Form\Elements;
 
-use \Veles\Form\iForm;
-
 /**
  * Интерфейс iElement
  * @author  Yancharuk Alexander <alex@itvault.info>

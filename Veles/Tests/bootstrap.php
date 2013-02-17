@@ -29,5 +29,6 @@ $paths = implode(PATH_SEPARATOR, array(
 );
 set_include_path($paths);
 
+/** @noinspection PhpIncludeInspection */
 require 'Veles/AutoLoader.php';
 AutoLoader::init();

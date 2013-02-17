@@ -46,7 +46,7 @@ interface iDbDriver
      * @param string $server Имя сервера
      * @return bool
      */
-    public static function query($sql, $server);
+    public static function query($sql, $server = 'master');
 
     /**
      * Для SELECT, возвращающих значение одного поля
@@ -55,7 +55,7 @@ interface iDbDriver
      * @param string $server Имя сервера
      * @return mixed
      */
-    public static function getValue($sql, $server);
+    public static function getValue($sql, $server = 'master');
 
     /**
      * Для SELECT, возвращающих значение одной строки таблицы
@@ -64,7 +64,7 @@ interface iDbDriver
      * @param string $server Имя сервера
      * @return array
      */
-    public static function getRow($sql, $server);
+    public static function getRow($sql, $server = 'master');
 
     /**
      * Для SELECT, возвращающих значение коллекцию результатов
@@ -73,5 +73,5 @@ interface iDbDriver
      * @param string $server Имя сервера
      * @return array
      */
-    public static function getRows($sql, $server);
+    public static function getRows($sql, $server = 'master');
 }

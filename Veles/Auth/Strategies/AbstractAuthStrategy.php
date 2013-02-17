@@ -13,6 +13,8 @@
 namespace Veles\Auth\Strategies;
 
 use \Veles\Model\User;
+use \Veles\Auth\UsrGroup;
+use \Veles\DataBase\DbFilter;
 
 /**
  * Интерфейс iUsrAuthStrategy
@@ -70,8 +72,9 @@ abstract class AbstractAuthStrategy
     /**
      * Поиск пользователя
      * @param DbFilter $filter
+     * @return bool
      */
-    final protected function findUser($filter)
+    final protected function findUser(DbFilter $filter)
     {
         // Пользователь с таким id не найден
         if ($this->user->find($filter)) {

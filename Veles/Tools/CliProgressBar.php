@@ -29,6 +29,7 @@ class CliProgressBar
     /**
      * Конструктор
      * @param int $final Числовой эквивалент финального результата
+     * @param int $width
      */
     final public function __construct($final, $width = 60)
     {

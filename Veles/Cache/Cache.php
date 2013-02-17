@@ -14,7 +14,6 @@ namespace Veles\Cache;
 
 use \Veles\Config;
 use \Veles\Cache\Drivers\iCacheDriver;
-use \Exception;
 
 /**
  * Класс AbstractCache
@@ -27,7 +26,7 @@ class Cache
     /**
      * Инициализация драйвера кэша
      * @param string $driver_name Имя дравйвера
-     * @return iCache
+     * @return iCacheDriver
      */
     final public static function init($driver_name = 'APC')
     {
@@ -62,7 +61,7 @@ class Cache
 
     /**
      * Сохранение данных
-     * @param stirng $key Ключ
+     * @param string $key Ключ
      * @param mixed $value Данные
      * @return bool
      */

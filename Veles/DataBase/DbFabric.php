@@ -13,6 +13,8 @@
 namespace Veles\DataBase;
 
 use \Veles\Config;
+use \Exception;
+use \Veles\DataBase\Drivers\iDbDriver;
 
 /**
  * Класс DbFabric
@@ -22,6 +24,8 @@ class DbFabric
 {
     /**
      * Метод для создания класса драйвера базы данных
+     * @throws Exception
+     * @return iDbDriver
      */
     final public static function getDriver()
     {
@@ -31,6 +35,12 @@ class DbFabric
 
         $class_name = "\\Veles\\DataBase\\Drivers\\$class";
 
-        return new $class_name;
+        $driver = new $class_name;
+
+        if (!$driver instanceof iDbDriver) {
+            throw new Exception('Не корректный Db-драйвер!');
+        }
+
+        return new $driver;
     }
 }

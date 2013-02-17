@@ -12,6 +12,8 @@
 
 namespace Veles\Auth;
 
+use \Veles\Model\AbstractModel;
+
 /**
  * Класс авторизации пользователя
  * @author  Yancharuk Alexander <alex@itvault.info>
@@ -85,7 +87,7 @@ final class UsrAuth
 
     /**
      * Получение пользователя
-     * @return Model
+     * @return AbstractModel
      */
     final public function getUser()
     {

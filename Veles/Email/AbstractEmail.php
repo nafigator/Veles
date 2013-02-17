@@ -29,7 +29,8 @@ abstract class AbstractEmail
 
     /**
      * Вызов
-     * @param array $vars Набор переменных
+     * @param SplSubject $subject
+     * @internal param array $vars Набор переменных
      */
     final public function update(SplSubject $subject)
     {

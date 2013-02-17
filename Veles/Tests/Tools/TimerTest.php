@@ -91,15 +91,15 @@ class TimerTest extends PHPUnit_Framework_TestCase
         $expected = round(microtime(true), 2);
 
         $object = new ReflectionObject(new Timer);
-        $prop = $object->getProperty('stop_time');
+        $prop = $object->getProperty('diff');
 
-        $msg = 'Property Timer::$stop_time not private';
+        $msg = 'Property Timer::$diff not private';
         $this->assertTrue($prop->isPrivate(), $msg);
 
         $prop->setAccessible(true);
         $result = round($prop->getValue(), 2);
 
-        $msg = 'Wrong result of Timer::$stop_time property';
+        $msg = 'Wrong result of Timer::$diff property';
         $this->assertSame($result, $expected, $msg);
     }
 

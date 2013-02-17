@@ -82,7 +82,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
     <div id="main_wrapper">
         Test complete!
     </div>
-    <div id="main_wrapper">
+    <div id="footer_wrapper">
         Hello World!
     </div>
 </body>

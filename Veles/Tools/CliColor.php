@@ -19,6 +19,7 @@ use \Exception;
  * Класс CliColor
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
+/** @noinspection PhpDocMissingReturnTagInspection */
 class CliColor
 {
     private $color;
@@ -50,6 +51,7 @@ class CliColor
     /**
      * При вызове оборачивает строку esc-последовательностями цвета
      * @param string $string Строка
+     * @return string
      */
     final public function __invoke($string = null)
     {
@@ -67,6 +69,8 @@ class CliColor
     /**
      * Конструктор
      * @param string $color Цвет
+     * @throws Exception
+     * @param array $style Массив со стилями
      */
     final public function __construct(
         $color = 'green', $style = array('default')
@@ -85,11 +89,12 @@ class CliColor
 
     /**
      * Вывод объекта в виде строки
+     * @return mixed
      */
     final public function __toString()
     {
         if (null === $this->string) {
-            return;
+            return null;
         }
 
         $style = $this->getStyle();
@@ -101,6 +106,7 @@ class CliColor
     /**
      * Добавление строки
      * @param string $string Строка для последующего вывода в цвете
+     * @throws Exception
      * @return CliColor
      */
     final public function setString($string = null)
@@ -117,6 +123,7 @@ class CliColor
     /**
      * Установка стиля
      * @param array $style Стиль
+     * @throws Exception
      * @return CliColor
      */
     final public function setStyle($style = array())
@@ -141,11 +148,12 @@ class CliColor
     /**
      * Установка цвета
      * @param string $color Цвет
+     * @throws Exception
      * @return CliColor
      */
-    private function setColor($color = null)
+    final public function setColor($color = null)
     {
-        if (null === $color || !is_string($style)) {
+        if (null === $color || !is_string($color)) {
             throw new Exception('Not valid color!');
         }
 

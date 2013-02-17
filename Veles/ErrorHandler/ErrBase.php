@@ -12,10 +12,11 @@
 
 namespace Veles\ErrorHandler;
 
-use \SplSubject,
-    \SplObserver,
-    \Veles\View,
-    \Veles\DataBase\DbException;
+use \SplSubject;
+use \SplObserver;
+use \Veles\View;
+use \Veles\DataBase\DbException;
+use \Exception;
 
 /**
  * Класс Error
@@ -94,7 +95,7 @@ class ErrBase implements SplSubject
             $this->output = View::get('error/exception.phtml');
 
             //TODO: $this->attach(new ErrorSMS($this->vars));
-            $this->attach(new ErrorEmail());
+            $this->attach(new ErrMail());
             $this->notify();
 
             //TODO: go to custom error page;
@@ -136,6 +137,7 @@ class ErrBase implements SplSubject
     /**
      * Форматирование стека вызовов
      * @param array $stack Массив вызовов
+     * @return array
      */
     private function getStack($stack)
     {

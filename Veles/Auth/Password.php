@@ -22,7 +22,8 @@ class Password
 {
     /**
      * Проверка хэша пользователя
-     * @param $user
+     * @param User $user
+     * @param $cookie_hash
      * @return bool
      */
     final public static function checkCookieHash(User $user, &$cookie_hash)
@@ -32,8 +33,8 @@ class Password
 
     /**
      * Проверка пароля пользователя при ajax-авторизации
-     * @param object $user     User
-     * @param string $password Пароль полученый ajax'ом
+     * @param User $user User
+     * @param string $password Пароль полученый через ajax
      * @return bool
      */
     final public static function check(User $user, &$password)

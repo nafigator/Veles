@@ -62,7 +62,8 @@ abstract class AbstractForm implements iForm
 
     /**
      * Добавление элемента формы
-     * @param Element $element Экземпляр элемента формы
+     * @param iElement $element Экземпляр элемента формы
+     * @return void
      */
     final public function addElement(iElement $element)
     {

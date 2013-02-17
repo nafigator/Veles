@@ -13,7 +13,6 @@
 namespace Veles\Auth\Strategies;
 
 use \Veles\DataBase\DbFilter;
-use \Veles\Auth\Password;
 use \Veles\Auth\UsrGroup;
 
 /**
@@ -40,7 +39,7 @@ class CookieStrategy extends AbstractAuthStrategy
 
     /**
      * Авторизация пользователя по кукам
-     * @return User
+     * @return bool
      */
     final public function identify()
     {

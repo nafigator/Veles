@@ -35,6 +35,7 @@ class Byte implements iValidator
      * Преобразование значений байтов в удобочитаемый формат
      * @param int $size Значение в байтах
      * @param int $precision Точность возвращаемых значений
+     * @return string
      */
     final public static function format($size, $precision = 2)
     {

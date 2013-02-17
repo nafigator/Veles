@@ -27,7 +27,7 @@ interface iCacheDriver
 
     /**
      * Сохранение данных
-     * @param stirng $key Ключ
+     * @param string $key Ключ
      * @param mixed $value Данные
      * @return bool
      */

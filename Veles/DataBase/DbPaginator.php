@@ -29,7 +29,8 @@ class DbPaginator
 
     /**
      * Конструктор
-     * @param string $template Путь к шаблону постраничной навигации
+     * @param bool|string $template Путь к шаблону постраничной навигации
+     * @param int $curr_page Текущая страница
      */
     final public function __construct($template = false, $curr_page = 1)
     {
@@ -45,6 +46,7 @@ class DbPaginator
      */
     final public function __toString()
     {
+        /** @noinspection PhpIncludeInspection */
         require $this->template;
         return '';
     }
@@ -123,7 +125,7 @@ class DbPaginator
 
     /**
      * Магия для создания доп. свойств постраничного вывода
-     * @param stirng $name
+     * @param string $name
      * @param mixed  $value
      */
     final public function __set($name, $value)
@@ -134,11 +136,14 @@ class DbPaginator
     /**
      * Магия для доступа к свойствам постраничного вывода
      * @param string $name
+     * @return mixed
      */
     final public function __get($name)
     {
         if (array_key_exists($name, $this->data)) {
             return $this->data[$name];
         }
+
+        return null;
     }
 }

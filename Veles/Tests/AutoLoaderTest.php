@@ -1,6 +1,6 @@
 <?php
 /**
- * Unit-test for Autoloader class
+ * Unit-test for AutoLoader class
  * @file    AutoLoaderTest.php
  *
  * PHP version 5.3.9+
@@ -60,7 +60,7 @@ EOF;
 
         $result = array_search('Veles\Tests\AutoLoaderFake', get_declared_classes());
 
-        $msg = 'Class AutoLoaderFake didn\'t loaded';
+        $msg = 'Class AutoLoaderFake did not loaded';
         self::assertTrue(false !== $result, $msg);
     }
 }

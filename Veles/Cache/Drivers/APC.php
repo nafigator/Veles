@@ -12,6 +12,8 @@
 
 namespace Veles\Cache\Drivers;
 
+use \Exception;
+
 /**
  * Класс APC
  * @author  Yancharuk Alexander <alex@itvault.info>
@@ -40,7 +42,7 @@ class APC implements iCacheDriver
 
     /**
      * Сохранение данных
-     * @param stirng $key Ключ
+     * @param string $key Ключ
      * @param mixed $value Данные
      * @param int $ttl Время хранения данных в секундах
      * @return mixed
