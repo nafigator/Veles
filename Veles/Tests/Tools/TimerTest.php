@@ -66,7 +66,7 @@ class TimerTest extends PHPUnit_Framework_TestCase
     public function testStart()
     {
         Timer::start();
-        $expected = round(microtime(true), 2);
+        $expected = round(microtime(true), 1);
 
         $object = new ReflectionObject(new Timer);
         $prop = $object->getProperty('start_time');
@@ -75,15 +75,55 @@ class TimerTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($prop->isPrivate(), $msg);
 
         $prop->setAccessible(true);
-        $result = round($prop->getValue(), 2);
+        $result = round($prop->getValue(), 1);
+
+        $msg = 'Wrong Timer Timer::$start_time type';
+        $this->assertInternalType('float', $result, $msg);
 
         $msg = 'Wrong result of Timer::$start_time property';
         $this->assertSame($result, $expected, $msg);
     }
 
     /**
+     * @covers Veles\Tools\Timer::reset
+     * @depends testStart
+     */
+    public function testReset()
+    {
+        Timer::start();
+        Timer::stop();
+        Timer::reset();
+        $expected = 0;
+
+        $object = new ReflectionObject(new Timer);
+
+        $stop_time  = $object->getProperty('stop_time');
+        $start_time = $object->getProperty('start_time');
+        $diff = $object->getProperty('diff');
+
+        $stop_time->setAccessible(true);
+        $result = $stop_time->getValue();
+
+        $msg = 'Wrong result of Timer::$stop_time property';
+        $this->assertSame($result, $expected, $msg);
+
+        $start_time->setAccessible(true);
+        $result = $start_time->getValue();
+
+        $msg = 'Wrong result of Timer::$start_time property';
+        $this->assertSame($result, $expected, $msg);
+
+        $diff->setAccessible(true);
+        $result = $start_time->getValue();
+
+        $msg = 'Wrong result of Timer::$diff property';
+        $this->assertSame($result, $expected, $msg);
+    }
+
+    /**
      * @covers  Veles\Tools\Timer::stop
      * @depends testStart
+     * @depends testReset
      */
     public function testStop()
     {
@@ -110,21 +150,22 @@ class TimerTest extends PHPUnit_Framework_TestCase
     public function testGet()
     {
         Timer::start();
-        Timer::stop();
 
         $object = new ReflectionObject(new Timer);
         $start_time = $object->getProperty('start_time');
-        $stop_time = $object->getProperty('stop_time');
-
         $start_time->setAccessible(true);
-        $start = $start_time->getValue();
-        $stop_time->setAccessible(true);
-        $stop = $stop_time->getValue();
+        $start_value = $start_time->getValue();
 
-        $expected = round($stop - $start, Timer::MICROSECONDS);
-        $result = Timer::get();
+        Timer::stop();
 
-        $this->assertInternalType('float', $result);
+        $stop_value = microtime(true);
+
+        $result = Timer::get(Timer::MILLISECONDS);
+        $expected = round($stop_value - $start_value, 3);
+
+
+        $msg = 'Wrong Timer result type';
+        $this->assertInternalType('float', $result, $msg);
 
         $msg = 'Wrong Timer result';
         $this->assertSame($result, $expected, $msg);
@@ -141,15 +182,12 @@ class TimerTest extends PHPUnit_Framework_TestCase
         Timer::stop();
 
         $object = new ReflectionObject(new Timer);
-        $start_time = $object->getProperty('start_time');
-        $stop_time = $object->getProperty('stop_time');
+        $diff_prop = $object->getProperty('diff');
 
-        $start_time->setAccessible(true);
-        $start = $start_time->getValue();
-        $stop_time->setAccessible(true);
-        $stop = $stop_time->getValue();
+        $diff_prop->setAccessible(true);
+        $diff = $diff_prop->getValue();
 
-        $expected = round($stop - $start, $precision);
+        $expected = round($diff, $precision);
 
         $result = Timer::get($precision);
 
@@ -169,34 +207,5 @@ class TimerTest extends PHPUnit_Framework_TestCase
             array(Timer::NANOSECONDS),
             array(Timer::PICOSECONDS)
         );
-    }
-
-    /**
-     * @covers  Veles\Tools\Timer::reset
-     * @depends testStop
-     */
-    public function testReset()
-    {
-        Timer::start();
-        Timer::stop();
-        Timer::reset();
-        $expected = 0;
-
-        $object = new ReflectionObject(new Timer);
-
-        $stop_time  = $object->getProperty('stop_time');
-        $start_time = $object->getProperty('start_time');
-
-        $stop_time->setAccessible(true);
-        $result = $stop_time->getValue();
-
-        $msg = 'Wrong result of Timer::$stop_time property';
-        $this->assertSame($result, $expected, $msg);
-
-        $start_time->setAccessible(true);
-        $result = $start_time->getValue();
-
-        $msg = 'Wrong result of Timer::$start_time property';
-        $this->assertSame($result, $expected, $msg);
     }
 }
