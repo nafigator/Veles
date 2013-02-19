@@ -17,13 +17,12 @@ use \Veles\View;
 use \Veles\Routing\Route;
 use \Veles\Auth\UsrAuth;
 use \Veles\ErrorHandler\ErrBase;
-use \Veles\Application\iApplication;
 
 /**
  * Класс Application
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
-class Application implements iApplication
+class Application
 {
     /**
      * Старт приложения
