@@ -99,10 +99,10 @@ class MysqliDriver implements iDbDriver
     {
         self::setLink($server);
 
-        $result = mysqli_query(self::$curr_link, $sql, MYSQLI_USE_RESULT);
+        $result = mysqli_query(self::getLink(), $sql, MYSQLI_USE_RESULT);
         if (false === $result) {
             throw new DbException(
-                'Не удалось выполнить запрос', self::$curr_link, $sql
+                'Не удалось выполнить запрос', self::getLink(), $sql
             );
         }
 
@@ -121,10 +121,10 @@ class MysqliDriver implements iDbDriver
     {
         self::setLink($server);
 
-        $result = mysqli_query(self::$curr_link, $sql, MYSQLI_USE_RESULT);
+        $result = mysqli_query(self::getLink(), $sql, MYSQLI_USE_RESULT);
         if (false === $result) {
             throw new DbException(
-                'Не удалось выполнить запрос', self::$curr_link, $sql
+                'Не удалось выполнить запрос', self::getLink(), $sql
             );
         }
 
@@ -147,10 +147,10 @@ class MysqliDriver implements iDbDriver
     {
         self::setLink($server);
 
-        $result = mysqli_query(self::$curr_link, $sql, MYSQLI_USE_RESULT);
+        $result = mysqli_query(self::getLink(), $sql, MYSQLI_USE_RESULT);
         if (false === $result) {
             throw new DbException(
-                'Не удалось выполнить запрос', self::$curr_link, $sql
+                'Не удалось выполнить запрос', self::getLink(), $sql
             );
         }
 
@@ -173,10 +173,10 @@ class MysqliDriver implements iDbDriver
     {
         self::setLink($server);
 
-        $result = mysqli_query(self::$curr_link, $sql, MYSQLI_USE_RESULT);
+        $result = mysqli_query(self::getLink(), $sql, MYSQLI_USE_RESULT);
         if (false === $result) {
             throw new DbException(
-                'Не удалось выполнить запрос', self::$curr_link, $sql
+                'Не удалось выполнить запрос', self::getLink(), $sql
             );
         }
 
@@ -196,10 +196,10 @@ class MysqliDriver implements iDbDriver
      */
     final public static function getLastInsertId()
     {
-        $result = mysqli_insert_id(self::$curr_link);
+        $result = mysqli_insert_id(self::getLink());
         if (false === $result) {
             throw new DbException(
-                'Не удалось получить LAST_INSERT_ID()', self::$curr_link
+                'Не удалось получить LAST_INSERT_ID()', self::getLink()
             );
         }
 
@@ -214,10 +214,10 @@ class MysqliDriver implements iDbDriver
     {
         $sql = 'SELECT FOUND_ROWS()';
 
-        $result = mysqli_query(self::$curr_link, $sql, MYSQLI_USE_RESULT);
+        $result = mysqli_query(self::getLink(), $sql, MYSQLI_USE_RESULT);
         if (false === $result) {
             throw new DbException(
-                'Не удалось выполнить запрос', self::$curr_link, $sql
+                'Не удалось выполнить запрос', self::getLink(), $sql
             );
         }
 

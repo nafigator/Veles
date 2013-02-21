@@ -54,7 +54,7 @@ class DbException extends Exception
     /**
      * Exception с ошибкой коннекта и текстом ошибки запроса
      * @param string $msg Текст ошибки
-     * @param resource $link Линк sql-соединения
+     * @param resource|\mysqli $link Линк sql-соединения
      * @param string $sql SQL-запрос
      */
     final public function __construct($msg, $link, $sql = null)
