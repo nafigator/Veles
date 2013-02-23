@@ -30,6 +30,8 @@ abstract class AbstractForm implements iForm
     protected $template = null;
     protected $data     = null;
     protected $sid      = null;
+    protected $name     = null;
+    protected $action   = null;
 
     private $elements = array();
 
@@ -153,14 +155,5 @@ abstract class AbstractForm implements iForm
         Cache::set($this->name . $this->sid, true, 7200);
 
         return str_replace($tpl, $elements, $output);
-    }
-
-    /**
-     * Получение общего шаблона для элементов
-     * @return string|bool
-     */
-    final public function getElementsTpl()
-    {
-        return $this->elements_template;
     }
 }

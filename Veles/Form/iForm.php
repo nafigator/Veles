@@ -46,10 +46,4 @@ interface iForm
      * Вывод формы
      */
     public function __toString();
-
-    /**
-     * Получение общего шаблона для элементов
-     * @return string|bool
-     */
-    public function getElementsTpl();
 }
