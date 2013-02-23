@@ -79,10 +79,9 @@ class CliProgressBar
      */
     final public function getStatusString($current)
     {
-        $cur_time = microtime(true);
-        $current = max($current, 1);
-        $process_time = $cur_time - $this->start_time;
-        $avg_speed = $current / $process_time;
+        $cur_time  = microtime(true);
+        $current   = max($current, 1);
+        $avg_speed = $current / ($cur_time - $this->start_time);
 
         $estimated = ($this->final_value - $current) / $avg_speed;
         $estimated = number_format($estimated, 1);
