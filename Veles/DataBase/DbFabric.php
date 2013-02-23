@@ -38,7 +38,7 @@ class DbFabric
         $driver = new $class_name;
 
         if (!$driver instanceof iDbDriver) {
-            throw new Exception('Не корректный Db-драйвер!');
+            throw new Exception('Некорректный Db-драйвер!');
         }
 
         return new $driver;

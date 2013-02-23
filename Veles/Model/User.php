@@ -23,7 +23,7 @@ class User extends AbstractModel
     const TBL_NAME      = 'users';
     const TBL_USER_INFO = 'users_info';
 
-    public static $map = array(
+    protected static $map = array(
         'id'         => 'int',
         'email'      => 'string',
         'hash'       => 'string',

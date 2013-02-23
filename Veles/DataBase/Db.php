@@ -38,6 +38,7 @@ class Db implements iDbDriver
 
     /**
      * Получение текущего линка к базе
+     * @return mixed
      */
     final public static function getLink()
     {
@@ -46,6 +47,7 @@ class Db implements iDbDriver
 
     /**
      * Метод для получения списка ошибок
+     * @return array
      */
     final public static function getErrors()
     {
@@ -55,6 +57,7 @@ class Db implements iDbDriver
     /**
      * Функция получения FOUND_ROWS()
      * Использовать только после запроса с DbPaginator
+     * @return array
      */
     final public static function getFoundRows()
     {

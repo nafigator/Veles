@@ -33,7 +33,7 @@ class QueryBuilder
     {
         $arr = array('fields' => '', 'values' => '');
 
-        foreach ($model::$map as $property => $value) {
+        foreach ($model::getMap() as $property => $value) {
             $value = self::sanitize($model, $property);
 
             if (null === $value) {
@@ -72,7 +72,7 @@ class QueryBuilder
     {
         $params = '';
 
-        $properties = array_keys($model::$map);
+        $properties = array_keys($model::getMap());
         foreach ($properties as $property) {
             $value = self::sanitize($model, $property);
 
@@ -174,7 +174,7 @@ class QueryBuilder
         $order  = '';
         $limit  = '';
 
-        $properties = array_keys($model::$map);
+        $properties = array_keys($model::getMap());
         foreach ($properties as $property) {
             $fields .= "`$property`, ";
         }
@@ -221,14 +221,16 @@ class QueryBuilder
 
     /**
      * Функция безопасности переменных
-     * @param $model
+     * @param AbstractModel $model
      * @param $property
      * @throws Exception
      * @return mixed
      */
     private static function sanitize($model, $property)
     {
-        if (!isset($model::$map[$property])) {
+        $map = $model::getMap();
+
+        if (!isset($map[$property])) {
             throw new Exception(
                 "Неизвестное свойство \"$property\" модели " . get_class($model)
             );
@@ -238,13 +240,7 @@ class QueryBuilder
             return null;
         }
 
-        if (!isset($model::$map[$property])) {
-            throw new Exception(
-                "Неизвестный тип данных {$model::$map[$property]} в запросе"
-            );
-        }
-
-        switch ($model::$map[$property]) {
+        switch ($map[$property]) {
             case 'int':
                 $value = (int) $model->$property;
                 break;
@@ -255,6 +251,9 @@ class QueryBuilder
                 $value = '\'' . mysqli_real_escape_string(
                     Db::getLink(), (string) $model->$property
                 ) . '\'';
+                break;
+            default:
+                $value = null;
                 break;
         }
 

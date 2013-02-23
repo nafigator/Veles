@@ -23,14 +23,19 @@ use \Veles\DataBase\QueryBuilder;
  */
 abstract class AbstractModel
 {
-    // Данные модели
+    /**
+     * @var array $data Данные модели
+     */
     protected $data = array();
 
-    // Карта типов данных объекта
-    // Values: int, float, string
-    public static $map = array();
+    /**
+     * @var int|float|string $map Карта типов данных объекта
+     */
+    protected static $map = array();
 
-    // Имя таблицы
+    /**
+     * @const string|null Имя таблицы
+     */
     const TBL_NAME = null;
 
     /**
@@ -76,6 +81,15 @@ abstract class AbstractModel
         if (null !== $identifier) {
             $this->getById($identifier);
         }
+    }
+
+    /**
+     * Получение карты данных модели
+     * @return array
+     */
+    final public static function getMap()
+    {
+        return static::$map;
     }
 
     /**
