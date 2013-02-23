@@ -74,9 +74,11 @@ abstract class AbstractForm implements iForm
 
     /**
      * Валидатор формы
+     * @return bool
      */
     final public function valid()
     {
+        /** @var iElement $element*/
         foreach ($this->elements as $element) {
             if ($element instanceof ButtonElement
                 || $element instanceof SubmitElement
@@ -104,6 +106,7 @@ abstract class AbstractForm implements iForm
 
     /**
      * Проверка была ли отправлена форма
+     * @return bool
      */
     final public function submitted()
     {
@@ -131,12 +134,14 @@ abstract class AbstractForm implements iForm
 
     /**
      * Вывод формы
+     * @return string
      */
     public function __toString()
     {
         $elements = $tpl = array();
         $output   = View::get($this->template);
 
+        /** @var iElement $element */
         foreach ($this->elements as $number => $element) {
             $elements[] = $element->render($this);
             $tpl[]      = "#$number#";
