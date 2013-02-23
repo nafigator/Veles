@@ -37,7 +37,7 @@ class User extends AbstractModel
      */
     final public function getId()
     {
-        return (isset($this->id)) ? $this->id : false;
+        return isset($this->id) ? $this->id : false;
     }
 
     /**
@@ -46,7 +46,7 @@ class User extends AbstractModel
      */
     final public function getHash()
     {
-        return (isset($this->hash)) ? $this->hash : false;
+        return isset($this->hash) ? $this->hash : false;
     }
 
     /**
@@ -55,7 +55,7 @@ class User extends AbstractModel
      */
     final public function getCookieHash()
     {
-        return (isset($this->hash)) ? substr($this->hash, 29) : false;
+        return isset($this->hash) ? substr($this->hash, 29) : false;
     }
 
     /**
@@ -64,7 +64,7 @@ class User extends AbstractModel
      */
     final public function getSalt()
     {
-        return (isset($this->hash)) ? substr($this->hash, 0, 28) : false;
+        return isset($this->hash) ? substr($this->hash, 0, 28) : false;
     }
 
     /**
@@ -73,6 +73,6 @@ class User extends AbstractModel
      */
     final public function getGroup()
     {
-        return (isset($this->group)) ? $this->group : UsrGroup::GUEST;
+        return isset($this->group) ? $this->group : UsrGroup::GUEST;
     }
 }
