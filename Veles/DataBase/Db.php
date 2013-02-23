@@ -63,6 +63,7 @@ class Db implements iDbDriver
 
     /**
      * Функция получения LAST_INSERT_ID()
+     * @return int
      */
     final public static function getLastInsertId()
     {

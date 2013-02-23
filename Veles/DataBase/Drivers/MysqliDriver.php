@@ -93,7 +93,7 @@ class MysqliDriver implements iDbDriver
      * @param string $server
      * @throws DbException
      * @internal param string $name Имя сервера
-     * @return mixed
+     * @return bool
      */
     final public static function query($sql, $server = 'master')
     {
@@ -115,7 +115,7 @@ class MysqliDriver implements iDbDriver
      * @param string $sql SQL-запрос
      * @param string $server Имя сервера
      * @throws DbException
-     * @return mixed
+     * @return string|bool
      */
     final public static function getValue($sql, $server = 'master')
     {
@@ -130,7 +130,7 @@ class MysqliDriver implements iDbDriver
 
         $row = mysqli_fetch_row($result);
 
-        $result->free();
+        mysqli_free_result($result);
 
         return isset($row[0]) ? $row[0] : false;
     }
@@ -141,7 +141,7 @@ class MysqliDriver implements iDbDriver
      * @param string $sql SQL-запрос
      * @param string $server Имя сервера
      * @throws DbException
-     * @return mixed
+     * @return array
      */
     final public static function getRow($sql, $server = 'master')
     {
@@ -156,7 +156,7 @@ class MysqliDriver implements iDbDriver
 
         $return = mysqli_fetch_assoc($result);
 
-        $result->free();
+        mysqli_free_result($result);
 
         return $return;
     }
@@ -167,7 +167,7 @@ class MysqliDriver implements iDbDriver
      * @param string $sql
      * @param string $server Имя сервера
      * @throws DbException
-     * @return mixed
+     * @return array
      */
     final public static function getRows($sql, $server = 'master')
     {
@@ -186,13 +186,14 @@ class MysqliDriver implements iDbDriver
             $return[] = $row;
         }
 
-        $result->free();
+        mysqli_free_result($result);
 
         return $return;
     }
 
     /**
      * Функция получения LAST_INSERT_ID()
+     * @return int
      */
     final public static function getLastInsertId()
     {
@@ -203,12 +204,13 @@ class MysqliDriver implements iDbDriver
             );
         }
 
-        return $result;
+        return (int) $result;
     }
 
     /**
      * Функция получения FOUND_ROWS()
      * Использовать только после запроса с DbPaginator
+     * @return int
      */
     final public static function getFoundRows()
     {
@@ -223,14 +225,14 @@ class MysqliDriver implements iDbDriver
 
         $rows = mysqli_fetch_row($result);
 
-        $result->free();
+        mysqli_free_result($result);
 
-        return $rows[0];
+        return (int) $rows[0];
     }
 
     /**
      * Метод возвращает массив с ошибками
-     * @return  array $errors
+     * @return array $errors
      */
     final public static function getErrors()
     {
