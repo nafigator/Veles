@@ -23,7 +23,6 @@ class CliProgressBar
     private $bp_percent;
     private $percent;
     private $start_time;
-    private $last_update = 0;
     private $final_value;
 
     /**
@@ -39,7 +38,6 @@ class CliProgressBar
         $this->bp_percent  = $width / 100;
         $this->percent     = $final / 100;
         $this->start_time  = microtime(true);
-        $this->last_update = $this->start_time;
         $this->final_value = $final;
         $this->update(0);
     }
@@ -79,14 +77,12 @@ class CliProgressBar
      */
     final public function getStatusString($current)
     {
-        $cur_time  = microtime(true);
         $current   = max($current, 1);
-        $avg_speed = $current / ($cur_time - $this->start_time);
+        $avg_speed = $current / (microtime(true) - $this->start_time);
 
         $estimated = ($this->final_value - $current) / $avg_speed;
         $estimated = number_format($estimated, 1);
 
-        $this->last_update = $cur_time;
         $avg_speed = round($avg_speed);
 
         return " $current u | $avg_speed u/s | Est: $estimated s";
