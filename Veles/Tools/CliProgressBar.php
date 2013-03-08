@@ -34,11 +34,12 @@ class CliProgressBar
     {
         stream_set_blocking(STDIN, false);
 
+        $this->final_value = max($final, 1);
         $this->width       = $width;
         $this->bp_percent  = $width / 100;
-        $this->percent     = $final / 100;
+        $this->percent     = $this->final_value / 100;
         $this->start_time  = microtime(true);
-        $this->final_value = $final;
+
         $this->update(0);
     }
 
