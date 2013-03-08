@@ -97,15 +97,8 @@ class TimerTest extends PHPUnit_Framework_TestCase
 
         $object = new ReflectionObject(new Timer);
 
-        $stop_time  = $object->getProperty('stop_time');
         $start_time = $object->getProperty('start_time');
         $diff = $object->getProperty('diff');
-
-        $stop_time->setAccessible(true);
-        $result = $stop_time->getValue();
-
-        $msg = 'Wrong result of Timer::$stop_time property';
-        $this->assertSame($result, $expected, $msg);
 
         $start_time->setAccessible(true);
         $result = $start_time->getValue();
