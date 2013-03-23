@@ -24,15 +24,20 @@ class CliProgressBar
     private $percent;
     private $start_time;
     private $final_value;
+    private $block = false;
 
     /**
      * Конструктор
      * @param int $final Числовой эквивалент финального результата
-     * @param int $width
+     * @param int $width Ширина прогрессбара
+     * @param bool $block Флаг блокирования пользовательского ввода
      */
-    final public function __construct($final, $width = 60)
+    final public function __construct($final, $width = 60, $block = false)
     {
-        stream_set_blocking(STDIN, false);
+        if ($block) {
+            $this->block = true;
+            stream_set_blocking(STDIN, false);
+        }
 
         $this->final_value = max($final, 1);
         $this->width       = $width;
@@ -64,7 +69,9 @@ class CliProgressBar
 
         $status = $this->getStatusString($current) . self::getMemString();
 
-        self::stdinCleanup();
+        if ($this->block) {
+            self::stdinCleanup();
+        }
 
         echo ($space_len > 0)
             ? "\033[?25l[$bar>\033[{$space_len}C]$status$end"
