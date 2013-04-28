@@ -1,39 +1,39 @@
 <?php
 $i = 1;
+$html = '';
 
-// Ссылка на первую страницу
+// First page link
 if ($this->curr_page > 4) {
-    echo '<a href="/index.php?page=',$i,'">&laquo;</a>';
+    $html .= "<a href=\"/index.php?page=$i\">&laquo;</a>";
     $i = $this->curr_page - 3;
 }
 
-// Если страниц больше чем текущая на 3
+// If pages count more than current on 3
 if ($this->page_nums > $this->curr_page + 3) {
     $last_page = $this->page_nums;
     $this->page_nums = $this->curr_page + 3;
 }
 
 while ($i <= $this->page_nums) {
-    // TODO: Реализовать более внятный код в условиях
-    if ($i == $this->curr_page) {
-        if ($i > 1) { // Если это не первая ссылка рисуем отступ
-            echo '<span class="curr lmargin7">',$i,'</span>';
-        } else {
-            echo '<span class="curr">',$i,'</span>';
-        }
-    } elseif ($i > 1) { // Если это не первая ссылка рисуем отступ
-        if (isset($cat)) {
-            echo '<a href="',$_SERVER["DOCUMENT_URI"],'?cat=',$cat,'&amp;page=',$i,'" class="lmargin7">',$i,'</a>';
-        } else {
-            echo '<a href="',$_SERVER["DOCUMENT_URI"],'?page=',$i,'" class="lmargin7">',$i,'</a>';
-        }
+    if ($i === $this->curr_page) {
+        $html .= ($i > 1)
+            // If this is not first page add margin
+            ? "<span class=\"curr lmargin7\">$i</span>"
+            : "<span class=\"curr\">$i</span>";
+    } elseif ($i > 1) {
+        // If this is not first page add margin
+        $html .= (isset($cat))
+            ? "<a href=\"$_SERVER[DOCUMENT_URI]?cat=$cat&amp;page=$i\" class=\"lmargin7\">$i</a>"
+            : "<a href=\"$_SERVER[DOCUMENT_URI]?page=$i\" class=\"lmargin7\">$i</a>";
     } else {
-        echo '<a href="',$_SERVER["DOCUMENT_URI"],'?page=',$i,'">',$i,'</a>';
+        $html .= "<a href=\"$_SERVER[DOCUMENT_URI]?page=$i\">$i</a>";
     }
 
     ++$i;
 }
 
 if (isset($last_page)) {
-    echo '<a href="',$_SERVER["DOCUMENT_URI"],'?page=',$last_page,'" class="lmargin7">&raquo;</a>';
+    $html .= "<a href=\"$_SERVER[DOCUMENT_URI]?page=$last_page\" class=\"lmargin7\">&raquo;</a>";
 }
+
+echo $html;

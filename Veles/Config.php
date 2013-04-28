@@ -1,12 +1,12 @@
 <?php
 /**
- * Класс-парсер конфигурации проекта
+ * Class-parser project configuration
  * @file    Config.php
  *
  * PHP version 5.3.9+
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
- * @date    Птн Июн 08 17:28:22 2012
+ * @date    Fri Jun 08 17:28:22 2012
  * @copyright The BSD 3-Clause License
  */
 
@@ -16,7 +16,8 @@ use \Exception;
 use \Veles\Cache\Cache;
 
 /**
- * Класс Config
+ * Class Config
+ *
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
 class Config
@@ -24,7 +25,8 @@ class Config
     private static $data = null;
 
     /**
-     * Парсер конфиг файла
+     * Config file parser
+     *
      * @throws Exception
      */
     private static function read()
@@ -53,7 +55,8 @@ class Config
     }
 
     /**
-     * Построение массива параметров
+     * Build array parameters
+     *
      * @param array &$config
      */
     private static function buildPramsTree(&$config)
@@ -80,7 +83,8 @@ class Config
     }
 
     /**
-     * Наследование секций конфига
+     * Config section inheritance
+     *
      * @param array $config
      */
     private static function initInheritance(&$config)
@@ -95,7 +99,7 @@ class Config
 
             array_walk($section, $closure);
 
-            // Обработка наследования параметров только для секции окружения
+            // Process only environment section
             if (ENVIRONMENT !== $section[0]
                 || !isset($section[1])
                 || !isset($config[$section[1]])
@@ -110,7 +114,7 @@ class Config
     }
 
     /**
-     * Проверка умолчаний окружения и пути
+     * Check environment and path defaults
      */
     private static function checkDefaults()
     {
@@ -124,7 +128,8 @@ class Config
     }
 
     /**
-     * Получение параметров конфиг-файла
+     * Get config file parameters
+     *
      * @param string $param
      * @return mixed
      */

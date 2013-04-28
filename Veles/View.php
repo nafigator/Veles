@@ -1,6 +1,6 @@
 <?php
 /**
- * Класс вывода
+ * Output class
  * @file    View.php
  *
  * PHP version 5.3.9+
@@ -16,7 +16,8 @@ use \Veles\Routing\Route;
 use \Exception;
 
 /**
- * Класс View
+ * ClassView
+ *
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
 class View
@@ -24,8 +25,9 @@ class View
     private static $variables = array();
 
     /**
-     * Метод для установки переменных в выводе
-     * @param array $vars Массив переменных для вывода
+     * Method for output variables setup
+     *
+     * @param array $vars Output variables array
      * @throws Exception
      */
     final public static function set($vars)
@@ -38,7 +40,8 @@ class View
     }
 
     /**
-     * Метод для очистки переменных в выводе
+     * Output variables cleanup
+     *
      * @param array $vars Массив имён переменных для очистки
      * @throws Exception
      */
@@ -56,7 +59,8 @@ class View
     }
 
     /**
-     * Метод вывода
+     * Output method
+     *
      * @param string $path Путь к шаблону
      */
     final public static function show($path)
@@ -72,9 +76,10 @@ class View
     }
 
     /**
-     * Вывод View в буфер и сохранение в переменную
-     * @param string $path Путь к шаблону
-     * @return string Вывод View
+     * Output View into buffer and save it in variable
+     *
+     * @param string $path Path to template
+     * @return string View content
      */
     final public static function get($path)
     {

@@ -1,25 +1,26 @@
 <?php
 /**
- * Класс AutoLoader
+ * Class AutoLoader
  * @file    AutoLoader.php
  *
  * PHP version 5.3.9+
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
- * @date    Птн Июн 01 10:19:04 2012
+ * @date    Fri Jun 01 10:19:04 2012
  * @copyright The BSD 3-Clause License
  */
 
 namespace Veles;
 
 /**
- * Класс AutoLoader
+ * Class AutoLoader
+ *
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
 class AutoLoader
 {
     /**
-     * Инициируем автолоадер
+     * Initialisation
      */
     final public static function init()
     {
@@ -27,7 +28,8 @@ class AutoLoader
     }
 
     /**
-     * Автолоадер
+     * Autoloader
+     *
      * @param string $name
      */
     final public static function load($name)

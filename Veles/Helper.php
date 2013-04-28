@@ -1,6 +1,6 @@
 <?php
 /**
- * Набор полезных функций
+ * Useful functions
  * @file    Helper.php
  *
  * PHP version 5.3.9+
@@ -13,17 +13,19 @@
 namespace Veles;
 
 /**
- * Набор полезных функций
+ * Useful functions
+ *
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
 class Helper
 {
     /**
-     * Генерирует случайный набор символов заданной длины.
+     * Generate random symbol sequence given length
      *
-     * По-умолчанию настройки для генерации blowfish соли
-     * @param int $length Длина генерируемой строки
-     * @param string $letters Набор символов
+     * By default setting is for blowfish salt generate
+     *
+     * @param int $length String length
+     * @param string $letters Group of symbols
      * @return string
      */
     final public static function genStr(
@@ -34,7 +36,8 @@ class Helper
     }
 
     /**
-     * Метод для проверки email
+     * Email check
+     *
      * @param string $email
      * @return bool
      */
@@ -46,7 +49,8 @@ class Helper
     }
 
     /**
-     * Метод для проверки mail-домена
+     * Check email-domain
+     *
      * @param string $email
      * @return bool
      */
@@ -58,7 +62,8 @@ class Helper
     }
 
     /**
-     * Переводит кириллицу в транслит по стандарту ГОСТ 7.79-2000
+     * Translate cyrillic into translit by GOST 7.79-2000 standart
+     *
      * @param string $string
      * @return string
      */
@@ -87,7 +92,8 @@ class Helper
     }
 
     /**
-     * Метод для генерации алиасов
+     * Method for alias generation
+     *
      * @param string $url URL для алиаса
      * @return string
      */
