@@ -16,18 +16,14 @@ use \Veles\DataBase\Db;
 use \Veles\DataBase\DbPaginator;
 use \Veles\DataBase\DbFilter;
 use \Veles\DataBase\QueryBuilder;
+use \StdClass;
 
 /**
  * Класс модели
  * @author Yancharuk Alexander <alex@itvault.info>
  */
-abstract class AbstractModel
+abstract class AbstractModel extends StdClass
 {
-    /**
-     * @var array $data Данные модели
-     */
-    protected $data = array();
-
     /**
      * @var int|float|string $map Карта типов данных объекта
      */
@@ -37,40 +33,6 @@ abstract class AbstractModel
      * @const string|null Имя таблицы
      */
     const TBL_NAME = null;
-
-    /**
-     * Магия для создания свойств модели
-     * @param string $name
-     * @param mixed  $value
-     */
-    final public function __set($name, $value)
-    {
-        $this->data[$name] = $value;
-    }
-
-    /**
-     * Магия для доступа к свойствам модели
-     * @param string $name
-     * @return mixed
-     */
-    final public function __get($name)
-    {
-        if (array_key_exists($name, $this->data)) {
-            return $this->data[$name];
-        }
-
-        return null;
-    }
-
-    /**
-     * Магия для проверки свойства
-     * @param string $name
-     * @return bool
-     */
-    final public function __isset($name)
-    {
-        return isset($this->data[$name]);
-    }
 
     /**
      * Конструктор модели

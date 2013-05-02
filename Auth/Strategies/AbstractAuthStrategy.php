@@ -76,7 +76,7 @@ abstract class AbstractAuthStrategy
      */
     final protected function findUser(DbFilter $filter)
     {
-        // Пользователь с таким id не найден
+        // Пользователь с таким id найден
         if ($this->user->find($filter)) {
             return true;
         }
