@@ -21,13 +21,17 @@ namespace Veles\Tests;
 use \Veles\AutoLoader;
 
 define('ENVIRONMENT', 'development');
-define('CONFIG_FILE', __DIR__ . '/Project/settings.ini');
-define('TEMPLATE_PATH', __DIR__ . '/Project/View/');
+define('LIB_DIR', realpath(__DIR__ . '/../..'));
+define('TEST_DIR', realpath(LIB_DIR . '/Veles/Tests'));
+define('CONFIG_FILE', TEST_DIR . '/Project/settings.ini');
+define('TEMPLATE_PATH', TEST_DIR . '/Project/View/');
 
-$paths = implode(PATH_SEPARATOR, array(
-    realpath(__DIR__), realpath(__DIR__ . '/Project/'), get_include_path())
-);
-set_include_path($paths);
+set_include_path(implode(PATH_SEPARATOR, array(
+    LIB_DIR,
+    TEST_DIR,
+    realpath(__DIR__ . '/Project'),
+    get_include_path()
+)));
 
 /** @noinspection PhpIncludeInspection */
 require 'Veles/AutoLoader.php';
