@@ -18,7 +18,7 @@ use \Veles\DataBase\Db;
 /**
  * Модель пользователя
  */
-class User extends AbstractModel
+class User extends ActiveRecord
 {
     const TBL_NAME      = 'users';
     const TBL_USER_INFO = 'users_info';

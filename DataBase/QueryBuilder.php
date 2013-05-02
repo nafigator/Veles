@@ -14,7 +14,7 @@ namespace Veles\DataBase;
 
 use \Exception;
 use \Veles\DataBase\DbPaginator;
-use \Veles\Model\AbstractModel;
+use \Veles\Model\ActiveRecord;
 
 /**
  * Класс QueryBuilder
@@ -24,7 +24,7 @@ class QueryBuilder
 {
     /**
      * Построение sql-запроса для insert
-     * @param AbstractModel $model Экземпляр модели
+     * @param ActiveRecord $model Экземпляр модели
      * @return string
      * @todo протестировать алгоритм на время.
      * Попробовать варианты с iterator, implode
@@ -63,7 +63,7 @@ class QueryBuilder
 
     /**
      * Построение sql-запроса для update
-     * @param AbstractModel $model Экземпляр модели
+     * @param ActiveRecord $model Экземпляр модели
      * @return string $sql
      * @todo протестировать алгоритм на время.
      * Попробовать варианты с iterator, implode
@@ -99,7 +99,7 @@ class QueryBuilder
 
     /**
      * Построение sql-запроса для select
-     * @param AbstractModel $model Экземпляр модели
+     * @param ActiveRecord $model Экземпляр модели
      * @param int $identifier primary key
      * @return string $sql
      */
@@ -121,7 +121,7 @@ class QueryBuilder
 
     /**
      * Построение sql-запроса для delete
-     * @param AbstractModel $model Экземпляр модели
+     * @param ActiveRecord $model Экземпляр модели
      * @param array $ids Массив ID для удаления
      * @throws Exception
      * @return string $sql
@@ -160,7 +160,7 @@ class QueryBuilder
 
     /**
      * Построение запроса получения списка объектов
-     * @param AbstractModel $model Экземпляр модели
+     * @param ActiveRecord $model Экземпляр модели
      * @param DbFilter $filter Экземпляр фильтра
      * @return string
      */
@@ -221,7 +221,7 @@ class QueryBuilder
 
     /**
      * Функция безопасности переменных
-     * @param AbstractModel $model
+     * @param ActiveRecord $model
      * @param $property
      * @throws Exception
      * @return mixed

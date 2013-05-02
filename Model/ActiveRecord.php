@@ -1,7 +1,7 @@
 <?php
 /**
- * Класс модели
- * @file    AbstractModel.php
+ * ActiveRecord model
+ * @file    ActiveRecord.php
  *
  * PHP version 5.3.9+
  *
@@ -19,10 +19,10 @@ use \Veles\DataBase\QueryBuilder;
 use \StdClass;
 
 /**
- * Класс модели
+ * Model class using ActiveRecord pattern
  * @author Yancharuk Alexander <alex@itvault.info>
  */
-abstract class AbstractModel extends StdClass
+class ActiveRecord extends StdClass
 {
     /**
      * @var int|float|string $map Карта типов данных объекта
