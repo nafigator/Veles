@@ -123,7 +123,7 @@ class Config
         }
 
         if (!defined('CONFIG_FILE')) {
-            define('CONFIG_PATH', realpath('../project/settings.ini'));
+            define('CONFIG_PATH', realpath('../../project/settings.ini'));
         }
     }
 
