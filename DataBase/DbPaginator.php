@@ -36,7 +36,7 @@ class DbPaginator
     {
         $this->template = ($template)
             ? $template
-            : BASE_PATH . 'lib/Veles/View/paginator_default.phtml';
+            : BASE_PATH . 'Veles/View/paginator_default.phtml';
 
         $this->curr_page = $curr_page;
     }

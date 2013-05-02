@@ -159,6 +159,7 @@ class ErrBase implements SplSubject
      */
     final public function notify()
     {
+        /** @var $observer SplObserver */
         foreach ($this->observers as $observer) {
             $observer->update($this);
         }

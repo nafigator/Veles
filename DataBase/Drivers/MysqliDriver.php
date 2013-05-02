@@ -193,6 +193,7 @@ class MysqliDriver implements iDbDriver
 
     /**
      * Функция получения LAST_INSERT_ID()
+     * @throws \Veles\DataBase\DbException
      * @return int
      */
     final public static function getLastInsertId()
@@ -210,6 +211,7 @@ class MysqliDriver implements iDbDriver
     /**
      * Функция получения FOUND_ROWS()
      * Использовать только после запроса с DbPaginator
+     * @throws \Veles\DataBase\DbException
      * @return int
      */
     final public static function getFoundRows()

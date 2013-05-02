@@ -12,7 +12,7 @@
 
 namespace Veles\Auth;
 
-use \Veles\Model\AbstractModel;
+use \Veles\Model\User;
 
 /**
  * Класс авторизации пользователя
@@ -87,7 +87,7 @@ final class UsrAuth
 
     /**
      * Получение пользователя
-     * @return AbstractModel
+     * @return User
      */
     final public function getUser()
     {

@@ -62,7 +62,7 @@ class Helper
     }
 
     /**
-     * Translate cyrillic into translit by GOST 7.79-2000 standart
+     * Translate cyrillic into translit by GOST 7.79-2000 standard
      *
      * @param string $string
      * @return string

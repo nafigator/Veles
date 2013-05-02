@@ -28,7 +28,7 @@ class AutoLoader
     }
 
     /**
-     * Autoloader
+     * AutoLoader
      *
      * @param string $name
      */

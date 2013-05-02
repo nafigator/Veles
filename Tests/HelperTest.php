@@ -122,7 +122,7 @@ class HelperTest extends PHPUnit_Framework_TestCase
         return array(
             array('webmaster@itvault.info', true),
             array('false@itvault.info', true),
-            array('error@wrongdomain.opa-opa-opa', false)
+            array('error@wrong-domain.opa-opa-opa', false)
         );
     }
 
