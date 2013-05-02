@@ -17,7 +17,7 @@ use \Veles\Auth\UsrGroup;
 use \Veles\DataBase\DbFilter;
 
 /**
- * Интерфейс iUsrAuthStrategy
+ * Класс AbstractAuthStrategy
  * @author   Yancharuk Alexander <alex@itvault.info>
  */
 abstract class AbstractAuthStrategy
