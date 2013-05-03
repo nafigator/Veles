@@ -36,7 +36,7 @@ class View
             throw new Exception('View can set variables only in arrays!');
         }
 
-        self::$variables = array_merge(self::$variables, $vars);
+        self::$variables = array_replace(self::$variables, $vars);
     }
 
     /**
