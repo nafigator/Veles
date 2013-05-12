@@ -161,4 +161,16 @@ abstract class AbstractForm implements iForm
 
         return str_replace($tpl, $elements, $output);
     }
+
+    /**
+     * Return form seciruty id
+     *
+     * Can be used for refresh sid after ajax-request
+     *
+     * @return string
+     */
+    public function getSid()
+    {
+        return $this->sid;
+    }
 }
