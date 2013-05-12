@@ -136,7 +136,7 @@ abstract class AbstractForm implements iForm
      * Вывод формы
      * @return string
      */
-    public function __toString()
+    final public function __toString()
     {
         $elements = $tpl = array();
         $output   = View::get($this->template);
@@ -157,7 +157,7 @@ abstract class AbstractForm implements iForm
             )
         );
 
-        Cache::set($this->name . $this->sid, true, 7200);
+        $this->saveSid();
 
         return str_replace($tpl, $elements, $output);
     }
@@ -169,8 +169,17 @@ abstract class AbstractForm implements iForm
      *
      * @return string
      */
-    public function getSid()
+    final public function getSid()
     {
         return $this->sid;
+    }
+
+    /**
+     * Save form secirity id to cache
+     * @return bool
+     */
+    final public function saveSid()
+    {
+        return Cache::set($this->name . $this->sid, true, 7200);
     }
 }
