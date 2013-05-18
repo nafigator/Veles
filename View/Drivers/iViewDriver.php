@@ -13,6 +13,8 @@
 
 namespace Veles\View\Drivers;
 
+use \Exception;
+
 /**
  * Interface iViewDriver
  * @author  Yancharuk Alexander <alex@itvault.info>

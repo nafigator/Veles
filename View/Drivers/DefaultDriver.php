@@ -13,6 +13,8 @@
 
 namespace Veles\View\Drivers;
 
+use \Exception;
+
 /**
  * Class DefaultDriver
  * @author  Yancharuk Alexander <alex@itvault.info>
