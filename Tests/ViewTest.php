@@ -12,7 +12,7 @@
 
 namespace Veles\Tests;
 
-use \Veles\View;
+use \Veles\View\View;
 use \PHPUnit_Framework_TestCase;
 use \ReflectionObject;
 use \Exception;
@@ -79,7 +79,7 @@ EOF;
     /**
      * Unit-test for View::set
      *
-     * @covers Veles\View::set
+     * @covers View::set
      * @dataProvider setExceptionProvider
      * @expectedException Exception
      * @expectedExceptionMessage View can set variables only in arrays!
@@ -100,7 +100,7 @@ EOF;
 
     /**
      * Unit-test for View::set
-     * @covers Veles\View::set
+     * @covers View::set
      * @dataProvider setProvider
      * @see View::set
      */
@@ -140,7 +140,7 @@ EOF;
 
     /**
      * Unit-test for View::show
-     * @covers Veles\View::show
+     * @covers View::show
      * @depends testSet
      * @see View::show
      */
@@ -153,7 +153,7 @@ EOF;
 
     /**
      * Unit-test for View::get
-     * @covers Veles\View::get
+     * @covers View::get
      * @depends testSet
      * @see View::get
      */

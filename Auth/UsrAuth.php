@@ -31,7 +31,7 @@ final class UsrAuth
     final public static function instance()
     {
         if (null === self::$instance) {
-            self::$instance = new UsrAuth;
+            self::$instance = new self;
         }
 
         return self::$instance;

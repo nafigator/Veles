@@ -1,26 +1,23 @@
 <?php
 /**
- * Output class
- * @file    View.php
+ * Default View driver
+ *
+ * @file    DefaultDriver.php
  *
  * PHP version 5.3.9+
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
- * @date    Сбт Июл 07 07:30:30 2012
+ * @date    2013-05-15 22:06
  * @copyright The BSD 3-Clause License
  */
 
-namespace Veles;
-
-use \Veles\Routing\Route;
-use \Exception;
+namespace Veles\View\Drivers;
 
 /**
- * ClassView
- *
+ * Class DefaultDriver
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
-class View
+class DefaultDriver implements iViewDriver
 {
     private static $variables = array();
 
@@ -30,7 +27,7 @@ class View
      * @param array $vars Output variables array
      * @throws Exception
      */
-    final public static function set($vars)
+    final public function set($vars)
     {
         if (!is_array($vars)) {
             throw new Exception('View can set variables only in arrays!');
@@ -45,7 +42,7 @@ class View
      * @param array $vars Массив имён переменных для очистки
      * @throws Exception
      */
-    final public static function del($vars)
+    final public function del($vars)
     {
         if (!is_array($vars)) {
             throw new Exception('View can unset variables only in arrays!');
@@ -63,7 +60,7 @@ class View
      *
      * @param string $path Путь к шаблону
      */
-    final public static function show($path)
+    final public function show($path)
     {
         foreach (self::$variables as $var_name => $value) {
             $$var_name = $value;
@@ -81,7 +78,7 @@ class View
      * @param string $path Path to template
      * @return string View content
      */
-    final public static function get($path)
+    final public function get($path)
     {
         foreach (self::$variables as $var_name => $value) {
             $$var_name = $value;

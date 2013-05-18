@@ -12,7 +12,7 @@
 
 namespace Veles\Form;
 
-use \Veles\View;
+use \Veles\View\View;
 use \Veles\Cache\Cache;
 use \Veles\Validators\RegEx;
 use \Veles\Form\Elements\iElement;

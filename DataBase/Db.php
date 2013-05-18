@@ -21,19 +21,22 @@ use \Veles\DataBase\DbFabric;
  */
 class Db implements iDbDriver
 {
-    private static $driver;
-
     /**
      * Инстанс драйвера
      * @return iDbDriver
      */
     private static function getDriver()
     {
-        if (!self::$driver instanceof iDbDriver) {
-            self::$driver = DbFabric::getDriver();
+        /**
+         * @var iDbDriver
+         */
+        static $driver;
+
+        if (null === $driver) {
+            $driver = DbFabric::getDriver();
         }
 
-        return self::$driver;
+        return $driver;
     }
 
     /**

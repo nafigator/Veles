@@ -12,7 +12,7 @@
 
 namespace Veles\Routing;
 
-use \Veles\View;
+use \Veles\View\View;
 
 /**
  * Класс Route404

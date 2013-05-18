@@ -14,7 +14,7 @@ namespace Veles\ErrorHandler;
 
 use \SplSubject;
 use \SplObserver;
-use \Veles\View;
+use \Veles\View\View;
 use \Veles\DataBase\DbException;
 use \Exception;
 

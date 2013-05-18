@@ -12,7 +12,7 @@
 
 namespace Veles\Tests\Application;
 
-use \Veles\View;
+use \Veles\View\View;
 use \Veles\Routing\Route;
 use \PHPUnit_Framework_TestCase;
 use \Veles\Application\Application;
