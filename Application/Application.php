@@ -27,7 +27,7 @@ class Application
     /**
      * Старт приложения
      */
-    public static function run()
+    final public static function run()
     {
         self::setPhpSettings();
         self::setErrorHandlers();
@@ -48,7 +48,7 @@ class Application
     /**
      * Инициализируем ErrorHandlers
      */
-    protected static function setErrorHandlers()
+    final public static function setErrorHandlers()
     {
         $error = new ErrBase;
         register_shutdown_function(array($error, 'fatal'));
@@ -60,7 +60,7 @@ class Application
      * Устанавливаем настройки php, прописанные в конфиге
      * @param array $keys Макссив php-параметров и их значений
      */
-    protected static function setPhpSettings($keys = null)
+    final protected static function setPhpSettings($keys = null)
     {
         $config = (null === $keys)
             ? Config::getParams('php')

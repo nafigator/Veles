@@ -35,7 +35,7 @@ class View
         static $driver;
 
         if (null === $driver) {
-            $driver = ViewFabric::getDriver();
+            $driver = ViewFactory::build();
         }
 
         return $driver;

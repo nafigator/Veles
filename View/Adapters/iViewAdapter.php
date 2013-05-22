@@ -1,6 +1,6 @@
 <?php
 /**
- * Interface for View drivers
+ * Interface for View adapters
  *
  * @file    iViewDriver.php
  *
@@ -11,15 +11,15 @@
  * @copyright The BSD 3-Clause License
  */
 
-namespace Veles\View\Drivers;
+namespace Veles\View\Adapters;
 
 use \Exception;
 
 /**
- * Interface iViewDriver
+ * Interface iViewAdapter
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
-interface iViewDriver
+interface iViewAdapter
 {
     /**
      * Method for output variables setup

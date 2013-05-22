@@ -36,6 +36,8 @@ class AutoLoader
     {
         $name = str_replace('\\', DIRECTORY_SEPARATOR, $name);
 
-        require "$name.php";
+        // For using external libs with their own autoloaders
+        // do not use strict require function
+        include "$name.php";
     }
 }

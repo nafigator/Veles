@@ -10,7 +10,7 @@
  * @copyright The BSD 3-Clause License.
  */
 
-namespace Veles\Tests;
+namespace Veles\Tests\View;
 
 use \Veles\View\View;
 use \PHPUnit_Framework_TestCase;
@@ -104,35 +104,22 @@ EOF;
      * @dataProvider setProvider
      * @see View::set
      */
-    public function testSet($vars, $expected)
+    public function testSet($vars)
     {
         $this->object->set($vars);
 
-        $object = new ReflectionObject($this->object);
-        $prop = $object->getProperty('variables');
+        $this->expectOutputString($this->html);
 
-        $msg = 'Property View::$variables not private';
-        $this->assertTrue($prop->isPrivate(), $msg);
-
-        $prop->setAccessible(true);
-        $result = $prop->getValue();
-
-        $msg = 'Wrong result of View::$variables property';
-        $this->assertTrue($result === $expected, $msg);
+        $this->object->show($this->tpl);
     }
 
     /**
-     * DataProvider for HelperTest::testTranslit
+     * DataProvider for View::set
      */
     public function setProvider()
     {
         return array(
             array(
-                array('a' => 'Test', 'b' => 'complete'),
-                array('a' => 'Test', 'b' => 'complete')
-            ),
-            array(
-                array('c' => 'Hello'),
                 array('a' => 'Test', 'b' => 'complete', 'c' => 'Hello')
             )
         );

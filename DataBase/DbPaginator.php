@@ -12,6 +12,8 @@
 
 namespace Veles\DataBase;
 
+use \Veles\View\View;
+
 /**
  * Класс DbPaginator
  * @author  Yancharuk Alexander <alex@itvault.info>
@@ -46,9 +48,24 @@ class DbPaginator
      */
     final public function __toString()
     {
-        /** @noinspection PhpIncludeInspection */
-        require $this->template;
-        return '';
+        $vars = array(
+            'curr_page' => $this->curr_page,
+            'page_nums' => $this->page_nums,
+            'first_link' => false,
+            'last_link'  => false,
+            'i'          => 1
+        );
+        if ($this->curr_page > 4) {
+            $vars['first_link'] = 1;
+            $vars['i'] = $this->curr_page - 3;
+        }
+
+        if ($this->page_nums > $this->curr_page + 3) {
+            $vars['last_link'] = $this->curr_page + 3;
+        }
+        View::set($vars);
+
+        return View::get($this->template);
     }
 
     /**

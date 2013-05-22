@@ -1,8 +1,8 @@
 <?php
 /**
- * Class for create view driver
+ * Class for create view adapter
  *
- * @file    ViewFabric.php
+ * @file    ViewFactory.php
  *
  * PHP version 5.3.9+
  *
@@ -13,31 +13,33 @@
 
 namespace Veles\View;
 
-use \Veles\View\Drivers\iViewDriver;
+use \Veles\View\Adapters\iViewAdapter;
 use \Veles\Config;
+use \Exception;
 
 /**
- * Class ViewFabric
+ * Class ViewFactory
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
-class ViewFabric
+class ViewFactory
 {
     /**
      * Method for create view driver
      * @throws Exception
      * @return iViewDriver
      */
-    final public static function getDriver()
+    final public static function build()
     {
-        if (null === ($class = Config::getParams('view_driver'))) {
-            throw new Exception('Not found View driver parms in config!');
+        if (null === ($class = Config::getParams('view_adapter'))) {
+            throw new Exception('Not found View driver params in config!');
         }
 
-        $class_name = "\\Veles\\View\\Drivers\\$class";
+        $class = ucfirst($class);
+        $class_name = "\\Veles\\View\\Adapters\\{$class}Adapter";
 
         $driver = new $class_name;
 
-        if (!$driver instanceof iViewDriver) {
+        if (!$driver instanceof iViewAdapter) {
             throw new Exception('Not correct View driver!');
         }
 

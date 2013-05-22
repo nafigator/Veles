@@ -1,8 +1,8 @@
 <?php
 /**
- * Default View driver
+ * Default View adapter
  *
- * @file    DefaultDriver.php
+ * @file    NativeAdapter.php
  *
  * PHP version 5.3.9+
  *
@@ -11,15 +11,15 @@
  * @copyright The BSD 3-Clause License
  */
 
-namespace Veles\View\Drivers;
+namespace Veles\View\Adapters;
 
 use \Exception;
 
 /**
- * Class DefaultDriver
+ * Class NativeAdapter
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
-class DefaultDriver implements iViewDriver
+class NativeAdapter implements iViewAdapter
 {
     private static $variables = array();
 
