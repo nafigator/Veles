@@ -12,7 +12,7 @@
 
 namespace Veles\Routing;
 
-use \Veles\View\View;
+use Veles\View\View;
 
 /**
  * Класс Route404
@@ -20,14 +20,14 @@ use \Veles\View\View;
  */
 class Route404
 {
-    /**
-     * Вывод 404 ошибки
-     * @param string $url URL ошибки
-     */
-    final public static function show($url)
-    {
-        header('HTTP/1.1 404 Not Found', true, 404);
-        View::set(array('url' => $url));
-        die(View::get('error/404.phtml'));
-    }
+	/**
+	 * Вывод 404 ошибки
+	 * @param string $url URL ошибки
+	 */
+	final public static function show($url)
+	{
+		header('HTTP/1.1 404 Not Found', true, 404);
+		View::set(array('url' => $url));
+		die(View::get('error/404.phtml'));
+	}
 }

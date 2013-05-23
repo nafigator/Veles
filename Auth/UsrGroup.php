@@ -18,11 +18,11 @@ namespace Veles\Auth;
  */
 class UsrGroup
 {
-    // Группы пользователя
-    const ADMIN      = 1;
-    const MANAGER    = 2;
-    const MODERATOR  = 4;
-    const REGISTERED = 8;
-    const GUEST      = 16;
-    const DELETED    = 32;
+	// Группы пользователя
+	const ADMIN      = 1;
+	const MANAGER    = 2;
+	const MODERATOR  = 4;
+	const REGISTERED = 8;
+	const GUEST      = 16;
+	const DELETED    = 32;
 }

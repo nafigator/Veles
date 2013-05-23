@@ -18,11 +18,11 @@ namespace Veles\Form\Elements;
  */
 class HiddenElement extends AbstractElement
 {
-    /**
-     * Отрисовка элемента
-     */
-    final public function render()
-    {
-        return '<input' . $this->attributes() . 'type="hidden">';
-    }
+	/**
+	 * Отрисовка элемента
+	 */
+	final public function render()
+	{
+		return '<input' . $this->attributes() . 'type="hidden">';
+	}
 }

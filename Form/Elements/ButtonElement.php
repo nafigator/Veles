@@ -18,11 +18,11 @@ namespace Veles\Form\Elements;
  */
 class ButtonElement extends AbstractElement
 {
-    /**
-     * Отрисовка элемента
-     */
-    final public function render()
-    {
-        return '<input' . $this->attributes() . 'type="button">';
-    }
+	/**
+	 * Отрисовка элемента
+	 */
+	final public function render()
+	{
+		return '<input' . $this->attributes() . 'type="button">';
+	}
 }

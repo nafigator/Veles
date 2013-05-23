@@ -18,60 +18,60 @@ namespace Veles\DataBase\Drivers;
  */
 interface iDbDriver
 {
-    /**
-     * Получение соединения с базой
-     * @return mixed
-     */
-    public static function getLink();
+	/**
+	 * Получение соединения с базой
+	 * @return mixed
+	 */
+	public static function getLink();
 
-    /**
-     * Метод для получения списка ошибок
-     */
-    public static function getErrors();
+	/**
+	 * Метод для получения списка ошибок
+	 */
+	public static function getErrors();
 
-    /**
-     * Функция получения FOUND_ROWS()
-     * Использовать только после запроса с DbPaginator
-     */
-    public static function getFoundRows();
+	/**
+	 * Функция получения FOUND_ROWS()
+	 * Использовать только после запроса с DbPaginator
+	 */
+	public static function getFoundRows();
 
-    /**
-     * Функция получения LAST_INSERT_ID()
-     */
-    public static function getLastInsertId();
+	/**
+	 * Функция получения LAST_INSERT_ID()
+	 */
+	public static function getLastInsertId();
 
-    /**
-     * Метод для выполнения non-SELECT запросов
-     * @param string $sql SQL-запрос
-     * @param string $server Имя сервера
-     * @return bool
-     */
-    public static function query($sql, $server = 'master');
+	/**
+	 * Метод для выполнения non-SELECT запросов
+	 * @param string $sql SQL-запрос
+	 * @param string $server Имя сервера
+	 * @return bool
+	 */
+	public static function query($sql, $server = 'master');
 
-    /**
-     * Для SELECT, возвращающих значение одного поля
-     *
-     * @param string $sql SQL-запрос
-     * @param string $server Имя сервера
-     * @return mixed
-     */
-    public static function getValue($sql, $server = 'master');
+	/**
+	 * Для SELECT, возвращающих значение одного поля
+	 *
+	 * @param string $sql SQL-запрос
+	 * @param string $server Имя сервера
+	 * @return mixed
+	 */
+	public static function getValue($sql, $server = 'master');
 
-    /**
-     * Для SELECT, возвращающих значение одной строки таблицы
-     *
-     * @param string $sql SQL-запрос
-     * @param string $server Имя сервера
-     * @return array
-     */
-    public static function getRow($sql, $server = 'master');
+	/**
+	 * Для SELECT, возвращающих значение одной строки таблицы
+	 *
+	 * @param string $sql SQL-запрос
+	 * @param string $server Имя сервера
+	 * @return array
+	 */
+	public static function getRow($sql, $server = 'master');
 
-    /**
-     * Для SELECT, возвращающих значение коллекцию результатов
-     *
-     * @param string $sql SQL-запрос
-     * @param string $server Имя сервера
-     * @return array
-     */
-    public static function getRows($sql, $server = 'master');
+	/**
+	 * Для SELECT, возвращающих значение коллекцию результатов
+	 *
+	 * @param string $sql SQL-запрос
+	 * @param string $server Имя сервера
+	 * @return array
+	 */
+	public static function getRows($sql, $server = 'master');
 }

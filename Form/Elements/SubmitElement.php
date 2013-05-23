@@ -18,11 +18,11 @@ namespace Veles\Form\Elements;
  */
 class SubmitElement extends AbstractElement
 {
-    /**
-     * Отрисовка элемента
-     */
-    final public function render()
-    {
-        return '<input' . $this->attributes() . 'type="submit">';
-    }
+	/**
+	 * Отрисовка элемента
+	 */
+	final public function render()
+	{
+		return '<input' . $this->attributes() . 'type="submit">';
+	}
 }

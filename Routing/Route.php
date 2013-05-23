@@ -1,6 +1,6 @@
 <?php
 /**
- * Класс роутинга
+ * Routing class
  * @file    Route.php
  *
  * PHP version 5.3.9+
@@ -12,162 +12,163 @@
 
 namespace Veles\Routing;
 
-use \Veles\Config;
-use \Exception;
+use Exception;
+use Veles\Config;
 
 /**
- * Класс Route
+ * Class Route
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
 class Route
 {
-    private static $instance = null;
-    private $page_name       = null;
-    private $config          = null;
-    private $template        = null;
-    private $map             = array();
+	private $page_name = null;
+	private $config    = null;
+	private $template  = null;
+	private $map       = array();
 
-    /**
-     * Доступ к объекту
-     * @return Route
-     */
-    final public static function instance()
-    {
-        if (null === self::$instance) {
-            self::$instance = new Route;
-        }
+	/**
+	 * Config parser and controller vars initialialisation
+	 * @throws Exception
+	 */
+	private function __construct()
+	{
+		if (null === ($routes = Config::getParams('routes'))) {
+			throw new Exception('В конфиге не найдены роуты!');
+		}
 
-        return self::$instance;
-    }
+		$q_pos = strpos($_SERVER['REQUEST_URI'], '?');
 
-    /**
-     * Парсинг конфига и инициализация переменных контроллера и экшена
-     * @throws Exception
-     */
-    private function __construct()
-    {
-        if (null === ($routes = Config::getParams('routes'))) {
-            throw new Exception('В конфиге не найдены роуты!');
-        }
+		$url = ($q_pos)
+			? urldecode(substr($_SERVER['REQUEST_URI'], 0, $q_pos))
+			: urldecode($_SERVER['REQUEST_URI']);
 
-        $q_pos = strpos($_SERVER['REQUEST_URI'], '?');
+		foreach ($routes as $name => $route) {
+			if (!$route['class']::check($route['route'], $url)) {
+				continue;
+			}
 
-        $url = ($q_pos)
-            ? urldecode(substr($_SERVER['REQUEST_URI'], 0, $q_pos))
-            : urldecode($_SERVER['REQUEST_URI']);
+			$this->config    = $route;
+			$this->page_name = $name;
 
-        foreach ($routes as $name => $route) {
-            if (!$route['class']::check($route['route'], $url)) {
-                continue;
-            }
+			if (isset($route['tpl'])) {
+				$this->template = $route['tpl'];
+			}
 
-            $this->config    = $route;
-            $this->page_name = $name;
+			$this->checkAjax();
 
-            if (isset($route['tpl'])) {
-                $this->template = $route['tpl'];
-            }
+			if (isset($route['map'])
+				&& null !== ($map = $route['class']::getMap())
+			) {
+				$this->map = array_combine($route['map'], $map);
+			}
 
-            $this->checkAjax();
+			return;
+		}
 
-            if (isset($route['map'])
-                && null !== ($map = $route['class']::getMap())
-            ) {
-                $this->map = array_combine($route['map'], $map);
-            }
+		Route404::show($url);
+	}
 
-            return;
-        }
+	/**
+	 * Check for request is ajax
+	 */
+	private function checkAjax()
+	{
+		if (!$this->isAjax()) {
+			return;
+		}
 
-        Route404::show($url);
-    }
+		if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])
+			&& 'XMLHttpRequest' === $_SERVER['HTTP_X_REQUESTED_WITH']
+		) {
+			return;
+		}
 
-    /**
-     * Получение и инициализация контроллера
-     * @throws Exception
-     * @return object
-     */
-    final public function getController()
-    {
-        if (!isset($this->config['controller'])) {
-            throw new Exception('Не указан контроллер!');
-        }
+		throw new Exception('На AJAX-роут отправлен не ajax-запрос!');
+	}
 
-        $controller_name = 'Controllers\\' . $this->config['controller'];
+	/**
+	 * Getting ajax-flag
+	 * @throws Exception
+	 * @return string
+	 */
+	final public function isAjax()
+	{
+		return isset($this->config['ajax']) ? $this->config['ajax'] : false;
+	}
 
-        return new $controller_name;
-    }
+	/**
+	 * Access to object
+	 * @return Route
+	 */
+	final public static function instance()
+	{
+		static $instance;
 
-    /**
-     * Получение имени метода
-     * @throws Exception
-     * @return string
-     */
-    final public function getActionName()
-    {
-        if (!isset($this->config['action'])) {
-            throw new Exception('Не указан экшен!');
-        }
+		if (null === $instance) {
+			$instance = new Route;
+		}
 
-        return $this->config['action'];
-    }
+		return $instance;
+	}
 
-    /**
-     * Получение ajax-флага
-     * @throws Exception
-     * @return string
-     */
-    final public function isAjax()
-    {
-        return isset($this->config['ajax']) ? $this->config['ajax'] : false;
-    }
+	/**
+	 * Access to controller
+	 * @throws Exception
+	 * @return object
+	 */
+	final public function getController()
+	{
+		if (!isset($this->config['controller'])) {
+			throw new Exception('Не указан контроллер!');
+		}
 
-    /**
-     * Получение имени страницы
-     * @throws Exception
-     * @return string
-     */
-    final public function getPageName()
-    {
-        if (!isset($this->page_name)) {
-            throw new Exception('Не найдено имя страницы!');
-        }
+		$controller = 'Controllers\\' . $this->config['controller'];
 
-        return $this->page_name;
-    }
+		return new $controller;
+	}
 
-    /**
-     * Получение URL-параметров
-     * @return array
-     */
-    final public function getMap()
-    {
-        return $this->map;
-    }
+	/**
+	 * Getn controller method name
+	 * @throws Exception
+	 * @return string
+	 */
+	final public function getActionName()
+	{
+		if (!isset($this->config['action'])) {
+			throw new Exception('Не указан экшен!');
+		}
 
-    /**
-     * Получение пути к view-шаблону
-     */
-    final public function getTemplate()
-    {
-        return $this->template;
-    }
+		return $this->config['action'];
+	}
 
-    /**
-     * Проверка является запрос AJAX-запросом
-     */
-    private function checkAjax()
-    {
-        if (!$this->isAjax()) {
-            return;
-        }
+	/**
+	 * Getting page name
+	 * @throws Exception
+	 * @return string
+	 */
+	final public function getPageName()
+	{
+		if (!isset($this->page_name)) {
+			throw new Exception('Не найдено имя страницы!');
+		}
 
-        if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])
-            && 'XMLHttpRequest' === $_SERVER['HTTP_X_REQUESTED_WITH']
-        ) {
-            return;
-        }
+		return $this->page_name;
+	}
 
-        throw new Exception('На AJAX-роут отправлен не ajax-запрос!');
-    }
+	/**
+	 * Getting URL-params
+	 * @return array
+	 */
+	final public function getMap()
+	{
+		return $this->map;
+	}
+
+	/**
+	 * Return template path
+	 */
+	final public function getTemplate()
+	{
+		return $this->template;
+	}
 }

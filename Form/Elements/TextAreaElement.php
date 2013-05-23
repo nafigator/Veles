@@ -18,11 +18,11 @@ namespace Veles\Form\Elements;
  */
 class TextAreaElement extends AbstractElement
 {
-    /**
-     * Отрисовка элемента
-     */
-    final public function render()
-    {
-        return '<textarea' . $this->attributes() . ">$this->value</textarea>";
-    }
+	/**
+	 * Отрисовка элемента
+	 */
+	final public function render()
+	{
+		return '<textarea' . $this->attributes() . ">$this->value</textarea>";
+	}
 }

@@ -13,9 +13,9 @@
 
 namespace Veles\View;
 
-use \Veles\View\Adapters\iViewAdapter;
-use \Veles\Config;
-use \Exception;
+use Exception;
+use Veles\Config;
+use Veles\View\Adapters\iViewAdapter;
 
 /**
  * Class ViewFactory
@@ -23,26 +23,26 @@ use \Exception;
  */
 class ViewFactory
 {
-    /**
-     * Method for create view driver
-     * @throws Exception
-     * @return iViewDriver
-     */
-    final public static function build()
-    {
-        if (null === ($class = Config::getParams('view_adapter'))) {
-            throw new Exception('Not found View driver params in config!');
-        }
+	/**
+	 * Method for create view driver
+	 * @throws Exception
+	 * @return iViewDriver
+	 */
+	final public static function build()
+	{
+		if (null === ($class = Config::getParams('view_adapter'))) {
+			throw new Exception('Not found View driver params in config!');
+		}
 
-        $class = ucfirst($class);
-        $class_name = "\\Veles\\View\\Adapters\\{$class}Adapter";
+		$class = ucfirst($class);
+		$class_name = "\\Veles\\View\\Adapters\\{$class}Adapter";
 
-        $driver = new $class_name;
+		$driver = new $class_name;
 
-        if (!$driver instanceof iViewAdapter) {
-            throw new Exception('Not correct View driver!');
-        }
+		if (!$driver instanceof iViewAdapter) {
+			throw new Exception('Not correct View driver!');
+		}
 
-        return new $driver;
-    }
+		return new $driver;
+	}
 }

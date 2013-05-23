@@ -21,32 +21,32 @@ use Veles\Validators\iValidator;
 class Byte implements iValidator
 {
 
-    /**
-     * Проверка на валидность байтовых значенй
-     * @param mixed $size Размер в байтах
-     * @return bool
-     */
-    final public function check($size)
-    {
-        return is_numeric($size);
-    }
+	/**
+	 * Проверка на валидность байтовых значенй
+	 * @param mixed $size Размер в байтах
+	 * @return bool
+	 */
+	final public function check($size)
+	{
+		return is_numeric($size);
+	}
 
-    /**
-     * Преобразование значений байтов в удобочитаемый формат
-     * @param int $size Значение в байтах
-     * @param int $precision Точность возвращаемых значений
-     * @return string
-     */
-    final public static function format($size, $precision = 2)
-    {
-        $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+	/**
+	 * Преобразование значений байтов в удобочитаемый формат
+	 * @param int $size Значение в байтах
+	 * @param int $precision Точность возвращаемых значений
+	 * @return string
+	 */
+	final public static function format($size, $precision = 2)
+	{
+		$units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
 
-        $size = max($size, 0);
-        $pow = floor(($size ? log($size) : 0) / log(1024));
-        $pow = min($pow, count($units) - 1);
+		$size = max($size, 0);
+		$pow = floor(($size ? log($size) : 0) / log(1024));
+		$pow = min($pow, count($units) - 1);
 
-        $size /= (1 << (10 * $pow));
+		$size /= (1 << (10 * $pow));
 
-        return round($size, $precision) . ' ' . $units[$pow];
-    }
+		return round($size, $precision) . ' ' . $units[$pow];
+	}
 }

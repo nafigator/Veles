@@ -13,7 +13,7 @@
 
 namespace Veles\View\Adapters;
 
-use \Exception;
+use Exception;
 
 /**
  * Interface iViewAdapter
@@ -21,34 +21,34 @@ use \Exception;
  */
 interface iViewAdapter
 {
-    /**
-     * Method for output variables setup
-     *
-     * @param array $vars Output variables array
-     * @throws Exception
-     */
-    public function set($vars);
+	/**
+	 * Method for output variables setup
+	 *
+	 * @param array $vars Output variables array
+	 * @throws Exception
+	 */
+	public function set($vars);
 
-    /**
-     * Output variables cleanup
-     *
-     * @param array $vars Variables array for cleanup
-     * @throws Exception
-     */
-    public function del($vars);
+	/**
+	 * Output variables cleanup
+	 *
+	 * @param array $vars Variables array for cleanup
+	 * @throws Exception
+	 */
+	public function del($vars);
 
-    /**
-     * Output method
-     *
-     * @param string $path Path to template
-     */
-    public function show($path);
+	/**
+	 * Output method
+	 *
+	 * @param string $path Path to template
+	 */
+	public function show($path);
 
-    /**
-     * Output View into buffer and save it in variable
-     *
-     * @param string $path Path to template
-     * @return string View content
-     */
-    public function get($path);
+	/**
+	 * Output View into buffer and save it in variable
+	 *
+	 * @param string $path Path to template
+	 * @return string View content
+	 */
+	public function get($path);
 }

@@ -18,11 +18,11 @@ namespace Controllers\Frontend;
  */
 class Home
 {
-    /**
-     * Метод вызываемый при запросе /index.html
-     */
-    final public function index()
-    {
-        return array('a' => 'Test', 'b' => 'complete', 'c' => 'Hello');
-    }
+	/**
+	 * Метод вызываемый при запросе /index.html
+	 */
+	final public function index()
+	{
+		return array('a' => 'Test', 'b' => 'complete', 'c' => 'Hello');
+	}
 }

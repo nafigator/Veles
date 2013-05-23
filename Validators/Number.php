@@ -18,32 +18,32 @@ namespace Veles\Validators;
  */
 class Number implements iValidator
 {
-    private $max;
-    private $min;
+	private $max;
+	private $min;
 
-    /**
-     * Конструктор
-     * @param int $max Максимальное значение
-     * @param int $min Минимальное значение
-     */
-    final public function __construct($min = 1, $max = 2147483647)
-    {
-        $this->min = (int) $min;
-        $this->max = (int) $max;
-    }
+	/**
+	 * Конструктор
+	 * @param int $max Максимальное значение
+	 * @param int $min Минимальное значение
+	 */
+	final public function __construct($min = 1, $max = 2147483647)
+	{
+		$this->min = (int) $min;
+		$this->max = (int) $max;
+	}
 
-    /**
-     * Валидация числовых значений
-     * @param mixed $value Валидируемое значение
-     * @return bool
-     */
-    final public function check($value)
-    {
-        if (!is_numeric($value))
-            return false;
+	/**
+	 * Валидация числовых значений
+	 * @param mixed $value Валидируемое значение
+	 * @return bool
+	 */
+	final public function check($value)
+	{
+		if (!is_numeric($value))
+			return false;
 
-        $value = (int) $value;
+		$value = (int) $value;
 
-        return $this->min <= $value && $value <= $this->max;
-    }
+		return $this->min <= $value && $value <= $this->max;
+	}
 }

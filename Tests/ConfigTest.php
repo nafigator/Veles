@@ -12,16 +12,15 @@
 
 namespace Veles\Tests;
 
+use PHPUnit_Framework_TestCase;
 use Veles\Config;
 
-use \PHPUnit_Framework_TestCase;
-
 if (!defined('ENVIRONMENT')) {
-    define('ENVIRONMENT', 'development');
+	define('ENVIRONMENT', 'development');
 }
 
 if (!defined('CONFIG_FILE')) {
-    define('CONFIG_FILE', __DIR__ . '/Project/settings.ini');
+	define('CONFIG_FILE', __DIR__ . '/Project/settings.ini');
 }
 
 /**
@@ -29,37 +28,37 @@ if (!defined('CONFIG_FILE')) {
  */
 class ConfigTest extends PHPUnit_Framework_TestCase
 {
-    /**
-     * Unit-test for Config::getParams
-     * @group RootClasses
-     * @covers Veles\Config::getParams
-     * @dataProvider getParamsProvider
-     * @see    Veles\Config
-     */
-    public function testGetParams($param, $expected)
-    {
-        $result = Config::getParams($param);
+	/**
+	 * Unit-test for Config::getParams
+	 * @group RootClasses
+	 * @covers Veles\Config::getParams
+	 * @dataProvider getParamsProvider
+	 * @see    Veles\Config
+	 */
+	public function testGetParams($param, $expected)
+	{
+		$result = Config::getParams($param);
 
-        $msg = 'Config returned wrong params';
-        self::assertEquals($expected, $result, $msg);
-    }
+		$msg = 'Config returned wrong params';
+		self::assertEquals($expected, $result, $msg);
+	}
 
-    /**
-     * Data-provider for testGetParams
-     */
-    public function getParamsProvider()
-    {
-        $php = array (
-            'display_errors'  => '1',
-            'log_errors'      => '1',
-            '' => array(
-                'xdebug.cli_color'                => '1',
-                'xdebug.var_display_max_children' => '-1',
-            )
-        );
-        $mysql = array(
-            'master' => array('host' => 'localhost', 'user' => 'user')
-        );
-        return array(array('php', $php), array('db', $mysql));
-    }
+	/**
+	 * Data-provider for testGetParams
+	 */
+	public function getParamsProvider()
+	{
+		$php = array (
+			'display_errors'  => '1',
+			'log_errors'      => '1',
+			'' => array(
+				'xdebug.cli_color'                => '1',
+				'xdebug.var_display_max_children' => '-1',
+			)
+		);
+		$mysql = array(
+			'master' => array('host' => 'localhost', 'user' => 'user')
+		);
+		return array(array('php', $php), array('db', $mysql));
+	}
 }

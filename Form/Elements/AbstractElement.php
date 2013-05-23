@@ -18,95 +18,95 @@ namespace Veles\Form\Elements;
  */
 abstract class AbstractElement implements iElement
 {
-    protected $params;
+	protected $params;
 
-    /**
-     * Конструктор элемента
-     * @param array $params Массив параметров элемента формы
-     */
-    final public function __construct($params)
-    {
-        $this->params = $params;
-    }
+	/**
+	 * Конструктор элемента
+	 * @param array $params Массив параметров элемента формы
+	 */
+	final public function __construct($params)
+	{
+		$this->params = $params;
+	}
 
-    /**
-     * Валидация элемента формы
-     * @param mixed $value Значение для валидации
-     * @return bool
-     */
-    final public function validate($value)
-    {
-        if (false ===  $this->validator) {
-            return true;
-        }
+	/**
+	 * Валидация элемента формы
+	 * @param mixed $value Значение для валидации
+	 * @return bool
+	 */
+	final public function validate($value)
+	{
+		if (false ===  $this->validator) {
+			return true;
+		}
 
-        if ($this->validator->check($value)) {
-            $this->params['attributes']['value'] = $value;
-            return true;
-        }
+		if ($this->validator->check($value)) {
+			$this->params['attributes']['value'] = $value;
+			return true;
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    /**
-     * Проверка является ли элемент обязательным
-     */
-    final public function required()
-    {
-        return $this->required;
-    }
+	/**
+	 * Проверка является ли элемент обязательным
+	 */
+	final public function required()
+	{
+		return $this->required;
+	}
 
-    /**
-     * Получение имени элемента
-     */
-    final public function getName()
-    {
-        return $this->attributes['name'];
-    }
+	/**
+	 * Получение имени элемента
+	 */
+	final public function getName()
+	{
+		return $this->attributes['name'];
+	}
 
-    /**
-     * Отрисовка элемента реализуется для каждого элемента
-     */
-    abstract public function render();
+	/**
+	 * Отрисовка элемента реализуется для каждого элемента
+	 */
+	abstract public function render();
 
-    /**
-     * Магия для создания свойств элемента
-     * @param string $name
-     * @param mixed  $value
-     */
-    final public function __set($name, $value)
-    {
-        $this->params[$name] = $value;
-    }
+	/**
+	 * Магия для создания свойств элемента
+	 * @param string $name
+	 * @param mixed  $value
+	 */
+	final public function __set($name, $value)
+	{
+		$this->params[$name] = $value;
+	}
 
-    /**
-     * Магия для доступа к свойствам элемента
-     * @param string $name
-     * @return mixed
-     */
-    final public function __get($name)
-    {
-        if (array_key_exists($name, $this->params)) {
-            return $this->params[$name];
-        }
-        return null;
-    }
+	/**
+	 * Магия для доступа к свойствам элемента
+	 * @param string $name
+	 * @return mixed
+	 */
+	final public function __get($name)
+	{
+		if (array_key_exists($name, $this->params)) {
+			return $this->params[$name];
+		}
+		return null;
+	}
 
-    /**
-     * Рендеринг аттрибутов элемента
-     */
-    final public function attributes()
-    {
-        $attributes = ' ';
+	/**
+	 * Рендеринг аттрибутов элемента
+	 */
+	final public function attributes()
+	{
+		$attributes = ' ';
 
-        if (!isset($this->params['attributes'])) {
-            return $attributes;
-        }
+		if (!isset($this->params['attributes'])) {
+			return $attributes;
+		}
 
-        foreach ($this->params['attributes'] as $name => $value) {
-            $attributes .= " $name=\"$value\" ";
-        }
+		foreach ($this->params['attributes'] as $name => $value) {
+			$attributes .= " $name=\"$value\" ";
+		}
 
-        return $attributes;
-    }
+		return $attributes;
+	}
 }

@@ -12,8 +12,8 @@
 
 namespace Veles\Cache;
 
-use \Veles\Config;
-use \Veles\Cache\Drivers\iCacheDriver;
+use Veles\Cache\Drivers\iCacheDriver;
+use Veles\Config;
 
 /**
  * Класс AbstractCache
@@ -21,81 +21,81 @@ use \Veles\Cache\Drivers\iCacheDriver;
  */
 class Cache
 {
-    private static $driver;
+	private static $driver;
 
-    /**
-     * Инициализация драйвера кэша
-     * @param string $driver_name Имя дравйвера
-     * @return iCacheDriver
-     */
-    final public static function init($driver_name = 'APC')
-    {
-        $driver_class = "\\Veles\\Cache\\Drivers\\$driver_name";
-        static::$driver = new $driver_class;
+	/**
+	 * Инициализация драйвера кэша
+	 * @param string $driver_name Имя дравйвера
+	 * @return iCacheDriver
+	 */
+	final public static function init($driver_name = 'APC')
+	{
+		$driver_class = "\\Veles\\Cache\\Drivers\\$driver_name";
+		static::$driver = new $driver_class;
 
-        return static::$driver;
-    }
+		return static::$driver;
+	}
 
-    /**
-     * Инстанс кэша
-     * @return Cache
-     */
-    final public static function getDriver()
-    {
-        if (self::$driver instanceof iCacheDriver) {
-            return static::$driver;
-        }
+	/**
+	 * Инстанс кэша
+	 * @return Cache
+	 */
+	final public static function getDriver()
+	{
+		if (self::$driver instanceof iCacheDriver) {
+			return static::$driver;
+		}
 
-        return static::init();
-    }
+		return static::init();
+	}
 
-    /**
-     * Получение данных
-     * @param string $key Ключ
-     * @return mixed
-     */
-    final static public function get($key)
-    {
-        return self::getDriver()->get($key);
-    }
+	/**
+	 * Получение данных
+	 * @param string $key Ключ
+	 * @return mixed
+	 */
+	final static public function get($key)
+	{
+		return self::getDriver()->get($key);
+	}
 
-    /**
-     * Сохранение данных
-     * @param string $key Ключ
-     * @param mixed $value Данные
-     * @return bool
-     */
-    final public static function set($key, $value)
-    {
-        return self::getDriver()->set($key, $value);
-    }
+	/**
+	 * Сохранение данных
+	 * @param string $key Ключ
+	 * @param mixed $value Данные
+	 * @return bool
+	 */
+	final public static function set($key, $value)
+	{
+		return self::getDriver()->set($key, $value);
+	}
 
-    /**
-     * Проверка существуют ли данные в кэше
-     * @param string $key Ключ
-     * @return bool
-     */
-    final public static function has($key)
-    {
-        return self::getDriver()->has($key);
-    }
+	/**
+	 * Проверка существуют ли данные в кэше
+	 * @param string $key Ключ
+	 * @return bool
+	 */
+	final public static function has($key)
+	{
+		return self::getDriver()->has($key);
+	}
 
-    /**
-     * Удаление данных
-     * @param string $key Ключ
-     * @return bool
-     */
-    final public static function del($key)
-    {
-        return self::getDriver()->del($key);
-    }
+	/**
+	 * Удаление данных
+	 * @param string $key Ключ
+	 * @return bool
+	 */
+	final public static function del($key)
+	{
+		return self::getDriver()->del($key);
+	}
 
-    /**
-     * Очистка кэша
-     * @return bool
-     */
-    final public static function clear()
-    {
-        return self::getDriver()->clear();
-    }
+	/**
+	 * Очистка кэша
+	 * @return bool
+	 */
+	final public static function clear()
+	{
+		return self::getDriver()->clear();
+	}
 }

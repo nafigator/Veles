@@ -12,8 +12,8 @@
 
 namespace Veles\ErrorHandler;
 
-use \SplObserver,
-    \Veles\Email\AbstractEmail;
+use SplObserver;
+use Veles\Email\AbstractEmail;
 
 /**
  * Класс ErrEmail
@@ -21,19 +21,19 @@ use \SplObserver,
  */
 class ErrMail extends AbstractEmail implements SplObserver
 {
-    /**
-     * Инициализация параметров
-     */
-    final public function init()
-    {
-        $this->receiver = 'poligon@tut.by';
+	/**
+	 * Инициализация параметров
+	 */
+	final public function init()
+	{
+		$this->receiver = 'poligon@tut.by';
 
-        $this->headers  = "From: www@itvault.info\n";
-        $this->headers .= 'X-Mailer: PHP/' . phpversion() . "\n";
-        $this->headers .= "MIME-Version: 1.0\n";
-        $this->headers .= "Content-type: text/html; charset=$this->charset \n";
-        $this->headers .= "Content-Transfer-Encoding: $this->encoding";
+		$this->headers  = "From: www@itvault.info\n";
+		$this->headers .= 'X-Mailer: PHP/' . phpversion() . "\n";
+		$this->headers .= "MIME-Version: 1.0\n";
+		$this->headers .= "Content-type: text/html; charset=$this->charset \n";
+		$this->headers .= "Content-Transfer-Encoding: $this->encoding";
 
-        $this->subject  = '=?' . $this->charset . '?B?' . base64_encode('itvault.info Error') . '?=';
-    }
+		$this->subject  = '=?' . $this->charset . '?B?' . base64_encode('itvault.info Error') . '?=';
+	}
 }

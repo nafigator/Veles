@@ -18,11 +18,11 @@ namespace Veles\Routing;
  */
 interface iRouteStrategy
 {
-    /**
-     * Метод для проверки текущего url на соответствие шаблонам роутов из конфига
-     * @param string $url
-     * @param string $pattern
-     * @return bool
-     */
-    public static function check($url, $pattern);
+	/**
+	 * Метод для проверки текущего url на соответствие шаблонам роутов из конфига
+	 * @param string $url
+	 * @param string $pattern
+	 * @return bool
+	 */
+	public static function check($url, $pattern);
 }

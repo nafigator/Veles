@@ -12,7 +12,7 @@
 
 namespace Veles\Email;
 
-use \SplSubject;
+use SplSubject;
 
 /**
  * Класс AbstractEmail
@@ -20,35 +20,35 @@ use \SplSubject;
  */
 abstract class AbstractEmail
 {
-    protected $receiver = null;
-    protected $headers  = null;
-    protected $subject  = null;
-    protected $message  = null;
-    protected $charset  = 'utf-8';
-    protected $encoding = 'base64';   //8bit
+	protected $receiver = null;
+	protected $headers  = null;
+	protected $subject  = null;
+	protected $message  = null;
+	protected $charset  = 'utf-8';
+	protected $encoding = 'base64';   //8bit
 
-    /**
-     * Вызов
-     * @param SplSubject $subject
-     * @internal param array $vars Набор переменных
-     */
-    final public function update(SplSubject $subject)
-    {
-        $this->message = base64_encode($subject->getMessage());
-        $this->init();
-        $this->send();
-    }
+	/**
+	 * Вызов
+	 * @param SplSubject $subject
+	 * @internal param array $vars Набор переменных
+	 */
+	final public function update(SplSubject $subject)
+	{
+		$this->message = base64_encode($subject->getMessage());
+		$this->init();
+		$this->send();
+	}
 
-    /**
-     * Создание сообщения
-     */
-    abstract public function init();
+	/**
+	 * Создание сообщения
+	 */
+	abstract public function init();
 
-    /**
-     * Отправка письма
-     */
-    final protected function send()
-    {
-        mail($this->receiver, $this->subject, $this->message, $this->headers);
-    }
+	/**
+	 * Отправка письма
+	 */
+	final protected function send()
+	{
+		mail($this->receiver, $this->subject, $this->message, $this->headers);
+	}
 }

@@ -12,11 +12,11 @@
 
 namespace Veles\Application;
 
-use \Veles\Config;
-use \Veles\View\View;
-use \Veles\Routing\Route;
-use \Veles\Auth\UsrAuth;
-use \Veles\ErrorHandler\ErrBase;
+use Veles\Auth\UsrAuth;
+use Veles\Config;
+use Veles\ErrorHandler\ErrBase;
+use Veles\Routing\Route;
+use Veles\View\View;
 
 /**
  * Класс Application
@@ -24,59 +24,59 @@ use \Veles\ErrorHandler\ErrBase;
  */
 class Application
 {
-    /**
-     * Старт приложения
-     */
-    final public static function run()
-    {
-        self::setPhpSettings();
-        self::setErrorHandlers();
+	/**
+	 * Старт приложения
+	 */
+	final public static function run()
+	{
+		self::setPhpSettings();
+		self::setErrorHandlers();
 
-        UsrAuth::instance();
+		UsrAuth::instance();
 
-        // Получаем имя контроллера и метода
-        $route       = Route::instance();
-        $controller  = $route->getController();
-        $action_name = $route->getActionName();
-        $template    = $route->getTemplate();
+		// Получаем имя контроллера и метода
+		$route       = Route::instance();
+		$controller  = $route->getController();
+		$action_name = $route->getActionName();
+		$template    = $route->getTemplate();
 
-        View::set($controller->$action_name());
+		View::set($controller->$action_name());
 
-        View::show($template);
-    }
+		View::show($template);
+	}
 
-    /**
-     * Инициализируем ErrorHandlers
-     */
-    final public static function setErrorHandlers()
-    {
-        $error = new ErrBase;
-        register_shutdown_function(array($error, 'fatal'));
-        set_error_handler(array($error, 'usrError'));
-        set_exception_handler(array($error, 'exception'));
-    }
+	/**
+	 * Инициализируем ErrorHandlers
+	 */
+	final public static function setErrorHandlers()
+	{
+		$error = new ErrBase;
+		register_shutdown_function(array($error, 'fatal'));
+		set_error_handler(array($error, 'usrError'));
+		set_exception_handler(array($error, 'exception'));
+	}
 
-    /**
-     * Устанавливаем настройки php, прописанные в конфиге
-     * @param array $keys Макссив php-параметров и их значений
-     */
-    final protected static function setPhpSettings($keys = null)
-    {
-        $config = (null === $keys)
-            ? Config::getParams('php')
-            : $keys;
+	/**
+	 * Устанавливаем настройки php, прописанные в конфиге
+	 * @param array $keys Макссив php-параметров и их значений
+	 */
+	final protected static function setPhpSettings($keys = null)
+	{
+		$config = (null === $keys)
+			? Config::getParams('php')
+			: $keys;
 
-        if (null === $config) {
-            return;
-        }
+		if (null === $config) {
+			return;
+		}
 
-        foreach ($config as $param => $value) {
-            if (is_array($value)) {
-                self::setPhpSettings($value);
-                continue;
-            }
+		foreach ($config as $param => $value) {
+			if (is_array($value)) {
+				self::setPhpSettings($value);
+				continue;
+			}
 
-            ini_set($param, $value);
-        }
-    }
+			ini_set($param, $value);
+		}
+	}
 }

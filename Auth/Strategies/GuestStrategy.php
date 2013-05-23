@@ -12,7 +12,7 @@
 
 namespace Veles\Auth\Strategies;
 
-use \Veles\Auth\UsrGroup;
+use Veles\Auth\UsrGroup;
 
 /**
  * Класс GuestStrategy
@@ -20,15 +20,15 @@ use \Veles\Auth\UsrGroup;
  */
 class GuestStrategy extends AbstractAuthStrategy
 {
-    /**
-     * Гостевая авторизация
-     * @return bool
-     */
-    final public function identify()
-    {
-        $props = array('group' => UsrGroup::GUEST);
-        $this->user->setProperties($props);
+	/**
+	 * Гостевая авторизация
+	 * @return bool
+	 */
+	final public function identify()
+	{
+		$props = array('group' => UsrGroup::GUEST);
+		$this->user->setProperties($props);
 
-        return false;
-    }
+		return false;
+	}
 }

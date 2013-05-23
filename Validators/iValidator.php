@@ -18,9 +18,9 @@ namespace Veles\Validators;
  */
 interface iValidator
 {
-    /**
-     * Валидация
-     * @param mixed $value Значения для проверки
-     */
-    public function check($value);
+	/**
+	 * Валидация
+	 * @param mixed $value Значения для проверки
+	 */
+	public function check($value);
 }

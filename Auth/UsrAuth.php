@@ -12,7 +12,7 @@
 
 namespace Veles\Auth;
 
-use \Veles\Model\User;
+use Veles\Model\User;
 
 /**
  * Класс авторизации пользователя
@@ -20,77 +20,77 @@ use \Veles\Model\User;
  */
 final class UsrAuth
 {
-    private $identify = false;
-    private $strategy;
-    private static $instance;
+	private $identify = false;
+	private $strategy;
+	private static $instance;
 
-    /**
-     * Проверка авторизации пользователя
-     * @return UsrAuth
-     */
-    final public static function instance()
-    {
-        if (null === self::$instance) {
-            self::$instance = new self;
-        }
+	/**
+	 * Проверка авторизации пользователя
+	 * @return UsrAuth
+	 */
+	final public static function instance()
+	{
+		if (null === self::$instance) {
+			self::$instance = new self;
+		}
 
-        return self::$instance;
-    }
+		return self::$instance;
+	}
 
-    /**
-     * Инициализация стратегии и пользователя
-     */
-    private function __construct()
-    {
-        $this->strategy = UsrAuthFactory::create();
-        $this->identify = $this->strategy->identify();
-    }
+	/**
+	 * Инициализация стратегии и пользователя
+	 */
+	private function __construct()
+	{
+		$this->strategy = UsrAuthFactory::create();
+		$this->identify = $this->strategy->identify();
+	}
 
-    /**
-     * Метод возвращает побитовые значения ошибок
-     * @return int Побитовые значения ошибок авторизации
-     */
-    final public static function getErrors()
-    {
-        return self::instance()->getStrategyErrors();
-    }
+	/**
+	 * Метод возвращает побитовые значения ошибок
+	 * @return int Побитовые значения ошибок авторизации
+	 */
+	final public static function getErrors()
+	{
+		return self::instance()->getStrategyErrors();
+	}
 
-    /**
-     * Возвращает ошибки авторизации
-     * @return int Побитовые значения ошибок авторизации
-     */
-    private function getStrategyErrors()
-    {
-        return $this->strategy->getErrors();
-    }
+	/**
+	 * Возвращает ошибки авторизации
+	 * @return int Побитовые значения ошибок авторизации
+	 */
+	private function getStrategyErrors()
+	{
+		return $this->strategy->getErrors();
+	}
 
-    /**
-     * Метод для проверки состоит ли пользователь в определённых группах
-     * @param   array
-     * @return  bool
-     * @todo переделать входящий параметр на int
-     */
-    final public function hasAccess($groups)
-    {
-        $user_group = $this->getUser()->getGroup();
+	/**
+	 * Метод для проверки состоит ли пользователь в определённых группах
+	 * @param   array
+	 * @return  bool
+	 * @todo переделать входящий параметр на int
+	 */
+	final public function hasAccess($groups)
+	{
+		$user_group = $this->getUser()->getGroup();
 
-        // Проверяем есть ли в группах пользователя определённый бит,
-        // соответствующий нужной группе.
-        foreach ($groups as $group) {
-            if ($group === ($user_group & $group)) {
-                return true;
-            }
-        }
+		// Проверяем есть ли в группах пользователя определённый бит,
+		// соответствующий нужной группе.
+		foreach ($groups as $group) {
+			if ($group === ($user_group & $group)) {
+				return true;
+			}
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    /**
-     * Получение пользователя
-     * @return User
-     */
-    final public function getUser()
-    {
-        return $this->strategy->getUser();
-    }
+	/**
+	 * Получение пользователя
+	 * @return User
+	 */
+	final public function getUser()
+	{
+		return $this->strategy->getUser();
+	}
 }

@@ -12,9 +12,9 @@
 
 namespace Veles\DataBase;
 
-use \Veles\Config;
-use \Exception;
-use \Veles\DataBase\Drivers\iDbDriver;
+use Exception;
+use Veles\Config;
+use Veles\DataBase\Drivers\iDbDriver;
 
 /**
  * Класс DbFabric

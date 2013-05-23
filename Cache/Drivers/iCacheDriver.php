@@ -18,38 +18,38 @@ namespace Veles\Cache\Drivers;
  */
 interface iCacheDriver
 {
-    /**
-     * Получение данных
-     * @param string $key Ключ
-     * @return mixed
-     */
-    public function get($key);
+	/**
+	 * Получение данных
+	 * @param string $key Ключ
+	 * @return mixed
+	 */
+	public function get($key);
 
-    /**
-     * Сохранение данных
-     * @param string $key Ключ
-     * @param mixed $value Данные
-     * @return bool
-     */
-    public function set($key, $value);
+	/**
+	 * Сохранение данных
+	 * @param string $key Ключ
+	 * @param mixed $value Данные
+	 * @return bool
+	 */
+	public function set($key, $value);
 
-    /**
-     * Проверка существуют ли данные в кэше
-     * @param string $key Ключ
-     * @return bool
-     */
-    public function has($key);
+	/**
+	 * Проверка существуют ли данные в кэше
+	 * @param string $key Ключ
+	 * @return bool
+	 */
+	public function has($key);
 
-    /**
-     * Удаление данных
-     * @param string $key Ключ
-     * @return bool
-     */
-    public function del($key);
+	/**
+	 * Удаление данных
+	 * @param string $key Ключ
+	 * @return bool
+	 */
+	public function del($key);
 
-    /**
-     * Очистка кэша
-     * @return bool
-     */
-    public function clear();
+	/**
+	 * Очистка кэша
+	 * @return bool
+	 */
+	public function clear();
 }

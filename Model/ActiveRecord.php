@@ -12,11 +12,11 @@
 
 namespace Veles\Model;
 
-use \Veles\DataBase\Db;
-use \Veles\DataBase\DbPaginator;
-use \Veles\DataBase\DbFilter;
-use \Veles\DataBase\QueryBuilder;
-use \StdClass;
+use StdClass;
+use Veles\DataBase\Db;
+use Veles\DataBase\DbFilter;
+use Veles\DataBase\DbPaginator;
+use Veles\DataBase\QueryBuilder;
 
 /**
  * Model class using ActiveRecord pattern
@@ -24,183 +24,183 @@ use \StdClass;
  */
 class ActiveRecord extends StdClass
 {
-    /**
-     * @var int|float|string $map Карта типов данных объекта
-     */
-    protected static $map = array();
+	/**
+	 * @var int|float|string $map Карта типов данных объекта
+	 */
+	protected static $map = array();
 
-    /**
-     * @const string|null Имя таблицы
-     */
-    const TBL_NAME = null;
+	/**
+	 * @const string|null Имя таблицы
+	 */
+	const TBL_NAME = null;
 
-    /**
-     * Конструктор модели
-     * @param int $identifier ID модели
-     */
-    final public function __construct($identifier = null)
-    {
-        null !== $identifier && $this->getById($identifier);
-    }
+	/**
+	 * Конструктор модели
+	 * @param int $identifier ID модели
+	 */
+	final public function __construct($identifier = null)
+	{
+		null !== $identifier && $this->getById($identifier);
+	}
 
-    /**
-     * Получение карты данных модели
-     * @return array
-     */
-    final public static function getMap()
-    {
-        return static::$map;
-    }
+	/**
+	 * Получение карты данных модели
+	 * @return array
+	 */
+	final public static function getMap()
+	{
+		return static::$map;
+	}
 
-    /**
-     * Вставка данных непосредственно в базу
-     * @return bool
-     */
-    private function insert()
-    {
-        $sql = QueryBuilder::insert($this);
+	/**
+	 * Вставка данных непосредственно в базу
+	 * @return bool
+	 */
+	private function insert()
+	{
+		$sql = QueryBuilder::insert($this);
 
-        return Db::query($sql) ? Db::getLastInsertId() : false;
-    }
+		return Db::query($sql) ? Db::getLastInsertId() : false;
+	}
 
-    /**
-     * Обновление данных в базе
-     * @return bool
-     */
-    private function update()
-    {
-        $sql = QueryBuilder::update($this);
+	/**
+	 * Обновление данных в базе
+	 * @return bool
+	 */
+	private function update()
+	{
+		$sql = QueryBuilder::update($this);
 
-        return Db::query($sql);
-    }
+		return Db::query($sql);
+	}
 
-    /**
-     * Получение данных по ID
-     * @param int $identifier ID модели
-     * @return bool
-     */
-    final public function getById($identifier)
-    {
-        $sql = QueryBuilder::getById($this, $identifier);
+	/**
+	 * Получение данных по ID
+	 * @param int $identifier ID модели
+	 * @return bool
+	 */
+	final public function getById($identifier)
+	{
+		$sql = QueryBuilder::getById($this, $identifier);
 
-        $result = Db::getRow($sql);
+		$result = Db::getRow($sql);
 
-        if (empty($result)) {
-            return false;
-        }
+		if (empty($result)) {
+			return false;
+		}
 
-        $this->setProperties($result);
+		$this->setProperties($result);
 
-        return true;
-    }
+		return true;
+	}
 
-    /**
-     * Получение списка объектов по фильтру
-     * @param bool|DbFilter $filter Объект фильтра
-     * @param bool|DbPaginator $pager Объект постраничного вывода
-     * @return array Массив с найденными по фильтру данными
-     */
-    final public function getAll($filter = false, $pager = false)
-    {
-        $sql = QueryBuilder::find($this, $filter);
-        $sql = QueryBuilder::setPage($sql, $pager);
+	/**
+	 * Получение списка объектов по фильтру
+	 * @param bool|DbFilter $filter Объект фильтра
+	 * @param bool|DbPaginator $pager Объект постраничного вывода
+	 * @return array Массив с найденными по фильтру данными
+	 */
+	final public function getAll($filter = false, $pager = false)
+	{
+		$sql = QueryBuilder::find($this, $filter);
+		$sql = QueryBuilder::setPage($sql, $pager);
 
-        $result = Db::getRows($sql);
+		$result = Db::getRows($sql);
 
-        if (empty($result)) {
-            return false;
-        }
+		if (empty($result)) {
+			return false;
+		}
 
-        $pager instanceof DbPaginator && $pager->calcMaxPages();
+		$pager instanceof DbPaginator && $pager->calcMaxPages();
 
-        return $result;
-    }
+		return $result;
+	}
 
-    /**
-     * Сохранение данных
-     * @return bool|int
-     */
-    final public function save()
-    {
-        return isset($this->id) ? $this->update() : $this->insert();
-    }
+	/**
+	 * Сохранение данных
+	 * @return bool|int
+	 */
+	final public function save()
+	{
+		return isset($this->id) ? $this->update() : $this->insert();
+	}
 
-    /**
-     * Удаление данных
-     * @param array|bool $ids
-     * @return bool
-     */
-    final public function delete($ids = false)
-    {
-        $sql = QueryBuilder::delete($this, $ids);
+	/**
+	 * Удаление данных
+	 * @param array|bool $ids
+	 * @return bool
+	 */
+	final public function delete($ids = false)
+	{
+		$sql = QueryBuilder::delete($this, $ids);
 
-        return Db::query($sql);
-    }
+		return Db::query($sql);
+	}
 
-    /**
-     * Метод для инициализации параметров модели
-     * @param   array Массив с требуемыми параметрами в ключах массива
-     * @return  array
-     */
-    final public function setProperties(&$properties)
-    {
-        foreach ($properties as $property_name => $value) {
-            $this->$property_name = $value;
-        }
-    }
+	/**
+	 * Метод для инициализации параметров модели
+	 * @param   array Массив с требуемыми параметрами в ключах массива
+	 * @return  array
+	 */
+	final public function setProperties(&$properties)
+	{
+		foreach ($properties as $property_name => $value) {
+			$this->$property_name = $value;
+		}
+	}
 
-    /**
-     * Метод для получения параметров модели
-     * @param   array Массив с требуемыми параметрами в ключах массива
-     * @return  array
-     */
-    final public function getProperties(&$properties)
-    {
-        $tmp_props = array_keys($properties);
-        foreach ($tmp_props as $property_name) {
-            isset($this->$property_name)
-                && $properties[$property_name] = $this->$property_name;
-        }
-    }
+	/**
+	 * Метод для получения параметров модели
+	 * @param   array Массив с требуемыми параметрами в ключах массива
+	 * @return  array
+	 */
+	final public function getProperties(&$properties)
+	{
+		$tmp_props = array_keys($properties);
+		foreach ($tmp_props as $property_name) {
+			isset($this->$property_name)
+				&& $properties[$property_name] = $this->$property_name;
+		}
+	}
 
-    /**
-     * Получение уникального объекта
-     * @param bool|DbFilter $filter Объект фильтра
-     * @return bool
-     */
-    final public function find($filter = false)
-    {
-        $sql = QueryBuilder::find($this, $filter);
+	/**
+	 * Получение уникального объекта
+	 * @param bool|DbFilter $filter Объект фильтра
+	 * @return bool
+	 */
+	final public function find($filter = false)
+	{
+		$sql = QueryBuilder::find($this, $filter);
 
-        $result = Db::getRow($sql);
+		$result = Db::getRow($sql);
 
-        if (empty($result)) {
-            return false;
-        }
+		if (empty($result)) {
+			return false;
+		}
 
-        $this->setProperties($result);
+		$this->setProperties($result);
 
-        return true;
-    }
+		return true;
+	}
 
-    /**
-     * Произвольный запрос с постраничным выводом
-     * @param string $sql Запрос
-     * @param bool|DbPaginator $pager Объект постраничного вывода
-     * @return array|bool
-     */
-    final protected function query($sql, $pager = false)
-    {
-        $pager && $sql = QueryBuilder::setPage($sql, $pager);
+	/**
+	 * Произвольный запрос с постраничным выводом
+	 * @param string $sql Запрос
+	 * @param bool|DbPaginator $pager Объект постраничного вывода
+	 * @return array|bool
+	 */
+	final protected function query($sql, $pager = false)
+	{
+		$pager && $sql = QueryBuilder::setPage($sql, $pager);
 
-        $result = Db::getRows($sql);
+		$result = Db::getRows($sql);
 
-        if (empty($result)) {
-            return false;
-        }
+		if (empty($result)) {
+			return false;
+		}
 
-        $pager && $pager->calcMaxPages();
+		$pager && $pager->calcMaxPages();
 
-        return $result;
-    }
+		return $result;
+	}
 }

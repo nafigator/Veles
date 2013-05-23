@@ -12,7 +12,7 @@
 
 namespace Veles\Auth;
 
-use \Veles\Model\User;
+use Veles\Model\User;
 
 /**
  * Управление паролем пользователя
@@ -20,25 +20,25 @@ use \Veles\Model\User;
  */
 class Password
 {
-    /**
-     * Проверка хэша пользователя
-     * @param User $user
-     * @param $cookie_hash
-     * @return bool
-     */
-    final public static function checkCookieHash(User $user, &$cookie_hash)
-    {
-        return $user->getCookieHash() === $cookie_hash;
-    }
+	/**
+	 * Проверка хэша пользователя
+	 * @param User $user
+	 * @param $cookie_hash
+	 * @return bool
+	 */
+	final public static function checkCookieHash(User $user, &$cookie_hash)
+	{
+		return $user->getCookieHash() === $cookie_hash;
+	}
 
-    /**
-     * Проверка пароля пользователя при ajax-авторизации
-     * @param User $user User
-     * @param string $password Пароль полученый через ajax
-     * @return bool
-     */
-    final public static function check(User $user, &$password)
-    {
-        return $user->getHash() === crypt($password, $user->getSalt());
-    }
+	/**
+	 * Проверка пароля пользователя при ajax-авторизации
+	 * @param User $user User
+	 * @param string $password Пароль полученый через ajax
+	 * @return bool
+	 */
+	final public static function check(User $user, &$password)
+	{
+		return $user->getHash() === crypt($password, $user->getSalt());
+	}
 }

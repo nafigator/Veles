@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="phpunit.xsd"
-    xmlns=""
-    backupGlobals="true"
-    backupStaticAttributes="false"
-    bootstrap="Tests/bootstrap.php"
-    cacheTokens="false"
-    colors="true"
-    convertErrorsToExceptions="true"
-    convertNoticesToExceptions="true"
-    convertWarningsToExceptions="true"
-    forceCoversAnnotation="false"
-    mapTestClassNameToCoveredClassName="false"
-    processIsolation="false"
-    stopOnError="false"
-    stopOnFailure="false"
-    stopOnIncomplete="false"
-    stopOnSkipped="false"
-    strict="true"
-    verbose="true">
-    <testsuites>
-        <testsuite name="All">
-            <directory>Tests</directory>
-        </testsuite>
-    </testsuites>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="phpunit.xsd"
+	xmlns=""
+	backupGlobals="true"
+	backupStaticAttributes="false"
+	bootstrap="Tests/bootstrap.php"
+	cacheTokens="false"
+	colors="true"
+	convertErrorsToExceptions="true"
+	convertNoticesToExceptions="true"
+	convertWarningsToExceptions="true"
+	forceCoversAnnotation="false"
+	mapTestClassNameToCoveredClassName="false"
+	processIsolation="false"
+	stopOnError="false"
+	stopOnFailure="false"
+	stopOnIncomplete="false"
+	stopOnSkipped="false"
+	strict="true"
+	verbose="true">
+	<testsuites>
+		<testsuite name="All">
+			<directory>Tests</directory>
+		</testsuite>
+	</testsuites>
 </phpunit>

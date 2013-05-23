@@ -18,24 +18,24 @@ namespace Veles\Form\Elements;
  */
 interface iElement
 {
-    /**
-     * Валидация элемента формы
-     * @param mixed $value Значение для валидации
-     */
-    public function validate($value);
+	/**
+	 * Валидация элемента формы
+	 * @param mixed $value Значение для валидации
+	 */
+	public function validate($value);
 
-    /**
-     * Проверка является ли элемент обязательным
-     */
-    public function required();
+	/**
+	 * Проверка является ли элемент обязательным
+	 */
+	public function required();
 
-    /**
-     * Получение имени элемента
-     */
-    public function getName();
+	/**
+	 * Получение имени элемента
+	 */
+	public function getName();
 
-    /**
-     * Отрисовка элемента
-     */
-    public function render();
+	/**
+	 * Отрисовка элемента
+	 */
+	public function render();
 }

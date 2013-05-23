@@ -18,11 +18,11 @@ namespace Veles\Form\Elements;
  */
 class PasswordElement extends AbstractElement
 {
-    /**
-     * Отрисовка элемента
-     */
-    final public function render()
-    {
-        return '<input' . $this->attributes() . 'type="text">';
-    }
+	/**
+	 * Отрисовка элемента
+	 */
+	final public function render()
+	{
+		return '<input' . $this->attributes() . 'type="text">';
+	}
 }

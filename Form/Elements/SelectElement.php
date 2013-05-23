@@ -18,27 +18,27 @@ namespace Veles\Form\Elements;
  */
 class SelectElement extends AbstractElement
 {
-    /**
-     * Отрисовка элемента
-     */
-    final public function render()
-    {
-        $html  = '<select' . $this->attributes() . '>';
+	/**
+	 * Отрисовка элемента
+	 */
+	final public function render()
+	{
+		$html  = '<select' . $this->attributes() . '>';
 
-        foreach ($this->options as $option) {
-            $selected = '';
+		foreach ($this->options as $option) {
+			$selected = '';
 
-            if ($option['id'] == $this->selected) {
-                $selected = ' selected="true" ';
-            }
+			if ($option['id'] == $this->selected) {
+				$selected = ' selected="true" ';
+			}
 
-            $html .= "<option $selected value=\"$option[id]\">
-                        $option[name]
-                      </option>";
-        }
+			$html .= "<option $selected value=\"$option[id]\">
+						$option[name]
+					  </option>";
+		}
 
-        $html .= '</select>';
+		$html .= '</select>';
 
-        return $html;
-    }
+		return $html;
+	}
 }

@@ -12,7 +12,7 @@
 
 namespace Veles\Form;
 
-use \Veles\Form\Elements\iElement;
+use Veles\Form\Elements\iElement;
 
 /**
  * Интерфейс iForm
@@ -20,30 +20,30 @@ use \Veles\Form\Elements\iElement;
  */
 interface iForm
 {
-    /**
-     * Сохранение формы
-     */
-    public function save();
+	/**
+	 * Сохранение формы
+	 */
+	public function save();
 
-    /**
-     * Добавление элемента формы
-     * @param iElement $element Экземпляр элемента формы
-     * @return
-     */
-    public function addElement(iElement $element);
+	/**
+	 * Добавление элемента формы
+	 * @param iElement $element Экземпляр элемента формы
+	 * @return
+	 */
+	public function addElement(iElement $element);
 
-    /**
-     * Валидатор формы
-     */
-    public function valid();
+	/**
+	 * Валидатор формы
+	 */
+	public function valid();
 
-    /**
-     * Проверка была ли отправлена форма
-     */
-    public function submitted();
+	/**
+	 * Проверка была ли отправлена форма
+	 */
+	public function submitted();
 
-    /**
-     * Вывод формы
-     */
-    public function __toString();
+	/**
+	 * Вывод формы
+	 */
+	public function __toString();
 }

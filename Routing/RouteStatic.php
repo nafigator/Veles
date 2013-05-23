@@ -18,16 +18,16 @@ namespace Veles\Routing;
  */
 class RouteStatic implements iRouteStrategy
 {
-    /**
-     * Проверка на соответствие роута шаблону
-     * @param string $pattern
-     * @param string $url
-     * @return bool
-     */
-    public static function check($pattern, $url)
-    {
-        return $pattern === $url
-            || $pattern . 'index.php'  === $url
-            || $pattern . '/index.php' === $url;
-    }
+	/**
+	 * Проверка на соответствие роута шаблону
+	 * @param string $pattern
+	 * @param string $url
+	 * @return bool
+	 */
+	public static function check($pattern, $url)
+	{
+		return $pattern === $url
+			|| $pattern . 'index.php'  === $url
+			|| $pattern . '/index.php' === $url;
+	}
 }

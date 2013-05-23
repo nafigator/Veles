@@ -18,7 +18,7 @@
 
 namespace Veles\Tests;
 
-use \Veles\AutoLoader;
+use Veles\AutoLoader;
 
 define('ENVIRONMENT', 'development');
 define('LIB_DIR', realpath(__DIR__ . '/../..'));
@@ -27,10 +27,10 @@ define('CONFIG_FILE', TEST_DIR . '/Project/settings.ini');
 define('TEMPLATE_PATH', TEST_DIR . '/Project/View/');
 
 set_include_path(implode(PATH_SEPARATOR, array(
-    LIB_DIR,
-    TEST_DIR,
-    realpath(__DIR__ . '/Project'),
-    get_include_path()
+	LIB_DIR,
+	TEST_DIR,
+	realpath(__DIR__ . '/Project'),
+	get_include_path()
 )));
 
 /** @noinspection PhpIncludeInspection */

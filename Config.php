@@ -12,8 +12,8 @@
 
 namespace Veles;
 
-use \Exception;
-use \Veles\Cache\Cache;
+use Exception;
+use Veles\Cache\Cache;
 
 /**
  * Class Config
@@ -22,134 +22,134 @@ use \Veles\Cache\Cache;
  */
 class Config
 {
-    private static $data = null;
+	private static $data = null;
 
-    /**
-     * Config file parser
-     *
-     * @throws Exception
-     */
-    private static function read()
-    {
-        self::checkDefaults();
+	/**
+	 * Config file parser
+	 *
+	 * @throws Exception
+	 */
+	private static function read()
+	{
+		self::checkDefaults();
 
-        if (Cache::has(CONFIG_FILE)) {
-            self::$data = Cache::get(CONFIG_FILE);
-            return;
-        }
+		if (Cache::has(CONFIG_FILE)) {
+			self::$data = Cache::get(CONFIG_FILE);
+			return;
+		}
 
-        $tmp_config = parse_ini_file(CONFIG_FILE, true);
+		$tmp_config = parse_ini_file(CONFIG_FILE, true);
 
-        self::initInheritance($tmp_config);
+		self::initInheritance($tmp_config);
 
-        if (!isset($tmp_config[ENVIRONMENT])) {
-            throw new Exception('Не найдена секция окружения в конфиг-файле!');
-        }
+		if (!isset($tmp_config[ENVIRONMENT])) {
+			throw new Exception('Не найдена секция окружения в конфиг-файле!');
+		}
 
-        self::$data = $tmp_config[ENVIRONMENT];
+		self::$data = $tmp_config[ENVIRONMENT];
 
-        unset($tmp_config);
+		unset($tmp_config);
 
-        self::buildPramsTree(self::$data);
-        Cache::set(CONFIG_FILE, self::$data);
-    }
+		self::buildPramsTree(self::$data);
+		Cache::set(CONFIG_FILE, self::$data);
+	}
 
-    /**
-     * Build array parameters
-     *
-     * @param array &$config
-     */
-    private static function buildPramsTree(&$config)
-    {
-        foreach ($config as $name => $value) {
-            $params = explode('.', $name);
+	/**
+	 * Build array parameters
+	 *
+	 * @param array &$config
+	 */
+	private static function buildPramsTree(&$config)
+	{
+		foreach ($config as $name => $value) {
+			$params = explode('.', $name);
 
-            if (1 === count($params)) {
-                continue;
-            }
+			if (1 === count($params)) {
+				continue;
+			}
 
-            $ptr =& $config;
+			$ptr =& $config;
 
-            foreach ($params as $param) {
-                if ($param === end($params)) {
-                    $ptr[$param] = $value;
-                } else {
-                    $ptr =& $ptr[$param];
-                }
-            }
+			foreach ($params as $param) {
+				if ($param === end($params)) {
+					$ptr[$param] = $value;
+				} else {
+					$ptr =& $ptr[$param];
+				}
+			}
 
-            unset($config[$name]);
-        }
-    }
+			unset($config[$name]);
+		}
+	}
 
-    /**
-     * Config section inheritance
-     *
-     * @param array $config
-     */
-    private static function initInheritance(&$config)
-    {
-        $namespaces = array_keys($config);
-        foreach ($namespaces as $namespace) {
-            $section = explode(':', $namespace);
+	/**
+	 * Config section inheritance
+	 *
+	 * @param array $config
+	 */
+	private static function initInheritance(&$config)
+	{
+		$namespaces = array_keys($config);
+		foreach ($namespaces as $namespace) {
+			$section = explode(':', $namespace);
 
-            $closure = function (&$value) {
-                $value = trim($value);
-            };
+			$closure = function (&$value) {
+				$value = trim($value);
+			};
 
-            array_walk($section, $closure);
+			array_walk($section, $closure);
 
-            // Process only environment section
-            if (ENVIRONMENT !== $section[0]
-                || !isset($section[1])
-                || !isset($config[$section[1]])
-            ) {
-                continue;
-            }
+			// Process only environment section
+			if (ENVIRONMENT !== $section[0]
+				|| !isset($section[1])
+				|| !isset($config[$section[1]])
+			) {
+				continue;
+			}
 
-            $config[ENVIRONMENT] = array_merge(
-                $config[$section[1]], $config[$namespace]
-            );
-        }
-    }
+			$config[ENVIRONMENT] = array_merge(
+				$config[$section[1]], $config[$namespace]
+			);
+		}
+	}
 
-    /**
-     * Check environment and path defaults
-     */
-    private static function checkDefaults()
-    {
-        if (!defined('ENVIRONMENT')) {
-            define('ENVIRONMENT', 'production');
-        }
+	/**
+	 * Check environment and path defaults
+	 */
+	private static function checkDefaults()
+	{
+		if (!defined('ENVIRONMENT')) {
+			define('ENVIRONMENT', 'production');
+		}
 
-        if (!defined('CONFIG_FILE')) {
-            define('CONFIG_PATH', realpath('../../project/settings.ini'));
-        }
-    }
+		if (!defined('CONFIG_FILE')) {
+			define('CONFIG_PATH', realpath('../../project/settings.ini'));
+		}
+	}
 
-    /**
-     * Get config file parameters
-     *
-     * @param string $param
-     * @return mixed
-     */
-    final public static function getParams($param)
-    {
-        if (null === self::$data) {
-            self::read();
-        }
+	/**
+	 * Get config file parameters
+	 *
+	 * @param string $param
+	 * @return mixed
+	 */
+	final public static function getParams($param)
+	{
+		if (null === self::$data) {
+			self::read();
+		}
 
-        $param_arr = explode('.', $param);
+		$param_arr = explode('.', $param);
 
-        $ptr =& self::$data;
-        foreach ($param_arr as $param_element) {
-            if (isset($ptr[$param_element])) {
-                $ptr =& $ptr[$param_element];
-            } else {
-                return null;
-            }
-        }
+		$ptr =& self::$data;
+		foreach ($param_arr as $param_element) {
+			if (isset($ptr[$param_element])) {
+				$ptr =& $ptr[$param_element];
+			} else {
+				return null;
+			}
+		}
 
-        return $ptr;
-    }
+		return $ptr;
+	}
 }

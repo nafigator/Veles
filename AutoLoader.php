@@ -19,25 +19,25 @@ namespace Veles;
  */
 class AutoLoader
 {
-    /**
-     * Initialisation
-     */
-    final public static function init()
-    {
-        spl_autoload_register(__NAMESPACE__ . '\AutoLoader::load');
-    }
+	/**
+	 * Initialisation
+	 */
+	final public static function init()
+	{
+		spl_autoload_register(__NAMESPACE__ . '\AutoLoader::load');
+	}
 
-    /**
-     * AutoLoader
-     *
-     * @param string $name
-     */
-    final public static function load($name)
-    {
-        $name = str_replace('\\', DIRECTORY_SEPARATOR, $name);
+	/**
+	 * AutoLoader
+	 *
+	 * @param string $name
+	 */
+	final public static function load($name)
+	{
+		$name = str_replace('\\', DIRECTORY_SEPARATOR, $name);
 
-        // For using external libs with their own autoloaders
-        // do not use strict require function
-        include "$name.php";
-    }
+		// For using external libs with their own autoloaders
+		// do not use strict require function
+		include "$name.php";
+	}
 }
