@@ -5,7 +5,7 @@
  *
  * PHP version 5.3.9+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Втр Авг 07 23:04:47 2012
  * @copyright The BSD 3-Clause License
  */
@@ -16,7 +16,7 @@ use Veles\View\View;
 
 /**
  * Класс DbPaginator
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class DbPaginator
 {

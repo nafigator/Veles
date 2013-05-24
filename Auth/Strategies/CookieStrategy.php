@@ -5,7 +5,7 @@
  *
  * PHP version 5.3.9+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Вск Янв 27 17:44:08 2013
  * @copyright The BSD 3-Clause License.
  */
@@ -17,7 +17,7 @@ use Veles\DataBase\DbFilter;
 
 /**
  * Класс CookieStrategy
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class CookieStrategy extends AbstractAuthStrategy
 {

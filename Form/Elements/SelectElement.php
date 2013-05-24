@@ -5,7 +5,7 @@
  *
  * PHP version 5.3.9+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Чтв Ноя 29 22:09:01 2012
  * @copyright The BSD 3-Clause License
  */
@@ -14,7 +14,7 @@ namespace Veles\Form\Elements;
 
 /**
  * Класс SelectElement
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class SelectElement extends AbstractElement
 {

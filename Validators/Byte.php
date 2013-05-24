@@ -5,7 +5,7 @@
  *
  * PHP version 5.3.9+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Вск Фев 17 10:48:43 2013
  * @copyright The BSD 3-Clause License.
  */
@@ -16,7 +16,7 @@ use Veles\Validators\iValidator;
 
 /**
  * Класс Byte
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class Byte implements iValidator
 {

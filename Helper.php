@@ -5,7 +5,7 @@
  *
  * PHP version 5.3.9+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Сбт Апр 21 20:59:37 2012
  * @copyright The BSD 3-Clause License
  */
@@ -15,7 +15,7 @@ namespace Veles;
 /**
  * Useful functions
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class Helper
 {

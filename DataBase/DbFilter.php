@@ -5,7 +5,7 @@
  *
  * PHP version 5.3.9+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Втр Авг 07 23:14:17 2012
  * @copyright The BSD 3-Clause License
  */
@@ -14,7 +14,7 @@ namespace Veles\DataBase;
 
 /**
  * Класс DbFilter
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class DbFilter
 {

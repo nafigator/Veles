@@ -5,7 +5,7 @@
  *
  * PHP version 5.3.9+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Пнд Янв 28 21:20:19 2013
  * @copyright The BSD 3-Clause License.
  */
@@ -16,7 +16,7 @@ use Veles\View\View;
 
 /**
  * Класс Route404
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class Route404
 {

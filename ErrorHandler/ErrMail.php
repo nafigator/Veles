@@ -5,7 +5,7 @@
  *
  * PHP version 5.3.9+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Сбт Июл 21 10:59:33 2012
  * @version
  */
@@ -17,7 +17,7 @@ use Veles\Email\AbstractEmail;
 
 /**
  * Класс ErrEmail
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class ErrMail extends AbstractEmail implements SplObserver
 {

@@ -5,7 +5,7 @@
  *
  * PHP version 5.3.9+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Птн Ноя 16 22:09:28 2012
  * @copyright The BSD 3-Clause License
  */
@@ -16,7 +16,7 @@ use Exception;
 
 /**
  * Класс APC
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class APC implements iCacheDriver
 {

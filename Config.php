@@ -5,7 +5,7 @@
  *
  * PHP version 5.3.9+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Fri Jun 08 17:28:22 2012
  * @copyright The BSD 3-Clause License
  */
@@ -18,7 +18,7 @@ use Veles\Cache\Cache;
 /**
  * Class Config
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class Config
 {

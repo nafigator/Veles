@@ -5,7 +5,7 @@
  *
  * PHP version 5.3.9+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Птн Ноя 16 20:42:01 2012
  * @copyright The BSD 3-Clause License
  */
@@ -17,7 +17,7 @@ use Veles\Config;
 
 /**
  * Класс AbstractCache
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class Cache
 {

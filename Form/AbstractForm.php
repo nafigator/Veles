@@ -5,7 +5,7 @@
  *
  * PHP version 5.3.9+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Вск Авг 12 10:30:52 2012
  * @copyright The BSD 3-Clause License
  */
@@ -22,7 +22,7 @@ use Veles\View\View;
 
 /**
  * Класс AbstractForm
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  */
 abstract class AbstractForm implements iForm
 {

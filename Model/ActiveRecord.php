@@ -5,7 +5,7 @@
  *
  * PHP version 5.3.9+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Втр Апр 24 21:53:04 2012
  * @copyright The BSD 3-Clause License
  */
@@ -20,7 +20,7 @@ use Veles\DataBase\QueryBuilder;
 
 /**
  * Model class using ActiveRecord pattern
- * @author Yancharuk Alexander <alex@itvault.info>
+ * @author Alexander Yancharuk <alex@itvault.info>
  */
 class ActiveRecord extends StdClass
 {

@@ -5,7 +5,7 @@
  *
  * PHP version 5.3.9+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    2013-05-18 17:59
  * @copyright The BSD 3-Clause License
  */
@@ -18,7 +18,7 @@ use Veles\Config;
 
 /**
  * Class SmartyAdapter
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class SmartyAdapter implements iViewAdapter
 {

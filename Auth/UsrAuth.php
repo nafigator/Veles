@@ -5,7 +5,7 @@
  *
  * PHP version 5.3.9+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Птн Мар 16 21:45:26 2012
  * @copyright The BSD 3-Clause License
  */
@@ -16,7 +16,7 @@ use Veles\Model\User;
 
 /**
  * Класс авторизации пользователя
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  */
 final class UsrAuth
 {

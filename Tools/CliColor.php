@@ -5,7 +5,7 @@
  *
  * PHP version 5.3.9+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Птн Фев 15 21:54:29 2013
  * @copyright The BSD 3-Clause License.
  */
@@ -16,7 +16,7 @@ use Exception;
 
 /**
  * Класс CliColor
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  */
 /** @noinspection PhpDocMissingReturnTagInspection */
 class CliColor

@@ -6,7 +6,7 @@
  *
  * PHP version 5.3.9+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    2013-05-15 22:01
  * @copyright The BSD 3-Clause License
  */
@@ -17,7 +17,7 @@ use Exception;
 
 /**
  * Interface iViewAdapter
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  */
 interface iViewAdapter
 {

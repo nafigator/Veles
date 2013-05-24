@@ -5,7 +5,7 @@
  *
  * PHP version 5.3.9+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Срд Фев 06 06:18:32 2013
  * @copyright The BSD 3-Clause License.
  */
@@ -14,7 +14,7 @@ namespace Veles\Tools;
 
 /**
  * Класс Timer
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class Timer
 {

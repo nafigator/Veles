@@ -5,7 +5,7 @@
  *
  * PHP version 5.3.9+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Птн Июн 08 18:10:37 2012
  * @copyright The BSD 3-Clause License
  */
@@ -20,7 +20,7 @@ use Veles\View\View;
 
 /**
  * Класс Application
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class Application
 {

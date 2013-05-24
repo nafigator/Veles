@@ -5,7 +5,7 @@
  *
  * PHP version 5.3.9+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Сбт Июл 07 21:55:54 2012
  * @copyright The BSD 3-Clause License
  */
@@ -18,7 +18,7 @@ use Veles\Model\ActiveRecord;
 
 /**
  * Класс QueryBuilder
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class QueryBuilder
 {
