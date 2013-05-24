@@ -30,7 +30,6 @@ class Application
 	final public static function run()
 	{
 		self::setPhpSettings();
-		self::setErrorHandlers();
 
 		UsrAuth::instance();
 
