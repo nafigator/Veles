@@ -1,6 +1,6 @@
 <?php
 /**
- * Обработка ошибок проекта
+ * Error handler
  * @file    ErrBase.php
  *
  * PHP version 5.3.9+
@@ -19,7 +19,7 @@ use Veles\DataBase\DbException;
 use Veles\View\View;
 
 /**
- * Класс Error
+ * Class Error
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class ErrBase implements SplSubject
@@ -29,31 +29,39 @@ class ErrBase implements SplSubject
 	private $observers = array();
 
 	/**
-	 * Обработчик пользовательских ошибок
+	 * Handler for user errors
 	 */
 	final public function usrError($type, $message, $file, $line, $defined)
 	{
 		$this->vars['type']    = $this->getErrorType($type);
-		$this->vars['time']    = strftime('%Y-%m-%d %H:%M:%S', $_SERVER['REQUEST_TIME']);
+		$this->vars['time']    = strftime(
+			'%Y-%m-%d %H:%M:%S', $_SERVER['REQUEST_TIME']
+		);
 		$this->vars['message'] = $message;
 		$this->vars['file']    = str_replace(BASE_PATH, '', $file);
 		$this->vars['line']    = $line;
-		$this->vars['stack']   = $this->getStack(array_reverse(debug_backtrace()));
+		$this->vars['stack']   = $this->getStack(
+			array_reverse(debug_backtrace())
+		);
 		$this->vars['defined'] = $defined;
 
 		$this->process();
 	}
 
 	/**
-	 * Обработчик php ошибок
+	 * Fatal error handler
 	 */
 	final public function fatal()
 	{
 		if (null === ($this->vars = error_get_last())) exit;
 
 		$this->vars['type']    = $this->getErrorType($this->vars['type']);
-		$this->vars['time']    = strftime('%Y-%m-%d %H:%M:%S', $_SERVER['REQUEST_TIME']);
-		$this->vars['file']    = str_replace(BASE_PATH, '', $this->vars['file']);
+		$this->vars['time']    = strftime(
+			'%Y-%m-%d %H:%M:%S', $_SERVER['REQUEST_TIME']
+		);
+		$this->vars['file']    = str_replace(
+			BASE_PATH, '', $this->vars['file']
+		);
 		$this->vars['stack']   = array();
 		$this->vars['defined'] = array();
 
@@ -61,17 +69,23 @@ class ErrBase implements SplSubject
 	}
 
 	/**
-	 * Обработчик исключений
+	 * Exception handler
 	 * @param Exception $exception Исключение
 	 */
 	final public function exception($exception)
 	{
 		$this->vars['type']    = $this->getErrorType($exception->getCode());
-		$this->vars['time']    = strftime('%Y-%m-%d %H:%M:%S', $_SERVER['REQUEST_TIME']);
+		$this->vars['time']    = strftime(
+			'%Y-%m-%d %H:%M:%S', $_SERVER['REQUEST_TIME']
+		);
 		$this->vars['message'] = $exception->getMessage();
-		$this->vars['file']    = str_replace(BASE_PATH, '', $exception->getFile());
+		$this->vars['file']    = str_replace(
+			BASE_PATH, '', $exception->getFile()
+		);
 		$this->vars['line']    = $exception->getLine();
-		$this->vars['stack']   = $this->getStack(array_reverse($exception->getTrace()));
+		$this->vars['stack']   = $this->getStack(
+			array_reverse($exception->getTrace())
+		);
 		$this->vars['defined'] = ($exception instanceof DbException)
 			? array(
 				'connect_error' => $exception->getConnectError(),
@@ -83,16 +97,16 @@ class ErrBase implements SplSubject
 	}
 
 	/**
-	 * Метод обработки исключений
+	 * Processing according to environment
 	 */
 	final public function process()
 	{
 		if ('development' === ENVIRONMENT) {
 			View::set($this->vars);
-			View::show('error/exception.phtml');
+			View::show('Error/Exception.phtml');
 		} else {
 			View::set($this->vars);
-			$this->output = View::get('error/exception.phtml');
+			$this->output = View::get('Error/Exception.phtml');
 
 			//TODO: $this->attach(new ErrorSMS($this->vars));
 			$this->attach(new ErrMail());
@@ -104,7 +118,7 @@ class ErrBase implements SplSubject
 	}
 
 	/**
-	 * Получение типа ошибки
+	 * Get error type
 	 * @param string $type
 	 * @return string
 	 */
@@ -135,8 +149,8 @@ class ErrBase implements SplSubject
 	}
 
 	/**
-	 * Форматирование стека вызовов
-	 * @param array $stack Массив вызовов
+	 * Calls stack formatting
+	 * @param array $stack Calls array
 	 * @return array
 	 */
 	private function getStack($stack)
@@ -155,7 +169,7 @@ class ErrBase implements SplSubject
 	}
 
 	/**
-	 * Метод уведомления наблюдателей об ошибке
+	 * Observers notification
 	 */
 	final public function notify()
 	{
@@ -166,7 +180,7 @@ class ErrBase implements SplSubject
 	}
 
 	/**
-	 * Метод добавления наблюдателей
+	 * Add Observer
 	 */
 	final public function attach(SplObserver $observer)
 	{
@@ -174,7 +188,7 @@ class ErrBase implements SplSubject
 	}
 
 	/**
-	 * Метод удаления наблюдателей
+	 * Remove Observer
 	 */
 	final public function detach(SplObserver $observer)
 	{
@@ -187,7 +201,7 @@ class ErrBase implements SplSubject
 	}
 
 	/**
-	 * Получение сообщения
+	 * Get message for email-notification
 	 * @return string
 	 */
 	final public function getMessage()
