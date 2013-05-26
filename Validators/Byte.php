@@ -1,6 +1,6 @@
 <?php
 /**
- * Валидатор значений байтов
+ * Byte values validator
  * @file    Byte.php
  *
  * PHP version 5.3.9+
@@ -12,18 +12,16 @@
 
 namespace Veles\Validators;
 
-use Veles\Validators\iValidator;
-
 /**
- * Класс Byte
+ * Class Byte
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class Byte implements iValidator
 {
 
 	/**
-	 * Проверка на валидность байтовых значенй
-	 * @param mixed $size Размер в байтах
+	 * Check byte values
+	 * @param mixed $size Size in bytes
 	 * @return bool
 	 */
 	final public function check($size)
@@ -32,9 +30,9 @@ class Byte implements iValidator
 	}
 
 	/**
-	 * Преобразование значений байтов в удобочитаемый формат
-	 * @param int $size Значение в байтах
-	 * @param int $precision Точность возвращаемых значений
+	 * Convert byte values to human readable format
+	 * @param int $size Size in bytes
+	 * @param int $precision Precision of returned values
 	 * @return string
 	 */
 	final public static function format($size, $precision = 2)

@@ -1,10 +1,10 @@
 <?php
 /**
- * Инициализация окружения для тестирования
+ * Environment initialisation for unit-tests
  *
- * Запускать тесты в директории lib или lib/Veles:
+ * Launch test in root directory:
  * phpunit
- * Генерировать скелеты тестов в lib/Veles так:
+ * Unit-tests skeletons generation:
  * phpunit-skelgen --test -- "Veles\Helper" Helper.php HelperTest Tests/HelperTest.php
  *
  * @file    bootstrap.php

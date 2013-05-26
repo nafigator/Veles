@@ -1,6 +1,6 @@
 <?php
 /**
- * Валидатор численных значений формы
+ * Integer values validator
  * @file    Number.php
  *
  * PHP version 5.3.9+
@@ -13,7 +13,7 @@
 namespace Veles\Validators;
 
 /**
- * Класс Number
+ * Class Number
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class Number implements iValidator
@@ -22,9 +22,9 @@ class Number implements iValidator
 	private $min;
 
 	/**
-	 * Конструктор
-	 * @param int $max Максимальное значение
-	 * @param int $min Минимальное значение
+	 * Constructor
+	 * @param int $max Max value
+	 * @param int $min Min value
 	 */
 	final public function __construct($min = 1, $max = 2147483647)
 	{
@@ -33,8 +33,8 @@ class Number implements iValidator
 	}
 
 	/**
-	 * Валидация числовых значений
-	 * @param mixed $value Валидируемое значение
+	 * Integer validation
+	 * @param mixed $value Value
 	 * @return bool
 	 */
 	final public function check($value)

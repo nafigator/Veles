@@ -1,6 +1,6 @@
 <?php
 /**
- * Валидатор по регулярному выражению
+ * Regular expression validator
  * @file    RegEx.php
  *
  * PHP version 5.3.9+
@@ -13,7 +13,7 @@
 namespace Veles\Validators;
 
 /**
- * Класс RegEx
+ * Class RegEx
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class RegEx implements iValidator
@@ -21,7 +21,7 @@ class RegEx implements iValidator
 	private $pattern;
 
 	/**
-	 * Конструктор
+	 * Constructor
 	 * @param string $pattern Шаблон для валидации
 	 */
 	final public function __construct($pattern)
@@ -30,8 +30,8 @@ class RegEx implements iValidator
 	}
 
 	/**
-	 * Валидация
-	 * @param mixed $value Значения для проверки
+	 * Validation
+	 * @param mixed $value Value for checking
 	 * @return bool
 	 */
 	final public function check($value)
@@ -40,9 +40,9 @@ class RegEx implements iValidator
 	}
 
 	/**
-	 * Валидация (статический вариант)
-	 * @param string $pattern Шаблон для валидации
-	 * @param mixed $value Значения для проверки
+	 * Validation (static version)
+	 * @param string $pattern Pattern for validation
+	 * @param mixed $value Value
 	 * @return bool
 	 */
 	final public static function validate($pattern, $value)

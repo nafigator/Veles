@@ -1,6 +1,6 @@
 <?php
 /**
- * Абстрактный класс для постраничного вывода
+ * Class for data pagination
  * @file    DbPaginator.php
  *
  * PHP version 5.3.9+
@@ -15,12 +15,12 @@ namespace Veles\DataBase;
 use Veles\View\View;
 
 /**
- * Класс DbPaginator
+ * Class DbPaginator
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class DbPaginator
 {
-	// Данные, которые могут быть задействованы при отрисовке
+	// Data, wihich will be used for rendering
 	protected $data = array();
 
 	protected $offset = 1;
@@ -30,21 +30,21 @@ class DbPaginator
 	protected $template;
 
 	/**
-	 * Конструктор
-	 * @param bool|string $template Путь к шаблону постраничной навигации
-	 * @param int $curr_page Текущая страница
+	 * Constructor
+	 * @param bool|string $template Path to template
+	 * @param int $curr_page Current page
 	 */
 	final public function __construct($template = false, $curr_page = 1)
 	{
 		$this->template = ($template)
 			? $template
-			: BASE_PATH . 'Veles/View/paginator_default.phtml';
+			: 'paginator_default.phtml';
 
-		$this->curr_page = $curr_page;
+		$this->curr_page = (int) $curr_page;
 	}
 
 	/**
-	 * Отрисовка постраничного вывода
+	 * Pagination rendering
 	 */
 	final public function __toString()
 	{
@@ -61,15 +61,17 @@ class DbPaginator
 		}
 
 		if ($this->page_nums > $this->curr_page + 3) {
-			$vars['last_link'] = $this->curr_page + 3;
+			$vars['page_nums'] = $this->curr_page + 3;
+			$vars['last_link'] = $this->page_nums;
 		}
+		$vars = array_merge($vars, $this->data);
 		View::set($vars);
 
 		return View::get($this->template);
 	}
 
 	/**
-	 * Метод получения offset
+	 * Getting offset
 	 * @return int
 	 */
 	final public function getOffset()
@@ -78,7 +80,7 @@ class DbPaginator
 	}
 
 	/**
-	 * Метод получения limit
+	 * Getting limit
 	 * @return int
 	 */
 	final public function getLimit()
@@ -87,7 +89,7 @@ class DbPaginator
 	}
 
 	/**
-	 * Метод установки кол-ва элементов на страницу
+	 * Elements per page setting
 	 * @param int $limit Кол-во выводимых элементов на странице
 	 */
 	final public function setLimit($limit)
@@ -100,7 +102,7 @@ class DbPaginator
 	}
 
 	/**
-	 * Метод получения limit для sql-запроса
+	 * Getting limit for sql-request
 	 * @return string
 	 */
 	final public function getSqlLimit()
@@ -111,7 +113,7 @@ class DbPaginator
 	}
 
 	/**
-	 * Получение кол-ва страниц
+	 * Pages quantity
 	 */
 	final public function getMaxPages()
 	{
@@ -125,7 +127,7 @@ class DbPaginator
 	}
 
 	/**
-	 * Подсчёт кол-ва страниц
+	 * Pages quantity calculation
 	 */
 	final public function calcMaxPages()
 	{
@@ -133,7 +135,7 @@ class DbPaginator
 	}
 
 	/**
-	 * Получение текущей страницы
+	 * Getting current page
 	 */
 	final public function getCurrPage()
 	{
