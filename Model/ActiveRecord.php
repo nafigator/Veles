@@ -117,10 +117,10 @@ class ActiveRecord extends StdClass
 	}
 
 	/**
-	 * Сохранение данных
+	 * Save data
 	 * @return bool|int
 	 */
-	final public function save()
+	public function save()
 	{
 		return isset($this->id) ? $this->update() : $this->insert();
 	}

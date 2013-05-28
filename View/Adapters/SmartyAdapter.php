@@ -4,6 +4,7 @@
  * @file    SmartyAdapter.php
  *
  * PHP version 5.3.9+
+ * Smarty version 3+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    2013-05-18 17:59
@@ -24,12 +25,20 @@ class SmartyAdapter implements iViewAdapter
 {
 	private $smarty;
 
+	/**
+	 * Check consistensy Smarty settings in config
+	 * @param $conf
+	 * @return bool
+	 */
 	private function checkDefaults($conf)
 	{
 		// TODO: check required smarty settings
 		return true;
 	}
 
+	/**
+	 * Constructor
+	 */
 	final public function __construct()
 	{
 		require_once 'Smarty' . DIRECTORY_SEPARATOR . 'Smarty.class.php';
@@ -103,5 +112,27 @@ class SmartyAdapter implements iViewAdapter
 	final public function get($path)
 	{
 		return $this->smarty->fetch($path);
+	}
+
+	/**
+	 * Clear template cache
+	 *
+	 * @param string $tpl
+	 * @return mixed
+	 */
+	final public function clearCache($tpl)
+	{
+		return $this->smarty->clearCache($tpl);
+	}
+
+	/**
+	 * Clear all template caches
+	 *
+	 * @param mixed $exp_time
+	 * @return mixed
+	 */
+	final public function clearAllCache($exp_time = null)
+	{
+		return $this->smarty->clearAllCache($exp_time);
 	}
 }
