@@ -1,6 +1,6 @@
 <?php
 /**
- * Базовый класс элементов формы
+ * Base class for form elements
  * @file    AbstractElement.php
  *
  * PHP version 5.3.9+
@@ -12,26 +12,29 @@
 
 namespace Veles\Form\Elements;
 
+use stdClass;
+use Exception;
+
 /**
- * Класс AbstractElement
+ * Class AbstractElement
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
-abstract class AbstractElement implements iElement
+abstract class AbstractElement extends stdClass implements iElement
 {
-	protected $params;
-
 	/**
-	 * Конструктор элемента
-	 * @param array $params Массив параметров элемента формы
+	 * Element constructor
+	 * @param array $params Form elements params array
 	 */
 	final public function __construct($params)
 	{
-		$this->params = $params;
+		foreach ($params as $param => $value) {
+			$this->$param = $value;
+		}
 	}
 
 	/**
-	 * Валидация элемента формы
-	 * @param mixed $value Значение для валидации
+	 * Element validation
+	 * @param mixed $value Value for validation
 	 * @return bool
 	 */
 	final public function validate($value)
@@ -41,7 +44,7 @@ abstract class AbstractElement implements iElement
 		}
 
 		if ($this->validator->check($value)) {
-			$this->params['attributes']['value'] = $value;
+			$this->attributes['value'] = $value;
 			return true;
 		}
 
@@ -49,7 +52,7 @@ abstract class AbstractElement implements iElement
 	}
 
 	/**
-	 * Проверка является ли элемент обязательным
+	 * Check is element required
 	 */
 	final public function required()
 	{
@@ -57,53 +60,36 @@ abstract class AbstractElement implements iElement
 	}
 
 	/**
-	 * Получение имени элемента
+	 * Getting elements name
 	 */
 	final public function getName()
 	{
+		if (!isset($this->attributes['name'])) {
+			throw new Exception('Element name not exist');
+		}
+
 		return $this->attributes['name'];
 	}
 
 	/**
-	 * Отрисовка элемента реализуется для каждого элемента
+	 * Rendering for each element
+	 *
+	 * Implements in descendant classes
 	 */
 	abstract public function render();
 
 	/**
-	 * Магия для создания свойств элемента
-	 * @param string $name
-	 * @param mixed  $value
-	 */
-	final public function __set($name, $value)
-	{
-		$this->params[$name] = $value;
-	}
-
-	/**
-	 * Магия для доступа к свойствам элемента
-	 * @param string $name
-	 * @return mixed
-	 */
-	final public function __get($name)
-	{
-		if (array_key_exists($name, $this->params)) {
-			return $this->params[$name];
-		}
-		return null;
-	}
-
-	/**
-	 * Рендеринг аттрибутов элемента
+	 * Element attributes rendering
 	 */
 	final public function attributes()
 	{
 		$attributes = ' ';
 
-		if (!isset($this->params['attributes'])) {
+		if (!isset($this->attributes)) {
 			return $attributes;
 		}
 
-		foreach ($this->params['attributes'] as $name => $value) {
+		foreach ($this->attributes as $name => $value) {
 			$attributes .= " $name=\"$value\" ";
 		}
 
