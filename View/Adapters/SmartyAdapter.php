@@ -135,4 +135,14 @@ class SmartyAdapter implements iViewAdapter
 	{
 		return $this->smarty->clearAllCache($exp_time);
 	}
+
+	/**
+	 * Check is template alreate already cached
+	 * @param $tpl
+	 * @return bool
+	 */
+	final public function isCached($tpl)
+	{
+		return $this->smarty->isCached($tpl);
+	}
 }

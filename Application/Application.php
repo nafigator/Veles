@@ -1,6 +1,6 @@
 <?php
 /**
- * Класс реализующий MVC-архитектуру проекта
+ * Class with MVC implementation
  * @file    Application.php
  *
  * PHP version 5.3.9+
@@ -19,21 +19,21 @@ use Veles\Routing\Route;
 use Veles\View\View;
 
 /**
- * Класс Application
+ * Class Application
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class Application
 {
 	/**
-	 * Старт приложения
+	 * Application start
 	 */
-	final public static function run()
+	public static function run()
 	{
 		self::setPhpSettings();
 
 		UsrAuth::instance();
 
-		// Получаем имя контроллера и метода
+		// Get route, controller, method
 		$route       = Route::instance();
 		$controller  = $route->getController();
 		$action_name = $route->getActionName();
@@ -45,9 +45,9 @@ class Application
 	}
 
 	/**
-	 * Инициализируем ErrorHandlers
+	 * ErrorHandlers initialisation
 	 */
-	final public static function setErrorHandlers()
+	public static function setErrorHandlers()
 	{
 		$error = new ErrBase;
 		register_shutdown_function(array($error, 'fatal'));
@@ -56,7 +56,7 @@ class Application
 	}
 
 	/**
-	 * Устанавливаем настройки php, прописанные в конфиге
+	 * Setup PHP settings from config
 	 * @param array $keys Макссив php-параметров и их значений
 	 */
 	final protected static function setPhpSettings($keys = null)

@@ -77,4 +77,15 @@ class View
 	{
 		return self::getDriver()->get($path);
 	}
+
+	/**
+	 * Check template cache status
+	 *
+	 * @param $tpl
+	 * @return bool
+	 */
+	public static function isCached($tpl)
+	{
+		return self::getDriver()->isCached($tpl);
+	}
 }

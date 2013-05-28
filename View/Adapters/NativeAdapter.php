@@ -94,4 +94,15 @@ class NativeAdapter implements iViewAdapter
 
 		return $output;
 	}
+
+	/**
+	 * Check template cache status
+	 *
+	 * @param string $tpl Template file
+	 * @return bool Cache status
+	 */
+	public function isCached($tpl)
+	{
+		return false;
+	}
 }

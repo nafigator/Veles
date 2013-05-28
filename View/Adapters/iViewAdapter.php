@@ -51,4 +51,12 @@ interface iViewAdapter
 	 * @return string View content
 	 */
 	public function get($path);
+
+	/**
+	 * Check template cache status
+	 *
+	 * @param string $tpl Template file
+	 * @return bool Cache status
+	 */
+	public function isCached($tpl);
 }
