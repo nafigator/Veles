@@ -12,8 +12,6 @@
 
 namespace Veles\View;
 
-use Veles\View\Drivers\iViewDriver;
-
 /**
  * Class View
  *
