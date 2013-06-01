@@ -25,18 +25,19 @@ use Veles\DataBase\QueryBuilder;
 class ActiveRecord extends StdClass
 {
 	/**
-	 * @var int|float|string $map Карта типов данных объекта
+	 * @var int|float|string $map Data type map
 	 */
 	protected static $map = array();
 
 	/**
-	 * @const string|null Имя таблицы
+	 * @const string|null Table name
 	 */
 	const TBL_NAME = null;
 
 	/**
-	 * Конструктор модели
-	 * @param int $identifier ID модели
+	 * Model constructor
+	 *
+	 * @param int $identifier Model ID
 	 */
 	final public function __construct($identifier = null)
 	{
@@ -44,7 +45,8 @@ class ActiveRecord extends StdClass
 	}
 
 	/**
-	 * Получение карты данных модели
+	 * Get data type map
+	 *
 	 * @return array
 	 */
 	final public static function getMap()
@@ -53,8 +55,9 @@ class ActiveRecord extends StdClass
 	}
 
 	/**
-	 * Вставка данных непосредственно в базу
-	 * @return bool
+	 * Insert data in database
+	 *
+	 * @return int|bool
 	 */
 	private function insert()
 	{
@@ -64,7 +67,8 @@ class ActiveRecord extends StdClass
 	}
 
 	/**
-	 * Обновление данных в базе
+	 * Update data in database
+	 *
 	 * @return bool
 	 */
 	private function update()
@@ -75,8 +79,9 @@ class ActiveRecord extends StdClass
 	}
 
 	/**
-	 * Получение данных по ID
-	 * @param int $identifier ID модели
+	 * Get data by ID
+	 *
+	 * @param int $identifier Model ID
 	 * @return bool
 	 */
 	final public function getById($identifier)
@@ -95,10 +100,11 @@ class ActiveRecord extends StdClass
 	}
 
 	/**
-	 * Получение списка объектов по фильтру
-	 * @param bool|DbFilter $filter Объект фильтра
-	 * @param bool|DbPaginator $pager Объект постраничного вывода
-	 * @return array Массив с найденными по фильтру данными
+	 * Get object list by filter
+	 *
+	 * @param bool|DbFilter $filter Filter object
+	 * @param bool|DbPaginator $pager Pagination object
+	 * @return array
 	 */
 	final public function getAll($filter = false, $pager = false)
 	{
@@ -126,8 +132,9 @@ class ActiveRecord extends StdClass
 	}
 
 	/**
-	 * Удаление данных
-	 * @param array|bool $ids
+	 * Delete data
+	 *
+	 * @param array|bool $ids Array of ID for delete
 	 * @return bool
 	 */
 	final public function delete($ids = false)
@@ -138,8 +145,9 @@ class ActiveRecord extends StdClass
 	}
 
 	/**
-	 * Метод для инициализации параметров модели
-	 * @param   array Массив с требуемыми параметрами в ключах массива
+	 * Method for setting model parameters
+	 *
+	 * @param   array Array with needle parameters as keys
 	 * @return  array
 	 */
 	final public function setProperties(&$properties)
@@ -150,8 +158,9 @@ class ActiveRecord extends StdClass
 	}
 
 	/**
-	 * Метод для получения параметров модели
-	 * @param   array Массив с требуемыми параметрами в ключах массива
+	 * Method for getting model parameters
+	 *
+	 * @param   array Array with needle parameters as keys
 	 * @return  array
 	 */
 	final public function getProperties(&$properties)
@@ -164,8 +173,9 @@ class ActiveRecord extends StdClass
 	}
 
 	/**
-	 * Получение уникального объекта
-	 * @param bool|DbFilter $filter Объект фильтра
+	 * Get unique object
+	 *
+	 * @param bool|DbFilter $filter Filter object
 	 * @return bool
 	 */
 	final public function find($filter = false)
@@ -184,9 +194,10 @@ class ActiveRecord extends StdClass
 	}
 
 	/**
-	 * Произвольный запрос с постраничным выводом
-	 * @param string $sql Запрос
-	 * @param bool|DbPaginator $pager Объект постраничного вывода
+	 * Query with pagination
+	 *
+	 * @param string $sql Query
+	 * @param bool|DbPaginator $pager Pagination object
 	 * @return array|bool
 	 */
 	final protected function query($sql, $pager = false)
