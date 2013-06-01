@@ -94,22 +94,21 @@ class MysqliDriver implements iDbDriver
 	 *
 	 * @param string $sql SQL-query
 	 * @param string $server Server name
-	 * @throws DbException
 	 *
 	 * @return bool
 	 */
 	final public static function query($sql, $server = 'master')
 	{
 		self::setLink($server);
+		$link = self::getLink();
 
-		$result = mysqli_query(self::getLink(), $sql, MYSQLI_USE_RESULT);
+		$result = mysqli_query($link, $sql, MYSQLI_USE_RESULT);
+
 		if (false === $result) {
-			throw new DbException(
-				'Query failure', self::getLink(), $sql
-			);
+			self::$errors[] = mysqli_error($link);
 		}
 
-		return true;
+		return $result;
 	}
 
 	/**
@@ -117,26 +116,27 @@ class MysqliDriver implements iDbDriver
 	 *
 	 * @param string $sql SQL-query
 	 * @param string $server Server name
-	 * @throws DbException
 	 *
 	 * @return string|bool
 	 */
 	final public static function getValue($sql, $server = 'master')
 	{
 		self::setLink($server);
+		$link = self::getLink();
 
-		$result = mysqli_query(self::getLink(), $sql, MYSQLI_USE_RESULT);
-		if (false === $result) {
-			throw new DbException(
-				'Не удалось выполнить запрос', self::getLink(), $sql
-			);
+		$result = mysqli_query($link, $sql, MYSQLI_USE_RESULT);
+
+		if (false !== $result) {
+			$row = mysqli_fetch_row($result);
+			$return = isset($row[0]) ? $row[0] : '';
+		} else {
+			self::$errors[] = mysqli_error($link);
+			$return = false;
 		}
-
-		$row = mysqli_fetch_row($result);
 
 		mysqli_free_result($result);
 
-		return isset($row[0]) ? $row[0] : false;
+		return $return;
 	}
 
 	/**
@@ -144,22 +144,21 @@ class MysqliDriver implements iDbDriver
 	 *
 	 * @param string $sql SQL-query
 	 * @param string $server Server name
-	 * @throws DbException
 	 *
 	 * @return array
 	 */
 	final public static function getRow($sql, $server = 'master')
 	{
 		self::setLink($server);
+		$link = self::getLink();
 
-		$result = mysqli_query(self::getLink(), $sql, MYSQLI_USE_RESULT);
-		if (false === $result) {
-			throw new DbException(
-				'Не удалось выполнить запрос', self::getLink(), $sql
-			);
+		$result = mysqli_query($link, $sql, MYSQLI_USE_RESULT);
+		if (false !== $result) {
+			$return = mysqli_fetch_assoc($result);
+		} else {
+			self::$errors[] = mysqli_error($link);
+			$return = false;
 		}
-
-		$return = mysqli_fetch_assoc($result);
 
 		mysqli_free_result($result);
 
@@ -171,25 +170,24 @@ class MysqliDriver implements iDbDriver
 	 *
 	 * @param string $sql SQL-query
 	 * @param string $server Server name
-	 * @throws DbException
 	 *
 	 * @return array
 	 */
 	final public static function getRows($sql, $server = 'master')
 	{
 		self::setLink($server);
+		$link = self::getLink();
 
-		$result = mysqli_query(self::getLink(), $sql, MYSQLI_USE_RESULT);
-		if (false === $result) {
-			throw new DbException(
-				'Не удалось выполнить запрос', self::getLink(), $sql
-			);
-		}
+		$result = mysqli_query($link, $sql, MYSQLI_USE_RESULT);
+		if (false !== $result) {
+			$return = array();
 
-		$return = array();
-
-		while ($row = mysqli_fetch_assoc($result)) {
-			$return[] = $row;
+			while ($row = mysqli_fetch_assoc($result)) {
+				$return[] = $row;
+			}
+		} else {
+			self::$errors[] = mysqli_error($link);
+			$return = false;
 		}
 
 		mysqli_free_result($result);
@@ -200,46 +198,38 @@ class MysqliDriver implements iDbDriver
 	/**
 	 * Get LAST_INSERT_ID()
 	 *
-	 * @throws DbException
-	 *
 	 * @return int
 	 */
 	final public static function getLastInsertId()
 	{
-		$result = mysqli_insert_id(self::getLink());
-		if (false === $result) {
-			throw new DbException(
-				'Не удалось получить LAST_INSERT_ID()', self::getLink()
-			);
-		}
-
-		return (int) $result;
+		return (int) mysqli_insert_id(self::getLink());;
 	}
 
 	/**
 	 * Get FOUND_ROWS()
 	 *
 	 * Use only after query with DbPaginator
-	 * @throws DbException
 	 *
 	 * @return int
 	 */
 	final public static function getFoundRows()
 	{
-		$sql = 'SELECT FOUND_ROWS()';
+		$sql  = 'SELECT FOUND_ROWS()';
+		$link = self::getLink();
 
-		$result = mysqli_query(self::getLink(), $sql, MYSQLI_USE_RESULT);
-		if (false === $result) {
-			throw new DbException(
-				'Не удалось выполнить запрос', self::getLink(), $sql
-			);
+		$result = mysqli_query($link, $sql, MYSQLI_USE_RESULT);
+		if (false !== $result) {
+			$return = (null !== ($rows = mysqli_fetch_row($result)))
+				? (int) $rows[0]
+				: 0;
+		} else {
+			self::$errors[] = mysqli_error($link);
+			$return = false;
 		}
-
-		$rows = mysqli_fetch_row($result);
 
 		mysqli_free_result($result);
 
-		return (int) $rows[0];
+		return $return;
 	}
 
 	/**

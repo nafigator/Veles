@@ -20,6 +20,7 @@ use Veles\DataBase\QueryBuilder;
 
 /**
  * Model class using ActiveRecord pattern
+ * @todo Implements Observer functionality for sql and errors logging
  * @author Alexander Yancharuk <alex@itvault.info>
  */
 class ActiveRecord extends StdClass
