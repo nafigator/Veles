@@ -1,6 +1,6 @@
 <?php
 /**
- * Select элемент формы
+ * Select form element
  * @file    SelectElement.php
  *
  * PHP version 5.3.9+
@@ -13,13 +13,13 @@
 namespace Veles\Form\Elements;
 
 /**
- * Класс SelectElement
+ * Class SelectElement
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class SelectElement extends AbstractElement
 {
 	/**
-	 * Отрисовка элемента
+	 * Element rendering
 	 */
 	final public function render()
 	{
@@ -28,7 +28,7 @@ class SelectElement extends AbstractElement
 		foreach ($this->options as $option) {
 			$selected = '';
 
-			if ($option['id'] == $this->selected) {
+			if (isset($this->selected) && $option['id'] === $this->selected) {
 				$selected = ' selected="true" ';
 			}
 
@@ -40,5 +40,16 @@ class SelectElement extends AbstractElement
 		$html .= '</select>';
 
 		return $html;
+	}
+
+
+	/**
+	 * Set select options
+	 *
+	 * @param $options
+	 */
+	final public function setOptions($options)
+	{
+		$this->options = $options;
 	}
 }
