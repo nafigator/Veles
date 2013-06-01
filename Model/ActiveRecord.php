@@ -41,7 +41,9 @@ class ActiveRecord extends StdClass
 	 */
 	final public function __construct($identifier = null)
 	{
-		null !== $identifier && $this->getById($identifier);
+		if (null !== $identifier) {
+			$this->getById($identifier);
+		}
 	}
 
 	/**
@@ -167,8 +169,9 @@ class ActiveRecord extends StdClass
 	{
 		$tmp_props = array_keys($properties);
 		foreach ($tmp_props as $property_name) {
-			isset($this->$property_name)
-				&& $properties[$property_name] = $this->$property_name;
+			if (isset($this->$property_name)) {
+				$properties[$property_name] = $this->$property_name;
+			}
 		}
 	}
 
@@ -202,7 +205,9 @@ class ActiveRecord extends StdClass
 	 */
 	final protected function query($sql, $pager = false)
 	{
-		$pager && $sql = QueryBuilder::setPage($sql, $pager);
+		if ($pager) {
+			$sql = QueryBuilder::setPage($sql, $pager);
+		}
 
 		$result = Db::getRows($sql);
 
@@ -210,7 +215,9 @@ class ActiveRecord extends StdClass
 			return false;
 		}
 
-		$pager && $pager->calcMaxPages();
+		if ($pager) {
+			$pager->calcMaxPages();
+		}
 
 		return $result;
 	}

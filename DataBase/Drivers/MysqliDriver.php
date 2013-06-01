@@ -1,7 +1,7 @@
 <?php
 /**
- * MySQLi драйвер для работы с базой.
- * Для использования необходимо в php наличие mysqli расширения.
+ * MySQLi driver for database interaction.
+ * For usage you must have mysqli php extension
  * @file    MysqliDriver.php
  *
  * PHP version 5.3.9+
@@ -20,7 +20,7 @@ use Veles\DataBase\DbException;
 use Veles\DataBase\Drivers\iDbDriver;
 
 /**
- * Класс соединения с базой
+ * Class MysqliDriver
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class MysqliDriver implements iDbDriver
@@ -30,10 +30,11 @@ class MysqliDriver implements iDbDriver
 	private static $errors    = array();
 
 	/**
-	 * Получение соединения с базой
-	 * @param string $name Имя сервера
+	 * Set current link to server
+	 *
+	 * @param string $name Server name
 	 */
-	private static function setLink($name)
+	final public static function setLink($name)
 	{
 		if (!isset(self::$links[$name])) {
 			self::connect($name);
@@ -43,7 +44,8 @@ class MysqliDriver implements iDbDriver
 	}
 
 	/**
-	 * Получение соединения с базой
+	 * Get database link
+	 *
 	 * @return mysqli
 	 */
 	public static function getLink()
@@ -57,21 +59,21 @@ class MysqliDriver implements iDbDriver
 	}
 
 	/**
-	 * Соединение с базой.
+	 * Database connection
 	 *
-	 * Метод создаёт экземпляр mysqli класса и сохраняет его в self::$curr_link.
-	 * @param string $name Имя сервера
+	 * Method create mysqli entity and save it in self::$curr_link
+	 * @param string $name Server name
 	 * @throws Exception
 	 */
 	private static function connect($name)
 	{
 		if (null === ($db_params = Config::getParams('db'))) {
-			throw new Exception('Не найдены параметры подключения к базе!');
+			throw new Exception('Not found connection parameters in config');
 		}
 
 		if (!isset($db_params[$name])) {
 			throw new Exception(
-				"Не найдены параметры подключения к серверу $name"
+				"Not found connection parameters for server $name"
 			);
 		}
 
@@ -83,16 +85,17 @@ class MysqliDriver implements iDbDriver
 		);
 
 		if (!self::$links[$name] instanceof mysqli) {
-			throw new Exception("Не удалось подключиться к серверу $name");
+			throw new Exception("Connetion failure to server $name");
 		}
 	}
 
 	/**
-	 * Метод для выполнения non-SELECT запросов
-	 * @param string $sql Sql-запрос
-	 * @param string $server
+	 * Method for execution non-SELECT queries
+	 *
+	 * @param string $sql SQL-query
+	 * @param string $server Server name
 	 * @throws DbException
-	 * @internal param string $name Имя сервера
+	 *
 	 * @return bool
 	 */
 	final public static function query($sql, $server = 'master')
@@ -102,7 +105,7 @@ class MysqliDriver implements iDbDriver
 		$result = mysqli_query(self::getLink(), $sql, MYSQLI_USE_RESULT);
 		if (false === $result) {
 			throw new DbException(
-				'Не удалось выполнить запрос', self::getLink(), $sql
+				'Query failure', self::getLink(), $sql
 			);
 		}
 
@@ -110,11 +113,12 @@ class MysqliDriver implements iDbDriver
 	}
 
 	/**
-	 * Для SELECT, возвращающих значение одного поля
+	 * Method for SELECT returning one field value
 	 *
-	 * @param string $sql SQL-запрос
-	 * @param string $server Имя сервера
+	 * @param string $sql SQL-query
+	 * @param string $server Server name
 	 * @throws DbException
+	 *
 	 * @return string|bool
 	 */
 	final public static function getValue($sql, $server = 'master')
@@ -136,11 +140,12 @@ class MysqliDriver implements iDbDriver
 	}
 
 	/**
-	 * Для SELECT, возвращающих значение одной строки таблицы
+	 * For SELECT, returning one row values
 	 *
-	 * @param string $sql SQL-запрос
-	 * @param string $server Имя сервера
+	 * @param string $sql SQL-query
+	 * @param string $server Server name
 	 * @throws DbException
+	 *
 	 * @return array
 	 */
 	final public static function getRow($sql, $server = 'master')
@@ -162,11 +167,12 @@ class MysqliDriver implements iDbDriver
 	}
 
 	/**
-	 * Для SELECT, возвращающих значение коллекцию результатов
+	 * For SELECT, returning collection
 	 *
-	 * @param string $sql
-	 * @param string $server Имя сервера
+	 * @param string $sql SQL-query
+	 * @param string $server Server name
 	 * @throws DbException
+	 *
 	 * @return array
 	 */
 	final public static function getRows($sql, $server = 'master')
@@ -192,8 +198,10 @@ class MysqliDriver implements iDbDriver
 	}
 
 	/**
-	 * Функция получения LAST_INSERT_ID()
-	 * @throws \Veles\DataBase\DbException
+	 * Get LAST_INSERT_ID()
+	 *
+	 * @throws DbException
+	 *
 	 * @return int
 	 */
 	final public static function getLastInsertId()
@@ -209,9 +217,11 @@ class MysqliDriver implements iDbDriver
 	}
 
 	/**
-	 * Функция получения FOUND_ROWS()
-	 * Использовать только после запроса с DbPaginator
-	 * @throws \Veles\DataBase\DbException
+	 * Get FOUND_ROWS()
+	 *
+	 * Use only after query with DbPaginator
+	 * @throws DbException
+	 *
 	 * @return int
 	 */
 	final public static function getFoundRows()
@@ -233,11 +243,52 @@ class MysqliDriver implements iDbDriver
 	}
 
 	/**
-	 * Метод возвращает массив с ошибками
-	 * @return array $errors
+	 * Get database errors array
+	 *
+	 * @return array
 	 */
 	final public static function getErrors()
 	{
 		return self::$errors;
+	}
+
+	/**
+	 * Transaction begin
+	 *
+	 * @return bool
+	 */
+	public static function begin()
+	{
+		return mysqli_autocommit(self::getLink(), false);
+	}
+
+	/**
+	 * Transaction rollback
+	 *
+	 * @return bool
+	 */
+	public static function rollback()
+	{
+		$link = self::getLink();
+
+		$result = mysqli_rollback($link);
+		mysqli_autocommit($link, true);
+
+		return $result;
+	}
+
+	/**
+	 * Transaction commit
+	 *
+	 * @return bool
+	 */
+	public static function commit()
+	{
+		$link = self::getLink();
+
+		$result = mysqli_commit($link);
+		mysqli_autocommit($link, true);
+
+		return $result;
 	}
 }

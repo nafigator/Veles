@@ -1,77 +1,115 @@
 <?php
 /**
- * Интерфейс для работы с базой
- * @file    iDbDriver.php
+ * Interface for data base interaction
+ * @file      iDbDriver.php
  *
  * PHP version 5.3.9+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
- * @date    Вск Янв 06 10:13:35 2013
+ * @author    Alexander Yancharuk <alex@itvault.info>
+ * @date      Вск Янв 06 10:13:35 2013
  * @copyright The BSD 3-Clause License
  */
 
 namespace Veles\DataBase\Drivers;
 
 /**
- * Интерфейс iDb
+ * Interface iDb
+ * @todo Transfer connection pool into separate layer
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 interface iDbDriver
 {
 	/**
-	 * Получение соединения с базой
+	 * Set current link to database server
+	 *
+	 * @param string $name Server name
+	 */
+	public static function setLink($name);
+
+	/**
+	 * Get database link
+	 *
 	 * @return mixed
 	 */
 	public static function getLink();
 
 	/**
-	 * Метод для получения списка ошибок
+	 * Get database errors array
+	 *
+	 * return array
 	 */
 	public static function getErrors();
 
 	/**
-	 * Функция получения FOUND_ROWS()
-	 * Использовать только после запроса с DbPaginator
+	 * Get FOUND_ROWS()
+	 *
+	 * Use only after query with DbPaginator
 	 */
 	public static function getFoundRows();
 
 	/**
-	 * Функция получения LAST_INSERT_ID()
+	 * Get LAST_INSERT_ID()
 	 */
 	public static function getLastInsertId();
 
 	/**
-	 * Метод для выполнения non-SELECT запросов
-	 * @param string $sql SQL-запрос
-	 * @param string $server Имя сервера
+	 * Method for execution non-SELECT queries
+	 *
+	 * @param string $sql    SQL-query
+	 * @param string $server Server name
+	 *
 	 * @return bool
 	 */
 	public static function query($sql, $server = 'master');
 
 	/**
-	 * Для SELECT, возвращающих значение одного поля
+	 * Method for SELECT returning one field value
 	 *
-	 * @param string $sql SQL-запрос
-	 * @param string $server Имя сервера
+	 * @param string $sql    SQL-query
+	 * @param string $server Server name
+	 *
 	 * @return mixed
 	 */
 	public static function getValue($sql, $server = 'master');
 
 	/**
-	 * Для SELECT, возвращающих значение одной строки таблицы
+	 * For SELECT, returning one row values
 	 *
-	 * @param string $sql SQL-запрос
-	 * @param string $server Имя сервера
+	 * @param string $sql    SQL-query
+	 * @param string $server Server name
+	 *
 	 * @return array
 	 */
 	public static function getRow($sql, $server = 'master');
 
 	/**
-	 * Для SELECT, возвращающих значение коллекцию результатов
+	 * For SELECT, returning collection
 	 *
-	 * @param string $sql SQL-запрос
-	 * @param string $server Имя сервера
+	 * @param string $sql    SQL-query
+	 * @param string $server Server name
+	 *
 	 * @return array
 	 */
 	public static function getRows($sql, $server = 'master');
+
+	/**
+	 * Transaction begin
+	 *
+	 * @return bool
+	 */
+	public static function begin();
+
+	/**
+	 * Transaction rollback
+	 *
+	 * @return bool
+	 */
+	public static function rollback();
+
+	/**
+	 * Transaction commit
+	 *
+	 * @return bool
+	 */
+	public static function commit();
 }

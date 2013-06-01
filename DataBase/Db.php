@@ -1,6 +1,6 @@
 <?php
 /**
- * Класс для работы с базой
+ * Calss for database interaction
  * @file    Db.php
  *
  * PHP version 5.3.9+
@@ -16,13 +16,14 @@ use Veles\DataBase\DbFabric;
 use Veles\DataBase\Drivers\iDbDriver;
 
 /**
- * Класс Db
+ * Class Db
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class Db implements iDbDriver
 {
 	/**
-	 * Инстанс драйвера
+	 * Driver instance
+	 *
 	 * @return iDbDriver
 	 */
 	private static function getDriver()
@@ -40,7 +41,48 @@ class Db implements iDbDriver
 	}
 
 	/**
-	 * Получение текущего линка к базе
+	 * Set current link to database server
+	 *
+	 * @param string $name Server name
+	 */
+	public static function setLink($name)
+	{
+		return self::getDriver()->setLink();
+	}
+
+	/**
+	 * Transaction begin
+	 *
+	 * @return bool
+	 */
+	public static function begin()
+	{
+		return self::getDriver()->begin();
+	}
+
+	/**
+	 * Transaction rollback
+	 *
+	 * @return bool
+	 */
+	public static function rollback()
+	{
+		return self::getDriver()->rollback();
+	}
+
+	/**
+	 * Transaction commit
+	 *
+	 * @return bool
+	 */
+	public static function commit()
+	{
+		return self::getDriver()->commit();
+	}
+
+	/**
+	 * Get database link
+	 *
 	 * @return mixed
 	 */
 	final public static function getLink()
@@ -49,7 +91,8 @@ class Db implements iDbDriver
 	}
 
 	/**
-	 * Метод для получения списка ошибок
+	 * Get database errors array
+	 *
 	 * @return array
 	 */
 	final public static function getErrors()
@@ -58,8 +101,10 @@ class Db implements iDbDriver
 	}
 
 	/**
-	 * Функция получения FOUND_ROWS()
-	 * Использовать только после запроса с DbPaginator
+	 * Get FOUND_ROWS()
+	 *
+	 * Use after query with DbPaginator
+	 *
 	 * @return array
 	 */
 	final public static function getFoundRows()
@@ -68,7 +113,8 @@ class Db implements iDbDriver
 	}
 
 	/**
-	 * Функция получения LAST_INSERT_ID()
+	 * Get LAST_INSERT_ID()
+	 *
 	 * @return int
 	 */
 	final public static function getLastInsertId()
@@ -77,9 +123,11 @@ class Db implements iDbDriver
 	}
 
 	/**
-	 * Метод для выполнения non-SELECT запросов
-	 * @param string $sql SQL-запрос
-	 * @param string $server Имя сервера
+	 * Method for execution non-SELECT queries
+	 *
+	 * @param string $sql SQL-query
+	 * @param string $server Server name
+	 *
 	 * @return bool
 	 */
 	final public static function query($sql, $server = 'master')
@@ -88,10 +136,11 @@ class Db implements iDbDriver
 	}
 
 	/**
-	 * Для SELECT, возвращающих значение одного поля
+	 * Method for SELECT returning one field value
 	 *
-	 * @param string $sql SQL-запрос
-	 * @param string $server Имя сервера
+	 * @param string $sql SQL-query
+	 * @param string $server Server name
+	 *
 	 * @return mixed
 	 */
 	final public static function getValue($sql, $server = 'master')
@@ -100,10 +149,11 @@ class Db implements iDbDriver
 	}
 
 	/**
-	 * Для SELECT, возвращающих значение одной строки таблицы
+	 * For SELECT, returning one row values
 	 *
-	 * @param string $sql SQL-запрос
-	 * @param string $server Имя сервера
+	 * @param string $sql SQL-qury
+	 * @param string $server Server name
+	 *
 	 * @return array
 	 */
 	final public static function getRow($sql, $server = 'master')
@@ -112,10 +162,11 @@ class Db implements iDbDriver
 	}
 
 	/**
-	 * Для SELECT, возвращающих значение коллекцию результатов
+	 * For SELECT, returning collection
 	 *
-	 * @param string $sql SQL-запрос
-	 * @param string $server Имя сервера
+	 * @param string $sql SQL-query
+	 * @param string $server Server name
+	 *
 	 * @return array
 	 */
 	final public static function getRows($sql, $server = 'master')
