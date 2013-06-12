@@ -87,6 +87,13 @@ class MysqliDriver implements iDbDriver
 		if (!self::$links[$name] instanceof mysqli) {
 			throw new Exception("Connetion failure to server $name");
 		}
+
+		if (isset($db_params[$name]['charset'])) {
+			mysqli_set_charset(
+				self::$links[$name],
+				$db_params[$name]['charset']
+			);
+		}
 	}
 
 	/**
