@@ -29,7 +29,14 @@ class HelperTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testGenStr($length, $letters)
 	{
-		$result        = Helper::genStr($length, $letters);
+		if (null === $length && null === $letters) {
+			$length  = 22;
+			$letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./';
+			$result  = Helper::genStr();
+		} else {
+			$result = Helper::genStr($length, $letters);
+		}
+
 		$result_length = strlen($result);
 		$unknown_array = array();
 
@@ -55,6 +62,7 @@ class HelperTest extends PHPUnit_Framework_TestCase
 	public function genStrProvider()
 	{
 		return array(
+			array(null, null),
 			array(21, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./'),
 			array(30, 'ABCDEFGHIJKLMNOPQRSTUVWX%$#'),
 			array(30, 'A|@абвгдеёжзийклмнопрстуфхцчшщъыьэюя%$#')

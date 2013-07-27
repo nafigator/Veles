@@ -80,7 +80,7 @@ class PasswordTest extends PHPUnit_Framework_TestCase
 	public function checkProvider()
 	{
 		$user = new User;
-		$user->hash = crypt('password', '$2a$07$' . Helper::genStr() . '$');
+		$user->hash = crypt('password', '$2y$07$' . Helper::genStr());
 
 		return array(
 			array($user, 'password', true),

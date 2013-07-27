@@ -29,7 +29,7 @@ class Helper
 	 * @return string
 	 */
 	final public static function genStr(
-		$length  = 21,
+		$length  = 22,
 		$letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./'
 	) {
 		return substr(str_shuffle(str_repeat($letters, 5)), 0, $length);

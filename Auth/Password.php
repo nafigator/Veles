@@ -39,6 +39,6 @@ class Password
 	 */
 	final public static function check(User $user, &$password)
 	{
-		return $user->getHash() === crypt($password, $user->getSalt());
+		return $user->getHash() === crypt($password, $user->getHash());
 	}
 }
