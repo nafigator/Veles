@@ -37,7 +37,7 @@ class RegExTest extends PHPUnit_Framework_TestCase
 		$result = $object->check($value);
 
 		$msg = 'Wrong RegEx::check() validation';
-		$this->assertSame($result, $expected, $msg);
+		$this->assertSame($expected, $result, $msg);
     }
 
 	public function checkProvider()
@@ -72,7 +72,7 @@ class RegExTest extends PHPUnit_Framework_TestCase
 		$result = RegEx::validate($pattern, $value);
 
 		$msg = 'Wrong RegEx::validate() validation';
-		$this->assertSame($result, $expected, $msg);
+		$this->assertSame($expected, $result, $msg);
     }
 
 	public function validateProvider()

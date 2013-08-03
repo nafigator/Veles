@@ -45,7 +45,7 @@ class NumberTest extends PHPUnit_Framework_TestCase
 		$result = $this->object->check($number);
 
 		$msg = 'Wrong Number::check() validation';
-		$this->assertSame($result, $expected, $msg);
+		$this->assertSame($expected, $result, $msg);
 	}
 
 	public function checkProvider()

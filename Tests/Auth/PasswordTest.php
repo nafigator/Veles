@@ -38,7 +38,7 @@ class PasswordTest extends PHPUnit_Framework_TestCase
 
 		$txt_result = $result ? 'true' : 'false';
 		$msg = "CheckCookieHash \"$cookie_hash\" has wrong result: $txt_result";
-		$this->assertTrue($expected === $result, $msg);
+		$this->assertSame($expected, $result, $msg);
 	}
 
 	/**
@@ -71,7 +71,7 @@ class PasswordTest extends PHPUnit_Framework_TestCase
 
 		$txt_result = $result ? 'true' : 'false';
 		$msg = "Password::check \"$password\" has wrong result: $txt_result";
-		$this->assertTrue($expected === $result, $msg);
+		$this->assertSame($expected, $result, $msg);
 	}
 
 	/**

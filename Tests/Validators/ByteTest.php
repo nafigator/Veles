@@ -45,7 +45,7 @@ class ByteTest extends PHPUnit_Framework_TestCase
 		$result = $this->object->check($size);
 
 		$msg = 'Wrong Byte::check() validation';
-		$this->assertSame($result, $expected, $msg);
+		$this->assertSame($expected, $result, $msg);
 	}
 
 	/**
@@ -74,7 +74,7 @@ class ByteTest extends PHPUnit_Framework_TestCase
 		$result = $this->object->format($size);
 
 		$msg = 'Wrong Byte::format() result';
-		$this->assertSame($result, $expected, $msg);
+		$this->assertSame($expected, $result, $msg);
 	}
 
 	/**

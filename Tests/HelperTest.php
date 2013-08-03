@@ -44,7 +44,7 @@ class HelperTest extends PHPUnit_Framework_TestCase
 		$this->assertInternalType('string', $result, $msg);
 
 		$msg = "Wrong result length: $result_length";
-		$this->assertEquals($length, $result_length, $msg);
+		$this->assertSame($length, $result_length, $msg);
 
 		for ($i = 0; $i < $result_length; ++$i) {
 			if (false === strpos($letters, $result[$i])) {
@@ -85,7 +85,7 @@ class HelperTest extends PHPUnit_Framework_TestCase
 
 		$txt_result = $result ? 'true' : 'false';
 		$msg = "Email $email has wrong validation result: $txt_result";
-		$this->assertTrue($expected === $result, $msg);
+		$this->assertSame($expected, $result, $msg);
 	}
 
 	/**
@@ -150,7 +150,7 @@ class HelperTest extends PHPUnit_Framework_TestCase
 		$this->assertInternalType('string', $result, $msg);
 
 		$msg = "Text \"$text\" has wrong translit result: \"$result\"";
-		$this->assertTrue($expected === $result, $msg);
+		$this->assertSame($expected, $result, $msg);
 	}
 
 	/**
@@ -182,7 +182,7 @@ class HelperTest extends PHPUnit_Framework_TestCase
 		$this->assertInternalType('string', $result, $msg);
 
 		$msg = "URL \"$url\" has wrong make alias result: \"$result\"";
-		$this->assertTrue($expected === $result, $msg);
+		$this->assertSame($expected, $result, $msg);
 	}
 
 	/**

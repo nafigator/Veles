@@ -45,19 +45,19 @@ class TimerTest extends PHPUnit_Framework_TestCase
 	public function testConstants()
 	{
 		$msg = 'Wrong value of Timer::SECONDS: ' . Timer::SECONDS;
-		$this->assertSame(Timer::SECONDS, 0, $msg);
+		$this->assertSame(0, Timer::SECONDS, $msg);
 
 		$msg = 'Wrong value of Timer::MILLISECONDS: ' . Timer::MILLISECONDS;
-		$this->assertSame(Timer::MILLISECONDS, 3, $msg);
+		$this->assertSame(3, Timer::MILLISECONDS, $msg);
 
 		$msg = 'Wrong value of Timer::MICROSECONDS: ' . Timer::MICROSECONDS;
-		$this->assertSame(Timer::MICROSECONDS, 6, $msg);
+		$this->assertSame(6, Timer::MICROSECONDS, $msg);
 
 		$msg = 'Wrong value of Timer::NANOSECONDS: ' . Timer::NANOSECONDS;
-		$this->assertSame(Timer::NANOSECONDS, 9, $msg);
+		$this->assertSame(9, Timer::NANOSECONDS, $msg);
 
 		$msg = 'Wrong value of Timer::PICOSECONDS: ' . Timer::PICOSECONDS;
-		$this->assertSame(Timer::PICOSECONDS, 12, $msg);
+		$this->assertSame(12, Timer::PICOSECONDS, $msg);
 	}
 
 	/**
@@ -81,7 +81,7 @@ class TimerTest extends PHPUnit_Framework_TestCase
 		$this->assertInternalType('float', $result, $msg);
 
 		$msg = 'Wrong result of Timer::$start_time property';
-		$this->assertSame($result, $expected, $msg);
+		$this->assertSame($expected, $result, $msg);
 	}
 
 	/**
@@ -104,13 +104,13 @@ class TimerTest extends PHPUnit_Framework_TestCase
 		$result = $start_time->getValue();
 
 		$msg = 'Wrong result of Timer::$start_time property';
-		$this->assertSame($result, $expected, $msg);
+		$this->assertSame($expected, $result, $msg);
 
 		$diff->setAccessible(true);
 		$result = $start_time->getValue();
 
 		$msg = 'Wrong result of Timer::$diff property';
-		$this->assertSame($result, $expected, $msg);
+		$this->assertSame($expected, $result, $msg);
 	}
 
 	/**
@@ -133,7 +133,7 @@ class TimerTest extends PHPUnit_Framework_TestCase
 		$result = round($prop->getValue(), 2);
 
 		$msg = 'Wrong result of Timer::$diff property';
-		$this->assertSame($result, $expected, $msg);
+		$this->assertSame($expected, $result, $msg);
 	}
 
 	/**
@@ -161,7 +161,7 @@ class TimerTest extends PHPUnit_Framework_TestCase
 		$this->assertInternalType('float', $result, $msg);
 
 		$msg = 'Wrong Timer result';
-		$this->assertSame($result, $expected, $msg);
+		$this->assertSame($expected, $result, $msg);
 	}
 
 	/**
@@ -185,7 +185,7 @@ class TimerTest extends PHPUnit_Framework_TestCase
 		$result = Timer::get($precision);
 
 		$msg = 'Wrong Timer precision result';
-		$this->assertSame($result, $expected, $msg);
+		$this->assertSame($expected, $result, $msg);
 	}
 
 	/**
