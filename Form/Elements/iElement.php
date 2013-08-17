@@ -12,6 +12,8 @@
 
 namespace Veles\Form\Elements;
 
+use Veles\Form\AbstractForm;
+
 /**
  * Интерфейс iElement
  * @author  Alexander Yancharuk <alex@itvault.info>
@@ -19,13 +21,18 @@ namespace Veles\Form\Elements;
 interface iElement
 {
 	/**
-	 * Валидация элемента формы
-	 * @param mixed $value Значение для валидации
+	 * Form element validation
+	 *
+	 * @param AbstractForm $form Form object
+	 *
+	 * @return bool
 	 */
-	public function validate($value);
+	public function validate(AbstractForm $form);
 
 	/**
-	 * Проверка является ли элемент обязательным
+	 * Check for element requirement
+	 *
+	 * @return bool
 	 */
 	public function required();
 

@@ -6,7 +6,7 @@
  * PHP version 5.3.9+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
- * @date    Срд Фев 06 22:00:10 2013
+ * @date    2013-02-06 21:58:55
  * @copyright The BSD 3-Clause License.
  */
 
@@ -41,6 +41,8 @@ class TimerTest extends PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers Veles\Tools\Timer::start
+	 * @group Tools
+	 * @see Timer::start
 	 */
 	public function testConstants()
 	{
@@ -62,6 +64,8 @@ class TimerTest extends PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers Veles\Tools\Timer::start
+	 * @group Tools
+	 * @see Timer::start
 	 */
 	public function testStart()
 	{
@@ -86,7 +90,9 @@ class TimerTest extends PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers Veles\Tools\Timer::reset
+	 * @group Tools
 	 * @depends testStart
+	 * @see Timer::reset
 	 */
 	public function testReset()
 	{
@@ -115,8 +121,10 @@ class TimerTest extends PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers  Veles\Tools\Timer::stop
+	 * @group Tools
 	 * @depends testStart
 	 * @depends testReset
+	 * @see Timer::stop
 	 */
 	public function testStop()
 	{
@@ -138,7 +146,9 @@ class TimerTest extends PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers  Veles\Tools\Timer::get
+	 * @group Tools
 	 * @depends testStop
+	 * @see Timer::get
 	 */
 	public function testGet()
 	{
@@ -166,8 +176,10 @@ class TimerTest extends PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers  Veles\Tools\Timer::get
+	 * @group Tools
 	 * @depends testStop
 	 * @dataProvider getPrecisionProvider
+	 * @see Timer::get
 	 */
 	public function testGetPrecision($precision)
 	{

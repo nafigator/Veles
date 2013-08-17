@@ -22,6 +22,7 @@ class UsrGroupTest extends PHPUnit_Framework_TestCase
 {
 	/**
 	 * Unit-test for UsrGroup class
+	 * @group Auth
 	 */
 	public function testConstants()
 	{

@@ -14,6 +14,7 @@ namespace Veles\Form\Elements;
 
 use stdClass;
 use Exception;
+use Veles\Form\AbstractForm;
 
 /**
  * Class AbstractElement
@@ -34,11 +35,17 @@ abstract class AbstractElement extends stdClass implements iElement
 
 	/**
 	 * Element validation
-	 * @param mixed $value Value for validation
+	 *
+	 * @param AbstractForm $form Form object
+	 *
 	 * @return bool
 	 */
-	final public function validate($value)
+	public function validate(AbstractForm $form)
 	{
+		if (null === ($value = $form->getData($this->getName()))) {
+			return !$this->required();
+		}
+
 		if (false ===  $this->validator) {
 			return true;
 		}
@@ -52,11 +59,13 @@ abstract class AbstractElement extends stdClass implements iElement
 	}
 
 	/**
-	 * Check is element required
+	 * Check for element requirement
+	 *
+	 * @return bool
 	 */
 	final public function required()
 	{
-		return $this->required;
+		return (bool) $this->required;
 	}
 
 	/**
@@ -83,7 +92,7 @@ abstract class AbstractElement extends stdClass implements iElement
 	 */
 	final public function attributes()
 	{
-		$attributes = ' ';
+		$attributes = '';
 
 		if (!isset($this->attributes)) {
 			return $attributes;

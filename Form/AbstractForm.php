@@ -1,6 +1,6 @@
 <?php
 /**
- * Базовый класс форм
+ * Base class for forms
  * @file    AbstractForm.php
  *
  * PHP version 5.3.9+
@@ -15,13 +15,14 @@ namespace Veles\Form;
 use Veles\Cache\Cache;
 use Veles\Form\Elements\ButtonElement;
 use Veles\Form\Elements\HiddenElement;
+use Veles\Form\Elements\FileElement;
 use Veles\Form\Elements\iElement;
 use Veles\Form\Elements\SubmitElement;
 use Veles\Validators\RegEx;
 use Veles\View\View;
 
 /**
- * Класс AbstractForm
+ * Class AbstractForm
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 abstract class AbstractForm implements iForm
@@ -36,18 +37,18 @@ abstract class AbstractForm implements iForm
 	private $elements = array();
 
 	/**
-	 * Конструктор
-	 * @param mixed $data Данные, которые могут понадобиться для генерации формы
+	 * Constructor
+	 * @param mixed $data Optional data for form generation
 	 */
 	abstract public function __construct($data = false);
 
 	/**
-	 * Сохранение формы
+	 * Form save
 	 */
 	abstract public function save();
 
 	/**
-	 * Инициализиция значений по-умолчанию
+	 * Default values initialization
 	 */
 	final protected function init()
 	{
@@ -63,8 +64,8 @@ abstract class AbstractForm implements iForm
 	}
 
 	/**
-	 * Добавление элемента формы
-	 * @param iElement $element Экземпляр элемента формы
+	 * Add form element
+	 * @param iElement $element Form element
 	 * @return void
 	 */
 	final public function addElement(iElement $element)
@@ -73,31 +74,23 @@ abstract class AbstractForm implements iForm
 	}
 
 	/**
-	 * Валидатор формы
+	 * Form validation
 	 * @return bool
 	 */
 	final public function valid()
 	{
 		/** @var iElement $element*/
 		foreach ($this->elements as $element) {
-			if ($element instanceof ButtonElement
-				|| $element instanceof SubmitElement
-			) {
-				continue;
-			}
-
-			$name = $element->getName();
-
-			if (!isset($this->data[$name])) {
-				if ($element->required()) {
-					return false;
-				}
-
-				continue;
-			}
-
-			if (!$element->validate($this->data[$name])) {
-				return false;
+			switch (true) {
+				case $element instanceof ButtonElement:
+				case $element instanceof SubmitElement:
+					continue;
+					break;
+				default:
+					if (!$element->validate($this)) {
+						return false;
+					}
+					break;
 			}
 		}
 
@@ -105,7 +98,7 @@ abstract class AbstractForm implements iForm
 	}
 
 	/**
-	 * Проверка была ли отправлена форма
+	 * Check is form submitted by security key presence
 	 * @return bool
 	 */
 	final public function submitted()
@@ -124,7 +117,7 @@ abstract class AbstractForm implements iForm
 	}
 
 	/**
-	 * Очистка security-ключа формы
+	 * Security key cleanup
 	 */
 	final public function cleanup()
 	{
@@ -133,7 +126,7 @@ abstract class AbstractForm implements iForm
 	}
 
 	/**
-	 * Вывод формы
+	 * Form output
 	 * @return string
 	 */
 	final public function __toString()
@@ -175,11 +168,23 @@ abstract class AbstractForm implements iForm
 	}
 
 	/**
-	 * Save form secirity id to cache
+	 * Save form security id to cache
 	 * @return bool
 	 */
 	final public function saveSid()
 	{
 		return Cache::set($this->name . $this->sid, true, 7200);
+	}
+
+	/**
+	 * Get data by element name
+	 *
+	 * @param string $name Element name
+	 *
+	 * @return null|string
+	 */
+	final public function getData($name)
+	{
+		return (isset($this->data[$name])) ? $this->data[$name] : null;
 	}
 }

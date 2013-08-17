@@ -47,7 +47,7 @@ class Db implements iDbDriver
 	 */
 	public static function setLink($name)
 	{
-		return self::getDriver()->setLink();
+		return self::getDriver()->setLink($name);
 	}
 
 	/**

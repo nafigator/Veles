@@ -1,6 +1,6 @@
 <?php
 /**
- * Интерфейс для валидаторов
+ * Interface for validators
  * @file    iValidator.php
  *
  * PHP version 5.3.9+
@@ -13,14 +13,16 @@
 namespace Veles\Validators;
 
 /**
- * Интерфейс iValidator
+ * Interface iValidator
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 interface iValidator
 {
 	/**
-	 * Валидация
-	 * @param mixed $value Значения для проверки
+	 * Validation
+	 *
+	 * @param mixed $value Values for checking
+	 * @return bool
 	 */
 	public function check($value);
 }

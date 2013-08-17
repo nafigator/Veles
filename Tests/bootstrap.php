@@ -6,6 +6,7 @@
  * phpunit
  * Unit-tests skeletons generation:
  * phpunit-skelgen --test -- "Veles\Helper" Helper.php HelperTest Tests/HelperTest.php
+ * phpunit-skelgen --test -- "Veles\Tools\File" Tools/File.php "Veles\Tests\Tools\FileTest" Tests/Tools/FileTest.php
  *
  * @file    bootstrap.php
  *
