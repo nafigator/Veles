@@ -141,59 +141,6 @@ class UploadFileTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tools\UploadFile::initStorageName
-	 * @group Tools
-	 * @depends testSetHash
-	 * @depends testSetSubDir
-	 * @see UploadFile::initStorageName
-	 */
-	public function testInitStorageName()
-	{
-		$this->object->setDir('/tmp/upload');
-		$this->object->initStorageName();
-		$object = new ReflectionObject($this->object);
-
-		$prop = $object->getProperty('hash');
-		$prop->setAccessible(true);
-		$hash = $prop->getValue($this->object);
-
-		$msg = 'Not valid value of UploadFile::$hash property';
-		$this->assertSame(1, preg_match('/^[a-f0-9]{32}$/', $hash), $msg);
-
-		$prop = $object->getProperty('sub_dir');
-		$prop->setAccessible(true);
-		$result = $prop->getValue($this->object);
-		$sub_dur = substr($hash, 0, 2);
-
-		$msg = 'Wrong value of UploadFile::$sub_dir property';
-		$this->assertSame($sub_dur, $result, $msg);
-
-		$prop = $object->getProperty('name');
-		$prop->setAccessible(true);
-		$result = $prop->getValue($this->object);
-		$name = substr($hash, 2);
-
-		$msg = 'Not valid value of UploadFile::$name property';
-		$this->assertSame($name, $result, $msg);
-
-		$prop = $object->getProperty('dir');
-		$prop->setAccessible(true);
-		$result = $prop->getValue($this->object);
-		$dir = '/tmp/upload' . DIRECTORY_SEPARATOR . $sub_dur;
-
-		$msg = 'Wrong value of UploadFile::$dir property';
-		$this->assertSame($dir, $result, $msg);
-
-		$prop = $object->getProperty('path');
-		$prop->setAccessible(true);
-		$result = $prop->getValue($this->object);
-		$path = $dir . DIRECTORY_SEPARATOR . $name;
-
-		$msg = 'Not valid value of UploadFile::$path property';
-		$this->assertSame($path, $result, $msg);
-	}
-
-	/**
 	 * @covers Veles\Tools\UploadFile::setTmpPath
 	 * @group Tools
 	 * @see UploadFile::testSetTmpPath
@@ -229,6 +176,72 @@ class UploadFileTest extends PHPUnit_Framework_TestCase
 
 		$msg = "Wrong value of UploadFile::\$tmp_path: $result";
 		$this->assertSame($result, '/tmp/file-path2937', $msg);
+	}
+
+	/**
+	 * @covers Veles\Tools\UploadFile::initStorageName
+	 * @group Tools
+	 * @depends testSetHash
+	 * @depends testSetSubDir
+	 * @depends testSetTmpPath
+	 * @see UploadFile::initStorageName
+	 */
+	public function testInitStorageName()
+	{
+		$content = 'This is the test content';
+		$path = tempnam(sys_get_temp_dir(), 'veles-testInitStorageName');
+		$this->object->setTmpPath($path);
+
+		file_put_contents($path, $content);
+
+		$this->object->setDir(sys_get_temp_dir());
+		$this->object->initStorageName();
+		$object = new ReflectionObject($this->object);
+
+		$prop = $object->getProperty('hash');
+		$prop->setAccessible(true);
+		$hash = $prop->getValue($this->object);
+
+		$msg = 'Not valid value of UploadFile::$hash property';
+		$this->assertSame(1, preg_match('/^[a-f0-9]{8}$/', $hash), $msg);
+
+		$msg = 'Wrong value of UploadFile::$hash property';
+		$this->assertSame('9830ddd8', $hash, $msg);
+
+		$prop = $object->getProperty('sub_dir');
+		$prop->setAccessible(true);
+		$result = $prop->getValue($this->object);
+		$sub_dur = substr($hash, 0, 2);
+
+		$msg = 'Wrong value of UploadFile::$sub_dir property';
+		$this->assertSame($sub_dur, $result, $msg);
+
+		$prop = $object->getProperty('name');
+		$prop->setAccessible(true);
+		$result = $prop->getValue($this->object);
+		$name = substr($hash, 2);
+
+		$msg = 'Not valid value of UploadFile::$name property';
+		$this->assertSame($name, $result, $msg);
+
+		$prop = $object->getProperty('dir');
+		$prop->setAccessible(true);
+		$result = $prop->getValue($this->object);
+		$dir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $sub_dur;
+
+		$msg = 'Wrong value of UploadFile::$dir property';
+		$this->assertSame($dir, $result, $msg);
+
+		$prop = $object->getProperty('path');
+		$prop->setAccessible(true);
+		$result = $prop->getValue($this->object);
+		$path = $dir . DIRECTORY_SEPARATOR . $name;
+
+		$msg = 'Not valid value of UploadFile::$path property';
+		$this->assertSame($path, $result, $msg);
+
+		// test file cleanup
+		unlink($this->object->getTmpPath());
 	}
 
 	/**

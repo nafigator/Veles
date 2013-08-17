@@ -22,7 +22,6 @@ class UploadFile extends File
 	private $hash;
 	private $sub_dir;
 	private $orig_name;
-	private $init_flag;
 
 	/**
 	 * @return string
@@ -42,17 +41,16 @@ class UploadFile extends File
 
 	/**
 	 * Generate path for uploaded file
+	 * @todo Implement adapters for different save algorithms
 	 */
 	final public function initStorageName()
 	{
-		if (null !== $this->init_flag) {
+		// initialize storage name only once
+		if (null !== $this->getHash()) {
 			return;
 		}
 
-		// initialize storage name only once
-		$this->init_flag = true;
-
-		$this->setHash(md5(mt_rand()));
+		$this->setHash(hash_file('crc32b', $this->getTmpPath()));
 
 		$this->setSubDir(substr($this->getHash(), 0, 2));
 		$this->setDir($this->getDir()
@@ -112,6 +110,10 @@ class UploadFile extends File
 
 		if (!is_writable($dir)) {
 			chmod($dir, 0755);
+		}
+
+		if (file_exists($this->getPath())) {
+			return true;
 		}
 
 		return move_uploaded_file($this->getTmpPath(), $this->getPath());
