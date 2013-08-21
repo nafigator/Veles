@@ -34,19 +34,31 @@ class MemcacheAdapter implements iCacheDriver
 			throw new Exception('Memcache not installed!');
 		}
 
-		if (null === ($params = Config::getParams('memcache'))) {
-			throw new Exception('Not found memcache parameters in config');
-		}
+		//todo find a beter way to initialize memcache params
+		$params = array(array(
+			'host' => 'localhost',
+			'port' => 11211
+		));
 
-		self::$instance = new Memcache;
+		$this->setMemcache(new Memcache);
 
 		foreach ($params as $param) {
 			if (!isset($param['port'])) {
 				$param['port'] = 11211;
 			}
 
-			self::$instance->addserver($param['host'], $param['port']);
+			$this->getMemcache()->addserver($param['host'], $param['port']);
 		}
+	}
+
+	/**
+	 * Set Memcache instance
+	 *
+	 * @param Memcache $memcache
+	 */
+	public function setMemcache($memcache)
+	{
+		$this->memcache = $memcache;
 	}
 
 	/**
