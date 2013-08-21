@@ -2,7 +2,7 @@
 /**
  * Adapter for APC cache
  *
- * @file    APC.php
+ * @file    ApcAdapter.php
  *
  * PHP version 5.3.9+
  *
@@ -16,10 +16,10 @@ namespace Veles\Cache\Drivers;
 use Exception;
 
 /**
- * Class APC
+ * Class ApcAdapter
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
-class APC implements iCacheDriver
+class ApcAdapter implements iCacheDriver
 {
 	/**
 	 * Constructor

@@ -16,7 +16,6 @@ namespace Veles\DataBase\Drivers;
 use Exception;
 use mysqli;
 use Veles\Config;
-use Veles\DataBase\DbException;
 use Veles\DataBase\Drivers\iDbDriver;
 
 /**
@@ -48,7 +47,7 @@ class MysqliDriver implements iDbDriver
 	 *
 	 * @return mysqli
 	 */
-	public static function getLink()
+	final public static function getLink()
 	{
 		if (!self::$curr_link instanceof mysqli) {
 			self::connect('master');

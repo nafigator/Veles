@@ -30,9 +30,9 @@ class Cache
 	 * @param string $driver_name Driver name
 	 * @return iCacheDriver
 	 */
-	final public static function init($driver_name = 'APC')
+	final public static function init($driver_name = 'Apc')
 	{
-		$driver_class = "\\Veles\\Cache\\Drivers\\$driver_name";
+		$driver_class = "\\Veles\\Cache\\Drivers\\${driver_name}Adapter";
 		self::$driver = new $driver_class;
 
 		return self::$driver;
