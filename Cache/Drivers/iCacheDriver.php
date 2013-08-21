@@ -1,6 +1,7 @@
 <?php
 /**
- * Интерфейс кэша
+ * Cache interface
+ *
  * @file    iCacheDriver.php
  *
  * PHP version 5.3.9+
@@ -13,42 +14,47 @@
 namespace Veles\Cache\Drivers;
 
 /**
- * Интерфейс iCacheDriver
+ * Interface iCacheDriver
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 interface iCacheDriver
 {
 	/**
-	 * Получение данных
-	 * @param string $key Ключ
+	 * Get data
+	 * @param string $key Key
 	 * @return mixed
 	 */
 	public function get($key);
 
 	/**
-	 * Сохранение данных
-	 * @param string $key Ключ
-	 * @param mixed $value Данные
-	 * @return bool
+	 * Save data
+	 *
+	 * @param string $key Key
+	 * @param mixed $value Data
+	 * @param int $ttl Time to live
+	 * @return mixed
 	 */
-	public function set($key, $value);
+	public function set($key, $value, $ttl);
 
 	/**
-	 * Проверка существуют ли данные в кэше
-	 * @param string $key Ключ
+	 * Check if data stored in cache
+	 *
+	 * @param string $key Key
 	 * @return bool
 	 */
 	public function has($key);
 
 	/**
-	 * Удаление данных
-	 * @param string $key Ключ
+	 * Delete data
+	 *
+	 * @param string $key Key
 	 * @return bool
 	 */
 	public function del($key);
 
 	/**
-	 * Очистка кэша
+	 * Cache cleanup
+	 *
 	 * @return bool
 	 */
 	public function clear();

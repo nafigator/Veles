@@ -1,6 +1,7 @@
 <?php
 /**
- * Драйвер для APC кэша
+ * Adapter for APC cache
+ *
  * @file    APC.php
  *
  * PHP version 5.3.9+
@@ -15,24 +16,24 @@ namespace Veles\Cache\Drivers;
 use Exception;
 
 /**
- * Класс APC
+ * Class APC
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class APC implements iCacheDriver
 {
 	/**
-	 * Конструктор
+	 * Constructor
 	 */
 	final public function __construct()
 	{
 		if (!function_exists('apc_add')) {
-			throw new Exception('Кэш APC не установлен!');
+			throw new Exception('APC cache not installed!');
 		}
 	}
 
 	/**
-	 * Получение данных
-	 * @param string $key Ключ
+	 * Get data
+	 * @param string $key Key
 	 * @return mixed
 	 */
 	public function get($key)
@@ -41,10 +42,11 @@ class APC implements iCacheDriver
 	}
 
 	/**
-	 * Сохранение данных
-	 * @param string $key Ключ
-	 * @param mixed $value Данные
-	 * @param int $ttl Время хранения данных в секундах
+	 * Save data
+	 *
+	 * @param string $key Key
+	 * @param mixed $value Data
+	 * @param int $ttl Time to live
 	 * @return mixed
 	 */
 	public function set($key, $value, $ttl = 0)
@@ -53,8 +55,9 @@ class APC implements iCacheDriver
 	}
 
 	/**
-	 * Проверка существуют ли данные в кэше
-	 * @param string $key Ключ
+	 * Check if data stored in cache
+	 *
+	 * @param string $key Key
 	 * @return bool
 	 */
 	public function has($key)
@@ -63,8 +66,9 @@ class APC implements iCacheDriver
 	}
 
 	/**
-	 * Удаление данных
-	 * @param string $key Ключ
+	 * Delete data
+	 *
+	 * @param string $key Key
 	 * @return bool
 	 */
 	public function del($key)
@@ -73,7 +77,8 @@ class APC implements iCacheDriver
 	}
 
 	/**
-	 * Очистка кэша
+	 * Cache cleanup
+	 *
 	 * @return bool
 	 */
 	public function clear()

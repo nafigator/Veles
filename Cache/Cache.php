@@ -1,6 +1,7 @@
 <?php
 /**
- * Класс-фасад для кэша
+ * Cache class
+ *
  * @file    Cache.php
  *
  * PHP version 5.3.9+
@@ -16,7 +17,7 @@ use Veles\Cache\Drivers\iCacheDriver;
 use Veles\Config;
 
 /**
- * Класс AbstractCache
+ * Class Cache
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class Cache
@@ -24,34 +25,37 @@ class Cache
 	private static $driver;
 
 	/**
-	 * Инициализация драйвера кэша
-	 * @param string $driver_name Имя дравйвера
+	 * Cache driver initialisation
+	 *
+	 * @param string $driver_name Driver name
 	 * @return iCacheDriver
 	 */
 	final public static function init($driver_name = 'APC')
 	{
 		$driver_class = "\\Veles\\Cache\\Drivers\\$driver_name";
-		static::$driver = new $driver_class;
+		self::$driver = new $driver_class;
 
-		return static::$driver;
+		return self::$driver;
 	}
 
 	/**
-	 * Инстанс кэша
+	 * Cache instance
+	 *
 	 * @return Cache
 	 */
 	final public static function getDriver()
 	{
 		if (self::$driver instanceof iCacheDriver) {
-			return static::$driver;
+			return self::$driver;
 		}
 
-		return static::init();
+		return self::init();
 	}
 
 	/**
-	 * Получение данных
-	 * @param string $key Ключ
+	 * Get data
+	 *
+	 * @param string $key Key
 	 * @return mixed
 	 */
 	final static public function get($key)
@@ -60,9 +64,10 @@ class Cache
 	}
 
 	/**
-	 * Сохранение данных
-	 * @param string $key Ключ
-	 * @param mixed $value Данные
+	 * Save date
+	 *
+	 * @param string $key Key
+	 * @param mixed $value Data
 	 * @return bool
 	 */
 	final public static function set($key, $value)
@@ -71,8 +76,9 @@ class Cache
 	}
 
 	/**
-	 * Проверка существуют ли данные в кэше
-	 * @param string $key Ключ
+	 * Check if data stored in cache
+	 *
+	 * @param string $key Key
 	 * @return bool
 	 */
 	final public static function has($key)
@@ -81,8 +87,9 @@ class Cache
 	}
 
 	/**
-	 * Удаление данных
-	 * @param string $key Ключ
+	 * Delete data
+	 *
+	 * @param string $key Key
 	 * @return bool
 	 */
 	final public static function del($key)
@@ -91,7 +98,8 @@ class Cache
 	}
 
 	/**
-	 * Очистка кэша
+	 * Cache cleanup
+	 *
 	 * @return bool
 	 */
 	final public static function clear()
