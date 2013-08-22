@@ -30,7 +30,7 @@ class Cache
 	 * @param string $driver_name Driver name
 	 * @return iCacheAdapter
 	 */
-	final public static function setDriver($driver_name = 'Memcache')
+	final public static function setDriver($driver_name = 'Apc')
 	{
 		$driver = "\\Veles\\Cache\\Drivers\\${driver_name}Adapter";
 		self::$driver = $driver::instance();

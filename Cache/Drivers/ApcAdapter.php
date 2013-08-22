@@ -27,7 +27,7 @@ class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	/**
 	 * Constructor
 	 */
-	final public function __construct()
+	final protected function __construct()
 	{
 		if (!function_exists('apc_add')) {
 			throw new Exception('APC cache not installed!');
