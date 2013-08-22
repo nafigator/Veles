@@ -20,6 +20,8 @@
 namespace Veles\Tests;
 
 use Veles\AutoLoader;
+use Veles\Cache\Cache;
+use Veles\Cache\Drivers\MemcacheAdapter;
 
 define('ENVIRONMENT', 'development');
 define('LIB_DIR', realpath(__DIR__ . '/../..'));
@@ -37,3 +39,12 @@ set_include_path(implode(PATH_SEPARATOR, array(
 /** @noinspection PhpIncludeInspection */
 require 'Veles/AutoLoader.php';
 AutoLoader::init();
+
+// Cache initialization
+switch (true) {
+	case function_exists('apc_add'):	// APC not need initialization
+		break;
+	case class_exists('Memcache'):		// Memcache
+		MemcacheAdapter::instance()->addServer('localhost');
+		break;
+}

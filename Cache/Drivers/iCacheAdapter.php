@@ -1,8 +1,8 @@
 <?php
 /**
- * Cache interface
+ * Cache adapters interface
  *
- * @file    iCacheDriver.php
+ * @file    iCacheAdapter.php
  *
  * PHP version 5.3.9+
  *
@@ -14,10 +14,10 @@
 namespace Veles\Cache\Drivers;
 
 /**
- * Interface iCacheDriver
+ * Interface iCacheAdapter
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
-interface iCacheDriver
+interface iCacheAdapter
 {
 	/**
 	 * Get data

@@ -19,8 +19,11 @@ use Exception;
  * Class ApcAdapter
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
-class ApcAdapter implements iCacheDriver
+class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 {
+	/** @var iCacheAdapter */
+	private static $instance;
+
 	/**
 	 * Constructor
 	 */
@@ -29,6 +32,19 @@ class ApcAdapter implements iCacheDriver
 		if (!function_exists('apc_add')) {
 			throw new Exception('APC cache not installed!');
 		}
+	}
+
+	/**
+	 * @return iCacheAdapter
+	 */
+	final public static function instance()
+	{
+		if (null === static::$instance) {
+			$class = get_called_class();
+			static::$instance = new $class;
+		}
+
+		return static::$instance;
 	}
 
 	/**

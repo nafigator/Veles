@@ -13,7 +13,7 @@
 
 namespace Veles\Cache;
 
-use Veles\Cache\Drivers\iCacheDriver;
+use Veles\Cache\Drivers\iCacheAdapter;
 use Veles\Config;
 
 /**
@@ -28,12 +28,12 @@ class Cache
 	 * Cache driver initialisation
 	 *
 	 * @param string $driver_name Driver name
-	 * @return iCacheDriver
+	 * @return iCacheAdapter
 	 */
-	final public static function init($driver_name = 'Apc')
+	final public static function setDriver($driver_name = 'Memcache')
 	{
-		$driver_class = "\\Veles\\Cache\\Drivers\\${driver_name}Adapter";
-		self::$driver = new $driver_class;
+		$driver = "\\Veles\\Cache\\Drivers\\${driver_name}Adapter";
+		self::$driver = $driver::instance();
 
 		return self::$driver;
 	}
@@ -45,11 +45,11 @@ class Cache
 	 */
 	final public static function getDriver()
 	{
-		if (self::$driver instanceof iCacheDriver) {
+		if (self::$driver instanceof iCacheAdapter) {
 			return self::$driver;
 		}
 
-		return self::init();
+		return self::setDriver();
 	}
 
 	/**

@@ -21,54 +21,34 @@ use Veles\Config;
  * Class MemcacheAdapter
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
-class MemcacheAdapter implements iCacheDriver
+class MemcacheAdapter extends CacheAdapterAbstract implements iCacheAdapter
 {
-	private $memcache;
+	/** @var iCacheAdapter */
+	private static $instance;
 
 	/**
 	 * Create Memcache class instance and connect to memcache pool
 	 */
-	final public function __construct()
+	final protected function __construct()
 	{
-		if (!function_exists('memcache_add')) {
+		if (!class_exists('Memcache')) {
 			throw new Exception('Memcache not installed!');
 		}
 
-		//todo find a beter way to initialize memcache params
-		$params = array(array(
-			'host' => 'localhost',
-			'port' => 11211
-		));
+		$this->driver = new Memcache;
+	}
 
-		$this->setMemcache(new Memcache);
-
-		foreach ($params as $param) {
-			if (!isset($param['port'])) {
-				$param['port'] = 11211;
-			}
-
-			$this->getMemcache()->addserver($param['host'], $param['port']);
+	/**
+	 * @return iCacheAdapter
+	 */
+	final public static function instance()
+	{
+		if (null === static::$instance) {
+			$class = get_called_class();
+			static::$instance = new $class;
 		}
-	}
 
-	/**
-	 * Set Memcache instance
-	 *
-	 * @param Memcache $memcache
-	 */
-	public function setMemcache($memcache)
-	{
-		$this->memcache = $memcache;
-	}
-
-	/**
-	 * Get Memcache instance
-	 *
-	 * @return Memcache
-	 */
-	private function getMemcache()
-	{
-		return $this->memcache;
+		return static::$instance;
 	}
 
 	/**
@@ -78,7 +58,7 @@ class MemcacheAdapter implements iCacheDriver
 	 */
 	public function get($key)
 	{
-		return $this->getMemcache()->get($key);
+		return $this->driver->get($key);
 	}
 
 	/**
@@ -91,7 +71,7 @@ class MemcacheAdapter implements iCacheDriver
 	 */
 	public function set($key, $value, $ttl = 0)
 	{
-		return $this->getMemcache()->set($key, $value, 0, $ttl);
+		return $this->driver->set($key, $value, 0, $ttl);
 	}
 
 	/**
@@ -102,7 +82,7 @@ class MemcacheAdapter implements iCacheDriver
 	 */
 	public function has($key)
 	{
-		return (bool) $this->getMemcache()->get($key);
+		return (bool) $this->driver->get($key);
 	}
 
 	/**
@@ -113,7 +93,7 @@ class MemcacheAdapter implements iCacheDriver
 	 */
 	public function del($key)
 	{
-		return $this->getMemcache()->delete($key);
+		return $this->driver->delete($key);
 	}
 
 	/**
@@ -123,6 +103,6 @@ class MemcacheAdapter implements iCacheDriver
 	 */
 	public function clear()
 	{
-		return $this->getMemcache()->flush();
+		return $this->driver->flush();
 	}
 }
