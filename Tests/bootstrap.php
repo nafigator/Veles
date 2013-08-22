@@ -45,6 +45,7 @@ switch (true) {
 	case function_exists('apc_add'):	// APC not need initialization
 		break;
 	case class_exists('Memcache'):		// Memcache
+		Cache::setDriver('Memcache');
 		MemcacheAdapter::instance()->addServer('localhost');
 		break;
 }
