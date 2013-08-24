@@ -93,11 +93,9 @@ class Config
 		foreach ($namespaces as $namespace) {
 			$section = explode(':', $namespace);
 
-			$closure = function (&$value) {
+			foreach ($section as &$value) {
 				$value = trim($value);
-			};
-
-			array_walk($section, $closure);
+			}
 
 			// Process only environment section
 			if (ENVIRONMENT !== $section[0]
@@ -118,13 +116,10 @@ class Config
 	 */
 	private static function checkDefaults()
 	{
-		if (!defined('ENVIRONMENT')) {
-			define('ENVIRONMENT', 'production');
-		}
+		defined('ENVIRONMENT') || define('ENVIRONMENT', 'production');
 
-		if (!defined('CONFIG_FILE')) {
-			define('CONFIG_PATH', realpath('../../project/settings.ini'));
-		}
+		defined('CONFIG_FILE')
+			|| define('CONFIG_PATH', realpath('../../project/settings.ini'));
 	}
 
 	/**
