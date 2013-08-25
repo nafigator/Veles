@@ -25,6 +25,11 @@ class CliProgressBar
 	private $start_time;
 	private $final_value;
 	private $block = false;
+	private $curr_time;
+	private $last_update_time = 0;
+	private $cycle_time;
+	private $clean_process_time = 0;
+
 
 	/**
 	 * Конструктор
@@ -44,6 +49,7 @@ class CliProgressBar
 		$this->bp_percent  = $width / 100;
 		$this->percent     = $this->final_value / 100;
 		$this->start_time  = microtime(true);
+		$this->last_update_time = $this->start_time;
 
 		$this->update(0);
 	}
@@ -54,6 +60,9 @@ class CliProgressBar
 	 */
 	final public function update($current)
 	{
+		$this->curr_time = microtime(true);
+		$this->cycle_time = $this->curr_time - $this->last_update_time;
+		$this->clean_process_time += $this->cycle_time;
 		$done = $current / $this->percent;
 
 		if ($done < 100) {
@@ -76,6 +85,8 @@ class CliProgressBar
 		echo ($space_len > 0)
 			? "\033[?25l[$bar>\033[{$space_len}C]$status$end"
 			: "[$bar>]$status$end\033[?25h";
+
+		$this->last_update_time = microtime(true);
 	}
 
 	/**
@@ -86,9 +97,10 @@ class CliProgressBar
 	final public function getStatusString($current)
 	{
 		$current   = max($current, 1);
-		$avg_speed = $current / (microtime(true) - $this->start_time);
+		$avg_speed = $current / $this->clean_process_time;
 
-		$estimated = ($this->final_value - $current) / $avg_speed;
+		$estimated = ($this->final_value - $current)
+			/ ($current / (microtime(true) - $this->start_time));
 		$estimated = number_format($estimated, 1);
 
 		$avg_speed = round($avg_speed);
