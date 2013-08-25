@@ -22,34 +22,34 @@ use Veles\Config;
  */
 class Cache
 {
-	private static $driver;
+	private static $adapter;
 
 	/**
-	 * Cache driver initialisation
+	 * Cache adapter initialisation
 	 *
-	 * @param string $driver_name Driver name
+	 * @param string $adapter_name Adapter name
 	 * @return iCacheAdapter
 	 */
-	final public static function setDriver($driver_name = 'Apc')
+	final public static function setAdapter($adapter_name = 'Apc')
 	{
-		$driver = "\\Veles\\Cache\\Drivers\\${driver_name}Adapter";
-		self::$driver = $driver::instance();
+		$adapter = "\\Veles\\Cache\\Drivers\\${adapter_name}Adapter";
+		self::$adapter = $adapter::instance();
 
-		return self::$driver;
+		return self::$adapter;
 	}
 
 	/**
-	 * Cache instance
+	 * Cache adapter instance
 	 *
 	 * @return Cache
 	 */
-	final public static function getDriver()
+	final public static function getAdapter()
 	{
-		if (self::$driver instanceof iCacheAdapter) {
-			return self::$driver;
+		if (self::$adapter instanceof iCacheAdapter) {
+			return self::$adapter;
 		}
 
-		return self::setDriver();
+		return self::setAdapter();
 	}
 
 	/**
@@ -60,7 +60,7 @@ class Cache
 	 */
 	final static public function get($key)
 	{
-		return self::getDriver()->get($key);
+		return self::getAdapter()->get($key);
 	}
 
 	/**
@@ -72,7 +72,7 @@ class Cache
 	 */
 	final public static function set($key, $value)
 	{
-		return self::getDriver()->set($key, $value);
+		return self::getAdapter()->set($key, $value);
 	}
 
 	/**
@@ -83,7 +83,7 @@ class Cache
 	 */
 	final public static function has($key)
 	{
-		return self::getDriver()->has($key);
+		return self::getAdapter()->has($key);
 	}
 
 	/**
@@ -94,7 +94,7 @@ class Cache
 	 */
 	final public static function del($key)
 	{
-		return self::getDriver()->del($key);
+		return self::getAdapter()->del($key);
 	}
 
 	/**
@@ -104,6 +104,6 @@ class Cache
 	 */
 	final public static function clear()
 	{
-		return self::getDriver()->clear();
+		return self::getAdapter()->clear();
 	}
 }
