@@ -45,6 +45,6 @@ class Byte implements iValidator
 
 		$size /= (1 << (10 * $pow));
 
-		return round($size, $precision) . ' ' . $units[$pow];
+		return number_format($size, $precision) . ' ' . $units[$pow];
 	}
 }
