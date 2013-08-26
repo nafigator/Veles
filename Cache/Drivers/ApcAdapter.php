@@ -21,9 +21,6 @@ use Exception;
  */
 class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 {
-	/** @var iCacheAdapter */
-	private static $instance;
-
 	/**
 	 * Constructor
 	 */
@@ -32,19 +29,6 @@ class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 		if (!function_exists('apc_add')) {
 			throw new Exception('APC cache not installed!');
 		}
-	}
-
-	/**
-	 * @return iCacheAdapter
-	 */
-	final public static function instance()
-	{
-		if (null === static::$instance) {
-			$class = get_called_class();
-			static::$instance = new $class;
-		}
-
-		return static::$instance;
 	}
 
 	/**

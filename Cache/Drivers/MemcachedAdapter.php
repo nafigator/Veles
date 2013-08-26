@@ -23,9 +23,6 @@ use Veles\Config;
  */
 class MemcachedAdapter extends CacheAdapterAbstract implements iCacheAdapter
 {
-	/** @var iCacheAdapter */
-	private static $instance;
-
 	/**
 	 * Create Memcached class instance and connect to memcached pool
 	 */
@@ -36,19 +33,6 @@ class MemcachedAdapter extends CacheAdapterAbstract implements iCacheAdapter
 		}
 
 		$this->driver = new Memcached;
-	}
-
-	/**
-	 * @return iCacheAdapter
-	 */
-	final public static function instance()
-	{
-		if (null === static::$instance) {
-			$class = get_called_class();
-			static::$instance = new $class;
-		}
-
-		return static::$instance;
 	}
 
 	/**

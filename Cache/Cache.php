@@ -43,7 +43,7 @@ class Cache
 	 *
 	 * @return Cache
 	 */
-	final public static function getAdapter()
+	private static function getAdapter()
 	{
 		if (self::$adapter instanceof iCacheAdapter) {
 			return self::$adapter;
