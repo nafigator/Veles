@@ -83,11 +83,11 @@ class ByteTest extends PHPUnit_Framework_TestCase
 	public function formatProvider()
 	{
 		return array(
-			array(58, '58 B'),
-			array(10245, '10 KB'),
+			array(58, '58.00 B'),
+			array(10245, '10.00 KB'),
 			array(10245156, '9.77 MB'),
-			array(10485760, '10 MB'),
-			array(10737418240, '10 GB')
+			array(10485760, '10.00 MB'),
+			array(10737418240, '10.00 GB')
 		);
 	}
 }
