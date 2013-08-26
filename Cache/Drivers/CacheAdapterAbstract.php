@@ -83,7 +83,6 @@ abstract class CacheAdapterAbstract
 		}
 
 		self::setCall($method, $arguments);
-		//return call_user_func_array(array($this->driver, $method), $arguments);
 	}
 
 	/**
