@@ -52,16 +52,7 @@ final class UsrAuth
 	 */
 	final public static function getErrors()
 	{
-		return self::instance()->getStrategyErrors();
-	}
-
-	/**
-	 * Возвращает ошибки авторизации
-	 * @return int Побитовые значения ошибок авторизации
-	 */
-	private function getStrategyErrors()
-	{
-		return $this->strategy->getErrors();
+		return self::instance()->strategy->getErrors();
 	}
 
 	/**
@@ -70,9 +61,9 @@ final class UsrAuth
 	 * @return  bool
 	 * @todo переделать входящий параметр на int
 	 */
-	final public function hasAccess($groups)
+	final public static function hasAccess($groups)
 	{
-		$user_group = $this->getUser()->getGroup();
+		$user_group = self::getUser()->getGroup();
 
 		// Проверяем есть ли в группах пользователя определённый бит,
 		// соответствующий нужной группе.
@@ -89,8 +80,8 @@ final class UsrAuth
 	 * Получение пользователя
 	 * @return User
 	 */
-	final public function getUser()
+	final public static function getUser()
 	{
-		return $this->strategy->getUser();
+		return self::instance()->strategy->getUser();
 	}
 }
