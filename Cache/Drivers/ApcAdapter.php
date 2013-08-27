@@ -36,7 +36,7 @@ class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 * @param string $key Key
 	 * @return mixed
 	 */
-	public function get($key)
+	final public function get($key)
 	{
 		return apc_fetch($key);
 	}
@@ -49,7 +49,7 @@ class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 * @param int $ttl Time to live
 	 * @return mixed
 	 */
-	public function set($key, $value, $ttl = 0)
+	final public function set($key, $value, $ttl = 0)
 	{
 		return apc_add($key, $value, $ttl);
 	}
@@ -60,7 +60,7 @@ class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 * @param string $key Key
 	 * @return bool
 	 */
-	public function has($key)
+	final public function has($key)
 	{
 		apc_exists($key);
 	}
@@ -71,7 +71,7 @@ class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 * @param string $key Key
 	 * @return bool
 	 */
-	public function del($key)
+	final public function del($key)
 	{
 		return apc_delete($key);
 	}
@@ -81,7 +81,7 @@ class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 *
 	 * @return bool
 	 */
-	public function clear()
+	final public function clear()
 	{
 		return apc_clear_cache();
 	}
