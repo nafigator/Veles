@@ -1,34 +1,38 @@
 <?php
 /**
- * Adapter for APC cache
+ * Adapter for Memcached
  *
- * @file    ApcAdapter.php
+ * @file    MemcachedAdapter.php
  *
  * PHP version 5.3.9+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
- * @date    Птн Ноя 16 22:09:28 2012
+ * @date    8/21/13 18:42
  * @copyright The BSD 3-Clause License
  */
 
-namespace Veles\Cache\Drivers;
+namespace Veles\Cache\Adapters;
 
 use Exception;
+use Memcached;
+use Veles\Config;
 
 /**
- * Class ApcAdapter
+ * Class MemcachedAdapter
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
-class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
+class MemcachedAdapter extends CacheAdapterAbstract implements iCacheAdapter
 {
 	/**
-	 * Constructor
+	 * Create Memcached class instance and connect to memcached pool
 	 */
 	final protected function __construct()
 	{
-		if (!function_exists('apc_add')) {
-			throw new Exception('APC cache not installed!');
+		if (!class_exists('Memcached')) {
+			throw new Exception('Memcached not installed!');
 		}
+
+		$this->driver = new Memcached;
 	}
 
 	/**
@@ -38,7 +42,7 @@ class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 */
 	final public function get($key)
 	{
-		return apc_fetch($key);
+		return $this->driver->get($key);
 	}
 
 	/**
@@ -47,11 +51,11 @@ class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 * @param string $key Key
 	 * @param mixed $value Data
 	 * @param int $ttl Time to live
-	 * @return mixed
+	 * @return bool
 	 */
-	final public function set($key, $value, $ttl = 0)
+	final public function set($key, $value, $ttl)
 	{
-		return apc_add($key, $value, $ttl);
+		return $this->driver->set($key, $value, $ttl);
 	}
 
 	/**
@@ -62,7 +66,7 @@ class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 */
 	final public function has($key)
 	{
-		apc_exists($key);
+		return (bool) $this->driver->get($key);
 	}
 
 	/**
@@ -73,7 +77,7 @@ class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 */
 	final public function del($key)
 	{
-		return apc_delete($key);
+		return $this->driver->delete($key);
 	}
 
 	/**
@@ -83,6 +87,6 @@ class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 */
 	final public function clear()
 	{
-		return apc_clear_cache();
+		return $this->driver->flush();
 	}
 }

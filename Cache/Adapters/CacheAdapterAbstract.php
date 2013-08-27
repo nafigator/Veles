@@ -11,7 +11,7 @@
  * @copyright The BSD 3-Clause License
  */
 
-namespace Veles\Cache\Drivers;
+namespace Veles\Cache\Adapters;
 
 use Exception;
 

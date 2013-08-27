@@ -13,7 +13,7 @@
 
 namespace Veles\Cache;
 
-use Veles\Cache\Drivers\iCacheAdapter;
+use Veles\Cache\Adapters\iCacheAdapter;
 use Veles\Config;
 
 /**
@@ -32,7 +32,7 @@ class Cache
 	 */
 	final public static function setAdapter($adapter_name = 'Apc')
 	{
-		$adapter = "\\Veles\\Cache\\Drivers\\${adapter_name}Adapter";
+		$adapter = "\\Veles\\Cache\\Adapters\\${adapter_name}Adapter";
 		self::$adapter = $adapter::instance();
 
 		return self::$adapter;
@@ -68,11 +68,12 @@ class Cache
 	 *
 	 * @param string $key Key
 	 * @param mixed $value Data
+	 * @param int $ttl Time to live
 	 * @return bool
 	 */
-	final public static function set($key, $value)
+	final public static function set($key, $value, $ttl = 0)
 	{
-		return self::getAdapter()->set($key, $value);
+		return self::getAdapter()->set($key, $value, $ttl);
 	}
 
 	/**

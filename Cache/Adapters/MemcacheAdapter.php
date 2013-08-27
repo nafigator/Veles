@@ -11,7 +11,7 @@
  * @copyright The BSD 3-Clause License
  */
 
-namespace Veles\Cache\Drivers;
+namespace Veles\Cache\Adapters;
 
 use Exception;
 use Memcache;
@@ -53,7 +53,7 @@ class MemcacheAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 * @param int $ttl Time to live
 	 * @return bool
 	 */
-	final public function set($key, $value, $ttl = 0)
+	final public function set($key, $value, $ttl)
 	{
 		return $this->driver->set($key, $value, 0, $ttl);
 	}
