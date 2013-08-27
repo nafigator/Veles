@@ -36,6 +36,7 @@ set_include_path(implode(PATH_SEPARATOR, array(
 	get_include_path()
 )));
 
+date_default_timezone_set('Europe/Moscow');
 /** @noinspection PhpIncludeInspection */
 require 'Veles/AutoLoader.php';
 AutoLoader::init();
