@@ -22,6 +22,7 @@ namespace Veles\Tests;
 use Veles\AutoLoader;
 use Veles\Cache\Cache;
 use Veles\Cache\Adapters\MemcacheAdapter;
+use Veles\Cache\Adapters\MemcachedAdapter;
 
 define('ENVIRONMENT', 'development');
 define('LIB_DIR', realpath(__DIR__ . '/../..'));
@@ -44,6 +45,10 @@ AutoLoader::init();
 // Cache initialization
 switch (true) {
 	case function_exists('apc_add'):	// APC not need initialization
+		break;
+	case class_exists('Memcached'):		// Memcached
+		MemcachedAdapter::instance()->addServer('localhost');
+		Cache::setAdapter('Memcached');
 		break;
 	case class_exists('Memcache'):		// Memcache
 		MemcacheAdapter::instance()->addServer('localhost');
