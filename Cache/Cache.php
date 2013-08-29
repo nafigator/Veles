@@ -14,7 +14,6 @@
 namespace Veles\Cache;
 
 use Veles\Cache\Adapters\iCacheAdapter;
-use Veles\Config;
 use Exception;
 
 /**
@@ -33,7 +32,7 @@ class Cache
 	 * Cache adapter initialisation
 	 *
 	 * @param string $class_name Adapter name
-	 * @return iCacheAdapter
+	 * @return null
 	 */
 	final public static function setAdapter($class_name = 'Apc')
 	{
