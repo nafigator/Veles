@@ -38,6 +38,7 @@ class Cache
 	final public static function setAdapter($class_name = 'Apc')
 	{
 		self::$adapter_name = "\\Veles\\Cache\\Adapters\\${class_name}Adapter";
+		self::$adapter = null;
 	}
 
 	/**
@@ -56,7 +57,8 @@ class Cache
 			throw new Exception('Adapter not set!');
 		}
 
-		self::$adapter = new self::$adapter_name;
+		$tmp =& self::$adapter_name;
+		self::$adapter = $tmp::instance();
 
 		return self::$adapter;
 	}
