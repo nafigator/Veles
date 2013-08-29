@@ -22,6 +22,7 @@ use Veles\Config;
  */
 class Cache
 {
+	/** @var iCacheAdapter */
 	private static $adapter;
 
 	/**
@@ -106,5 +107,28 @@ class Cache
 	final public static function clear()
 	{
 		return self::getAdapter()->clear();
+	}
+
+	/**
+	 * Increment key value
+	 *
+	 * @param string $key
+	 * @param int    $offset
+	 *
+	 * @return mixed
+	 */final public static function increment($key, $offset = 1)
+	{
+		return self::getAdapter()->increment($key, $offset);
+	}
+
+	/**
+	 * Decrement key value
+	 *
+	 * @param string $key
+	 * @param int    $offset
+	 * @return mixed
+	 */final public static function decrement($key, $offset = 1)
+	{
+		return self::getAdapter()->decrement($key, $offset);
 	}
 }

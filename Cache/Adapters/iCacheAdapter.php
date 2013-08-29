@@ -58,4 +58,23 @@ interface iCacheAdapter
 	 * @return bool
 	 */
 	public function clear();
+
+	/**
+	 * Increment key value
+	 *
+	 * @param string $key
+	 * @param int $offset
+	 *
+	 * @return bool|int
+	 */
+	public function increment($key, $offset);
+
+	/**
+	 * Decrement key value
+	 *
+	 * @param string $key
+	 * @param int $offset
+	 * @return bool|int
+	 */
+	public function decrement($key, $offset);
 }

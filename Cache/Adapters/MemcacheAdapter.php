@@ -89,4 +89,30 @@ class MemcacheAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	{
 		return $this->driver->flush();
 	}
+
+	/**
+	 * Increment key value
+	 *
+	 * @param string $key Key
+	 * @param int $offset Offset
+	 *
+	 * @return bool|int
+	 */
+	public function increment($key, $offset)
+	{
+		return $this->driver->increment($key, $offset);
+	}
+
+	/**
+	 * Decrement key value
+	 *
+	 * @param string $key Key
+	 * @param int $offset Offset
+	 *
+	 * @return bool|int
+	 */
+	public function decrement($key, $offset)
+	{
+		return $this->driver->decrement($key, $offset);
+	}
 }

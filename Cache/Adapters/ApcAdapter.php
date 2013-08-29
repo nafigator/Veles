@@ -85,4 +85,30 @@ class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	{
 		return apc_clear_cache();
 	}
+
+	/**
+	 * Increment key value
+	 *
+	 * @param string $key Key
+	 * @param int $offset Offset
+	 *
+	 * @return bool|int
+	 */
+	final public function increment($key, $offset)
+	{
+		return apc_inc($key, $offset);
+	}
+
+	/**
+	 * Decrement key value
+	 *
+	 * @param string $key Key
+	 * @param int $offset Offset
+	 *
+	 * @return bool|int
+	 */
+	final public function decrement($key, $offset)
+	{
+		return apc_dec($key, $offset);
+	}
 }
