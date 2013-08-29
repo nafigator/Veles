@@ -15,6 +15,7 @@ namespace Veles\Cache;
 
 use Veles\Cache\Adapters\iCacheAdapter;
 use Veles\Config;
+use Exception;
 
 /**
  * Class Cache
@@ -25,24 +26,25 @@ class Cache
 	/** @var iCacheAdapter */
 	private static $adapter;
 
+	/** @var  string */
+	private static $adapter_name;
+
 	/**
 	 * Cache adapter initialisation
 	 *
-	 * @param string $adapter_name Adapter name
+	 * @param string $class_name Adapter name
 	 * @return iCacheAdapter
 	 */
-	final public static function setAdapter($adapter_name = 'Apc')
+	final public static function setAdapter($class_name = 'Apc')
 	{
-		$adapter = "\\Veles\\Cache\\Adapters\\${adapter_name}Adapter";
-		self::$adapter = $adapter::instance();
-
-		return self::$adapter;
+		self::$adapter_name = "\\Veles\\Cache\\Adapters\\${class_name}Adapter";
 	}
 
 	/**
 	 * Cache adapter instance
 	 *
-	 * @return Cache
+	 * @throws Exception
+	 * @return iCacheAdapter
 	 */
 	private static function getAdapter()
 	{
@@ -50,7 +52,13 @@ class Cache
 			return self::$adapter;
 		}
 
-		return self::setAdapter();
+		if (null === self::$adapter_name) {
+			throw new Exception('Adapter not set!');
+		}
+
+		self::$adapter = new self::$adapter_name;
+
+		return self::$adapter;
 	}
 
 	/**
