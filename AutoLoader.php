@@ -30,14 +30,23 @@ class AutoLoader
 	/**
 	 * AutoLoader
 	 *
-	 * @param string $name
+	 * @param string $class_name
 	 */
-	final public static function load($name)
+	final public static function load($class_name)
 	{
-		$name = str_replace('\\', DIRECTORY_SEPARATOR, $name);
+		$class_name = ltrim($class_name, '\\');
+		$namespace = $file_name = '';
+		if ($last_ns_pos = strrpos($class_name, '\\')) {
+			$namespace = substr($class_name, 0, $last_ns_pos);
+			$class_name = substr($class_name, $last_ns_pos + 1);
+			$file_name  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
+		}
+		$file_name = stream_resolve_include_path(
+			$file_name . str_replace('_', DIRECTORY_SEPARATOR, $class_name) . '.php'
+		);
 
-		// For using external libs with their own autoloaders
-		// do not use strict require function
-		include "$name.php";
+		if ($file_name) {
+			include $file_name;
+		}
 	}
 }
