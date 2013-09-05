@@ -14,14 +14,40 @@
 namespace Veles\View\Adapters;
 
 use Exception;
+use Veles\View\Adapters\ViewAdapterAbstract;
+
 
 /**
  * Class NativeAdapter
+ *
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
-class NativeAdapter implements iViewAdapter
+class NativeAdapter extends ViewAdapterAbstract implements iViewAdapter
 {
+	/** @var array */
 	private static $variables = array();
+	/** @var string */
+	private static $template_dir;
+
+	/**
+	 * Set templates directory
+	 *
+	 * @param string $template_dir
+	 */
+	final public static function setTemplateDir($template_dir)
+	{
+		self::$template_dir = $template_dir;
+	}
+
+	/**
+	 * Get templates directory
+	 *
+	 * @return string
+	 */
+	final public static function getTemplateDir()
+	{
+		return self::$template_dir;
+	}
 
 	/**
 	 * Method for output variables setup
@@ -41,7 +67,7 @@ class NativeAdapter implements iViewAdapter
 	/**
 	 * Output variables cleanup
 	 *
-	 * @param array $vars Массив имён переменных для очистки
+	 * @param array $vars Array of variables names
 	 * @throws Exception
 	 */
 	final public function del($vars)
@@ -60,7 +86,7 @@ class NativeAdapter implements iViewAdapter
 	/**
 	 * Output method
 	 *
-	 * @param string $path Путь к шаблону
+	 * @param string $path Path to template
 	 */
 	final public function show($path)
 	{
@@ -104,5 +130,13 @@ class NativeAdapter implements iViewAdapter
 	public function isCached($tpl)
 	{
 		return false;
+	}
+
+	/**
+	 * Driver initialization
+	 */
+	protected function __construct()
+	{
+		$this->setDriver($this);
 	}
 }

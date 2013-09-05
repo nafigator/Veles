@@ -13,8 +13,9 @@
 
 namespace Veles\Cache;
 
-use Veles\Cache\Adapters\iCacheAdapter;
 use Exception;
+use Veles\Cache\Adapters\iCacheAdapter;
+use Veles\Cache\Adapters\CacheAdapterAbstract;
 
 /**
  * Class Cache
@@ -24,20 +25,29 @@ class Cache
 {
 	/** @var iCacheAdapter */
 	private static $adapter;
-
-	/** @var  string */
+	/** @var  string|CacheAdapterAbstract */
 	private static $adapter_name;
 
 	/**
 	 * Cache adapter initialisation
 	 *
 	 * @param string $class_name Adapter name
-	 * @return null
 	 */
 	final public static function setAdapter($class_name = 'Apc')
 	{
 		self::$adapter_name = "\\Veles\\Cache\\Adapters\\${class_name}Adapter";
 		self::$adapter = null;
+	}
+
+	/**
+	 * Get data
+	 *
+	 * @param string $key Key
+	 * @return mixed
+	 */
+	final static public function get($key)
+	{
+		return self::getAdapter()->get($key);
 	}
 
 	/**
@@ -60,17 +70,6 @@ class Cache
 		self::$adapter = $tmp::instance();
 
 		return self::$adapter;
-	}
-
-	/**
-	 * Get data
-	 *
-	 * @param string $key Key
-	 * @return mixed
-	 */
-	final static public function get($key)
-	{
-		return self::getAdapter()->get($key);
 	}
 
 	/**
@@ -125,7 +124,8 @@ class Cache
 	 * @param int    $offset
 	 *
 	 * @return mixed
-	 */final public static function increment($key, $offset = 1)
+	 */
+	final public static function increment($key, $offset = 1)
 	{
 		return self::getAdapter()->increment($key, $offset);
 	}
@@ -136,7 +136,8 @@ class Cache
 	 * @param string $key
 	 * @param int    $offset
 	 * @return mixed
-	 */final public static function decrement($key, $offset = 1)
+	 */
+	final public static function decrement($key, $offset = 1)
 	{
 		return self::getAdapter()->decrement($key, $offset);
 	}

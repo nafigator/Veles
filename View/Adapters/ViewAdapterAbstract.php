@@ -1,30 +1,30 @@
 <?php
 /**
- * Cache adapter and singleton functionality
+ * View adapter and singleton functionality
  *
- * @file    CacheAdapterAbstract.php
+ * @file    ViewAdapterAbstract.php
  *
  * PHP version 5.3.9+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
- * @date    8/22/13 16:20
+ * @date    Чтв Сен  5 15:10:46 MSK 2013
  * @copyright The BSD 3-Clause License
  */
 
-namespace Veles\Cache\Adapters;
+namespace Veles\View\Adapters;
 
 use Exception;
 
 /**
- * Class CacheAdapterAbstract
+ * Class ViewAdapterAbstract
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
-abstract class CacheAdapterAbstract
+abstract class ViewAdapterAbstract
 {
 	/** @var  null|array */
 	protected static $calls;
-	/** @var iCacheAdapter|CacheAdapterAbstract */
+	/** @var iViewAdapter|ViewAdapterAbstract */
 	protected static $instance;
 	/** @var  mixed */
 	protected $driver;
@@ -35,7 +35,7 @@ abstract class CacheAdapterAbstract
 	abstract protected function __construct();
 
 	/**
-	 * @return iCacheAdapter|CacheAdapterAbstract
+	 * @return iViewAdapter|ViewAdapterAbstract
 	 */
 	final public static function instance()
 	{

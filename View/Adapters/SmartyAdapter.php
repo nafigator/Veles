@@ -1,6 +1,7 @@
 <?php
 /**
- * Adapter for Smarty templater
+ * Adapter for Smarty
+ *
  * @file    SmartyAdapter.php
  *
  * PHP version 5.3.9+
@@ -16,26 +17,15 @@ namespace Veles\View\Adapters;
 use Exception;
 use Smarty;
 use Veles\Config;
+use Veles\View\Adapters\ViewAdapterAbstract;
 
 /**
  * Class SmartyAdapter
+ *
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
-class SmartyAdapter implements iViewAdapter
+class SmartyAdapter extends ViewAdapterAbstract implements iViewAdapter
 {
-	private $smarty;
-
-	/**
-	 * Check consistensy Smarty settings in config
-	 * @param $conf
-	 * @return bool
-	 */
-	private function checkDefaults($conf)
-	{
-		// TODO: check required smarty settings
-		return true;
-	}
-
 	/**
 	 * Constructor
 	 */
@@ -43,20 +33,7 @@ class SmartyAdapter implements iViewAdapter
 	{
 		require_once 'Smarty' . DIRECTORY_SEPARATOR . 'Smarty.class.php';
 
-		if (null === ($conf = Config::getParams('smarty'))) {
-			throw new Exception('Not found Smarty params in config!');
-		}
-
-		if (!$this->checkDefaults($conf)) {
-			throw new Exception('Not found required smarty settings!');
-		}
-
-		$this->smarty = new Smarty();
-
-		$this->smarty->setTemplateDir(BASE_PATH . $conf['templates']);
-		$this->smarty->setCompileDir(BASE_PATH . $conf['templates_c']);
-		$this->smarty->setCacheDir(BASE_PATH . $conf['cache']);
-		$this->smarty->setConfigDir(BASE_PATH . $conf['configs']);
+		$this->setDriver(new Smarty);
 	}
 
 	/**
@@ -72,7 +49,7 @@ class SmartyAdapter implements iViewAdapter
 		}
 
 		foreach ($vars as $name => $value) {
-			$this->smarty->assign($name, $value);
+			$this->getDriver()->assign($name, $value);
 		}
 	}
 
@@ -89,7 +66,7 @@ class SmartyAdapter implements iViewAdapter
 		}
 
 		foreach ($vars as $name) {
-			$this->smarty->clearAssign($name);
+			$this->getDriver()->clearAssign($name);
 		}
 	}
 
@@ -100,7 +77,7 @@ class SmartyAdapter implements iViewAdapter
 	 */
 	final public function show($path)
 	{
-		$this->smarty->display($path);
+		$this->getDriver()->display($path);
 	}
 
 	/**
@@ -111,7 +88,7 @@ class SmartyAdapter implements iViewAdapter
 	 */
 	final public function get($path)
 	{
-		return $this->smarty->fetch($path);
+		return $this->getDriver()->fetch($path);
 	}
 
 	/**
@@ -122,7 +99,7 @@ class SmartyAdapter implements iViewAdapter
 	 */
 	final public function clearCache($tpl)
 	{
-		return $this->smarty->clearCache($tpl);
+		return $this->getDriver()->clearCache($tpl);
 	}
 
 	/**
@@ -133,16 +110,16 @@ class SmartyAdapter implements iViewAdapter
 	 */
 	final public function clearAllCache($exp_time = null)
 	{
-		return $this->smarty->clearAllCache($exp_time);
+		return $this->getDriver()->clearAllCache($exp_time);
 	}
 
 	/**
-	 * Check is template alreate already cached
+	 * Check is template already cached
 	 * @param $tpl
 	 * @return bool
 	 */
 	final public function isCached($tpl)
 	{
-		return $this->smarty->isCached($tpl);
+		return $this->getDriver()->isCached($tpl);
 	}
 }

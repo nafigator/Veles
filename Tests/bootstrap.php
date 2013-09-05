@@ -23,6 +23,8 @@ use Veles\AutoLoader;
 use Veles\Cache\Cache;
 use Veles\Cache\Adapters\MemcacheAdapter;
 use Veles\Cache\Adapters\MemcachedAdapter;
+use Veles\View\Adapters\NativeAdapter;
+use Veles\View\View;
 
 define('ENVIRONMENT', 'development');
 define('LIB_DIR', realpath(__DIR__ . '/../..'));
@@ -41,6 +43,9 @@ date_default_timezone_set('Europe/Moscow');
 /** @noinspection PhpIncludeInspection */
 require 'Veles/AutoLoader.php';
 AutoLoader::init();
+
+NativeAdapter::instance()->setTemplateDir(TEST_DIR . '/Project/View/');
+View::setAdapter('Native');
 
 // Cache initialization
 switch (true) {

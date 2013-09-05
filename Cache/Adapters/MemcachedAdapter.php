@@ -15,7 +15,7 @@ namespace Veles\Cache\Adapters;
 
 use Exception;
 use Memcached;
-use Veles\Config;
+use Veles\Cache\Adapters\CacheAdapterAbstract;
 
 /**
  * Class MemcachedAdapter
@@ -32,7 +32,7 @@ class MemcachedAdapter extends CacheAdapterAbstract implements iCacheAdapter
 			throw new Exception('Memcached not installed!');
 		}
 
-		$this->driver = new Memcached;
+		$this->setDriver(new Memcached);
 	}
 
 	/**
@@ -42,7 +42,7 @@ class MemcachedAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 */
 	final public function get($key)
 	{
-		return $this->driver->get($key);
+		return $this->getDriver()->get($key);
 	}
 
 	/**
@@ -55,7 +55,7 @@ class MemcachedAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 */
 	final public function set($key, $value, $ttl)
 	{
-		return $this->driver->set($key, $value, $ttl);
+		return $this->getDriver()->set($key, $value, $ttl);
 	}
 
 	/**
@@ -66,7 +66,7 @@ class MemcachedAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 */
 	final public function has($key)
 	{
-		return (bool) $this->driver->get($key);
+		return (bool) $this->getDriver()->get($key);
 	}
 
 	/**
@@ -77,7 +77,7 @@ class MemcachedAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 */
 	final public function del($key)
 	{
-		return $this->driver->delete($key);
+		return $this->getDriver()->delete($key);
 	}
 
 	/**
@@ -87,7 +87,7 @@ class MemcachedAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 */
 	final public function clear()
 	{
-		return $this->driver->flush();
+		return $this->getDriver()->flush();
 	}
 
 	/**
@@ -100,7 +100,7 @@ class MemcachedAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 */
 	public function increment($key, $offset)
 	{
-		return $this->driver->increment($key, $offset);
+		return $this->getDriver()->increment($key, $offset);
 	}
 
 	/**
@@ -113,6 +113,6 @@ class MemcachedAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 */
 	public function decrement($key, $offset)
 	{
-		return $this->driver->decrement($key, $offset);
+		return $this->getDriver()->decrement($key, $offset);
 	}
 }

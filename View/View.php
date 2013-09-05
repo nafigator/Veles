@@ -12,6 +12,10 @@
 
 namespace Veles\View;
 
+use Veles\View\Adapters\iViewAdapter;
+use Veles\View\Adapters\ViewAdapterAbstract;
+use Exception;
+
 /**
  * Class View
  *
@@ -19,22 +23,42 @@ namespace Veles\View;
  */
 class View
 {
-	/**
-	 * Get driver instance
-	 * @return iViewDriver
-	 */
-	private static function getDriver()
-	{
-		/**
-		 * @var iViewDriver
-		 */
-		static $driver;
+	/** @var iViewAdapter */
+	private static $adapter;
+	/** @var  string|ViewAdapterAbstract */
+	private static $adapter_name;
 
-		if (null === $driver) {
-			$driver = ViewFactory::build();
+	/**
+	 * Cache adapter initialisation
+	 *
+	 * @param string $class_name Adapter name
+	 */
+	final public static function setAdapter($class_name = 'Native')
+	{
+		self::$adapter_name = "\\Veles\\View\\Adapters\\${class_name}Adapter";
+		self::$adapter = null;
+	}
+
+	/**
+	 * Cache adapter instance
+	 *
+	 * @throws Exception
+	 * @return iViewAdapter|ViewAdapterAbstract
+	 */
+	private static function getAdapter()
+	{
+		if (self::$adapter instanceof iViewAdapter) {
+			return self::$adapter;
 		}
 
-		return $driver;
+		if (null === self::$adapter_name) {
+			throw new Exception('Adapter not set!');
+		}
+
+		$tmp =& self::$adapter_name;
+		self::$adapter = $tmp::instance();
+
+		return self::$adapter;
 	}
 
 	/**
@@ -44,7 +68,7 @@ class View
 	 */
 	final public static function set($vars)
 	{
-		self::getDriver()->set($vars);
+		self::getAdapter()->set($vars);
 	}
 
 	/**
@@ -54,7 +78,7 @@ class View
 	 */
 	final public static function del($vars)
 	{
-		self::getDriver()->del($vars);
+		self::getAdapter()->del($vars);
 	}
 
 	/**
@@ -64,7 +88,7 @@ class View
 	 */
 	final public static function show($path)
 	{
-		self::getDriver()->show($path);
+		self::getAdapter()->show($path);
 	}
 
 	/**
@@ -75,7 +99,7 @@ class View
 	 */
 	final public static function get($path)
 	{
-		return self::getDriver()->get($path);
+		return self::getAdapter()->get($path);
 	}
 
 	/**
@@ -86,6 +110,6 @@ class View
 	 */
 	public static function isCached($tpl)
 	{
-		return self::getDriver()->isCached($tpl);
+		return self::getAdapter()->isCached($tpl);
 	}
 }

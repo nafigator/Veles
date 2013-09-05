@@ -14,9 +14,11 @@
 namespace Veles\Cache\Adapters;
 
 use Exception;
+use Veles\Cache\Adapters\CacheAdapterAbstract;
 
 /**
  * Class ApcAdapter
+ *
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
