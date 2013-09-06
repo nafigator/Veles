@@ -51,7 +51,11 @@ abstract class AbstractElement extends stdClass implements iElement
 		}
 
 		if ($this->validator->check($value)) {
-			$this->attributes['value'] = $value;
+			if (isset($this->attributes['name'])
+				&& 'sid' !== $this->attributes['name']
+			) {
+				$this->attributes['value'] = $value;
+			}
 			return true;
 		}
 
