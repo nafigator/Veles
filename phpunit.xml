@@ -20,6 +20,11 @@
 	stopOnSkipped="false"
 	strict="true"
 	verbose="true">
+	<filter>
+		<blacklist>
+			<directory suffix=".php">Tests</directory>
+		</blacklist>
+	</filter>
 	<testsuites>
 		<testsuite name="All">
 			<directory>Tests</directory>

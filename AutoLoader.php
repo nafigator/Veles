@@ -46,6 +46,7 @@ class AutoLoader
 		);
 
 		if ($file_name) {
+			/** @noinspection PhpIncludeInspection */
 			include $file_name;
 		}
 	}
