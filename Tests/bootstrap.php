@@ -41,7 +41,7 @@ set_include_path(implode(PATH_SEPARATOR, array(
 
 date_default_timezone_set('Europe/Moscow');
 /** @noinspection PhpIncludeInspection */
-require 'Veles/AutoLoader.php';
+include 'Veles/AutoLoader.php';
 AutoLoader::init();
 
 NativeAdapter::instance()->setTemplateDir(TEST_DIR . '/Project/View/');

@@ -96,7 +96,7 @@ class NativeAdapter extends ViewAdapterAbstract implements iViewAdapter
 
 		ob_start();
 		/** @noinspection PhpIncludeInspection */
-		require TEMPLATE_PATH . $path;
+		include TEMPLATE_PATH . $path;
 		ob_end_flush();
 	}
 
@@ -114,7 +114,7 @@ class NativeAdapter extends ViewAdapterAbstract implements iViewAdapter
 
 		ob_start();
 		/** @noinspection PhpIncludeInspection */
-		require TEMPLATE_PATH . $path;
+		include TEMPLATE_PATH . $path;
 		$output = ob_get_contents();
 		ob_end_clean();
 
