@@ -103,10 +103,10 @@ class ErrBase implements SplSubject
 	{
 		if ('development' === ENVIRONMENT) {
 			View::set($this->vars);
-			View::show('Error/Exception.phtml');
+			View::show('error/exception.phtml');
 		} else {
 			View::set($this->vars);
-			$this->output = View::get('Error/Exception.phtml');
+			$this->output = View::get('error/exception.phtml');
 
 			//TODO: $this->attach(new ErrorSMS($this->vars));
 			$this->attach(new ErrMail());
