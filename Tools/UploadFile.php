@@ -22,6 +22,7 @@ class UploadFile extends File
 	private $hash;
 	private $sub_dir;
 	private $orig_name;
+	private $www_path;
 
 	/**
 	 * @return string
@@ -53,12 +54,16 @@ class UploadFile extends File
 		$this->setHash(hash_file('crc32b', $this->getTmpPath()));
 
 		$this->setSubDir(substr($this->getHash(), 0, 2));
-		$this->setDir($this->getDir()
+		$this->setName(substr($this->getHash(), 2));
+		$this->setWwwPath(DIRECTORY_SEPARATOR
+			. $this->getSubDir()
+			. DIRECTORY_SEPARATOR
+			. $this->getName()
+		);
+
+		$this->setPath($this->getDir()
 			. DIRECTORY_SEPARATOR
 			. $this->getSubDir()
-		);
-		$this->setName(substr($this->getHash(), 2));
-		$this->setPath($this->getDir()
 			. DIRECTORY_SEPARATOR
 			. $this->getName()
 		);
@@ -103,12 +108,14 @@ class UploadFile extends File
 	{
 		$dir = $this->getDir();
 
-		//TODO Сделать сеттеры и геттеры для umask директории и файла
+		// TODO Сделать сеттеры и геттеры для umask директории и файла
+		// TODO Реализовать через try..catch
 		if (!is_dir($dir)) {
 			mkdir($dir, 0755, true);
 		}
 
 		if (!is_writable($dir)) {
+			// TODO Реализовать через try..catch
 			chmod($dir, 0755);
 		}
 
@@ -133,5 +140,21 @@ class UploadFile extends File
 	final public function setTmpPath($tmp_path)
 	{
 		$this->tmp_path = $tmp_path;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getWwwPath()
+	{
+		return $this->www_path;
+	}
+
+	/**
+	 * @param mixed $www_path
+	 */
+	public function setWwwPath($www_path)
+	{
+		$this->www_path = $www_path;
 	}
 }

@@ -33,8 +33,7 @@ abstract class AbstractForm implements iForm
 	protected $sid      = null;
 	protected $name     = null;
 	protected $action   = null;
-
-	private $elements = array();
+	protected $elements = array();
 
 	/**
 	 * Constructor
