@@ -31,7 +31,7 @@ class SmartyAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 */
 	final public function __construct()
 	{
-		include_once 'Smarty' . DIRECTORY_SEPARATOR . 'Smarty.class.php';
+		include 'Smarty' . DIRECTORY_SEPARATOR . 'Smarty.class.php';
 
 		$this->setDriver(new Smarty);
 	}

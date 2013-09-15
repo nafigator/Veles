@@ -105,6 +105,7 @@ class NativeAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 *
 	 * @param string $path Path to template
 	 * @return string View content
+	 * @return string
 	 */
 	final public function get($path)
 	{

@@ -50,4 +50,15 @@ class AutoLoader
 			include $file_name;
 		}
 	}
+
+	final public static function registerPath($path)
+	{
+		if (is_array($path)) {
+			$path = implode(PATH_SEPARATOR, $path);
+		}
+
+		set_include_path(
+			implode(PATH_SEPARATOR, array($path, get_include_path()))
+		);
+	}
 }
