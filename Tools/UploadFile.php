@@ -24,21 +24,27 @@ class UploadFile extends File
 	private $sub_dir;
 	private $orig_name;
 	private $www_path;
-	private $dir_mask;
+	private $dir_mask = 0755;
+	private $hash_algorithm = 'sha1';
 
 	/**
 	 * Set upload directory mask
 	 *
 	 * @param int $dir_mask Value must be octal. Examples: 0755, 02755
+	 *
+	 * @return $this
 	 */
 	final public function setDirMask($dir_mask)
 	{
-		$this->dir_mask = octdec($dir_mask);
+		$this->dir_mask = $dir_mask;
+
+		return $this;
 	}
 
 	/**
 	 * Det upload directory mask
-	 * @return mixed
+	 *
+	 * @return int
 	 */
 	final public function getDirMask()
 	{
@@ -46,6 +52,8 @@ class UploadFile extends File
 	}
 
 	/**
+	 * Get uploaded file origin name
+	 *
 	 * @return string
 	 */
 	final public function getOrigName()
@@ -54,16 +62,21 @@ class UploadFile extends File
 	}
 
 	/**
-	 * @param string $orig_name
+	 * Set uploaded file origin name
+	 *
+	 * @param string $orig_name Origin file name
+	 *
+	 * @return $this
 	 */
 	final public function setOrigName($orig_name)
 	{
 		$this->orig_name = $orig_name;
+
+		return $this;
 	}
 
 	/**
 	 * Generate path for uploaded file
-	 * @todo Implement adapters for different save algorithms
 	 */
 	final public function initStorageName()
 	{
@@ -75,25 +88,30 @@ class UploadFile extends File
 		$array = explode('.', $this->getOrigName());
 		$extension = strtolower(end($array));
 
-		$this->setHash(hash_file('md5', $this->getTmpPath()));
-
-		$this->setSubDir(substr($this->getHash(), 0, 2));
-		$this->setName(substr($this->getHash(), 2) . '.' . $extension);
-		$this->setWwwPath(DIRECTORY_SEPARATOR
-			. $this->getSubDir()
-			. DIRECTORY_SEPARATOR
-			. $this->getName()
-		);
-
-		$this->setPath($this->getDir()
-			. DIRECTORY_SEPARATOR
-			. $this->getSubDir()
-			. DIRECTORY_SEPARATOR
-			. $this->getName()
-		);
+		$this->setHash(
+			hash_file($this->getHashAlgorithm(), $this->getTmpPath())
+		)
+			->setSubDir(substr($this->getHash(), 0, 2))
+			->setName(substr($this->getHash(), 2) . '.' . $extension)
+			->setWwwPath(
+				str_replace($_SERVER['DOCUMENT_ROOT'], '', $this->getDir())
+				. DIRECTORY_SEPARATOR
+				. $this->getSubDir()
+				. DIRECTORY_SEPARATOR
+				. $this->getName()
+			)
+			->setPath(
+				$this->getDir()
+				. DIRECTORY_SEPARATOR
+				. $this->getSubDir()
+				. DIRECTORY_SEPARATOR
+				. $this->getName()
+			);
 	}
 
 	/**
+	 * Get uploaded file name hash
+	 *
 	 * @return string
 	 */
 	final public function getHash()
@@ -102,14 +120,22 @@ class UploadFile extends File
 	}
 
 	/**
+	 * Set uploaded file name hash
+	 *
 	 * @param string $hash
+	 *
+	 * @return $this
 	 */
 	final public function setHash($hash)
 	{
 		$this->hash = $hash;
+
+		return $this;
 	}
 
 	/**
+	 * Get uploaded file sub-dir
+	 *
 	 * @return string
 	 */
 	final public function getSubDir()
@@ -118,14 +144,22 @@ class UploadFile extends File
 	}
 
 	/**
+	 * Set uploaded file sub-dir
+	 *
 	 * @param string $sub_dir
+	 *
+	 * @return $this
 	 */
 	final public function setSubDir($sub_dir)
 	{
 		$this->sub_dir = $sub_dir;
+
+		return $this;
 	}
 
 	/**
+	 * Save uploaded file
+	 *
 	 * @return bool
 	 */
 	final public function save()
@@ -133,7 +167,7 @@ class UploadFile extends File
 		$dir = $this->getDir();
 
 		is_dir($dir) or mkdir($dir, $this->getDirMask(), true);
-		is_writable($dir) or chmod($dir, 0755);
+		is_writable($dir) or chmod($dir, $this->getDirMask());
 
 		return file_exists($this->getPath())
 			? true
@@ -141,6 +175,8 @@ class UploadFile extends File
 	}
 
 	/**
+	 * Get uploaded file temporary path
+	 *
 	 * @return string
 	 */
 	final public function getTmpPath()
@@ -149,15 +185,23 @@ class UploadFile extends File
 	}
 
 	/**
-	 * @param string $tmp_path
+	 * Set uploaded file temporary path
+	 *
+	 * @param string $tmp_path Uploaded file temp path
+	 *
+	 * @return $this
 	 */
 	final public function setTmpPath($tmp_path)
 	{
 		$this->tmp_path = $tmp_path;
+
+		return $this;
 	}
 
 	/**
-	 * @return mixed
+	 * Get uploaded file www-path
+	 *
+	 * @return string
 	 */
 	final public function getWwwPath()
 	{
@@ -165,10 +209,43 @@ class UploadFile extends File
 	}
 
 	/**
-	 * @param mixed $www_path
+	 * Set uploaded file www-path
+	 *
+	 * @param string $www_path www-path to file
+	 *
+	 * @return $this
 	 */
 	final public function setWwwPath($www_path)
 	{
 		$this->www_path = $www_path;
+
+		return $this;
+	}
+
+	/**
+	 * Get uploaded file name hashing algorithm
+	 *
+	 * @see hash_algos()
+	 *
+	 * @return string
+	 */
+	public function getHashAlgorithm()
+	{
+		return $this->hash_algorithm;
+	}
+
+	/**
+	 * Set uploaded file name hashing algorithm
+	 *
+	 * @param string $hash_algorithm Hash algorithm
+	 * @see hash_algos()
+	 *
+	 * @return $this
+	 */
+	public function setHashAlgorithm($hash_algorithm)
+	{
+		$this->hash_algorithm = $hash_algorithm;
+
+		return $this;
 	}
 }

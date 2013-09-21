@@ -25,6 +25,8 @@ class File
 	protected $mime_type;
 
 	/**
+	 * Get absolute directory path
+	 *
 	 * @return string
 	 */
 	public function getDir()
@@ -33,11 +35,17 @@ class File
 	}
 
 	/**
-	 * @param string $dir
+	 * Set absolute directory path
+	 *
+	 * @param string $dir Absolute directory path
+	 *
+	 * @return $this
 	 */
 	public function setDir($dir)
 	{
 		$this->dir = $dir;
+
+		return $this;
 	}
 
 	/**
@@ -50,13 +58,19 @@ class File
 
 	/**
 	 * @param string $mime_type
+	 *
+	 * @return $this;
 	 */
 	public function setMimeType($mime_type)
 	{
 		$this->mime_type = $mime_type;
+
+		return $this;
 	}
 
 	/**
+	 * Get file name
+	 *
 	 * @return string
 	 */
 	public function getName()
@@ -65,14 +79,22 @@ class File
 	}
 
 	/**
-	 * @param string $name
+	 * Set file name
+	 *
+	 * @param string $name File name
+	 *
+	 * @return $this
 	 */
 	public function setName($name)
 	{
 		$this->name = $name;
+
+		return $this;
 	}
 
 	/**
+	 * Get absolute file path
+	 *
 	 * @return string
 	 */
 	public function getPath()
@@ -81,7 +103,11 @@ class File
 	}
 
 	/**
-	 * @param string $path
+	 * Set absolute file path
+	 *
+	 * @param string $path Absolute path to file
+	 *
+	 * @return $this
 	 */
 	public function setPath($path)
 	{
@@ -94,5 +120,7 @@ class File
 		$dir = rtrim(strchr($path, $name, true), DIRECTORY_SEPARATOR);
 
 		$this->setDir($dir);
+
+		return $this;
 	}
 }
