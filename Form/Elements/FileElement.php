@@ -38,17 +38,16 @@ class FileElement extends AbstractElement
 	 */
 	public function validate(AbstractForm $form)
 	{
-		$name = $this->getName();
+		$element_name = $this->getName();
 
-		if (!isset($_FILES[$name])) {
+		if (!isset($_FILES[$element_name])) {
 			return !$this->required();
 		}
 
-		if (false ===  $this->validator) {
+		if (!$this->validator) {
 			return true;
 		}
 
-		//TODO: implement mime and file extension check
-		return true;
+		return $this->validator->check($element_name);
 	}
 }

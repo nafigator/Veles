@@ -52,7 +52,7 @@ abstract class AbstractForm implements iForm
 	final protected function init()
 	{
 		$this->data = ('get' === $this->method) ? $_GET : $_POST;
-		$this->sid  = md5(mt_rand());
+		$this->sid  = md5(uniqid('', true));
 
 		$params = array(
 			'validator'  => new RegEx('/^[a-f\d]{32}$/'),

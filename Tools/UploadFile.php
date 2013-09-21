@@ -14,6 +14,7 @@ namespace Veles\Tools;
 
 /**
  * Class UploadFile
+ *
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
 class UploadFile extends File
@@ -23,6 +24,26 @@ class UploadFile extends File
 	private $sub_dir;
 	private $orig_name;
 	private $www_path;
+	private $dir_mask;
+
+	/**
+	 * Set upload directory mask
+	 *
+	 * @param int $dir_mask Value must be octal. Examples: 0755, 02755
+	 */
+	final public function setDirMask($dir_mask)
+	{
+		$this->dir_mask = octdec($dir_mask);
+	}
+
+	/**
+	 * Det upload directory mask
+	 * @return mixed
+	 */
+	final public function getDirMask()
+	{
+		return $this->dir_mask;
+	}
 
 	/**
 	 * @return string
@@ -51,10 +72,13 @@ class UploadFile extends File
 			return;
 		}
 
-		$this->setHash(hash_file('crc32b', $this->getTmpPath()));
+		$array = explode('.', $this->getOrigName());
+		$extension = strtolower(end($array));
+
+		$this->setHash(hash_file('md5', $this->getTmpPath()));
 
 		$this->setSubDir(substr($this->getHash(), 0, 2));
-		$this->setName(substr($this->getHash(), 2));
+		$this->setName(substr($this->getHash(), 2) . '.' . $extension);
 		$this->setWwwPath(DIRECTORY_SEPARATOR
 			. $this->getSubDir()
 			. DIRECTORY_SEPARATOR
@@ -108,22 +132,12 @@ class UploadFile extends File
 	{
 		$dir = $this->getDir();
 
-		// TODO Сделать сеттеры и геттеры для umask директории и файла
-		// TODO Реализовать через try..catch
-		if (!is_dir($dir)) {
-			mkdir($dir, 0755, true);
-		}
+		is_dir($dir) or mkdir($dir, $this->getDirMask(), true);
+		is_writable($dir) or chmod($dir, 0755);
 
-		if (!is_writable($dir)) {
-			// TODO Реализовать через try..catch
-			chmod($dir, 0755);
-		}
-
-		if (file_exists($this->getPath())) {
-			return true;
-		}
-
-		return move_uploaded_file($this->getTmpPath(), $this->getPath());
+		return file_exists($this->getPath())
+			? true
+			: move_uploaded_file($this->getTmpPath(), $this->getPath());
 	}
 
 	/**
@@ -145,7 +159,7 @@ class UploadFile extends File
 	/**
 	 * @return mixed
 	 */
-	public function getWwwPath()
+	final public function getWwwPath()
 	{
 		return $this->www_path;
 	}
@@ -153,7 +167,7 @@ class UploadFile extends File
 	/**
 	 * @param mixed $www_path
 	 */
-	public function setWwwPath($www_path)
+	final public function setWwwPath($www_path)
 	{
 		$this->www_path = $www_path;
 	}
