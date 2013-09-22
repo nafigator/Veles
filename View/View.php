@@ -64,7 +64,7 @@ class View
 	/**
 	 * Method for output variables setup
 	 *
-	 * @param array $vars Output variables array
+	 * @param mixed $vars Output variables
 	 */
 	final public static function set($vars)
 	{

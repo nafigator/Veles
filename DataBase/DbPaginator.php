@@ -13,21 +13,23 @@
 namespace Veles\DataBase;
 
 use Veles\View\View;
+use stdClass;
 
 /**
  * Class DbPaginator
+ *
+ * Additional data for rendering can be stored as public params.
+ * For this purpose class extends stdClass.
+ *
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
-class DbPaginator
+class DbPaginator extends stdClass
 {
-	// Data, wihich will be used for rendering
-	protected $data = array();
-
-	protected $offset = 1;
-	protected $limit  = 5;
-	protected $page_nums;
-	protected $curr_page;
-	protected $template;
+	public $offset = 1;
+	public $limit  = 5;
+	public $page_nums;
+	public $curr_page;
+	public $template;
 
 	/**
 	 * Constructor
@@ -48,24 +50,21 @@ class DbPaginator
 	 */
 	final public function __toString()
 	{
-		$vars = array(
-			'curr_page' => $this->curr_page,
-			'page_nums' => $this->page_nums,
-			'first_link' => false,
-			'last_link'  => false,
-			'i'          => 1
-		);
+		$this->first_link = false;
+		$this->last_link  = false;
+		$this->index      = 1;
+
 		if ($this->curr_page > 4) {
-			$vars['first_link'] = 1;
-			$vars['i'] = $this->curr_page - 3;
+			$this->first_link = 1;
+			$this->index = $this->curr_page - 3;
 		}
 
 		if ($this->page_nums > $this->curr_page + 3) {
-			$vars['page_nums'] = $this->curr_page + 3;
-			$vars['last_link'] = $this->page_nums;
+			$this->last_link = $this->page_nums;
+			$this->page_nums = $this->curr_page + 3;
 		}
-		$vars = array_merge($vars, $this->data);
-		View::set($vars);
+
+		View::set($this);
 
 		return View::get($this->template);
 	}
@@ -140,29 +139,5 @@ class DbPaginator
 	final public function getCurrPage()
 	{
 		return $this->curr_page;
-	}
-
-	/**
-	 * Магия для создания доп. свойств постраничного вывода
-	 * @param string $name
-	 * @param mixed  $value
-	 */
-	final public function __set($name, $value)
-	{
-		$this->data[$name] = $value;
-	}
-
-	/**
-	 * Магия для доступа к свойствам постраничного вывода
-	 * @param string $name
-	 * @return mixed
-	 */
-	final public function __get($name)
-	{
-		if (array_key_exists($name, $this->data)) {
-			return $this->data[$name];
-		}
-
-		return null;
 	}
 }

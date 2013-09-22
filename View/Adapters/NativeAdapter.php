@@ -52,16 +52,14 @@ class NativeAdapter extends ViewAdapterAbstract implements iViewAdapter
 	/**
 	 * Method for output variables setup
 	 *
-	 * @param array $vars Output variables array
+	 * @param mixed $vars Output variables or traversable class
 	 * @throws Exception
 	 */
 	final public function set($vars)
 	{
-		if (!is_array($vars)) {
-			throw new Exception('View can set variables only in arrays!');
+		foreach ($vars as $prop => $value) {
+			self::$variables[$prop] = $value;
 		}
-
-		self::$variables = array_replace(self::$variables, $vars);
 	}
 
 	/**

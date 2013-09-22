@@ -39,15 +39,11 @@ class SmartyAdapter extends ViewAdapterAbstract implements iViewAdapter
 	/**
 	 * Method for output variables setup
 	 *
-	 * @param array $vars Output variables array
+	 * @param mixed $vars Output variables array or traversable class
 	 * @throws Exception
 	 */
 	final public function set($vars)
 	{
-		if (!is_array($vars)) {
-			throw new Exception('View can set variables only in arrays!');
-		}
-
 		foreach ($vars as $name => $value) {
 			$this->getDriver()->assign($name, $value);
 		}
