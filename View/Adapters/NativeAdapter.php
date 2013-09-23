@@ -53,7 +53,6 @@ class NativeAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 * Method for output variables setup
 	 *
 	 * @param mixed $vars Output variables or traversable class
-	 * @throws Exception
 	 */
 	final public function set($vars)
 	{

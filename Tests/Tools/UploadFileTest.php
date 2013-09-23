@@ -203,10 +203,11 @@ class UploadFileTest extends PHPUnit_Framework_TestCase
 		$hash = $prop->getValue($this->object);
 
 		$msg = 'Not valid value of UploadFile::$hash property';
-		$this->assertSame(1, preg_match('/^[a-f0-9]{8}$/', $hash), $msg);
+		$this->assertSame(1, preg_match('/^[a-f0-9]{40}$/', $hash), $msg);
 
+		$expected = hash_file($this->object->getHashAlgorithm(), $path);
 		$msg = 'Wrong value of UploadFile::$hash property';
-		$this->assertSame('9830ddd8', $hash, $msg);
+		$this->assertSame($expected, $hash, $msg);
 
 		$prop = $object->getProperty('sub_dir');
 		$prop->setAccessible(true);
@@ -219,7 +220,7 @@ class UploadFileTest extends PHPUnit_Framework_TestCase
 		$prop = $object->getProperty('name');
 		$prop->setAccessible(true);
 		$result = $prop->getValue($this->object);
-		$name = substr($hash, 2);
+		$name = substr($hash, 2) . '.';
 
 		$msg = 'Not valid value of UploadFile::$name property';
 		$this->assertSame($name, $result, $msg);

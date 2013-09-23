@@ -40,7 +40,6 @@ class SmartyAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 * Method for output variables setup
 	 *
 	 * @param mixed $vars Output variables array or traversable class
-	 * @throws Exception
 	 */
 	final public function set($vars)
 	{

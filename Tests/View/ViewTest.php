@@ -77,28 +77,6 @@ EOF;
 
 	/**
 	 * Unit-test for View::set
-	 *
-	 * @covers View::set
-	 * @dataProvider setExceptionProvider
-	 * @expectedException Exception
-	 * @expectedExceptionMessage View can set variables only in arrays!
-	 * @see View::set
-	 */
-	public function testSetException($vars)
-	{
-		$this->object->set($vars);
-	}
-
-	/**
-	 * DataProvider for VewTest::testSetException
-	 */
-	public function setExceptionProvider()
-	{
-		return array(array(1, array(1)));
-	}
-
-	/**
-	 * Unit-test for View::set
 	 * @covers View::set
 	 * @dataProvider setProvider
 	 * @see View::set
