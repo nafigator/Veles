@@ -19,10 +19,20 @@ use Veles\Cache\Adapters\CacheAdapterAbstract;
 
 /**
  * Class MemcacheAdapter
+ *
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class MemcacheAdapter extends CacheAdapterAbstract implements iCacheAdapter
 {
+    /** @var  mixed */
+    protected $driver;
+
+    /** @var  null|array */
+    protected static $calls;
+
+    /** @var iCacheAdapter */
+    protected static $instance;
+
 	/**
 	 * Create Memcache class instance and connect to memcache pool
 	 */
@@ -37,6 +47,7 @@ class MemcacheAdapter extends CacheAdapterAbstract implements iCacheAdapter
 
 	/**
 	 * Get data
+     *
 	 * @param string $key Key
 	 * @return mixed
 	 */

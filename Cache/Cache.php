@@ -19,14 +19,15 @@ use Veles\Cache\Adapters\CacheAdapterAbstract;
 
 /**
  * Class Cache
+ *
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class Cache
 {
 	/** @var iCacheAdapter */
-	private static $adapter;
+	protected static $adapter;
 	/** @var  string|CacheAdapterAbstract */
-	private static $adapter_name;
+	protected static $adapter_name;
 
 	/**
 	 * Cache adapter initialisation
@@ -56,7 +57,7 @@ class Cache
 	 * @throws Exception
 	 * @return iCacheAdapter
 	 */
-	private static function getAdapter()
+	final public static function getAdapter()
 	{
 		if (self::$adapter instanceof iCacheAdapter) {
 			return self::$adapter;

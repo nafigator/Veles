@@ -39,17 +39,17 @@ abstract class CacheAdapterAbstract
 	 */
 	final public static function instance()
 	{
-		if (null === self::$instance) {
+		if (null === static::$instance) {
 			$class = get_called_class();
 
-			self::$instance = new $class;
+			static::$instance = new $class;
 		}
 
-		if (null !== self::$calls) {
-			self::invokeLazyCalls();
+		if (null !== static::$calls) {
+			static::invokeLazyCalls();
 		}
 
-		return self::$instance;
+		return static::$instance;
 	}
 
 	/**
@@ -57,13 +57,13 @@ abstract class CacheAdapterAbstract
 	 */
 	final protected static function invokeLazyCalls()
 	{
-		foreach (self::$calls as $call) {
+		foreach (static::$calls as $call) {
 			call_user_func_array(
-				array(self::$instance->getDriver(), $call['method']),
+				array(static::$instance->getDriver(), $call['method']),
 				$call['arguments']
 			);
 		}
-		self::$calls = null;
+		static::$calls = null;
 	}
 
 	/**
@@ -112,7 +112,7 @@ abstract class CacheAdapterAbstract
 	 */
 	private static function setCall($method, $arguments)
 	{
-		self::$calls[] = array(
+		static::$calls[] = array(
 			'method'    => $method,
 			'arguments' => $arguments
 		);

@@ -48,16 +48,6 @@ NativeAdapter::instance()->setTemplateDir(TEST_DIR . '/Project/View/');
 View::setAdapter('Native');
 
 // Cache initialization
-switch (true) {
-	case function_exists('apc_add'):	// APC
-		Cache::setAdapter('Apc');
-		break;
-	case class_exists('Memcached'):		// Memcached
-		MemcachedAdapter::instance()->addServer('localhost', 11211);
-		Cache::setAdapter('Memcached');
-		break;
-	case class_exists('Memcache'):		// Memcache
-		MemcacheAdapter::instance()->addServer('localhost', 11211);
-		Cache::setAdapter('Memcache');
-		break;
-}
+MemcachedAdapter::instance()->addServer('localhost', 11211);
+MemcacheAdapter::instance()->addServer('localhost', 11211);
+Cache::setAdapter('Memcached');
