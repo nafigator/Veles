@@ -140,11 +140,9 @@ class QueryBuilder
 			$ids = array($ids);
 		}
 
-		$closure = function (&$value) {
+		foreach ($ids as &$value) {
 			$value = (int) $value;
 		};
-
-		array_walk($ids, $closure);
 
 		$ids = implode(',', $ids);
 
@@ -166,20 +164,9 @@ class QueryBuilder
 	 */
 	final public static function find($model, $filter)
 	{
-		$fields = '';
+		$where = $group = $having = $order = $limit = '';
 		$select = 'SELECT';
-		$where  = '';
-		$group  = '';
-		$having = '';
-		$order  = '';
-		$limit  = '';
-
-		$properties = array_keys($model::getMap());
-		foreach ($properties as $property) {
-			$fields .= "`$property`, ";
-		}
-
-		$fields = rtrim($fields, ', ');
+		$fields = '`' . implode('`, `', array_keys($model::getMap())) . '`';
 
 		if ($filter instanceof DbFilter) {
 			$where  = $filter->getWhere();
