@@ -14,7 +14,7 @@
 namespace Veles\Cache\Adapters;
 
 use Exception;
-use Veles\Cache\Adapters\CacheAdapterAbstract;
+use APCIterator;
 
 /**
  * Class ApcAdapter
@@ -76,6 +76,23 @@ class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	final public function del($key)
 	{
 		return apc_delete($key);
+	}
+
+	/**
+	 * Method for deletion keys by template
+	 *
+	 * ATTENTION: if key contains spaces, for example 'THIS IS KEY::ID:50d98ld',
+	 * then in cache it will be saved as 'THIS_IS_KEY::ID:50d98ld'. So, template
+	 * for that key deletion must be look like - 'THIS_IS_KEY'.
+	 * Deletion can be made by substring, containing in keys. For example
+	 * '_KEY::ID'.
+	 *
+	 * @param string $tpl Substring containing in needed keys
+	 * @return bool
+	 */
+	final public function delByTemplate($tpl)
+	{
+		return apc_delete(new APCIterator('user', "/$tpl/"));
 	}
 
 	/**

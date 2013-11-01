@@ -15,7 +15,6 @@ namespace Veles\Cache\Adapters;
 
 use Exception;
 use Memcache;
-use Veles\Cache\Adapters\CacheAdapterAbstract;
 
 /**
  * Class MemcacheAdapter
@@ -24,30 +23,22 @@ use Veles\Cache\Adapters\CacheAdapterAbstract;
  */
 class MemcacheAdapter extends CacheAdapterAbstract implements iCacheAdapter
 {
-    /** @var  mixed */
-    protected $driver;
-
-    /** @var  null|array */
-    protected static $calls;
-
-    /** @var iCacheAdapter */
-    protected static $instance;
+	/** @var  null|array */
+	protected static $calls;
+	/** @var iCacheAdapter */
+	protected static $instance;
 
 	/**
 	 * Create Memcache class instance and connect to memcache pool
 	 */
 	final protected function __construct()
 	{
-		if (!class_exists('Memcache')) {
-			throw new Exception('Memcache not installed!');
-		}
-
 		$this->setDriver(new Memcache);
 	}
 
 	/**
 	 * Get data
-     *
+	 *
 	 * @param string $key Key
 	 * @return mixed
 	 */
@@ -89,6 +80,29 @@ class MemcacheAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	final public function del($key)
 	{
 		return $this->getDriver()->delete($key);
+	}
+
+	/**
+	 * Method for deletion keys by template
+	 *
+	 * ATTENTION: if key contains spaces, for example 'THIS IS KEY::ID:50d98ld',
+	 * then in cache it will be saved as 'THIS_IS_KEY::ID:50d98ld'. So, template
+	 * for that key deletion must be look like - 'THIS_IS_KEY'.
+	 * Deletion can be made by substring, containing in keys. For example
+	 * '_KEY::ID'.
+	 *
+	 * @param string $tpl Substring containing in needed keys
+	 * @return bool
+	 */
+	final public function delByTemplate($tpl)
+	{
+		try {
+			$cache = new MemcacheRaw();
+			$cache->delByTemplate($tpl)->disconnect();
+			return true;
+		} catch (Exception $e) {
+			return false;
+		}
 	}
 
 	/**

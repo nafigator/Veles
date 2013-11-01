@@ -2,7 +2,6 @@
 namespace Veles\Tests\Cache;
 
 use PHPUnit_Framework_TestCase;
-use Veles\Tests\Cache\Cache;
 use ReflectionObject;
 use Veles\Cache\Adapters\iCacheAdapter;
 use Memcached;
@@ -13,15 +12,15 @@ use Exception;
  */
 class CacheTest extends PHPUnit_Framework_TestCase
 {
-    public static function setUpBeforeClass()
-    {
-        Cache::setAdapter('Memcache');
-    }
+	public static function setUpBeforeClass()
+	{
+		Cache::setAdapter('Memcache');
+	}
 
-    public static function tearDownAfterClass()
-    {
-        Cache::setAdapter();
-    }
+	public static function tearDownAfterClass()
+	{
+		Cache::setAdapter();
+	}
 
 	/**
 	 * @covers OpenRu\Core\Cache\Cache::setAdapter
@@ -95,31 +94,28 @@ class CacheTest extends PHPUnit_Framework_TestCase
 	 * @covers OpenRu\Core\Cache\Cache::get
 	 * @depends testSetAdapter
 	 * @depends testGetAdapter
-	 * @dataProvider getProvider
 	 */
-	public function testGet($key, $expected)
-	{
-		Cache::setAdapter('Memcache');
-		$result = Cache::get($key);
-
-		$msg = 'Wrong Cache::get result!';
-		$this->assertSame($expected, $result, $msg);
-	}
-
-	public function getProvider()
+	public function testGet()
 	{
 		$cache = new Memcached;
 		$cache->addServer('localhost', 11211);
 		$params = array();
 
 		for ($i = 0; $i < 3; ++$i) {
-			$key = uniqid('RBK::UNIT-TEST::');
+			$key = uniqid('VELES::UNIT-TEST::');
 			$value = uniqid();
 			$cache->set($key, $value, 10);
 			$params[] = array($key, $value);
 		}
 
-		return $params;
+		Cache::setAdapter('Memcache');
+		foreach ($params as $param) {
+			$result   = Cache::get($param[0]);
+			$expected = $param[1];
+
+			$msg = 'Wrong Cache::get result!';
+			$this->assertSame($expected, $result, $msg);
+		}
 	}
 
 	/**
@@ -129,7 +125,7 @@ class CacheTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testSet()
 	{
-		$key = uniqid('RBK::UNIT-TEST::');
+		$key = uniqid('VELES::UNIT-TEST::');
 		$expected = uniqid();
 		Cache::set($key, $expected, 10);
 
@@ -147,7 +143,7 @@ class CacheTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testHas()
 	{
-		$key = uniqid('RBK::UNIT-TEST::');
+		$key = uniqid('VELES::UNIT-TEST::');
 		$value = uniqid();
 		Cache::set($key, $value, 10);
 
@@ -163,7 +159,7 @@ class CacheTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testDel()
 	{
-		$key = uniqid('RBK::UNIT-TEST::');
+		$key = uniqid('VELES::UNIT-TEST::');
 		$value = uniqid();
 		Cache::set($key, $value, 10);
 
@@ -180,102 +176,117 @@ class CacheTest extends PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers OpenRu\Core\Cache\Cache::increment
-	 * @dataProvider incrementProvider
 	 * @depends testSet
 	 */
-	public function testIncrement($key, $offset, $expected)
-	{
-		$result = (null === $offset)
-			? Cache::increment($key)
-			: Cache::increment($key, $offset);
-
-		$msg = 'Cache::increment returned wrong result type!';
-		$this->assertInternalType('integer', $result, $msg);
-		$msg = 'Cache::increment returned wrong result value!';
-		$this->assertSame($expected, $result, $msg);
-	}
-
-	public function incrementProvider()
+	public function testIncrement()
 	{
 		// for default offset testing
-		$key    = uniqid('RBK::UNIT-TEST::');
+		$key    = uniqid('VELES::UNIT-TEST::');
 		$value  = mt_rand(0, 1000);
 		Cache::set($key, $value, 10);
 		$params = array(array($key, null, ++$value));
 
 		for ($i = 0; $i < 5; ++$i) {
-			$key    = uniqid('RBK::UNIT-TEST::');
+			$key    = uniqid('VELES::UNIT-TEST::');
 			$value  = mt_rand(0, 1000);
 			$offset = mt_rand(0, 1000);
 			Cache::set($key, $value, 10);
 			$params[] = array($key, $offset, $value + $offset);
 		}
 
-		return $params;
+		foreach ($params as $param) {
+			list($key, $offset, $expected) = $param;
+			$result = (null === $offset)
+				? Cache::increment($key)
+				: Cache::increment($key, $offset);
+
+			$msg = 'Cache::increment returned wrong result type!';
+			$this->assertInternalType('integer', $result, $msg);
+			$msg = 'Cache::increment returned wrong result value!';
+			$this->assertSame($expected, $result, $msg);
+		}
 	}
 
 	/**
 	 * @covers OpenRu\Core\Cache\Cache::decrement
-	 * @dataProvider decrementProvider
 	 * @depends testSet
 	 */
-	public function testDecrement($key, $offset, $expected)
-	{
-		$result = (null === $offset)
-			? Cache::decrement($key)
-			: Cache::decrement($key, $offset);
-
-		$msg = 'Cache::decrement returned wrong result type!';
-		$this->assertInternalType('integer', $result, $msg);
-		$msg = 'Cache::decrement returned wrong result value!';
-		$this->assertSame($expected, $result, $msg);
-	}
-
-	public function decrementProvider()
+	public function testDecrement()
 	{
 		// for default offset testing
-		$key    = uniqid('RBK::UNIT-TEST::');
+		$key    = uniqid('VELES::UNIT-TEST::');
 		$value  = mt_rand(1, 1000);
 		Cache::set($key, $value, 10);
 		$params = array(array($key, null, --$value));
 
 		for ($i = 0; $i < 5; ++$i) {
-			$key    = uniqid('RBK::UNIT-TEST::');
+			$key    = uniqid('VELES::UNIT-TEST::');
 			$value  = mt_rand(1000, 2000);
 			$offset = mt_rand(0, 1000);
 			Cache::set($key, $value, 10);
 			$params[] = array($key, $offset, $value - $offset);
 		}
 
-		return $params;
+		foreach ($params as $param) {
+			list($key, $offset, $expected) = $param;
+			$result = (null === $offset)
+				? Cache::decrement($key)
+				: Cache::decrement($key, $offset);
+
+			$msg = 'Cache::decrement returned wrong result type!';
+			$this->assertInternalType('integer', $result, $msg);
+			$msg = 'Cache::decrement returned wrong result value!';
+			$this->assertSame($expected, $result, $msg);
+		}
 	}
 
-//	/**
-//	 * @covers OpenRu\Core\Cache\Cache::clear
-//	 * @depends testSet
-//	 */
-//	public function testClear()
-//	{
-//		$params = array();
-//
-//		for ($i = 0; $i < 10; ++$i) {
-//			$key = uniqid('RBK::UNIT-TEST::');
-//			$value = uniqid();
-//			Cache::set($key, $value, 10);
-//			$params[] = $key;
-//		}
-//
-//		$result = Cache::clear();
-//
-//		$msg = 'Wrong Cache::clear() result!';
-//		$this->assertSame(true, $result, $msg);
-//
-//		$result = false;
-//		foreach ($params as $key) {
-//			if (Cache::has($key)) $result = true;
-//		}
-//
-//		$msg = 'Cache was not cleared!';
-//		$this->assertSame(false, $result, $msg);
-//	}
+	/**
+	 * @covers OpenRu\Core\Cache\Cache::clear
+	 * @depends testSet
+	 */
+	public function testClear()
+	{
+		$params = array();
+
+		for ($i = 0; $i < 10; ++$i) {
+			$key = uniqid('VELES::UNIT-TEST::');
+			$value = uniqid();
+			Cache::set($key, $value, 10);
+			$params[] = $key;
+		}
+
+		$result = Cache::clear();
+
+		$msg = 'Wrong Cache::clear() result!';
+		$this->assertSame(true, $result, $msg);
+
+		$result = false;
+		foreach ($params as $key) {
+			if (Cache::has($key)) $result = true;
+		}
+
+		$msg = 'Cache was not cleared!';
+		$this->assertSame(false, $result, $msg);
+	}
+
+	/**
+	 * @covers OpenRu\Core\Cache\Cache::delByTemplate
+	 * @depends testSet
+	 */
+	public function testDelByTemplate()
+	{
+		Cache::setAdapter('Memcache');
+		$key = uniqid('VELES::UNIT-TEST::DEL-BY-TPL::');
+		$value = uniqid();
+		Cache::set($key, $value, 10);
+
+		$result = Cache::delByTemplate('VELES::UNIT-TEST::DEL-BY-TPL::');
+
+		$msg = 'Cache::delByTemplate return wrong result!';
+		$this->assertSame(true, $result, $msg);
+
+		$result = Cache::has($key);
+		$msg = 'Key was not deleted by template!';
+		$this->assertSame(false, $result, $msg);
+	}
 }

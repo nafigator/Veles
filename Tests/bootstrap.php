@@ -21,6 +21,7 @@ namespace Veles\Tests;
 
 use Veles\AutoLoader;
 use Veles\Cache\Cache;
+use Veles\Cache\Adapters\MemcacheRaw;
 use Veles\Cache\Adapters\MemcacheAdapter;
 use Veles\Cache\Adapters\MemcachedAdapter;
 use Veles\View\Adapters\NativeAdapter;
@@ -48,6 +49,7 @@ NativeAdapter::instance()->setTemplateDir(TEST_DIR . '/Project/View/');
 View::setAdapter('Native');
 
 // Cache initialization
+MemcacheRaw::setConnectionParams('localhost', 11211);
 MemcachedAdapter::instance()->addServer('localhost', 11211);
 MemcacheAdapter::instance()->addServer('localhost', 11211);
 Cache::setAdapter('Memcached');

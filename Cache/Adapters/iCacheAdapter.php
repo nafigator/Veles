@@ -53,6 +53,20 @@ interface iCacheAdapter
 	public function del($key);
 
 	/**
+	 * Method for deletion keys by template
+	 *
+	 * ATTENTION: if key contains spaces, for example 'THIS IS KEY::ID:50d98ld',
+	 * then in cache it will be saved as 'THIS_IS_KEY::ID:50d98ld'. So, template
+	 * for that key deletion must be look like - 'THIS_IS_KEY'.
+	 * Deletion can be made by substring, containing in keys. For example
+	 * '_KEY::ID'.
+	 *
+	 * @param string $tpl Substring containing in needed keys
+	 * @return bool
+	 */
+	public function delByTemplate($tpl);
+
+	/**
 	 * Cache cleanup
 	 *
 	 * @return bool
@@ -62,8 +76,8 @@ interface iCacheAdapter
 	/**
 	 * Increment key value
 	 *
-	 * @param string $key
-	 * @param int $offset
+	 * @param string $key Key
+	 * @param int $offset Offset
 	 *
 	 * @return bool|int
 	 */
@@ -72,8 +86,8 @@ interface iCacheAdapter
 	/**
 	 * Decrement key value
 	 *
-	 * @param string $key
-	 * @param int $offset
+	 * @param string $key Keys
+	 * @param int $offset Offset
 	 * @return bool|int
 	 */
 	public function decrement($key, $offset);

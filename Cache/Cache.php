@@ -109,6 +109,23 @@ class Cache
 	}
 
 	/**
+	 * Method for deletion keys by template
+	 *
+	 * ATTENTION: if key contains spaces, for example 'THIS IS KEY::ID:50d98ld',
+	 * then in cache it will be saved as 'THIS_IS_KEY::ID:50d98ld'. So, template
+	 * for that key deletion must be look like - 'THIS_IS_KEY'.
+	 * Deletion can be made by substring, containing in keys. For example
+	 * '_KEY::ID'.
+	 *
+	 * @param string $tpl Substring containing in needed keys
+	 * @return bool
+	 */
+	final public static function delByTemplate($tpl)
+	{
+		return self::getAdapter()->delByTemplate($tpl);
+	}
+
+	/**
 	 * Cache cleanup
 	 *
 	 * @return bool

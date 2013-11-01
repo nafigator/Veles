@@ -1,8 +1,8 @@
 <?php
 namespace Veles\Tests\Cache\Adapters;
 
-use Veles\Tests\Cache\Adapters\MemcachedAdapterChild;
 use Veles\Cache\Adapters\MemcachedAdapter;
+use Veles\Cache\Adapters\MemcacheRaw;
 use Veles\Cache\Cache;
 
 /**
@@ -23,6 +23,7 @@ class MemcachedAdapterTest extends \PHPUnit_Framework_TestCase
 	public static function tearDownAfterClass()
 	{
 		Cache::setAdapter();
+		MemcacheRaw::setConnectionParams('localhost', 11211);
 	}
 
 	/**
@@ -34,7 +35,7 @@ class MemcachedAdapterTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\Cache\MemcachedAdapter::__construct
+	 * @covers Veles\Cache\Adapters\MemcachedAdapter::__construct
 	 */
 	public function testInstance()
 	{
@@ -46,39 +47,36 @@ class MemcachedAdapterTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\Cache\MemcachedAdapter::get
-	 * @dataProvider getProvider
+	 * @covers Veles\Cache\Adapters\MemcachedAdapter::get
 	 */
-	public function testGet($key, $expected)
-	{
-		$result = $this->object->get($key);
-		$msg = 'Wrong MemcachedAdapter::get result!';
-		$this->assertSame($expected, $result, $msg);
-	}
-
-	public function getProvider()
+	public function testGet()
 	{
 		$params = array();
 
 		for ($i = 0; $i < 3; ++$i) {
-			$key = uniqid('RBK::UNIT-TEST::');
+			$key = uniqid('VELES::UNIT-TEST::');
 			$value = uniqid();
-			Cache::getAdapter()->set($key, $value, 10);
+			Cache::set($key, $value, 10);
 			$params[] = array($key, $value);
 		}
 
-		return $params;
+		$msg = 'Wrong MemcachedAdapter::get result!';
+		foreach ($params as $param) {
+			list($key, $expected) = $param;
+			$result = $this->object->get($key);
+			$this->assertSame($expected, $result, $msg);
+		}
 	}
 
 	/**
-	 * @covers Veles\Tests\Cache\MemcachedAdapter::set
+	 * @covers Veles\Cache\Adapters\MemcachedAdapter::set
 	 */
 	public function testSet()
 	{
 		$params = array();
 
 		for ($i = 0; $i < 3; ++$i) {
-			$key = uniqid('RBK::UNIT-TEST::');
+			$key = uniqid('VELES::UNIT-TEST::');
 			$value = uniqid();
 			$this->object->set($key, $value, 10);
 			$params[] = array($key, $value);
@@ -92,141 +90,173 @@ class MemcachedAdapterTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\Cache\MemcachedAdapter::has
-	 * @dataProvider hasProvider
+	 * @covers Veles\Cache\Adapters\MemcachedAdapter::has
 	 */
-	public function testHas($key, $expected)
-	{
-		$result = $this->object->has($key);
-		$msg = 'Wrong MemcachedAdapter::has result!';
-		$this->assertSame($expected, $result, $msg);
-	}
-
-	public function hasProvider()
+	public function testHas()
 	{
 		$params = array();
 
 		for ($i = 0; $i < 3; ++$i) {
-			$key = uniqid('RBK::UNIT-TEST::');
+			$key = uniqid('VELES::UNIT-TEST::');
 			$value = uniqid();
-			Cache::getAdapter()->set($key, $value, 10);
+			Cache::set($key, $value, 10);
 			$params[] = array($key, true);
 		}
 
 		for ($i = 0; $i < 3; ++$i) {
-			$key = uniqid('RBK::UNIT-TEST::');
+			$key = uniqid('VELES::UNIT-TEST::');
 			$params[] = array($key, false);
 		}
 
-		return $params;
+		$msg = 'Wrong MemcachedAdapter::has result!';
+		foreach ($params as $param) {
+			list($key, $expected) = $param;
+			$result = $this->object->has($key);
+			$this->assertSame($expected, $result, $msg);
+		}
 	}
 
 	/**
-	 * @covers Veles\Tests\Cache\MemcachedAdapter::del
-	 * @dataProvider hasProvider
+	 * @covers Veles\Cache\Adapters\MemcachedAdapter::del
 	 */
-	public function testDel($key, $expected)
+	public function testDel()
 	{
-		$result = $this->object->del($key);
+		$params = array();
+
+		for ($i = 0; $i < 3; ++$i) {
+			$key = uniqid('VELES::UNIT-TEST::');
+			$value = uniqid();
+			Cache::set($key, $value, 10);
+			$params[] = array($key, true);
+		}
+
+		for ($i = 0; $i < 3; ++$i) {
+			$key = uniqid('VELES::UNIT-TEST::');
+			$params[] = array($key, false);
+		}
+
 		$msg = 'Wrong MemcachedAdapter::del result!';
-		$this->assertSame($expected, $result, $msg);
+		foreach ($params as $param) {
+			list($key, $expected) = $param;
+			$result = $this->object->del($key);
+			$this->assertSame($expected, $result, $msg);
+		}
 	}
 
 	/**
-	 * @covers Veles\Tests\Cache\MemcachedAdapter::increment
-	 * @dataProvider incrementProvider
+	 * @covers Veles\Cache\Adapters\MemcachedAdapter::increment
 	 */
-	public function testIncrement($key, $offset, $expected)
+	public function testIncrement()
 	{
-		$result = (null === $offset)
-			? $this->object->increment($key, 1)
-			: $this->object->increment($key, $offset);
-
-		$msg = 'MemcachedAdapter::increment returned wrong result type!';
-		$this->assertInternalType('integer', $result, $msg);
-		$msg = 'MemcachedAdapter::increment returned wrong result value!';
-		$this->assertSame($expected, $result, $msg);
-	}
-
-	public function incrementProvider()
-	{
-		$key    = uniqid('RBK::UNIT-TEST::');
+		$key    = uniqid('VELES::UNIT-TEST::');
 		$value  = mt_rand(0, 1000);
-		Cache::getAdapter()->set($key, $value, 10);
+		Cache::set($key, $value, 10);
 		$params = array(array($key, null, ++$value));
 
 		for ($i = 0; $i < 5; ++$i) {
-			$key    = uniqid('RBK::UNIT-TEST::');
+			$key    = uniqid('VELES::UNIT-TEST::');
 			$value  = mt_rand(0, 1000);
 			$offset = mt_rand(0, 1000);
-			Cache::getAdapter()->set($key, $value, 10);
+			Cache::set($key, $value, 10);
 			$params[] = array($key, $offset, $value + $offset);
 		}
 
-		return $params;
+		foreach ($params as $param) {
+			list($key, $offset, $expected) = $param;
+
+			$result = (null === $offset)
+				? $this->object->increment($key, 1)
+				: $this->object->increment($key, $offset);
+
+			$msg = 'MemcachedAdapter::increment returned wrong result type!';
+			$this->assertInternalType('integer', $result, $msg);
+			$msg = 'MemcachedAdapter::increment returned wrong result value!';
+			$this->assertSame($expected, $result, $msg);
+		}
 	}
 
 	/**
-	 * @covers Veles\Tests\Cache\MemcachedAdapter::decrement
-	 * @dataProvider decrementProvider
+	 * @covers Veles\Cache\Adapters\MemcachedAdapter::decrement
 	 */
-	public function testDecrement($key, $offset, $expected)
+	public function testDecrement()
 	{
-		$result = (null === $offset)
-			? $this->object->decrement($key, 1)
-			: $this->object->decrement($key, $offset);
-
-		$msg = 'MemcachedAdapter::decrement returned wrong result type!';
-		$this->assertInternalType('integer', $result, $msg);
-		$msg = 'MemcachedAdapter::decrement returned wrong result value!';
-		$this->assertSame($expected, $result, $msg);
-	}
-
-	public function decrementProvider()
-	{
-		$key    = uniqid('RBK::UNIT-TEST::');
+		$key    = uniqid('VELES::UNIT-TEST::');
 		$value  = mt_rand(1, 1000);
-		Cache::getAdapter()->set($key, $value, 10);
+		Cache::set($key, $value, 10);
 		$params = array(array($key, null, --$value));
 
 		for ($i = 0; $i < 5; ++$i) {
-			$key    = uniqid('RBK::UNIT-TEST::');
+			$key    = uniqid('VELES::UNIT-TEST::');
 			$value  = mt_rand(1000, 2000);
 			$offset = mt_rand(0, 1000);
-			Cache::getAdapter()->set($key, $value, 10);
+			Cache::set($key, $value, 10);
 			$params[] = array($key, $offset, $value - $offset);
 		}
 
-		return $params;
+		foreach ($params as $param) {
+			list($key, $offset, $expected) = $param;
+			$result = (null === $offset)
+				? $this->object->decrement($key, 1)
+				: $this->object->decrement($key, $offset);
+
+			$msg = 'MemcachedAdapter::decrement returned wrong result type!';
+			$this->assertInternalType('integer', $result, $msg);
+			$msg = 'MemcachedAdapter::decrement returned wrong result value!';
+			$this->assertSame($expected, $result, $msg);
+		}
 	}
 
 	/**
-	 * @fixme If this test enabled all other cache test throws exception
-	 *
-	 * @covers Veles\Tests\Cache\MemcachedAdapter::clear
+	 * @covers Veles\Cache\Adapters\MemcachedAdapter::clear
 	 */
-//	public function testClear()
-//	{
-//		$params = array();
-//
-//		for ($i = 0; $i < 10; ++$i) {
-//			$key = uniqid('RBK::UNIT-TEST::');
-//			$value = uniqid();
-//			$this->object->set($key, $value, 10);
-//			$params[] = $key;
-//		}
-//
-//		$result = $this->object->clear();
-//
-//		$msg = 'Wrong MemcachedAdapter::clear() result!';
-//		$this->assertSame(true, $result, $msg);
-//
-//		$result = false;
-//		foreach ($params as $key) {
-//			if ($this->object->get($key)) $result = true;
-//		}
-//
-//		$msg = 'Cache was not cleared!';
-//		$this->assertSame(false, $result, $msg);
-//	}
+	public function testClear()
+	{
+		$params = array();
+
+		for ($i = 0; $i < 10; ++$i) {
+			$key = uniqid('VELES::UNIT-TEST::');
+			$value = uniqid();
+			$this->object->set($key, $value, 10);
+			$params[] = $key;
+		}
+
+		$result = $this->object->clear();
+
+		$msg = 'Wrong MemcachedAdapter::clear() result!';
+		$this->assertSame(true, $result, $msg);
+
+		$result = false;
+		foreach ($params as $key) {
+			if ($this->object->get($key)) $result = true;
+		}
+
+		$msg = 'Cache was not cleared!';
+		$this->assertSame(false, $result, $msg);
+	}
+
+	/**
+	 * @covers Veles\Cache\Adapters\MemcachedAdapter::delByTemplate
+	 */
+	public function testDelByTemplate()
+	{
+		$key    = uniqid('VELES::UNIT-TEST::DEL-BY-TPL::');
+		$value  = mt_rand(1, 1000);
+		$this->object->set($key, $value, 10);
+
+		$result = $this->object->delByTemplate('VELES::UNIT-TEST::DEL-BY-TPL::');
+
+		$msg = 'Cache::delByTemplate return wrong result!';
+		$this->assertSame(true, $result, $msg);
+
+		$result = $this->object->has($key);
+		$msg = 'Key was not deleted by template!';
+		$this->assertSame(false, $result, $msg);
+
+		MemcacheRaw::setConnectionParams('localhost', 11213);
+
+		$result = $this->object->delByTemplate('EnyKey');
+
+		$msg = 'Wrong MemcacheAdapter::delByTemplate behavior!';
+		$this->assertSame(false, $result, $msg);
+	}
 }
