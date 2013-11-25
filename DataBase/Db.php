@@ -1,6 +1,6 @@
 <?php
 /**
- * Calss for database interaction
+ * Class for database interaction
  * @file    Db.php
  *
  * PHP version 5.3.9+
@@ -12,11 +12,11 @@
 
 namespace Veles\DataBase;
 
-use Veles\DataBase\DbFabric;
 use Veles\DataBase\Drivers\iDbDriver;
 
 /**
  * Class Db
+ *
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class Db implements iDbDriver
@@ -151,7 +151,7 @@ class Db implements iDbDriver
 	/**
 	 * For SELECT, returning one row values
 	 *
-	 * @param string $sql SQL-qury
+	 * @param string $sql SQL-query
 	 * @param string $server Server name
 	 *
 	 * @return array
