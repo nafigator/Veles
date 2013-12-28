@@ -24,7 +24,7 @@ abstract class CacheAdapterAbstract
 {
 	/** @var  null|array */
 	protected static $calls;
-	/** @var iCacheAdapter|CacheAdapterAbstract */
+	/** @var iCacheAdapter|$this */
 	protected static $instance;
 	/** @var  mixed */
 	protected $driver;
@@ -35,7 +35,7 @@ abstract class CacheAdapterAbstract
 	abstract protected function __construct();
 
 	/**
-	 * @return iCacheAdapter|CacheAdapterAbstract
+	 * @return iCacheAdapter|$this
 	 */
 	final public static function instance()
 	{

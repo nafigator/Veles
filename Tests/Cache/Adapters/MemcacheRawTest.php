@@ -41,7 +41,7 @@ class MemcacheRawTest extends \PHPUnit_Framework_TestCase
 		$this->assertInternalType('resource', $connection, $msg);
 
 		MemcacheRaw::setConnectionParams('localhost', 11213);
-		$object = new MemcacheRawChild;
+		new MemcacheRawChild;
 	}
 
     /**

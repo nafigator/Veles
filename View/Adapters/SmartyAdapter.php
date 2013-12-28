@@ -15,9 +15,8 @@
 namespace Veles\View\Adapters;
 
 use Exception;
-use Smarty;
-use Veles\Config;
-use Veles\View\Adapters\ViewAdapterAbstract;
+
+use /** @noinspection PhpUndefinedClassInspection */ Smarty;
 
 /**
  * Class SmartyAdapter
@@ -31,8 +30,9 @@ class SmartyAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 */
 	final public function __construct()
 	{
+		/** @noinspection PhpIncludeInspection */
 		include 'Smarty' . DIRECTORY_SEPARATOR . 'Smarty.class.php';
-
+		/** @noinspection PhpUndefinedClassInspection */
 		$this->setDriver(new Smarty);
 	}
 

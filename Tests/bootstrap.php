@@ -50,6 +50,8 @@ View::setAdapter('Native');
 
 // Cache initialization
 MemcacheRaw::setConnectionParams('localhost', 11211);
+/** @noinspection PhpUndefinedMethodInspection */
 MemcachedAdapter::instance()->addServer('localhost', 11211);
+/** @noinspection PhpUndefinedMethodInspection */
 MemcacheAdapter::instance()->addServer('localhost', 11211);
 Cache::setAdapter('Memcached');

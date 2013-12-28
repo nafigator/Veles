@@ -15,7 +15,6 @@ namespace Veles\Form;
 use Veles\Cache\Cache;
 use Veles\Form\Elements\ButtonElement;
 use Veles\Form\Elements\HiddenElement;
-use Veles\Form\Elements\FileElement;
 use Veles\Form\Elements\iElement;
 use Veles\Form\Elements\SubmitElement;
 use Veles\Validators\RegEx;
@@ -155,7 +154,7 @@ abstract class AbstractForm implements iForm
 	}
 
 	/**
-	 * Return form seciruty id
+	 * Return form security id
 	 *
 	 * Can be used for refresh sid after ajax-request
 	 *

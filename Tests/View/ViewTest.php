@@ -12,7 +12,6 @@
 
 namespace Veles\Tests\View;
 
-use Exception;
 use PHPUnit_Framework_TestCase;
 use Veles\View\View;
 

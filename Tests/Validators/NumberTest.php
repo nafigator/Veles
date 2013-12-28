@@ -21,7 +21,7 @@ use Veles\Validators\Number;
 class NumberTest extends PHPUnit_Framework_TestCase
 {
 	/**
-	 * @var Number
+	 * @var \Veles\Validators\Number
 	 */
 	protected $object;
 

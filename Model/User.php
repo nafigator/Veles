@@ -13,7 +13,6 @@
 namespace Veles\Model;
 
 use Veles\Auth\UsrGroup;
-use Veles\DataBase\Db;
 
 /**
  * Модель пользователя

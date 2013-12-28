@@ -38,6 +38,7 @@ class ErrBase implements SplSubject
 			'%Y-%m-%d %H:%M:%S', $_SERVER['REQUEST_TIME']
 		);
 		$this->vars['message'] = $message;
+		/** @noinspection PhpUndefinedConstantInspection */
 		$this->vars['file']    = str_replace(BASE_PATH, '', $file);
 		$this->vars['line']    = $line;
 		$this->vars['stack']   = $this->getStack(
@@ -59,6 +60,7 @@ class ErrBase implements SplSubject
 		$this->vars['time']    = strftime(
 			'%Y-%m-%d %H:%M:%S', $_SERVER['REQUEST_TIME']
 		);
+		/** @noinspection PhpUndefinedConstantInspection */
 		$this->vars['file']    = str_replace(
 			BASE_PATH, '', $this->vars['file']
 		);
@@ -79,6 +81,7 @@ class ErrBase implements SplSubject
 			'%Y-%m-%d %H:%M:%S', $_SERVER['REQUEST_TIME']
 		);
 		$this->vars['message'] = $exception->getMessage();
+		/** @noinspection PhpUndefinedConstantInspection */
 		$this->vars['file']    = str_replace(
 			BASE_PATH, '', $exception->getFile()
 		);

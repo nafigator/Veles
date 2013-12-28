@@ -14,8 +14,6 @@
 namespace Veles\View\Adapters;
 
 use Exception;
-use Veles\View\Adapters\ViewAdapterAbstract;
-
 
 /**
  * Class NativeAdapter

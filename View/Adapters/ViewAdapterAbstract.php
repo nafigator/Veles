@@ -24,7 +24,7 @@ abstract class ViewAdapterAbstract
 {
 	/** @var  null|array */
 	protected static $calls;
-	/** @var iViewAdapter|ViewAdapterAbstract */
+	/** @var iViewAdapter|$this */
 	protected static $instance;
 	/** @var  mixed */
 	protected $driver;
@@ -35,7 +35,7 @@ abstract class ViewAdapterAbstract
 	abstract protected function __construct();
 
 	/**
-	 * @return iViewAdapter|ViewAdapterAbstract
+	 * @return iViewAdapter|$this
 	 */
 	final public static function instance()
 	{

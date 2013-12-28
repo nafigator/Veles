@@ -16,7 +16,6 @@ namespace Veles\DataBase\Drivers;
 use Exception;
 use mysqli;
 use Veles\Config;
-use Veles\DataBase\Drivers\iDbDriver;
 
 /**
  * Class MysqliDriver
@@ -84,7 +83,7 @@ class MysqliDriver implements iDbDriver
 		);
 
 		if (!self::$links[$name] instanceof mysqli) {
-			throw new Exception("Connetion failure to server $name");
+			throw new Exception("Connection failure to server $name");
 		}
 
 		if (isset($db_params[$name]['charset'])) {
@@ -208,7 +207,7 @@ class MysqliDriver implements iDbDriver
 	 */
 	final public static function getLastInsertId()
 	{
-		return (int) mysqli_insert_id(self::getLink());;
+		return (int) mysqli_insert_id(self::getLink());
 	}
 
 	/**

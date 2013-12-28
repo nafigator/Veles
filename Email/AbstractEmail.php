@@ -24,6 +24,7 @@ abstract class AbstractEmail
 	protected $headers  = null;
 	protected $subject  = null;
 	protected $message  = null;
+	protected $from		= null;
 	protected $charset  = 'utf-8';
 	protected $encoding = 'base64';   //8bit
 
@@ -34,6 +35,7 @@ abstract class AbstractEmail
 	 */
 	final public function update(SplSubject $subject)
 	{
+		/** @noinspection PhpUndefinedMethodInspection */
 		$this->message = base64_encode($subject->getMessage());
 		$this->init();
 		$this->send();

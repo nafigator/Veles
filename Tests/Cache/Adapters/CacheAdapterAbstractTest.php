@@ -2,7 +2,6 @@
 namespace Veles\Tests\Cache\Adapters;
 
 use Veles\Cache\Cache;
-use Veles\Cache\Adapters\CacheAdapterAbstract;
 use Exception;
 
 /**
@@ -47,6 +46,7 @@ class CacheAdapterAbstractTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function test__call()
 	{
+		/** @noinspection PhpUndefinedMethodInspection */
 		$result = CacheAdapterAbstractChild::instance()->testCall('string');
 
 		$msg = 'Adapter returned wrong result while calling getOption()!';
@@ -68,6 +68,7 @@ class CacheAdapterAbstractTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function test__callException()
 	{
+		/** @noinspection PhpUndefinedMethodInspection */
 		CacheAdapterAbstractChild::instance()->wrongCall('string');
 	}
 }

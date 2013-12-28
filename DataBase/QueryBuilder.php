@@ -13,7 +13,6 @@
 namespace Veles\DataBase;
 
 use Exception;
-use Veles\DataBase\DbPaginator;
 use Veles\Model\ActiveRecord;
 
 /**

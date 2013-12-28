@@ -27,7 +27,7 @@ class Route
 	private $map       = array();
 
 	/**
-	 * Config parser and controller vars initialialisation
+	 * Config parser and controller vars initialisation
 	 * @throws Exception
 	 */
 	private function __construct()
@@ -43,6 +43,7 @@ class Route
 			: urldecode($_SERVER['REQUEST_URI']);
 
 		foreach ($routes as $name => $route) {
+			/** @noinspection PhpUndefinedMethodInspection */
 			if (!$route['class']::check($route['route'], $url)) {
 				continue;
 			}
@@ -56,6 +57,7 @@ class Route
 
 			$this->checkAjax();
 
+			/** @noinspection PhpUndefinedMethodInspection */
 			if (isset($route['map'])
 				&& null !== ($map = $route['class']::getMap())
 			) {
@@ -128,7 +130,7 @@ class Route
 	}
 
 	/**
-	 * Getn controller method name
+	 * Get controller method name
 	 * @throws Exception
 	 * @return string
 	 */
