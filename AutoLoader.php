@@ -30,25 +30,14 @@ class AutoLoader
 	/**
 	 * AutoLoader
 	 *
-	 * @param string $class_name
+	 * @param string $class
 	 */
-	final public static function load($class_name)
+	final public static function load($class)
 	{
-		$class_name = ltrim($class_name, '\\');
-		$namespace = $file_name = '';
-		if ($last_ns_pos = strrpos($class_name, '\\')) {
-			$namespace = substr($class_name, 0, $last_ns_pos);
-			$class_name = substr($class_name, $last_ns_pos + 1);
-			$file_name  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
-		}
-		$file_name = stream_resolve_include_path(
-			$file_name . str_replace('_', DIRECTORY_SEPARATOR, $class_name) . '.php'
-		);
-
-		if ($file_name) {
+		$file = preg_replace('/\\\|_(?!.+\\\)/', DIRECTORY_SEPARATOR, $class) . '.php';
+		if (stream_resolve_include_path($file))
 			/** @noinspection PhpIncludeInspection */
-			include $file_name;
-		}
+			require $file;
 	}
 
 	final public static function registerPath($path)
