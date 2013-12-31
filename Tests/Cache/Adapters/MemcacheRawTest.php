@@ -27,7 +27,7 @@ class MemcacheRawTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers OpenRu\Core\Cache\Adapters\MemcacheRaw::__construct
+	 * @covers Veles\Cache\Adapters\MemcacheRaw::__construct
 	 * @expectedException Exception
 	 * @expectedExceptionMessage Can not connect to Memcache. Host: localhost Port: 11213
 	 */
@@ -44,17 +44,17 @@ class MemcacheRawTest extends \PHPUnit_Framework_TestCase
 		new MemcacheRawChild;
 	}
 
-    /**
-     * @covers OpenRu\Core\Cache\Adapters\MemcacheRaw::setConnectionParams
-     */
-    public function testSetConnectionParams()
-    {
+	/**
+	 * @covers Veles\Cache\Adapters\MemcacheRaw::setConnectionParams
+	 */
+	public function testSetConnectionParams()
+	{
 		$object = new MemcacheRawChild;
 
 		$host = uniqid();
 		$port = mt_rand(55000, 56000);
 
-        MemcacheRaw::setConnectionParams($host, $port);
+		MemcacheRaw::setConnectionParams($host, $port);
 
 		$result = $object->getHost();
 
@@ -67,13 +67,13 @@ class MemcacheRawTest extends \PHPUnit_Framework_TestCase
 		$msg = 'Wrong MemcacheRaw::$port result';
 		$this->assertSame($port, $result, $msg);
 		$this->assertInternalType('integer', $result, $msg);
-    }
+	}
 
-    /**
-     * @covers OpenRu\Core\Cache\Adapters\MemcacheRaw::disconnect
-     */
-    public function testDisconnect()
-    {
+	/**
+	 * @covers Veles\Cache\Adapters\MemcacheRaw::disconnect
+	 */
+	public function testDisconnect()
+	{
 		$object = new MemcacheRawChild;
 		$result = $object->disconnect();
 
@@ -84,18 +84,18 @@ class MemcacheRawTest extends \PHPUnit_Framework_TestCase
 
 		$msg = 'Wrong type of MemcacheRaw::$connection!';
 		$this->assertSame('Unknown', $result, $msg);
-    }
+	}
 
-    /**
-     * @covers OpenRu\Core\Cache\Adapters\MemcacheRaw::command
-     */
-    public function testCommand()
-    {
+	/**
+	 * @covers Veles\Cache\Adapters\MemcacheRaw::command
+	 */
+	public function testCommand()
+	{
 		$key   = uniqid('VELES::UNIT-TEST::');
 		$value = uniqid();
 		Cache::set($key, $value, 10);
 
-        $object = new MemcacheRawChild;
+		$object = new MemcacheRawChild;
 		$result = $object->command("delete $key");
 
 		$msg = 'MemcacheRaw::command return wrong result!';
@@ -104,13 +104,13 @@ class MemcacheRawTest extends \PHPUnit_Framework_TestCase
 		$result = Cache::has($key);
 		$msg = 'MemcacheRaw::command malfunction!';
 		$this->assertSame(false, $result, $msg);
-    }
+	}
 
-    /**
-     * @covers OpenRu\Core\Cache\Adapters\MemcacheRaw::delByTemplate
-     */
-    public function testDelByTemplate()
-    {
+	/**
+	 * @covers Veles\Cache\Adapters\MemcacheRaw::delByTemplate
+	 */
+	public function testDelByTemplate()
+	{
 		$keys   = array();
 		$prefix = uniqid();
 
@@ -140,13 +140,13 @@ class MemcacheRawTest extends \PHPUnit_Framework_TestCase
 
 		$msg = 'MemcacheRaw::delByTemplate malfunction!';
 		$this->assertSame($expected, $result, $msg);
-    }
+	}
 
-    /**
-     * @covers OpenRu\Core\Cache\Adapters\MemcacheRaw::query
-     */
-    public function testQuery()
-    {
+	/**
+	 * @covers Veles\Cache\Adapters\MemcacheRaw::query
+	 */
+	public function testQuery()
+	{
 		$key    = uniqid("VELES::UNIT-TEST::");
 		$value  = mt_rand(0, 1000);
 		Cache::set($key, $value, 100);
@@ -159,5 +159,5 @@ class MemcacheRawTest extends \PHPUnit_Framework_TestCase
 
 		$msg = 'MemcacheRaw::query return wrong result!';
 		$this->assertSame(1, $result, $msg);
-    }
+	}
 }

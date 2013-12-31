@@ -23,7 +23,7 @@ class CacheTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers OpenRu\Core\Cache\Cache::setAdapter
+	 * @covers Veles\Cache\Cache::setAdapter
 	 * @dataProvider setAdapterProvider
 	 */
 	public function testSetAdapter($class_name)
@@ -64,7 +64,7 @@ class CacheTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers OpenRu\Core\Cache\Cache::getAdapter
+	 * @covers Veles\Cache\Cache::getAdapter
 	 * @depends testSetAdapter
 	 */
 	public function testGetAdapter()
@@ -81,7 +81,7 @@ class CacheTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers OpenRu\Core\Cache\Cache::getAdapter
+	 * @covers Veles\Cache\Cache::getAdapter
 	 * @expectedException Exception
 	 */
 	public function testSetAdapterException()
@@ -91,7 +91,7 @@ class CacheTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers OpenRu\Core\Cache\Cache::get
+	 * @covers Veles\Cache\Cache::get
 	 * @depends testSetAdapter
 	 * @depends testGetAdapter
 	 */
@@ -119,7 +119,7 @@ class CacheTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers OpenRu\Core\Cache\Cache::set
+	 * @covers Veles\Cache\Cache::set
 	 * @depends testSetAdapter
 	 * @depends testGetAdapter
 	 */
@@ -138,7 +138,7 @@ class CacheTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers OpenRu\Core\Cache\Cache::has
+	 * @covers Veles\Cache\Cache::has
 	 * @depends testSet
 	 */
 	public function testHas()
@@ -154,7 +154,7 @@ class CacheTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers OpenRu\Core\Cache\Cache::del
+	 * @covers Veles\Cache\Cache::del
 	 * @depends testSet
 	 */
 	public function testDel()
@@ -175,7 +175,7 @@ class CacheTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers OpenRu\Core\Cache\Cache::increment
+	 * @covers Veles\Cache\Cache::increment
 	 * @depends testSet
 	 */
 	public function testIncrement()
@@ -208,7 +208,7 @@ class CacheTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers OpenRu\Core\Cache\Cache::decrement
+	 * @covers Veles\Cache\Cache::decrement
 	 * @depends testSet
 	 */
 	public function testDecrement()
@@ -241,7 +241,7 @@ class CacheTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers OpenRu\Core\Cache\Cache::clear
+	 * @covers Veles\Cache\Cache::clear
 	 * @depends testSet
 	 */
 	public function testClear()
@@ -270,7 +270,7 @@ class CacheTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers OpenRu\Core\Cache\Cache::delByTemplate
+	 * @covers Veles\Cache\Cache::delByTemplate
 	 * @depends testSet
 	 */
 	public function testDelByTemplate()

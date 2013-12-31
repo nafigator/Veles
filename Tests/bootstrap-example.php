@@ -26,6 +26,10 @@ use Veles\Cache\Adapters\MemcacheAdapter;
 use Veles\Cache\Adapters\MemcachedAdapter;
 use Veles\View\Adapters\NativeAdapter;
 use Veles\View\View;
+use Veles\DataBase\Adapters\PdoAdapter;
+use Veles\DataBase\ConnectionPools\ConnectionPool;
+use Veles\DataBase\Connections\PdoConnection;
+use Veles\DataBase\Db;
 
 define('ENVIRONMENT', 'development');
 define('LIB_DIR', realpath(__DIR__ . '/../..'));
@@ -33,17 +37,13 @@ define('TEST_DIR', realpath(LIB_DIR . '/Veles/Tests'));
 define('CONFIG_FILE', TEST_DIR . '/Project/settings.ini');
 define('TEMPLATE_PATH', TEST_DIR . '/Project/View/');
 
-set_include_path(implode(PATH_SEPARATOR, array(
-	LIB_DIR,
-	TEST_DIR,
-	realpath(__DIR__ . '/Project'),
-	get_include_path()
-)));
-
 date_default_timezone_set('Europe/Moscow');
 /** @noinspection PhpIncludeInspection */
-include 'Veles/AutoLoader.php';
+include LIB_DIR . '/Veles/AutoLoader.php';
 AutoLoader::init();
+AutoLoader::registerPath(
+	array(LIB_DIR, TEST_DIR, realpath(__DIR__ . '/Project'))
+);
 
 NativeAdapter::instance()->setTemplateDir(TEST_DIR . '/Project/View/');
 View::setAdapter('Native');
@@ -55,3 +55,14 @@ MemcachedAdapter::instance()->addServer('localhost', 11211);
 /** @noinspection PhpUndefinedMethodInspection */
 MemcacheAdapter::instance()->addServer('localhost', 11211);
 Cache::setAdapter('Memcached');
+
+// Параметризуем соединение с базой
+$pool = new ConnectionPool();
+$conn = new PdoConnection('master');
+
+$conn->setDsn('mysql:host=localhost;dbname=dbname;charset=utf8')
+	->setUserName('user')
+	->setPassword('password');
+$pool->addConnection($conn, true);
+PdoAdapter::setPool($pool);
+Db::setAdapter('Pdo');

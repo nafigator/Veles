@@ -91,7 +91,7 @@ class ActiveRecord extends StdClass
 	{
 		$sql = QueryBuilder::getById($this, $identifier);
 
-		$result = Db::getRow($sql);
+		$result = Db::row($sql);
 
 		if (empty($result)) {
 			return false;
@@ -114,7 +114,7 @@ class ActiveRecord extends StdClass
 		$sql = QueryBuilder::find($this, $filter);
 		$sql = QueryBuilder::setPage($sql, $pager);
 
-		$result = Db::getRows($sql);
+		$result = Db::rows($sql);
 
 		if (empty($result)) {
 			return false;
@@ -186,7 +186,7 @@ class ActiveRecord extends StdClass
 	{
 		$sql = QueryBuilder::find($this, $filter);
 
-		$result = Db::getRow($sql);
+		$result = Db::row($sql);
 
 		if (empty($result)) {
 			return false;
@@ -210,7 +210,7 @@ class ActiveRecord extends StdClass
 			$sql = QueryBuilder::setPage($sql, $pager);
 		}
 
-		$result = Db::getRows($sql);
+		$result = Db::rows($sql);
 
 		if (empty($result)) {
 			return false;

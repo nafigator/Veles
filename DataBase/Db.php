@@ -1,176 +1,190 @@
 <?php
-/**
- * Class for database interaction
- * @file    Db.php
- *
- * PHP version 5.3.9+
- *
- * @author  Alexander Yancharuk <alex@itvault.info>
- * @date    Вск Янв 06 11:48:07 2013
- * @copyright The BSD 3-Clause License
- */
-
 namespace Veles\DataBase;
 
-use Veles\DataBase\Drivers\iDbDriver;
+use Exception;
+use Veles\DataBase\Adapters\iDbAdapter;
+use Veles\DataBase\Adapters\DbAdapterBase;
 
 /**
  * Class Db
  *
+ * Класс для работы с базой данных
+ * Типы плейсхолдеров указываются в mysqli-формате:
+ * i - integer
+ * d - float/double
+ * s - string
+ * b - binary
+ * Если для плейсходеров не указываются типы, используется тип string
+ *
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
-class Db implements iDbDriver
+class Db
 {
-	/**
-	 * Driver instance
-	 *
-	 * @return iDbDriver
-	 */
-	private static function getDriver()
-	{
-		/**
-		 * @var iDbDriver
-		 */
-		static $driver;
+	/** @var iDbAdapter */
+	protected static $adapter;
+	/** @var  string */
+	protected static $adapter_name;
+	/** @var  mixed */
+	protected static $connection;
+	/** @var  string */
+	protected static $connection_name;
 
-		if (null === $driver) {
-			$driver = DbFabric::getDriver();
+	/**
+	 * Сохраняем имя класса адаптера для последующей инициализации
+	 * Будет инициализирован при первом запросе данных из базы
+	 *
+	 * @param string $class_name Adapter name
+	 * @see Db::getAdapter
+	 */
+	final public static function setAdapter($class_name = 'Pdo')
+	{
+		self::$adapter_name = "\\Veles\\DataBase\\Adapters\\${class_name}Adapter";
+		self::$adapter = null;
+	}
+
+	/**
+	 * Инстанс адаптера
+	 *
+	 * @throws Exception
+	 * @return iDbAdapter
+	 */
+	final public static function getAdapter()
+	{
+		if (self::$adapter instanceof iDbAdapter) {
+			return self::$adapter;
 		}
 
-		return $driver;
+		if (null === self::$adapter_name) {
+			throw new Exception('Adapter not set!');
+		}
+
+		$tmp =& self::$adapter_name;
+		self::$adapter = $tmp::instance();
+
+		return self::$adapter;
 	}
 
 	/**
-	 * Set current link to database server
+	 * Выбор соединения
 	 *
-	 * @param string $name Server name
+	 * @param string $name Имя соединения
+	 * @return DbAdapterBase
 	 */
-	public static function setLink($name)
+	final public static function connection($name)
 	{
-		return self::getDriver()->setLink($name);
+		return self::getAdapter()->setConnection($name);
 	}
 
 	/**
-	 * Transaction begin
+	 * Получение значения столбца таблицы
 	 *
-	 * @return bool
+	 * @param string $sql SQL-запрос
+	 * @param array $params Плейсхолдеры запроса
+	 * @param string|null $types Типы плейсхолдеров
+	 * @return string
 	 */
-	public static function begin()
+	public static function value($sql, array $params = array(), $types = null)
 	{
-		return self::getDriver()->begin();
+		return self::getAdapter()->value($sql, $params, $types);
 	}
 
 	/**
-	 * Transaction rollback
+	 * Получение строки таблицы в виде ассоциативного массива
 	 *
-	 * @return bool
+	 * @param string $sql SQL-запрос
+	 * @param array $params Плейсхолдеры запроса
+	 * @param string|null $types Типы плейсхолдеров
+	 * @return array
 	 */
-	public static function rollback()
+	final public static function row($sql, array $params = array(), $types = null)
 	{
-		return self::getDriver()->rollback();
+		return self::getAdapter()->row($sql, $params, $types);
 	}
 
 	/**
-	 * Transaction commit
+	 * Получение результата в виде коллекции ассоциативных массивов
 	 *
-	 * @return bool
-	 */
-	public static function commit()
-	{
-		return self::getDriver()->commit();
-	}
-
-	/**
-	 * Get database link
-	 *
+	 * @param string $sql SQL-запрос
+	 * @param array $params Плейсхолдеры запроса
+	 * @param string|null $types Типы плейсхолдеров
 	 * @return mixed
 	 */
-	final public static function getLink()
+	final public static function rows($sql, array $params = array(), $types = null)
 	{
-		return self::getDriver()->getLink();
+		return self::getAdapter()->rows($sql, $params, $types);
 	}
 
 	/**
-	 * Get database errors array
+	 * Инициализация транзакции
 	 *
-	 * @return array
+	 * @return bool
 	 */
-	final public static function getErrors()
+	final public static function begin()
 	{
-		return self::getDriver()->getErrors();
+		return self::getAdapter()->begin();
 	}
 
 	/**
-	 * Get FOUND_ROWS()
+	 * Откат транзакции
 	 *
-	 * Use after query with DbPaginator
-	 *
-	 * @return array
+	 * @return bool
 	 */
-	final public static function getFoundRows()
+	final public static function rollback()
 	{
-		return self::getDriver()->getFoundRows();
+		return self::getAdapter()->rollback();
 	}
 
 	/**
-	 * Get LAST_INSERT_ID()
+	 * Сохранение всех запросов транзакции и её закрытие
+	 *
+	 * @return bool
+	 */
+	final public static function commit()
+	{
+		return self::getAdapter()->commit();
+	}
+
+	/**
+	 * Запуск произвольного не SELECT запроса
+	 *
+	 * @param string $sql Non-SELECT SQL-запрос
+	 * @param array $params Плейсхолдеры запроса
+	 * @param string|null $types Типы плейсхолдеров
+	 * @return bool
+	 */
+	final public static function query($sql, array $params = array(), $types = null)
+	{
+		return self::getAdapter()->query($sql, $params, $types);
+	}
+
+	/**
+	 * Получение последнего сохранённого ID
 	 *
 	 * @return int
 	 */
 	final public static function getLastInsertId()
 	{
-		return self::getDriver()->getLastInsertId();
+		return self::getAdapter()->getLastInsertId();
 	}
 
 	/**
-	 * Method for execution non-SELECT queries
+	 * Получение кол-ва строк в результате
 	 *
-	 * @param string $sql SQL-query
-	 * @param string $server Server name
-	 *
-	 * @return bool
+	 * @return int
 	 */
-	final public static function query($sql, $server = 'master')
+	final public static function getFoundRows()
 	{
-		return self::getDriver()->query($sql, $server);
+		return self::getAdapter()->getFoundRows();
 	}
 
 	/**
-	 * Method for SELECT returning one field value
+	 * Escaping variable
 	 *
-	 * @param string $sql SQL-query
-	 * @param string $server Server name
-	 *
-	 * @return mixed
+	 * @param string $var
+	 * @return string
 	 */
-	final public static function getValue($sql, $server = 'master')
+	final public static function escape($var)
 	{
-		return self::getDriver()->getValue($sql, $server);
-	}
-
-	/**
-	 * For SELECT, returning one row values
-	 *
-	 * @param string $sql SQL-query
-	 * @param string $server Server name
-	 *
-	 * @return array
-	 */
-	final public static function getRow($sql, $server = 'master')
-	{
-		return self::getDriver()->getRow($sql, $server);
-	}
-
-	/**
-	 * For SELECT, returning collection
-	 *
-	 * @param string $sql SQL-query
-	 * @param string $server Server name
-	 *
-	 * @return array
-	 */
-	final public static function getRows($sql, $server = 'master')
-	{
-		return self::getDriver()->getRows($sql, $server);
+		return self::getAdapter()->escape($var);
 	}
 }

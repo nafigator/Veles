@@ -11,9 +11,9 @@ use Veles\Cache\Cache;
 class MemcacheAdapterTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-     * @var MemcacheAdapter
-     */
-    protected $object;
+	 * @var MemcacheAdapter
+	 */
+	protected $object;
 
 	public static function setUpBeforeClass()
 	{
@@ -47,10 +47,10 @@ class MemcacheAdapterTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-     * @covers Veles\Cache\Adapters\MemcacheAdapter::get
-     */
-    public function testGet()
-    {
+	 * @covers Veles\Cache\Adapters\MemcacheAdapter::get
+	 */
+	public function testGet()
+	{
 		$params = array();
 
 		for ($i = 0; $i < 3; ++$i) {
@@ -66,13 +66,13 @@ class MemcacheAdapterTest extends \PHPUnit_Framework_TestCase
 			$result = $this->object->get($key);
 			$this->assertSame($expected, $result, $msg);
 		}
-    }
+	}
 
-    /**
-     * @covers Veles\Cache\Adapters\MemcacheAdapter::set
-     */
-    public function testSet()
-    {
+	/**
+	 * @covers Veles\Cache\Adapters\MemcacheAdapter::set
+	 */
+	public function testSet()
+	{
 		$params = array();
 
 		for ($i = 0; $i < 3; ++$i) {
@@ -87,13 +87,13 @@ class MemcacheAdapterTest extends \PHPUnit_Framework_TestCase
 			$result = $this->object->get($param[0]);
 			$this->assertSame($param[1], $result, $msg);
 		}
-    }
+	}
 
-    /**
-     * @covers Veles\Cache\Adapters\MemcacheAdapter::has
-     */
-    public function testHas()
-    {
+	/**
+	 * @covers Veles\Cache\Adapters\MemcacheAdapter::has
+	 */
+	public function testHas()
+	{
 		$params = array();
 
 		for ($i = 0; $i < 3; ++$i) {
@@ -114,13 +114,13 @@ class MemcacheAdapterTest extends \PHPUnit_Framework_TestCase
 			$result = $this->object->has($key);
 			$this->assertSame($expected, $result, $msg);
 		}
-    }
+	}
 
-    /**
-     * @covers Veles\Cache\Adapters\MemcacheAdapter::del
-     */
-    public function testDel()
-    {
+	/**
+	 * @covers Veles\Cache\Adapters\MemcacheAdapter::del
+	 */
+	public function testDel()
+	{
 		$params = array();
 
 		for ($i = 0; $i < 3; ++$i) {
@@ -141,13 +141,13 @@ class MemcacheAdapterTest extends \PHPUnit_Framework_TestCase
 			$result = $this->object->del($key);
 			$this->assertSame($expected, $result, $msg);
 		}
-    }
+	}
 
-    /**
-     * @covers Veles\Cache\Adapters\MemcacheAdapter::increment
-     */
-    public function testIncrement()
-    {
+	/**
+	 * @covers Veles\Cache\Adapters\MemcacheAdapter::increment
+	 */
+	public function testIncrement()
+	{
 		$key    = uniqid('VELES::UNIT-TEST::');
 		$value  = mt_rand(0, 1000);
 		Cache::set($key, $value, 10);
@@ -173,13 +173,13 @@ class MemcacheAdapterTest extends \PHPUnit_Framework_TestCase
 			$msg = 'MemcacheAdapter::increment returned wrong result value!';
 			$this->assertSame($expected, $result, $msg);
 		}
-    }
+	}
 
-    /**
-     * @covers Veles\Cache\Adapters\MemcacheAdapter::decrement
-     */
-    public function testDecrement()
-    {
+	/**
+	 * @covers Veles\Cache\Adapters\MemcacheAdapter::decrement
+	 */
+	public function testDecrement()
+	{
 		$key    = uniqid('VELES::UNIT-TEST::');
 		$value  = mt_rand(1, 1000);
 		Cache::set($key, $value, 10);
@@ -204,7 +204,7 @@ class MemcacheAdapterTest extends \PHPUnit_Framework_TestCase
 			$msg = 'MemcacheAdapter::decrement returned wrong result value!';
 			$this->assertSame($expected, $result, $msg);
 		}
-    }
+	}
 
 	/**
 	 * @covers Veles\Cache\Adapters\MemcacheAdapter::clear

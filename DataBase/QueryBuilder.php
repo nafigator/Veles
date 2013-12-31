@@ -234,9 +234,7 @@ class QueryBuilder
 				$value = (float) $model->$property;
 				break;
 			case 'string':
-				$value = '\'' . mysqli_real_escape_string(
-					Db::getLink(), (string) $model->$property
-				) . '\'';
+				$value = Db::escape($model->$property);
 				break;
 			default:
 				$value = null;

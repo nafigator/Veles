@@ -9,7 +9,7 @@ use Exception;
  */
 class CacheAdapterAbstractTest extends \PHPUnit_Framework_TestCase
 {
-    /**
+	/**
 	 * @covers Veles\Cache\Adapters\CacheAdapterAbstract::instance
 	 * @covers Veles\Cache\Adapters\CacheAdapterAbstract::invokeLazyCalls
 	 */
