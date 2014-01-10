@@ -76,9 +76,9 @@ EOF;
 
 	/**
 	 * Unit-test for View::set
-	 * @covers View::set
+	 * @covers Veles\View\View::set
 	 * @dataProvider setProvider
-	 * @see View::set
+	 * @see Veles\View\View::set
 	 */
 	public function testSet($vars)
 	{
@@ -103,9 +103,9 @@ EOF;
 
 	/**
 	 * Unit-test for View::show
-	 * @covers View::show
+	 * @covers Veles\View\View::show
 	 * @depends testSet
-	 * @see View::show
+	 * @see Veles\View\View::show
 	 */
 	public function testShow()
 	{
@@ -116,9 +116,9 @@ EOF;
 
 	/**
 	 * Unit-test for View::get
-	 * @covers View::get
+	 * @covers Veles\View\View::get
 	 * @depends testSet
-	 * @see View::get
+	 * @see Veles\View\View::get
 	 */
 	public function testGet()
 	{

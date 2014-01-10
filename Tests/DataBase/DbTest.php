@@ -46,7 +46,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Db::setAdapter
+	 * @covers Veles\DataBase\Db::setAdapter
 	 */
 	public function testSetAdapter()
 	{
@@ -80,7 +80,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Db::getAdapter
+	 * @covers Veles\DataBase\Db::getAdapter
 	 */
 	public function testGetAdapter()
 	{
@@ -95,7 +95,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Db::getAdapter
+	 * @covers Veles\DataBase\Db::getAdapter
 	 * @expectedException Exception
 	 * @expectedExceptionMessage Adapter not set!
 	 */
@@ -106,7 +106,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Db::connection
+	 * @covers Veles\DataBase\Db::connection
 	 */
 	public function testConnection()
 	{
@@ -131,7 +131,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Db::value
+	 * @covers Veles\DataBase\Db::value
 	 */
 	public function testValue()
 	{
@@ -144,7 +144,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Db::row
+	 * @covers Veles\DataBase\Db::row
 	 */
 	public function testRow()
 	{
@@ -159,7 +159,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Db::rows
+	 * @covers Veles\DataBase\Db::rows
 	 */
 	public function testRows()
 	{
@@ -178,9 +178,9 @@ class DbTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Db::begin
-	 * @covers Veles\Tests\DataBase\Db::rollback
-	 * @covers Veles\Tests\DataBase\Db::commit
+	 * @covers Veles\DataBase\Db::begin
+	 * @covers Veles\DataBase\Db::rollback
+	 * @covers Veles\DataBase\Db::commit
 	 */
 	public function testTransactions()
 	{
@@ -213,7 +213,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Db::query
+	 * @covers Veles\DataBase\Db::query
 	 */
 	public function testQuery()
 	{
@@ -228,7 +228,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Db::getLastInsertId
+	 * @covers Veles\DataBase\Db::getLastInsertId
 	 */
 	public function testGetLastInsertId()
 	{
@@ -245,7 +245,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Db::getFoundRows
+	 * @covers Veles\DataBase\Db::getFoundRows
 	 */
 	public function testGetFoundRows()
 	{
@@ -262,7 +262,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Db::escape
+	 * @covers Veles\DataBase\Db::escape
 	 */
 	public function testEscape()
 	{

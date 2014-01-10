@@ -45,8 +45,8 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Adapters\PdoAdapter::value
-	 * @covers Veles\Tests\DataBase\Adapters\PdoAdapter::bindParams
+	 * @covers Veles\DataBase\Adapters\PdoAdapter::value
+	 * @covers Veles\DataBase\Adapters\PdoAdapter::bindParams
 	 */
 	public function testGetValue()
 	{
@@ -68,8 +68,8 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Adapters\PdoAdapter::getRow
-	 * @covers Veles\Tests\DataBase\Adapters\PdoAdapter::bindParams
+	 * @covers Veles\DataBase\Adapters\PdoAdapter::row
+	 * @covers Veles\DataBase\Adapters\PdoAdapter::bindParams
 	 */
 	public function testGetRow()
 	{
@@ -89,8 +89,8 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Adapters\PdoAdapter::getRows
-	 * @covers Veles\Tests\DataBase\Adapters\PdoAdapter::bindParams
+	 * @covers Veles\DataBase\Adapters\PdoAdapter::rows
+	 * @covers Veles\DataBase\Adapters\PdoAdapter::bindParams
 	 */
 	public function testGetRows()
 	{
@@ -114,9 +114,9 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Adapters\PdoAdapter::begin
-	 * @covers Veles\Tests\DataBase\Adapters\PdoAdapter::rollback
-	 * @covers Veles\Tests\DataBase\Adapters\PdoAdapter::commit
+	 * @covers Veles\DataBase\Adapters\PdoAdapter::begin
+	 * @covers Veles\DataBase\Adapters\PdoAdapter::rollback
+	 * @covers Veles\DataBase\Adapters\PdoAdapter::commit
 	 */
 	public function testTransactions()
 	{
@@ -141,8 +141,8 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Adapters\PdoAdapter::query
-	 * @covers Veles\Tests\DataBase\Adapters\PdoAdapter::bindParams
+	 * @covers Veles\DataBase\Adapters\PdoAdapter::query
+	 * @covers Veles\DataBase\Adapters\PdoAdapter::bindParams
 	 */
 	public function testQuery()
 	{
@@ -162,7 +162,7 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Adapters\PdoAdapter::getLastInsertId
+	 * @covers Veles\DataBase\Adapters\PdoAdapter::getLastInsertId
 	 */
 	public function testGetLastInsertId()
 	{
@@ -177,7 +177,7 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Adapters\PdoAdapter::getFoundRows
+	 * @covers Veles\DataBase\Adapters\PdoAdapter::getFoundRows
 	 */
 	public function testGetFoundRows()
 	{
@@ -192,7 +192,7 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Adapters\PdoAdapter::getStmt
+	 * @covers Veles\DataBase\Adapters\PdoAdapter::getStmt
 	 */
 	public function testGetStmt()
 	{

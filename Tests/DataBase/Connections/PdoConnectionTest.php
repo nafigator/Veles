@@ -26,7 +26,7 @@ class PdoConnectionTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Connections\PdoConnection::getDsn
+	 * @covers Veles\DataBase\Connections\PdoConnection::getDsn
 	 * @expectedException Exception
 	 * @expectedExceptionMessage DSN соединения не установлен.
 	 */
@@ -36,7 +36,7 @@ class PdoConnectionTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Connections\PdoConnection::create
+	 * @covers Veles\DataBase\Connections\PdoConnection::create
 	 */
 	public function testCreate()
 	{
@@ -56,7 +56,7 @@ class PdoConnectionTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Connections\PdoConnection::setDsn
+	 * @covers Veles\DataBase\Connections\PdoConnection::setDsn
 	 */
 	public function testSetDsn()
 	{
@@ -71,7 +71,7 @@ class PdoConnectionTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Connections\PdoConnection::getDsn
+	 * @covers Veles\DataBase\Connections\PdoConnection::getDsn
 	 * @depends testSetDsn
 	 */
 	public function testGetDsn()
@@ -86,7 +86,7 @@ class PdoConnectionTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Connections\PdoConnection::setOptions
+	 * @covers Veles\DataBase\Connections\PdoConnection::setOptions
 	 */
 	public function testSetOptions()
 	{
@@ -101,7 +101,7 @@ class PdoConnectionTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Connections\PdoConnection::getOptions
+	 * @covers Veles\DataBase\Connections\PdoConnection::getOptions
 	 * @depends testSetOptions
 	 */
 	public function testGetOptions()

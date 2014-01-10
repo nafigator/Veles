@@ -25,9 +25,9 @@ class PasswordTest extends PHPUnit_Framework_TestCase
 	/**
 	 * Unit-test for Password::checkCookieHash
 	 * @group Auth
-	 * @covers Veles\Password::checkCookieHash
+	 * @covers Veles\Auth\Password::checkCookieHash
 	 * @dataProvider checkCookieHashProvider
-	 * @see Password::checkCookieHash
+	 * @see Veles\Auth\Password::checkCookieHash
 	 */
 	public function testCheckCookieHash($user, $cookie_hash, $expected)
 	{
@@ -58,9 +58,9 @@ class PasswordTest extends PHPUnit_Framework_TestCase
 	/**
 	 * Unit-test for Password::check
 	 * @group Auth
-	 * @covers Veles\Password::check
+	 * @covers Veles\Auth\Password::check
 	 * @dataProvider checkProvider
-	 * @see Password::check
+	 * @see Veles\Auth\Password::check
 	 */
 	public function testCheck($user, $password, $expected)
 	{

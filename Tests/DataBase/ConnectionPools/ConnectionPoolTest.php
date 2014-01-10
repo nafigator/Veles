@@ -25,7 +25,7 @@ class ConnectionPoolTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\ConnectionPools\ConnectionPool::getDefaultConnectionName
+	 * @covers Veles\DataBase\ConnectionPools\ConnectionPool::getDefaultConnectionName
 	 */
 	public function testGetDefaultConnectionName()
 	{
@@ -40,7 +40,7 @@ class ConnectionPoolTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\ConnectionPools\ConnectionPool::addConnection
+	 * @covers Veles\DataBase\ConnectionPools\ConnectionPool::addConnection
 	 */
 	public function testAddConnection()
 	{
@@ -70,7 +70,7 @@ class ConnectionPoolTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\ConnectionPools\ConnectionPool::getConnection
+	 * @covers Veles\DataBase\ConnectionPools\ConnectionPool::getConnection
 	 * @depends testAddConnection
 	 */
 	public function testGetConnection()

@@ -38,7 +38,7 @@ class DbAdapterBaseTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Adapters\DbAdapterBase::getPool
+	 * @covers Veles\DataBase\Adapters\DbAdapterBase::getPool
 	 */
 	public function testGetPool()
 	{
@@ -54,7 +54,7 @@ class DbAdapterBaseTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Adapters\DbAdapterBase::setPool
+	 * @covers Veles\DataBase\Adapters\DbAdapterBase::setPool
 	 */
 	public function testSetPool()
 	{
@@ -76,7 +76,7 @@ class DbAdapterBaseTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Adapters\DbAdapterBase::setConnection
+	 * @covers Veles\DataBase\Adapters\DbAdapterBase::setConnection
 	 */
 	public function testSetConnection()
 	{
@@ -93,7 +93,7 @@ class DbAdapterBaseTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Adapters\DbAdapterBase::getConnection
+	 * @covers Veles\DataBase\Adapters\DbAdapterBase::getConnection
 	 */
 	public function testGetConnection()
 	{
@@ -109,7 +109,7 @@ class DbAdapterBaseTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tests\DataBase\Adapters\DbAdapterBase::instance
+	 * @covers Veles\DataBase\Adapters\DbAdapterBase::instance
 	 */
 	public function testInstance()
 	{

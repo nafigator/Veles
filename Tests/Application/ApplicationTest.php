@@ -47,7 +47,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
 
 	/**
 	 * Unit-test for Application::run
-	 * @covers Veles\Application::run
+	 * @covers Veles\Application\Application::run
 	 * @dataProvider runProvider
 	 */
 	public function testRun($url, $expected)

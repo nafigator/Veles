@@ -26,7 +26,7 @@ class TraceablePdoConnectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Veles\Tests\DataBase\Connections\TraceablePdoConnection::create
+     * @covers Veles\DataBase\Connections\TraceablePdoConnection::create
      */
     public function testCreate()
     {
@@ -55,7 +55,7 @@ class TraceablePdoConnectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Veles\Tests\DataBase\Connections\TraceablePdoConnection::setBar
+     * @covers Veles\DataBase\Connections\TraceablePdoConnection::setBar
      */
     public function testSetBar()
     {

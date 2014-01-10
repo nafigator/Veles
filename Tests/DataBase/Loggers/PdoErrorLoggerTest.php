@@ -24,7 +24,7 @@ class PdoErrorLoggerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Veles\Tests\DataBase\Loggers\PdoErrorLogger::setPath
+     * @covers Veles\DataBase\Loggers\PdoErrorLogger::setPath
      */
     public function testSetPath()
     {
@@ -39,7 +39,7 @@ class PdoErrorLoggerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Veles\Tests\DataBase\Loggers\PdoErrorLogger::getPath
+     * @covers Veles\DataBase\Loggers\PdoErrorLogger::getPath
 	 * @depend testSetPath
      */
     public function testGetPath()
@@ -53,7 +53,7 @@ class PdoErrorLoggerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Veles\Tests\DataBase\Loggers\PdoErrorLogger::update
+     * @covers Veles\DataBase\Loggers\PdoErrorLogger::update
 	 * @dataProvider updateProvider
      */
     public function testUpdate($subject, $error)

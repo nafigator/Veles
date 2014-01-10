@@ -39,7 +39,7 @@ define('TEMPLATE_PATH', TEST_DIR . '/Project/View/');
 
 date_default_timezone_set('Europe/Moscow');
 /** @noinspection PhpIncludeInspection */
-include LIB_DIR . '/Veles/AutoLoader.php';
+require LIB_DIR . '/Veles/AutoLoader.php';
 AutoLoader::init();
 AutoLoader::registerPath(
 	array(LIB_DIR, TEST_DIR, realpath(__DIR__ . '/Project'))
