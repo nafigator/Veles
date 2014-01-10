@@ -73,13 +73,7 @@ class MemcacheRaw
 	final public function command($command)
 	{
 		fwrite($this->connection, $command . PHP_EOL);
-		while (false !== ($str = fgets($this->connection))) {
-			if (1 === preg_match($this->regex, $str)) {
-				break;
-			}
-		}
-
-		return $this;
+		fgets($this->connection);
 	}
 
 	/**
@@ -115,13 +109,11 @@ class MemcacheRaw
 			$query = "stats cachedump $slab";
 			$output = $this->query($query);
 
-			if (!preg_match_all($regex_keys, $output, $match)) {
-				continue;
-			}
-
-			foreach ($match[1] as $key) {
-				if (false !== strpos($key, $tpl)) {
-					$this->command("delete $key");
+			if (preg_match_all($regex_keys, $output, $match)) {
+				foreach ($match[1] as $key) {
+					if (false !== strpos($key, $tpl)) {
+						$this->command("delete $key");
+					}
 				}
 			}
 		}

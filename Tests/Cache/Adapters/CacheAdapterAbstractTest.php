@@ -9,6 +9,46 @@ use Exception;
  */
 class CacheAdapterAbstractTest extends \PHPUnit_Framework_TestCase
 {
+	private static $driver;
+
+	public static function setUpBeforeClass()
+	{
+		self::$driver = CacheAdapterAbstractChild::instance()->getDriver();
+	}
+
+	public static function tearDownAfterClass()
+	{
+		CacheAdapterAbstractChild::instance()->setDriver(self::$driver);
+	}
+
+	/**
+	 * @covers Veles\Cache\Adapters\CacheAdapterAbstract::setDriver
+	 */
+	public function testSetDriver()
+	{
+		$expected = 'uq[0n;34nt';
+		$obj = CacheAdapterAbstractChild::instance();
+		$obj->setDriver($expected);
+
+		$msg = 'Wrong behavior of CacheAdapterAbstract::setDriver()';
+		$this->assertAttributeSame($expected, 'driver', $obj, $msg);
+	}
+
+	/**
+	 * @covers Veles\Cache\Adapters\CacheAdapterAbstract::getDriver
+	 * @depends testSetDriver
+	 */
+	public function testGetDriver()
+	{
+		$expected = '123;kbn90bj';
+		$obj = CacheAdapterAbstractChild::instance();
+		$obj->setDriver($expected);
+
+		$result = $obj->getDriver();
+		$msg = 'Wrong result of CacheAdapterAbstract::getDriver()';
+		$this->assertSame($expected, $result, $msg);
+	}
+
 	/**
 	 * @covers Veles\Cache\Adapters\CacheAdapterAbstract::instance
 	 * @covers Veles\Cache\Adapters\CacheAdapterAbstract::invokeLazyCalls

@@ -201,4 +201,17 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 		$msg = 'Wrong PdoAdapter::getStmt() result';
 		$this->assertInstanceOf('PDOStatement', $result, $msg);
 	}
+
+	/**
+	 * @covers Veles\DataBase\Adapters\PdoAdapter::escape
+	 */
+	public function testEscape()
+	{
+		$expected = '\'\\\\\\\'\"\'';
+
+		$result = PdoAdapter::instance()->escape("\'\"");
+
+		$msg = 'Wrong PdoAdapter::escape() result';
+		$this->assertSame($expected, $result, $msg);
+	}
 }
