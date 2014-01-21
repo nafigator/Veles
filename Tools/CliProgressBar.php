@@ -1,6 +1,6 @@
 <?php
 /**
- * Консольный прогресс-баг
+ * Progress bar for console applications
  * @file    CliProgressBar.php
  *
  * PHP version 5.3.9+
@@ -15,7 +15,7 @@ namespace Veles\Tools;
 use Veles\Validators\Byte;
 
 /**
- * Класс CliProgressBar
+ * Class CliProgressBar
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class CliProgressBar
@@ -32,7 +32,8 @@ class CliProgressBar
 
 
 	/**
-	 * Конструктор
+	 * Constructor
+	 *
 	 * @param int $final Числовой эквивалент финального результата
 	 * @param int $width Ширина прогрессбара
 	 * @param bool $block Флаг блокирования пользовательского ввода
@@ -55,7 +56,8 @@ class CliProgressBar
 	}
 
 	/**
-	 * Обновление прогресс-бара
+	 * Progress bar update
+	 *
 	 * @param int $current Числовой эквивалент состояния процесса
 	 */
 	final public function update($current)
@@ -90,7 +92,8 @@ class CliProgressBar
 	}
 
 	/**
-	 * Формирование строки со статистическими данными
+	 * Get string with statistic
+	 *
 	 * @param int $current Текущее значение числового эквевалента процесса
 	 * @return string
 	 */
@@ -109,7 +112,8 @@ class CliProgressBar
 	}
 
 	/**
-	 * Формирование строки с данными по использованию памяти
+	 * Get string with memory statistic
+	 *
 	 * @return string
 	 */
 	final public static function getMemString()
@@ -121,7 +125,7 @@ class CliProgressBar
 	}
 
 	/**
-	 * Очищаем пользовательский ввод
+	 * User input cleanup
 	 */
 	private static function stdinCleanup()
 	{

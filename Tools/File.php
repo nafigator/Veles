@@ -49,6 +49,8 @@ class File
 	}
 
 	/**
+	 * Get MIME type
+	 *
 	 * @return string
 	 */
 	public function getMimeType()
@@ -57,8 +59,9 @@ class File
 	}
 
 	/**
-	 * @param string $mime_type
+	 * Set MIME type
 	 *
+	 * @param string $mime_type
 	 * @return $this;
 	 */
 	public function setMimeType($mime_type)

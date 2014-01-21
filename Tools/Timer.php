@@ -1,6 +1,6 @@
 <?php
 /**
- * Класс-таймер
+ * Class Timer
  * @file    Timer.php
  *
  * PHP version 5.3.9+
@@ -13,7 +13,7 @@
 namespace Veles\Tools;
 
 /**
- * Класс Timer
+ * Class Timer
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class Timer
@@ -29,7 +29,7 @@ class Timer
 	private static $diff       = 0;
 
 	/**
-	 * Старт таймера
+	 * Timer start
 	 */
 	public static function start()
 	{
@@ -37,7 +37,7 @@ class Timer
 	}
 
 	/**
-	 * Остановка таймера
+	 * Timer stop
 	 */
 	public static function stop()
 	{
@@ -46,8 +46,9 @@ class Timer
 	}
 
 	/**
-	 * Получение результата
-	 * @param int $precision Точность измерения
+	 * Get result
+	 *
+	 * @param int $precision Result precision
 	 * @return mixed
 	 */
 	public static function get($precision = self::MICROSECONDS)
@@ -67,13 +68,14 @@ class Timer
 	}
 
 	/**
-	 * Сброс значений
-	 * @param bool $full Флаг полного сброса значений
+	 * Reset internal timer values
+	 *
+	 * @param bool $full Flag for reset diff value
 	 */
 	public static function reset($full = true)
 	{
 		self::$start_time = 0;
 
-		$full && self::$diff = 0;
+		$full and self::$diff = 0;
 	}
 }

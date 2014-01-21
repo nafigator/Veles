@@ -1,6 +1,6 @@
 <?php
 /**
- * Цвета для консольного вывода
+ * Console colors
  * @file    CliColor.php
  *
  * PHP version 5.3.9+
@@ -15,7 +15,7 @@ use Exception;
 
 
 /**
- * Класс CliColor
+ * Class CliColor
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 /** @noinspection PhpDocMissingReturnTagInspection */
@@ -48,7 +48,8 @@ class CliColor
 	);
 
 	/**
-	 * При вызове оборачивает строку esc-последовательностями цвета
+	 * Encapsulate string in color esc-sequences
+	 *
 	 * @param string $string Строка
 	 * @return string
 	 */
@@ -66,10 +67,11 @@ class CliColor
 	}
 
 	/**
-	 * Конструктор
-	 * @param string $color Цвет
+	 * Constructor
+	 *
+	 * @param string $color Color
+	 * @param array $style Styles array
 	 * @throws Exception
-	 * @param array $style Массив со стилями
 	 */
 	final public function __construct(
 		$color = 'green', $style = array('default')
@@ -87,7 +89,8 @@ class CliColor
 	}
 
 	/**
-	 * Вывод объекта в виде строки
+	 * Output object as string
+	 *
 	 * @return mixed
 	 */
 	final public function __toString()
@@ -103,8 +106,9 @@ class CliColor
 	}
 
 	/**
-	 * Добавление строки
-	 * @param string $string Строка для последующего вывода в цвете
+	 * Add string
+	 *
+	 * @param string $string String that should be colorized
 	 * @throws Exception
 	 * @return CliColor
 	 */
@@ -120,7 +124,8 @@ class CliColor
 	}
 
 	/**
-	 * Установка стиля
+	 * Set style
+	 *
 	 * @param array $style Стиль
 	 * @throws Exception
 	 * @return CliColor
@@ -145,7 +150,8 @@ class CliColor
 	}
 
 	/**
-	 * Установка цвета
+	 * Set color
+	 *
 	 * @param string $color Цвет
 	 * @throws Exception
 	 * @return CliColor
@@ -166,7 +172,8 @@ class CliColor
 	}
 
 	/**
-	 * Получение стиля
+	 * Get style
+	 *
 	 * @return string
 	 */
 	private function getStyle()
@@ -177,7 +184,8 @@ class CliColor
 	}
 
 	/**
-	 * Получение цвета
+	 * Get color
+	 *
 	 * @return string
 	 */
 	private function getColor()
