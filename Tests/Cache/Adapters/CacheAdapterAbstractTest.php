@@ -79,36 +79,4 @@ class CacheAdapterAbstractTest extends \PHPUnit_Framework_TestCase
 
 		Cache::setAdapter();
 	}
-
-	/**
-	 * @covers Veles\Cache\Adapters\CacheAdapterAbstract::__call
-	 * @covers Veles\Cache\Adapters\CacheAdapterAbstract::setCall
-	 */
-	public function test__call()
-	{
-		/** @noinspection PhpUndefinedMethodInspection */
-		$result = CacheAdapterAbstractChild::instance()->testCall('string');
-
-		$msg = 'Adapter returned wrong result while calling getOption()!';
-		$this->assertSame(null, $result, $msg);
-
-		$result = CacheAdapterAbstractChild::getCalls();
-		$expected = array(array(
-			'method' => 'testCall',
-			'arguments' => array('string')
-		));
-
-		$msg = 'Driver calls was not saved correctly!';
-		$this->assertSame($expected, $result, $msg);
-	}
-
-	/**
-	 * @covers Veles\Cache\Adapters\CacheAdapterAbstract::__call
-	 * @expectedException Exception
-	 */
-	public function test__callException()
-	{
-		/** @noinspection PhpUndefinedMethodInspection */
-		CacheAdapterAbstractChild::instance()->wrongCall('string');
-	}
 }

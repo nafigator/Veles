@@ -40,6 +40,11 @@ class AutoLoader
 			require $file;
 	}
 
+	/**
+	 * Add path to directory contained classes that should be loaded
+	 *
+	 * @param $path
+	 */
 	final public static function registerPath($path)
 	{
 		if (is_array($path)) {

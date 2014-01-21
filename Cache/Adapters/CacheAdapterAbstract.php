@@ -87,30 +87,12 @@ abstract class CacheAdapterAbstract
 	}
 
 	/**
-	 * Collect calls which will be invoked during first real query
-	 *
-	 * @param $method
-	 * @param $arguments
-	 *
-	 * @return mixed
-	 * @throws \Exception
-	 */
-	final public function __call($method, $arguments)
-	{
-		if (!method_exists($this->getDriver(), $method)) {
-			throw new Exception('Calling non existent method!');
-		}
-
-		self::setCall($method, $arguments);
-	}
-
-	/**
 	 * Save calls for future invocation
 	 *
-	 * @param $method
-	 * @param $arguments
+	 * @param string $method Method name that should be called
+	 * @param array $arguments Method arguments
 	 */
-	private static function setCall($method, $arguments)
+	final public static function addCall($method, array $arguments = array())
 	{
 		static::$calls[] = array(
 			'method'    => $method,

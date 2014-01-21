@@ -79,7 +79,7 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 
 		$this->notify();
 
-		return $this->stmt->fetch(PDO::FETCH_ASSOC);
+		return $this->stmt->fetch();
 	}
 
 	/**
@@ -103,7 +103,7 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 
 		$this->notify();
 
-		return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+		return $this->stmt->fetchAll();
 	}
 
 	/**

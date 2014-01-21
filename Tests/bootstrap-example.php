@@ -30,6 +30,7 @@ use Veles\DataBase\Adapters\PdoAdapter;
 use Veles\DataBase\ConnectionPools\ConnectionPool;
 use Veles\DataBase\Connections\PdoConnection;
 use Veles\DataBase\Db;
+use PDO;
 
 define('ENVIRONMENT', 'development');
 define('LIB_DIR', realpath(__DIR__ . '/../..'));
@@ -51,9 +52,9 @@ View::setAdapter('Native');
 // Cache initialization
 MemcacheRaw::setConnectionParams('localhost', 11211);
 /** @noinspection PhpUndefinedMethodInspection */
-MemcachedAdapter::instance()->addServer('localhost', 11211);
+MemcachedAdapter::addCall('addServer', array('localhost', 11211));
 /** @noinspection PhpUndefinedMethodInspection */
-MemcacheAdapter::instance()->addServer('localhost', 11211);
+MemcacheAdapter::addCall('addServer', array('localhost', 11211));
 Cache::setAdapter('Memcached');
 
 // Параметризуем соединение с базой
@@ -65,4 +66,9 @@ $conn->setDsn('mysql:host=localhost;dbname=dbname;charset=utf8')
 	->setPassword('password');
 $pool->addConnection($conn, true);
 PdoAdapter::setPool($pool);
+PdoAdapter::addCall('setAttribute', array(PDO::ATTR_EMULATE_PREPARES, false));
+PdoAdapter::addCall(
+	'setAttribute',
+	array(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC)
+);
 Db::setAdapter('Pdo');

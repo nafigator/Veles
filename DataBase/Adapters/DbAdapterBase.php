@@ -8,12 +8,14 @@ use Veles\Helpers\Observable;
 /**
  * Class DbAdapterBase
  *
- * Общий базовый класс для Db адаптеров
+ * Base class for Db adapters
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class DbAdapterBase extends Observable
 {
+	/** @var  null|array */
+	protected static $calls;
 	/** @var ConnectionPool[] */
 	protected static $pool;
 	/** @var  DbConnection */
@@ -24,7 +26,7 @@ class DbAdapterBase extends Observable
 	protected static $instance;
 
 	/**
-	 * Добавление пула соединений
+	 * Add connection pool
 	 *
 	 * @param ConnectionPool $pool
 	 */
@@ -35,7 +37,7 @@ class DbAdapterBase extends Observable
 	}
 
 	/**
-	 * Получение пула соединений
+	 * Get connection pool
 	 *
 	 * @return ConnectionPool $pool
 	 */
@@ -45,7 +47,7 @@ class DbAdapterBase extends Observable
 	}
 
 	/**
-	 * Установка соединения по-умолчанию
+	 * Set default connection
 	 *
 	 * @param string $name Имя соединения
 	 * @return $this
@@ -59,7 +61,7 @@ class DbAdapterBase extends Observable
 	}
 
 	/**
-	 * Получение соединения по-умолчанию
+	 * Get default connection resource
 	 *
 	 * return mixed
 	 */
@@ -75,7 +77,7 @@ class DbAdapterBase extends Observable
 	}
 
 	/**
-	 * Возвращаем инстанс адаптера
+	 * Get adapter instance
 	 *
 	 * @return iDbAdapter
 	 */
@@ -87,6 +89,38 @@ class DbAdapterBase extends Observable
 			static::$instance = new $class;
 		}
 
+		if (null !== static::$calls) {
+			static::invokeLazyCalls();
+		}
+
 		return static::$instance;
+	}
+
+	/**
+	 * Save calls for future invocation
+	 *
+	 * @param string $method Method name that should be called
+	 * @param array $arguments Method arguments
+	 */
+	final public static function addCall($method, array $arguments = array())
+	{
+		static::$calls[] = array(
+			'method'    => $method,
+			'arguments' => $arguments
+		);
+	}
+
+	/**
+	 * Lazy calls invocation
+	 */
+	final protected static function invokeLazyCalls()
+	{
+		foreach (static::$calls as $call) {
+			call_user_func_array(
+				array(static::$instance->getConnection(), $call['method']),
+				$call['arguments']
+			);
+		}
+		static::$calls = null;
 	}
 }
