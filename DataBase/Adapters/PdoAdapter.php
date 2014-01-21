@@ -146,6 +146,10 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	 */
 	public function query($sql, array $params, $types)
 	{
+		if (empty($params)) {
+			return (bool) $this->getConnection()->query($sql);
+		}
+
 		$this->stmt = $this->getConnection()->prepare($sql, $params);
 
 		if (null === $types) {
@@ -177,11 +181,11 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	 */
 	public function getFoundRows()
 	{
-		$this->stmt = $this->getConnection()->query('SELECT FOUND_ROWS()');
+		$result = $this->value('SELECT FOUND_ROWS()', array(), null);
 
 		$this->notify();
 
-		return (int) $this->stmt->fetchColumn();
+		return (int) $result;
 	}
 
 	/**
