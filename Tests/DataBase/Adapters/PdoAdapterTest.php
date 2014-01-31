@@ -20,7 +20,7 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 	public static function setUpBeforeClass()
 	{
 		// Создаём тестовую таблицу в базе
-		$tbl_name = static::$tbl_name = 'rbk_unit_test' . mt_rand(1000, 9999);
+		$tbl_name = static::$tbl_name = 'veles_unit_test' . mt_rand(1000, 9999);
 
 		Db::query("
 			CREATE TABLE IF NOT EXISTS $tbl_name (
@@ -41,7 +41,7 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 
 	public static function tearDownAfterClass()
 	{
-		Db::query('DROP DATABASE ' . static::$tbl_name);
+		Db::query('DROP TABLE ' . static::$tbl_name);
 	}
 
 	/**
@@ -149,6 +149,11 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 		$tbl_name = static::$tbl_name;
 		$expected = true;
 		$result = Db::query("DELETE FROM $tbl_name WHERE id > 8");
+
+		$msg = 'Wrong PdoAdapter::query() result';
+		$this->assertSame($expected, $result, $msg);
+
+		$result = Db::query("DELETE FROM $tbl_name WHERE id > ?", array(8));
 
 		$msg = 'Wrong PdoAdapter::query() result';
 		$this->assertSame($expected, $result, $msg);

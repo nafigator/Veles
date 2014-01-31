@@ -113,7 +113,7 @@ class DbAdapterBase extends Observable
 	/**
 	 * Lazy calls invocation
 	 */
-	final protected static function invokeLazyCalls()
+	final public static function invokeLazyCalls()
 	{
 		foreach (static::$calls as $call) {
 			call_user_func_array(

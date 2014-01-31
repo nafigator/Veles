@@ -79,4 +79,21 @@ class CacheAdapterAbstractTest extends \PHPUnit_Framework_TestCase
 
 		Cache::setAdapter();
 	}
+
+	/**
+	 * @covers Veles\Cache\Adapters\CacheAdapterAbstract::AddCall
+	 */
+	public function testAddCall()
+	{
+		CacheAdapterAbstractChild::addCall('testCall', array('string'));
+
+		$result = CacheAdapterAbstractChild::getCalls();
+		$expected = array(array(
+			'method' => 'testCall',
+			'arguments' => array('string')
+		));
+
+		$msg = 'Driver calls was not saved correctly!';
+		$this->assertSame($expected, $result, $msg);
+	}
 }
