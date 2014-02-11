@@ -57,7 +57,7 @@ MemcachedAdapter::addCall('addServer', array('localhost', 11211));
 MemcacheAdapter::addCall('addServer', array('localhost', 11211));
 Cache::setAdapter('Memcached');
 
-// Параметризуем соединение с базой
+// Parameters for Db connection
 $pool = new ConnectionPool();
 $conn = new PdoConnection('master');
 

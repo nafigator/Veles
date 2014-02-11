@@ -4,91 +4,91 @@ namespace Veles\DataBase\Adapters;
 /**
  * Interface iDbAdapter
  *
- * Интерфейс для Db адаптеров
+ * Db adapters interface
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 interface iDbAdapter
 {
 	/**
-	 * Получение значения столбца таблицы
+	 * Get value from table row
 	 *
-	 * @param string $sql SQL-запрос
-	 * @param array $params Плейсхолдеры запроса
-	 * @param string|null $types Типы плейсхолдеров
+	 * @param string $sql SQL-query
+	 * @param array $params Query values
+	 * @param string|null $types Placeholders types
 	 * @return string
 	 */
 	public function value($sql, array $params, $types);
 
 	/**
-	 * Получение строки таблицы в виде ассоциативного массива
+	 * Get table row
 	 *
-	 * @param string $sql SQL-запрос
-	 * @param array $params Плейсхолдеры запроса
-	 * @param string|null $types Типы плейсхолдеров
+	 * @param string $sql SQL-query
+	 * @param array $params Query values
+	 * @param string|null $types Placeholders types
 	 * @return array
 	 */
 	public function row($sql, array $params, $types);
 
 	/**
-	 * Получение результата в виде коллекции ассоциативных массивов
+	 * Get result collection
 	 *
-	 * @param string $sql SQL-запрос
-	 * @param array $params Плейсхолдеры запроса
-	 * @param string|null $types Типы плейсхолдеров
-	 * @return array
+	 * @param string $sql SQL-query
+	 * @param array $params Query values
+	 * @param string|null $types Placeholders types
+	 * @return mixed
 	 */
 	public function rows($sql, array $params, $types);
 
 	/**
-	 * Инициализация транзакции
+	 * Transaction initialization
 	 *
 	 * @return bool
 	 */
 	public function begin();
 
 	/**
-	 * Откат транзакции
+	 * Transaction rollback
 	 *
 	 * @return bool
 	 */
 	public function rollback();
 
 	/**
-	 * Сохранение всех запросов транзакции и её закрытие
+	 * Commit transaction
 	 *
 	 * @return bool
 	 */
 	public function commit();
 
 	/**
-	 * Запуск произвольного не SELECT запроса
+	 * Launch non-SELECT query
 	 *
-	 * @param string $sql Non-SELECT SQL-запрос
-	 * @param array $params Плейсхолдеры запроса
-	 * @param string|null $types Типы плейсхолдеров
+	 * @param string $sql Non-SELECT SQL-query
+	 * @param array $params Query values
+	 * @param string|null $types Placeholders types
 	 * @return bool
 	 */
 	public function query($sql, array $params, $types);
 
 	/**
-	 * Получение последнего сохранённого ID
+	 * Get last saved ID
 	 *
 	 * @return int
 	 */
 	public function getLastInsertId();
 
 	/**
-	 * Получение кол-ва строк в результате
+	 * Get found rows quantity
 	 *
 	 * @return int
 	 */
 	public function getFoundRows();
 
 	/**
-	 * Получение statement
+	 * Get PDOStatement
 	 *
-	 * Используется подписчиками для получения информации об ошибках
+	 * Used in subscribers for getting error information
 	 *
 	 * @return mixed
 	 */

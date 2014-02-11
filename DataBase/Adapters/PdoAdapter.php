@@ -6,13 +6,13 @@ use PDO;
 /**
  * Class PdoAdapter
  *
- * Адаптер для php-расширения PDO
+ * Adapter PDO extension
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class PdoAdapter extends DbAdapterBase implements iDbAdapter
 {
-	// Храним стейтмент для возможности получения ошибок в подписчиках
+	// Save statement for ability to get error information
 	/** @var  \PDOStatement */
 	private $stmt;
 
@@ -35,11 +35,11 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	}
 
 	/**
-	 * Получение значения столбца таблицы
+	 * Get value from table row
 	 *
-	 * @param string $sql SQL-запрос
-	 * @param array $params Плейсхолдеры запроса
-	 * @param string|null $types Типы плейсхолдеров
+	 * @param string $sql SQL-query
+	 * @param array $params Query values
+	 * @param string|null $types Placeholders types
 	 * @return string
 	 */
 	public function value($sql, array $params, $types)
@@ -59,11 +59,11 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	}
 
 	/**
-	 * Получение строки таблицы в виде ассоциативного массива
+	 * Get table row
 	 *
-	 * @param string $sql SQL-запрос
-	 * @param array $params Плейсхолдеры запроса
-	 * @param string|null $types Типы плейсхолдеров
+	 * @param string $sql SQL-query
+	 * @param array $params Query values
+	 * @param string|null $types Placeholders types
 	 * @return array
 	 */
 	public function row($sql, array $params, $types)
@@ -83,11 +83,11 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	}
 
 	/**
-	 * Получение результата в виде коллекции ассоциативных массивов
+	 * Get result collection
 	 *
-	 * @param string $sql SQL-запрос
-	 * @param array $params Плейсхолдеры запроса
-	 * @param string|null $types Типы плейсхолдеров
+	 * @param string $sql SQL-query
+	 * @param array $params Query values
+	 * @param string|null $types Placeholders types
 	 * @return mixed
 	 */
 	public function rows($sql, array $params, $types)
@@ -107,7 +107,7 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	}
 
 	/**
-	 * Инициализация транзакции
+	 * Transaction initialization
 	 *
 	 * @return bool
 	 */
@@ -117,7 +117,7 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	}
 
 	/**
-	 * Откат транзакции
+	 * Transaction rollback
 	 *
 	 * @return bool
 	 */
@@ -127,7 +127,7 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	}
 
 	/**
-	 * Сохранение всех запросов транзакции и её закрытие
+	 * Commit transaction
 	 *
 	 * @return bool
 	 */
@@ -137,11 +137,11 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	}
 
 	/**
-	 * Запуск произвольного не SELECT запроса
+	 * Launch non-SELECT query
 	 *
-	 * @param string $sql Non-SELECT SQL-запрос
-	 * @param array $params Плейсхолдеры запроса
-	 * @param string|null $types Типы плейсхолдеров
+	 * @param string $sql Non-SELECT SQL-query
+	 * @param array $params Query values
+	 * @param string|null $types Placeholders types
 	 * @return bool
 	 */
 	public function query($sql, array $params, $types)
@@ -150,7 +150,7 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 			return (bool) $this->getConnection()->query($sql);
 		}
 
-		$this->stmt = $this->getConnection()->prepare($sql, $params);
+		$this->stmt = $this->getConnection()->prepare($sql);
 
 		if (null === $types) {
 			$result = $this->stmt->execute($params);
@@ -165,7 +165,7 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	}
 
 	/**
-	 * Получение последнего сохранённого ID
+	 * Get last saved ID
 	 *
 	 * @return int
 	 */
@@ -175,7 +175,7 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	}
 
 	/**
-	 * Получение кол-ва строк в результате
+	 * Get found rows quantity
 	 *
 	 * @return int
 	 */
@@ -189,9 +189,9 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	}
 
 	/**
-	 * Получение PDOStatement
+	 * Get PDOStatement
 	 *
-	 * Используется подписчиками для получения информации об ошибках
+	 * Used in subscribers for getting error information
 	 *
 	 * @return mixed
 	 */
