@@ -65,40 +65,40 @@ class FileTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tools\File::setMimeType
+	 * @covers Veles\Tools\File::setMime
 	 * @group Tools
-	 * @see File::setMimeType
+	 * @see File::setMime
 	 */
-	public function testSetMimeType()
+	public function testSetMime()
 	{
-		$this->object->setMimeType('text/plain');
+		$this->object->setMime('text/plain');
 
 		$object = new ReflectionObject($this->object);
-		$prop = $object->getProperty('mime_type');
+		$prop = $object->getProperty('mime');
 
-		$msg = 'Property File::$mime_type not protected';
+		$msg = 'Property File::$mime not protected';
 		$this->assertTrue($prop->isProtected(), $msg);
 
 		$prop->setAccessible(true);
 		$result = $prop->getValue($this->object);
 
-		$msg = "Wrong value of File::setMimeType: $result";
+		$msg = "Wrong value of File::setMime: $result";
 		$this->assertSame($result, 'text/plain', $msg);
 	}
 
 	/**
-	 * @covers Veles\Tools\File::getMimeType
+	 * @covers Veles\Tools\File::getMime
 	 * @group Tools
-	 * @depends testSetMimeType
-	 * @see File::getMimeType
+	 * @depends testSetMime
+	 * @see File::getMime
 	 */
 	public function testGetMimeType()
 	{
-		$this->object->setMimeType('application/pdf');
+		$this->object->setMime('application/pdf');
 
-		$result = $this->object->getMimeType();
+		$result = $this->object->getMime();
 
-		$msg = "Wrong value of File::getMimeType: $result";
+		$msg = "Wrong value of File::getMime: $result";
 		$this->assertSame($result, 'application/pdf', $msg);
 	}
 

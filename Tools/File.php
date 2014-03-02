@@ -22,7 +22,7 @@ class File
 	protected $name;
 	protected $path;
 	protected $dir;
-	protected $mime_type;
+	protected $mime;
 
 	/**
 	 * Get absolute directory path
@@ -53,20 +53,20 @@ class File
 	 *
 	 * @return string
 	 */
-	public function getMimeType()
+	public function getMime()
 	{
-		return $this->mime_type;
+		return $this->mime;
 	}
 
 	/**
 	 * Set MIME type
 	 *
-	 * @param string $mime_type
+	 * @param string $mime
 	 * @return $this;
 	 */
-	public function setMimeType($mime_type)
+	public function setMime($mime)
 	{
-		$this->mime_type = $mime_type;
+		$this->mime = $mime;
 
 		return $this;
 	}
