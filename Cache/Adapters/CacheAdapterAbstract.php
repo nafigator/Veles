@@ -13,8 +13,6 @@
 
 namespace Veles\Cache\Adapters;
 
-use Exception;
-
 /**
  * Class CacheAdapterAbstract
  *
