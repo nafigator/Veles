@@ -16,7 +16,7 @@ class DbAdapterBase extends Observable
 {
 	/** @var  null|array */
 	protected static $calls;
-	/** @var ConnectionPool[] */
+	/** @var ConnectionPool */
 	protected static $pool;
 	/** @var  DbConnection */
 	protected static $connection;

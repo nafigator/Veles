@@ -44,17 +44,20 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	 */
 	public function value($sql, array $params, $types)
 	{
+		/** @noinspection PhpUndefinedMethodInspection */
 		$this->stmt = $this->getConnection()->prepare($sql);
 
 		if (null === $types) {
+			/** @noinspection PhpUndefinedMethodInspection */
 			$this->stmt->execute($params);
 		} else {
 			$this->bindParams($params, $types);
+			/** @noinspection PhpUndefinedMethodInspection */
 			$this->stmt->execute();
 		}
 
 		$this->notify();
-
+		/** @noinspection PhpUndefinedMethodInspection */
 		return $this->stmt->fetchColumn();
 	}
 
@@ -68,6 +71,7 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	 */
 	public function row($sql, array $params, $types)
 	{
+		/** @noinspection PhpUndefinedMethodInspection */
 		$this->stmt = $this->getConnection()->prepare($sql);
 
 		if (null === $types) {

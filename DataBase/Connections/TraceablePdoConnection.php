@@ -39,6 +39,7 @@ class TraceablePdoConnection extends PdoConnection
 			$this->bar->addCollector($pdoCollector);
 		} else {
 			$pdoCollector = $this->bar->getCollector('pdo');
+			/** @noinspection PhpUndefinedMethodInspection */
 			$pdoCollector->addConnection($this->resource, $this->getName());
 		}
 
