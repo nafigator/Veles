@@ -31,7 +31,7 @@ class UploadFile extends File
 	 * Set upload directory mask
 	 *
 	 * @param int $dir_mask Value must be octal. Examples: 0755, 02755
-	 * @return $this
+	 * @return UploadFile
 	 */
 	final public function setDirMask($dir_mask)
 	{
@@ -64,7 +64,7 @@ class UploadFile extends File
 	 * Set uploaded file origin name
 	 *
 	 * @param string $orig_name Origin file name
-	 * @return $this
+	 * @return UploadFile
 	 */
 	final public function setOrigName($orig_name)
 	{
@@ -121,7 +121,7 @@ class UploadFile extends File
 	 * Set uploaded file name hash
 	 *
 	 * @param string $hash
-	 * @return $this
+	 * @return UploadFile
 	 */
 	final public function setHash($hash)
 	{
@@ -144,7 +144,7 @@ class UploadFile extends File
 	 * Set uploaded file sub-dir
 	 *
 	 * @param string $sub_dir
-	 * @return $this
+	 * @return UploadFile
 	 */
 	final public function setSubDir($sub_dir)
 	{
@@ -184,7 +184,7 @@ class UploadFile extends File
 	 * Set uploaded file temporary path
 	 *
 	 * @param string $tmp_path Uploaded file temp path
-	 * @return $this
+	 * @return UploadFile
 	 */
 	final public function setTmpPath($tmp_path)
 	{
@@ -207,7 +207,7 @@ class UploadFile extends File
 	 * Set uploaded file www-path
 	 *
 	 * @param string $www_path www-path to file
-	 * @return $this
+	 * @return UploadFile
 	 */
 	final public function setWwwPath($www_path)
 	{
@@ -232,7 +232,7 @@ class UploadFile extends File
 	 *
 	 * @param string $hash_algorithm Hash algorithm
 	 * @see hash_algos()
-	 * @return $this
+	 * @return UploadFile
 	 */
 	public function setHashAlgorithm($hash_algorithm)
 	{
