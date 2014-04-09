@@ -18,7 +18,6 @@ use Exception;
  * Class CliColor
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
-/** @noinspection PhpDocMissingReturnTagInspection */
 class CliColor
 {
 	private $color;

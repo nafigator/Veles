@@ -39,7 +39,7 @@ define('CONFIG_FILE', TEST_DIR . '/Project/settings.ini');
 define('TEMPLATE_PATH', TEST_DIR . '/Project/View/');
 
 date_default_timezone_set('Europe/Moscow');
-/** @noinspection PhpIncludeInspection */
+
 require LIB_DIR . '/Veles/AutoLoader.php';
 AutoLoader::init();
 AutoLoader::registerPath(
@@ -51,9 +51,7 @@ View::setAdapter('Native');
 
 // Cache initialization
 MemcacheRaw::setConnectionParams('localhost', 11211);
-/** @noinspection PhpUndefinedMethodInspection */
 MemcachedAdapter::addCall('addServer', array('localhost', 11211));
-/** @noinspection PhpUndefinedMethodInspection */
 MemcacheAdapter::addCall('addServer', array('localhost', 11211));
 Cache::setAdapter('Memcached');
 
