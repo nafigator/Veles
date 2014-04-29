@@ -1,7 +1,6 @@
 <?php
 namespace Veles\DataBase\Adapters;
 
-use Veles\DataBase\Connections\DbConnection;
 use Veles\DataBase\ConnectionPools\ConnectionPool;
 use Veles\Helpers\Observable;
 
@@ -18,7 +17,7 @@ class DbAdapterBase extends Observable
 	protected static $calls;
 	/** @var ConnectionPool */
 	protected static $pool;
-	/** @var  DbConnection */
+	/** @var  \PDO */
 	protected static $connection;
 	/** @var  string */
 	protected static $connection_name;
@@ -63,7 +62,7 @@ class DbAdapterBase extends Observable
 	/**
 	 * Get default connection resource
 	 *
-	 * return mixed
+	 * return \PDO
 	 */
 	final public function getConnection()
 	{
