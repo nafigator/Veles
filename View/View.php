@@ -31,12 +31,11 @@ class View
 	/**
 	 * Cache adapter initialisation
 	 *
-	 * @param string $class_name Adapter name
+	 * @param iViewAdapter $adapter Adapter
 	 */
-	final public static function setAdapter($class_name = 'Native')
+	final public static function setAdapter(iViewAdapter $adapter)
 	{
-		self::$adapter_name = "\\Veles\\View\\Adapters\\${class_name}Adapter";
-		self::$adapter = null;
+		self::$adapter = $adapter;
 	}
 
 	/**

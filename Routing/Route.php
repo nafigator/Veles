@@ -144,6 +144,23 @@ class Route
 	}
 
 	/**
+	 * Get View adapter class
+	 *
+	 * @return \Veles\View\Adapters\iViewAdapter
+	 * @throws \Exception
+	 */
+	final public function getAdapter()
+	{
+		if (!isset($this->config['adapter'])) {
+			throw new Exception('Не указан адаптер!');
+		}
+
+		/** @var \Veles\View\Adapters\ViewAdapterAbstract $adapter_name */
+		$adapter_name = $this->config['adapter'];
+		return $adapter_name::instance();
+	}
+
+	/**
 	 * Getting page name
 	 * @throws Exception
 	 * @return string

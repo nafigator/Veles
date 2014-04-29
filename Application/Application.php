@@ -39,6 +39,7 @@ class Application
 		$action_name = $route->getActionName();
 		$template    = $route->getTemplate();
 
+		View::setAdapter($route->getAdapter());
 		View::set($controller->$action_name());
 
 		View::show($template);
