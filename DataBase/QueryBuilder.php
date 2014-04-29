@@ -39,7 +39,7 @@ class QueryBuilder
 				continue;
 			}
 
-			$arr['fields'] .= "`$property`, ";
+			$arr['fields'] .= "$property, ";
 			$arr['values'] .= "$value, ";
 		}
 
@@ -51,7 +51,7 @@ class QueryBuilder
 
 		$sql = '
 			INSERT
-				`' . $model::TBL_NAME . "`
+				' . $model::TBL_NAME . "
 				($arr[fields])
 			VALUES
 				($arr[values])
@@ -79,14 +79,14 @@ class QueryBuilder
 				continue;
 			}
 
-			$params .= "`$property` = $value, ";
+			$params .= "$property = $value, ";
 		}
 
 		$params = rtrim($params, ', ');
 
 		$sql = '
 			UPDATE
-				`' . $model::TBL_NAME . "`
+				' . $model::TBL_NAME . "
 			SET
 				$params
 			WHERE
@@ -109,9 +109,9 @@ class QueryBuilder
 		$sql = '
 			SELECT *
 			FROM
-				`' . $model::TBL_NAME . "`
+				' . $model::TBL_NAME . "
 			WHERE
-				`id` = $identifier
+				id = $identifier
 			LIMIT 1
 		";
 
@@ -147,7 +147,7 @@ class QueryBuilder
 
 		$sql = '
 			DELETE FROM
-				`' . $model::TBL_NAME . "`
+				' . $model::TBL_NAME . "
 			WHERE
 				id IN ($ids)
 		";
@@ -165,7 +165,7 @@ class QueryBuilder
 	{
 		$where = $group = $having = $order = $limit = '';
 		$select = 'SELECT';
-		$fields = '`' . implode('`, `', array_keys($model::getMap())) . '`';
+		$fields = implode(', ', array_keys($model::getMap()));
 
 		if ($filter instanceof DbFilter) {
 			$where  = $filter->getWhere();
@@ -178,7 +178,7 @@ class QueryBuilder
 			$select
 				$fields
 			FROM
-				`" . $model::TBL_NAME . "`
+				" . $model::TBL_NAME . "
 			$where
 			$group
 			$having
