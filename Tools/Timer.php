@@ -26,6 +26,7 @@ class Timer
 	const PICOSECONDS  = 12;
 
 	private static $start_time = 0;
+	private static $stop_time  = 0;
 	private static $diff       = 0;
 
 	/**
@@ -41,7 +42,8 @@ class Timer
 	 */
 	public static function stop()
 	{
-		self::$diff += microtime(true) - self::$start_time;
+		self::$stop_time = microtime(true);
+		self::$diff += self::$stop_time - self::$start_time;
 		self::reset(false);
 	}
 

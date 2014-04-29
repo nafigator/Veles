@@ -147,10 +147,11 @@ class TimerTest extends PHPUnit_Framework_TestCase
 	/**
 	 * @covers  Veles\Tools\Timer::get
 	 * @group Tools
+	 * @dataProvider getProvider
 	 * @depends testStop
 	 * @see Timer::get
 	 */
-	public function testGet()
+	public function testGet($timer_precision, $precision)
 	{
 		Timer::start();
 
@@ -161,17 +162,30 @@ class TimerTest extends PHPUnit_Framework_TestCase
 
 		Timer::stop();
 
-		$stop_value = microtime(true);
+		$stop_time = $object->getProperty('stop_time');
+		$stop_time->setAccessible(true);
+		$stop_value = $stop_time->getValue();
 
-		$result = Timer::get(Timer::MILLISECONDS);
-		$expected = round($stop_value - $start_value, 3);
-
+		$result = Timer::get($timer_precision);
+		$expected = round($stop_value - $start_value, $precision);
 
 		$msg = 'Wrong Timer result type';
 		$this->assertInternalType('float', $result, $msg);
 
 		$msg = 'Wrong Timer result';
 		$this->assertSame($expected, $result, $msg);
+	}
+
+	public function getProvider()
+	{
+		return array(
+			array(Timer::SECONDS, 0),
+			array(Timer::MILLISECONDS, 3),
+			array(Timer::MICROSECONDS, 6),
+			array(Timer::NANOSECONDS, 9),
+			array(Timer::PICOSECONDS, 12),
+			array(8, 6)
+		);
 	}
 
 	/**
