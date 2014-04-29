@@ -50,14 +50,7 @@ class View
 			return self::$adapter;
 		}
 
-		if (null === self::$adapter_name) {
-			throw new Exception('Adapter not set!');
-		}
-
-		$tmp =& self::$adapter_name;
-		self::$adapter = $tmp::instance();
-
-		return self::$adapter;
+		throw new Exception('Adapter not set!');
 	}
 
 	/**
