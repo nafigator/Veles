@@ -12,6 +12,7 @@
 
 namespace Veles\View;
 
+use Veles\Routing\Route;
 use Veles\View\Adapters\iViewAdapter;
 use Veles\View\Adapters\ViewAdapterAbstract;
 use Exception;
@@ -25,8 +26,6 @@ class View
 {
 	/** @var iViewAdapter */
 	private static $adapter;
-	/** @var  string|ViewAdapterAbstract */
-	private static $adapter_name;
 
 	/**
 	 * Cache adapter initialisation
@@ -50,7 +49,10 @@ class View
 			return self::$adapter;
 		}
 
-		throw new Exception('Adapter not set!');
+		$adapter = Route::instance()->getAdapter();
+		self::setAdapter($adapter);
+
+		return $adapter;
 	}
 
 	/**
