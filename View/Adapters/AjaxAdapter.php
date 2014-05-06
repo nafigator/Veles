@@ -18,6 +18,10 @@ use Exception;
 
 class AjaxAdapter extends ViewAdapterAbstract implements iViewAdapter
 {
+	/** @var  null|array */
+	protected static $calls;
+	/** @var iViewAdapter|$this */
+	protected static $instance;
 	/** @var array */
 	private static $variables = array();
 
@@ -26,7 +30,7 @@ class AjaxAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 */
 	protected function __construct()
 	{
-		// Just a stub method. Ajax adapter not need additional driver
+		$this->setDriver($this);
 	}
 
 	/**
@@ -38,7 +42,7 @@ class AjaxAdapter extends ViewAdapterAbstract implements iViewAdapter
 	public function set($vars)
 	{
 		foreach ($vars as $prop => $value) {
-			self::$variables[$prop] = $value;
+			static::$variables[$prop] = $value;
 		}
 	}
 
@@ -55,8 +59,8 @@ class AjaxAdapter extends ViewAdapterAbstract implements iViewAdapter
 		}
 
 		foreach ($vars as $var_name) {
-			if (isset(self::$variables[$var_name])) {
-				unset(self::$variables[$var_name]);
+			if (isset(static::$variables[$var_name])) {
+				unset(static::$variables[$var_name]);
 			}
 		}
 	}
@@ -68,7 +72,7 @@ class AjaxAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 */
 	public function show($path)
 	{
-		echo json_encode(self::$variables);
+		echo json_encode(static::$variables);
 	}
 
 	/**

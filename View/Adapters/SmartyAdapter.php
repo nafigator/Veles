@@ -25,6 +25,10 @@ use /** @noinspection PhpUndefinedClassInspection */ Smarty;
  */
 class SmartyAdapter extends ViewAdapterAbstract implements iViewAdapter
 {
+	/** @var  null|array */
+	protected static $calls;
+	/** @var iViewAdapter|$this */
+	protected static $instance;
 	/**
 	 * Constructor
 	 */

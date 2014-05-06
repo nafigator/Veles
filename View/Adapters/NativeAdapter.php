@@ -22,6 +22,10 @@ use Exception;
  */
 class NativeAdapter extends ViewAdapterAbstract implements iViewAdapter
 {
+	/** @var  null|array */
+	protected static $calls;
+	/** @var iViewAdapter|$this */
+	protected static $instance;
 	/** @var array */
 	private static $variables = array();
 	/** @var string */
