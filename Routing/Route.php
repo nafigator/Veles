@@ -151,12 +151,12 @@ class Route
 	 */
 	final public function getAdapter()
 	{
-		if (!isset($this->config['adapter'])) {
+		if (!isset($this->config['view'])) {
 			throw new Exception('Не указан адаптер!');
 		}
 
 		/** @var \Veles\View\Adapters\ViewAdapterAbstract $adapter_name */
-		$adapter_name = $this->config['adapter'];
+		$adapter_name = $this->config['view'];
 		return $adapter_name::instance();
 	}
 
