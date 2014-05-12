@@ -25,7 +25,7 @@ use Exception;
 class View
 {
 	/** @var iViewAdapter */
-	private static $adapter;
+	protected static $adapter;
 
 	/**
 	 * Cache adapter initialisation
@@ -43,7 +43,7 @@ class View
 	 * @throws Exception
 	 * @return iViewAdapter|ViewAdapterAbstract
 	 */
-	private static function getAdapter()
+	final public static function getAdapter()
 	{
 		if (self::$adapter instanceof iViewAdapter) {
 			return self::$adapter;
@@ -102,7 +102,7 @@ class View
 	 * @param $tpl
 	 * @return bool
 	 */
-	public static function isCached($tpl)
+	final public static function isCached($tpl)
 	{
 		return self::getAdapter()->isCached($tpl);
 	}
