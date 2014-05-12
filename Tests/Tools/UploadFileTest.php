@@ -188,6 +188,43 @@ class UploadFileTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testInitStorageName()
 	{
+		$hash = '4b53f83dcdd24c5eefa9c9d9633f9ff5';
+		$this->object->setHash($hash);
+		$this->object->initStorageName();
+
+		$object = new ReflectionObject($this->object);
+		$prop = $object->getProperty('sub_dir');
+		$prop->setAccessible(true);
+		$result = $prop->getValue($this->object);
+		$expected = null;
+
+		$msg = 'Wrong value of UploadFile::$sub_dir property';
+		$this->assertSame($expected, $result, $msg);
+
+		$prop = $object->getProperty('name');
+		$prop->setAccessible(true);
+		$result = $prop->getValue($this->object);
+
+		$msg = 'Not valid value of UploadFile::$name property';
+		$this->assertSame($expected, $result, $msg);
+
+		$prop = $object->getProperty('dir');
+		$prop->setAccessible(true);
+		$result = $prop->getValue($this->object);
+
+		$msg = 'Wrong value of UploadFile::$dir property';
+		$this->assertSame($expected, $result, $msg);
+
+		$prop = $object->getProperty('path');
+		$prop->setAccessible(true);
+		$result = $prop->getValue($this->object);
+
+		$msg = 'Not valid value of UploadFile::$path property';
+		$this->assertSame($expected, $result, $msg);
+
+		$this->object = new UploadFile;
+
+
 		$content = 'This is the test content';
 		$path = tempnam(sys_get_temp_dir(), 'veles-testInitStorageName');
 		$this->object->setTmpPath($path);
