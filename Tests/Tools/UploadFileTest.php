@@ -13,7 +13,6 @@
 namespace Veles\Tests\Tools;
 
 use PHPUnit_Framework_TestCase;
-use Veles\Tools\UploadFile;
 use ReflectionObject;
 
 /**
@@ -38,8 +37,8 @@ class UploadFileTest extends PHPUnit_Framework_TestCase
 		$object = new ReflectionObject($this->object);
 		$prop = $object->getProperty('orig_name');
 
-		$msg = 'Property UploadFile::$orig_name not private';
-		$this->assertTrue($prop->isPrivate(), $msg);
+		$msg = 'Property UploadFile::$orig_name not protected';
+		$this->assertTrue($prop->isProtected(), $msg);
 
 		$prop->setAccessible(true);
 		$result = $prop->getValue($this->object);
@@ -76,8 +75,8 @@ class UploadFileTest extends PHPUnit_Framework_TestCase
 		$object = new ReflectionObject($this->object);
 		$hash_prop = $object->getProperty('hash');
 
-		$msg = 'Property UploadFile::$hash not private';
-		$this->assertTrue($hash_prop->isPrivate(), $msg);
+		$msg = 'Property UploadFile::$hash not protected';
+		$this->assertTrue($hash_prop->isProtected(), $msg);
 
 		$hash_prop->setAccessible(true);
 		$result = $hash_prop->getValue($this->object);
@@ -114,8 +113,8 @@ class UploadFileTest extends PHPUnit_Framework_TestCase
 		$object = new ReflectionObject($this->object);
 		$sub_dir_prop = $object->getProperty('sub_dir');
 
-		$msg = 'Property UploadFile::$sub_dir_prop not private';
-		$this->assertTrue($sub_dir_prop->isPrivate(), $msg);
+		$msg = 'Property UploadFile::$sub_dir_prop not protected';
+		$this->assertTrue($sub_dir_prop->isProtected(), $msg);
 
 		$sub_dir_prop->setAccessible(true);
 		$result = $sub_dir_prop->getValue($this->object);
@@ -152,8 +151,8 @@ class UploadFileTest extends PHPUnit_Framework_TestCase
 		$object = new ReflectionObject($this->object);
 		$sub_dir_prop = $object->getProperty('tmp_path');
 
-		$msg = 'Property UploadFile::$tmp_path not private';
-		$this->assertTrue($sub_dir_prop->isPrivate(), $msg);
+		$msg = 'Property UploadFile::$tmp_path not protected';
+		$this->assertTrue($sub_dir_prop->isProtected(), $msg);
 
 		$sub_dir_prop->setAccessible(true);
 		$result = $sub_dir_prop->getValue($this->object);
@@ -295,8 +294,8 @@ class UploadFileTest extends PHPUnit_Framework_TestCase
 		$object = new ReflectionObject($this->object);
 		$dir_mask_prop = $object->getProperty('dir_mask');
 
-		$msg = 'Property UploadFile::$tmp_path not private';
-		$this->assertTrue($dir_mask_prop->isPrivate(), $msg);
+		$msg = 'Property UploadFile::$tmp_path not protected';
+		$this->assertTrue($dir_mask_prop->isProtected(), $msg);
 
 		$dir_mask_prop->setAccessible(true);
 		$result = $dir_mask_prop->getValue($this->object);
@@ -333,8 +332,8 @@ class UploadFileTest extends PHPUnit_Framework_TestCase
 		$object = new ReflectionObject($this->object);
 		$sub_dir_prop = $object->getProperty('www_path');
 
-		$msg = 'Property UploadFile::$www_path not private';
-		$this->assertTrue($sub_dir_prop->isPrivate(), $msg);
+		$msg = 'Property UploadFile::$www_path not protected';
+		$this->assertTrue($sub_dir_prop->isProtected(), $msg);
 
 		$sub_dir_prop->setAccessible(true);
 		$result = $sub_dir_prop->getValue($this->object);
@@ -371,8 +370,8 @@ class UploadFileTest extends PHPUnit_Framework_TestCase
 		$object = new ReflectionObject($this->object);
 		$dir_mask_prop = $object->getProperty('hash_algorithm');
 
-		$msg = 'Property UploadFile::$hash_algorithm not private';
-		$this->assertTrue($dir_mask_prop->isPrivate(), $msg);
+		$msg = 'Property UploadFile::$hash_algorithm not protected';
+		$this->assertTrue($dir_mask_prop->isProtected(), $msg);
 
 		$dir_mask_prop->setAccessible(true);
 		$result = $dir_mask_prop->getValue($this->object);
@@ -399,15 +398,17 @@ class UploadFileTest extends PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers Veles\Tools\UploadFile::save
+	 * @covers Veles\Tools\UploadFile::moveUploadedFile
+	 *
 	 * @group Tools
 	 * @depends testGetTmpPath
 	 * @dataProvider saveProvider
 	 * @see UploadFile::save
-	 * @todo find a way to test move_uploaded_file
 	 */
-	/*public function testSave($dir, $file, $expected)
+	public function testSave($dir, $file, $expected)
 	{
 		$this->object->setTmpPath($file['tmp_name']);
+		$this->object->setOrigName($file['name']);
 		$this->object->setDir($dir);
 
 		$this->object->initStorageName();
@@ -417,7 +418,7 @@ class UploadFileTest extends PHPUnit_Framework_TestCase
 		$msg = 'Wrong result of UploadFile::save: ' . ($result)
 			? 'true' : 'false';
 		$this->assertSame($expected, $result, $msg);
-	}*/
+	}
 
 	/**
 	 * DataProvider for UploadFileTest::testSave
@@ -436,7 +437,10 @@ class UploadFileTest extends PHPUnit_Framework_TestCase
 			$_FILES["uploaded_file_$i"]['size'] = 0;
 			$_FILES["uploaded_file_$i"]['type'] = 'plain/text';
 			$_FILES["uploaded_file_$i"]['error'] = UPLOAD_ERR_OK;
-
+			file_put_contents(
+				$files[$i]['tmp_name'],
+				uniqid('This is test content ', true)
+			);
 		}
 
 		return array(

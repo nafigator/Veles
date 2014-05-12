@@ -19,13 +19,25 @@ namespace Veles\Tools;
  */
 class UploadFile extends File
 {
-	private $tmp_path;
-	private $hash;
-	private $sub_dir;
-	private $orig_name;
-	private $www_path;
-	private $dir_mask = 0755;
-	private $hash_algorithm = 'sha1';
+	protected $tmp_path;
+	protected $hash;
+	protected $sub_dir;
+	protected $orig_name;
+	protected $www_path;
+	protected $dir_mask = 0755;
+	protected $hash_algorithm = 'sha1';
+
+	/**
+	 * Method created for test purpose
+	 *
+	 * @param string $filename File name
+	 * @param string $destination Save destination
+	 * @return bool
+	 */
+	protected function moveUploadedFile($filename, $destination)
+	{
+		return move_uploaded_file($filename, $destination);
+	}
 
 	/**
 	 * Set upload directory mask
@@ -167,7 +179,7 @@ class UploadFile extends File
 
 		return file_exists($this->getPath())
 			? true
-			: move_uploaded_file($this->getTmpPath(), $this->getPath());
+			: $this->moveUploadedFile($this->getTmpPath(), $this->getPath());
 	}
 
 	/**
@@ -222,7 +234,7 @@ class UploadFile extends File
 	 * @see hash_algos()
 	 * @return string
 	 */
-	public function getHashAlgorithm()
+	final public function getHashAlgorithm()
 	{
 		return $this->hash_algorithm;
 	}
@@ -234,7 +246,7 @@ class UploadFile extends File
 	 * @see hash_algos()
 	 * @return UploadFile
 	 */
-	public function setHashAlgorithm($hash_algorithm)
+	final public function setHashAlgorithm($hash_algorithm)
 	{
 		$this->hash_algorithm = $hash_algorithm;
 
