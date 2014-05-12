@@ -143,7 +143,7 @@ class UploadFileTest extends PHPUnit_Framework_TestCase
 	/**
 	 * @covers Veles\Tools\UploadFile::setTmpPath
 	 * @group Tools
-	 * @see UploadFile::testSetTmpPath
+	 * @see UploadFile::setTmpPath
 	 */
 	public function testSetTmpPath()
 	{
@@ -188,6 +188,7 @@ class UploadFileTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testInitStorageName()
 	{
+		// Test for non-empty hash case
 		$hash = '4b53f83dcdd24c5eefa9c9d9633f9ff5';
 		$this->object->setHash($hash);
 		$this->object->initStorageName();
@@ -224,7 +225,7 @@ class UploadFileTest extends PHPUnit_Framework_TestCase
 
 		$this->object = new UploadFile;
 
-
+		// Test for empty hash case
 		$content = 'This is the test content';
 		$path = tempnam(sys_get_temp_dir(), 'veles-testInitStorageName');
 		$this->object->setTmpPath($path);
@@ -280,6 +281,120 @@ class UploadFileTest extends PHPUnit_Framework_TestCase
 
 		// test file cleanup
 		unlink($this->object->getTmpPath());
+	}
+
+	/**
+	 * @covers Veles\Tools\UploadFile::setDirMask
+	 * @group Tools
+	 * @see UploadFile::setDirMask
+	 */
+	public function testSetDirMask()
+	{
+		$this->object->setDirMask(0744);
+
+		$object = new ReflectionObject($this->object);
+		$dir_mask_prop = $object->getProperty('dir_mask');
+
+		$msg = 'Property UploadFile::$tmp_path not private';
+		$this->assertTrue($dir_mask_prop->isPrivate(), $msg);
+
+		$dir_mask_prop->setAccessible(true);
+		$result = $dir_mask_prop->getValue($this->object);
+
+		$msg = "Wrong value of UploadFile::\$dir_mask: $result";
+		$this->assertSame(0744, $result, $msg);
+	}
+
+	/**
+	 * @covers Veles\Tools\UploadFile::getDirMask
+	 * @group Tools
+	 * @see UploadFile::getDirMask
+	 */
+	public function testGetDirMask()
+	{
+		$result = $this->object->getDirMask();
+		$msg = "Wrong value of UploadFile::\$dir_mask: $result";
+		$this->assertSame($result, 0755, $msg);
+
+		$this->object->setDirMask(0644);
+		$result = $this->object->getDirMask();
+		$this->assertSame($result, 0644, $msg);
+	}
+
+	/**
+	 * @covers Veles\Tools\UploadFile::setWwwPath
+	 * @group Tools
+	 * @see UploadFile::setWwwPath
+	 */
+	public function testSetWwwPath()
+	{
+		$this->object->setWwwPath('/tmp/tmp-file555');
+
+		$object = new ReflectionObject($this->object);
+		$sub_dir_prop = $object->getProperty('www_path');
+
+		$msg = 'Property UploadFile::$www_path not private';
+		$this->assertTrue($sub_dir_prop->isPrivate(), $msg);
+
+		$sub_dir_prop->setAccessible(true);
+		$result = $sub_dir_prop->getValue($this->object);
+
+		$msg = "Wrong value of UploadFile::\$www_path: $result";
+		$this->assertSame('/tmp/tmp-file555', $result, $msg);
+	}
+
+	/**
+	 * @covers Veles\Tools\UploadFile::getWwwPath
+	 * @group Tools
+	 * @depends testSetWwwPath
+	 * @see UploadFile::getWwwPath
+	 */
+	public function testGetWwwPath()
+	{
+		$this->object->setWwwPath('/tmp/file-path4984');
+
+		$result = $this->object->getWwwPath();
+
+		$msg = "Wrong value of UploadFile::\$Www_path: $result";
+		$this->assertSame($result, '/tmp/file-path4984', $msg);
+	}
+
+	/**
+	 * @covers Veles\Tools\UploadFile::setHashAlgorithm
+	 * @group Tools
+	 * @see UploadFile::setHashAlgorithm
+	 */
+	public function testSetHashAlgorithm()
+	{
+		$this->object->setHashAlgorithm('md5');
+
+		$object = new ReflectionObject($this->object);
+		$dir_mask_prop = $object->getProperty('hash_algorithm');
+
+		$msg = 'Property UploadFile::$hash_algorithm not private';
+		$this->assertTrue($dir_mask_prop->isPrivate(), $msg);
+
+		$dir_mask_prop->setAccessible(true);
+		$result = $dir_mask_prop->getValue($this->object);
+
+		$msg = "Wrong value of UploadFile::\$hash_algorithm: $result";
+		$this->assertSame('md5', $result, $msg);
+	}
+
+	/**
+	 * @covers Veles\Tools\UploadFile::getHashAlgorithm
+	 * @group Tools
+	 * @see UploadFile::getHashAlgorithm
+	 */
+	public function testGetHashAlgorithm()
+	{
+		$result = $this->object->getHashAlgorithm();
+		$msg = "Wrong value of UploadFile::\$hash_algorithm: $result";
+		$this->assertSame($result, 'sha1', $msg);
+
+		$this->object->setHashAlgorithm('md5');
+		$result = $this->object->getHashAlgorithm();
+		$this->assertSame($result, 'md5', $msg);
 	}
 
 	/**
