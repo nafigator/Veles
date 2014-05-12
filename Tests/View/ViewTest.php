@@ -13,6 +13,7 @@
 namespace Veles\Tests\View;
 
 use PHPUnit_Framework_TestCase;
+use ReflectionObject;
 use Veles\View\Adapters\NativeAdapter;
 
 /**
@@ -143,6 +144,66 @@ EOF;
 				array('a' => 'Test', 'b' => 'complete', 'c' => 'Hello')
 			)
 		);
+	}
+
+	/**
+	 * Unit-test for View::del
+	 * @covers Veles\View\View::del
+	 * @dataProvider delProvider
+	 * @see Veles\View\View::del
+	 */
+	public function testDel($vars, $del, $expected)
+	{
+		View::set($vars);
+		View::del($del);
+
+		$object = new ReflectionObject(View::getAdapter());
+
+		$prop = $object->getProperty('variables');
+		$prop->setAccessible(true);
+		$result = $prop->getValue();
+		$msg = 'Wrong View::del() behavior!';
+
+		foreach ($expected as $var => $value) {
+			$this->assertSame($value, isset($result[$var]), $msg);
+		}
+	}
+
+	/**
+	 * DataProvider for View::del
+	 */
+	public function delProvider()
+	{
+		return array(
+			array(
+				array('variable-1' => 'string', 'variable-2' => 'string'),
+				array('variable-1'),
+				array('variable-1' => false, 'variable-2' => true)
+			),
+			array(
+				array('variable-3' => 'string', 'variable-4' => 'string'),
+				array('variable-4'),
+				array('variable-3' => true, 'variable-4' => false)
+			)
+		);
+	}
+
+	/**
+	 * Unit-test for View::isCached
+	 * @covers Veles\View\View::isCached
+	 * @depends testGetAdapter
+	 * @see Veles\View\View::isCached
+	 */
+	public function testIsCached()
+	{
+		$adapter = View::getAdapter();
+		$tpl = $adapter->getTemplateDir();
+
+		$expected = $adapter->isCached($tpl);
+		$result = View::isCached($tpl);
+
+		$msg = 'Wrong View::isCached() result!';
+		$this->assertSame($expected, $result, $msg);
 	}
 
 	/**

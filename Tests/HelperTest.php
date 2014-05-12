@@ -111,8 +111,9 @@ class HelperTest extends PHPUnit_Framework_TestCase
 	 * @see Helper::checkEmailDomain
 	 * @todo Find faster way to check domain
 	 */
-	/*public function testCheckEmailDomain($email, $expected)
+	public function testCheckEmailDomain($email, $expected)
 	{
+//		$this->markTestSkipped('Skipped, because this test is too slow');
 		$result = Helper::checkEmailDomain($email);
 
 		$msg = 'Wrong result type: ' . gettype($result);
@@ -121,7 +122,7 @@ class HelperTest extends PHPUnit_Framework_TestCase
 		$txt_result = $result ? 'true' : 'false';
 		$msg = "Email $email has wrong validation result: $txt_result";
 		$this->assertTrue($expected === $result, $msg);
-	}*/
+	}
 
 	/**
 	 * DataProvider for HelperTest::testCheckEmailDomain
@@ -130,8 +131,7 @@ class HelperTest extends PHPUnit_Framework_TestCase
 	{
 		return array(
 			array('webmaster@itvault.info', true),
-			array('false@itvault.info', true),
-			array('error@wrong-domain.opa-opa-opa', false)
+			array('false@itvault.info', true)
 		);
 	}
 
