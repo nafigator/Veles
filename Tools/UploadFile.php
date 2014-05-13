@@ -30,6 +30,7 @@ class UploadFile extends File
 	/**
 	 * Method created for test purpose
 	 *
+	 * @codeCoverageIgnore
 	 * @param string $filename File name
 	 * @param string $destination Save destination
 	 * @return bool
