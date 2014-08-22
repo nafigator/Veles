@@ -12,10 +12,6 @@
 
 namespace Veles\DataBase;
 
-use Exception;
-use Veles\DataBase\Adapters\iDbAdapter;
-use Veles\DataBase\Adapters\DbAdapterBase;
-
 /**
  * Class DbTransactionHandler
  *
