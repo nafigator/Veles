@@ -59,7 +59,7 @@ Cache::setAdapter('Memcached');
 $pool = new ConnectionPool();
 $conn = new PdoConnection('master');
 
-$conn->setDsn('mysql:host=localhost;dbname=dbname;charset=utf8')
+$conn->setDsn('mysql:host=localhost;dbname=test;charset=utf8')
 	->setUserName('user')
 	->setPassword('password');
 $pool->addConnection($conn, true);
