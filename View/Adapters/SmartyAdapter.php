@@ -15,7 +15,6 @@
 namespace Veles\View\Adapters;
 
 use Exception;
-
 use /** @noinspection PhpUndefinedClassInspection */ Smarty;
 
 /**

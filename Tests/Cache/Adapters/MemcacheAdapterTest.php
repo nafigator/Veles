@@ -1,8 +1,8 @@
 <?php
 namespace Veles\Tests\Cache\Adapters;
 
-use Veles\Cache\Adapters\MemcacheRaw;
 use Veles\Cache\Adapters\MemcacheAdapter;
+use Veles\Cache\Adapters\MemcacheRaw;
 use Veles\Cache\Cache;
 
 /**

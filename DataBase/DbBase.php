@@ -13,8 +13,8 @@
 namespace Veles\DataBase;
 
 use Exception;
-use Veles\DataBase\Adapters\iDbAdapter;
 use Veles\DataBase\Adapters\DbAdapterBase;
+use Veles\DataBase\Adapters\iDbAdapter;
 
 /**
  * Class DbBase

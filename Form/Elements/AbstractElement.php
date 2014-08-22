@@ -12,8 +12,8 @@
 
 namespace Veles\Form\Elements;
 
-use stdClass;
 use Exception;
+use stdClass;
 use Veles\Form\AbstractForm;
 
 /**

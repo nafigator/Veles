@@ -14,8 +14,8 @@
 namespace Veles\Cache;
 
 use Exception;
-use Veles\Cache\Adapters\iCacheAdapter;
 use Veles\Cache\Adapters\CacheAdapterAbstract;
+use Veles\Cache\Adapters\iCacheAdapter;
 
 /**
  * Class Cache

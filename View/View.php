@@ -12,10 +12,10 @@
 
 namespace Veles\View;
 
+use Exception;
 use Veles\Routing\Route;
 use Veles\View\Adapters\iViewAdapter;
 use Veles\View\Adapters\ViewAdapterAbstract;
-use Exception;
 
 /**
  * Class View

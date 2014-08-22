@@ -12,10 +12,10 @@
 
 namespace Veles\ErrorHandler;
 
+use Exception;
 use SplObserver;
 use Veles\Config;
 use Veles\Email\AbstractEmail;
-use Exception;
 
 /**
  * Class ErrEmail

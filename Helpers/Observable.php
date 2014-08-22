@@ -1,8 +1,8 @@
 <?php
 namespace Veles\Helpers;
 
-use SplSubject;
 use SplObserver;
+use SplSubject;
 
 /**
  * Class Observable

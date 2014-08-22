@@ -12,8 +12,8 @@
 
 namespace Veles\DataBase;
 
-use Veles\View\View;
 use stdClass;
+use Veles\View\View;
 
 /**
  * Class DbPaginator

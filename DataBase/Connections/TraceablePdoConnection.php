@@ -1,10 +1,10 @@
 <?php
 namespace Veles\DataBase\Connections;
 
-use DebugBar\DebugBar;
-use PDO;
 use DebugBar\DataCollector\PDO\PDOCollector;
 use DebugBar\DataCollector\PDO\TraceablePDO;
+use DebugBar\DebugBar;
+use PDO;
 
 /**
  * Class PdoConnection

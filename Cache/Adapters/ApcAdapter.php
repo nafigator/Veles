@@ -13,8 +13,8 @@
 
 namespace Veles\Cache\Adapters;
 
-use Exception;
 use APCIterator;
+use Exception;
 
 /**
  * Class ApcAdapter

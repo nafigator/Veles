@@ -13,7 +13,6 @@
 namespace Veles\Tools;
 use Exception;
 
-
 /**
  * Class CliColor
  * @author  Alexander Yancharuk <alex@itvault.info>
