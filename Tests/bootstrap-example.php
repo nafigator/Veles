@@ -59,6 +59,7 @@ Cache::setAdapter('Memcached');
 $pool = new ConnectionPool();
 $conn = new PdoConnection('master');
 
+// Database "test" must be created
 $conn->setDsn('mysql:host=localhost;dbname=test;charset=utf8')
 	->setUserName('user')
 	->setPassword('password');
