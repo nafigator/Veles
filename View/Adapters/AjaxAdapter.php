@@ -1,66 +1,57 @@
 <?php
 /**
- * Adapter for Ajax-requests
+ * Ajax View adapter
  *
  * @file    AjaxAdapter.php
  *
  * PHP version 5.3.9+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
- * @date    Mon May  5 16:46:28 MSK 2014
+ * @date    Втр Апр 29 22:20:05 MSK 2014
  * @copyright The BSD 3-Clause License
  */
 
 namespace Veles\View\Adapters;
 
-
 use Exception;
 
+/**
+ * Class AjaxAdapter
+ *
+ * @author  Alexander Yancharuk <alex@itvault.info>
+ */
 class AjaxAdapter extends ViewAdapterAbstract implements iViewAdapter
 {
-	/** @var  null|array */
-	protected static $calls;
-	/** @var iViewAdapter|$this */
-	protected static $instance;
 	/** @var array */
 	private static $variables = array();
 
 	/**
-	 * Driver initialization
-	 */
-	protected function __construct()
-	{
-		$this->setDriver($this);
-	}
-
-	/**
 	 * Method for output variables setup
 	 *
-	 * @param array $vars Output variables array
-	 * @throws Exception
+	 * @param mixed $vars Output variables or traversable class
 	 */
-	public function set($vars)
+	final public function set($vars)
 	{
 		foreach ($vars as $prop => $value) {
-			static::$variables[$prop] = $value;
+			self::$variables[$prop] = $value;
 		}
 	}
 
 	/**
 	 * Output variables cleanup
 	 *
-	 * @param array $vars Variables array for cleanup
+	 * @param array $vars Array of variables names
 	 * @throws Exception
 	 */
-	public function del($vars)
+	final public function del($vars)
 	{
 		if (!is_array($vars)) {
 			throw new Exception('View can unset variables only in arrays!');
 		}
 
 		foreach ($vars as $var_name) {
-			if (isset(static::$variables[$var_name])) {
-				unset(static::$variables[$var_name]);
+			if (isset(self::$variables[$var_name])) {
+				unset(self::$variables[$var_name]);
 			}
 		}
 	}
@@ -70,9 +61,9 @@ class AjaxAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 *
 	 * @param string $path Path to template
 	 */
-	public function show($path)
+	final public function show($path)
 	{
-		echo json_encode(static::$variables);
+		echo json_encode(self::$variables);
 	}
 
 	/**
@@ -80,10 +71,21 @@ class AjaxAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 *
 	 * @param string $path Path to template
 	 * @return string View content
+	 * @return string
 	 */
-	public function get($path)
+	final public function get($path)
 	{
-		// Just a stub method
+		foreach (self::$variables as $var_name => $value) {
+			$$var_name = $value;
+		}
+
+		ob_start();
+		/** @noinspection PhpIncludeInspection */
+		include TEMPLATE_PATH . $path;
+		$output = ob_get_contents();
+		ob_end_clean();
+
+		return $output;
 	}
 
 	/**
@@ -94,7 +96,14 @@ class AjaxAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 */
 	public function isCached($tpl)
 	{
-		//TODO implement cache check
 		return false;
+	}
+
+	/**
+	 * Driver initialization
+	 */
+	protected function __construct()
+	{
+		$this->setDriver($this);
 	}
 }
