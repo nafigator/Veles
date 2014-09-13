@@ -46,8 +46,9 @@ AutoLoader::registerPath(
 	array(LIB_DIR, TEST_DIR, realpath(__DIR__ . '/Project'))
 );
 
-NativeAdapter::instance()->setTemplateDir(TEST_DIR . '/Project/View/');
-View::setAdapter(NativeAdapter::instance());
+$view_adapter = new NativeAdapter;
+$view_adapter->setTemplateDir(TEST_DIR . '/Project/View/');
+View::setAdapter($view_adapter);
 
 // Cache initialization
 MemcacheRaw::setConnectionParams('localhost', 11211);

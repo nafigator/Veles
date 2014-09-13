@@ -135,7 +135,7 @@ class NativeAdapter extends ViewAdapterAbstract implements iViewAdapter
 	/**
 	 * Driver initialization
 	 */
-	protected function __construct()
+	public function __construct()
 	{
 		$this->setDriver($this);
 	}
