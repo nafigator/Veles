@@ -23,6 +23,7 @@
 	<filter>
 		<blacklist>
 			<directory suffix=".php">Tests</directory>
+			<directory suffix=".phtml">Tests</directory>
 			<directory suffix=".php">DebugBar</directory>
 			<directory suffix=".php">Psr</directory>
 		</blacklist>
