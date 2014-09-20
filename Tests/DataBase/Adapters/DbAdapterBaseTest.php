@@ -13,20 +13,23 @@ use Veles\DataBase\Connections\PdoConnection;
 class DbAdapterBaseTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * @var PdoAdapter
+	 * @var PdoAdapterCopy
 	 */
 	protected $object;
 
 	private static $pool_backup;
+	private static $calls_backup;
 
 	public static function setUpBeforeClass()
 	{
-		self::$pool_backup = PdoAdapter::getPool();
+		self::$pool_backup = PdoAdapterCopy::getPool();
+		self::$calls_backup = PdoAdapterCopy::getCalls();
 	}
 
 	public static function tearDownAfterClass()
 	{
-		PdoAdapter::setPool(self::$pool_backup);
+		PdoAdapterCopy::setPool(self::$pool_backup);
+		PdoAdapterCopy::setCalls(self::$calls_backup);
 	}
 
 	/**
@@ -35,7 +38,7 @@ class DbAdapterBaseTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new PdoAdapter;
+		$this->object = new PdoAdapterCopy;
 	}
 
 	/**
@@ -128,9 +131,7 @@ class DbAdapterBaseTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testAddCall()
 	{
-		$msg = 'Wrong DbAdapterBase::addCall() behavior';
-		$this->assertAttributeEquals(null, 'calls', $this->object, $msg);
-
+		$this->object->resetCalls();
 		$this->object->addCall('setAttribute', array(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT));
 
 		$expected = array(array(
@@ -142,25 +143,5 @@ class DbAdapterBaseTest extends \PHPUnit_Framework_TestCase
 
 		// Возвращаем предыдущее значение
 		$this->object->addCall('setAttribute', array(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION));
-	}
-
-	/**
-	 * @covers Veles\DataBase\Adapters\DbAdapterBase::invokeLazyCalls
-	 * @depends testAddCall
-	 */
-	public function testInvokeLazyCalls()
-	{
-		$this->object->getConnection()->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
-
-		$this->object->addCall('setAttribute', array(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION));
-
-		PdoAdapter::invokeLazyCalls();
-		$expected = PDO::ERRMODE_EXCEPTION;
-		$result = $this->object->getConnection()->getAttribute(PDO::ATTR_ERRMODE);
-
-		$msg = 'Wrong DbAdapterBase::invokeLazyCalls() behaviour';
-		$this->assertSame($expected, $result, $msg);
-
-		$this->object->getConnection()->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 	}
 }

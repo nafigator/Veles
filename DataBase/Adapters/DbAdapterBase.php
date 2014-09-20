@@ -68,8 +68,9 @@ class DbAdapterBase extends Observable
 	{
 		if (null === static::$connection) {
 			$conn = static::$pool->getConnection(static::$connection_name);
-			static::$connection = ($conn->getResource())
-				?: $conn->create()->getResource();
+			static::$connection = (null === $conn->getResource())
+				? $conn->create(static::$calls)->getResource()
+				: $conn->getResource();
 		}
 
 		return static::$connection;
@@ -88,10 +89,6 @@ class DbAdapterBase extends Observable
 			static::$instance = new $class;
 		}
 
-		if (null !== static::$calls) {
-			static::invokeLazyCalls();
-		}
-
 		return static::$instance;
 	}
 
@@ -107,19 +104,5 @@ class DbAdapterBase extends Observable
 			'method'    => $method,
 			'arguments' => $arguments
 		);
-	}
-
-	/**
-	 * Lazy calls invocation
-	 */
-	final public static function invokeLazyCalls()
-	{
-		foreach (static::$calls as $call) {
-			call_user_func_array(
-				array(static::$instance->getConnection(), $call['method']),
-				$call['arguments']
-			);
-		}
-		static::$calls = null;
 	}
 }

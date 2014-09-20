@@ -24,14 +24,23 @@ class TraceablePdoConnection extends PdoConnection
 	 *
 	 * Реализуется в конкретном классе для каждого типа соединений
 	 *
+	 * @param array $calls Array with lazy calls
+	 *
 	 * @return mixed
 	 */
-	public function create()
+	public function create(array $calls = array())
 	{
 		$this->resource = new TraceablePDO(new PDO(
 			$this->getDsn(), $this->getUserName(),
 			$this->getPassword(), $this->getOptions()
 		));
+
+		foreach ($calls as $call) {
+			call_user_func_array(
+				array($this->resource, $call['method']),
+				$call['arguments']
+			);
+		}
 
 		if (!$this->bar->hasCollector('pdo')) {
 			$pdoCollector = new PDOCollector();

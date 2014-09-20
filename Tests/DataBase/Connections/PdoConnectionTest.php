@@ -2,6 +2,7 @@
 namespace Veles\Tests\DataBase\Connections;
 
 use Exception;
+use PDO;
 use Veles\DataBase\Adapters\PdoAdapter;
 use Veles\DataBase\Connections\PdoConnection;
 
@@ -46,13 +47,26 @@ class PdoConnectionTest extends \PHPUnit_Framework_TestCase
 			->setUserName($conn->getUserName())
 			->setPassword($conn->getPassword());
 
-		$result = $this->object->create();
+		$calls = array(
+			array(
+				'method'    => 'setAttribute',
+				'arguments' => array(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC)
+			)
+		);
 
-		$msg = 'Wrong PdoConnection::connect result!';
+		$result = $this->object->create($calls);
+
+		$msg = 'Wrong PdoConnection::create result!';
 		$this->assertAttributeInstanceOf($expected, 'resource', $this->object, $msg);
 
-		$msg = 'Wrong PdoConnection::connect return value!';
+		$msg = 'Wrong PdoConnection::create return value!';
 		$this->assertSame($this->object, $result, $msg);
+
+		$expected = PDO::FETCH_ASSOC;
+		$result = $this->object->getResource()->getAttribute(PDO::ATTR_DEFAULT_FETCH_MODE);
+
+		$msg = 'Wrong PdoConnection::create behavior!';
+		$this->assertSame($expected, $result, $msg);
 	}
 
 	/**

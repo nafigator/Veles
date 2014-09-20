@@ -34,9 +34,11 @@ abstract class DbConnection
 	 *
 	 * Реализуется в конкретном классе для каждого типа соединений
 	 *
+	 * @param array $calls Array with lazy calls
+	 *
 	 * @return mixed
 	 */
-	abstract function create();
+	abstract function create(array $calls = array());
 
 	/**
 	 * @return mixed

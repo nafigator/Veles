@@ -2,6 +2,7 @@
 namespace Veles\Tests\DataBase\Connections;
 
 use DebugBar\StandardDebugBar;
+use PDO;
 use Veles\DataBase\Adapters\PdoAdapter;
 use Veles\DataBase\Connections\TraceablePdoConnection;
 
@@ -41,17 +42,30 @@ class TraceablePdoConnectionTest extends \PHPUnit_Framework_TestCase
 			->setPassword($conn->getPassword())
 			->setBar($bar);
 
-		$this->object->create();
+		$calls = array(
+			array(
+				'method'    => 'setAttribute',
+				'arguments' => array(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC)
+			)
+		);
+
+		$this->object->create($calls);
 
 		$this->assertAttributeInstanceOf(
 			'\DebugBar\DataCollector\PDO\TraceablePDO',
 			'resource', $this->object, $msg
 		);
 
-		$this->object->create();
+		$this->object->create($calls);
 
-		$msg = 'Wrong behavior of TraceablePdoConnectionTest::create';
+		$msg = 'Wrong behavior of TraceablePdoConnection::create';
 		$this->assertTrue($bar->hasCollector('pdo'), $msg);
+
+		$expected = PDO::FETCH_ASSOC;
+		$result = $this->object->getResource()->getAttribute(PDO::ATTR_DEFAULT_FETCH_MODE);
+
+		$msg = 'Wrong TraceablePdoConnection::create behavior!';
+		$this->assertSame($expected, $result, $msg);
     }
 
     /**
