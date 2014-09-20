@@ -21,20 +21,6 @@ use Veles\Validators\Number;
 class NumberTest extends PHPUnit_Framework_TestCase
 {
 	/**
-	 * @var \Veles\Validators\Number
-	 */
-	protected $object;
-
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 */
-	protected function setUp()
-	{
-		$this->object = new Number;
-	}
-
-	/**
 	 * @covers Veles\Validators\Number::check
 	 * @group  Validators
 	 * @see	   Number::check()
@@ -42,7 +28,8 @@ class NumberTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testCheck($number, $expected)
 	{
-		$result = $this->object->check($number);
+		$object = new Number;
+		$result = $object->check($number);
 
 		$msg = 'Wrong Number::check() validation';
 		$this->assertSame($expected, $result, $msg);
@@ -51,9 +38,38 @@ class NumberTest extends PHPUnit_Framework_TestCase
 	public function checkProvider()
 	{
 		return array(
+			array('lalala', false),
 			array(34, true),
 			array('34', true),
 			array(2147483649, false)
 		);
+	}
+
+	/**
+	 * @covers Veles\Validators\Number::__construct
+	 * @group  Validators
+	 * @see	   Number::__construct()
+	 */
+	public function testConstruct()
+	{
+		$expect_min = 10;
+		$expect_max = 100;
+		$object = new Number($expect_min, $expect_max);
+
+		$msg = 'Wrong value of Number::min';
+		$this->assertAttributeSame($expect_min, 'min', $object, $msg);
+
+		$msg = 'Wrong value of Number::max';
+		$this->assertAttributeSame($expect_max, 'max', $object, $msg);
+
+		$expect_min = 1;
+		$expect_max = 2147483647;
+		$object = new Number;
+
+		$msg = 'Wrong value of Number::min';
+		$this->assertAttributeSame($expect_min, 'min', $object, $msg);
+
+		$msg = 'Wrong value of Number::max';
+		$this->assertAttributeSame($expect_max, 'max', $object, $msg);
 	}
 }

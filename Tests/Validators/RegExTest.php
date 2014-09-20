@@ -21,12 +21,8 @@ use Veles\Validators\RegEx;
 class RegExTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var RegEx
-     */
-    protected $object;
-
-    /**
      * @covers Veles\Validators\RegEx::check
+	 * @covers Veles\Validators\RegEx::__construct
      * @group Validators
 	 * @see RegEx::check()
 	 * @dataProvider checkProvider
@@ -34,6 +30,9 @@ class RegExTest extends PHPUnit_Framework_TestCase
     public function testCheck($pattern, $value, $expected)
     {
 		$object = new RegEx($pattern);
+
+		$msg = 'Wrong value of RegEx::pattern';
+		$this->assertAttributeSame($pattern, 'pattern', $object, $msg);
 
 		$result = $object->check($value);
 
