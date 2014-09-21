@@ -31,7 +31,7 @@ class SmartyAdapter extends ViewAdapterAbstract implements iViewAdapter
 	/**
 	 * Constructor
 	 */
-	final public function __construct()
+	public function __construct()
 	{
 		/** @noinspection PhpIncludeInspection */
 		include 'Smarty' . DIRECTORY_SEPARATOR . 'Smarty.class.php';
@@ -44,7 +44,7 @@ class SmartyAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 *
 	 * @param mixed $vars Output variables array or traversable class
 	 */
-	final public function set($vars)
+	public function set($vars)
 	{
 		foreach ($vars as $name => $value) {
 			$this->getDriver()->assign($name, $value);
@@ -57,7 +57,7 @@ class SmartyAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 * @param array $vars Variables array for cleanup
 	 * @throws Exception
 	 */
-	final public function del($vars)
+	public function del($vars)
 	{
 		if (!is_array($vars)) {
 			throw new Exception('View can unset variables only in arrays!');
@@ -73,7 +73,7 @@ class SmartyAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 *
 	 * @param string $path Path to template
 	 */
-	final public function show($path)
+	public function show($path)
 	{
 		$this->getDriver()->display($path);
 	}
@@ -84,7 +84,7 @@ class SmartyAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 * @param string $path Path to template
 	 * @return string View content
 	 */
-	final public function get($path)
+	public function get($path)
 	{
 		return $this->getDriver()->fetch($path);
 	}
@@ -95,7 +95,7 @@ class SmartyAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 * @param string $tpl
 	 * @return mixed
 	 */
-	final public function clearCache($tpl)
+	public function clearCache($tpl)
 	{
 		return $this->getDriver()->clearCache($tpl);
 	}
@@ -106,7 +106,7 @@ class SmartyAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 * @param mixed $exp_time
 	 * @return mixed
 	 */
-	final public function clearAllCache($exp_time = null)
+	public function clearAllCache($exp_time = null)
 	{
 		return $this->getDriver()->clearAllCache($exp_time);
 	}
@@ -116,7 +116,7 @@ class SmartyAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 * @param $tpl
 	 * @return bool
 	 */
-	final public function isCached($tpl)
+	public function isCached($tpl)
 	{
 		return $this->getDriver()->isCached($tpl);
 	}
