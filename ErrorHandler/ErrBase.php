@@ -30,8 +30,14 @@ class ErrBase implements SplSubject
 
 	/**
 	 * Handler for user errors
+	 *
+	 * @param $type
+	 * @param $message
+	 * @param $file
+	 * @param $line
+	 * @param $defined
 	 */
-	final public function usrError($type, $message, $file, $line, $defined)
+	public function usrError($type, $message, $file, $line, $defined)
 	{
 		$this->vars['type']    = $this->getErrorType($type);
 		$this->vars['time']    = strftime(
@@ -52,7 +58,7 @@ class ErrBase implements SplSubject
 	/**
 	 * Fatal error handler
 	 */
-	final public function fatal()
+	public function fatal()
 	{
 		if (null === ($this->vars = error_get_last())) exit;
 
@@ -74,7 +80,7 @@ class ErrBase implements SplSubject
 	 * Exception handler
 	 * @param Exception $exception Исключение
 	 */
-	final public function exception($exception)
+	public function exception($exception)
 	{
 		$this->vars['type']    = $this->getErrorType($exception->getCode());
 		$this->vars['time']    = strftime(
@@ -102,7 +108,7 @@ class ErrBase implements SplSubject
 	/**
 	 * Processing according to environment
 	 */
-	final public function process()
+	public function process()
 	{
 		if ('development' === ENVIRONMENT) {
 			View::set($this->vars);
@@ -174,7 +180,7 @@ class ErrBase implements SplSubject
 	/**
 	 * Observers notification
 	 */
-	final public function notify()
+	public function notify()
 	{
 		/** @var $observer SplObserver */
 		foreach ($this->observers as $observer) {
@@ -184,16 +190,20 @@ class ErrBase implements SplSubject
 
 	/**
 	 * Add Observer
+	 *
+	 * @param SplObserver $observer
 	 */
-	final public function attach(SplObserver $observer)
+	public function attach(SplObserver $observer)
 	{
 		$this->observers[] = $observer;
 	}
 
 	/**
 	 * Remove Observer
+	 *
+	 * @param SplObserver $observer
 	 */
-	final public function detach(SplObserver $observer)
+	public function detach(SplObserver $observer)
 	{
 		foreach ($this->observers as $key => $subscriber) {
 			if ($subscriber == $observer) {
@@ -207,7 +217,7 @@ class ErrBase implements SplSubject
 	 * Get message for email-notification
 	 * @return string
 	 */
-	final public function getMessage()
+	public function getMessage()
 	{
 		return $this->output;
 	}

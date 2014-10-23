@@ -109,9 +109,9 @@ class QueryBuilder
 		$sql = '
 			SELECT *
 			FROM
-				`' . $model::TBL_NAME . "`
+				' . $model::TBL_NAME . "
 			WHERE
-				`id` = $identifier
+				id = $identifier
 			LIMIT 1
 		";
 
@@ -147,7 +147,7 @@ class QueryBuilder
 
 		$sql = '
 			DELETE FROM
-				`' . $model::TBL_NAME . "`
+				' . $model::TBL_NAME . "
 			WHERE
 				id IN ($ids)
 		";

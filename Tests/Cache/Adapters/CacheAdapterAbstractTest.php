@@ -1,6 +1,7 @@
 <?php
 namespace Veles\Tests\Cache\Adapters;
 
+use Veles\Cache\Adapters\ApcAdapter;
 use Veles\Cache\Cache;
 
 /**
@@ -76,7 +77,7 @@ class CacheAdapterAbstractTest extends \PHPUnit_Framework_TestCase
 		$result = CacheAdapterAbstractChild::getCalls();
 		$this->assertSame(null, $result);
 
-		Cache::setAdapter();
+		Cache::setAdapter(ApcAdapter::instance());
 	}
 
 	/**

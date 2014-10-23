@@ -54,7 +54,7 @@ View::setAdapter($view_adapter);
 MemcacheRaw::setConnectionParams('localhost', 11211);
 MemcachedAdapter::addCall('addServer', array('localhost', 11211));
 MemcacheAdapter::addCall('addServer', array('localhost', 11211));
-Cache::setAdapter('Memcached');
+Cache::setAdapter(MemcachedAdapter::instance());
 
 // Parameters for Db connection
 $pool = new ConnectionPool();

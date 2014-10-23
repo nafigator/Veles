@@ -23,6 +23,11 @@ use Exception;
  */
 class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 {
+	/** @var  null|array */
+	protected static $calls;
+	/** @var iCacheAdapter|$this */
+	protected static $instance;
+
 	/**
 	 * Constructor
 	 */

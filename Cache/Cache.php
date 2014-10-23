@@ -32,12 +32,11 @@ class Cache
 	/**
 	 * Cache adapter initialisation
 	 *
-	 * @param string $class_name Adapter name
+	 * @param iCacheAdapter $adapter Adapter
 	 */
-	final public static function setAdapter($class_name = 'Apc')
+	public static function setAdapter(iCacheAdapter $adapter)
 	{
-		self::$adapter_name = "\\Veles\\Cache\\Adapters\\${class_name}Adapter";
-		self::$adapter = null;
+		self::$adapter = $adapter;
 	}
 
 	/**
@@ -46,7 +45,7 @@ class Cache
 	 * @param string $key Key
 	 * @return mixed
 	 */
-	final static public function get($key)
+	static public function get($key)
 	{
 		return self::getAdapter()->get($key);
 	}
@@ -57,18 +56,11 @@ class Cache
 	 * @throws Exception
 	 * @return iCacheAdapter
 	 */
-	final public static function getAdapter()
+	public static function getAdapter()
 	{
-		if (self::$adapter instanceof iCacheAdapter) {
-			return self::$adapter;
-		}
-
-		if (null === self::$adapter_name) {
+		if (null === self::$adapter) {
 			throw new Exception('Adapter not set!');
 		}
-
-		$tmp =& self::$adapter_name;
-		self::$adapter = $tmp::instance();
 
 		return self::$adapter;
 	}
@@ -81,7 +73,7 @@ class Cache
 	 * @param int $ttl Time to live
 	 * @return bool
 	 */
-	final public static function set($key, $value, $ttl = 0)
+	public static function set($key, $value, $ttl = 0)
 	{
 		return self::getAdapter()->set($key, $value, $ttl);
 	}
@@ -92,7 +84,7 @@ class Cache
 	 * @param string $key Key
 	 * @return bool
 	 */
-	final public static function has($key)
+	public static function has($key)
 	{
 		return self::getAdapter()->has($key);
 	}
@@ -103,7 +95,7 @@ class Cache
 	 * @param string $key Key
 	 * @return bool
 	 */
-	final public static function del($key)
+	public static function del($key)
 	{
 		return self::getAdapter()->del($key);
 	}
@@ -120,7 +112,7 @@ class Cache
 	 * @param string $tpl Substring containing in needed keys
 	 * @return bool
 	 */
-	final public static function delByTemplate($tpl)
+	public static function delByTemplate($tpl)
 	{
 		return self::getAdapter()->delByTemplate($tpl);
 	}
@@ -130,7 +122,7 @@ class Cache
 	 *
 	 * @return bool
 	 */
-	final public static function clear()
+	public static function clear()
 	{
 		return self::getAdapter()->clear();
 	}
@@ -143,7 +135,7 @@ class Cache
 	 *
 	 * @return mixed
 	 */
-	final public static function increment($key, $offset = 1)
+	public static function increment($key, $offset = 1)
 	{
 		return self::getAdapter()->increment($key, $offset);
 	}
@@ -155,7 +147,7 @@ class Cache
 	 * @param int    $offset
 	 * @return mixed
 	 */
-	final public static function decrement($key, $offset = 1)
+	public static function decrement($key, $offset = 1)
 	{
 		return self::getAdapter()->decrement($key, $offset);
 	}

@@ -2,6 +2,7 @@
 namespace Veles\Tests\Cache\Adapters;
 
 use Exception;
+use Veles\Cache\Adapters\MemcachedAdapter;
 use Veles\Cache\Adapters\MemcacheRaw;
 use Veles\Cache\Cache;
 
@@ -15,7 +16,7 @@ class MemcacheRawTest extends \PHPUnit_Framework_TestCase
 	 */
 	public static function setUpBeforeClass()
 	{
-		Cache::setAdapter('Memcache');
+		Cache::setAdapter(MemcachedAdapter::instance());
 	}
 
 	/**

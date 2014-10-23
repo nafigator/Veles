@@ -2,7 +2,6 @@
 namespace Veles\Tests\DataBase\Adapters;
 
 use PDO;
-use Veles\DataBase\Adapters\PdoAdapter;
 use Veles\DataBase\ConnectionPools\ConnectionPool;
 use Veles\DataBase\Connections\PdoConnection;
 

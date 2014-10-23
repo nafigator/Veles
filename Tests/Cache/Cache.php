@@ -1,7 +1,7 @@
 <?php
 namespace Veles\Tests\Cache;
 
-use Veles\Cache\Adapters\MemcachedAdapter;
+use Veles\Cache\Adapters\ApcAdapter;
 
 /**
  * Class Cache
@@ -21,6 +21,6 @@ class Cache extends \Veles\Cache\Cache
 
 	public static function resetAdapter()
 	{
-		self::$adapter = MemcachedAdapter::instance();
+		self::$adapter = ApcAdapter::instance();
 	}
 }
