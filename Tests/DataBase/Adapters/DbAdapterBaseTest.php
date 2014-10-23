@@ -117,9 +117,6 @@ class DbAdapterBaseTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testInstance()
 	{
-		$msg = 'Wrong DbAdapterBase::$instance default value';
-		$this->assertAttributeEquals(null, 'instance', $this->object, $msg);
-
 		$result = $this->object->instance();
 
 		$msg = 'Wrong DbAdapterBase::instance() return value';

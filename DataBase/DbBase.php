@@ -27,8 +27,6 @@ class DbBase
 {
 	/** @var iDbAdapter */
 	protected static $adapter;
-	/** @var  string */
-	protected static $adapter_name;
 	/** @var  mixed */
 	protected static $connection;
 	/** @var  string */
@@ -38,13 +36,12 @@ class DbBase
 	 * Сохраняем имя класса адаптера для последующей инициализации
 	 * Будет инициализирован при первом запросе данных из базы
 	 *
-	 * @param string $class_name Adapter name
+	 * @param iDbAdapter $adapter Adapter
 	 * @see Db::getAdapter
 	 */
-	final public static function setAdapter($class_name = 'Pdo')
+	final public static function setAdapter(iDbAdapter $adapter)
 	{
-		self::$adapter_name = "\\Veles\\DataBase\\Adapters\\${class_name}Adapter";
-		self::$adapter = null;
+		self::$adapter = $adapter;
 	}
 
 	/**
@@ -55,16 +52,9 @@ class DbBase
 	 */
 	final public static function getAdapter()
 	{
-		if (self::$adapter instanceof iDbAdapter) {
-			return self::$adapter;
-		}
-
-		if (null === self::$adapter_name) {
+		if (null === self::$adapter) {
 			throw new Exception('Adapter not set!');
 		}
-
-		$tmp =& self::$adapter_name;
-		self::$adapter = $tmp::instance();
 
 		return self::$adapter;
 	}

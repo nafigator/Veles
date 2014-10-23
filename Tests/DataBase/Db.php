@@ -14,7 +14,6 @@ class Db extends \Veles\DataBase\Db
 {
 	public static function unsetAdapter()
 	{
-		self::$adapter_name = null;
-		self::$adapter 		= null;
+		self::$adapter = null;
 	}
 }

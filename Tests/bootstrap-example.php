@@ -70,4 +70,4 @@ PdoAdapter::addCall(
 	'setAttribute',
 	array(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC)
 );
-Db::setAdapter('Pdo');
+Db::setAdapter(PdoAdapter::instance());
