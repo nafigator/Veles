@@ -117,6 +117,12 @@ class DbAdapterBaseTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testInstance()
 	{
+		$this->object->unsetInstance();
+		$result = $this->object->instance();
+
+		$msg = 'Wrong DbAdapterBase::instance() return value';
+		$this->assertInstanceOf('Veles\DataBase\Adapters\PdoAdapter', $result, $msg);
+
 		$result = $this->object->instance();
 
 		$msg = 'Wrong DbAdapterBase::instance() return value';

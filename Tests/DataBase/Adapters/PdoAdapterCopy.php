@@ -34,4 +34,9 @@ class PdoAdapterCopy extends PdoAdapter
 	{
 		self::$calls = null;
 	}
+
+	final public static function unsetInstance()
+	{
+		self::$instance = null;
+	}
 }
