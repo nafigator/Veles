@@ -3,7 +3,7 @@
  * Вспомогательный класс для формирования запросов
  * @file    QueryBuilder.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Сбт Июл 07 21:55:54 2012

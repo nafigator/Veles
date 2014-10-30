@@ -3,7 +3,7 @@
  * Text элемент формы
  * @file    TextElement.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Втр Авг 14 22:00:05 2012

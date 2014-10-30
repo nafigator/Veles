@@ -3,7 +3,7 @@
  * Class with MVC implementation
  * @file    Application.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Птн Июн 08 18:10:37 2012

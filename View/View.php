@@ -3,7 +3,7 @@
  * Output class
  * @file    View.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Сбт Июл 07 07:30:30 2012

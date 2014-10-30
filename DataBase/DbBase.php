@@ -3,7 +3,7 @@
  * Базовый класс для работы с базой данных
  * @file    DbBase.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Срд Апр 23 06:34:47 MSK 2014

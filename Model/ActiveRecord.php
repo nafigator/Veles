@@ -3,7 +3,7 @@
  * ActiveRecord model
  * @file    ActiveRecord.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Втр Апр 24 21:53:04 2012

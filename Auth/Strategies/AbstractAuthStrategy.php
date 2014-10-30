@@ -3,7 +3,7 @@
  * Базовый класс стратегий авторизации пользователя
  * @file    AbstractAuthStrategy.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Вск Янв 27 17:29:50 2013

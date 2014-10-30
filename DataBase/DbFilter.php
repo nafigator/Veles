@@ -3,7 +3,7 @@
  * Фильтр для выборки моделей
  * @file    DbFilter.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Втр Авг 07 23:14:17 2012

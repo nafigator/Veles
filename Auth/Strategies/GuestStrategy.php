@@ -3,7 +3,7 @@
  * Стратегия гостевой авторизации
  * @file    GuestStrategy,php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Вск Янв 27 21:43:51 2013

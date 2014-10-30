@@ -4,7 +4,7 @@
  *
  * @file    iCacheAdapter.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Чтв Ноя 15 21:36:22 2012

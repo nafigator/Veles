@@ -3,7 +3,7 @@
  * Base class for forms
  * @file    AbstractForm.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Вск Авг 12 10:30:52 2012

@@ -3,7 +3,7 @@
  * Console colors
  * @file    CliColor.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Птн Фев 15 21:54:29 2013

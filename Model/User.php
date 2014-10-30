@@ -3,7 +3,7 @@
  * Модель пользователя
  * @file    User.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Пнд Мар 05 21:39:43 2012

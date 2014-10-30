@@ -3,7 +3,7 @@
  * Базовый класс для email-сообщений
  * @file    AbstractEmail.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Втр Июл 17 21:58:01 2012

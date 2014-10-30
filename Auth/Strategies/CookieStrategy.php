@@ -3,7 +3,7 @@
  * Стратегия авторизации пользователя по кукам
  * @file    CookieStrategy.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Вск Янв 27 17:44:08 2013

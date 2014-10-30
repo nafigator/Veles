@@ -3,7 +3,7 @@
  * TextArea элемент формы
  * @file    TextAreaElement.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Сбт Ноя 10 12:14:37 2012

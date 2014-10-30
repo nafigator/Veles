@@ -3,7 +3,7 @@
  * Unit-test for Byte class
  * @file    ByteTest.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
  * @date    2013-05-24 07:54

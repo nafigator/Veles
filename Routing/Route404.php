@@ -3,7 +3,7 @@
  * Вывод ошибки 404
  * @file    Route404.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Пнд Янв 28 21:20:19 2013

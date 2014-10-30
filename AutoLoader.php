@@ -3,7 +3,7 @@
  * Class AutoLoader
  * @file    AutoLoader.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Fri Jun 01 10:19:04 2012

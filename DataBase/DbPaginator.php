@@ -3,7 +3,7 @@
  * Class for data pagination
  * @file    DbPaginator.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Втр Авг 07 23:04:47 2012

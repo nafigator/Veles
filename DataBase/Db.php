@@ -3,7 +3,7 @@
  * Класс с методами обработки и вызова запросов
  * @file    DbBase.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Thu May 2 11:51:05 2013

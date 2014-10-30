@@ -3,7 +3,7 @@
  * Фабрика. Содержит алогритм выбора стратегии авторизации
  * @file    UserAuthFactory.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Вск Янв 27 17:34:29 2013

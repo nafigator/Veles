@@ -3,7 +3,7 @@
  * Контроллер для теста Application
  * @file    Home.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Птн Янв 25 05:49:20 2013

@@ -3,7 +3,7 @@
  * Unit-test for AutoLoader class
  * @file    AutoLoaderTest.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Вск Янв 20 22:07:49 2013

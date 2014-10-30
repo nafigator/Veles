@@ -3,7 +3,7 @@
  * Группы пользователей
  * @file    UsrGroup.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Вск Ноя 04 08:18:08 2012

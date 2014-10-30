@@ -3,7 +3,7 @@
  * Password элемент формы
  * @file    PasswordElement.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Срд Авг 15 22:35:36 2012

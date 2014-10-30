@@ -3,7 +3,7 @@
  * Interface for data base interaction
  * @file      iDbDriver.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author    Alexander Yancharuk <alex@itvault.info>
  * @date      Вск Янв 06 10:13:35 2013

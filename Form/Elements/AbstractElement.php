@@ -3,7 +3,7 @@
  * Base class for form elements
  * @file    AbstractElement.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Втр Авг 14 21:52:39 2012

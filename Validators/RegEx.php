@@ -3,7 +3,7 @@
  * Regular expression validator
  * @file    RegEx.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Втр Авг 14 23:50:04 2012

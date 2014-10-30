@@ -3,7 +3,7 @@
  * Интерфейс для стратегий роутинга
  * @file    iRouteStrategy.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Сбт Июн 23 10:06:37 2012

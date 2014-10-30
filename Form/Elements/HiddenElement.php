@@ -3,7 +3,7 @@
  * Hidden элемент формы
  * @file    HiddenElement.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Втр Авг 14 21:41:53 2012

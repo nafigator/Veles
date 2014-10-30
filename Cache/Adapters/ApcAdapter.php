@@ -4,7 +4,7 @@
  *
  * @file    ApcAdapter.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Птн Ноя 16 22:09:28 2012

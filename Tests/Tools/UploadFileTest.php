@@ -3,7 +3,7 @@
  * Unit-test for UploadFile class
  * @file    TimerTest.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    2013-07-28 21:33:28

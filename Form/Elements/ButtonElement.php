@@ -3,7 +3,7 @@
  * Button элемент формы
  * @file    ButtonElement.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Срд Авг 15 00:33:35 2012

@@ -3,7 +3,7 @@
  * Class Timer
  * @file    Timer.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Срд Фев 06 06:18:32 2013

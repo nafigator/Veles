@@ -4,7 +4,7 @@
  *
  * @file    ViewAdapterAbstract.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Чтв Сен  5 15:10:46 MSK 2013

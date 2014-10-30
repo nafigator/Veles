@@ -4,7 +4,7 @@
  *
  * @file    Cache.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Птн Ноя 16 20:42:01 2012

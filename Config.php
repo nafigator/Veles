@@ -3,7 +3,7 @@
  * Class-parser project configuration
  * @file    Config.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Fri Jun 08 17:28:22 2012

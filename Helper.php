@@ -3,7 +3,7 @@
  * Useful functions
  * @file    Helper.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Сбт Апр 21 20:59:37 2012

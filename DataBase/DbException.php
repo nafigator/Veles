@@ -3,7 +3,7 @@
  * Exception содержащий код, текст и запрос sql-ошибки
  * @file    DbException.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Птн Мар 09 01:40:46 2012

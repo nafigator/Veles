@@ -3,7 +3,7 @@
  * Byte values validator
  * @file    Byte.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Вск Фев 17 10:48:43 2013

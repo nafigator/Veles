@@ -3,7 +3,7 @@
  * Interface for validators
  * @file    iValidator.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Втр Авг 14 23:58:56 2012

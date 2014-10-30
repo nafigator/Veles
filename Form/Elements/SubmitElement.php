@@ -3,7 +3,7 @@
  * Submit-кнопка формы
  * @file    SubmitElement.php
  *
- * PHP version 5.3.9+
+ * PHP version 5.4+
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  * @date    Сбт Авг 18 21:36:33 2012
