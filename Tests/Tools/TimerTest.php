@@ -178,14 +178,14 @@ class TimerTest extends PHPUnit_Framework_TestCase
 
 	public function getProvider()
 	{
-		return array(
-			array(Timer::SECONDS, 0),
-			array(Timer::MILLISECONDS, 3),
-			array(Timer::MICROSECONDS, 6),
-			array(Timer::NANOSECONDS, 9),
-			array(Timer::PICOSECONDS, 12),
-			array(8, 6)
-		);
+		return [
+			[Timer::SECONDS, 0],
+			[Timer::MILLISECONDS, 3],
+			[Timer::MICROSECONDS, 6],
+			[Timer::NANOSECONDS, 9],
+			[Timer::PICOSECONDS, 12],
+			[8, 6]
+		];
 	}
 
 	/**
@@ -219,12 +219,12 @@ class TimerTest extends PHPUnit_Framework_TestCase
 	 */
 	public function getPrecisionProvider()
 	{
-		return array(
-			array(Timer::SECONDS),
-			array(Timer::MILLISECONDS),
-			array(Timer::MICROSECONDS),
-			array(Timer::NANOSECONDS),
-			array(Timer::PICOSECONDS)
-		);
+		return [
+			[Timer::SECONDS],
+			[Timer::MILLISECONDS],
+			[Timer::MICROSECONDS],
+			[Timer::NANOSECONDS],
+			[Timer::PICOSECONDS]
+		];
 	}
 }

@@ -43,11 +43,11 @@ class CacheTest extends PHPUnit_Framework_TestCase
 
 	public function setAdapterProvider()
 	{
-		return array(
-			array(MemcacheAdapter::instance()),
-			array(MemcachedAdapter::instance()),
-			array(ApcAdapter::instance())
-		);
+		return [
+			[MemcacheAdapter::instance()],
+			[MemcachedAdapter::instance()],
+			[ApcAdapter::instance()]
+		];
 	}
 
 	/**
@@ -86,13 +86,13 @@ class CacheTest extends PHPUnit_Framework_TestCase
 	{
 		$cache = new Memcached;
 		$cache->addServer('localhost', 11211);
-		$params = array();
+		$params = [];
 
 		for ($i = 0; $i < 3; ++$i) {
 			$key = uniqid('VELES::UNIT-TEST::');
 			$value = uniqid();
 			$cache->set($key, $value, 10);
-			$params[] = array($key, $value);
+			$params[] = [$key, $value];
 		}
 
 		Cache::setAdapter(MemcachedAdapter::instance());
@@ -171,14 +171,14 @@ class CacheTest extends PHPUnit_Framework_TestCase
 		$key    = uniqid('VELES::UNIT-TEST::');
 		$value  = mt_rand(0, 1000);
 		Cache::set($key, $value, 10);
-		$params = array(array($key, null, ++$value));
+		$params = [[$key, null, ++$value]];
 
 		for ($i = 0; $i < 5; ++$i) {
 			$key    = uniqid('VELES::UNIT-TEST::');
 			$value  = mt_rand(0, 1000);
 			$offset = mt_rand(0, 1000);
 			Cache::set($key, $value, 10);
-			$params[] = array($key, $offset, $value + $offset);
+			$params[] = [$key, $offset, $value + $offset];
 		}
 
 		foreach ($params as $param) {
@@ -204,14 +204,14 @@ class CacheTest extends PHPUnit_Framework_TestCase
 		$key    = uniqid('VELES::UNIT-TEST::');
 		$value  = mt_rand(1, 1000);
 		Cache::set($key, $value, 10);
-		$params = array(array($key, null, --$value));
+		$params = [[$key, null, --$value]];
 
 		for ($i = 0; $i < 5; ++$i) {
 			$key    = uniqid('VELES::UNIT-TEST::');
 			$value  = mt_rand(1000, 2000);
 			$offset = mt_rand(0, 1000);
 			Cache::set($key, $value, 10);
-			$params[] = array($key, $offset, $value - $offset);
+			$params[] = [$key, $offset, $value - $offset];
 		}
 
 		foreach ($params as $param) {
@@ -233,7 +233,7 @@ class CacheTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testClear()
 	{
-		$params = array();
+		$params = [];
 
 		for ($i = 0; $i < 10; ++$i) {
 			$key = uniqid('VELES::UNIT-TEST::');

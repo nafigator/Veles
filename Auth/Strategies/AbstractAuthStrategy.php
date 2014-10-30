@@ -83,7 +83,7 @@ abstract class AbstractAuthStrategy
 
 		$this->delCookie();
 
-		$props = array('group' => UsrGroup::GUEST);
+		$props = ['group' => UsrGroup::GUEST];
 		$this->user->setProperties($props);
 
 		$this->errors |= self::ERR_USER_NOT_FOUND;

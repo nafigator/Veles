@@ -28,7 +28,7 @@ class ActiveRecord extends StdClass
 	/**
 	 * @var int|float|string $map Data type map
 	 */
-	protected static $map = array();
+	protected static $map = [];
 
 	/**
 	 * @const string|null Table name

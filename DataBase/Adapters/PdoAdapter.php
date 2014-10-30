@@ -16,12 +16,12 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	/** @var  \PDOStatement */
 	private $stmt;
 
-	private $type = array(
+	private $type = [
 	   'i' => PDO::PARAM_INT,
 	   'd' => PDO::PARAM_STR,
 	   's' => PDO::PARAM_STR,
 	   'b' => PDO::PARAM_LOB
-	);
+	];
 
 	private function bindParams($params, $types)
 	{
@@ -181,7 +181,7 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	 */
 	public function getFoundRows()
 	{
-		$result = $this->value('SELECT FOUND_ROWS()', array(), null);
+		$result = $this->value('SELECT FOUND_ROWS()', [], null);
 
 		$this->notify();
 

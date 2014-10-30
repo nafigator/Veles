@@ -25,7 +25,7 @@ class CliColor
 
 	private $string;
 
-	private static $colors = array(
+	private static $colors = [
 		'black'  => '0',
 		'red'    => '1',
 		'green'  => '2',
@@ -34,16 +34,16 @@ class CliColor
 		'purple' => '5',
 		'cyan'   => '6',
 		'white'  => '7'
-	);
+	];
 
-	private static $styles = array(
+	private static $styles = [
 		'0' => 'default',
 		'1' => 'bold',
 		'2' => 'dark',
 		'4' => 'underline',
 		'7' => 'invert',
 		'9' => 'strike'
-	);
+	];
 
 	/**
 	 * Encapsulate string in color esc-sequences
@@ -72,7 +72,7 @@ class CliColor
 	 * @throws Exception
 	 */
 	public function __construct(
-		$color = 'green', $style = array('default')
+		$color = 'green', $style = ['default']
 	) {
 		if (!is_array($style)) {
 			throw new Exception('Style parameter must be an array!');
@@ -128,7 +128,7 @@ class CliColor
 	 * @throws Exception
 	 * @return CliColor
 	 */
-	public function setStyle($style = array())
+	public function setStyle($style = [])
 	{
 		if (!is_array($style)) {
 			throw new Exception('Not valid style!');

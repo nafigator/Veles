@@ -30,7 +30,7 @@ class QueryBuilder
 	 */
 	public static function insert($model)
 	{
-		$arr = array('fields' => '', 'values' => '');
+		$arr = ['fields' => '', 'values' => ''];
 
 		foreach ($model::getMap() as $property => $value) {
 			$value = self::sanitize($model, $property);
@@ -136,7 +136,7 @@ class QueryBuilder
 		}
 
 		if (!is_array($ids)) {
-			$ids = array($ids);
+			$ids = [$ids];
 		}
 
 		foreach ($ids as &$value) {

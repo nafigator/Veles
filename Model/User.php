@@ -22,13 +22,13 @@ class User extends ActiveRecord
 	const TBL_NAME      = 'users';
 	const TBL_USER_INFO = 'users_info';
 
-	protected static $map = array(
+	protected static $map = [
 		'id'         => 'int',
 		'email'      => 'string',
 		'hash'       => 'string',
 		'group'      => 'int',
 		'last_login' => 'string'
-	);
+	];
 
 	/**
 	 * Метод для получения ID пользователя

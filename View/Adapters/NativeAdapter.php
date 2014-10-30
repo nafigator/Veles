@@ -27,7 +27,7 @@ class NativeAdapter extends ViewAdapterAbstract implements iViewAdapter
 	/** @var iViewAdapter|$this */
 	protected static $instance;
 	/** @var array */
-	private static $variables = array();
+	private static $variables = [];
 	/** @var string */
 	private static $template_dir;
 

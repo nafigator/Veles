@@ -32,7 +32,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
 			) ENGINE INNODB
 		");
 
-		$arr = array();
+		$arr = [];
 		$i = 0;
 		while (++$i <= 10) {
 			$arr[] = 'test-value';
@@ -129,7 +129,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
 	public function testRow()
 	{
 		$tbl_name = static::$tbl_name;
-		$expected = array('id' => '1', 'txt' => 'test-value');
+		$expected = ['id' => '1', 'txt' => 'test-value'];
 		$result = Db::row("
 			SELECT * FROM $tbl_name LIMIT 3
 		");
@@ -144,11 +144,11 @@ class DbTest extends \PHPUnit_Framework_TestCase
 	public function testRows()
 	{
 		$tbl_name = static::$tbl_name;
-		$expected = array(
-			array('id' => '1', 'txt' => 'test-value'),
-			array('id' => '2', 'txt' => 'test-value'),
-			array('id' => '3', 'txt' => 'test-value'),
-		);
+		$expected = [
+			['id' => '1', 'txt' => 'test-value'],
+			['id' => '2', 'txt' => 'test-value'],
+			['id' => '3', 'txt' => 'test-value'],
+		];
 		$result = Db::rows("
 			SELECT * FROM $tbl_name LIMIT 3
 		");
@@ -165,7 +165,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
 	public function testTransactions()
 	{
 		$tbl_name = static::$tbl_name;
-		$expected = array('id' => '222', 'txt' => 'test-value');
+		$expected = ['id' => '222', 'txt' => 'test-value'];
 
 		Db::begin();
 		Db::query("
@@ -201,7 +201,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
 		$expected = true;
 		$result = Db::query("
 			DELETE FROM $tbl_name WHERE id > :id
-		", array(':id' => 8));
+		", [':id' => 8]);
 
 		$msg = 'Wrong Db::query result';
 		$this->assertSame($expected, $result, $msg);

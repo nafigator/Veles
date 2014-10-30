@@ -26,7 +26,7 @@ class GuestStrategy extends AbstractAuthStrategy
 	 */
 	public function identify()
 	{
-		$props = array('group' => UsrGroup::GUEST);
+		$props = ['group' => UsrGroup::GUEST];
 		$this->user->setProperties($props);
 
 		return false;

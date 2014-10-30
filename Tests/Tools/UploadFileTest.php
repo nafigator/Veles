@@ -425,7 +425,7 @@ class UploadFileTest extends PHPUnit_Framework_TestCase
 	 */
 	public function saveProvider()
 	{
-		$files = array();
+		$files = [];
 		$dir = sys_get_temp_dir() . '/VelesUploads';
 		$tmp_dir = sys_get_temp_dir();
 
@@ -443,12 +443,12 @@ class UploadFileTest extends PHPUnit_Framework_TestCase
 			);
 		}
 
-		return array(
-			array($dir, $files[0], true),
-			array($dir, $files[1], true),
-			array($dir, $files[2], true),
-			array($dir, $files[3], true)
-		);
+		return [
+			[$dir, $files[0], true],
+			[$dir, $files[1], true],
+			[$dir, $files[2], true],
+			[$dir, $files[3], true]
+		];
 
 	}
 

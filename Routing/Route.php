@@ -24,7 +24,7 @@ class Route
 	private $page_name = null;
 	private $config    = null;
 	private $template  = null;
-	private $map       = array();
+	private $map       = [];
 
 	/**
 	 * Config parser and controller vars initialisation

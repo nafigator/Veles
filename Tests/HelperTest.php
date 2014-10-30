@@ -38,7 +38,7 @@ class HelperTest extends PHPUnit_Framework_TestCase
 		}
 
 		$result_length = strlen($result);
-		$unknown_array = array();
+		$unknown_array = [];
 
 		$msg = 'Wrong result type: ' . gettype($result);
 		$this->assertInternalType('string', $result, $msg);
@@ -61,12 +61,12 @@ class HelperTest extends PHPUnit_Framework_TestCase
 	 */
 	public function genStrProvider()
 	{
-		return array(
-			array(null, null),
-			array(21, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./'),
-			array(30, 'ABCDEFGHIJKLMNOPQRSTUVWX%$#'),
-			array(30, 'A|@абвгдеёжзийклмнопрстуфхцчшщъыьэюя%$#')
-		);
+		return [
+			[null, null],
+			[21, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./'],
+			[30, 'ABCDEFGHIJKLMNOPQRSTUVWX%$#'],
+			[30, 'A|@абвгдеёжзийклмнопрстуфхцчшщъыьэюя%$#']
+		];
 	}
 
 	/**
@@ -93,14 +93,14 @@ class HelperTest extends PHPUnit_Framework_TestCase
 	 */
 	public function validateEmailProvider()
 	{
-		return array(
-			array('nd_lk.test-pro@mail.ru', true),
-			array('nd/lk@mail.ru', false),
-			array('false/email@mailer.ru', false),
-			array('email@wrong-domain', false),
-			array('email@wrong_domain.wrongLd', false),
-			array('email@wrong_domain.wro-d', false)
-		);
+		return [
+			['nd_lk.test-pro@mail.ru', true],
+			['nd/lk@mail.ru', false],
+			['false/email@mailer.ru', false],
+			['email@wrong-domain', false],
+			['email@wrong_domain.wrongLd', false],
+			['email@wrong_domain.wro-d', false]
+		];
 	}
 
 	/**
@@ -129,10 +129,10 @@ class HelperTest extends PHPUnit_Framework_TestCase
 	 */
 	public function checkEmailDomainProvider()
 	{
-		return array(
-			array('webmaster@itvault.info', true),
-			array('false@itvault.info', true)
-		);
+		return [
+			['webmaster@itvault.info', true],
+			['false@itvault.info', true]
+		];
 	}
 
 	/**
@@ -158,12 +158,12 @@ class HelperTest extends PHPUnit_Framework_TestCase
 	 */
 	public function translitProvider()
 	{
-		return array(
-			array(
+		return [
+			[
 				'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёждийклмнопрстуфхцчшщъыьэюя ".,!?()#@*&[]:;<>+',
 				'abvgdeyozhzijklmnoprstufhtschshshhyeyuyaabvgdeyozhdijklmnoprstufhtschshshhyeyuya-'
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -190,9 +190,9 @@ class HelperTest extends PHPUnit_Framework_TestCase
 	 */
 	public function makeAliasProvider()
 	{
-		return array(
-			array('Кровельная черепица', 'krovelnaya-cherepitsa'),
-			array('Внеземные цивилизации', 'vnezemnye-tsivilizatsii')
-		);
+		return [
+			['Кровельная черепица', 'krovelnaya-cherepitsa'],
+			['Внеземные цивилизации', 'vnezemnye-tsivilizatsii']
+		];
 	}
 }

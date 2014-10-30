@@ -59,7 +59,7 @@ abstract class ViewAdapterAbstract
 	{
 		foreach (static::$calls as $call) {
 			call_user_func_array(
-				array(static::$instance->getDriver(), $call['method']),
+				[static::$instance->getDriver(), $call['method']],
 				$call['arguments']
 			);
 		}
@@ -112,9 +112,9 @@ abstract class ViewAdapterAbstract
 	 */
 	private static function setCall($method, $arguments)
 	{
-		static::$calls[] = array(
+		static::$calls[] = [
 			'method'    => $method,
 			'arguments' => $arguments
-		);
+		];
 	}
 }

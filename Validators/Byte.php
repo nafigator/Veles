@@ -37,7 +37,7 @@ class Byte implements iValidator
 	 */
 	public static function format($size, $precision = 2)
 	{
-		$units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+		$units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 
 		$size = max($size, 0);
 		$pow = floor(($size ? log($size) : 0) / log(1024));

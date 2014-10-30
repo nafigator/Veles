@@ -139,11 +139,11 @@ EOF;
 	 */
 	public function setProvider()
 	{
-		return array(
-			array(
-				array('a' => 'Test', 'b' => 'complete', 'c' => 'Hello')
-			)
-		);
+		return [
+			[
+				['a' => 'Test', 'b' => 'complete', 'c' => 'Hello']
+			]
+		];
 	}
 
 	/**
@@ -174,18 +174,18 @@ EOF;
 	 */
 	public function delProvider()
 	{
-		return array(
-			array(
-				array('variable-1' => 'string', 'variable-2' => 'string'),
-				array('variable-1'),
-				array('variable-1' => false, 'variable-2' => true)
-			),
-			array(
-				array('variable-3' => 'string', 'variable-4' => 'string'),
-				array('variable-4'),
-				array('variable-3' => true, 'variable-4' => false)
-			)
-		);
+		return [
+			[
+				['variable-1' => 'string', 'variable-2' => 'string'],
+				['variable-1'],
+				['variable-1' => false, 'variable-2' => true]
+			],
+			[
+				['variable-3' => 'string', 'variable-4' => 'string'],
+				['variable-4'],
+				['variable-3' => true, 'variable-4' => false]
+			]
+		];
 	}
 
 	/**

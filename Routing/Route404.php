@@ -27,7 +27,7 @@ class Route404
 	public static function show($url)
 	{
 		header('HTTP/1.1 404 Not Found', true, 404);
-		View::set(array('url' => $url));
+		View::set(['url' => $url]);
 		die(View::get('error/404.phtml'));
 	}
 }

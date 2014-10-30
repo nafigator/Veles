@@ -23,7 +23,7 @@ use Exception;
 class AjaxAdapter extends ViewAdapterAbstract implements iViewAdapter
 {
 	/** @var array */
-	private static $variables = array();
+	private static $variables = [];
 
 	/**
 	 * Method for output variables setup

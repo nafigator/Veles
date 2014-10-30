@@ -24,8 +24,8 @@ use Veles\Config;
 class MysqliDriver implements iDbDriver
 {
 	private static $curr_link = null;
-	private static $links     = array();
-	private static $errors    = array();
+	private static $links     = [];
+	private static $errors    = [];
 
 	/**
 	 * Set current link to server
@@ -185,7 +185,7 @@ class MysqliDriver implements iDbDriver
 
 		$result = mysqli_query($link, $sql, MYSQLI_USE_RESULT);
 		if (false !== $result) {
-			$return = array();
+			$return = [];
 
 			while ($row = mysqli_fetch_assoc($result)) {
 				$return[] = $row;

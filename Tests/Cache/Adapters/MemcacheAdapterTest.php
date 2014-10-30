@@ -52,13 +52,13 @@ class MemcacheAdapterTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testGet()
 	{
-		$params = array();
+		$params = [];
 
 		for ($i = 0; $i < 3; ++$i) {
 			$key = uniqid('VELES::UNIT-TEST::');
 			$value = uniqid();
 			Cache::set($key, $value, 10);
-			$params[] = array($key, $value);
+			$params[] = [$key, $value];
 		}
 
 		$msg = 'Wrong MemcachedAdapter::get result!';
@@ -74,13 +74,13 @@ class MemcacheAdapterTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testSet()
 	{
-		$params = array();
+		$params = [];
 
 		for ($i = 0; $i < 3; ++$i) {
 			$key = uniqid('VELES::UNIT-TEST::');
 			$value = uniqid();
 			$this->object->set($key, $value, 10);
-			$params[] = array($key, $value);
+			$params[] = [$key, $value];
 		}
 
 		$msg = 'Wrong MemcacheAdapter::set result!';
@@ -95,18 +95,18 @@ class MemcacheAdapterTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testHas()
 	{
-		$params = array();
+		$params = [];
 
 		for ($i = 0; $i < 3; ++$i) {
 			$key = uniqid('VELES::UNIT-TEST::');
 			$value = uniqid();
 			Cache::set($key, $value, 10);
-			$params[] = array($key, true);
+			$params[] = [$key, true];
 		}
 
 		for ($i = 0; $i < 3; ++$i) {
 			$key = uniqid('VELES::UNIT-TEST::');
-			$params[] = array($key, false);
+			$params[] = [$key, false];
 		}
 
 		$msg = 'Wrong MemcacheAdapter::has result!';
@@ -122,18 +122,18 @@ class MemcacheAdapterTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testDel()
 	{
-		$params = array();
+		$params = [];
 
 		for ($i = 0; $i < 3; ++$i) {
 			$key = uniqid('VELES::UNIT-TEST::');
 			$value = uniqid();
 			Cache::set($key, $value, 10);
-			$params[] = array($key, true);
+			$params[] = [$key, true];
 		}
 
 		for ($i = 0; $i < 3; ++$i) {
 			$key = uniqid('VELES::UNIT-TEST::');
-			$params[] = array($key, false);
+			$params[] = [$key, false];
 		}
 
 		$msg = 'Wrong MemcacheAdapter::del result!';
@@ -152,14 +152,14 @@ class MemcacheAdapterTest extends \PHPUnit_Framework_TestCase
 		$key    = uniqid('VELES::UNIT-TEST::');
 		$value  = mt_rand(0, 1000);
 		Cache::set($key, $value, 10);
-		$params = array(array($key, null, ++$value));
+		$params = [[$key, null, ++$value]];
 
 		for ($i = 0; $i < 5; ++$i) {
 			$key    = uniqid('VELES::UNIT-TEST::');
 			$value  = mt_rand(0, 1000);
 			$offset = mt_rand(0, 1000);
 			Cache::set($key, $value, 10);
-			$params[] = array($key, $offset, $value + $offset);
+			$params[] = [$key, $offset, $value + $offset];
 		}
 
 		foreach ($params as $param) {
@@ -184,14 +184,14 @@ class MemcacheAdapterTest extends \PHPUnit_Framework_TestCase
 		$key    = uniqid('VELES::UNIT-TEST::');
 		$value  = mt_rand(1, 1000);
 		Cache::set($key, $value, 10);
-		$params = array(array($key, null, --$value));
+		$params = [[$key, null, --$value]];
 
 		for ($i = 0; $i < 5; ++$i) {
 			$key    = uniqid('VELES::UNIT-TEST::');
 			$value  = mt_rand(1000, 2000);
 			$offset = mt_rand(0, 1000);
 			Cache::set($key, $value, 10);
-			$params[] = array($key, $offset, $value - $offset);
+			$params[] = [$key, $offset, $value - $offset];
 		}
 
 		foreach ($params as $param) {
@@ -212,7 +212,7 @@ class MemcacheAdapterTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testClear()
 	{
-		$params = array();
+		$params = [];
 
 		for ($i = 0; $i < 10; ++$i) {
 			$key = uniqid('VELES::UNIT-TEST::');

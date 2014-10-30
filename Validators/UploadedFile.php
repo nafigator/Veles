@@ -20,7 +20,7 @@ namespace Veles\Validators;
  */
 class UploadedFile implements iValidator
 {
-	private $allowable_extensions = array();
+	private $allowable_extensions = [];
 
 	/**
 	 * Creates validator instance
@@ -89,12 +89,12 @@ class UploadedFile implements iValidator
 	 */
 	final static function getMimeByExtension($ext)
 	{
-		$mime_types = array(
+		$mime_types = [
 			'gif'  => 'image/gif; charset=binary',
 			'png'  => 'image/png; charset=binary',
 			'jpeg' => 'image/jpeg; charset=binary',
 			'jpg'  => 'image/jpeg; charset=binary'
-		);
+		];
 
 		return isset($mime_types[$ext]) ? $mime_types[$ext] : '';
 	}

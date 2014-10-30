@@ -52,7 +52,7 @@ class AutoLoader
 		}
 
 		set_include_path(
-			implode(PATH_SEPARATOR, array($path, get_include_path()))
+			implode(PATH_SEPARATOR, [$path, get_include_path()])
 		);
 	}
 }

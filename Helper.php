@@ -69,7 +69,7 @@ class Helper
 	 */
 	public static function translit($string)
 	{
-		$symbols = array(
+		$symbols = [
 			'А'=>'A','Б'=>'B','В'=>'V','Г'=>'G',
 			'Д'=>'D','Е'=>'E','Ё'=>'YO','Ж'=>'ZH','З'=>'Z','И'=>'I',
 			'Й'=>'J','К'=>'K','Л'=>'L','М'=>'M','Н'=>'N',
@@ -87,7 +87,7 @@ class Helper
 			'('=>'',')'=>'','#'=>'','@'=>'','*'=>'','&'=>'',
 			'['=>'',']'=>'',':'=>'',';'=>'','<'=>'','>'=>'',
 			'+'=>''
-		);
+		];
 		return strtr(mb_strtolower($string, 'UTF-8'), $symbols);
 	}
 
