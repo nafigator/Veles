@@ -21,7 +21,7 @@ class SubmitElement extends AbstractElement
 	/**
 	 * Отрисовка элемента
 	 */
-	final public function render()
+	public function render()
 	{
 		return '<input' . $this->attributes() . 'type="submit">';
 	}

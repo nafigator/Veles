@@ -37,7 +37,7 @@ abstract class ViewAdapterAbstract
 	/**
 	 * @return iViewAdapter|$this
 	 */
-	final public static function instance()
+	public static function instance()
 	{
 		if (null === static::$instance) {
 			$class = get_called_class();
@@ -71,7 +71,7 @@ abstract class ViewAdapterAbstract
 	 *
 	 * @return mixed
 	 */
-	final public function getDriver()
+	public function getDriver()
 	{
 		return $this->driver;
 	}
@@ -81,7 +81,7 @@ abstract class ViewAdapterAbstract
 	 *
 	 * @param mixed $driver
 	 */
-	final public function setDriver($driver)
+	public function setDriver($driver)
 	{
 		$this->driver = $driver;
 	}
@@ -95,7 +95,7 @@ abstract class ViewAdapterAbstract
 	 * @return mixed
 	 * @throws \Exception
 	 */
-	final public function __call($method, $arguments)
+	public function __call($method, $arguments)
 	{
 		if (!method_exists($this->getDriver(), $method)) {
 			throw new Exception('Calling non existent method!');

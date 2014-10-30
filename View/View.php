@@ -32,7 +32,7 @@ class View
 	 *
 	 * @param iViewAdapter $adapter Adapter
 	 */
-	final public static function setAdapter(iViewAdapter $adapter)
+	public static function setAdapter(iViewAdapter $adapter)
 	{
 		self::$adapter = $adapter;
 	}
@@ -43,7 +43,7 @@ class View
 	 * @throws Exception
 	 * @return iViewAdapter|ViewAdapterAbstract
 	 */
-	final public static function getAdapter()
+	public static function getAdapter()
 	{
 		if (self::$adapter instanceof iViewAdapter) {
 			return self::$adapter;
@@ -60,7 +60,7 @@ class View
 	 *
 	 * @param mixed $vars Output variables
 	 */
-	final public static function set($vars)
+	public static function set($vars)
 	{
 		self::getAdapter()->set($vars);
 	}
@@ -70,7 +70,7 @@ class View
 	 *
 	 * @param array $vars Variables array for cleanup
 	 */
-	final public static function del($vars)
+	public static function del($vars)
 	{
 		self::getAdapter()->del($vars);
 	}
@@ -80,7 +80,7 @@ class View
 	 *
 	 * @param string $path Path to template
 	 */
-	final public static function show($path)
+	public static function show($path)
 	{
 		self::getAdapter()->show($path);
 	}
@@ -91,7 +91,7 @@ class View
 	 * @param string $path Path to template
 	 * @return string View content
 	 */
-	final public static function get($path)
+	public static function get($path)
 	{
 		return self::getAdapter()->get($path);
 	}
@@ -102,7 +102,7 @@ class View
 	 * @param $tpl
 	 * @return bool
 	 */
-	final public static function isCached($tpl)
+	public static function isCached($tpl)
 	{
 		return self::getAdapter()->isCached($tpl);
 	}

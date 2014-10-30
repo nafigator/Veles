@@ -29,7 +29,7 @@ class DbAdapterBase extends Observable
 	 *
 	 * @param ConnectionPool $pool
 	 */
-	final public static function setPool(ConnectionPool $pool)
+	public static function setPool(ConnectionPool $pool)
 	{
 		static::$pool = $pool;
 		static::$connection_name = $pool->getDefaultConnectionName();
@@ -40,7 +40,7 @@ class DbAdapterBase extends Observable
 	 *
 	 * @return ConnectionPool $pool
 	 */
-	final public static function getPool()
+	public static function getPool()
 	{
 		return static::$pool;
 	}
@@ -51,7 +51,7 @@ class DbAdapterBase extends Observable
 	 * @param string $name Имя соединения
 	 * @return $this
 	 */
-	final public function setConnection($name)
+	public function setConnection($name)
 	{
 		static::$connection_name = $name;
 		static::$connection = null;
@@ -64,7 +64,7 @@ class DbAdapterBase extends Observable
 	 *
 	 * return \PDO
 	 */
-	final public function getConnection()
+	public function getConnection()
 	{
 		if (null === static::$connection) {
 			$conn = static::$pool->getConnection(static::$connection_name);
@@ -81,7 +81,7 @@ class DbAdapterBase extends Observable
 	 *
 	 * @return iDbAdapter
 	 */
-	final public static function instance()
+	public static function instance()
 	{
 		if (null === static::$instance) {
 			$class = get_called_class();
@@ -98,7 +98,7 @@ class DbAdapterBase extends Observable
 	 * @param string $method Method name that should be called
 	 * @param array $arguments Method arguments
 	 */
-	final public static function addCall($method, array $arguments = array())
+	public static function addCall($method, array $arguments = array())
 	{
 		static::$calls[] = array(
 			'method'    => $method,

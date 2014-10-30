@@ -28,7 +28,7 @@ final class UsrAuth
 	 * Проверка авторизации пользователя
 	 * @return UsrAuth
 	 */
-	final public static function instance()
+	public static function instance()
 	{
 		if (null === self::$instance) {
 			self::$instance = new self;
@@ -50,7 +50,7 @@ final class UsrAuth
 	 * Метод возвращает побитовые значения ошибок
 	 * @return int Побитовые значения ошибок авторизации
 	 */
-	final public static function getErrors()
+	public static function getErrors()
 	{
 		return self::instance()->strategy->getErrors();
 	}
@@ -61,7 +61,7 @@ final class UsrAuth
 	 * @return  bool
 	 * @todo переделать входящий параметр на int
 	 */
-	final public static function hasAccess($groups)
+	public static function hasAccess($groups)
 	{
 		$user_group = self::getUser()->getGroup();
 
@@ -80,7 +80,7 @@ final class UsrAuth
 	 * Получение пользователя
 	 * @return User
 	 */
-	final public static function getUser()
+	public static function getUser()
 	{
 		return self::instance()->strategy->getUser();
 	}

@@ -36,7 +36,7 @@ class DbPaginator extends stdClass
 	 * @param bool|string $template Path to template
 	 * @param int $curr_page Current page
 	 */
-	final public function __construct($template = false, $curr_page = 1)
+	public function __construct($template = false, $curr_page = 1)
 	{
 		$this->template = ($template)
 			? $template
@@ -48,7 +48,7 @@ class DbPaginator extends stdClass
 	/**
 	 * Pagination rendering
 	 */
-	final public function __toString()
+	public function __toString()
 	{
 		$this->first_link = false;
 		$this->last_link  = false;
@@ -73,7 +73,7 @@ class DbPaginator extends stdClass
 	 * Getting offset
 	 * @return int
 	 */
-	final public function getOffset()
+	public function getOffset()
 	{
 		return ($this->curr_page - 1) * $this->getLimit();
 	}
@@ -82,7 +82,7 @@ class DbPaginator extends stdClass
 	 * Getting limit
 	 * @return int
 	 */
-	final public function getLimit()
+	public function getLimit()
 	{
 		return $this->limit;
 	}
@@ -91,7 +91,7 @@ class DbPaginator extends stdClass
 	 * Elements per page setting
 	 * @param int $limit Кол-во выводимых элементов на странице
 	 */
-	final public function setLimit($limit)
+	public function setLimit($limit)
 	{
 		if (!is_numeric($limit)) {
 			return;
@@ -104,7 +104,7 @@ class DbPaginator extends stdClass
 	 * Getting limit for sql-request
 	 * @return string
 	 */
-	final public function getSqlLimit()
+	public function getSqlLimit()
 	{
 		$offset = $this->getOffset();
 		$limit  = $this->getLimit();
@@ -114,7 +114,7 @@ class DbPaginator extends stdClass
 	/**
 	 * Pages quantity
 	 */
-	final public function getMaxPages()
+	public function getMaxPages()
 	{
 		if (null !== $this->page_nums) {
 			return $this->page_nums;
@@ -128,7 +128,7 @@ class DbPaginator extends stdClass
 	/**
 	 * Pages quantity calculation
 	 */
-	final public function calcMaxPages()
+	public function calcMaxPages()
 	{
 		$this->page_nums = (int) ceil(Db::getFoundRows() / $this->getLimit());
 	}
@@ -136,7 +136,7 @@ class DbPaginator extends stdClass
 	/**
 	 * Getting current page
 	 */
-	final public function getCurrPage()
+	public function getCurrPage()
 	{
 		return $this->curr_page;
 	}

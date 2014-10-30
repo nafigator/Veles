@@ -30,7 +30,7 @@ class CookieStrategy extends AbstractAuthStrategy
 	/**
 	 * Конструктор
 	 */
-	final public function __construct()
+	public function __construct()
 	{
 		parent::__construct();
 		$this->cookie_id   =& $_COOKIE['id'];
@@ -41,7 +41,7 @@ class CookieStrategy extends AbstractAuthStrategy
 	 * Авторизация пользователя по кукам
 	 * @return bool
 	 */
-	final public function identify()
+	public function identify()
 	{
 		// Некорректные куки
 		if (!$this->checkInput()) {

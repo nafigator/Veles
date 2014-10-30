@@ -43,7 +43,7 @@ class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 * @param string $key Key
 	 * @return mixed
 	 */
-	final public function get($key)
+	public function get($key)
 	{
 		return apc_fetch($key);
 	}
@@ -56,7 +56,7 @@ class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 * @param int $ttl Time to live
 	 * @return mixed
 	 */
-	final public function set($key, $value, $ttl = 0)
+	public function set($key, $value, $ttl = 0)
 	{
 		return apc_add($key, $value, $ttl);
 	}
@@ -67,7 +67,7 @@ class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 * @param string $key Key
 	 * @return bool
 	 */
-	final public function has($key)
+	public function has($key)
 	{
 		apc_exists($key);
 	}
@@ -78,7 +78,7 @@ class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 * @param string $key Key
 	 * @return bool
 	 */
-	final public function del($key)
+	public function del($key)
 	{
 		return apc_delete($key);
 	}
@@ -95,7 +95,7 @@ class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 * @param string $tpl Substring containing in needed keys
 	 * @return bool
 	 */
-	final public function delByTemplate($tpl)
+	public function delByTemplate($tpl)
 	{
 		return apc_delete(new APCIterator('user', "/$tpl/"));
 	}
@@ -105,7 +105,7 @@ class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 *
 	 * @return bool
 	 */
-	final public function clear()
+	public function clear()
 	{
 		return apc_clear_cache();
 	}
@@ -118,7 +118,7 @@ class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 *
 	 * @return bool|int
 	 */
-	final public function increment($key, $offset)
+	public function increment($key, $offset)
 	{
 		return apc_inc($key, $offset);
 	}
@@ -131,7 +131,7 @@ class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 *
 	 * @return bool|int
 	 */
-	final public function decrement($key, $offset)
+	public function decrement($key, $offset)
 	{
 		return apc_dec($key, $offset);
 	}

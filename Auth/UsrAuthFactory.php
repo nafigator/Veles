@@ -27,7 +27,7 @@ class UsrAuthFactory
 	 * Алгритм выбора стратегии авторизации пользователя
 	 * @return AbstractAuthStrategy
 	 */
-	final public static function create()
+	public static function create()
 	{
 		switch (true) {
 			case (isset($_REQUEST['ln']) && isset($_REQUEST['pw'])):

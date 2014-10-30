@@ -39,7 +39,7 @@ class DbBase
 	 * @param iDbAdapter $adapter Adapter
 	 * @see Db::getAdapter
 	 */
-	final public static function setAdapter(iDbAdapter $adapter)
+	public static function setAdapter(iDbAdapter $adapter)
 	{
 		self::$adapter = $adapter;
 	}
@@ -50,7 +50,7 @@ class DbBase
 	 * @throws Exception
 	 * @return iDbAdapter
 	 */
-	final public static function getAdapter()
+	public static function getAdapter()
 	{
 		if (null === self::$adapter) {
 			throw new Exception('Adapter not set!');
@@ -65,7 +65,7 @@ class DbBase
 	 * @param string $name Имя соединения
 	 * @return DbAdapterBase
 	 */
-	final public static function connection($name)
+	public static function connection($name)
 	{
 		return self::getAdapter()->setConnection($name);
 	}
@@ -75,7 +75,7 @@ class DbBase
 	 *
 	 * @return int
 	 */
-	final public static function getLastInsertId()
+	public static function getLastInsertId()
 	{
 		return self::getAdapter()->getLastInsertId();
 	}
@@ -85,7 +85,7 @@ class DbBase
 	 *
 	 * @return int
 	 */
-	final public static function getFoundRows()
+	public static function getFoundRows()
 	{
 		return self::getAdapter()->getFoundRows();
 	}
@@ -96,7 +96,7 @@ class DbBase
 	 * @param string $var
 	 * @return string
 	 */
-	final public static function escape($var)
+	public static function escape($var)
 	{
 		return self::getAdapter()->escape($var);
 	}

@@ -26,7 +26,7 @@ class Number implements iValidator
 	 * @param int $max Max value
 	 * @param int $min Min value
 	 */
-	final public function __construct($min = 1, $max = 2147483647)
+	public function __construct($min = 1, $max = 2147483647)
 	{
 		$this->min = (int) $min;
 		$this->max = (int) $max;
@@ -37,7 +37,7 @@ class Number implements iValidator
 	 * @param mixed $value Value
 	 * @return bool
 	 */
-	final public function check($value)
+	public function check($value)
 	{
 		if (!is_numeric($value)) {
 			return false;

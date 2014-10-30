@@ -46,7 +46,7 @@ class UploadFile extends File
 	 * @param int $dir_mask Value must be octal. Examples: 0755, 02755
 	 * @return UploadFile
 	 */
-	final public function setDirMask($dir_mask)
+	public function setDirMask($dir_mask)
 	{
 		$this->dir_mask = $dir_mask;
 
@@ -58,7 +58,7 @@ class UploadFile extends File
 	 *
 	 * @return int
 	 */
-	final public function getDirMask()
+	public function getDirMask()
 	{
 		return $this->dir_mask;
 	}
@@ -68,7 +68,7 @@ class UploadFile extends File
 	 *
 	 * @return string
 	 */
-	final public function getOrigName()
+	public function getOrigName()
 	{
 		return $this->orig_name;
 	}
@@ -79,7 +79,7 @@ class UploadFile extends File
 	 * @param string $orig_name Origin file name
 	 * @return UploadFile
 	 */
-	final public function setOrigName($orig_name)
+	public function setOrigName($orig_name)
 	{
 		$this->orig_name = $orig_name;
 
@@ -89,7 +89,7 @@ class UploadFile extends File
 	/**
 	 * Generate path for uploaded file
 	 */
-	final public function initStorageName()
+	public function initStorageName()
 	{
 		// initialize storage name only once
 		if (null !== $this->getHash()) {
@@ -125,7 +125,7 @@ class UploadFile extends File
 	 *
 	 * @return string
 	 */
-	final public function getHash()
+	public function getHash()
 	{
 		return $this->hash;
 	}
@@ -136,7 +136,7 @@ class UploadFile extends File
 	 * @param string $hash
 	 * @return UploadFile
 	 */
-	final public function setHash($hash)
+	public function setHash($hash)
 	{
 		$this->hash = $hash;
 
@@ -148,7 +148,7 @@ class UploadFile extends File
 	 *
 	 * @return string
 	 */
-	final public function getSubDir()
+	public function getSubDir()
 	{
 		return $this->sub_dir;
 	}
@@ -159,7 +159,7 @@ class UploadFile extends File
 	 * @param string $sub_dir
 	 * @return UploadFile
 	 */
-	final public function setSubDir($sub_dir)
+	public function setSubDir($sub_dir)
 	{
 		$this->sub_dir = $sub_dir;
 
@@ -171,7 +171,7 @@ class UploadFile extends File
 	 *
 	 * @return bool
 	 */
-	final public function save()
+	public function save()
 	{
 		$dir = $this->getDir();
 
@@ -188,7 +188,7 @@ class UploadFile extends File
 	 *
 	 * @return string
 	 */
-	final public function getTmpPath()
+	public function getTmpPath()
 	{
 		return $this->tmp_path;
 	}
@@ -199,7 +199,7 @@ class UploadFile extends File
 	 * @param string $tmp_path Uploaded file temp path
 	 * @return UploadFile
 	 */
-	final public function setTmpPath($tmp_path)
+	public function setTmpPath($tmp_path)
 	{
 		$this->tmp_path = $tmp_path;
 
@@ -211,7 +211,7 @@ class UploadFile extends File
 	 *
 	 * @return string
 	 */
-	final public function getWwwPath()
+	public function getWwwPath()
 	{
 		return $this->www_path;
 	}
@@ -222,7 +222,7 @@ class UploadFile extends File
 	 * @param string $www_path www-path to file
 	 * @return UploadFile
 	 */
-	final public function setWwwPath($www_path)
+	public function setWwwPath($www_path)
 	{
 		$this->www_path = $www_path;
 
@@ -235,7 +235,7 @@ class UploadFile extends File
 	 * @see hash_algos()
 	 * @return string
 	 */
-	final public function getHashAlgorithm()
+	public function getHashAlgorithm()
 	{
 		return $this->hash_algorithm;
 	}
@@ -247,7 +247,7 @@ class UploadFile extends File
 	 * @see hash_algos()
 	 * @return UploadFile
 	 */
-	final public function setHashAlgorithm($hash_algorithm)
+	public function setHashAlgorithm($hash_algorithm)
 	{
 		$this->hash_algorithm = $hash_algorithm;
 

@@ -30,7 +30,7 @@ class AutoLoaderTest extends PHPUnit_Framework_TestCase
 	public function testInit()
 	{
 		$expected = <<<EOF
-	final public static function init()
+	public static function init()
 	{
 		spl_autoload_register(__NAMESPACE__ . '\AutoLoader::load');
 	}

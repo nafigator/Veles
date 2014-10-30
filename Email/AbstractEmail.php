@@ -33,7 +33,7 @@ abstract class AbstractEmail
 	 * @param SplSubject $subject
 	 * @internal param array $vars Набор переменных
 	 */
-	final public function update(SplSubject $subject)
+	public function update(SplSubject $subject)
 	{
 		/** @noinspection PhpUndefinedMethodInspection */
 		$this->message = base64_encode($subject->getMessage());

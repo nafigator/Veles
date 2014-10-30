@@ -21,7 +21,7 @@ class TextAreaElement extends AbstractElement
 	/**
 	 * Отрисовка элемента
 	 */
-	final public function render()
+	public function render()
 	{
 		return '<textarea' . $this->attributes() . ">$this->value</textarea>";
 	}

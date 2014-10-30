@@ -28,7 +28,7 @@ class Helper
 	 * @param string $letters Group of symbols
 	 * @return string
 	 */
-	final public static function genStr(
+	public static function genStr(
 		$length  = 22,
 		$letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./'
 	) {
@@ -41,7 +41,7 @@ class Helper
 	 * @param string $email
 	 * @return bool
 	 */
-	final public static function validateEmail($email)
+	public static function validateEmail($email)
 	{
 		return (bool) preg_match(
 			'/^(?:[a-zA-Z0-9]|_|\-|\.)+@(?:(?:[a-z0-9_]|\-)+\.)+[a-z]{2,6}$/', $email
@@ -54,7 +54,7 @@ class Helper
 	 * @param string $email
 	 * @return bool
 	 */
-	final public static function checkEmailDomain($email)
+	public static function checkEmailDomain($email)
 	{
 		list(, $domain) = explode('@', $email);
 
@@ -67,7 +67,7 @@ class Helper
 	 * @param string $string
 	 * @return string
 	 */
-	final public static function translit($string)
+	public static function translit($string)
 	{
 		$symbols = array(
 			'А'=>'A','Б'=>'B','В'=>'V','Г'=>'G',
@@ -97,7 +97,7 @@ class Helper
 	 * @param string $url URL для алиаса
 	 * @return string
 	 */
-	final public static function makeAlias($url)
+	public static function makeAlias($url)
 	{
 		$alias = htmlspecialchars_decode($url);
 		$alias = preg_replace('/[^a-z^а-яё^\d^ ^-]/iu', '', $alias);

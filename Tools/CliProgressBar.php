@@ -38,7 +38,7 @@ class CliProgressBar
 	 * @param int $width Ширина прогрессбара
 	 * @param bool $block Флаг блокирования пользовательского ввода
 	 */
-	final public function __construct($final, $width = 60, $block = false)
+	public function __construct($final, $width = 60, $block = false)
 	{
 		if ($block) {
 			$this->block = true;
@@ -60,7 +60,7 @@ class CliProgressBar
 	 *
 	 * @param int $current Числовой эквивалент состояния процесса
 	 */
-	final public function update($current)
+	public function update($current)
 	{
 		$this->curr_time = microtime(true);
 		$this->cycle_time = $this->curr_time - $this->last_update_time;
@@ -97,7 +97,7 @@ class CliProgressBar
 	 * @param int $current Текущее значение числового эквевалента процесса
 	 * @return string
 	 */
-	final public function getStatusString($current)
+	public function getStatusString($current)
 	{
 		$current   = max($current, 1);
 		$avg_speed = $current / $this->clean_process_time;
@@ -116,7 +116,7 @@ class CliProgressBar
 	 *
 	 * @return string
 	 */
-	final public static function getMemString()
+	public static function getMemString()
 	{
 		$mem = Byte::format(memory_get_usage());
 		$max_mem = Byte::format(memory_get_peak_usage());

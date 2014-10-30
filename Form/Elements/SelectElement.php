@@ -21,7 +21,7 @@ class SelectElement extends AbstractElement
 	/**
 	 * Element rendering
 	 */
-	final public function render()
+	public function render()
 	{
 		$html = '<select' . $this->attributes() . '>';
 
@@ -55,7 +55,7 @@ class SelectElement extends AbstractElement
 	 *
 	 * @param $options
 	 */
-	final public function setOptions($options)
+	public function setOptions($options)
 	{
 		$this->options = $options;
 	}

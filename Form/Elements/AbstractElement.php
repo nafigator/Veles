@@ -26,7 +26,7 @@ abstract class AbstractElement extends stdClass implements iElement
 	 * Element constructor
 	 * @param array $params Form elements params array
 	 */
-	final public function __construct($params)
+	public function __construct($params)
 	{
 		foreach ($params as $param => $value) {
 			$this->$param = $value;
@@ -67,7 +67,7 @@ abstract class AbstractElement extends stdClass implements iElement
 	 *
 	 * @return bool
 	 */
-	final public function required()
+	public function required()
 	{
 		return (bool) $this->required;
 	}
@@ -75,7 +75,7 @@ abstract class AbstractElement extends stdClass implements iElement
 	/**
 	 * Getting elements name
 	 */
-	final public function getName()
+	public function getName()
 	{
 		if (!isset($this->attributes['name'])) {
 			throw new Exception('Element name not exist');
@@ -94,7 +94,7 @@ abstract class AbstractElement extends stdClass implements iElement
 	/**
 	 * Element attributes rendering
 	 */
-	final public function attributes()
+	public function attributes()
 	{
 		$attributes = '';
 

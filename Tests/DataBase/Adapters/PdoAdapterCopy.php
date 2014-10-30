@@ -20,22 +20,22 @@ use Veles\DataBase\Adapters\PdoAdapter;
  */
 class PdoAdapterCopy extends PdoAdapter
 {
-	final public static function getCalls()
+	public static function getCalls()
 	{
 		return self::$calls;
 	}
 
-	final public static function setCalls(array $calls)
+	public static function setCalls(array $calls)
 	{
 		self::$calls = $calls;
 	}
 
-	final public static function resetCalls()
+	public static function resetCalls()
 	{
 		self::$calls = null;
 	}
 
-	final public static function unsetInstance()
+	public static function unsetInstance()
 	{
 		self::$instance = null;
 	}

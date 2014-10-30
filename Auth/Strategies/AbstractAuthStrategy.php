@@ -94,7 +94,7 @@ abstract class AbstractAuthStrategy
 	 * Получение пользователя
 	 * @return User
 	 */
-	final public function getUser()
+	public function getUser()
 	{
 		return $this->user;
 	}
@@ -103,7 +103,7 @@ abstract class AbstractAuthStrategy
 	 * Получение ошибок
 	 * @return int
 	 */
-	final public function getErrors()
+	public function getErrors()
 	{
 		return $this->errors;
 	}

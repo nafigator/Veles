@@ -42,7 +42,7 @@ class MemcacheAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 * @param string $key Key
 	 * @return mixed
 	 */
-	final public function get($key)
+	public function get($key)
 	{
 		return $this->getDriver()->get($key);
 	}
@@ -55,7 +55,7 @@ class MemcacheAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 * @param int $ttl Time to live
 	 * @return bool
 	 */
-	final public function set($key, $value, $ttl)
+	public function set($key, $value, $ttl)
 	{
 		return $this->getDriver()->set($key, $value, 0, $ttl);
 	}
@@ -66,7 +66,7 @@ class MemcacheAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 * @param string $key Key
 	 * @return bool
 	 */
-	final public function has($key)
+	public function has($key)
 	{
 		return (bool) $this->getDriver()->get($key);
 	}
@@ -77,7 +77,7 @@ class MemcacheAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 * @param string $key Key
 	 * @return bool
 	 */
-	final public function del($key)
+	public function del($key)
 	{
 		return $this->getDriver()->delete($key);
 	}
@@ -94,7 +94,7 @@ class MemcacheAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 * @param string $tpl Substring containing in needed keys
 	 * @return bool
 	 */
-	final public function delByTemplate($tpl)
+	public function delByTemplate($tpl)
 	{
 		try {
 			$cache = new MemcacheRaw();
@@ -110,7 +110,7 @@ class MemcacheAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 *
 	 * @return bool
 	 */
-	final public function clear()
+	public function clear()
 	{
 		return $this->getDriver()->flush();
 	}

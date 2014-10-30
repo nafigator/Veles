@@ -128,7 +128,7 @@ class Config
 	 * @param string $param
 	 * @return mixed
 	 */
-	final public static function getParams($param)
+	public static function getParams($param)
 	{
 		if (null === self::$data) {
 			self::read();

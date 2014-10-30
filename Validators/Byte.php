@@ -24,7 +24,7 @@ class Byte implements iValidator
 	 * @param mixed $size Size in bytes
 	 * @return bool
 	 */
-	final public function check($size)
+	public function check($size)
 	{
 		return is_numeric($size);
 	}
@@ -35,7 +35,7 @@ class Byte implements iValidator
 	 * @param int $precision Precision of returned values
 	 * @return string
 	 */
-	final public static function format($size, $precision = 2)
+	public static function format($size, $precision = 2)
 	{
 		$units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
 

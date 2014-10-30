@@ -5,7 +5,7 @@ use Veles\Cache\Adapters\MemcachedAdapter;
 
 class MemcachedAdapterChild extends MemcachedAdapter
 {
-	final public function getDriverForTest()
+	public function getDriverForTest()
 	{
 		return $this->driver;
 	}
@@ -13,7 +13,7 @@ class MemcachedAdapterChild extends MemcachedAdapter
 	/**
 	 * @return MemcachedAdapterChild
 	 */
-	final public static function getTestInstance()
+	public static function getTestInstance()
 	{
 		return new self;
 	}

@@ -28,7 +28,7 @@ class MemcacheRaw
 	 *
 	 * @throws Exception
 	 */
-	final public function __construct()
+	public function __construct()
 	{
 		try {
 			$this->connection = fsockopen(
@@ -47,7 +47,7 @@ class MemcacheRaw
 	 * @param string $host
 	 * @param int $port
 	 */
-	final public static function setConnectionParams($host, $port)
+	public static function setConnectionParams($host, $port)
 	{
 		self::$host = $host;
 		self::$port = $port;
@@ -58,7 +58,7 @@ class MemcacheRaw
 	 *
 	 * @return bool
 	 */
-	final public function disconnect()
+	public function disconnect()
 	{
 		$this->command('quit');
 		return fclose($this->connection);
@@ -70,7 +70,7 @@ class MemcacheRaw
 	 * @param string $command Internal console memcache command
 	 * @return MemcacheRaw
 	 */
-	final public function command($command)
+	public function command($command)
 	{
 		fwrite($this->connection, $command . PHP_EOL);
 		fgets($this->connection);
@@ -88,7 +88,7 @@ class MemcacheRaw
 	 * @param string $tpl Substring containing in needed keys
 	 * @return MemcacheRaw
 	 */
-	final public function delByTemplate($tpl)
+	public function delByTemplate($tpl)
 	{
 		$output = $this->query('stats items');
 		$lines  = explode("\r\n", trim($output));
@@ -128,7 +128,7 @@ class MemcacheRaw
 	 * @param string $command Memcache console internal command
 	 * @return string
 	 */
-	final public function query($command)
+	public function query($command)
 	{
 		fwrite($this->connection, $command . PHP_EOL);
 

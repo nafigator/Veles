@@ -28,7 +28,7 @@ class LoginFormStrategy extends AbstractAuthStrategy
 	/**
 	 * Конструктор
 	 */
-	final public function __construct()
+	public function __construct()
 	{
 		parent::__construct();
 		$this->email    =& $_REQUEST['ln'];
@@ -39,7 +39,7 @@ class LoginFormStrategy extends AbstractAuthStrategy
 	 * Авторизация пользователя через форму логина
 	 * @return bool
 	 */
-	final public function identify()
+	public function identify()
 	{
 		// Некорректные $_GET
 		if (!$this->checkInput()) {

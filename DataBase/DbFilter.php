@@ -27,7 +27,7 @@ class DbFilter
 	 * Метод для получения where
 	 * @return string
 	 */
-	final public function getWhere()
+	public function getWhere()
 	{
 		return $this->where;
 	}
@@ -36,7 +36,7 @@ class DbFilter
 	 * Метод для получения group by
 	 * @return string
 	 */
-	final public function getGroup()
+	public function getGroup()
 	{
 		return $this->group;
 	}
@@ -45,7 +45,7 @@ class DbFilter
 	 * Метод для получения having
 	 * @return string
 	 */
-	final public function getHaving()
+	public function getHaving()
 	{
 		return $this->having;
 	}
@@ -54,7 +54,7 @@ class DbFilter
 	 * Метод для получения order by
 	 * @return string
 	 */
-	final public function getOrder()
+	public function getOrder()
 	{
 		return $this->order;
 	}
@@ -63,7 +63,7 @@ class DbFilter
 	 * Метод для установки значения where
 	 * @param string $where WHERE для sql-запроса
 	 */
-	final public function setWhere($where)
+	public function setWhere($where)
 	{
 		$this->where = "WHERE $where";
 	}
@@ -72,7 +72,7 @@ class DbFilter
 	 * Метод для установки значения group by
 	 * @param string $group GROUP BY для sql-запроса
 	 */
-	final public function setGroup($group)
+	public function setGroup($group)
 	{
 		$this->group = "GROUP BY $group";
 	}
@@ -81,7 +81,7 @@ class DbFilter
 	 * Метод для установки значения having
 	 * @param string $having HAVING для sql-запроса
 	 */
-	final public function setHaving($having)
+	public function setHaving($having)
 	{
 		$this->having = "HAVING $having";
 	}
@@ -90,7 +90,7 @@ class DbFilter
 	 * Метод для установки значения order by
 	 * @param string $order ORDER BY для sql-запроса
 	 */
-	final public function setOrder($order)
+	public function setOrder($order)
 	{
 		$this->order = "ORDER BY $order";
 	}

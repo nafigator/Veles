@@ -27,7 +27,7 @@ class UploadedFile implements iValidator
 	 *
 	 * @param string $ext_string List of valid extension separated by comma
 	 */
-	final public function __construct($ext_string = 'gif,jpg,jpeg,png')
+	public function __construct($ext_string = 'gif,jpg,jpeg,png')
 	{
 		$extensions = explode(',', $ext_string);
 
@@ -43,7 +43,7 @@ class UploadedFile implements iValidator
 	 *
 	 * @return bool
 	 */
-	final public function check($value)
+	public function check($value)
 	{
 		$file_name = strtolower($_FILES[$value]['name']);
 

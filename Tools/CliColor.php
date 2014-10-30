@@ -51,7 +51,7 @@ class CliColor
 	 * @param string $string Строка
 	 * @return string
 	 */
-	final public function __invoke($string = null)
+	public function __invoke($string = null)
 	{
 		if (null === $string) {
 			if (null === $this->string) {
@@ -71,7 +71,7 @@ class CliColor
 	 * @param array $style Styles array
 	 * @throws Exception
 	 */
-	final public function __construct(
+	public function __construct(
 		$color = 'green', $style = array('default')
 	) {
 		if (!is_array($style)) {
@@ -91,7 +91,7 @@ class CliColor
 	 *
 	 * @return mixed
 	 */
-	final public function __toString()
+	public function __toString()
 	{
 		if (null === $this->string) {
 			return null;
@@ -110,7 +110,7 @@ class CliColor
 	 * @throws Exception
 	 * @return CliColor
 	 */
-	final public function setString($string = null)
+	public function setString($string = null)
 	{
 		if (null === $string) {
 			throw new Exception('Not valid string!');
@@ -128,7 +128,7 @@ class CliColor
 	 * @throws Exception
 	 * @return CliColor
 	 */
-	final public function setStyle($style = array())
+	public function setStyle($style = array())
 	{
 		if (!is_array($style)) {
 			throw new Exception('Not valid style!');
@@ -154,7 +154,7 @@ class CliColor
 	 * @throws Exception
 	 * @return CliColor
 	 */
-	final public function setColor($color = null)
+	public function setColor($color = null)
 	{
 		if (null === $color || !is_string($color)) {
 			throw new Exception('Not valid color!');

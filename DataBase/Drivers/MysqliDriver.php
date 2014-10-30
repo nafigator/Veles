@@ -32,7 +32,7 @@ class MysqliDriver implements iDbDriver
 	 *
 	 * @param string $name Server name
 	 */
-	final public static function setLink($name)
+	public static function setLink($name)
 	{
 		if (!isset(self::$links[$name])) {
 			self::connect($name);
@@ -46,7 +46,7 @@ class MysqliDriver implements iDbDriver
 	 *
 	 * @return mysqli
 	 */
-	final public static function getLink()
+	public static function getLink()
 	{
 		if (!self::$curr_link instanceof mysqli) {
 			self::connect('master');
@@ -102,7 +102,7 @@ class MysqliDriver implements iDbDriver
 	 *
 	 * @return bool
 	 */
-	final public static function query($sql, $server = 'master')
+	public static function query($sql, $server = 'master')
 	{
 		self::setLink($server);
 		$link = self::getLink();
@@ -124,7 +124,7 @@ class MysqliDriver implements iDbDriver
 	 *
 	 * @return string|bool
 	 */
-	final public static function getValue($sql, $server = 'master')
+	public static function getValue($sql, $server = 'master')
 	{
 		self::setLink($server);
 		$link = self::getLink();
@@ -152,7 +152,7 @@ class MysqliDriver implements iDbDriver
 	 *
 	 * @return array
 	 */
-	final public static function getRow($sql, $server = 'master')
+	public static function getRow($sql, $server = 'master')
 	{
 		self::setLink($server);
 		$link = self::getLink();
@@ -178,7 +178,7 @@ class MysqliDriver implements iDbDriver
 	 *
 	 * @return array
 	 */
-	final public static function getRows($sql, $server = 'master')
+	public static function getRows($sql, $server = 'master')
 	{
 		self::setLink($server);
 		$link = self::getLink();
@@ -205,7 +205,7 @@ class MysqliDriver implements iDbDriver
 	 *
 	 * @return int
 	 */
-	final public static function getLastInsertId()
+	public static function getLastInsertId()
 	{
 		return (int) mysqli_insert_id(self::getLink());
 	}
@@ -217,7 +217,7 @@ class MysqliDriver implements iDbDriver
 	 *
 	 * @return int
 	 */
-	final public static function getFoundRows()
+	public static function getFoundRows()
 	{
 		$sql  = 'SELECT FOUND_ROWS()';
 		$link = self::getLink();
@@ -242,7 +242,7 @@ class MysqliDriver implements iDbDriver
 	 *
 	 * @return array
 	 */
-	final public static function getErrors()
+	public static function getErrors()
 	{
 		return self::$errors;
 	}

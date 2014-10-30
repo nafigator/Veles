@@ -26,7 +26,7 @@ class DbTransactionHandler extends DbBase
 	 *
 	 * @return bool
 	 */
-	final public static function begin()
+	public static function begin()
 	{
 		return self::getAdapter()->begin();
 	}
@@ -36,7 +36,7 @@ class DbTransactionHandler extends DbBase
 	 *
 	 * @return bool
 	 */
-	final public static function rollback()
+	public static function rollback()
 	{
 		return self::getAdapter()->rollback();
 	}
@@ -46,7 +46,7 @@ class DbTransactionHandler extends DbBase
 	 *
 	 * @return bool
 	 */
-	final public static function commit()
+	public static function commit()
 	{
 		return self::getAdapter()->commit();
 	}

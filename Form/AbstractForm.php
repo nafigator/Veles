@@ -66,7 +66,7 @@ abstract class AbstractForm implements iForm
 	 * @param iElement $element Form element
 	 * @return void
 	 */
-	final public function addElement(iElement $element)
+	public function addElement(iElement $element)
 	{
 		$this->elements[] = $element;
 	}
@@ -75,7 +75,7 @@ abstract class AbstractForm implements iForm
 	 * Form validation
 	 * @return bool
 	 */
-	final public function valid()
+	public function valid()
 	{
 		/** @var iElement $element*/
 		foreach ($this->elements as $element) {
@@ -99,7 +99,7 @@ abstract class AbstractForm implements iForm
 	 * Check is form submitted by security key presence
 	 * @return bool
 	 */
-	final public function submitted()
+	public function submitted()
 	{
 		if (!isset($this->data['sid'])) {
 			return false;
@@ -117,7 +117,7 @@ abstract class AbstractForm implements iForm
 	/**
 	 * Security key cleanup
 	 */
-	final public function cleanup()
+	public function cleanup()
 	{
 		$key = $this->name . $this->data['sid'];
 		Cache::del($key);
@@ -127,7 +127,7 @@ abstract class AbstractForm implements iForm
 	 * Form output
 	 * @return string
 	 */
-	final public function __toString()
+	public function __toString()
 	{
 		$elements = $tpl = array();
 		$output   = View::get($this->template);
@@ -160,7 +160,7 @@ abstract class AbstractForm implements iForm
 	 *
 	 * @return string
 	 */
-	final public function getSid()
+	public function getSid()
 	{
 		return $this->sid;
 	}
@@ -169,7 +169,7 @@ abstract class AbstractForm implements iForm
 	 * Save form security id to cache
 	 * @return bool
 	 */
-	final public function saveSid()
+	public function saveSid()
 	{
 		return Cache::set($this->name . $this->sid, true, 7200);
 	}
@@ -181,7 +181,7 @@ abstract class AbstractForm implements iForm
 	 *
 	 * @return null|string
 	 */
-	final public function getData($name)
+	public function getData($name)
 	{
 		return (isset($this->data[$name])) ? $this->data[$name] : null;
 	}

@@ -35,7 +35,7 @@ abstract class CacheAdapterAbstract
 	/**
 	 * @return iCacheAdapter|$this
 	 */
-	final public static function instance()
+	public static function instance()
 	{
 		if (null === static::$instance) {
 			$class = get_called_class();
@@ -69,7 +69,7 @@ abstract class CacheAdapterAbstract
 	 *
 	 * @return mixed
 	 */
-	final public function getDriver()
+	public function getDriver()
 	{
 		return $this->driver;
 	}
@@ -79,7 +79,7 @@ abstract class CacheAdapterAbstract
 	 *
 	 * @param mixed $driver
 	 */
-	final public function setDriver($driver)
+	public function setDriver($driver)
 	{
 		$this->driver = $driver;
 	}
@@ -90,7 +90,7 @@ abstract class CacheAdapterAbstract
 	 * @param string $method Method name that should be called
 	 * @param array $arguments Method arguments
 	 */
-	final public static function addCall($method, array $arguments = array())
+	public static function addCall($method, array $arguments = array())
 	{
 		static::$calls[] = array(
 			'method'    => $method,

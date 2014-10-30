@@ -28,7 +28,7 @@ class QueryBuilder
 	 * @todo протестировать алгоритм на время.
 	 * Попробовать варианты с iterator, implode
 	 */
-	final public static function insert($model)
+	public static function insert($model)
 	{
 		$arr = array('fields' => '', 'values' => '');
 
@@ -67,7 +67,7 @@ class QueryBuilder
 	 * @todo протестировать алгоритм на время.
 	 * Попробовать варианты с iterator, implode
 	 */
-	final public static function update($model)
+	public static function update($model)
 	{
 		$params = '';
 
@@ -102,7 +102,7 @@ class QueryBuilder
 	 * @param int $identifier primary key
 	 * @return string $sql
 	 */
-	final public static function getById($model, $identifier)
+	public static function getById($model, $identifier)
 	{
 		$identifier = (int) $identifier;
 
@@ -125,7 +125,7 @@ class QueryBuilder
 	 * @throws Exception
 	 * @return string $sql
 	 */
-	final public static function delete($model, $ids)
+	public static function delete($model, $ids)
 	{
 		if (!$ids) {
 			if (!isset($model->id)) {
@@ -161,7 +161,7 @@ class QueryBuilder
 	 * @param DbFilter $filter Экземпляр фильтра
 	 * @return string
 	 */
-	final public static function find($model, $filter)
+	public static function find($model, $filter)
 	{
 		$where = $group = $having = $order = $limit = '';
 		$select = 'SELECT';
@@ -195,7 +195,7 @@ class QueryBuilder
 	 * @param DbPaginator $pager Экземпляр постраничного вывода
 	 * @return string
 	 */
-	final public static function setPage($sql, $pager)
+	public static function setPage($sql, $pager)
 	{
 		if ($pager instanceof DbPaginator) {
 			$sql = str_replace('SELECT', 'SELECT SQL_CALC_FOUND_ROWS', $sql);

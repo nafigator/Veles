@@ -40,7 +40,7 @@ class ActiveRecord extends StdClass
 	 *
 	 * @param int $identifier Model ID
 	 */
-	final public function __construct($identifier = null)
+	public function __construct($identifier = null)
 	{
 		if (null !== $identifier) {
 			$this->getById($identifier);
@@ -52,7 +52,7 @@ class ActiveRecord extends StdClass
 	 *
 	 * @return array
 	 */
-	final public static function getMap()
+	public static function getMap()
 	{
 		return static::$map;
 	}
@@ -87,7 +87,7 @@ class ActiveRecord extends StdClass
 	 * @param int $identifier Model ID
 	 * @return bool
 	 */
-	final public function getById($identifier)
+	public function getById($identifier)
 	{
 		$sql = QueryBuilder::getById($this, $identifier);
 
@@ -109,7 +109,7 @@ class ActiveRecord extends StdClass
 	 * @param bool|DbPaginator $pager Pagination object
 	 * @return array
 	 */
-	final public function getAll($filter = false, $pager = false)
+	public function getAll($filter = false, $pager = false)
 	{
 		$sql = QueryBuilder::find($this, $filter);
 		$sql = QueryBuilder::setPage($sql, $pager);
@@ -140,7 +140,7 @@ class ActiveRecord extends StdClass
 	 * @param array|bool $ids Array of ID for delete
 	 * @return bool
 	 */
-	final public function delete($ids = false)
+	public function delete($ids = false)
 	{
 		$sql = QueryBuilder::delete($this, $ids);
 
@@ -153,7 +153,7 @@ class ActiveRecord extends StdClass
 	 * @param   array Array with needle parameters as keys
 	 * @return  array
 	 */
-	final public function setProperties(&$properties)
+	public function setProperties(&$properties)
 	{
 		foreach ($properties as $property_name => $value) {
 			$this->$property_name = $value;
@@ -166,7 +166,7 @@ class ActiveRecord extends StdClass
 	 * @param   array Array with needle parameters as keys
 	 * @return  array
 	 */
-	final public function getProperties(&$properties)
+	public function getProperties(&$properties)
 	{
 		$tmp_props = array_keys($properties);
 		foreach ($tmp_props as $property_name) {
@@ -182,7 +182,7 @@ class ActiveRecord extends StdClass
 	 * @param bool|DbFilter $filter Filter object
 	 * @return bool
 	 */
-	final public function find($filter = false)
+	public function find($filter = false)
 	{
 		$sql = QueryBuilder::find($this, $filter);
 

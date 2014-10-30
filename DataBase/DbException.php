@@ -57,7 +57,7 @@ class DbException extends Exception
 	 * @param resource|\mysqli $link Линк sql-соединения
 	 * @param string $sql SQL-запрос
 	 */
-	final public function __construct($msg, $link, $sql = null)
+	public function __construct($msg, $link, $sql = null)
 	{
 		parent::__construct($msg);
 		$this->setConnectError($link->connect_error);
@@ -72,7 +72,7 @@ class DbException extends Exception
 	 * Возвращает ошибку соединения с базой
 	 * @return string
 	 */
-	final public function getConnectError()
+	public function getConnectError()
 	{
 		return $this->connect_error;
 	}
@@ -81,7 +81,7 @@ class DbException extends Exception
 	 * Возвращает ошибку соединения с базой
 	 * @return  string
 	 */
-	final public function getSqlError()
+	public function getSqlError()
 	{
 		return $this->sql_error;
 	}
@@ -90,7 +90,7 @@ class DbException extends Exception
 	 * Установка ошибки SQL-запроса, вызвавшего ошибку
 	 * @return string
 	 */
-	final public function getSqlQuery()
+	public function getSqlQuery()
 	{
 		return $this->sql_query;
 	}

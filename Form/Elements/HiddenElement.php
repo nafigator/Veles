@@ -21,7 +21,7 @@ class HiddenElement extends AbstractElement
 	/**
 	 * Отрисовка элемента
 	 */
-	final public function render()
+	public function render()
 	{
 		return '<input' . $this->attributes() . 'type="hidden">';
 	}

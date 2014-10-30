@@ -26,7 +26,7 @@ class Password
 	 * @param $cookie_hash
 	 * @return bool
 	 */
-	final public static function checkCookieHash(User $user, &$cookie_hash)
+	public static function checkCookieHash(User $user, &$cookie_hash)
 	{
 		return $user->getCookieHash() === $cookie_hash;
 	}
@@ -37,7 +37,7 @@ class Password
 	 * @param string $password Пароль полученый через ajax
 	 * @return bool
 	 */
-	final public static function check(User $user, &$password)
+	public static function check(User $user, &$password)
 	{
 		return $user->getHash() === crypt($password, $user->getHash());
 	}

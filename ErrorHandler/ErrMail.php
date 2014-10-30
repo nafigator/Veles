@@ -26,7 +26,7 @@ class ErrMail extends AbstractEmail implements SplObserver
 	/**
 	 * Params initialization
 	 */
-	final public function init()
+	public function init()
 	{
 		if (null === ($settings = Config::getParams('error'))) {
 			$msg = 'Error notification email not found in config!';

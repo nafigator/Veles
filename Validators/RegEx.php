@@ -24,7 +24,7 @@ class RegEx implements iValidator
 	 * Constructor
 	 * @param string $pattern Шаблон для валидации
 	 */
-	final public function __construct($pattern)
+	public function __construct($pattern)
 	{
 		$this->pattern = $pattern;
 	}
@@ -34,7 +34,7 @@ class RegEx implements iValidator
 	 * @param mixed $value Value for checking
 	 * @return bool
 	 */
-	final public function check($value)
+	public function check($value)
 	{
 		return (bool) preg_match($this->pattern, $value);
 	}
@@ -45,7 +45,7 @@ class RegEx implements iValidator
 	 * @param mixed $value Value
 	 * @return bool
 	 */
-	final public static function validate($pattern, $value)
+	public static function validate($pattern, $value)
 	{
 		return (bool) preg_match($pattern, $value);
 	}

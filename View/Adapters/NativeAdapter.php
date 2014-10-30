@@ -36,7 +36,7 @@ class NativeAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 *
 	 * @param string $template_dir
 	 */
-	final public static function setTemplateDir($template_dir)
+	public static function setTemplateDir($template_dir)
 	{
 		self::$template_dir = $template_dir;
 	}
@@ -46,7 +46,7 @@ class NativeAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 *
 	 * @return string
 	 */
-	final public static function getTemplateDir()
+	public static function getTemplateDir()
 	{
 		return self::$template_dir;
 	}
@@ -56,7 +56,7 @@ class NativeAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 *
 	 * @param mixed $vars Output variables or traversable class
 	 */
-	final public function set($vars)
+	public function set($vars)
 	{
 		foreach ($vars as $prop => $value) {
 			self::$variables[$prop] = $value;
@@ -69,7 +69,7 @@ class NativeAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 * @param array $vars Array of variables names
 	 * @throws Exception
 	 */
-	final public function del($vars)
+	public function del($vars)
 	{
 		if (!is_array($vars)) {
 			throw new Exception('View can unset variables only in arrays!');
@@ -87,7 +87,7 @@ class NativeAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 *
 	 * @param string $path Path to template
 	 */
-	final public function show($path)
+	public function show($path)
 	{
 		foreach (self::$variables as $var_name => $value) {
 			$$var_name = $value;
@@ -106,7 +106,7 @@ class NativeAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 * @return string View content
 	 * @return string
 	 */
-	final public function get($path)
+	public function get($path)
 	{
 		foreach (self::$variables as $var_name => $value) {
 			$$var_name = $value;

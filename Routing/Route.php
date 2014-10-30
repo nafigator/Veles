@@ -93,7 +93,7 @@ class Route
 	 * @throws Exception
 	 * @return string
 	 */
-	final public function isAjax()
+	public function isAjax()
 	{
 		return isset($this->config['ajax']) ? $this->config['ajax'] : false;
 	}
@@ -102,7 +102,7 @@ class Route
 	 * Access to object
 	 * @return Route
 	 */
-	final public static function instance()
+	public static function instance()
 	{
 		static $instance;
 
@@ -118,7 +118,7 @@ class Route
 	 * @throws Exception
 	 * @return object
 	 */
-	final public function getController()
+	public function getController()
 	{
 		if (!isset($this->config['controller'])) {
 			throw new Exception('Не указан контроллер!');
@@ -134,7 +134,7 @@ class Route
 	 * @throws Exception
 	 * @return string
 	 */
-	final public function getActionName()
+	public function getActionName()
 	{
 		if (!isset($this->config['action'])) {
 			throw new Exception('Не указан экшен!');
@@ -149,7 +149,7 @@ class Route
 	 * @return \Veles\View\Adapters\iViewAdapter
 	 * @throws \Exception
 	 */
-	final public function getAdapter()
+	public function getAdapter()
 	{
 		if (!isset($this->config['view'])) {
 			throw new Exception('Не указан адаптер!');
@@ -165,7 +165,7 @@ class Route
 	 * @throws Exception
 	 * @return string
 	 */
-	final public function getPageName()
+	public function getPageName()
 	{
 		if (!isset($this->page_name)) {
 			throw new Exception('Не найдено имя страницы!');
@@ -178,7 +178,7 @@ class Route
 	 * Getting URL-params
 	 * @return array
 	 */
-	final public function getMap()
+	public function getMap()
 	{
 		return $this->map;
 	}
@@ -186,7 +186,7 @@ class Route
 	/**
 	 * Return template path
 	 */
-	final public function getTemplate()
+	public function getTemplate()
 	{
 		return $this->template;
 	}

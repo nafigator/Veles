@@ -48,7 +48,7 @@ class Db extends DbTransactionHandler
 	 * @param string|null $types Типы плейсхолдеров
 	 * @return array
 	 */
-	final public static function row($sql, array $params = array(), $types = null)
+	public static function row($sql, array $params = array(), $types = null)
 	{
 		return self::getAdapter()->row($sql, $params, $types);
 	}
@@ -61,7 +61,7 @@ class Db extends DbTransactionHandler
 	 * @param string|null $types Типы плейсхолдеров
 	 * @return mixed
 	 */
-	final public static function rows($sql, array $params = array(), $types = null)
+	public static function rows($sql, array $params = array(), $types = null)
 	{
 		return self::getAdapter()->rows($sql, $params, $types);
 	}
@@ -74,7 +74,7 @@ class Db extends DbTransactionHandler
 	 * @param string|null $types Типы плейсхолдеров
 	 * @return bool
 	 */
-	final public static function query($sql, array $params = array(), $types = null)
+	public static function query($sql, array $params = array(), $types = null)
 	{
 		return self::getAdapter()->query($sql, $params, $types);
 	}

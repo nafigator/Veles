@@ -22,7 +22,7 @@ class AutoLoader
 	/**
 	 * Initialisation
 	 */
-	final public static function init()
+	public static function init()
 	{
 		spl_autoload_register(__NAMESPACE__ . '\AutoLoader::load');
 	}
@@ -32,7 +32,7 @@ class AutoLoader
 	 *
 	 * @param string $class
 	 */
-	final public static function load($class)
+	public static function load($class)
 	{
 		$file = preg_replace('/\\\|_(?!.+\\\)/', DIRECTORY_SEPARATOR, $class) . '.php';
 		if (stream_resolve_include_path($file))
@@ -45,7 +45,7 @@ class AutoLoader
 	 *
 	 * @param $path
 	 */
-	final public static function registerPath($path)
+	public static function registerPath($path)
 	{
 		if (is_array($path)) {
 			$path = implode(PATH_SEPARATOR, $path);

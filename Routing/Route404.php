@@ -24,7 +24,7 @@ class Route404
 	 * Вывод 404 ошибки
 	 * @param string $url URL ошибки
 	 */
-	final public static function show($url)
+	public static function show($url)
 	{
 		header('HTTP/1.1 404 Not Found', true, 404);
 		View::set(array('url' => $url));

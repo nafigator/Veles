@@ -34,7 +34,7 @@ class User extends ActiveRecord
 	 * Метод для получения ID пользователя
 	 * @return int|bool
 	 */
-	final public function getId()
+	public function getId()
 	{
 		return isset($this->id) ? $this->id : false;
 	}
@@ -43,7 +43,7 @@ class User extends ActiveRecord
 	 * Метод для получения хэша пользователя, взятого из базы
 	 * @return string|bool
 	 */
-	final public function getHash()
+	public function getHash()
 	{
 		return isset($this->hash) ? $this->hash : false;
 	}
@@ -52,7 +52,7 @@ class User extends ActiveRecord
 	 * Метод для получения хэша для кук
 	 * @return string|bool
 	 */
-	final public function getCookieHash()
+	public function getCookieHash()
 	{
 		return isset($this->hash) ? substr($this->hash, 29) : false;
 	}
@@ -61,7 +61,7 @@ class User extends ActiveRecord
 	 * Метод для получения соли хэша
 	 * @return string|bool
 	 */
-	final public function getSalt()
+	public function getSalt()
 	{
 		return isset($this->hash) ? substr($this->hash, 0, 28) : false;
 	}
@@ -70,7 +70,7 @@ class User extends ActiveRecord
 	 * Метод для получения группы пользователя
 	 * @return int
 	 */
-	final public function getGroup()
+	public function getGroup()
 	{
 		return isset($this->group) ? $this->group : UsrGroup::GUEST;
 	}
