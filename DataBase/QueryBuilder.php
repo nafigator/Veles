@@ -214,6 +214,10 @@ class QueryBuilder
 	 */
 	private static function sanitize($model, $property)
 	{
+		if (!isset($model->$property)) {
+			return null;
+		}
+
 		switch ($model::getMap()[$property]) {
 			case 'int':
 				$value = (int) $model->$property;
