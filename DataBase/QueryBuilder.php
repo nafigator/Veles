@@ -214,19 +214,7 @@ class QueryBuilder
 	 */
 	private static function sanitize($model, $property)
 	{
-		$map = $model::getMap();
-
-		if (!isset($map[$property])) {
-			throw new Exception(
-				"Неизвестное свойство \"$property\" модели " . get_class($model)
-			);
-		}
-
-		if (!isset($model->$property)) {
-			return null;
-		}
-
-		switch ($map[$property]) {
+		switch ($model::getMap()[$property]) {
 			case 'int':
 				$value = (int) $model->$property;
 				break;
