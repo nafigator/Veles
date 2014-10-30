@@ -63,6 +63,8 @@ class AjaxAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 */
 	public function show($path)
 	{
+		if (empty(self::$variables)) return;
+
 		echo json_encode(self::$variables);
 	}
 
