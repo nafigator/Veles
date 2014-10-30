@@ -47,12 +47,12 @@ class PdoConnectionTest extends \PHPUnit_Framework_TestCase
 			->setUserName($conn->getUserName())
 			->setPassword($conn->getPassword());
 
-		$calls = array(
-			array(
+		$calls = [
+			[
 				'method'    => 'setAttribute',
-				'arguments' => array(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC)
-			)
-		);
+				'arguments' => [PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC]
+			]
+		];
 
 		$result = $this->object->create($calls);
 
@@ -104,7 +104,7 @@ class PdoConnectionTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testSetOptions()
 	{
-		$expected = array('option-1', 'option-1');
+		$expected = ['option-1', 'option-1'];
 		$result = $this->object->setOptions($expected);
 
 		$msg = 'Wrong PdoConnection::$options property value!';
@@ -120,7 +120,7 @@ class PdoConnectionTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testGetOptions()
 	{
-		$expected = array('option-1', 'option-1');
+		$expected = ['option-1', 'option-1'];
 		$this->object->setOptions($expected);
 
 		$result = $this->object->getOptions();

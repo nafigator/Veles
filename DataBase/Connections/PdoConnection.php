@@ -27,7 +27,7 @@ class PdoConnection extends DbConnection
 	 *
 	 * @return mixed
 	 */
-	public function create(array $calls = array())
+	public function create(array $calls = [])
 	{
 		$this->resource = new PDO(
 			$this->getDsn(), $this->getUserName(),
@@ -36,7 +36,7 @@ class PdoConnection extends DbConnection
 
 		foreach ($calls as $call) {
 			call_user_func_array(
-				array($this->resource, $call['method']),
+				[$this->resource, $call['method']],
 				$call['arguments']
 			);
 		}

@@ -98,11 +98,11 @@ class DbAdapterBase extends Observable
 	 * @param string $method Method name that should be called
 	 * @param array $arguments Method arguments
 	 */
-	public static function addCall($method, array $arguments = array())
+	public static function addCall($method, array $arguments = [])
 	{
-		static::$calls[] = array(
+		static::$calls[] = [
 			'method'    => $method,
 			'arguments' => $arguments
-		);
+		];
 	}
 }

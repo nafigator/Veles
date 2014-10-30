@@ -110,7 +110,7 @@ class MemcacheRawTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testDelByTemplate()
 	{
-		$keys   = array();
+		$keys   = [];
 		$prefix = uniqid();
 
 		for ($i = 0; $i < 5; ++$i) {

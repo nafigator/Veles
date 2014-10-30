@@ -30,11 +30,11 @@ class ObservableTest extends \PHPUnit_Framework_TestCase
     public function testAttach()
     {
 		$msg = 'Wrong initial value of Observable::attach';
-		$this->assertAttributeSame(array(), 'observers', $this->object, $msg);
+		$this->assertAttributeSame([], 'observers', $this->object, $msg);
 
 		$obj = new PdoErrorLogger;
 		$this->object->attach($obj);
-		$expected = array($obj);
+		$expected = [$obj];
 
 		$msg = 'Wrong behavior of Observable::attach';
 		$this->assertAttributeSame($expected, 'observers', $this->object, $msg);
@@ -49,7 +49,7 @@ class ObservableTest extends \PHPUnit_Framework_TestCase
 		$obj = new PdoErrorLogger;
 		$this->object->attach($obj);
 
-		$expected = array();
+		$expected = [];
 		$this->object->detach($obj);
 		$msg = 'Wrong behavior of Observable::detach';
 		$this->assertAttributeSame($expected, 'observers', $this->object, $msg);

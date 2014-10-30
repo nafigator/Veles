@@ -134,16 +134,16 @@ class DbAdapterBaseTest extends \PHPUnit_Framework_TestCase
 	public function testAddCall()
 	{
 		$this->object->resetCalls();
-		$this->object->addCall('setAttribute', array(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT));
+		$this->object->addCall('setAttribute', [PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT]);
 
-		$expected = array(array(
+		$expected = [[
 			'method' => 'setAttribute',
-			'arguments' => array(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT)
-		));
+			'arguments' => [PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT]
+		]];
 		$msg = 'Wrong DbAdapterBase::addCall() behavior';
 		$this->assertAttributeEquals($expected, 'calls', $this->object, $msg);
 
 		// Возвращаем предыдущее значение
-		$this->object->addCall('setAttribute', array(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION));
+		$this->object->addCall('setAttribute', [PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION]);
 	}
 }

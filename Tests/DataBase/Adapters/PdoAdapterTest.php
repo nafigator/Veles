@@ -30,7 +30,7 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 			) ENGINE INNODB
 		");
 
-		$arr = array();
+		$arr = [];
 		$i = 0;
 		while (++$i <= 10) {
 			$arr[] = 'test-value';
@@ -63,7 +63,7 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 			SELECT $expected, 2, 3
 			FROM $tbl_name
 			WHERE 2 = ?
-		", array(2), 'i');
+		", [2], 'i');
 
 		$msg = 'Wrong PdoAdapter::getValue() result';
 		$this->assertSame($expected, $result, $msg);
@@ -76,7 +76,7 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 	public function testGetRow()
 	{
 		$tbl_name = static::$tbl_name;
-		$expected = array('id' => '1', 'txt' => 'test-value');
+		$expected = ['id' => '1', 'txt' => 'test-value'];
 		$result = Db::row("SELECT * FROM $tbl_name LIMIT 3");
 
 		$msg = 'Wrong PdoAdapter::getRow() result';
@@ -84,7 +84,7 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 
 		$result = Db::row("
 			SELECT * FROM $tbl_name LIMIT ?
-		", array(3), 'i');
+		", [3], 'i');
 
 		$msg = 'Wrong PdoAdapter::getRow() result';
 		$this->assertSame($expected, $result, $msg);
@@ -97,11 +97,11 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 	public function testGetRows()
 	{
 		$tbl_name = static::$tbl_name;
-		$expected = array(
-			array('id' => '1', 'txt' => 'test-value'),
-			array('id' => '2', 'txt' => 'test-value'),
-			array('id' => '3', 'txt' => 'test-value'),
-		);
+		$expected = [
+			['id' => '1', 'txt' => 'test-value'],
+			['id' => '2', 'txt' => 'test-value'],
+			['id' => '3', 'txt' => 'test-value'],
+		];
 		$result = Db::rows("SELECT * FROM $tbl_name LIMIT 3");
 
 		$msg = 'Wrong PdoAdapter::getRows() result';
@@ -109,7 +109,7 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 
 		$result = Db::rows("
 			SELECT * FROM $tbl_name LIMIT ?
-		", array(3), 'i');
+		", [3], 'i');
 
 		$msg = 'Wrong PdoAdapter::getRows() result';
 		$this->assertSame($expected, $result, $msg);
@@ -123,7 +123,7 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 	public function testTransactions()
 	{
 		$tbl_name = static::$tbl_name;
-		$expected = array('id' => '222', 'txt' => 'test-value');
+		$expected = ['id' => '222', 'txt' => 'test-value'];
 
 		Db::begin();
 		Db::query("INSERT $tbl_name VALUES (222, 'test-value')");
@@ -155,14 +155,14 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 		$msg = 'Wrong PdoAdapter::query() result';
 		$this->assertSame($expected, $result, $msg);
 
-		$result = Db::query("DELETE FROM $tbl_name WHERE id > ?", array(8));
+		$result = Db::query("DELETE FROM $tbl_name WHERE id > ?", [8]);
 
 		$msg = 'Wrong PdoAdapter::query() result';
 		$this->assertSame($expected, $result, $msg);
 
 		$result = Db::query("
 			DELETE FROM $tbl_name WHERE id > ?
-		", array(8), 'i');
+		", [8], 'i');
 
 		$msg = 'Wrong PdoAdapter::query() result';
 		$this->assertSame($expected, $result, $msg);

@@ -32,7 +32,7 @@ abstract class AbstractForm implements iForm
 	protected $sid      = null;
 	protected $name     = null;
 	protected $action   = null;
-	protected $elements = array();
+	protected $elements = [];
 
 	/**
 	 * Constructor
@@ -53,11 +53,11 @@ abstract class AbstractForm implements iForm
 		$this->data = ('get' === $this->method) ? $_GET : $_POST;
 		$this->sid  = md5(uniqid('', true));
 
-		$params = array(
+		$params = [
 			'validator'  => new RegEx('/^[a-f\d]{32}$/'),
 			'required'   => true,
-			'attributes' => array('name' => 'sid', 'value' => $this->sid)
-		);
+			'attributes' => ['name' => 'sid', 'value' => $this->sid]
+		];
 		$this->addElement(new HiddenElement($params));
 	}
 
@@ -129,7 +129,7 @@ abstract class AbstractForm implements iForm
 	 */
 	public function __toString()
 	{
-		$elements = $tpl = array();
+		$elements = $tpl = [];
 		$output   = View::get($this->template);
 
 		/** @var iElement $element */
@@ -138,14 +138,14 @@ abstract class AbstractForm implements iForm
 			$tpl[]      = "#$number#";
 		}
 
-		$tpl      = array_merge($tpl, array("#method#", "#action#", "#name#"));
+		$tpl      = array_merge($tpl, ["#method#", "#action#", "#name#"]);
 		$elements = array_merge(
 			$elements,
-			array(
+			[
 				$this->method,
 				$this->action,
 				$this->name
-			)
+			]
 		);
 
 		$this->saveSid();

@@ -64,10 +64,10 @@ class CacheAdapterAbstractTest extends \PHPUnit_Framework_TestCase
 		$this->assertInstanceOf($expected, $result, $msg);
 
 		CacheAdapterAbstractChild::setInstance(null);
-		CacheAdapterAbstractChild::setCalls(array(array(
+		CacheAdapterAbstractChild::setCalls([[
 			'method'    => 'testCall',
-			'arguments' => array('string')
-		)));
+			'arguments' => ['string']
+		]]);
 
 		$result = CacheAdapterAbstractChild::instance();
 
@@ -85,13 +85,13 @@ class CacheAdapterAbstractTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testAddCall()
 	{
-		CacheAdapterAbstractChild::addCall('testCall', array('string'));
+		CacheAdapterAbstractChild::addCall('testCall', ['string']);
 
 		$result = CacheAdapterAbstractChild::getCalls();
-		$expected = array(array(
+		$expected = [[
 			'method' => 'testCall',
-			'arguments' => array('string')
-		));
+			'arguments' => ['string']
+		]];
 
 		$msg = 'Driver calls was not saved correctly!';
 		$this->assertSame($expected, $result, $msg);

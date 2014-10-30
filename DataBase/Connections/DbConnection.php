@@ -38,7 +38,7 @@ abstract class DbConnection
 	 *
 	 * @return mixed
 	 */
-	abstract function create(array $calls = array());
+	abstract function create(array $calls = []);
 
 	/**
 	 * @return mixed

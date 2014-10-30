@@ -23,6 +23,6 @@ class Home
 	 */
 	public function index()
 	{
-		return array('a' => 'Test', 'b' => 'complete', 'c' => 'Hello');
+		return ['a' => 'Test', 'b' => 'complete', 'c' => 'Hello'];
 	}
 }

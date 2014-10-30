@@ -92,7 +92,7 @@ class MemcacheRaw
 	{
 		$output = $this->query('stats items');
 		$lines  = explode("\r\n", trim($output));
-		$slabs  = array();
+		$slabs  = [];
 		$regex_items = '/^STAT items:(\d+):number (\d+)$/';
 		$regex_keys  = '/ITEM ([^\s]+)/';
 

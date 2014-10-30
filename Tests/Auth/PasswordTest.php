@@ -49,10 +49,10 @@ class PasswordTest extends PHPUnit_Framework_TestCase
 		$user = new User;
 		$user->hash = crypt('password', '$2a$07$' . Helper::genStr() . '$');
 
-		return array(
-			array($user, $user->getCookieHash(), true),
-			array($user, 'wrongHash', false)
-		);
+		return [
+			[$user, $user->getCookieHash(), true],
+			[$user, 'wrongHash', false]
+		];
 	}
 
 	/**
@@ -82,9 +82,9 @@ class PasswordTest extends PHPUnit_Framework_TestCase
 		$user = new User;
 		$user->hash = crypt('password', '$2y$07$' . Helper::genStr());
 
-		return array(
-			array($user, 'password', true),
-			array($user, 'wrongPassword', false)
-		);
+		return [
+			[$user, 'password', true],
+			[$user, 'wrongPassword', false]
+		];
 	}
 }

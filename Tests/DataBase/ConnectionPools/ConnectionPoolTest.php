@@ -51,14 +51,14 @@ class ConnectionPoolTest extends \PHPUnit_Framework_TestCase
 
 		$this->object->addConnection($conn);
 
-		$expected = array('some-name' => $conn);
+		$expected = ['some-name' => $conn];
 		$msg = 'Wrong value of ConnectionPool::$pool';
 		$this->assertAttributeEquals($expected, 'pool', $this->object, $msg);
 
 		$conn_default = new PdoConnection('default');
 		$this->object->addConnection($conn_default, true);
 
-		$expected = array('some-name' => $conn, 'default' => $conn_default);
+		$expected = ['some-name' => $conn, 'default' => $conn_default];
 		$msg = 'Wrong value of ConnectionPool::$pool';
 		$this->assertAttributeEquals($expected, 'pool', $this->object, $msg);
 

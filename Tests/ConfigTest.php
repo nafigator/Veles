@@ -48,17 +48,17 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 	 */
 	public function getParamsProvider()
 	{
-		$php = array (
+		$php = [
 			'display_errors'  => '1',
 			'log_errors'      => '1',
-			'' => array(
+			'' => [
 				'xdebug.cli_color'                => '1',
 				'xdebug.var_display_max_children' => '-1',
-			)
-		);
-		$mysql = array(
-			'master' => array('host' => 'localhost', 'user' => 'user')
-		);
-		return array(array('php', $php), array('db', $mysql));
+			]
+		];
+		$mysql = [
+			'master' => ['host' => 'localhost', 'user' => 'user']
+		];
+		return [['php', $php], ['db', $mysql]];
 	}
 }

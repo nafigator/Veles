@@ -12,7 +12,7 @@ use SplSubject;
 class Observable implements SplSubject
 {
 	/** @var SplObserver[] */
-	protected $observers = array();
+	protected $observers = [];
 
 	/**
 	 * Добавление подписчика

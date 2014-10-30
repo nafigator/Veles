@@ -53,14 +53,14 @@ class ByteTest extends PHPUnit_Framework_TestCase
 	 */
 	public function checkProvider()
 	{
-		return array(
-			array(123, true),
-			array(500, true),
-			array(-1298, true),
-			array(23.34, true),
-			array('one', false),
-			array('23', true)
-		);
+		return [
+			[123, true],
+			[500, true],
+			[-1298, true],
+			[23.34, true],
+			['one', false],
+			['23', true]
+		];
 	}
 
 	/**
@@ -82,12 +82,12 @@ class ByteTest extends PHPUnit_Framework_TestCase
 	 */
 	public function formatProvider()
 	{
-		return array(
-			array(58, '58.00 B'),
-			array(10245, '10.00 KB'),
-			array(10245156, '9.77 MB'),
-			array(10485760, '10.00 MB'),
-			array(10737418240, '10.00 GB')
-		);
+		return [
+			[58, '58.00 B'],
+			[10245, '10.00 KB'],
+			[10245156, '9.77 MB'],
+			[10485760, '10.00 MB'],
+			[10737418240, '10.00 GB']
+		];
 	}
 }

@@ -26,7 +26,7 @@ class ErrBase implements SplSubject
 {
 	private $vars;
 	private $output;
-	private $observers = array();
+	private $observers = [];
 
 	/**
 	 * Handler for user errors
@@ -70,8 +70,8 @@ class ErrBase implements SplSubject
 		$this->vars['file']    = str_replace(
 			BASE_PATH, '', $this->vars['file']
 		);
-		$this->vars['stack']   = array();
-		$this->vars['defined'] = array();
+		$this->vars['stack']   = [];
+		$this->vars['defined'] = [];
 
 		$this->process();
 	}
@@ -96,11 +96,11 @@ class ErrBase implements SplSubject
 			array_reverse($exception->getTrace())
 		);
 		$this->vars['defined'] = ($exception instanceof DbException)
-			? array(
+			? [
 				'connect_error' => $exception->getConnectError(),
 				'sql_error'     => $exception->getSqlError(),
-				'sql_query'     => $exception->getSqlQuery())
-			: array();
+				'sql_query'     => $exception->getSqlQuery()]
+			: [];
 
 		$this->process();
 	}
@@ -133,7 +133,7 @@ class ErrBase implements SplSubject
 	 */
 	private function getErrorType($type)
 	{
-		$err_types = array(
+		$err_types = [
 			E_ERROR             => 'FATAL ERROR',               // 1
 			E_WARNING           => 'WARNING',                   // 2
 			E_PARSE             => 'PARSE ERROR',               // 4
@@ -150,7 +150,7 @@ class ErrBase implements SplSubject
 			E_DEPRECATED        => 'DEPRECATED WARNING',        // 8192
 			E_USER_DEPRECATED   => 'USER DEPRECATED WARNING',   // 16384
 			0                   => 'EXCEPTION'
-		);
+		];
 
 		return (isset($err_types[$type]))
 			? $err_types[$type]

@@ -42,23 +42,23 @@ class RegExTest extends PHPUnit_Framework_TestCase
 
 	public function checkProvider()
 	{
-		return array(
-			array(
+		return [
+			[
 				'/^\/(?:index.html|page\-(\d+)\.html)?$/',
 				'/index.html',
 				true
-			),
-			array(
+			],
+			[
 				'/^\/(?:index.html|page\-(\d+)\.html)?$/',
 				'/page-19.html',
 				true
-			),
-			array(
+			],
+			[
 				'/^\/(?:index.html|page\-(\d+)\.html)?$/',
 				'/page-1d9.html',
 				false
-			)
-		);
+			]
+		];
 	}
 
     /**
@@ -77,22 +77,22 @@ class RegExTest extends PHPUnit_Framework_TestCase
 
 	public function validateProvider()
 	{
-		return array(
-			array(
+		return [
+			[
 				'/^\/(?:index.html|page\-(\d+)\.html)?$/',
 				'/index.html',
 				true
-			),
-			array(
+			],
+			[
 				'/^\/(?:index.html|page\-(\d+)\.html)?$/',
 				'/page-19.html',
 				true
-			),
-			array(
+			],
+			[
 				'/^\/(?:index.html|page\-(\d+)\.html)?$/',
 				'/page-1d9.html',
 				false
-			)
-		);
+			]
+		];
 	}
 }

@@ -42,7 +42,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->view->del(array('a', 'b', 'c'));
+		$this->view->del(['a', 'b', 'c']);
 	}
 
 	/**
@@ -70,8 +70,8 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
 	public function runProvider()
 	{
 		$uri      = '/page-2.html';
-		$expected = array(
-			'map'    => array('page' => '2'),
+		$expected = [
+			'map'    => ['page' => '2'],
 			'output' => <<<EOF
 <!DOCTYPE html>
 <html>
@@ -89,8 +89,8 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
 </html>
 
 EOF
-		);
+		];
 
-		return array(array($uri, $expected));
+		return [[$uri, $expected]];
 	}
 }

@@ -83,7 +83,7 @@ class PdoErrorLoggerTest extends \PHPUnit_Framework_TestCase
 		$subject_1->setConnection($conn_good);
 		$subject_1->setStmt($conn_good);
 
-		$info2 = array(555, 555, 'This is first error!');
+		$info2 = [555, 555, 'This is first error!'];
 		$subject_2 = new FakeSubject();
 		$conn_bad  = new FakeStmt();
 		$conn_bad->setErrorCode('11000');
@@ -91,7 +91,7 @@ class PdoErrorLoggerTest extends \PHPUnit_Framework_TestCase
 		$subject_2->setConnection($conn_good);
 		$subject_2->setStmt($conn_bad);
 
-		$info3 = array(777, 777, 'This is second error!');
+		$info3 = [777, 777, 'This is second error!'];
 		$subject_3 = new FakeSubject();
 		$conn_bad1 = new FakeStmt();
 		$conn_bad1->setErrorCode('11000');
@@ -99,10 +99,10 @@ class PdoErrorLoggerTest extends \PHPUnit_Framework_TestCase
 		$subject_3->setConnection($conn_bad1);
 		$subject_3->setStmt($conn_good);
 
-		return array(
-			array($subject_1, null),
-			array($subject_2, $info2),
-			array($subject_3, $info3)
-		);
+		return [
+			[$subject_1, null],
+			[$subject_2, $info2],
+			[$subject_3, $info3]
+		];
 	}
 }

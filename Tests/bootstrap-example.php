@@ -43,7 +43,7 @@ date_default_timezone_set('Europe/Moscow');
 require LIB_DIR . '/Veles/AutoLoader.php';
 AutoLoader::init();
 AutoLoader::registerPath(
-	array(LIB_DIR, TEST_DIR, realpath(__DIR__ . '/Project'))
+	[LIB_DIR, TEST_DIR, realpath(__DIR__ . '/Project')]
 );
 
 $view_adapter = new NativeAdapter;
@@ -52,8 +52,8 @@ View::setAdapter($view_adapter);
 
 // Cache initialization
 MemcacheRaw::setConnectionParams('localhost', 11211);
-MemcachedAdapter::addCall('addServer', array('localhost', 11211));
-MemcacheAdapter::addCall('addServer', array('localhost', 11211));
+MemcachedAdapter::addCall('addServer', ['localhost', 11211]);
+MemcacheAdapter::addCall('addServer', ['localhost', 11211]);
 Cache::setAdapter(MemcachedAdapter::instance());
 
 // Parameters for Db connection
@@ -68,6 +68,6 @@ $pool->addConnection($conn, true);
 PdoAdapter::setPool($pool);
 PdoAdapter::addCall(
 	'setAttribute',
-	array(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC)
+	[PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC]
 );
 Db::setAdapter(PdoAdapter::instance());

@@ -57,7 +57,7 @@ abstract class CacheAdapterAbstract
 	{
 		foreach (static::$calls as $call) {
 			call_user_func_array(
-				array(static::$instance->getDriver(), $call['method']),
+				[static::$instance->getDriver(), $call['method']],
 				$call['arguments']
 			);
 		}
@@ -90,11 +90,11 @@ abstract class CacheAdapterAbstract
 	 * @param string $method Method name that should be called
 	 * @param array $arguments Method arguments
 	 */
-	public static function addCall($method, array $arguments = array())
+	public static function addCall($method, array $arguments = [])
 	{
-		static::$calls[] = array(
+		static::$calls[] = [
 			'method'    => $method,
 			'arguments' => $arguments
-		);
+		];
 	}
 }
