@@ -26,18 +26,7 @@ class ApcAdapterTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function setUp()
 	{
-		$this->object = Cache::getAdapter();
-	}
-
-	/**
-	 * @covers Veles\Cache\Adapters\ApcAdapter::__construct
-	 */
-	public function testInstance()
-	{
-		$result = ApcAdapter::instance();
-		$expected = '\Veles\Cache\Adapters\ApcAdapter';
-		$msg = 'Wrong result driver inside MemcacheAdapter!';
-		$this->assertInstanceOf($expected, $result, $msg);
+		$this->object = ApcAdapter::instance();
 	}
 
     /**
