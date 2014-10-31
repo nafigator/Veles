@@ -29,25 +29,20 @@ class AutoLoaderTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testInit()
 	{
-		$expected = <<<EOF
-	public static function init()
-	{
-		spl_autoload_register(__NAMESPACE__ . '\AutoLoader::load');
-	}
+		// Удаляем автолоадер из списка зарегистрированных
+		spl_autoload_unregister('Veles\AutoLoader::load');
 
-EOF;
-		$object = new ReflectionObject(new AutoLoader);
-		$method = $object->getMethod('init');
-		$path   = $method->getFileName();
-		$lines  = file($path);
-		$start  = $method->getStartLine() - 1;
-		$end    = $method->getEndLine();
-		$len    = $end - $start;
+		AutoLoader::init();
 
-		$result = implode(array_slice($lines, $start, $len));
+		$auto_loaders = spl_autoload_functions();
+		$result = array_search(
+			['Veles\AutoLoader', 'load'],
+			$auto_loaders
+		);
 
-		$msg = 'Wrong content of AutoLoader::init() method';
-		$this->assertSame($expected, $result, $msg);
+		$msg = 'AutoLoader function not registered!';
+		$this->assertNotSame(false, $result, $msg);
+		$this->assertInternalType('integer', $result, $msg);
 	}
 
 	/**
@@ -64,5 +59,41 @@ EOF;
 
 		$msg = 'Class AutoLoaderFake did not loaded';
 		self::assertTrue(false !== $result, $msg);
+	}
+
+	/**
+	 * @covers Veles\AutoLoader::registerPath
+	 * @dataProvider registerPathProvider
+	 */
+	public function testRegisterPath($path)
+	{
+		$includes = get_include_path();
+		if (is_array($path)) {
+			foreach ($path as $value) {
+				$includes = str_replace($value . PATH_SEPARATOR, '', $includes);
+			}
+		} else {
+			$includes = str_replace($path . PATH_SEPARATOR, '', $includes);
+		}
+
+		AutoLoader::registerPath($path);
+
+		if (is_array($path)) {
+			$path = implode(PATH_SEPARATOR, $path);
+		}
+
+		$expected = true;
+		$result = (bool) strstr(get_include_path(), $path);
+
+		$msg = 'Wron AutoLoader::registerPath behavior!';
+		$this->assertSame($expected, $result, $msg);
+	}
+
+	public function registerPathProvider()
+	{
+		return [
+			[LIB_DIR],
+			[[LIB_DIR, TEST_DIR]]
+		];
 	}
 }

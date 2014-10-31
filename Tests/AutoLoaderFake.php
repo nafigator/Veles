@@ -1,6 +1,6 @@
 <?php
 /**
- * Класс для unit-теста AutoLoader
+ * Class for AutoLoader unit-test
  * @file    AutoLoaderFake.php
  *
  * PHP version 5.4+
@@ -13,7 +13,7 @@
 namespace Veles\Tests;
 
 /**
- * Класс AutoLoaderFake
+ * Class AutoLoaderFake
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class AutoLoaderFake
