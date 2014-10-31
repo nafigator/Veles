@@ -69,7 +69,7 @@ class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 */
 	public function has($key)
 	{
-		apc_exists($key);
+		return apc_exists($key);
 	}
 
 	/**
@@ -97,7 +97,13 @@ class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 */
 	public function delByTemplate($tpl)
 	{
-		return apc_delete(new APCIterator('user', "/$tpl/"));
+		$result = false;
+
+		foreach (new APCIterator('user', "/$tpl/") as $data) {
+			$result = apc_delete($data['key']);
+		}
+
+		return $result;
 	}
 
 	/**
@@ -107,7 +113,7 @@ class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	 */
 	public function clear()
 	{
-		return apc_clear_cache();
+		return apc_clear_cache('user');
 	}
 
 	/**
