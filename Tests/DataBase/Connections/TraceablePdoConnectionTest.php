@@ -42,12 +42,12 @@ class TraceablePdoConnectionTest extends \PHPUnit_Framework_TestCase
 			->setPassword($conn->getPassword())
 			->setBar($bar);
 
-		$calls = array(
-			array(
+		$calls = [
+			[
 				'method'    => 'setAttribute',
-				'arguments' => array(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC)
-			)
-		);
+				'arguments' => [PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC]
+			]
+		];
 
 		$this->object->create($calls);
 

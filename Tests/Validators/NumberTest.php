@@ -37,12 +37,12 @@ class NumberTest extends PHPUnit_Framework_TestCase
 
 	public function checkProvider()
 	{
-		return array(
-			array('lalala', false),
-			array(34, true),
-			array('34', true),
-			array(2147483649, false)
-		);
+		return [
+			['lalala', false],
+			[34, true],
+			['34', true],
+			[2147483649, false]
+		];
 	}
 
 	/**
