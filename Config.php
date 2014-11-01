@@ -22,7 +22,7 @@ use Veles\Cache\Cache;
  */
 class Config
 {
-	private static $data = null;
+	protected static $data;
 
 	/**
 	 * Config file parser
@@ -126,7 +126,7 @@ class Config
 	 * Get config file parameters
 	 *
 	 * @param string $param
-	 * @return mixed
+	 * @return array
 	 */
 	public static function getParams($param)
 	{
@@ -141,7 +141,7 @@ class Config
 			if (isset($ptr[$param_element])) {
 				$ptr =& $ptr[$param_element];
 			} else {
-				return null;
+				return [];
 			}
 		}
 

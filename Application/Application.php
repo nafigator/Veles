@@ -47,6 +47,7 @@ class Application
 
 	/**
 	 * ErrorHandlers initialisation
+	 * @codeCoverageIgnore
 	 */
 	public static function setErrorHandlers()
 	{
@@ -58,17 +59,14 @@ class Application
 
 	/**
 	 * Setup PHP settings from config
+	 *
 	 * @param array $keys Макссив php-параметров и их значений
 	 */
-	final protected static function setPhpSettings($keys = null)
+	protected static function setPhpSettings($keys = [])
 	{
-		$config = (null === $keys)
+		$config = ([] === $keys)
 			? Config::getParams('php')
 			: $keys;
-
-		if (null === $config) {
-			return;
-		}
 
 		foreach ($config as $param => $value) {
 			if (is_array($value)) {
