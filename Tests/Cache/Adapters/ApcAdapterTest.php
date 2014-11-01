@@ -102,7 +102,6 @@ class ApcAdapterTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Veles\Cache\Adapters\ApcAdapter::del
-     * @todo   Implement testDel().
      */
     public function testDel()
     {
@@ -130,7 +129,6 @@ class ApcAdapterTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Veles\Cache\Adapters\ApcAdapter::delByTemplate
-     * @todo   Implement testDelByTemplate().
      */
     public function testDelByTemplate()
     {
@@ -155,7 +153,6 @@ class ApcAdapterTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Veles\Cache\Adapters\ApcAdapter::clear
-     * @todo   Implement testClear().
      */
     public function testClear()
     {
@@ -184,7 +181,6 @@ class ApcAdapterTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Veles\Cache\Adapters\ApcAdapter::increment
-     * @todo   Implement testIncrement().
      */
     public function testIncrement()
     {
@@ -217,7 +213,6 @@ class ApcAdapterTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Veles\Cache\Adapters\ApcAdapter::decrement
-     * @todo   Implement testDecrement().
      */
     public function testDecrement()
     {
