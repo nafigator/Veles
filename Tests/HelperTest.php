@@ -105,7 +105,10 @@ class HelperTest extends PHPUnit_Framework_TestCase
 
 	/**
 	 * Unit-test for Helper::checkEmailDomain
+	 *
 	 * @group RootClasses
+	 *
+	 * @large
 	 * @covers Veles\Helper::checkEmailDomain
 	 * @dataProvider checkEmailDomainProvider
 	 * @see Helper::checkEmailDomain
