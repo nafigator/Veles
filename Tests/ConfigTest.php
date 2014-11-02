@@ -31,6 +31,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 {
 	/**
 	 * Unit-test for Config::getParams
+	 *
 	 * @group RootClasses
 	 * @covers Veles\Config::getParams
 	 * @covers Veles\Config::read

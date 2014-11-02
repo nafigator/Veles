@@ -113,11 +113,9 @@ class HelperTest extends PHPUnit_Framework_TestCase
 	 * @covers Veles\Helper::checkEmailDomain
 	 * @dataProvider checkEmailDomainProvider
 	 * @see Helper::checkEmailDomain
-	 * @todo Find faster way to check domain
 	 */
 	public function testCheckEmailDomain($email, $expected)
 	{
-//		$this->markTestSkipped('Skipped, because this test is too slow');
 		$result = Helper::checkEmailDomain($email);
 
 		$msg = 'Wrong result type: ' . gettype($result);

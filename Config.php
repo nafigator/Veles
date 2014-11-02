@@ -42,10 +42,6 @@ class Config
 
 		self::initInheritance($tmp_config);
 
-		if (!isset($tmp_config[ENVIRONMENT])) {
-			throw new Exception('Не найдена секция окружения в конфиг-файле!');
-		}
-
 		self::$data = $tmp_config[ENVIRONMENT];
 
 		unset($tmp_config);
@@ -113,6 +109,8 @@ class Config
 
 	/**
 	 * Check environment and path defaults
+	 *
+	 * @codeCoverageIgnore
 	 */
 	private static function checkDefaults()
 	{
