@@ -36,7 +36,6 @@ class PhpTokenTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers Veles\Tools\PhpToken::setContent
-	 * @todo   Implement testSetContent().
 	 */
 	public function testSetContent()
 	{
@@ -52,14 +51,16 @@ class PhpTokenTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers Veles\Tools\PhpToken::getContent
-	 * @todo   Implement testGetContent().
 	 */
 	public function testGetContent()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$expected = uniqid();
+		$this->object->setContent($expected);
+
+		$result = $this->object->getContent();
+
+		$msg = 'Wrong behavior of PhpToken::getContent()';
+		$this->assertSame($expected, $result, $msg);
 	}
 
 	/**
