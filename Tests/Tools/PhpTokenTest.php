@@ -65,73 +65,79 @@ class PhpTokenTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers Veles\Tools\PhpToken::setId
-	 * @todo   Implement testSetId().
 	 */
 	public function testSetId()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$expected = mt_rand();
+		$this->object->setId($expected);
+
+		$msg = 'Wrong behavior of PhpToken::setId()';
+		$this->assertAttributeSame($expected, 'id', $this->object, $msg);
 	}
 
 	/**
 	 * @covers Veles\Tools\PhpToken::getId
-	 * @todo   Implement testGetId().
 	 */
 	public function testGetId()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$expected = mt_rand();
+		$this->object->setId($expected);
+
+		$result = $this->object->getId();
+
+		$msg = 'Wrong behavior of PhpToken::getId()';
+		$this->assertSame($expected, $result, $msg);
 	}
 
 	/**
 	 * @covers Veles\Tools\PhpToken::setLine
-	 * @todo   Implement testSetLine().
 	 */
 	public function testSetLine()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$expected = mt_rand();
+		$this->object->setLine($expected);
+
+		$msg = 'Wrong behavior of PhpToken::setLine()';
+		$this->assertAttributeSame($expected, 'line', $this->object, $msg);
 	}
 
 	/**
 	 * @covers Veles\Tools\PhpToken::getLine
-	 * @todo   Implement testGetLine().
 	 */
 	public function testGetLine()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$expected = mt_rand();
+		$this->object->setLine($expected);
+
+		$result = $this->object->getLine();
+
+		$msg = 'Wrong behavior of PhpToken::getLine()';
+		$this->assertSame($expected, $result, $msg);
 	}
 
 	/**
 	 * @covers Veles\Tools\PhpToken::setName
-	 * @todo   Implement testSetName().
 	 */
 	public function testSetName()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$expected = uniqid();
+		$this->object->setName($expected);
+
+		$msg = 'Wrong behavior of PhpToken::setName()';
+		$this->assertAttributeSame($expected, 'name', $this->object, $msg);
 	}
 
 	/**
 	 * @covers Veles\Tools\PhpToken::getName
-	 * @todo   Implement testGetName().
 	 */
 	public function testGetName()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$expected = uniqid();
+		$this->object->setName($expected);
+
+		$result = $this->object->getName();
+
+		$msg = 'Wrong behavior of PhpToken::getName()';
+		$this->assertSame($expected, $result, $msg);
 	}
 }
