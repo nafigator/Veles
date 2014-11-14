@@ -35,6 +35,67 @@ class PhpTokenTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * @covers Veles\Tools\PhpToken::__construct
+	 * @dataProvider constructProvider
+	 * @param $token
+	 * @param $validator
+	 * @param $expected
+	 */
+	public function testConstruct($token, $validator, $expected)
+	{
+		$obj = new PhpToken($token, $validator);
+
+		$msg = 'Wrong PhpToken::id property value';
+		$this->assertAttributeSame($expected[0], 'id', $obj, $msg);
+
+		$msg = 'Wrong PhpToken::content property value';
+		$this->assertAttributeSame($expected[1], 'content', $obj, $msg);
+
+		$msg = 'Wrong PhpToken::line property value';
+		$this->assertAttributeSame($expected[2], 'line', $obj, $msg);
+	}
+
+	/**
+	 * @return array
+	 */
+	public function constructProvider()
+	{
+		$validator = new Validator;
+
+		$token_string = uniqid();
+		$token_array = [mt_rand(1, 300), uniqid(), mt_rand()];
+
+		return [
+			[
+				$token_array,
+				$validator,
+				$token_array
+			],
+			[
+				$token_string,
+				$validator,
+				[0, $token_string, 0]
+			]
+		];
+	}
+
+	/**
+	 * @expectedException \Exception
+	 * @dataProvider constructExceptionProvider
+	 * @param $not_valid_token
+	 * @param $validator
+	 */
+	public function testConstructException($not_valid_token, $validator)
+	{
+		$obj = new PhpToken($not_valid_token, $validator);
+	}
+
+	public function constructExceptionProvider()
+	{
+		return [[mt_rand(), new Validator]];
+	}
+
+	/**
 	 * @covers Veles\Tools\PhpToken::setContent
 	 */
 	public function testSetContent()
