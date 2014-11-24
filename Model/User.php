@@ -22,7 +22,7 @@ class User extends ActiveRecord
 	const TBL_NAME      = 'users';
 	const TBL_USER_INFO = 'users_info';
 
-	protected static $map = [
+	protected $map = [
 		'id'         => 'int',
 		'email'      => 'string',
 		'hash'       => 'string',

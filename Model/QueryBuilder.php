@@ -10,16 +10,17 @@
  * @copyright The BSD 3-Clause License
  */
 
-namespace Veles\DataBase;
+namespace Veles\Model;
 
 use Exception;
-use Veles\Model\ActiveRecord;
+use Veles\DataBase\DbFilter;
+use Veles\DataBase\DbPaginator;
 
 /**
  * Класс QueryBuilder
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
-class QueryBuilder
+class QueryBuilder implements iQueryBuilder
 {
 	/**
 	 * Построение sql-запроса для insert
@@ -28,12 +29,12 @@ class QueryBuilder
 	 * @todo протестировать алгоритм на время.
 	 * Попробовать варианты с iterator, implode
 	 */
-	public static function insert($model)
+	public function insert(ActiveRecord $model)
 	{
 		$arr = ['fields' => '', 'values' => ''];
 
 		foreach ($model::getMap() as $property => $value) {
-			$value = self::sanitize($model, $property);
+			$value = $this->sanitize($model, $property);
 
 			if (null === $value) {
 				continue;
@@ -61,19 +62,50 @@ class QueryBuilder
 	}
 
 	/**
+	 * Функция безопасности переменных
+	 * @param ActiveRecord $model
+	 * @param $property
+	 * @throws Exception
+	 * @return mixed
+	 */
+	private function sanitize(ActiveRecord $model, $property)
+	{
+		if (!isset($model->$property)) {
+			return null;
+		}
+
+		switch ($model::getMap()[$property]) {
+			case 'int':
+				$value = (int) $model->$property;
+				break;
+			case 'float':
+				$value = (float) $model->$property;
+				break;
+			case 'string':
+				$value = Db::escape($model->$property);
+				break;
+			default:
+				$value = null;
+				break;
+		}
+
+		return $value;
+	}
+
+	/**
 	 * Построение sql-запроса для update
 	 * @param ActiveRecord $model Экземпляр модели
 	 * @return string $sql
 	 * @todo протестировать алгоритм на время.
 	 * Попробовать варианты с iterator, implode
 	 */
-	public static function update($model)
+	public function update(ActiveRecord $model)
 	{
 		$params = '';
 
 		$properties = array_keys($model::getMap());
 		foreach ($properties as $property) {
-			$value = self::sanitize($model, $property);
+			$value = $this->sanitize($model, $property);
 
 			if (null === $value || 'id' === $property) {
 				continue;
@@ -102,7 +134,7 @@ class QueryBuilder
 	 * @param int $identifier primary key
 	 * @return string $sql
 	 */
-	public static function getById($model, $identifier)
+	public function getById(ActiveRecord $model, $identifier)
 	{
 		$identifier = (int) $identifier;
 
@@ -125,7 +157,7 @@ class QueryBuilder
 	 * @throws Exception
 	 * @return string $sql
 	 */
-	public static function delete($model, $ids)
+	public function delete(ActiveRecord $model, $ids)
 	{
 		if (!$ids) {
 			if (!isset($model->id)) {
@@ -161,7 +193,7 @@ class QueryBuilder
 	 * @param DbFilter $filter Экземпляр фильтра
 	 * @return string
 	 */
-	public static function find($model, $filter)
+	public function find(ActiveRecord $model, DbFilter $filter)
 	{
 		$where = $group = $having = $order = $limit = '';
 		$select = 'SELECT';
@@ -195,7 +227,7 @@ class QueryBuilder
 	 * @param DbPaginator $pager Экземпляр постраничного вывода
 	 * @return string
 	 */
-	public static function setPage($sql, $pager)
+	public function setPage($sql, DbPaginator $pager)
 	{
 		if ($pager instanceof DbPaginator) {
 			$sql = str_replace('SELECT', 'SELECT SQL_CALC_FOUND_ROWS', $sql);
@@ -203,36 +235,5 @@ class QueryBuilder
 		}
 
 		return $sql;
-	}
-
-	/**
-	 * Функция безопасности переменных
-	 * @param ActiveRecord $model
-	 * @param $property
-	 * @throws Exception
-	 * @return mixed
-	 */
-	private static function sanitize($model, $property)
-	{
-		if (!isset($model->$property)) {
-			return null;
-		}
-
-		switch ($model::getMap()[$property]) {
-			case 'int':
-				$value = (int) $model->$property;
-				break;
-			case 'float':
-				$value = (float) $model->$property;
-				break;
-			case 'string':
-				$value = Db::escape($model->$property);
-				break;
-			default:
-				$value = null;
-				break;
-		}
-
-		return $value;
 	}
 }

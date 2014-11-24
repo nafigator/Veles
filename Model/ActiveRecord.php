@@ -16,7 +16,6 @@ use StdClass;
 use Veles\DataBase\Db;
 use Veles\DataBase\DbFilter;
 use Veles\DataBase\DbPaginator;
-use Veles\DataBase\QueryBuilder;
 
 /**
  * Model class using ActiveRecord pattern
@@ -25,26 +24,22 @@ use Veles\DataBase\QueryBuilder;
  */
 class ActiveRecord extends StdClass
 {
+	/* @var iQueryBuilder */
+	protected $builder;
+
 	/**
 	 * @var int|float|string $map Data type map
 	 */
-	protected static $map = [];
+	protected $map = [];
 
 	/**
 	 * @const string|null Table name
 	 */
 	const TBL_NAME = null;
 
-	/**
-	 * Model constructor
-	 *
-	 * @param int $identifier Model ID
-	 */
-	public function __construct($identifier = null)
+	public function __construct()
 	{
-		if (null !== $identifier) {
-			$this->getById($identifier);
-		}
+		$this->builder = new QueryBuilder;
 	}
 
 	/**
@@ -52,9 +47,9 @@ class ActiveRecord extends StdClass
 	 *
 	 * @return array
 	 */
-	public static function getMap()
+	public function getMap()
 	{
-		return static::$map;
+		return $this->$map;
 	}
 
 	/**
@@ -64,7 +59,7 @@ class ActiveRecord extends StdClass
 	 */
 	private function insert()
 	{
-		$sql = QueryBuilder::insert($this);
+		$sql = $this->builder->insert($this);
 
 		return Db::query($sql) ? Db::getLastInsertId() : false;
 	}
@@ -76,7 +71,7 @@ class ActiveRecord extends StdClass
 	 */
 	private function update()
 	{
-		$sql = QueryBuilder::update($this);
+		$sql = $this->builder->update($this);
 
 		return Db::query($sql);
 	}
@@ -89,7 +84,7 @@ class ActiveRecord extends StdClass
 	 */
 	public function getById($identifier)
 	{
-		$sql = QueryBuilder::getById($this, $identifier);
+		$sql = $this->builder->getById($this, $identifier);
 
 		$result = Db::row($sql);
 
@@ -111,8 +106,8 @@ class ActiveRecord extends StdClass
 	 */
 	public function getAll($filter = false, $pager = false)
 	{
-		$sql = QueryBuilder::find($this, $filter);
-		$sql = QueryBuilder::setPage($sql, $pager);
+		$sql = $this->builder->find($this, $filter);
+		$sql = $this->builder->setPage($sql, $pager);
 
 		$result = Db::rows($sql);
 
@@ -142,7 +137,7 @@ class ActiveRecord extends StdClass
 	 */
 	public function delete($ids = false)
 	{
-		$sql = QueryBuilder::delete($this, $ids);
+		$sql = $this->builder->delete($this, $ids);
 
 		return Db::query($sql);
 	}
@@ -184,7 +179,7 @@ class ActiveRecord extends StdClass
 	 */
 	public function find($filter = false)
 	{
-		$sql = QueryBuilder::find($this, $filter);
+		$sql = $this->builder->find($this, $filter);
 
 		$result = Db::row($sql);
 
@@ -198,6 +193,14 @@ class ActiveRecord extends StdClass
 	}
 
 	/**
+	 * @param iQueryBuilder $builder
+	 */
+	public function setBuilder($builder)
+	{
+		$this->builder = $builder;
+	}
+
+	/**
 	 * Query with pagination
 	 *
 	 * @param string $sql Query
@@ -207,7 +210,7 @@ class ActiveRecord extends StdClass
 	final protected function query($sql, $pager = false)
 	{
 		if ($pager) {
-			$sql = QueryBuilder::setPage($sql, $pager);
+			$sql = $this->builder->setPage($sql, $pager);
 		}
 
 		$result = Db::rows($sql);
