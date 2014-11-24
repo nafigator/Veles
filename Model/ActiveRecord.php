@@ -49,7 +49,7 @@ class ActiveRecord extends StdClass
 	 */
 	public function getMap()
 	{
-		return $this->$map;
+		return $this->map;
 	}
 
 	/**
