@@ -15,6 +15,7 @@ namespace Veles\Model;
 use Exception;
 use Veles\DataBase\DbFilter;
 use Veles\DataBase\DbPaginator;
+use Veles\DataBase\Db;
 
 /**
  * Класс QueryBuilder
