@@ -33,7 +33,7 @@ class QueryBuilder implements iQueryBuilder
 	{
 		$arr = ['fields' => '', 'values' => ''];
 
-		foreach ($model::getMap() as $property => $value) {
+		foreach ($model->getMap() as $property => $value) {
 			$value = $this->sanitize($model, $property);
 
 			if (null === $value) {
@@ -74,7 +74,7 @@ class QueryBuilder implements iQueryBuilder
 			return null;
 		}
 
-		switch ($model::getMap()[$property]) {
+		switch ($model->getMap()[$property]) {
 			case 'int':
 				$value = (int) $model->$property;
 				break;
@@ -103,7 +103,7 @@ class QueryBuilder implements iQueryBuilder
 	{
 		$params = '';
 
-		$properties = array_keys($model::getMap());
+		$properties = array_keys($model->getMap());
 		foreach ($properties as $property) {
 			$value = $this->sanitize($model, $property);
 
@@ -197,7 +197,7 @@ class QueryBuilder implements iQueryBuilder
 	{
 		$where = $group = $having = $order = $limit = '';
 		$select = 'SELECT';
-		$fields = '`' . implode('`, `', array_keys($model::getMap())) . '`';
+		$fields = '`' . implode('`, `', array_keys($model->getMap())) . '`';
 
 		if ($filter instanceof DbFilter) {
 			$where  = $filter->getWhere();
