@@ -194,7 +194,7 @@ class QueryBuilder implements iQueryBuilder
 	 * @param DbFilter $filter Экземпляр фильтра
 	 * @return string
 	 */
-	public function find(ActiveRecord $model, DbFilter $filter)
+	public function find(ActiveRecord $model, $filter)
 	{
 		$where = $group = $having = $order = $limit = '';
 		$select = 'SELECT';
@@ -228,7 +228,7 @@ class QueryBuilder implements iQueryBuilder
 	 * @param DbPaginator $pager Экземпляр постраничного вывода
 	 * @return string
 	 */
-	public function setPage($sql, DbPaginator $pager)
+	public function setPage($sql, $pager)
 	{
 		if ($pager instanceof DbPaginator) {
 			$sql = str_replace('SELECT', 'SELECT SQL_CALC_FOUND_ROWS', $sql);

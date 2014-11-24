@@ -57,7 +57,7 @@ interface iQueryBuilder
 	 * @param DbFilter $filter Экземпляр фильтра
 	 * @return string
 	 */
-	public function find(ActiveRecord $model, DbFilter $filter);
+	public function find(ActiveRecord $model, $filter);
 
 	/**
 	 * Построение произвольного запроса с постраничным выводом
@@ -65,5 +65,5 @@ interface iQueryBuilder
 	 * @param DbPaginator $pager Экземпляр постраничного вывода
 	 * @return string
 	 */
-	public function setPage($sql, DbPaginator $pager);
+	public function setPage($sql, $pager);
 }
