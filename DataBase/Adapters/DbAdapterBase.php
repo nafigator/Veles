@@ -1,4 +1,15 @@
 <?php
+/**
+ * Base db-adapter class
+ * @file    PdoConnection.php
+ *
+ * PHP version 5.4+
+ *
+ * @author  Alexander Yancharuk <alex@itvault.info>
+ * @date    2013-12-31 15:44
+ * @copyright The BSD 3-Clause License
+ */
+
 namespace Veles\DataBase\Adapters;
 
 use Veles\DataBase\ConnectionPools\ConnectionPool;
@@ -13,8 +24,6 @@ use Veles\Helpers\Observable;
  */
 class DbAdapterBase extends Observable
 {
-	/** @var  null|array */
-	protected static $calls;
 	/** @var ConnectionPool */
 	protected static $pool;
 	/** @var  \PDO */
@@ -48,7 +57,8 @@ class DbAdapterBase extends Observable
 	/**
 	 * Set default connection
 	 *
-	 * @param string $name Имя соединения
+	 * @param string $name Connection name
+	 *
 	 * @return $this
 	 */
 	public function setConnection($name)
@@ -69,7 +79,7 @@ class DbAdapterBase extends Observable
 		if (null === static::$connection) {
 			$conn = static::$pool->getConnection(static::$connection_name);
 			static::$connection = (null === $conn->getResource())
-				? $conn->create(static::$calls)->getResource()
+				? $conn->create()
 				: $conn->getResource();
 		}
 
@@ -90,19 +100,5 @@ class DbAdapterBase extends Observable
 		}
 
 		return static::$instance;
-	}
-
-	/**
-	 * Save calls for future invocation
-	 *
-	 * @param string $method Method name that should be called
-	 * @param array $arguments Method arguments
-	 */
-	public static function addCall($method, array $arguments = [])
-	{
-		static::$calls[] = [
-			'method'    => $method,
-			'arguments' => $arguments
-		];
 	}
 }

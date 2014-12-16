@@ -1,4 +1,15 @@
 <?php
+/**
+ * Base connection class
+ * @file    DbConnection.php
+ *
+ * PHP version 5.4+
+ *
+ * @author  Alexander Yancharuk <alex@itvault.info>
+ * @date    2013-12-31 15:44
+ * @copyright The BSD 3-Clause License
+ */
+
 namespace Veles\DataBase\Connections;
 
 use Exception;
@@ -22,7 +33,7 @@ abstract class DbConnection
 	protected $resource;
 
 	/**
-	 * @param string $name Уникальное название соединения
+	 * @param string $name Unique connection name
 	 */
 	public function __construct($name)
 	{
@@ -30,15 +41,15 @@ abstract class DbConnection
 	}
 
 	/**
-	 * Создание соединения
+	 * Connection create
 	 *
-	 * Реализуется в конкретном классе для каждого типа соединений
+	 * Must be realized in child classes
 	 *
 	 * @param array $calls Array with lazy calls
 	 *
 	 * @return mixed
 	 */
-	abstract function create(array $calls = []);
+	abstract function create();
 
 	/**
 	 * @return mixed

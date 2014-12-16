@@ -1,4 +1,14 @@
 <?php
+/**
+ * PDO connection class
+ * @file    PdoConnection.php
+ *
+ * PHP version 5.4+
+ *
+ * @author  Alexander Yancharuk <alex@itvault.info>
+ * @date    2013-12-31 15:44
+ * @copyright The BSD 3-Clause License
+ */
 namespace Veles\DataBase\Connections;
 
 use Exception;
@@ -7,7 +17,7 @@ use PDO;
 /**
  * Class PdoConnection
  *
- * Класс-контейнер для хранения PDO-соединений и их параметров
+ * Class-container for PDO connection and it's options
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
@@ -17,35 +27,39 @@ class PdoConnection extends DbConnection
 	protected $dsn;
 	/** @var array */
 	protected $options;
+	/** @var array */
+	protected $callbacks = [];
 
 	/**
-	 * Создание соединения
+	 * Create connection
 	 *
-	 * Реализуется в конкретном классе для каждого типа соединений
-	 *
-	 * @param array $calls Array with lazy calls
-	 *
-	 * @return mixed
+	 * @return \PDO
 	 */
-	public function create(array $calls = [])
+	public function create()
 	{
 		$this->resource = new PDO(
 			$this->getDsn(), $this->getUserName(),
 			$this->getPassword(), $this->getOptions()
 		);
 
-		foreach ($calls as $call) {
+		if ([] === $this->callbacks) {
+			return $this->resource;
+		}
+
+		foreach ($this->callbacks as $call) {
 			call_user_func_array(
-				[$this->resource, $call['method']],
-				$call['arguments']
+				[$this->resource, $call['method']], $call['arguments']
 			);
 		}
 
-		return $this;
+		return $this->resource;
 	}
 
 	/**
+	 * Set connection DSN (Data Source Name)
+	 *
 	 * @param string $dsn
+	 *
 	 * @return $this
 	 */
 	public function setDsn($dsn)
@@ -55,19 +69,25 @@ class PdoConnection extends DbConnection
 	}
 
 	/**
+	 * Get connection DSN (Data Source Name)
+	 *
 	 * @throws Exception
+	 *
 	 * @return string
 	 */
 	public function getDsn()
 	{
 		if (null === $this->dsn) {
-			throw new Exception('DSN соединения не установлен.');
+			throw new Exception('Connection DSN not set.');
 		}
 		return $this->dsn;
 	}
 
 	/**
+	 * Set connection options
+	 *
 	 * @param array $options
+	 *
 	 * @return $this
 	 */
 	public function setOptions(array $options)
@@ -77,11 +97,41 @@ class PdoConnection extends DbConnection
 	}
 
 	/**
+	 * Get connection options
+	 *
 	 * @throws Exception
+	 *
 	 * @return array
 	 */
 	public function getOptions()
 	{
 		return $this->options;
+	}
+
+	/**
+	 * Get connection callbacks
+	 *
+	 * @return array
+	 */
+	public function getCallbacks()
+	{
+		return $this->callback;
+	}
+
+	/**
+	 * Save calls for future invocation
+	 *
+	 * @param string $method Method name that should be called
+	 * @param array $arguments Method arguments
+	 *
+	 * @return $this
+	 */
+	public function setCallback($method, array $arguments)
+	{
+		$this->callbacks[] = [
+			'method'    => $method,
+			'arguments' => $arguments
+		];
+		return $this;
 	}
 }

@@ -29,7 +29,7 @@ class PdoConnectionTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * @covers Veles\DataBase\Connections\PdoConnection::getDsn
 	 * @expectedException Exception
-	 * @expectedExceptionMessage DSN соединения не установлен.
+	 * @expectedExceptionMessage Connection DSN not set.
 	 */
 	public function testGetDsnException()
 	{
@@ -45,22 +45,17 @@ class PdoConnectionTest extends \PHPUnit_Framework_TestCase
 		$conn = PdoAdapter::instance()->getPool()->getConnection('master');
 		$this->object->setDsn($conn->getDsn())
 			->setUserName($conn->getUserName())
-			->setPassword($conn->getPassword());
+			->setPassword($conn->getPassword())
+			->setOptions([PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
 
-		$calls = [
-			[
-				'method'    => 'setAttribute',
-				'arguments' => [PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC]
-			]
-		];
-
-		$result = $this->object->create($calls);
+		$result = $this->object->create();
 
 		$msg = 'Wrong PdoConnection::create result!';
 		$this->assertAttributeInstanceOf($expected, 'resource', $this->object, $msg);
 
+		$expected = $this->object->getResource();
 		$msg = 'Wrong PdoConnection::create return value!';
-		$this->assertSame($this->object, $result, $msg);
+		$this->assertSame($expected, $result, $msg);
 
 		$expected = PDO::FETCH_ASSOC;
 		$result = $this->object->getResource()->getAttribute(PDO::ATTR_DEFAULT_FETCH_MODE);

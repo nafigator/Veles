@@ -22,13 +22,11 @@ class DbAdapterBaseTest extends \PHPUnit_Framework_TestCase
 	public static function setUpBeforeClass()
 	{
 		self::$pool_backup = PdoAdapterCopy::getPool();
-		self::$calls_backup = PdoAdapterCopy::getCalls();
 	}
 
 	public static function tearDownAfterClass()
 	{
 		PdoAdapterCopy::setPool(self::$pool_backup);
-		PdoAdapterCopy::setCalls(self::$calls_backup);
 	}
 
 	/**
@@ -126,24 +124,5 @@ class DbAdapterBaseTest extends \PHPUnit_Framework_TestCase
 
 		$msg = 'Wrong DbAdapterBase::instance() return value';
 		$this->assertInstanceOf('Veles\DataBase\Adapters\PdoAdapter', $result, $msg);
-	}
-
-	/**
-	 * @covers Veles\DataBase\Adapters\DbAdapterBase::addCall
-	 */
-	public function testAddCall()
-	{
-		$this->object->resetCalls();
-		$this->object->addCall('setAttribute', [PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT]);
-
-		$expected = [[
-			'method' => 'setAttribute',
-			'arguments' => [PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT]
-		]];
-		$msg = 'Wrong DbAdapterBase::addCall() behavior';
-		$this->assertAttributeEquals($expected, 'calls', $this->object, $msg);
-
-		// Возвращаем предыдущее значение
-		$this->object->addCall('setAttribute', [PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION]);
 	}
 }
