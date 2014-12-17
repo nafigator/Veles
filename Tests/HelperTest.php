@@ -118,12 +118,9 @@ class HelperTest extends PHPUnit_Framework_TestCase
 	{
 		$result = Helper::checkEmailDomain($email);
 
-		$msg = 'Wrong result type: ' . gettype($result);
-		$this->assertInternalType('bool', $result, $msg);
-
-		$txt_result = $result ? 'true' : 'false';
+		$txt_result = (true === $result) ? 'true' : 'false';
 		$msg = "Email $email has wrong validation result: $txt_result";
-		$this->assertTrue($expected === $result, $msg);
+		$this->assertSame($expected, $result, $msg);
 	}
 
 	/**
@@ -147,9 +144,6 @@ class HelperTest extends PHPUnit_Framework_TestCase
 	public function testTranslit($text, $expected)
 	{
 		$result = Helper::translit($text);
-
-		$msg = 'Wrong result type: ' . gettype($result);
-		$this->assertInternalType('string', $result, $msg);
 
 		$msg = "Text \"$text\" has wrong translit result: \"$result\"";
 		$this->assertSame($expected, $result, $msg);
@@ -179,9 +173,6 @@ class HelperTest extends PHPUnit_Framework_TestCase
 	public function testMakeAlias($url, $expected)
 	{
 		$result = Helper::makeAlias($url);
-
-		$msg = 'Wrong result type: ' . gettype($result);
-		$this->assertInternalType('string', $result, $msg);
 
 		$msg = "URL \"$url\" has wrong make alias result: \"$result\"";
 		$this->assertSame($expected, $result, $msg);
