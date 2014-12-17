@@ -62,6 +62,18 @@ class PdoConnectionTest extends \PHPUnit_Framework_TestCase
 
 		$msg = 'Wrong PdoConnection::create behavior!';
 		$this->assertSame($expected, $result, $msg);
+
+		$this->object->setCallback(
+			'setAttribute', [PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ]
+		);
+
+		$this->object->create();
+
+		$expected = PDO::FETCH_OBJ;
+		$result = $this->object->getResource()->getAttribute(PDO::ATTR_DEFAULT_FETCH_MODE);
+
+		$msg = 'Wrong PdoConnection::create behavior!';
+		$this->assertSame($expected, $result, $msg);
 	}
 
 	/**
@@ -121,6 +133,41 @@ class PdoConnectionTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->getOptions();
 
 		$msg = 'Wrong PdoConnection::getOptions return result!';
+		$this->assertSame($expected, $result, $msg);
+	}
+
+	/**
+	 * @covers Veles\DataBase\Connections\PdoConnection::setCallback
+	 */
+	public function testSetCallback()
+	{
+		$callback_name = 'callback';
+		$args = ['arument 1', 'argument 2'];
+		$expected = [
+			['method' => $callback_name, 'arguments' => $args]
+		];
+
+		$this->object->setCallback($callback_name, $args);
+
+		$result = $this->object->getCallbacks();
+
+		$msg = 'Wrong PdoConnection::setCallback behavior!';
+		$this->assertAttributeSame($expected, 'callbacks', $this->object, $msg);
+	}
+
+	public function testGetCallbacks()
+	{
+		$callback_name = 'callback';
+		$args = ['arument 1', 'argument 2'];
+		$expected = [
+			['method' => $callback_name, 'arguments' => $args]
+		];
+
+		$this->object->setCallback($callback_name, $args);
+
+		$result = $this->object->getCallbacks();
+
+		$msg = 'Wrong PdoConnection::setCallback behavior!';
 		$this->assertSame($expected, $result, $msg);
 	}
 }

@@ -115,7 +115,7 @@ class PdoConnection extends DbConnection
 	 */
 	public function getCallbacks()
 	{
-		return $this->callback;
+		return $this->callbacks;
 	}
 
 	/**
