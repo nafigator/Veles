@@ -20,7 +20,7 @@ use Exception;
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
-class AjaxAdapter extends ViewAdapterAbstract implements iViewAdapter
+class AjaxAdapter extends ViewAdapterAbstract
 {
 	/**
 	 * Output method

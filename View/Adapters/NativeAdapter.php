@@ -20,11 +20,11 @@ use Exception;
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
-class NativeAdapter extends ViewAdapterAbstract implements iViewAdapter
+class NativeAdapter extends ViewAdapterAbstract
 {
 	/** @var  null|array */
 	protected static $calls;
-	/** @var iViewAdapter|$this */
+	/** @var $this */
 	protected static $instance;
 	/** @var string */
 	private static $template_dir;

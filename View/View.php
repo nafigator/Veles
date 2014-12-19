@@ -14,7 +14,6 @@ namespace Veles\View;
 
 use Exception;
 use Veles\Routing\Route;
-use Veles\View\Adapters\iViewAdapter;
 use Veles\View\Adapters\ViewAdapterAbstract;
 
 /**
@@ -24,15 +23,15 @@ use Veles\View\Adapters\ViewAdapterAbstract;
  */
 class View
 {
-	/** @var iViewAdapter */
+	/** @var ViewAdapterAbstract */
 	protected static $adapter;
 
 	/**
 	 * Cache adapter initialisation
 	 *
-	 * @param iViewAdapter $adapter Adapter
+	 * @param ViewAdapterAbstract $adapter Adapter
 	 */
-	public static function setAdapter(iViewAdapter $adapter)
+	public static function setAdapter(ViewAdapterAbstract $adapter)
 	{
 		self::$adapter = $adapter;
 	}
@@ -41,11 +40,11 @@ class View
 	 * Cache adapter instance
 	 *
 	 * @throws Exception
-	 * @return iViewAdapter|ViewAdapterAbstract
+	 * @return ViewAdapterAbstract
 	 */
 	public static function getAdapter()
 	{
-		if (self::$adapter instanceof iViewAdapter) {
+		if (self::$adapter instanceof ViewAdapterAbstract) {
 			return self::$adapter;
 		}
 

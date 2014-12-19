@@ -146,7 +146,7 @@ class Route
 	/**
 	 * Get View adapter class
 	 *
-	 * @return \Veles\View\Adapters\iViewAdapter
+	 * @return \Veles\View\Adapters\ViewAdapterAbstract
 	 * @throws \Exception
 	 */
 	public function getAdapter()

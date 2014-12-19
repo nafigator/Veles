@@ -24,7 +24,7 @@ abstract class ViewAdapterAbstract
 {
 	/** @var  null|array */
 	protected static $calls;
-	/** @var iViewAdapter|$this */
+	/** @var $this */
 	protected static $instance;
 	/** @var  mixed */
 	protected $driver;
@@ -37,7 +37,30 @@ abstract class ViewAdapterAbstract
 	abstract protected function __construct();
 
 	/**
-	 * @return iViewAdapter|$this
+	 * Output method
+	 *
+	 * @param string $path Path to template
+	 */
+	abstract public function show($path);
+
+	/**
+	 * Output View into buffer and save it in variable
+	 *
+	 * @param string $path Path to template
+	 * @return string View content
+	 */
+	abstract public function get($path);
+
+	/**
+	 * Check template cache status
+	 *
+	 * @param string $tpl Template file
+	 * @return bool Cache status
+	 */
+	abstract public function isCached($tpl);
+
+	/**
+	 * @return $this
 	 */
 	public static function instance()
 	{
