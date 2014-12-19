@@ -106,14 +106,25 @@ class ViewAdapterAbstractTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers Veles\View\Adapters\ViewAdapterAbstract::set
-	 * @todo   Implement testSet().
 	 */
 	public function testSet()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$expected = [
+			'variable-1' => 'value-1',
+			'variable-2' => 'value-2'
+		];
+		$this->object->set($expected);
+
+		$object = new \ReflectionObject($this->object);
+
+		$prop = $object->getProperty('variables');
+		$prop->setAccessible(true);
+		$result = $prop->getValue($this->object);
+
+		$msg = 'Wrong ViewAdapterAbstract::set() behavior!';
+		foreach ($expected as $var => $value) {
+			$this->assertSame($value, $result[$var], $msg);
+		}
 	}
 
 	/**
