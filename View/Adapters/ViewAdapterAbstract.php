@@ -28,6 +28,8 @@ abstract class ViewAdapterAbstract
 	protected static $instance;
 	/** @var  mixed */
 	protected $driver;
+	/** @var array */
+	protected $variables;
 
 	/**
 	 * Driver initialization
@@ -116,5 +118,31 @@ abstract class ViewAdapterAbstract
 			'method'    => $method,
 			'arguments' => $arguments
 		];
+	}
+
+	/**
+	 * Method for output variables setup
+	 *
+	 * @param mixed $vars Output variables or traversable class
+	 */
+	public function set($vars)
+	{
+		foreach ($vars as $prop => $value) {
+			$this->variables[$prop] = $value;
+		}
+	}
+
+	/**
+	 * Output variables cleanup
+	 *
+	 * @param array $vars Array of variables names
+	 */
+	public function del(array $vars)
+	{
+		foreach ($vars as $var_name) {
+			if (isset($this->variables[$var_name])) {
+				unset($this->variables[$var_name]);
+			}
+		}
 	}
 }

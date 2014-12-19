@@ -26,8 +26,6 @@ class NativeAdapter extends ViewAdapterAbstract implements iViewAdapter
 	protected static $calls;
 	/** @var iViewAdapter|$this */
 	protected static $instance;
-	/** @var array */
-	private static $variables = [];
 	/** @var string */
 	private static $template_dir;
 
@@ -52,40 +50,13 @@ class NativeAdapter extends ViewAdapterAbstract implements iViewAdapter
 	}
 
 	/**
-	 * Method for output variables setup
-	 *
-	 * @param mixed $vars Output variables or traversable class
-	 */
-	public function set($vars)
-	{
-		foreach ($vars as $prop => $value) {
-			self::$variables[$prop] = $value;
-		}
-	}
-
-	/**
-	 * Output variables cleanup
-	 *
-	 * @param array $vars Array of variables names
-	 * @throws Exception
-	 */
-	public function del(array $vars)
-	{
-		foreach ($vars as $var_name) {
-			if (isset(self::$variables[$var_name])) {
-				unset(self::$variables[$var_name]);
-			}
-		}
-	}
-
-	/**
 	 * Output method
 	 *
 	 * @param string $path Path to template
 	 */
 	public function show($path)
 	{
-		foreach (self::$variables as $var_name => $value) {
+		foreach ($this->variables as $var_name => $value) {
 			$$var_name = $value;
 		}
 
@@ -104,7 +75,7 @@ class NativeAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 */
 	public function get($path)
 	{
-		foreach (self::$variables as $var_name => $value) {
+		foreach ($this->variables as $var_name => $value) {
 			$$var_name = $value;
 		}
 

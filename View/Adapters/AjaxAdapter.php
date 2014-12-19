@@ -22,40 +22,6 @@ use Exception;
  */
 class AjaxAdapter extends ViewAdapterAbstract implements iViewAdapter
 {
-	/** @var array */
-	private static $variables = [];
-
-	/**
-	 * Method for output variables setup
-	 *
-	 * @param mixed $vars Output variables or traversable class
-	 */
-	public function set($vars)
-	{
-		foreach ($vars as $prop => $value) {
-			self::$variables[$prop] = $value;
-		}
-	}
-
-	/**
-	 * Output variables cleanup
-	 *
-	 * @param array $vars Array of variables names
-	 * @throws Exception
-	 */
-	public function del(array $vars)
-	{
-		if (!is_array($vars)) {
-			throw new Exception('View can unset variables only in arrays!');
-		}
-
-		foreach ($vars as $var_name) {
-			if (isset(self::$variables[$var_name])) {
-				unset(self::$variables[$var_name]);
-			}
-		}
-	}
-
 	/**
 	 * Output method
 	 *

@@ -22,22 +22,6 @@ use Exception;
 interface iViewAdapter
 {
 	/**
-	 * Method for output variables setup
-	 *
-	 * @param array $vars Output variables array
-	 * @throws Exception
-	 */
-	public function set($vars);
-
-	/**
-	 * Output variables cleanup
-	 *
-	 * @param array $vars Variables array for cleanup
-	 * @throws Exception
-	 */
-	public function del(array $vars);
-
-	/**
 	 * Output method
 	 *
 	 * @param string $path Path to template
