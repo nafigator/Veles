@@ -35,7 +35,7 @@ interface iViewAdapter
 	 * @param array $vars Variables array for cleanup
 	 * @throws Exception
 	 */
-	public function del($vars);
+	public function del(array $vars);
 
 	/**
 	 * Output method

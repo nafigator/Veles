@@ -57,12 +57,8 @@ class SmartyAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 * @param array $vars Variables array for cleanup
 	 * @throws Exception
 	 */
-	public function del($vars)
+	public function del(array $vars)
 	{
-		if (!is_array($vars)) {
-			throw new Exception('View can unset variables only in arrays!');
-		}
-
 		foreach ($vars as $name) {
 			$this->getDriver()->clearAssign($name);
 		}
