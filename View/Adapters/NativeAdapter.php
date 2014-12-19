@@ -69,12 +69,8 @@ class NativeAdapter extends ViewAdapterAbstract implements iViewAdapter
 	 * @param array $vars Array of variables names
 	 * @throws Exception
 	 */
-	public function del($vars)
+	public function del(array $vars)
 	{
-		if (!is_array($vars)) {
-			throw new Exception('View can unset variables only in arrays!');
-		}
-
 		foreach ($vars as $var_name) {
 			if (isset(self::$variables[$var_name])) {
 				unset(self::$variables[$var_name]);
