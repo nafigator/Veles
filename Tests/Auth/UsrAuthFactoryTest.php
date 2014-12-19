@@ -9,33 +9,33 @@ use Veles\Auth\UsrAuthFactory;
  */
 class UsrAuthFactoryTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var UsrAuthFactory
-     */
-    protected $object;
+	/**
+	 * @var UsrAuthFactory
+	 */
+	protected $object;
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
-    {
-        $this->object = new UsrAuthFactory;
-    }
+	/**
+	 * Sets up the fixture, for example, opens a network connection.
+	 * This method is called before a test is executed.
+	 */
+	protected function setUp()
+	{
+		$this->object = new UsrAuthFactory;
+	}
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-    }
+	/**
+	 * Tears down the fixture, for example, closes a network connection.
+	 * This method is called after a test is executed.
+	 */
+	protected function tearDown()
+	{
+	}
 
-    /**
-     * @covers Veles\Auth\UsrAuthFactory::create
-     */
-    public function testCreate()
-    {
+	/**
+	 * @covers Veles\Auth\UsrAuthFactory::create
+	 */
+	public function testCreate()
+	{
 		$result = $this->object->create();
 		$expected = 'Veles\Auth\Strategies\GuestStrategy';
 
@@ -61,5 +61,5 @@ class UsrAuthFactoryTest extends \PHPUnit_Framework_TestCase
 
 		$msg = 'UsrAuthFactory::create() return wrong result!';
 		$this->assertInstanceOf($expected, $result, $msg);
-    }
+	}
 }
