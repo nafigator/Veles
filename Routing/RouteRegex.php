@@ -22,7 +22,7 @@ class RouteRegex implements iRouteStrategy
 	 * Переменная содержит массив со значениями регулярных подмасок url
 	 * @var array
 	 */
-	private static $map;
+	protected static $map;
 
 	/**
 	 * Проверка на соответствие роута шаблону
