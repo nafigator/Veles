@@ -58,13 +58,17 @@ class RouteRegexTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers Veles\Routing\RouteRegex::getMap
-	 * @todo   Implement testGetMap().
 	 */
 	public function testGetMap()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$pattern = '#^\/article\/([\d\w\-]+).html$#';
+		$url = '/article/234.html';
+		$expected = [1 => '234'];
+
+		$this->object->check($pattern, $url);
+		$result = $this->object->getMap();
+
+		$msg = 'RouteRegex::getMap() returns wrong result!';
+		$this->assertSame($expected, $result, $msg);
 	}
 }
