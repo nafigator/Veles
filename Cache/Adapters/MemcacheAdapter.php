@@ -31,7 +31,7 @@ class MemcacheAdapter extends CacheAdapterAbstract implements iCacheAdapter
 	/**
 	 * Create Memcache class instance and connect to memcache pool
 	 */
-	final protected function __construct()
+	protected function __construct()
 	{
 		$this->setDriver(new Memcache);
 	}
