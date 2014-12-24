@@ -1,4 +1,4 @@
-[![Build status][Travis image]][Travis repo] [![Coverage Status][Coverage image]][Coverage repo] [![GitHub license][License img]]
+[![Build status][Travis image]][Travis repo] [![Coverage Status][Coverage image]][Coverage repo] [![GitHub license][License img]]()
 
 # Veles
 
