@@ -1,4 +1,4 @@
-[![Build status][Travis image]][Travis repo] [![Coverage Status][Coverage image]][Coverage repo] [![GitHub license][License img]][License src] [![GitHub release][Release img]][Release src]
+[![Build status][Travis image]][Travis repo] [![Code Climate][Quality status]][Quality src] [![Coverage Status][Coverage image]][Coverage repo] [![GitHub license][License img]][License src] [![GitHub release][Release img]][Release src]
 
 # Veles
 
@@ -11,8 +11,10 @@ Read more on [SemVer.org](http://semver.org).
 
   [Travis image]: https://travis-ci.org/nafigator/Veles.svg?branch=master
   [Travis repo]: https://travis-ci.org/nafigator/Veles
-  [Coverage image]: https://coveralls.io/repos/nafigator/Veles/badge.png
-  [Coverage repo]: https://coveralls.io/r/nafigator/Veles
+  [Quality status]: https://codeclimate.com/github/nafigator/Veles/badges/gpa.svg
+  [Quality src]: https://codeclimate.com/github/nafigator/Veles
+  [Coverage image]: https://codeclimate.com/github/nafigator/Veles/badges/coverage.svg
+  [Coverage repo]: https://codeclimate.com/github/nafigator/Veles
   [License img]: https://img.shields.io/badge/license-BSD3-brightgreen.svg
   [License src]: https://tldrlegal.com/license/bsd-3-clause-license-%28revised%29
   [Release img]: https://img.shields.io/badge/release-v0.22.0-orange.svg
