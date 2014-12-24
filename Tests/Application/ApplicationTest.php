@@ -142,7 +142,6 @@ EOF
 			[
 				'xdebug.remote_host' => 'localhost',
 				'xdebug.remote_port' => 9137,
-				'xdebug.remote_enable' => 1,
 				'xdebug.max_nesting_level' => 100,
 				'xdebug.var_display_max_data' => -1,
 				'xdebug.var_display_max_depth' => -1
@@ -150,7 +149,6 @@ EOF
 			[
 				'xdebug.remote_host' => 'localhost',
 				'xdebug.remote_port' => '9137',
-				'xdebug.remote_enable' => '1',
 				'xdebug.max_nesting_level' => '100',
 				'xdebug.var_display_max_data' => '-1',
 				'xdebug.var_display_max_depth' => '-1'
