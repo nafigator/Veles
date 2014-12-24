@@ -18,11 +18,11 @@ use Veles\Model\User;
  * Класс авторизации пользователя
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
-final class UsrAuth
+class UsrAuth
 {
-	private $identify = false;
-	private $strategy;
-	private static $instance;
+	protected $identify = false;
+	protected $strategy;
+	protected static $instance;
 
 	/**
 	 * Проверка авторизации пользователя
@@ -30,17 +30,19 @@ final class UsrAuth
 	 */
 	public static function instance()
 	{
-		if (null === self::$instance) {
-			self::$instance = new self;
+		if (null === static::$instance) {
+			$class = get_called_class();
+
+			static::$instance = new $class;
 		}
 
-		return self::$instance;
+		return static::$instance;
 	}
 
 	/**
 	 * Инициализация стратегии и пользователя
 	 */
-	private function __construct()
+	protected function __construct()
 	{
 		$this->strategy = UsrAuthFactory::create();
 		$this->identify = $this->strategy->identify();
