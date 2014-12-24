@@ -7,8 +7,12 @@ services:
   - memcached
 
 before_script:
+  - composer install --dev --no-interaction
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
   - phpenv config-add travisci.ini
 
 script:
-  - phpunit -c travisci-phpunit.xml
+  - phpunit -c travisci-phpunit.xml --coverage-clover build/logs/clover.xml
+
+after_script:
+  - php vendor/bin/coveralls -v
