@@ -1,4 +1,4 @@
-[![Build status][Master image]][Master]
+[![Build status][Travis image]][Travis repo] [![Coverage Status][Coverage image]][Coverage repo]
 
 # Veles
 
@@ -9,5 +9,7 @@ PHP micro framework
 This software follows Semantic Versioning specifications.
 Read more on [SemVer.org](http://semver.org).
 
-  [Master image]: https://travis-ci.org/nafigator/Veles.svg?branch=master
-  [Master]: https://travis-ci.org/nafigator/Veles
+  [Travis image]: https://travis-ci.org/nafigator/Veles.svg?branch=master
+  [Travis repo]: https://travis-ci.org/nafigator/Veles
+  [Coverage image]: https://coveralls.io/repos/nafigator/Veles/badge.png
+  [Coverage repo]: https://coveralls.io/r/nafigator/Veles
