@@ -1,4 +1,4 @@
-[![Build status][Travis image]][Travis repo] [![Coverage Status][Coverage image]][Coverage repo] [![GitHub license][License img]][License src]
+[![Build status][Travis image]][Travis repo] [![Coverage Status][Coverage image]][Coverage repo] [![GitHub license][License img]][License src] [![GitHub release][Release img]][Release src]
 
 # Veles
 
@@ -15,3 +15,5 @@ Read more on [SemVer.org](http://semver.org).
   [Coverage repo]: https://coveralls.io/r/nafigator/Veles
   [License img]: https://img.shields.io/badge/license-BSD-brightgreen.svg
   [License src]: http://opensource.org/licenses/BSD-3-Clause
+  [Release img]: https://img.shields.io/badge/release-v0.22.0-orange.svg
+  [Release src]: https://github.com/nafigator/Veles
