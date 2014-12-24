@@ -21,10 +21,11 @@ use Veles\Config;
  */
 class Route
 {
-	private $page_name = null;
-	private $config    = null;
-	private $template  = null;
-	private $map       = [];
+	protected $page_name;
+	protected $config;
+	protected $template;
+	protected $map = [];
+	protected static $instance;
 
 	/**
 	 * Config parser and controller vars initialisation
@@ -32,11 +33,8 @@ class Route
 	 */
 	private function __construct()
 	{
-		if (null === ($routes = Config::getParams('routes'))) {
-			throw new Exception('В конфиге не найдены роуты!');
-		}
-
-		$q_pos = strpos($_SERVER['REQUEST_URI'], '?');
+		$routes = Config::getParams('routes');
+		$q_pos  = strpos($_SERVER['REQUEST_URI'], '?');
 
 		$url = ($q_pos)
 			? urldecode(substr($_SERVER['REQUEST_URI'], 0, $q_pos))
@@ -64,10 +62,8 @@ class Route
 				$this->map = array_combine($route['map'], $map);
 			}
 
-			return;
+			break;
 		}
-
-		Route404::show($url);
 	}
 
 	/**
@@ -91,32 +87,31 @@ class Route
 	/**
 	 * Getting ajax-flag
 	 * @throws Exception
-	 * @return string
+	 * @return bool
 	 */
 	public function isAjax()
 	{
-		return isset($this->config['ajax']) ? $this->config['ajax'] : false;
+		return isset($this->config['ajax']) ? true : false;
 	}
 
 	/**
 	 * Access to object
-	 * @return Route
+	 * @return mixed
 	 */
 	public static function instance()
 	{
-		static $instance;
-
-		if (null === $instance) {
-			$instance = new Route;
+		if (null === static::$instance) {
+			$class = get_called_class();
+			static::$instance = new $class;
 		}
 
-		return $instance;
+		return static::$instance;
 	}
 
 	/**
 	 * Access to controller
 	 * @throws Exception
-	 * @return object
+	 * @return mixed
 	 */
 	public function getController()
 	{
@@ -162,15 +157,10 @@ class Route
 
 	/**
 	 * Getting page name
-	 * @throws Exception
 	 * @return string
 	 */
 	public function getPageName()
 	{
-		if (!isset($this->page_name)) {
-			throw new Exception('Не найдено имя страницы!');
-		}
-
 		return $this->page_name;
 	}
 
