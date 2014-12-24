@@ -72,6 +72,7 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * @covers Veles\DataBase\Adapters\PdoAdapter::row
 	 * @covers Veles\DataBase\Adapters\PdoAdapter::bindParams
+	 * @covers Veles\DataBase\Adapters\PdoAdapter::prepare
 	 */
 	public function testGetRow()
 	{
