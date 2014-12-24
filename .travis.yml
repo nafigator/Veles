@@ -7,3 +7,5 @@ php:
 
 before_script:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
+
+script: phpunit -c travisci-phpunit.xml
