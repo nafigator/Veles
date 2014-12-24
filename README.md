@@ -1,4 +1,4 @@
-[![Build status][Travis image]][Travis repo] [![Code Climate][Quality status]][Quality src] [![Coverage Status][Coverage image]][Coverage repo] [![GitHub license][License img]][License src] [![GitHub release][Release img]][Release src]
+[![Build status][Travis image]][Travis repo] [![Code Climate][Quality status]][Quality src] [![Coverage Status][Coverage image]][Coverage repo] [![GitHub license][License img]][License src] [![GitHub release][Release img]][Release src] [![Size status][Size image]][Release src]
 
 # Veles
 
@@ -19,3 +19,4 @@ Read more on [SemVer.org](http://semver.org).
   [License src]: https://tldrlegal.com/license/bsd-3-clause-license-%28revised%29
   [Release img]: https://img.shields.io/badge/release-v0.22.0-orange.svg
   [Release src]: https://github.com/nafigator/Veles
+  [Size image]: https://reposs.herokuapp.com/?path=nafigator/Veles
