@@ -13,4 +13,4 @@ Read more on [SemVer.org](http://semver.org).
   [Travis repo]: https://travis-ci.org/nafigator/Veles
   [Coverage image]: https://coveralls.io/repos/nafigator/Veles/badge.png
   [Coverage repo]: https://coveralls.io/r/nafigator/Veles
-  [License img]: https://img.shields.io/badge/style-flat-blue.svg?license=BSD
+  [License img]: https://img.shields.io/badge/license-BSD-blue.svg
