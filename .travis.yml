@@ -7,5 +7,3 @@ php:
 
 before_script:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
-
-phpunit --configuration phpunit.xml
