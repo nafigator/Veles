@@ -7,5 +7,6 @@ php:
 
 before_script:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
+  - phpenv config-add travisci.ini
 
 script: phpunit -c travisci-phpunit.xml
