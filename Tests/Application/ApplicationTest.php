@@ -106,7 +106,7 @@ EOF
 		foreach ($expected_arr as $param => $expected) {
 			$result = ini_get($param);
 
-			$msg = 'Wrong behavior of Application::setPhpSettings()!';
+			$msg = "Wrong '$param' result: $result";
 			$this->assertSame($expected, $result, $msg);
 		}
 	}
