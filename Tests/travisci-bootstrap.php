@@ -1,35 +1,28 @@
 <?php
 /**
- * Environment initialisation for unit-tests
- *
- * Launch test in root directory:
- * phpunit
- * Unit-tests skeletons generation:
- * phpunit-skelgen --bootstrap="Tests/bootstrap.php" generate-test "Veles\Cache\Adapters\ApcAdapter" "Cache\Adapters\ApcAdapter.php" "Tests\Cache\Adapters\ApcAdapterTest" "Tests/Cache/Adapters/ApcAdapterTest.php"
- *
- * @file    bootstrap.php
+ * @file    travisci-bootstrap.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
- * @date    Чтв Дек 20 12:22:58 2012
+ * @author  Yancharuk Alexander <alex@itvault.info>
+ * @date    2014-12-24 09:59
  * @copyright The BSD 3-Clause License
  */
 
 namespace Veles\Tests;
 
-use PDO;
 use Veles\AutoLoader;
+use Veles\Cache\Cache;
+use Veles\Cache\Adapters\MemcacheRaw;
 use Veles\Cache\Adapters\MemcacheAdapter;
 use Veles\Cache\Adapters\MemcachedAdapter;
-use Veles\Cache\Adapters\MemcacheRaw;
-use Veles\Cache\Cache;
+use Veles\View\Adapters\NativeAdapter;
+use Veles\View\View;
 use Veles\DataBase\Adapters\PdoAdapter;
 use Veles\DataBase\ConnectionPools\ConnectionPool;
 use Veles\DataBase\Connections\PdoConnection;
 use Veles\DataBase\Db;
-use Veles\View\Adapters\NativeAdapter;
-use Veles\View\View;
+use PDO;
 
 define('ENVIRONMENT', 'development');
 define('LIB_DIR', realpath(__DIR__ . '/../..'));
@@ -61,8 +54,8 @@ $conn = new PdoConnection('master');
 
 // Database "test" must be created
 $conn->setDsn('mysql:host=localhost;dbname=test;charset=utf8')
-	->setUserName('user')
-	->setPassword('password')
+	->setUserName('travis')
+	->setPassword('')
 	->setOptions([PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
 
 $pool->addConnection($conn, true);

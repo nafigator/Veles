@@ -4,5 +4,5 @@ Tests/bootstrap.php
 # Dependencies
 # https://github.com/maximebf/php-debugbar
 # https://github.com/php-fig/log
-DebugBar
-Psr
+#DebugBar
+#Psr
