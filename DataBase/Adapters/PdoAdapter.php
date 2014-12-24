@@ -34,15 +34,7 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 		}
 	}
 
-	/**
-	 * Get value from table row
-	 *
-	 * @param string $sql SQL-query
-	 * @param array $params Query values
-	 * @param string|null $types Placeholders types
-	 * @return string
-	 */
-	public function value($sql, array $params, $types)
+	private function prepare($sql, array $params, $types)
 	{
 		$this->stmt = $this->getConnection()->prepare($sql);
 
@@ -54,6 +46,19 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 		}
 
 		$this->notify();
+	}
+
+	/**
+	 * Get value from table row
+	 *
+	 * @param string $sql SQL-query
+	 * @param array $params Query values
+	 * @param string|null $types Placeholders types
+	 * @return string
+	 */
+	public function value($sql, array $params, $types)
+	{
+		$this->prepare($sql, $params, $types);
 
 		return $this->stmt->fetchColumn();
 	}
@@ -68,16 +73,7 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	 */
 	public function row($sql, array $params, $types)
 	{
-		$this->stmt = $this->getConnection()->prepare($sql);
-
-		if (null === $types) {
-			$this->stmt->execute($params);
-		} else {
-			$this->bindParams($params, $types);
-			$this->stmt->execute();
-		}
-
-		$this->notify();
+		$this->prepare($sql, $params, $types);
 
 		return $this->stmt->fetch();
 	}
@@ -92,16 +88,7 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	 */
 	public function rows($sql, array $params, $types)
 	{
-		$this->stmt = $this->getConnection()->prepare($sql);
-
-		if (null === $types) {
-			$this->stmt->execute($params);
-		} else {
-			$this->bindParams($params, $types);
-			$this->stmt->execute();
-		}
-
-		$this->notify();
+		$this->prepare($sql, $params, $types);
 
 		return $this->stmt->fetchAll();
 	}
