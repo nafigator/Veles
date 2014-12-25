@@ -52,7 +52,7 @@ class UsrAuthTest extends \PHPUnit_Framework_TestCase
 	{
 		$expected = 0;
 		$result = $this->object->getErrors();
-		$msg = 'Usr::getErrors returns wrong result!';
+		$msg = 'UsrAuth::getErrors returns wrong result!';
 		$this->assertSame($expected, $result, $msg);
 	}
 

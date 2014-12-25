@@ -1,6 +1,6 @@
 <?php
 /**
- * Базовый класс стратегий авторизации пользователя
+ * Usr authentification strategy base class
  * @file    AbstractAuthStrategy.php
  *
  * PHP version 5.4+
@@ -17,7 +17,7 @@ use Veles\DataBase\DbFilter;
 use Veles\Model\User;
 
 /**
- * Класс AbstractAuthStrategy
+ * Class AbstractAuthStrategy
  * @author   Alexander Yancharuk <alex@itvault.info>
  */
 abstract class AbstractAuthStrategy
@@ -29,12 +29,12 @@ abstract class AbstractAuthStrategy
 	const ERR_USER_NOT_FOUND   = 16; // auth
 	const ERR_WRONG_PASSWORD   = 32;
 
-	// В переменной будет содержаться побитная информация об ошибках
+	// This var contains bit-wise error info
 	protected $errors = 0;
 	protected $user;
 
 	/**
-	 * Базовый конструктор
+	 * Constructor
 	 */
 	public function __construct()
 	{
@@ -42,17 +42,19 @@ abstract class AbstractAuthStrategy
 	}
 
 	/**
-	 * Авторизация пользователя
+	 * User authentification
+	 *
 	 * @return User
 	 */
 	abstract public function identify();
 
 	/**
-	 * Установка авторизационных кук
+	 * Auth cookies setup
+	 *
 	 * @param int $identifier ID пользователя
 	 * @param int $hash Хэш пароля
 	 */
-	final protected static function setCookie($identifier, $hash)
+	protected static function setCookie($identifier, $hash)
 	{
 		// Делаем куки на 1 год (3600*24*365)
 		setcookie('id', $identifier, $_SERVER['REQUEST_TIME'] + 31536000, '/', $_SERVER['HTTP_HOST'], false, false);
@@ -61,22 +63,22 @@ abstract class AbstractAuthStrategy
 	}
 
 	/**
-	 * Удаление авторизационных кук
+	 * Delete auth cookies
 	 */
-	final protected static function delCookie()
+	protected static function delCookie()
 	{
 		setcookie('id', '', $_SERVER['REQUEST_TIME'] - 3600, '/', $_SERVER['HTTP_HOST'], false, false);
 		setcookie('pw', '', $_SERVER['REQUEST_TIME'] - 3600, '/', $_SERVER['HTTP_HOST'], false, false);
 	}
 
 	/**
-	 * Поиск пользователя
+	 * User search
+	 *
 	 * @param DbFilter $filter
 	 * @return bool
 	 */
-	final protected function findUser(DbFilter $filter)
+	protected function findUser(DbFilter $filter)
 	{
-		// Пользователь с таким id найден
 		if ($this->user->find($filter)) {
 			return true;
 		}
@@ -91,7 +93,8 @@ abstract class AbstractAuthStrategy
 	}
 
 	/**
-	 * Получение пользователя
+	 * Get user
+	 *
 	 * @return User
 	 */
 	public function getUser()
@@ -100,7 +103,8 @@ abstract class AbstractAuthStrategy
 	}
 
 	/**
-	 * Получение ошибок
+	 * Get errors
+	 *
 	 * @return int
 	 */
 	public function getErrors()
