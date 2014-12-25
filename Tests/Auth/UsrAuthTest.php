@@ -1,6 +1,7 @@
 <?php
 namespace Tests\Auth;
 
+use Veles\Auth\UsrGroup;
 use Veles\Tests\Auth\UsrAuthCopy;
 
 /**
@@ -32,49 +33,60 @@ class UsrAuthTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers Veles\Auth\UsrAuth::instance
-	 * @todo   Implement testInstance().
+	 * @covers Veles\Auth\UsrAuth::__construct
 	 */
 	public function testInstance()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		UsrAuthCopy::unsetInstance();
+
+		$expected = '\Veles\Auth\UsrAuth';
+		$result = UsrAuthCopy::instance();
+		$msg = 'UsrAuth::instance() return wrong result!';
+		$this->assertInstanceOf($expected, $result, $msg);
 	}
 
 	/**
 	 * @covers Veles\Auth\UsrAuth::getErrors
-	 * @todo   Implement testGetErrors().
 	 */
 	public function testGetErrors()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$expected = 0;
+		$result = $this->object->getErrors();
+		$msg = 'Usr::getErrors returns wrong result!';
+		$this->assertSame($expected, $result, $msg);
 	}
 
 	/**
 	 * @covers Veles\Auth\UsrAuth::hasAccess
-	 * @todo   Implement testHasAccess().
+	 * @dataProvider testHasAccessProvider
 	 */
-	public function testHasAccess()
+	public function testHasAccess($group, $expected)
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$result = $this->object->hasAccess([$group]);
+		$msg = 'UsrAuth::hasAccess() returns wrong result!';
+		$this->assertSame($expected, $result, $msg);
+	}
+
+	public function testHasAccessProvider()
+	{
+		return [
+			[UsrGroup::ADMIN, false],
+			[UsrGroup::DELETED, false],
+			[UsrGroup::GUEST, true],
+			[UsrGroup::MANAGER, false],
+			[UsrGroup::MODERATOR, false],
+			[UsrGroup::REGISTERED, false]
+		];
 	}
 
 	/**
 	 * @covers Veles\Auth\UsrAuth::getUser
-	 * @todo   Implement testGetUser().
 	 */
 	public function testGetUser()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$expected = '\Veles\Model\User';
+		$result = $this->object->getUser();
+		$msg = 'UsrAuth::getUser() returns wrong result!';
+		$this->assertInstanceOf($expected, $result, $msg);
 	}
 }

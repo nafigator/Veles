@@ -63,7 +63,7 @@ class UsrAuth
 	 * @return  bool
 	 * @todo переделать входящий параметр на int
 	 */
-	public static function hasAccess($groups)
+	public static function hasAccess(array $groups)
 	{
 		$user_group = self::getUser()->getGroup();
 

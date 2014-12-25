@@ -23,6 +23,6 @@ class UsrAuthCopy extends UsrAuth
 
 	public static function unsetInstance()
 	{
-		self::$instance = null;
+		static::$instance = null;
 	}
 }
