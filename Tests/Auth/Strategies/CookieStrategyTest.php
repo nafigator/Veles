@@ -11,11 +11,6 @@ use Veles\Tests\Auth\Strategies\CookieStrategyCopy;
  */
 class CookieStrategyTest extends \PHPUnit_Framework_TestCase
 {
-	/**
-	 * @var CookieStrategy
-	 */
-	protected $object;
-
 	protected static $tbl_name;
 
 	public static function setUpBeforeClass()
