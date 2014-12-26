@@ -78,6 +78,7 @@ class CookieStrategyTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * @covers Veles\Auth\Strategies\CookieStrategy::identify
 	 * @covers Veles\Auth\Strategies\CookieStrategy::checkInput
+	 * @covers Veles\Auth\Strategies\AbstractAuthStrategy::findUser
 	 * @dataProvider identifyProvider
 	 */
 	public function testIdentify($id, $hash, $expected)
@@ -101,6 +102,33 @@ class CookieStrategyTest extends \PHPUnit_Framework_TestCase
 			['ss', '109()', false],
 			[2, 'GlOaUExBSD9HxuEYk3ZFaeDhggU716O', false],
 			[1, 'GlOaUExBSD9HxuEYk3ZFaeDhggU716O', false]
+		];
+	}
+
+	/**
+	 * @covers Veles\Auth\Strategies\CookieStrategy::__construct
+	 * @dataProvider constructProvider
+	 */
+	public function testConstruct($id, $hash)
+	{
+		$_COOKIE['id'] = $id;
+		$_COOKIE['pw'] = $hash;
+
+		$object = new CookieStrategyCopy;
+
+		$msg = 'Wrong behavior of CookieStrategy::__construct!';
+		$this->assertAttributeSame($id, 'cookie_id', $object, $msg);
+
+		$msg = 'Wrong behavior of CookieStrategy::__construct!';
+		$this->assertAttributeSame($hash, 'cookie_hash', $object, $msg);
+	}
+
+	public function constructProvider()
+	{
+		return [
+			[1, 'GlOaUExBSD9HxuEYk2ZFaeDhggU716O'],
+			[5, 'GlOaUExBSD9HxuEYk2ZFaeDhggU7162'],
+			[5555, 'GlOaUExBSD9HxuEYk2fFaeDhggU7162']
 		];
 	}
 }

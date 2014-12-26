@@ -53,6 +53,7 @@ abstract class AbstractAuthStrategy
 	 *
 	 * @param int $identifier ID пользователя
 	 * @param int $hash Хэш пароля
+	 * @codeCoverageIgnore
 	 */
 	protected static function setCookie($identifier, $hash)
 	{
@@ -64,6 +65,7 @@ abstract class AbstractAuthStrategy
 
 	/**
 	 * Delete auth cookies
+	 * @codeCoverageIgnore
 	 */
 	protected static function delCookie()
 	{
