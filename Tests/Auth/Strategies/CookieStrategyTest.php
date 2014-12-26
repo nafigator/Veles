@@ -21,7 +21,7 @@ class CookieStrategyTest extends \PHPUnit_Framework_TestCase
 	public static function setUpBeforeClass()
 	{
 		// Create test table
-		$tbl_name = static::$tbl_name; User::TBL_NAME;
+		$tbl_name = static::$tbl_name = User::TBL_NAME;
 
 		Db::setAdapter(PdoAdapter::instance());
 		Db::query("
