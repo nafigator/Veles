@@ -8,48 +8,48 @@ use Veles\Auth\Strategies\GuestStrategy;
  */
 class AbstractAuthStrategyTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var AbstractAuthStrategy
-     */
-    protected $object;
+	/**
+	 * @var AbstractAuthStrategy
+	 */
+	protected $object;
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
-    {
-        $this->object = new GuestStrategy;
-    }
+	/**
+	 * Sets up the fixture, for example, opens a network connection.
+	 * This method is called before a test is executed.
+	 */
+	protected function setUp()
+	{
+		$this->object = new GuestStrategy;
+	}
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-    }
+	/**
+	 * Tears down the fixture, for example, closes a network connection.
+	 * This method is called after a test is executed.
+	 */
+	protected function tearDown()
+	{
+	}
 
-    /**
-     * @covers Veles\Auth\Strategies\AbstractAuthStrategy::getUser
-     * @covers Veles\Auth\Strategies\AbstractAuthStrategy::__construct
-     */
-    public function testGetUser()
-    {
-        $expected = '\Veles\Model\User';
-        $result = $this->object->getUser();
-        $msg = 'AbstractAuthStrategy::getUser() returns wrong result!';
-        $this->assertInstanceOf($expected, $result, $msg);
-    }
+	/**
+	 * @covers Veles\Auth\Strategies\AbstractAuthStrategy::getUser
+	 * @covers Veles\Auth\Strategies\AbstractAuthStrategy::__construct
+	 */
+	public function testGetUser()
+	{
+		$expected = '\Veles\Model\User';
+		$result = $this->object->getUser();
+		$msg = 'AbstractAuthStrategy::getUser() returns wrong result!';
+		$this->assertInstanceOf($expected, $result, $msg);
+	}
 
-    /**
-     * @covers Veles\Auth\Strategies\AbstractAuthStrategy::getErrors
-     */
-    public function testGetErrors()
-    {
-        $expected = 0;
-        $result = $this->object->getErrors();
-        $msg = 'AbstractAuthStrategy::getErrors returns wrong result!';
-        $this->assertSame($expected, $result, $msg);
-    }
+	/**
+	 * @covers Veles\Auth\Strategies\AbstractAuthStrategy::getErrors
+	 */
+	public function testGetErrors()
+	{
+		$expected = 0;
+		$result = $this->object->getErrors();
+		$msg = 'AbstractAuthStrategy::getErrors returns wrong result!';
+		$this->assertSame($expected, $result, $msg);
+	}
 }
