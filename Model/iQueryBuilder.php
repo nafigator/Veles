@@ -65,5 +65,5 @@ interface iQueryBuilder
 	 * @param DbPaginator $pager Экземпляр постраничного вывода
 	 * @return string
 	 */
-	public function setPage($sql, DbPaginator $pager);
+	public function setPage($sql, $pager);
 }
