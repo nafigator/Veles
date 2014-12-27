@@ -2,6 +2,7 @@
 namespace Veles\Tests\Model;
 
 use Veles\DataBase\DbFilter;
+use Veles\DataBase\DbPaginator;
 use Veles\Model\QueryBuilder;
 use Veles\Model\User;
 use Veles\Auth\UsrGroup;
@@ -195,13 +196,21 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers Veles\Model\QueryBuilder::setPage
-	 * @todo   Implement testSetPage().
 	 */
 	public function testSetPage()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$pager = new DbPaginator;
+		$news = new News;
+		$expected = '
+			SELECT SQL_CALC_FOUND_ROWS
+				`id`, `title`, `content`, `author`
+			FROM
+				`news` LIMIT 0, 5';
+
+		$sql = $this->object->find($news, false);
+		$result = $this->object->setPage($sql, $pager);
+
+		$msg = 'QueryBuilder::setPage returns wrong result!';
+		$this->assertSame($expected, $result, $msg);
 	}
 }

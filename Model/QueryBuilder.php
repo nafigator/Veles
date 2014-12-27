@@ -228,13 +228,10 @@ class QueryBuilder implements iQueryBuilder
 	 * @param DbPaginator $pager Экземпляр постраничного вывода
 	 * @return string
 	 */
-	public function setPage($sql, $pager)
+	public function setPage($sql, DbPaginator $pager)
 	{
-		if ($pager instanceof DbPaginator) {
-			$sql = str_replace('SELECT', 'SELECT SQL_CALC_FOUND_ROWS', $sql);
-			return $sql . $pager->getSqlLimit();
-		}
+		$sql = str_replace('SELECT', 'SELECT SQL_CALC_FOUND_ROWS', $sql);
 
-		return $sql;
+		return $sql . $pager->getSqlLimit();
 	}
 }
