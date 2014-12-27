@@ -32,38 +32,38 @@ class User extends ActiveRecord
 
 	/**
 	 * Метод для получения ID пользователя
-	 * @return int|bool
+	 * @return int|null
 	 */
 	public function getId()
 	{
-		return isset($this->id) ? $this->id : false;
+		return isset($this->id) ? (int) $this->id : null;
 	}
 
 	/**
 	 * Метод для получения хэша пользователя, взятого из базы
-	 * @return string|bool
+	 * @return string|null
 	 */
 	public function getHash()
 	{
-		return isset($this->hash) ? $this->hash : false;
+		return isset($this->hash) ? $this->hash : null;
 	}
 
 	/**
 	 * Метод для получения хэша для кук
-	 * @return string|bool
+	 * @return string|null
 	 */
 	public function getCookieHash()
 	{
-		return isset($this->hash) ? substr($this->hash, 29) : false;
+		return isset($this->hash) ? substr($this->hash, 29) : null;
 	}
 
 	/**
 	 * Метод для получения соли хэша
-	 * @return string|bool
+	 * @return string|null
 	 */
 	public function getSalt()
 	{
-		return isset($this->hash) ? substr($this->hash, 0, 28) : false;
+		return isset($this->hash) ? substr($this->hash, 0, 28) : null;
 	}
 
 	/**
@@ -72,6 +72,6 @@ class User extends ActiveRecord
 	 */
 	public function getGroup()
 	{
-		return isset($this->group) ? $this->group : UsrGroup::GUEST;
+		return isset($this->group) ? (int) $this->group : UsrGroup::GUEST;
 	}
 }
