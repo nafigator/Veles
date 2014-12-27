@@ -219,7 +219,7 @@ class QueryBuilder implements iQueryBuilder
 			$limit
 		";
 
-		return $sql;
+		return rtrim($sql);
 	}
 
 	/**

@@ -1,6 +1,7 @@
 <?php
 namespace Veles\Tests\Model;
 
+use Veles\DataBase\DbFilter;
 use Veles\Model\QueryBuilder;
 use Veles\Model\User;
 use Veles\Auth\UsrGroup;
@@ -16,48 +17,6 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
 	 * @var QueryBuilder
 	 */
 	protected $object;
-	protected static $tbl_name;
-
-	public static function setUpBeforeClass()
-	{
-		// Create test table
-		$tbl_name = static::$tbl_name = User::TBL_NAME;
-
-		Db::setAdapter(PdoAdapter::instance());
-		Db::query("
-			CREATE TABLE $tbl_name (
-			  id int(10) unsigned NOT NULL DEFAULT '0',
-			  `group` tinyint(3) unsigned NOT NULL DEFAULT '16',
-			  email char(30) NOT NULL,
-			  hash char(60) NOT NULL,
-			  short_name char(30) NOT NULL,
-			  name char(30) NOT NULL DEFAULT 'n\\a',
-			  patronymic char(30) NOT NULL DEFAULT 'n\\a',
-			  surname char(30) NOT NULL DEFAULT 'n\\a',
-			  birth_date date NOT NULL,
-			  last_login timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-			  PRIMARY KEY (id),
-			  KEY email (email)
-			) ENGINE=INNODB DEFAULT CHARSET=utf8
-		");
-		// superpass GlOaUExBSD9HxuEYk2ZFaeDhggU716O
-		Db::query("
-			INSERT INTO $tbl_name
-				(id, email, hash, short_name, birth_date)
-			VALUES
-				(?, ?, ?, ?, ?)
-		", [
-			1, 'mail@mail.org',
-			'$2a$07$usesomesillystringforeGlOaUExBSD9HxuEYk2ZFaeDhggU716O',
-			'uzzy', '1980-12-12'
-		], 'issss');
-	}
-
-	public static function tearDownAfterClass()
-	{
-		$table =& static::$tbl_name;
-		Db::query("DROP TABLE $table");
-	}
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
@@ -78,24 +37,27 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers Veles\Model\QueryBuilder::insert
+	 * @covers Veles\Model\QueryBuilder::sanitize
 	 */
 	public function testInsert()
 	{
 		$group = UsrGroup::GUEST;
 		$hash = md5('lalala');
 
-		$user = new User;
+		$user = new UserCopy;
 		$user->id = 1;
 		$user->email = 'mail@mail.org';
 		$user->hash = $hash;
 		$user->group = $group;
+		$user->money = 2.22;
+		$user->date = '1080-12-12';
 
 		$expected = "
 			INSERT
 				`users`
-				(`id`, `email`, `hash`, `group`)
+				(`id`, `email`, `hash`, `group`, `money`)
 			VALUES
-				(1, 'mail@mail.org', '$hash', $group)
+				(1, 'mail@mail.org', '$hash', $group, 2.22)
 		";
 		$result = $this->object->insert($user);
 
@@ -105,6 +67,7 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers Veles\Model\QueryBuilder::update
+	 * @covers Veles\Model\QueryBuilder::sanitize
 	 */
 	public function testUpdate()
 	{
@@ -153,26 +116,81 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers Veles\Model\QueryBuilder::delete
-	 * @todo   Implement testDelete().
+	 * @dataProvider deleteProvider
 	 */
-	public function testDelete()
+	public function testDelete($ids, $expected, $user)
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$msg = 'QueryBuilder::delete() returns wrong result!';
+		$result = $this->object->delete($user, $ids);
+		$this->assertSame($expected, $result, $msg);
+	}
+
+	public function deleteProvider()
+	{
+		$user = new User;
+		$user->id = 1;
+
+		return [
+			[1, "
+			DELETE FROM
+				users
+			WHERE
+				id IN (1)
+		", $user],
+			[[1,2,3], "
+			DELETE FROM
+				users
+			WHERE
+				id IN (1,2,3)
+		", $user],
+			[null, "
+			DELETE FROM
+				users
+			WHERE
+				id IN (1)
+		", $user],
+		];
+	}
+
+	/**
+	 * @expectedException \Exception
+	 * @expectedExceptionMessage Не найден id модели!
+	 */
+	public function testDeleteException()
+	{
+		$user = new User;
+		$result = $this->object->delete($user, false);
 	}
 
 	/**
 	 * @covers Veles\Model\QueryBuilder::find
-	 * @todo   Implement testFind().
+	 * @dataProvider findProvider
 	 */
-	public function testFind()
+	public function testFind($filter, $expected)
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$user = new User;
+		$result = $this->object->find($user, $filter);
+		$msg = 'QueryBuilder::find() returns wrong result!';
+		$this->assertSame($expected, $result, $msg);
+	}
+
+	public function findProvider()
+	{
+		$filter = new DbFilter;
+		$filter->setWhere('id = 1');
+		return [
+			[null, "
+			SELECT
+				`id`, `email`, `hash`, `group`, `last_login`
+			FROM
+				`users`"],
+			[$filter, "
+			SELECT
+				`id`, `email`, `hash`, `group`, `last_login`
+			FROM
+				`users`
+			WHERE id = 1"]
+		];
 	}
 
 	/**
