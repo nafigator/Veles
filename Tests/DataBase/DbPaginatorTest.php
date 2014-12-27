@@ -16,6 +16,11 @@ class DbPaginatorTest extends \PHPUnit_Framework_TestCase
 	 * @var DbPaginator
 	 */
 	protected $object;
+	/**
+	 * Final HTML output
+	 * @var string
+	 */
+	protected $html;
 	protected static $tbl_name;
 
 	public static function setUpBeforeClass()
@@ -56,6 +61,14 @@ class DbPaginatorTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->object = new DbPaginator;
+		$this->html = <<<EOL
+			<span class="curr">1</span>
+					<a href="/page-2.html" class="pager-margin">2</a>
+			<a href="/page-3.html" class="pager-margin">3</a>
+			<a href="/page-4.html" class="pager-margin">4</a>
+		<a href="/page-5.html" class="pager-margin">&raquo;</a>
+
+EOL;
 	}
 
 	/**
@@ -68,14 +81,17 @@ class DbPaginatorTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers Veles\DataBase\DbPaginator::__toString
-	 * @todo   Implement test__toString().
 	 */
 	public function test__toString()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$this->expectOutputString($this->html);
+
+		$news = new News;
+		$this->object->setLimit(4);
+		$filter = new DbFilter;
+		$news->getAll($filter, $this->object);
+
+		echo $this->object;
 	}
 
 	/**
