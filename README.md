@@ -20,3 +20,7 @@ Read more on [SemVer.org](http://semver.org).
   [Release img]: https://img.shields.io/badge/release-v0.22.0-orange.svg
   [Release src]: https://github.com/nafigator/Veles
   [Size image]: https://reposs.herokuapp.com/?path=nafigator/Veles
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/nafigator/veles/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
