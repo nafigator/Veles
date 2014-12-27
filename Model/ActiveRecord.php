@@ -207,7 +207,7 @@ class ActiveRecord extends StdClass
 	 * @param bool|DbPaginator $pager Pagination object
 	 * @return array|bool
 	 */
-	final protected function query($sql, $pager = false)
+	protected function query($sql, $pager = false)
 	{
 		if ($pager) {
 			$sql = $this->builder->setPage($sql, $pager);
