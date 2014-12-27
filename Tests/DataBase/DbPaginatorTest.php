@@ -62,11 +62,15 @@ class DbPaginatorTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->object = new DbPaginator;
 		$this->html = <<<EOL
-			<span class="curr">1</span>
-					<a href="/page-2.html" class="pager-margin">2</a>
+	<a href="/page-1.html">&laquo;</a>
+		<a href="/page-2.html" class="pager-margin">2</a>
 			<a href="/page-3.html" class="pager-margin">3</a>
 			<a href="/page-4.html" class="pager-margin">4</a>
-		<a href="/page-5.html" class="pager-margin">&raquo;</a>
+				<span class="curr pager-margin">5</span>
+					<a href="/page-6.html" class="pager-margin">6</a>
+			<a href="/page-7.html" class="pager-margin">7</a>
+			<a href="/page-8.html" class="pager-margin">8</a>
+		<a href="/page-20.html" class="pager-margin">&raquo;</a>
 
 EOL;
 	}
@@ -86,12 +90,13 @@ EOL;
 	{
 		$this->expectOutputString($this->html);
 
+		$pager = new DbPaginator(false, 5);
 		$news = new News;
-		$this->object->setLimit(4);
+		$pager->setLimit(1);
 		$filter = new DbFilter;
-		$news->getAll($filter, $this->object);
+		$news->getAll($filter, $pager);
 
-		echo $this->object;
+		echo $pager;
 	}
 
 	/**
