@@ -1,6 +1,7 @@
 <?php
 namespace Veles\Tests\Model;
 
+use Veles\DataBase\DbFilter;
 use Veles\Model\ActiveRecord;
 use Veles\DataBase\Db;
 use Veles\DataBase\Adapters\PdoAdapter;
@@ -234,26 +235,61 @@ class ActiveRecordTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers Veles\Model\ActiveRecord::getProperties
-	 * @todo   Implement testGetProperties().
 	 */
 	public function testGetProperties()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$expected = [
+			'id' => '3',
+			'title' => 'title_3',
+			'content' => 'content_3',
+			'author' => 'author_3'
+		];
+		$news = new News;
+		$news->getById(3);
+		$result = [
+			'id' => '',
+			'title' => '',
+			'content' => '',
+			'author' => ''
+		];
+		$news->getProperties($result);
+		$msg = 'ActiveRecord::getProperties() wrong behavior!';
+		$this->assertSame($expected, $result, $msg);
 	}
 
 	/**
 	 * @covers Veles\Model\ActiveRecord::find
-	 * @todo   Implement testFind().
+	 * @dataProvider findProvider
 	 */
-	public function testFind()
+	public function testFind($id, $expected)
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$news = new News;
+		$filter = new DbFilter;
+		$filter->setWhere("id = $id");
+		$result = $news->find($filter);
+		$msg = 'ActiveRecord::find returns wrong result!';
+		$this->assertSame($expected, $result, $msg);
+
+		if ($expected) {
+			$expected = new News;
+			$expected->id = $id;
+			$expected->title = "title_$id";
+			$expected->content = "content_$id";
+			$expected->author = "author_$id";
+		} else {
+			$expected = new News;
+		}
+
+		$msg = 'Wrong ActiveRecord::find() behavior!';
+		$this->assertEquals($expected, $news, $msg);
+	}
+
+	public function findProvider()
+	{
+		return [
+			[3, true],
+			[200, false]
+		];
 	}
 
 	/**
