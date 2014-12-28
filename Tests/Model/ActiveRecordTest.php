@@ -4,6 +4,7 @@ namespace Veles\Tests\Model;
 use Veles\Model\ActiveRecord;
 use Veles\DataBase\Db;
 use Veles\DataBase\Adapters\PdoAdapter;
+use Veles\Model\QueryBuilder;
 use Veles\Model\User;
 
 /**
@@ -168,38 +169,67 @@ class ActiveRecordTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers Veles\Model\ActiveRecord::save
-	 * @todo   Implement testSave().
+	 * @covers Veles\Model\ActiveRecord::update
+	 * @covers Veles\Model\ActiveRecord::insert
 	 */
 	public function testSave()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$news = new News;
+		$news->title = 'title_21';
+		$news->content = 'content_21';
+		$news->author = 'author_21';
+
+		$expected = 21;
+		$result = $news->save();
+		$msg = 'ActiveRecord::save() returns wrong result!';
+		$this->assertSame($expected, $result, $msg);
+
+		$news = new News;
+		$news->getById(21);
+		$news->title = 'updated_title_21';
+
+		$expected = true;
+		$result = $news->save();
+		$msg = 'ActiveRecord::save() returns wrong result!';
+		$this->assertSame($expected, $result, $msg);
 	}
 
 	/**
 	 * @covers Veles\Model\ActiveRecord::delete
-	 * @todo   Implement testDelete().
 	 */
 	public function testDelete()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$news = new News;
+		$news->id = 21;
+
+		$expected = true;
+		$result = $news->delete();
+		$msg = 'ActiveRecord::delete() returns wrong result!';
+		$this->assertSame($expected, $result, $msg);
 	}
 
 	/**
 	 * @covers Veles\Model\ActiveRecord::setProperties
-	 * @todo   Implement testSetProperties().
 	 */
 	public function testSetProperties()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$news = new News;
+		$properties = [
+			'id' => 21,
+			'title' => 'title_21',
+			'content' => 'content_21',
+			'author' => 'author_21'
+		];
+		$news->setProperties($properties);
+
+		$expected = new News;
+		$expected->id = 21;
+		$expected->title = 'title_21';
+		$expected->content = 'content_21';
+		$expected->author = 'author_21';
+
+		$msg = 'Wrong ActiveRecord::setProperties() behavior!';
+		$this->assertEquals($expected, $news, $msg);
 	}
 
 	/**
@@ -228,13 +258,13 @@ class ActiveRecordTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers Veles\Model\ActiveRecord::setBuilder
-	 * @todo   Implement testSetBuilder().
 	 */
 	public function testSetBuilder()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$news = new News;
+		$builder = new QueryBuilder;
+		$news->setBuilder($builder);
+		$msg = 'Wrong ActiveRecord::setBuilder behavior!';
+		$this->assertAttributeSame($builder, 'builder', $news, $msg);
 	}
 }
