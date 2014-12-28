@@ -199,30 +199,4 @@ class ActiveRecord extends StdClass
 	{
 		$this->builder = $builder;
 	}
-
-	/**
-	 * Query with pagination
-	 *
-	 * @param string $sql Query
-	 * @param bool|DbPaginator $pager Pagination object
-	 * @return array|bool
-	 */
-	protected function query($sql, $pager = false)
-	{
-		if ($pager) {
-			$sql = $this->builder->setPage($sql, $pager);
-		}
-
-		$result = Db::rows($sql);
-
-		if (empty($result)) {
-			return false;
-		}
-
-		if ($pager) {
-			$pager->calcMaxPages();
-		}
-
-		return $result;
-	}
 }
