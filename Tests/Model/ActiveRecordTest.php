@@ -8,133 +8,138 @@ use Veles\Model\ActiveRecord;
  */
 class ActiveRecordTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var ActiveRecord
-     */
-    protected $object;
+	/**
+	 * @var ActiveRecord
+	 */
+	protected $object;
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
-    {
-        $this->object = new ActiveRecord;
-    }
+	/**
+	 * Sets up the fixture, for example, opens a network connection.
+	 * This method is called before a test is executed.
+	 */
+	protected function setUp()
+	{
+		$this->object = new ActiveRecord;
+	}
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-    }
+	/**
+	 * Tears down the fixture, for example, closes a network connection.
+	 * This method is called after a test is executed.
+	 */
+	protected function tearDown()
+	{
+	}
 
-    /**
-     * @covers Veles\Model\ActiveRecord::getMap
-     * @todo   Implement testGetMap().
-     */
-    public function testGetMap()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
+	/**
+	 * @covers Veles\Model\ActiveRecord::getMap
+	 */
+	public function testGetMap()
+	{
+		$news = new News;
+		$expected = [
+			'id'      => 'int',
+			'title'   => 'string',
+			'content' => 'string',
+			'author'  => 'string'
+		];
+		$result = $news->getMap();
+		$msg = 'ActiveRecord::getMap() returns wrong result!';
+		$this->assertSame($expected, $result, $msg);
+	}
 
-    /**
-     * @covers Veles\Model\ActiveRecord::getById
-     * @todo   Implement testGetById().
-     */
-    public function testGetById()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
+	/**
+	 * @covers Veles\Model\ActiveRecord::getById
+	 * @todo   Implement testGetById().
+	 */
+	public function testGetById()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+			'This test has not been implemented yet.'
+		);
+	}
 
-    /**
-     * @covers Veles\Model\ActiveRecord::getAll
-     * @todo   Implement testGetAll().
-     */
-    public function testGetAll()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
+	/**
+	 * @covers Veles\Model\ActiveRecord::getAll
+	 * @todo   Implement testGetAll().
+	 */
+	public function testGetAll()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+			'This test has not been implemented yet.'
+		);
+	}
 
-    /**
-     * @covers Veles\Model\ActiveRecord::save
-     * @todo   Implement testSave().
-     */
-    public function testSave()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
+	/**
+	 * @covers Veles\Model\ActiveRecord::save
+	 * @todo   Implement testSave().
+	 */
+	public function testSave()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+			'This test has not been implemented yet.'
+		);
+	}
 
-    /**
-     * @covers Veles\Model\ActiveRecord::delete
-     * @todo   Implement testDelete().
-     */
-    public function testDelete()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
+	/**
+	 * @covers Veles\Model\ActiveRecord::delete
+	 * @todo   Implement testDelete().
+	 */
+	public function testDelete()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+			'This test has not been implemented yet.'
+		);
+	}
 
-    /**
-     * @covers Veles\Model\ActiveRecord::setProperties
-     * @todo   Implement testSetProperties().
-     */
-    public function testSetProperties()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
+	/**
+	 * @covers Veles\Model\ActiveRecord::setProperties
+	 * @todo   Implement testSetProperties().
+	 */
+	public function testSetProperties()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+			'This test has not been implemented yet.'
+		);
+	}
 
-    /**
-     * @covers Veles\Model\ActiveRecord::getProperties
-     * @todo   Implement testGetProperties().
-     */
-    public function testGetProperties()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
+	/**
+	 * @covers Veles\Model\ActiveRecord::getProperties
+	 * @todo   Implement testGetProperties().
+	 */
+	public function testGetProperties()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+			'This test has not been implemented yet.'
+		);
+	}
 
-    /**
-     * @covers Veles\Model\ActiveRecord::find
-     * @todo   Implement testFind().
-     */
-    public function testFind()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
+	/**
+	 * @covers Veles\Model\ActiveRecord::find
+	 * @todo   Implement testFind().
+	 */
+	public function testFind()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+			'This test has not been implemented yet.'
+		);
+	}
 
-    /**
-     * @covers Veles\Model\ActiveRecord::setBuilder
-     * @todo   Implement testSetBuilder().
-     */
-    public function testSetBuilder()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
+	/**
+	 * @covers Veles\Model\ActiveRecord::setBuilder
+	 * @todo   Implement testSetBuilder().
+	 */
+	public function testSetBuilder()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+			'This test has not been implemented yet.'
+		);
+	}
 }
