@@ -24,10 +24,10 @@ class ConnectionPool
 	}
 
 	/**
-	 * Добавление класса соединения в пул
+	 * Add connection to connection pool
 	 *
 	 * @param PdoConnection $conn
-	 * @param bool $default Флаг является ли соединение соединением по-умолчанию
+	 * @param bool $default Flag is this connection default or not
 	 * @return $this
 	 * @see DbConnection
 	 */
@@ -42,9 +42,9 @@ class ConnectionPool
 	}
 
 	/**
-	 * Получение класса соединения по имени
+	 * Get connection class by name
 	 *
-	 * @param string $name Название соединения
+	 * @param string $name Connection name
 	 * @return PdoConnection|null
 	 * @see DbConnection
 	 */
