@@ -1,6 +1,6 @@
 <?php
 /**
- * Класс управления паролем пользователя
+ * Class for user password managing
  * @file    Password.php
  *
  * PHP version 5.4+
@@ -15,13 +15,14 @@ namespace Veles\Auth;
 use Veles\Model\User;
 
 /**
- * Управление паролем пользователя
+ * User password managing
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class Password
 {
 	/**
-	 * Проверка хэша пользователя
+	 * User hash check
+	 *
 	 * @param User $user
 	 * @param $cookie_hash
 	 * @return bool
@@ -32,9 +33,10 @@ class Password
 	}
 
 	/**
-	 * Проверка пароля пользователя при ajax-авторизации
+	 * User password check in ajax-authentification
+	 *
 	 * @param User $user User
-	 * @param string $password Пароль полученый через ajax
+	 * @param string $password Password retrieved through ajax
 	 * @return bool
 	 */
 	public static function check(User $user, &$password)

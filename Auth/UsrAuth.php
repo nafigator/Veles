@@ -1,6 +1,6 @@
 <?php
 /**
- * Класс аторизации пользователя
+ * User authentification class
  * @file    UsrAuth.php
  *
  * PHP version 5.4+
@@ -15,7 +15,7 @@ namespace Veles\Auth;
 use Veles\Model\User;
 
 /**
- * Класс авторизации пользователя
+ * User authentification class
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class UsrAuth
@@ -25,7 +25,8 @@ class UsrAuth
 	protected static $instance;
 
 	/**
-	 * Проверка авторизации пользователя
+	 * User authentification
+	 *
 	 * @return UsrAuth
 	 */
 	public static function instance()
@@ -40,7 +41,7 @@ class UsrAuth
 	}
 
 	/**
-	 * Инициализация стратегии и пользователя
+	 * User authentification strategy initialization
 	 */
 	protected function __construct()
 	{
@@ -49,8 +50,8 @@ class UsrAuth
 	}
 
 	/**
-	 * Метод возвращает побитовые значения ошибок
-	 * @return int Побитовые значения ошибок авторизации
+	 * Method returns bitwise values of auth-errors
+	 * @return int Bitwise auth-errors
 	 */
 	public static function getErrors()
 	{
@@ -58,7 +59,8 @@ class UsrAuth
 	}
 
 	/**
-	 * Метод для проверки состоит ли пользователь в определённых группах
+	 * Check for user groups
+	 *
 	 * @param   array
 	 * @return  bool
 	 * @todo переделать входящий параметр на int
@@ -79,7 +81,8 @@ class UsrAuth
 	}
 
 	/**
-	 * Получение пользователя
+	 * Get user
+	 *
 	 * @return User
 	 */
 	public static function getUser()
