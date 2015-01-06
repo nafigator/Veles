@@ -29,9 +29,9 @@ class AjaxAdapter extends ViewAdapterAbstract
 	 */
 	public function show($path)
 	{
-		if (empty(self::$variables)) return;
+		if (empty($this->variables)) return;
 
-		echo json_encode(self::$variables);
+		echo json_encode($this->variables);
 	}
 
 	/**
@@ -43,7 +43,7 @@ class AjaxAdapter extends ViewAdapterAbstract
 	 */
 	public function get($path)
 	{
-		foreach (self::$variables as $var_name => $value) {
+		foreach ($this->variables as $var_name => $value) {
 			$$var_name = $value;
 		}
 
