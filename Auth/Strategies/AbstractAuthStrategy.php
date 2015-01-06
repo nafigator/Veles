@@ -1,6 +1,6 @@
 <?php
 /**
- * Usr authentification strategy base class
+ * Usr authentication strategy base class
  * @file    AbstractAuthStrategy.php
  *
  * PHP version 5.4+
@@ -42,7 +42,7 @@ abstract class AbstractAuthStrategy
 	}
 
 	/**
-	 * User authentification
+	 * User authentication
 	 *
 	 * @return User
 	 */
