@@ -31,6 +31,8 @@ class JsonAdapter extends ViewAdapterAbstract
 	{
 		if (empty($this->variables)) return;
 
+		header('Content-Type: application/json');
+
 		echo json_encode($this->variables);
 	}
 
