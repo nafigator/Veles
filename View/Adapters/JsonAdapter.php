@@ -1,8 +1,8 @@
 <?php
 /**
- * Ajax View adapter
+ * Json View adapter
  *
- * @file    AjaxAdapter.php
+ * @file    JsonAdapter.php
  *
  * PHP version 5.4+
  *
@@ -16,11 +16,11 @@ namespace Veles\View\Adapters;
 use Exception;
 
 /**
- * Class AjaxAdapter
+ * Class JsonAdapter
  *
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
-class AjaxAdapter extends ViewAdapterAbstract
+class JsonAdapter extends ViewAdapterAbstract
 {
 	/**
 	 * Output method
