@@ -1,6 +1,6 @@
 <?php
 /**
- * User authentification class
+ * User authentication class
  * @file    UsrAuth.php
  *
  * PHP version 5.4+
@@ -15,7 +15,7 @@ namespace Veles\Auth;
 use Veles\Model\User;
 
 /**
- * User authentification class
+ * User authentication class
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
 class UsrAuth
@@ -25,7 +25,7 @@ class UsrAuth
 	protected static $instance;
 
 	/**
-	 * User authentification
+	 * User authentication
 	 *
 	 * @return UsrAuth
 	 */
@@ -41,7 +41,7 @@ class UsrAuth
 	}
 
 	/**
-	 * User authentification strategy initialization
+	 * User authentication strategy initialization
 	 */
 	protected function __construct()
 	{
@@ -51,6 +51,7 @@ class UsrAuth
 
 	/**
 	 * Method returns bitwise values of auth-errors
+	 *
 	 * @return int Bitwise auth-errors
 	 */
 	public static function getErrors()
@@ -69,8 +70,6 @@ class UsrAuth
 	{
 		$user_group = self::getUser()->getGroup();
 
-		// Проверяем есть ли в группах пользователя определённый бит,
-		// соответствующий нужной группе.
 		foreach ($groups as $group) {
 			if ($group === ($user_group & $group)) {
 				return true;
