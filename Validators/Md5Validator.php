@@ -27,8 +27,8 @@ class Md5Validator implements iValidator
 	public function __construct($case_sensitive = false)
 	{
 		$this->pattern = $case_sensitive
-			? '/^[a-f\d]{32}$/i'
-			: '/^[a-f\d]{32}$/';
+			? '/^[a-f\d]{32}$/'
+			: '/^[a-f\d]{32}$/i';
 	}
 
 	/**
