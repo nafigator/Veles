@@ -18,7 +18,7 @@ namespace Veles\Validators;
  */
 class RegExValidator implements iValidator
 {
-	private $pattern;
+	protected $pattern;
 
 	/**
 	 * Constructor

@@ -18,8 +18,8 @@ namespace Veles\Validators;
  */
 class NumberValidator implements iValidator
 {
-	private $max;
-	private $min;
+	protected $max;
+	protected $min;
 
 	/**
 	 * Constructor

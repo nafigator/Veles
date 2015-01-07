@@ -17,7 +17,7 @@ namespace Veles\Validators;
  */
 class Md5Validator implements iValidator
 {
-	private $pattern;
+	protected $pattern;
 
 	/**
 	 * Constructor

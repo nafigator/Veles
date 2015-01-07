@@ -18,7 +18,6 @@ namespace Veles\Validators;
  */
 class ByteValidator implements iValidator
 {
-
 	/**
 	 * Check byte values
 	 *

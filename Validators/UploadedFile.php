@@ -20,7 +20,7 @@ namespace Veles\Validators;
  */
 class UploadedFileValidator implements iValidator
 {
-	private $allowable_extensions = [];
+	protected $allowable_extensions = [];
 
 	/**
 	 * Creates validator instance
