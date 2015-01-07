@@ -17,7 +17,7 @@ use Veles\Form\Elements\ButtonElement;
 use Veles\Form\Elements\HiddenElement;
 use Veles\Form\Elements\iElement;
 use Veles\Form\Elements\SubmitElement;
-use Veles\Validators\RegEx;
+use Veles\Validators\RegExValidator;
 use Veles\View\View;
 
 /**
@@ -54,7 +54,7 @@ abstract class AbstractForm implements iForm
 		$this->sid  = md5(uniqid('', true));
 
 		$params = [
-			'validator'  => new RegEx('/^[a-f\d]{32}$/'),
+			'validator'  => new RegExValidator('/^[a-f\d]{32}$/'),
 			'required'   => true,
 			'attributes' => ['name' => 'sid', 'value' => $this->sid]
 		];

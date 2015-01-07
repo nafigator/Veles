@@ -1,7 +1,7 @@
 <?php
 /**
  * Regular expression validator
- * @file    RegEx.php
+ * @file    RegExValidator.php
  *
  * PHP version 5.4+
  *
@@ -13,10 +13,10 @@
 namespace Veles\Validators;
 
 /**
- * Class RegEx
+ * Class RegExValidator
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
-class RegEx implements iValidator
+class RegExValidator implements iValidator
 {
 	private $pattern;
 

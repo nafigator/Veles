@@ -12,7 +12,7 @@
 
 namespace Veles\Tools;
 
-use Veles\Validators\Byte;
+use Veles\Validators\ByteValidator;
 
 /**
  * Class CliProgressBar
@@ -118,8 +118,8 @@ class CliProgressBar
 	 */
 	public static function getMemString()
 	{
-		$mem = Byte::format(memory_get_usage());
-		$max_mem = Byte::format(memory_get_peak_usage());
+		$mem = ByteValidator::format(memory_get_usage());
+		$max_mem = ByteValidator::format(memory_get_peak_usage());
 
 		return " | Mem: $mem | Max: $max_mem";
 	}

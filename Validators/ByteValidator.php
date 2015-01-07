@@ -1,7 +1,7 @@
 <?php
 /**
- * Byte values validator
- * @file    Byte.php
+ * ByteValidator values validator
+ * @file    ByteValidator.php
  *
  * PHP version 5.4+
  *
@@ -13,14 +13,15 @@
 namespace Veles\Validators;
 
 /**
- * Class Byte
+ * Class ByteValidator
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
-class Byte implements iValidator
+class ByteValidator implements iValidator
 {
 
 	/**
 	 * Check byte values
+	 *
 	 * @param mixed $size Size in bytes
 	 * @return bool
 	 */
@@ -31,6 +32,7 @@ class Byte implements iValidator
 
 	/**
 	 * Convert byte values to human readable format
+	 *
 	 * @param int $size Size in bytes
 	 * @param int $precision Precision of returned values
 	 * @return string

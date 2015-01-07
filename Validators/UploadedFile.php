@@ -2,7 +2,7 @@
 /**
  * Class for uploaded file validation
  *
- * @file    UploadedFile.php
+ * @file    UploadedFileValidator.php
  *
  * PHP version 5.4+
  *
@@ -14,11 +14,11 @@
 namespace Veles\Validators;
 
 /**
- * Class UploadedFile
+ * Class UploadedFileValidator
  *
  * @author  Yancharuk Alexander <alex@itvault.info>
  */
-class UploadedFile implements iValidator
+class UploadedFileValidator implements iValidator
 {
 	private $allowable_extensions = [];
 

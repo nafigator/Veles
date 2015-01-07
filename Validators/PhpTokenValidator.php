@@ -2,7 +2,7 @@
 /**
  * PHP token validator
  *
- * @file    PhpToken.php
+ * @file    PhpTokenValidator.php
  *
  * PHP version 5.4+
  *
@@ -13,7 +13,7 @@
 
 namespace Veles\Validators;
 
-class PhpToken implements iValidator
+class PhpTokenValidator implements iValidator
 {
 	/**
 	 * PHP token validation

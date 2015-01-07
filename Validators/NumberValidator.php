@@ -1,7 +1,7 @@
 <?php
 /**
  * Integer values validator
- * @file    Number.php
+ * @file    NumberValidator.php
  *
  * PHP version 5.4+
  *
@@ -13,10 +13,10 @@
 namespace Veles\Validators;
 
 /**
- * Class Number
+ * Class NumberValidator
  * @author  Alexander Yancharuk <alex@itvault.info>
  */
-class Number implements iValidator
+class NumberValidator implements iValidator
 {
 	private $max;
 	private $min;
