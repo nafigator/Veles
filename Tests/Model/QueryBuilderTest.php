@@ -55,8 +55,8 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
 
 		$expected = "
 			INSERT
-				`users`
-				(`id`, `email`, `hash`, `group`, `money`)
+				\"users\"
+				(\"id\", \"email\", \"hash\", \"group\", \"money\")
 			VALUES
 				(1, 'mail@mail.org', '$hash', $group, 2.22)
 		";
@@ -83,9 +83,9 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
 
 		$expected = "
 			UPDATE
-				`users`
+				\"users\"
 			SET
-				`email` = 'mail@mail.org', `hash` = '9aa6e5f2256c17d2d430b100032b997c', `group` = 16
+				\"email\" = 'mail@mail.org', \"hash\" = '9aa6e5f2256c17d2d430b100032b997c', \"group\" = 16
 			WHERE
 				id = 1
 		";
@@ -104,7 +104,7 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
 		$expected = "
 			SELECT *
 			FROM
-				users
+				\"users\"
 			WHERE
 				id = 1
 			LIMIT 1
@@ -134,19 +134,19 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
 		return [
 			[1, "
 			DELETE FROM
-				users
+				\"users\"
 			WHERE
 				id IN (1)
 		", $user],
 			[[1,2,3], "
 			DELETE FROM
-				users
+				\"users\"
 			WHERE
 				id IN (1,2,3)
 		", $user],
 			[null, "
 			DELETE FROM
-				users
+				\"users\"
 			WHERE
 				id IN (1)
 		", $user],
@@ -155,7 +155,7 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @expectedException \Exception
-	 * @expectedExceptionMessage Не найден id модели!
+	 * @expectedExceptionMessage Not found model id!
 	 */
 	public function testDeleteException()
 	{
@@ -182,14 +182,14 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
 		return [
 			[null, "
 			SELECT
-				`id`, `email`, `hash`, `group`, `last_login`
+				\"id\", \"email\", \"hash\", \"group\", \"last_login\"
 			FROM
-				`users`"],
+				\"users\""],
 			[$filter, "
 			SELECT
-				`id`, `email`, `hash`, `group`, `last_login`
+				\"id\", \"email\", \"hash\", \"group\", \"last_login\"
 			FROM
-				`users`
+				\"users\"
 			WHERE id = 1"]
 		];
 	}
@@ -203,9 +203,9 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
 		$news = new News;
 		$expected = '
 			SELECT SQL_CALC_FOUND_ROWS
-				`id`, `title`, `content`, `author`
+				"id", "title", "content", "author"
 			FROM
-				`news` LIMIT 0, 5';
+				"news" LIMIT 0, 5';
 
 		$sql = $this->object->find($news, false);
 		$result = $this->object->setPage($sql, $pager);

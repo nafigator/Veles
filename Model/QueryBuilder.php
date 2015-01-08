@@ -41,7 +41,7 @@ class QueryBuilder implements iQueryBuilder
 				continue;
 			}
 
-			$arr['fields'] .= "`$property`, ";
+			$arr['fields'] .= "\"$property\", ";
 			$arr['values'] .= "$value, ";
 		}
 
@@ -53,7 +53,7 @@ class QueryBuilder implements iQueryBuilder
 
 		$sql = '
 			INSERT
-				`' . $model::TBL_NAME . "`
+				"' . $model::TBL_NAME . "\"
 				($arr[fields])
 			VALUES
 				($arr[values])
@@ -112,14 +112,14 @@ class QueryBuilder implements iQueryBuilder
 				continue;
 			}
 
-			$params .= "`$property` = $value, ";
+			$params .= "\"$property\" = $value, ";
 		}
 
 		$params = rtrim($params, ', ');
 
 		$sql = '
 			UPDATE
-				`' . $model::TBL_NAME . "`
+				"' . $model::TBL_NAME . "\"
 			SET
 				$params
 			WHERE
@@ -142,7 +142,7 @@ class QueryBuilder implements iQueryBuilder
 		$sql = '
 			SELECT *
 			FROM
-				' . $model::TBL_NAME . "
+				"' . $model::TBL_NAME . "\"
 			WHERE
 				id = $identifier
 			LIMIT 1
@@ -162,7 +162,7 @@ class QueryBuilder implements iQueryBuilder
 	{
 		if (!$ids) {
 			if (!isset($model->id)) {
-				throw new Exception('Не найден id модели!');
+				throw new Exception('Not found model id!');
 			}
 
 			$ids = $model->id;
@@ -180,7 +180,7 @@ class QueryBuilder implements iQueryBuilder
 
 		$sql = '
 			DELETE FROM
-				' . $model::TBL_NAME . "
+				"' . $model::TBL_NAME . "\"
 			WHERE
 				id IN ($ids)
 		";
@@ -198,7 +198,7 @@ class QueryBuilder implements iQueryBuilder
 	{
 		$where = $group = $having = $order = $limit = '';
 		$select = 'SELECT';
-		$fields = '`' . implode('`, `', array_keys($model->getMap())) . '`';
+		$fields = '"' . implode('", "', array_keys($model->getMap())) . '"';
 
 		if ($filter instanceof DbFilter) {
 			$where  = $filter->getWhere();
@@ -211,7 +211,7 @@ class QueryBuilder implements iQueryBuilder
 			$select
 				$fields
 			FROM
-				`" . $model::TBL_NAME . "`
+				\"" . $model::TBL_NAME . "\"
 			$where
 			$group
 			$having
