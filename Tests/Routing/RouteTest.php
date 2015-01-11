@@ -183,12 +183,18 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers Veles\Routing\Route::getMap
+	 * @covers Veles\Routing\Route::__construct
 	 * @dataProvider getMapProvider
 	 */
 	public function testGetMap($url, $expected)
 	{
 		$_SERVER['REQUEST_URI'] = $url;
 		RouteCopy::instance()->unsetInstance();
+
+		$route = RouteCopy::instance();
+		$msg = 'Route::$map wrong value!';
+		$this->assertAttributeSame($expected, 'map', $route, $msg);
+
 		$result = RouteCopy::instance()->getMap();
 
 		$msg = 'Route::getMap() returns wrong result!';
