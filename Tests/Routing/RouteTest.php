@@ -183,11 +183,11 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers Veles\Routing\Route::getMap
+	 * @dataProvider getMapProvider
 	 */
-	public function testGetMap()
+	public function testGetMap($url, $expected)
 	{
-		$_SERVER['REQUEST_URI'] = '/page-2.html';
-		$expected = ['page' => '2'];
+		$_SERVER['REQUEST_URI'] = $url;
 		RouteCopy::instance()->unsetInstance();
 		$result = RouteCopy::instance()->getMap();
 
@@ -195,6 +195,18 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 		$this->assertSame($expected, $result, $msg);
 
 		RouteCopy::instance()->unsetInstance();
+	}
+
+	public function getMapProvider()
+	{
+		return [
+			['/page-2.html', ['page' => '2']],
+			['/page-8.html', ['page' => '8']],
+			['/book/5/user/4', ['book_id' => '5', 'user_id' => '4']],
+			['/book/5000/user/43', ['book_id' => '5000', 'user_id' => '43']],
+			['/book/15/user/14', ['book_id' => '15', 'user_id' => '14']],
+			['/book/500/user/143', ['book_id' => '500', 'user_id' => '143']]
+		];
 	}
 
 	/**

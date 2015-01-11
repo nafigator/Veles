@@ -25,4 +25,12 @@ class Home
 	{
 		return ['a' => 'Test', 'b' => 'complete', 'c' => 'Hello'];
 	}
+
+	/**
+	 * Метод вызываемый при запросе /book/5/user/3
+	 */
+	public function book()
+	{
+		return [1, 2, 3];
+	}
 }
