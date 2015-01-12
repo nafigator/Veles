@@ -194,6 +194,37 @@ class FileTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * @covers Veles\Tools\File::delete
+	 * @group Tools
+	 * @param $path
+	 * @param $expected
+	 * @dataProvider deleteProvider
+	 */
+	public function testDelete($path, $expected)
+	{
+		$this->object->setPath($path);
+
+		$result = $this->object->delete();
+		$msg = 'File::delete() returns wrong result!';
+		$this->assertSame($expected, $result, $msg);
+
+		$expected = false;
+		$result = file_exists($path);
+		$msg = 'Unexpected behavior or File::delete()!';
+		$this->assertSame($expected, $result, $msg);
+	}
+
+	public function deleteProvider()
+	{
+		$real_file = tempnam(sys_get_temp_dir(), uniqid());
+		return [
+			['/lalala', false],
+			[$real_file, true],
+			[uniqid('wrong-file'), false]
+		];
+	}
+
+	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
 	 */

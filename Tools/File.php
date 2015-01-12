@@ -126,4 +126,18 @@ class File
 
 		return $this;
 	}
+
+	/**
+	 * Delete file
+	 *
+	 * @return bool
+	 */
+	public function delete()
+	{
+		if (!file_exists($this->getPath()) or !is_writable($this->getPath())) {
+			return false;
+		}
+
+		return unlink($this->getPath());
+	}
 }
