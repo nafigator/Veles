@@ -225,6 +225,54 @@ class FileTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * @covers Veles\Tools\File::deleteDir
+	 * @group Tools
+	 * @param $path
+	 * @param $expected
+	 * @dataProvider deleteDirProvider
+	 */
+	public function testDeleteDir($path_dir, $path_file, $expected1, $expected2, $path_file_second)
+	{
+		$this->object->setPath($path_file);
+
+		$result = $this->object->deleteDir();
+		$msg = 'File::deleteDir() returns wrong result!';
+		$this->assertSame($expected1, $result, $msg);
+
+		$result = !file_exists($path_dir) and !file_exists($path_file);
+		$msg = 'Unexpected behavior or File::deleteDir()!';
+		$this->assertSame($expected2, $result, $msg);
+
+		// cleanup
+		if (null !== $path_file_second) {
+			$file = new File;
+			$file->setPath($path_file_second)->delete();
+			$file->setPath($path_file)->deleteDir();
+		}
+	}
+
+	public function deleteDirProvider()
+	{
+		$real_dir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . uniqid();
+		mkdir($real_dir);
+		$real_file = tempnam($real_dir, uniqid());
+
+		$non_empty_dir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . uniqid();
+		mkdir($non_empty_dir);
+		$non_empty_file1 = tempnam($non_empty_dir, uniqid());
+		$non_empty_file2 = tempnam($non_empty_dir, uniqid());
+
+		$fake_dir = uniqid('wrong-dir');
+		$fake_file = $fake_dir . DIRECTORY_SEPARATOR . uniqid();
+
+		return [
+			[$real_dir, $real_file, true, true, null],
+			[$fake_dir, $fake_file, false, true, null],
+			[$non_empty_dir, $non_empty_file1, false, false, $non_empty_file2]
+		];
+	}
+
+	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
 	 */

@@ -140,4 +140,26 @@ class File
 
 		return unlink($this->getPath());
 	}
+
+	/**
+	 * Delete file dir if empty
+	 *
+	 * @return bool
+	 */
+	public function deleteDir()
+	{
+		$files = glob($this->getDir() . '/*');
+
+		foreach ($files as $file) {
+			if ($file !== $this->getPath()) {
+				return false;
+			}
+		}
+
+		if (!$this->delete()) {
+			return false;
+		}
+
+		return rmdir($this->getDir());
+	}
 }
