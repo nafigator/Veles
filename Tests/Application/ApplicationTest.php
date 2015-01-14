@@ -49,8 +49,11 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
 
 	/**
 	 * Unit-test for Application::run
-	 * @covers Veles\Application\Application::run
+	 * @covers       Veles\Application\Application::run
 	 * @dataProvider runProvider
+	 *
+	 * @param $url
+	 * @param $expected
 	 */
 	public function testRun($url, $expected)
 	{
@@ -98,6 +101,9 @@ EOF
 
 	/**
 	 * @dataProvider setPhpSettingsProvider
+	 *
+	 * @param $params
+	 * @param $expected_arr
 	 */
 	public function testSetPhpSettings($params, $expected_arr)
 	{
