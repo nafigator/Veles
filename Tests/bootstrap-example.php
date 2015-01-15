@@ -69,3 +69,5 @@ $pool->addConnection($conn, true);
 PdoAdapter::setPool($pool);
 
 Db::setAdapter(PdoAdapter::instance());
+system('mysql -u user -p password -e "DROP DATABASE IF EXISTS test; CREATE DATABASE IF NOT EXISTS test DEFAULT CHARACTER SET utf8"');
+register_shutdown_function(function() { Db::query('DROP DATABASE test'); });
