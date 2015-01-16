@@ -13,7 +13,7 @@ before_script:
   - phpenv config-add travisci.ini
 
 script:
-  - phpunit -c travisci-phpunit.xml --coverage-clover build/logs/clover.xml
+  - phpunit -c travisci-phpunit.xml --stderr --coverage-clover build/logs/clover.xml
 
 after_script:
   - CODECLIMATE_REPO_TOKEN="9b68837f2ccc3206ed5d6f74fc9422423e35a4dd28ee48f161165bc0259fd692" ./vendor/bin/test-reporter --stdout > codeclimate.json
