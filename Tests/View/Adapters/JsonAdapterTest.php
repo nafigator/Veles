@@ -48,25 +48,35 @@ class JsonAdapterTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers Veles\View\Adapters\JsonAdapter::get
-	 * @todo   Implement testGet().
 	 */
 	public function testGet()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$vars = ['a', 'b', 'c'];
+		$this->object->set($vars);
+		$expected = json_encode($vars);
+		$result = $this->object->get('');
+		$msg = 'Wrong JsonAdapter::get() result!';
+		$this->assertSame($expected, $result, $msg);
 	}
 
 	/**
 	 * @covers Veles\View\Adapters\JsonAdapter::isCached
-	 * @todo   Implement testIsCached().
 	 */
 	public function testIsCached()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$expected = false;
+		$result = $this->object->isCached('');
+		$msg = 'Wrong JsonAdapter::isCached() result!';
+		$this->assertSame($expected, $result, $msg);
+	}
+
+	/**
+	 * @covers Veles\View\Adapters\JsonAdapter::__construct()
+	 */
+	public function testConstruct()
+	{
+		$expected = $this->object;
+		$msg = 'Unexpected JsonAdapter::__construct() behavior!';
+		$this->assertAttributeSame($expected, 'driver', $this->object, $msg);
 	}
 }

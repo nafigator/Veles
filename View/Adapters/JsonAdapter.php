@@ -48,8 +48,7 @@ class JsonAdapter extends ViewAdapterAbstract
 		}
 
 		ob_start();
-		/** @noinspection PhpIncludeInspection */
-		include TEMPLATE_PATH . $path;
+		echo json_encode($this->variables);
 		$output = ob_get_contents();
 		ob_end_clean();
 
