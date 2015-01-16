@@ -19,7 +19,8 @@
 	stopOnIncomplete="false"
 	stopOnSkipped="false"
 	strict="false"
-	verbose="true">
+	verbose="true"
+	stderr="true">
 	<filter>
 		<blacklist>
 			<directory suffix=".php">Tests</directory>

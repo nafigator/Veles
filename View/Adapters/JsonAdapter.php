@@ -13,8 +13,6 @@
 
 namespace Veles\View\Adapters;
 
-use Exception;
-
 /**
  * Class JsonAdapter
  *
@@ -72,7 +70,7 @@ class JsonAdapter extends ViewAdapterAbstract
 	/**
 	 * Driver initialization
 	 */
-	protected function __construct()
+	public function __construct()
 	{
 		$this->setDriver($this);
 	}
