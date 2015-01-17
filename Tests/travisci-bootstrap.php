@@ -50,15 +50,22 @@ Cache::setAdapter(MemcachedAdapter::instance());
 
 // Parameters for Db connection
 $pool = new ConnectionPool();
-$conn = new PdoConnection('master');
+$conn1 = new PdoConnection('master');
 
 // Database "test" must be created
-$conn->setDsn('mysql:host=localhost;dbname=test;charset=utf8')
+$conn1->setDsn('mysql:host=localhost;dbname=test;charset=utf8')
 	->setUserName('travis')
 	->setPassword('')
 	->setOptions([PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
 
-$pool->addConnection($conn, true);
+// For testing exceptions thrown on connection errors
+$conn2 = new PdoConnection('fake');
+$conn2->setDsn('mysql:host=localhost;dbname=test;charset=utf8')
+	->setUserName('fake-user')
+	->setPassword('fake-password');
+
+$pool->addConnection($conn1, true);
+$pool->addConnection($conn2);
 PdoAdapter::setPool($pool);
 
 Db::setAdapter(PdoAdapter::instance());

@@ -69,8 +69,7 @@ $conn1->setDsn('mysql:host=localhost;dbname=test;charset=utf8')
 $conn2 = new PdoConnection('fake');
 $conn2->setDsn('mysql:host=localhost;dbname=test;charset=utf8')
 	->setUserName('user')
-	->setPassword('password')
-	->setOptions([PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
+	->setPassword('password');
 
 $pool->addConnection($conn1, true);
 $pool->addConnection($conn2);
