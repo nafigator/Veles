@@ -70,6 +70,15 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * @covers Veles\DataBase\Adapters\PdoAdapter::value
+	 * @expectedException \Veles\DataBase\Exceptions\DbException
+	 */
+	public function getGetValueException()
+	{
+		Db::value('Veles');
+	}
+
+	/**
 	 * @covers Veles\DataBase\Adapters\PdoAdapter::row
 	 * @covers Veles\DataBase\Adapters\PdoAdapter::bindParams
 	 * @covers Veles\DataBase\Adapters\PdoAdapter::prepare
