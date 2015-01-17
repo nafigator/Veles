@@ -56,13 +56,20 @@ $conn1 = new PdoConnection('master');
 $conn1->setDsn('mysql:host=localhost;dbname=test;charset=utf8')
 	->setUserName('travis')
 	->setPassword('')
-	->setOptions([PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
+	->setOptions([
+		PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+		PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+	]);
 
 // For testing exceptions thrown on connection errors
 $conn2 = new PdoConnection('fake');
 $conn2->setDsn('mysql:host=localhost;dbname=test;charset=utf8')
 	->setUserName('fake-user')
-	->setPassword('fake-password');
+	->setPassword('fake-password')
+	->setOptions([
+		PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+		PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+	]);
 
 $pool->addConnection($conn1, true);
 $pool->addConnection($conn2);

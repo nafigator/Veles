@@ -43,7 +43,6 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 
 	public static function tearDownAfterClass()
 	{
-		Db::connection('master');
 		$table =& static::$tbl_name;
 		Db::query("DROP TABLE $table");
 	}
