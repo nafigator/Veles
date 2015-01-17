@@ -252,14 +252,15 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 		Db::connection('fake');
 		try {
 			PdoAdapter::instance()->getLastInsertId();
-		} catch (DbException $e) {}
+		} catch (DbException $e) {
+			Db::connection('master');
+		}
 		$obj = Db::getAdapter();
 
 		$msg = 'Wrong Db::getLastInsertId() behavior!';
 		$this->assertAttributeInstanceOf(
 			'\PDOException', 'exception', $obj, $msg
 		);
-		Db::connection('master');
 	}
 
 	/**
@@ -303,13 +304,14 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 		Db::connection('fake');
 		try {
 			PdoAdapter::instance()->escape($expected);
-		} catch (DbException $e) {}
+		} catch (DbException $e) {
+			Db::connection('master');
+		}
 		$obj = Db::getAdapter();
 
 		$msg = 'Wrong Db::escape() behavior!';
 		$this->assertAttributeInstanceOf(
 			'\PDOException', 'exception', $obj, $msg
 		);
-		Db::connection('master');
 	}
 }
