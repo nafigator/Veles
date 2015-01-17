@@ -153,8 +153,9 @@ class QueryBuilder implements iQueryBuilder
 
 	/**
 	 * Построение sql-запроса для delete
+	 *
 	 * @param ActiveRecord $model Экземпляр модели
-	 * @param array $ids Массив ID для удаления
+	 * @param array|string $ids Массив ID для удаления
 	 * @throws Exception
 	 * @return string $sql
 	 */

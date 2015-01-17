@@ -62,7 +62,7 @@ class Application
 	 *
 	 * @param array $keys Макссив php-параметров и их значений
 	 */
-	protected static function setPhpSettings($keys = [])
+	protected static function setPhpSettings(array $keys = [])
 	{
 		$config = ([] === $keys)
 			? Config::getParams('php')

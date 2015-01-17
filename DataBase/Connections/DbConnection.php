@@ -45,8 +45,6 @@ abstract class DbConnection
 	 *
 	 * Must be realized in child classes
 	 *
-	 * @param array $calls Array with lazy calls
-	 *
 	 * @return mixed
 	 */
 	abstract function create();

@@ -2,6 +2,7 @@
 namespace Veles\DataBase\Adapters;
 
 use PDO;
+use Veles\DataBase\Exceptions\DbException;
 
 /**
  * Class PdoAdapter
@@ -51,46 +52,79 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	/**
 	 * Get value from table row
 	 *
-	 * @param string $sql SQL-query
-	 * @param array $params Query values
-	 * @param string|null $types Placeholders types
+	 * @param string      $sql    SQL-query
+	 * @param array       $params Query values
+	 * @param string|null $types  Placeholders types
+	 *
 	 * @return string
+	 * @throws DbException
 	 */
 	public function value($sql, array $params, $types)
 	{
-		$this->prepare($sql, $params, $types);
+		try {
+			$this->prepare($sql, $params, $types);
+			$result = $this->stmt->fetchColumn();
+		} catch (\PDOException $e) {
+			$this->setSql($sql);
+			$this->setParams($params);
+			$this->setException($e);
+			$this->notify();
+			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
+		}
 
-		return $this->stmt->fetchColumn();
+		return $result;
 	}
 
 	/**
 	 * Get table row
 	 *
-	 * @param string $sql SQL-query
-	 * @param array $params Query values
-	 * @param string|null $types Placeholders types
+	 * @param string      $sql    SQL-query
+	 * @param array       $params Query values
+	 * @param string|null $types  Placeholders types
+	 *
 	 * @return array
+	 * @throws DbException
 	 */
 	public function row($sql, array $params, $types)
 	{
-		$this->prepare($sql, $params, $types);
+		try {
+			$this->prepare($sql, $params, $types);
+			$result = $this->stmt->fetch();
+		} catch (\PDOException $e) {
+			$this->setSql($sql);
+			$this->setParams($params);
+			$this->setException($e);
+			$this->notify();
+			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
+		}
 
-		return $this->stmt->fetch();
+		return $result;
 	}
 
 	/**
 	 * Get result collection
 	 *
-	 * @param string $sql SQL-query
-	 * @param array $params Query values
-	 * @param string|null $types Placeholders types
+	 * @param string      $sql    SQL-query
+	 * @param array       $params Query values
+	 * @param string|null $types  Placeholders types
+	 *
 	 * @return mixed
+	 * @throws DbException
 	 */
 	public function rows($sql, array $params, $types)
 	{
-		$this->prepare($sql, $params, $types);
+		try {
+			$this->prepare($sql, $params, $types);
+			$result = $this->stmt->fetchAll();
+		} catch (\PDOException $e) {
+			$this->setSql($sql);
+			$this->setParams($params);
+			$this->setException($e);
+			$this->notify();
+			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
+		}
 
-		return $this->stmt->fetchAll();
+		return $result;
 	}
 
 	/**
@@ -126,27 +160,35 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	/**
 	 * Launch non-SELECT query
 	 *
-	 * @param string $sql Non-SELECT SQL-query
-	 * @param array $params Query values
-	 * @param string|null $types Placeholders types
+	 * @param string      $sql    Non-SELECT SQL-query
+	 * @param array       $params Query values
+	 * @param string|null $types  Placeholders types
+	 *
 	 * @return bool
+	 * @throws DbException
 	 */
 	public function query($sql, array $params, $types)
 	{
-		if (empty($params)) {
-			return (bool) $this->getConnection()->query($sql);
+		try {
+			if (empty($params)) {
+				return (bool)$this->getConnection()->query($sql);
+			}
+
+			$this->stmt = $this->getConnection()->prepare($sql);
+
+			if (null === $types) {
+				$result = $this->stmt->execute($params);
+			} else {
+				$this->bindParams($params, $types);
+				$result = $this->stmt->execute();
+			}
+		} catch (\PDOException $e) {
+			$this->setSql($sql);
+			$this->setParams($params);
+			$this->setException($e);
+			$this->notify();
+			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
 		}
-
-		$this->stmt = $this->getConnection()->prepare($sql);
-
-		if (null === $types) {
-			$result = $this->stmt->execute($params);
-		} else {
-			$this->bindParams($params, $types);
-			$result = $this->stmt->execute();
-		}
-
-		$this->notify();
 
 		return $result;
 	}
@@ -155,10 +197,18 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	 * Get last saved ID
 	 *
 	 * @return int
+	 * @throws DbException
 	 */
 	public function getLastInsertId()
 	{
-		return (int) $this->getConnection()->lastInsertId();
+		try {
+			$result = (int) $this->getConnection()->lastInsertId();
+		} catch (\PDOException $e) {
+			$this->setException($e);
+			$this->notify();
+			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
+		}
+		return $result;
 	}
 
 	/**
@@ -168,11 +218,7 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	 */
 	public function getFoundRows()
 	{
-		$result = $this->value('SELECT FOUND_ROWS()', [], null);
-
-		$this->notify();
-
-		return (int) $result;
+		return (int) $this->value('SELECT FOUND_ROWS()', [], null);
 	}
 
 	/**
@@ -191,10 +237,19 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	 * Escape variable
 	 *
 	 * @param string $var
+	 *
 	 * @return string
+	 * @throws DbException
 	 */
 	public function escape($var)
 	{
-		return $this->getConnection()->quote($var);
+		try {
+			$result = $this->getConnection()->quote($var);
+		} catch (\PDOException $e) {
+			$this->setException($e);
+			$this->notify();
+			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
+		}
+		return $result;
 	}
 }

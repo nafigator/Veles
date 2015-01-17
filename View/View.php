@@ -69,7 +69,7 @@ class View
 	 *
 	 * @param array $vars Variables array for cleanup
 	 */
-	public static function del($vars)
+	public static function del(array $vars)
 	{
 		self::getAdapter()->del($vars);
 	}

@@ -159,10 +159,11 @@ class ErrBase implements SplSubject
 
 	/**
 	 * Calls stack formatting
+	 *
 	 * @param array $stack Calls array
 	 * @return array
 	 */
-	private function getStack($stack)
+	private function getStack(array $stack)
 	{
 		foreach ($stack as &$call) {
 			$call['function'] = (isset($call['class']))

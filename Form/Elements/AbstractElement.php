@@ -24,9 +24,10 @@ abstract class AbstractElement extends stdClass implements iElement
 {
 	/**
 	 * Element constructor
+	 *
 	 * @param array $params Form elements params array
 	 */
-	public function __construct($params)
+	public function __construct(array $params)
 	{
 		foreach ($params as $param => $value) {
 			$this->$param = $value;

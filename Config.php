@@ -55,7 +55,7 @@ class Config
 	 *
 	 * @param array &$config
 	 */
-	private static function buildPramsTree(&$config)
+	private static function buildPramsTree(array &$config)
 	{
 		foreach ($config as $name => $value) {
 			$params = explode('.', $name);
@@ -83,7 +83,7 @@ class Config
 	 *
 	 * @param array $config
 	 */
-	private static function initInheritance(&$config)
+	private static function initInheritance(array&$config)
 	{
 		$namespaces = array_keys($config);
 		foreach ($namespaces as $namespace) {

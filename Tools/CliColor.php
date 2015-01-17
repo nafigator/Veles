@@ -72,7 +72,7 @@ class CliColor
 	 * @throws Exception
 	 */
 	public function __construct(
-		$color = 'green', $style = ['default']
+		$color = 'green', array $style = ['default']
 	) {
 		if (!is_array($style)) {
 			throw new Exception('Style parameter must be an array!');
@@ -128,7 +128,7 @@ class CliColor
 	 * @throws Exception
 	 * @return CliColor
 	 */
-	public function setStyle($style = [])
+	public function setStyle(array $style = [])
 	{
 		if (!is_array($style)) {
 			throw new Exception('Not valid style!');
