@@ -69,6 +69,7 @@ class DbObservableTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Veles\DataBase\Helpers\DbObservable::setSql
+     * @covers Veles\DataBase\Adapters\PdoAdapter::query
      */
     public function testSetSql()
     {
