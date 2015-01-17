@@ -4,7 +4,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Yancharuk Alexander <alex at itvault dot info>
  * @date    2015-01-17 07:53
  * @copyright The BSD 3-Clause License
  */
@@ -15,7 +15,7 @@ use Veles\Helpers\Observable;
 
 /**
  * Class DbObservable
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Yancharuk Alexander <alex at itvault dot info>
  */
 class DbObservable extends Observable
 {

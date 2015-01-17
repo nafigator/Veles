@@ -9,7 +9,7 @@ use Veles\DataBase\Exceptions\DbException;
  *
  * Adapter PDO extension
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class PdoAdapter extends DbAdapterBase implements iDbAdapter
 {

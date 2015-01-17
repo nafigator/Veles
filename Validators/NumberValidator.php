@@ -5,7 +5,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    Вск Ноя 18 12:48:50 2012
  * @copyright The BSD 3-Clause License
  */
@@ -14,7 +14,7 @@ namespace Veles\Validators;
 
 /**
  * Class NumberValidator
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class NumberValidator implements iValidator
 {

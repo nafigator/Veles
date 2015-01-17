@@ -7,7 +7,7 @@ use SplSubject;
 /**
  * Class Observable
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class Observable implements SplSubject
 {

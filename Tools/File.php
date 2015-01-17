@@ -6,7 +6,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Yancharuk Alexander <alex at itvault dot info>
  * @date    2013-07-27 16:15
  * @copyright The BSD 3-Clause License
  */
@@ -15,7 +15,7 @@ namespace Veles\Tools;
 
 /**
  * Class File
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Yancharuk Alexander <alex at itvault dot info>
  */
 class File
 {

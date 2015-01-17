@@ -5,7 +5,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    Втр Июл 17 21:58:01 2012
  * @copyright The BSD 3-Clause License
  */
@@ -16,7 +16,7 @@ use SplSubject;
 
 /**
  * Класс AbstractEmail
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 abstract class AbstractEmail
 {

@@ -5,7 +5,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    Втр Авг 14 05:36:37 2012
  * @copyright The BSD 3-Clause License
  */
@@ -16,7 +16,7 @@ use Veles\Form\AbstractForm;
 
 /**
  * Интерфейс iElement
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 interface iElement
 {

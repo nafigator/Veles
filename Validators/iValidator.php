@@ -5,7 +5,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    Втр Авг 14 23:58:56 2012
  * @copyright The BSD 3-Clause License
  */
@@ -14,7 +14,7 @@ namespace Veles\Validators;
 
 /**
  * Interface iValidator
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 interface iValidator
 {

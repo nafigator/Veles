@@ -5,7 +5,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    Срд Апр 23 06:34:47 MSK 2014
  * @copyright The BSD 3-Clause License
  */
@@ -17,7 +17,7 @@ namespace Veles\DataBase;
  *
  * Класс, содержащий функционал транзакций
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class DbTransactionHandler extends DbBase
 {

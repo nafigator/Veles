@@ -8,7 +8,7 @@ use SplSubject;
  *
  * Класс-подписчик PDO-адаптера. Предназначен для логгирования ошибок
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class PdoErrorLogger implements \SplObserver
 {

@@ -5,7 +5,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    Втр Авг 07 23:04:47 2012
  * @copyright The BSD 3-Clause License
  */
@@ -21,7 +21,7 @@ use Veles\View\View;
  * Additional data for rendering can be stored as public params.
  * For this purpose class extends stdClass.
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class DbPaginator extends stdClass
 {

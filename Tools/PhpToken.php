@@ -6,7 +6,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Yancharuk Alexander <alex at itvault dot info>
  * @date    Tue Aug 26 17:43:40
  * @copyright The BSD 3-Clause License
  */

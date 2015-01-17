@@ -8,7 +8,7 @@ use SplObserver;
  *
  * Нужен для тестирования класса PdoErrorLogger
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @group database
  */
 class FakeSubject implements \SplSubject

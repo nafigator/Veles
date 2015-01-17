@@ -6,7 +6,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    8/22/13 16:20
  * @copyright The BSD 3-Clause License
  */
@@ -16,7 +16,7 @@ namespace Veles\Cache\Adapters;
 /**
  * Class CacheAdapterAbstract
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 abstract class CacheAdapterAbstract
 {

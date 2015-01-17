@@ -7,7 +7,7 @@
  * PHP version 5.4+
  * Smarty version 3+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    2013-05-18 17:59
  * @copyright The BSD 3-Clause License
  */
@@ -20,7 +20,7 @@ use /** @noinspection PhpUndefinedClassInspection */ Smarty;
 /**
  * Class SmartyAdapter
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class SmartyAdapter extends ViewAdapterAbstract
 {

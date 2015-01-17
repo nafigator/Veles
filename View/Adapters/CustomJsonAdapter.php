@@ -4,7 +4,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Yancharuk Alexander <alex at itvault dot info>
  * @date    2015-01-09 21:20
  * @copyright The BSD 3-Clause License
  */
@@ -16,7 +16,7 @@ namespace Veles\View\Adapters;
  *
  * Class intended for output already builded json string
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Yancharuk Alexander <alex at itvault dot info>
  */
 class CustomJsonAdapter extends ViewAdapterAbstract
 {

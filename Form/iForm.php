@@ -5,7 +5,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    Сбт Ноя 10 06:37:26 2012
  * @copyright The BSD 3-Clause License
  */
@@ -16,7 +16,7 @@ use Veles\Form\Elements\iElement;
 
 /**
  * Интерфейс iForm
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 interface iForm
 {

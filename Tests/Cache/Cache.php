@@ -9,7 +9,7 @@ use Veles\Cache\Adapters\ApcAdapter;
  * Need for class Cache testing. In standard class static properties can't
  * available, so here added some methods for access them.
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class Cache extends \Veles\Cache\Cache
 {

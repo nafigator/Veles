@@ -5,7 +5,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    Сбт Июн 23 08:52:41 2012
  * @copyright The BSD 3-Clause License
  */
@@ -17,7 +17,7 @@ use Veles\Config;
 
 /**
  * Class Route
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class Route
 {

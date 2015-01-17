@@ -5,7 +5,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    Птн Мар 09 01:40:46 2012
  * @copyright The BSD 3-Clause License
  */
@@ -16,7 +16,7 @@ use Exception;
 
 /**
  * General db exception class
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class DbException extends Exception
 {

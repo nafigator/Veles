@@ -5,7 +5,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    2013-12-31 15:44
  * @copyright The BSD 3-Clause License
  */
@@ -19,7 +19,7 @@ use Exception;
  *
  * Базовый класс-контейнер для хранения общих для всех соединений параметров
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 abstract class DbConnection
 {

@@ -4,7 +4,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Yancharuk Alexander <alex at itvault dot info>
  * @date    2014-11-02 20:45
  * @copyright The BSD 3-Clause License
  */
@@ -15,7 +15,7 @@ use Veles\Config;
 
 /**
  * Class ConfigChild
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Yancharuk Alexander <alex at itvault dot info>
  */
 class ConfigChild extends Config
 {

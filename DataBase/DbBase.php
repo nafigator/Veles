@@ -5,7 +5,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    Срд Апр 23 06:34:47 MSK 2014
  * @copyright The BSD 3-Clause License
  */
@@ -21,7 +21,7 @@ use Veles\DataBase\Adapters\iDbAdapter;
  *
  * Базовый класс для работы с базой данных
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class DbBase
 {

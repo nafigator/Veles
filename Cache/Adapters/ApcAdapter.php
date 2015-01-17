@@ -6,7 +6,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    Птн Ноя 16 22:09:28 2012
  * @copyright The BSD 3-Clause License
  */
@@ -19,7 +19,7 @@ use Exception;
 /**
  * Class ApcAdapter
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class ApcAdapter extends CacheAdapterAbstract implements iCacheAdapter
 {

@@ -4,7 +4,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Yancharuk Alexander <alex at itvault dot info>
  * @date    2014-12-27 17:42
  * @copyright The BSD 3-Clause License
  */
@@ -15,7 +15,7 @@ use Veles\Model\User;
 
 /**
  * Class UserCopy
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Yancharuk Alexander <alex at itvault dot info>
  */
 class UserCopy extends User
 {

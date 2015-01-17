@@ -7,7 +7,7 @@ namespace Veles\Tests\DataBase;
  * Нужен для тестирования класса Db. В стандартном классе статические свойства
  * недоступны, поэтому добавил пару методов для доступа к ним.
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @group database
  */
 class Db extends \Veles\DataBase\Db

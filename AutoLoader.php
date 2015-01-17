@@ -5,7 +5,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    Fri Jun 01 10:19:04 2012
  * @copyright The BSD 3-Clause License
  */
@@ -15,7 +15,7 @@ namespace Veles;
 /**
  * Class AutoLoader
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class AutoLoader
 {

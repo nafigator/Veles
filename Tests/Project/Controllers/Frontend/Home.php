@@ -5,7 +5,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    Птн Янв 25 05:49:20 2013
  * @copyright The BSD 3-Clause License.
  */
@@ -14,7 +14,7 @@ namespace Controllers\Frontend;
 
 /**
  * Класс Home
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class Home
 {

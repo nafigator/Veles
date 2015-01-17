@@ -6,7 +6,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    Втр Апр 29 22:20:05 MSK 2014
  * @copyright The BSD 3-Clause License
  */
@@ -16,7 +16,7 @@ namespace Veles\View\Adapters;
 /**
  * Class JsonAdapter
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class JsonAdapter extends ViewAdapterAbstract
 {

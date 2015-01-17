@@ -6,7 +6,7 @@ namespace Veles\DataBase\Adapters;
  *
  * Db adapters interface
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 interface iDbAdapter
 {

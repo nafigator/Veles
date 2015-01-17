@@ -5,7 +5,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    Вск Янв 27 17:40:18 2013
  * @copyright The BSD 3-Clause License.
  */
@@ -19,7 +19,7 @@ use Veles\Helper;
 
 /**
  * Класс LoginFormStrategy
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class LoginFormStrategy extends AbstractAuthStrategy
 {

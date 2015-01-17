@@ -6,7 +6,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    2013-05-15 22:06
  * @copyright The BSD 3-Clause License
  */
@@ -18,7 +18,7 @@ use Exception;
 /**
  * Class NativeAdapter
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class NativeAdapter extends ViewAdapterAbstract
 {

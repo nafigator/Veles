@@ -6,7 +6,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    8/21/13 12:54
  * @copyright The BSD 3-Clause License
  */
@@ -19,7 +19,7 @@ use Memcache;
 /**
  * Class MemcacheAdapter
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class MemcacheAdapter extends CacheAdapterAbstract implements iCacheAdapter
 {

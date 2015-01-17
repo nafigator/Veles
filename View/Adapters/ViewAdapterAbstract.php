@@ -6,7 +6,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    Чтв Сен  5 15:10:46 MSK 2013
  * @copyright The BSD 3-Clause License
  */
@@ -18,7 +18,7 @@ use Exception;
 /**
  * Class ViewAdapterAbstract
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 abstract class ViewAdapterAbstract
 {

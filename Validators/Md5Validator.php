@@ -4,7 +4,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Yancharuk Alexander <alex at itvault dot info>
  * @date    2015-01-06 15:30
  * @copyright The BSD 3-Clause License
  */
@@ -13,7 +13,7 @@ namespace Veles\Validators;
 
 /**
  * Class Md5Validator
- * @author  Yancharuk Alexander <alex@itvault.info>
+ * @author  Yancharuk Alexander <alex at itvault dot info>
  */
 class Md5Validator implements iValidator
 {

@@ -5,7 +5,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    Сбт Фев 16 20:07:56 2013
  * @copyright The BSD 3-Clause License.
  */
@@ -16,7 +16,7 @@ use Veles\Validators\ByteValidator;
 
 /**
  * Class CliProgressBar
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class CliProgressBar
 {

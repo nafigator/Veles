@@ -5,7 +5,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    Втр Апр 24 21:53:04 2012
  * @copyright The BSD 3-Clause License
  */
@@ -20,7 +20,7 @@ use Veles\DataBase\DbPaginator;
 /**
  * Model class using ActiveRecord pattern
  * @todo Implements Observer functionality for sql and errors logging
- * @author Alexander Yancharuk <alex@itvault.info>
+ * @author Alexander Yancharuk <alex at itvault dot info>
  */
 class ActiveRecord extends StdClass
 {

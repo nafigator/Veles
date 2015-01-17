@@ -5,7 +5,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    Пнд Июл 16 22:08:47 2012
  * @version
  */
@@ -20,7 +20,7 @@ use Veles\View\View;
 
 /**
  * Class Error
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class ErrBase implements SplSubject
 {

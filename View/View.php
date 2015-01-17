@@ -5,7 +5,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    Сбт Июл 07 07:30:30 2012
  * @copyright The BSD 3-Clause License
  */
@@ -19,7 +19,7 @@ use Veles\View\Adapters\ViewAdapterAbstract;
 /**
  * Class View
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class View
 {

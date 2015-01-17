@@ -5,7 +5,7 @@
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    Thu May 2 11:51:05 2013
  * @copyright The BSD 3-Clause License
  */
@@ -23,7 +23,7 @@ namespace Veles\DataBase;
  * b - binary
  * Если для плейсходеров не указываются типы, используется тип string
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class Db extends DbTransactionHandler
 {

@@ -6,7 +6,7 @@ use Veles\DataBase\Connections\PdoConnection;
 /**
  * Class ConnectionPool
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class ConnectionPool
 {

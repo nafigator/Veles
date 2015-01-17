@@ -8,7 +8,7 @@ use SplSubject;
  *
  * Нужен для тестирования класса Observable
  *
- * @author  Alexander Yancharuk <alex@itvault.info>
+ * @author  Alexander Yancharuk <alex at itvault dot info>
  * @group helpers
  */
 class ClassForTesting implements \SplObserver
