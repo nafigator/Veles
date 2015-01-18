@@ -1,6 +1,6 @@
 <?php
 /**
- * Обработка шаблонов статических роутов
+ * Handler for processing static routes
  * @file    RouteStatic.php
  *
  * PHP version 5.4+
@@ -13,13 +13,14 @@
 namespace Veles\Routing;
 
 /**
- * Класс RouteStatic
+ * Class RouteStatic
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class RouteStatic implements iRouteStrategy
 {
 	/**
-	 * Проверка на соответствие роута шаблону
+	 * Check for matching url to pattern
+	 *
 	 * @param string $pattern
 	 * @param string $url
 	 * @return bool
