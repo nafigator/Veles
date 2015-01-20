@@ -32,8 +32,14 @@ class CurlRequest
 	 */
 	public function __construct($url, array $options = [])
 	{
-		$this->curl = curl_init($url);
+		$this->curl = curl_init();
+		curl_setopt($this->curl, CURLOPT_URL, curl_escape($this->curl, $url));
 		curl_setopt_array($this->curl, $options + $this->default_options);
+	}
+
+	public function __destruct()
+	{
+		curl_close($this->curl);
 	}
 
 	/**
