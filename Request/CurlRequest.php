@@ -42,7 +42,7 @@ class CurlRequest
 	{
 		$this->curl = curl_init();
 
-		$this->setOption(CURLOPT_URL, curl_escape($this->curl, $url))
+		$this->setOption(CURLOPT_URL, rawurlencode($url))
 			->setArrayOptions($options);
 	}
 
