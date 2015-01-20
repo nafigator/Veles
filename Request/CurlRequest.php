@@ -9,9 +9,9 @@
  * @copyright The BSD 3-Clause License
  */
 
-namespace Request;
+namespace Veles\Request;
 
-use Request\AuthStrategies\iAuthStrategy;
+use Veles\Request\AuthStrategies\iAuthStrategy;
 
 /**
  * Class CurlRequest

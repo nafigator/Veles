@@ -9,7 +9,7 @@
  * @copyright The BSD 3-Clause License
  */
 
-namespace Request;
+namespace Veles\Request;
 
 /**
  * Class PostCurlRequest

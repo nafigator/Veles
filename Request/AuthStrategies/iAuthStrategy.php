@@ -9,9 +9,9 @@
  * @copyright The BSD 3-Clause License
  */
 
-namespace Request\AuthStrategies;
+namespace Veles\Request\AuthStrategies;
 
-use Request\CurlRequest;
+use Veles\Request\CurlRequest;
 
 /**
  * Interface iAuthStrategy
