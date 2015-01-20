@@ -32,7 +32,13 @@ abstract class CurlAbstract
 	/** @var iAuthStrategy Authentication strategy */
 	protected $auth;
 
-	abstract public function __construct();
+	/**
+	 * Creates cURL handler and sets options
+	 *
+	 * @param       $url
+	 * @param array $options
+	 */
+	abstract public function __construct($url, array $options = []);
 
 	public function getErrNo()
 	{

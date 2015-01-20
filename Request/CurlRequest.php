@@ -17,7 +17,7 @@ use Veles\Request\AuthStrategies\iAuthStrategy;
  * Class CurlRequest
  * @author  Yancharuk Alexander <alex at itvault dot info>
  */
-class CurlRequest
+class CurlRequest extends CurlAbstract
 {
 	/**
 	 * Creates cURL handler and sets options
