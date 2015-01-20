@@ -11,6 +11,8 @@
 
 namespace Request;
 
+use Request\AuthStrategies\iAuthStrategy;
+
 /**
  * Class CurlRequest
  * @author  Yancharuk Alexander <alex at itvault dot info>
@@ -25,8 +27,10 @@ class CurlRequest
 		CURLOPT_CONNECTTIMEOUT => 10,		// timeout on connect
 		CURLOPT_TIMEOUT        => 10,		// timeout on request
 	];
-
+	/** @var array Current options set */
 	protected $options = [];
+	/** @var iAuthStrategy Authentication strategy */
+	protected $auth;
 
 	/**
 	 * Creates cURL handler and sets options
@@ -38,8 +42,8 @@ class CurlRequest
 	{
 		$this->curl = curl_init();
 
-		$this->setOption(CURLOPT_URL, curl_escape($this->curl, $url));
-		$this->setArrayOptions($options);
+		$this->setOption(CURLOPT_URL, curl_escape($this->curl, $url))
+			->setArrayOptions($options);
 	}
 
 	public function __destruct()
@@ -62,13 +66,14 @@ class CurlRequest
 	 *
 	 * @param array $headers Array of additional headers
 	 *
-	 * @return bool
+	 * @return $this
 	 */
 	public function setRequestHeaders(array $headers)
 	{
 		$this->options[CURLOPT_HTTPHEADER] = $headers;
+		curl_setopt($this->curl, CURLOPT_HTTPHEADER, $headers);
 
-		return curl_setopt($this->curl, CURLOPT_HTTPHEADER, $headers);
+		return $this;
 	}
 
 	/**
@@ -89,12 +94,14 @@ class CurlRequest
 	 * @param $option
 	 * @param $value
 	 *
-	 * @return bool
+	 * @return $this
 	 */
 	public function setOption($option, $value)
 	{
 		$this->options[$option] = $value;
-		return curl_setopt($this->curl, $option, $value);
+		curl_setopt($this->curl, $option, $value);
+
+		return $this;
 	}
 
 	/**
@@ -102,15 +109,32 @@ class CurlRequest
 	 *
 	 * @param array $options
 	 *
-	 * @return bool
+	 * @return $this
 	 */
 	public function setArrayOptions(array $options)
 	{
 		foreach ($options as $option => $value) {
 			$this->options[$option] = $value;
 		}
-		return curl_setopt_array(
+		curl_setopt_array(
 			$this->curl, $options + $this->default_options
 		);
+
+		return $this;
+	}
+
+	/**
+	 * Set request authentication strategy
+	 *
+	 * @param iAuthStrategy $auth Authentication strategy
+	 *
+	 * @return $this
+	 */
+	public function setAuth(iAuthStrategy $auth)
+	{
+		$auth->apply($this);
+		$this->auth = $auth;
+
+		return $this;
 	}
 }
