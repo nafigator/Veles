@@ -19,19 +19,6 @@ use Veles\Request\AuthStrategies\iAuthStrategy;
  */
 class CurlRequest
 {
-	/** @var resource */
-	protected $curl;
-	/** @var array */
-	protected $default_options = [
-		CURLOPT_RETURNTRANSFER => true,		// output to string instead stdout
-		CURLOPT_CONNECTTIMEOUT => 10,		// timeout on connect
-		CURLOPT_TIMEOUT        => 10,		// timeout on request
-	];
-	/** @var array Current options set */
-	protected $options = [];
-	/** @var iAuthStrategy Authentication strategy */
-	protected $auth;
-
 	/**
 	 * Creates cURL handler and sets options
 	 *
