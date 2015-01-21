@@ -52,6 +52,8 @@ abstract class CurlAbstract
 
 	public function getInfo($option = null)
 	{
-		return curl_getinfo($this->curl, $option);
+		return null === $option
+			? curl_getinfo($this->curl)
+			: curl_getinfo($this->curl, $option);
 	}
 }
