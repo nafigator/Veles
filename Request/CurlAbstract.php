@@ -40,7 +40,7 @@ abstract class CurlAbstract
 	 */
 	abstract public function __construct($url, array $options = []);
 
-	public function getErrNo()
+	public function getErrorCode()
 	{
 		return curl_errno($this->curl);
 	}
