@@ -1,6 +1,7 @@
 <?php
 /**
- * Интерфейс для стратегий роутинга
+ * Interface for route strategies
+ *
  * @file    iRouteStrategy.php
  *
  * PHP version 5.4+
@@ -13,13 +14,14 @@
 namespace Veles\Routing;
 
 /**
- * Класс iRouteStrategy
+ * Class iRouteStrategy
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 interface iRouteStrategy
 {
 	/**
-	 * Метод для проверки текущего url на соответствие шаблонам роутов из конфига
+	 * Method for checking current url
+	 *
 	 * @param string $url
 	 * @param string $pattern
 	 * @return bool
