@@ -29,6 +29,7 @@ class Route
 
 	/**
 	 * Config parser and controller vars initialisation
+	 *
 	 * @throws Exception
 	 */
 	private function __construct()
@@ -86,6 +87,7 @@ class Route
 
 	/**
 	 * Getting ajax-flag
+	 *
 	 * @throws Exception
 	 * @return bool
 	 */
@@ -96,6 +98,7 @@ class Route
 
 	/**
 	 * Access to object
+	 *
 	 * @return mixed
 	 */
 	public static function instance()
@@ -110,6 +113,7 @@ class Route
 
 	/**
 	 * Access to controller
+	 *
 	 * @throws Exception
 	 * @return mixed
 	 */
@@ -126,6 +130,7 @@ class Route
 
 	/**
 	 * Get controller method name
+	 *
 	 * @throws Exception
 	 * @return string
 	 */
@@ -157,6 +162,7 @@ class Route
 
 	/**
 	 * Getting page name
+	 *
 	 * @return string
 	 */
 	public function getPageName()
@@ -166,6 +172,7 @@ class Route
 
 	/**
 	 * Getting URL-params
+	 *
 	 * @return array
 	 */
 	public function getMap()
