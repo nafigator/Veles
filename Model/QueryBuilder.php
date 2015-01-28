@@ -197,7 +197,7 @@ class QueryBuilder implements iQueryBuilder
 	 */
 	public function find(ActiveRecord $model, $filter)
 	{
-		$where = $group = $having = $order = $limit = '';
+		$where = $group = $having = $order = '';
 		$select = 'SELECT';
 		$fields = '"' . implode('", "', array_keys($model->getMap())) . '"';
 
@@ -217,7 +217,6 @@ class QueryBuilder implements iQueryBuilder
 			$group
 			$having
 			$order
-			$limit
 		";
 
 		return rtrim($sql);
