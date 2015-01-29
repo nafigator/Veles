@@ -198,7 +198,6 @@ class QueryBuilder implements iQueryBuilder
 	public function find(ActiveRecord $model, $filter)
 	{
 		$where = $group = $having = $order = '';
-		$select = 'SELECT';
 		$fields = '"' . implode('", "', array_keys($model->getMap())) . '"';
 
 		if ($filter instanceof DbFilter) {
@@ -209,7 +208,7 @@ class QueryBuilder implements iQueryBuilder
 		}
 
 		$sql = "
-			$select
+			SELECT
 				$fields
 			FROM
 				\"" . $model::TBL_NAME . "\"
