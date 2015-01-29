@@ -164,8 +164,12 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Model\QueryBuilder::find
+	 * @covers       Veles\Model\QueryBuilder::find
+	 * @covers       Veles\Model\QueryBuilder::getFieldsString
 	 * @dataProvider findProvider
+	 *
+	 * @param $filter
+	 * @param $expected
 	 */
 	public function testFind($filter, $expected)
 	{

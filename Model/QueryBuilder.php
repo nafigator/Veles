@@ -23,6 +23,11 @@ use Veles\DataBase\Db;
  */
 class QueryBuilder implements iQueryBuilder
 {
+	protected function getFieldsString(ActiveRecord $model)
+	{
+		return '"' . implode('", "', array_keys($model->getMap())) . '"';
+	}
+
 	/**
 	 * Построение sql-запроса для insert
 	 * @param ActiveRecord $model Экземпляр модели
@@ -198,7 +203,7 @@ class QueryBuilder implements iQueryBuilder
 	public function find(ActiveRecord $model, $filter)
 	{
 		$where = $group = $having = $order = '';
-		$fields = '"' . implode('", "', array_keys($model->getMap())) . '"';
+		$fields = $this->getFieldsString($model);
 
 		if ($filter instanceof DbFilter) {
 			$where  = $filter->getWhere();
