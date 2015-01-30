@@ -65,20 +65,8 @@ class CliProgressBar
 		$this->curr_time = microtime(true);
 		$this->cycle_time = $this->curr_time - $this->last_update_time;
 		$this->clean_process_time += $this->cycle_time;
-		$done = $current / $this->percent;
 
-		if ($done < 100) {
-			$position = floor($this->bp_percent * $done);
-			$end = "\033[K\r";
-		} else {
-			$position = $this->width;
-			$end = "\033[K" . PHP_EOL;
-		}
-
-		$bar = str_repeat('=', $position);
-		$space_len = $this->width - $position;
-
-		$status = $this->getStatusString($current) . self::getMemString();
+		list ($end, $bar, $space_len, $status) = $this->calcParams($current);
 
 		if ($this->block) {
 			self::stdinCleanup();
@@ -134,5 +122,32 @@ class CliProgressBar
 		}
 
 		echo "\033[K\033[1A";
+	}
+
+	/**
+	 * Calculate bar-string params
+	 *
+	 * @param $current
+	 *
+	 * @return array
+	 */
+	private function calcParams($current)
+	{
+		$done = $current / $this->percent;
+
+		if ($done < 100) {
+			$position = floor($this->bp_percent * $done);
+			$end = "\033[K\r";
+		} else {
+			$position = $this->width;
+			$end = "\033[K" . PHP_EOL;
+		}
+
+		$bar = str_repeat('=', $position);
+		$space_len = $this->width - $position;
+
+		$status = $this->getStatusString($current) . self::getMemString();
+
+		return [$end, $bar, $space_len, $status];
 	}
 }
