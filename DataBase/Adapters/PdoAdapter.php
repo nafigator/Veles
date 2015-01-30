@@ -131,30 +131,54 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	 * Transaction initialization
 	 *
 	 * @return bool
+	 * @throws DbException
 	 */
 	public function begin()
 	{
-		return $this->getConnection()->beginTransaction();
+		try {
+			$result = $this->getConnection()->beginTransaction();
+		} catch (\PDOException $e) {
+			$this->setException($e);
+			$this->notify();
+			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
+		}
+		return $result;
 	}
 
 	/**
 	 * Transaction rollback
 	 *
 	 * @return bool
+	 * @throws DbException
 	 */
 	public function rollback()
 	{
-		return $this->getConnection()->rollBack();
+		try {
+			$result = $this->getConnection()->rollBack();
+		} catch (\PDOException $e) {
+			$this->setException($e);
+			$this->notify();
+			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
+		}
+		return $result;
 	}
 
 	/**
 	 * Commit transaction
 	 *
 	 * @return bool
+	 * @throws DbException
 	 */
 	public function commit()
 	{
-		return $this->getConnection()->commit();
+		try {
+			$result = $this->getConnection()->commit();
+		} catch (\PDOException $e) {
+			$this->setException($e);
+			$this->notify();
+			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
+		}
+		return $result;
 	}
 
 	/**
