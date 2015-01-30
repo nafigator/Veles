@@ -60,7 +60,7 @@ class ErrBase implements SplSubject
 	 */
 	public function fatal()
 	{
-		if (null === ($this->vars = error_get_last())) exit;
+		if (null === ($this->vars = error_get_last())) return;
 
 		$this->vars['type']    = $this->getErrorType($this->vars['type']);
 		$this->vars['time']    = strftime(
@@ -122,7 +122,6 @@ class ErrBase implements SplSubject
 			$this->notify();
 
 			//TODO: go to custom error page;
-			exit;
 		}
 	}
 
