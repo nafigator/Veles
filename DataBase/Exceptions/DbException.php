@@ -29,8 +29,10 @@ class DbException extends Exception
 		if ($exception instanceof \PDOException) {
 			$pattern1 = '/SQLSTATE\[(.+)\]:[\s\w]+: ([\w\d]+) (.+)$/';
 			$pattern2 = '/SQLSTATE\[(.+)\] ([\w\d]+) (.+)$/';
+
 			preg_match($pattern1, $exception->getMessage(), $match)
 			or preg_match($pattern2, $exception->getMessage(), $match);
+
 			$this->setAnsiCode($match[1]);
 			$this->code    = $match[2];
 			$this->message = $match[3];
