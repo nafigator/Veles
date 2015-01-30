@@ -34,7 +34,7 @@ class DbException extends Exception
 			or preg_match($pattern2, $exception->getMessage(), $match);
 
 			$this->setAnsiCode($match[1]);
-			$this->code    = $match[2];
+			$this->code    = (int) $match[2];
 			$this->message = $match[3];
 		}
 	}
