@@ -27,8 +27,8 @@ class DbException extends Exception
 		parent::__construct($msg, $code, $exception);
 
 		if ($exception instanceof \PDOException) {
-			$pattern1 = '/SQLSTATE\[(.+)\]:[\s\w]+: ([\w\d]+) (.+)$/';
-			$pattern2 = '/SQLSTATE\[(.+)\] \[([\w\d]+)\] (.+)/';
+			$pattern1 = '/SQLSTATE\[(.+)\]:[\s\w]+: ([\w\d]+) ([\s\S]+)$/';
+			$pattern2 = '/SQLSTATE\[(.+)\] \[([\w\d]+)\] ([\s\S]+)/';
 
 			preg_match($pattern1, $exception->getMessage(), $match)
 			or preg_match($pattern2, $exception->getMessage(), $match);
