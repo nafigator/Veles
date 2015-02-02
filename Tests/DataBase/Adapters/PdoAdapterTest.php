@@ -47,6 +47,11 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 		Db::query("DROP TABLE $table");
 	}
 
+	public function tearDown()
+	{
+		Db::connection('master');
+	}
+
 	/**
 	 * @covers Veles\DataBase\Adapters\PdoAdapter::value
 	 * @covers Veles\DataBase\Adapters\PdoAdapter::bindParams
@@ -190,6 +195,36 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 		$result = Db::row("SELECT * FROM $tbl_name WHERE id = 333");
 
 		$this->assertSame($expected, $result, $msg);
+	}
+
+	/**
+	 * @covers Veles\DataBase\Adapters\PdoAdapter::begin
+	 * @expectedException \Veles\DataBase\Exceptions\DbException
+	 */
+	public function testBeginException()
+	{
+		Db::connection('fake');
+		Db::begin();
+	}
+
+	/**
+	 * @covers Veles\DataBase\Adapters\PdoAdapter::rollback
+	 * @expectedException \Veles\DataBase\Exceptions\DbException
+	 */
+	public function testRollbackException()
+	{
+		Db::connection('fake');
+		PdoAdapter::instance()->rollback();
+	}
+
+	/**
+	 * @covers Veles\DataBase\Adapters\PdoAdapter::commit
+	 * @expectedException \Veles\DataBase\Exceptions\DbException
+	 */
+	public function testCommitException()
+	{
+		Db::connection('fake');
+		PdoAdapter::instance()->commit();
 	}
 
 	/**
