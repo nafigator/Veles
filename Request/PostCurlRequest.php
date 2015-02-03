@@ -28,11 +28,11 @@ class PostCurlRequest extends CurlRequest
 	/**
 	 * Set request data
 	 *
-	 * @param array $data
+	 * @param string|array $data
 	 *
 	 * @return bool
 	 */
-	public function setData(array $data)
+	public function setData($data)
 	{
 		return $this->setOption(CURLOPT_POSTFIELDS, $data);
 	}
