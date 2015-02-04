@@ -1,41 +1,42 @@
 <?php
 /**
  * ActiveRecord model
- * @file    ActiveRecord.php
+ * @file      ActiveRecord.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Втр Апр 24 21:53:04 2012
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Втр Апр 24 21:53:04 2012
  * @copyright The BSD 3-Clause License
  */
 
 namespace Veles\Model;
 
 use StdClass;
+use Traits\DynamicPropHandler;
 use Veles\DataBase\Db;
 use Veles\DataBase\DbFilter;
 use Veles\DataBase\DbPaginator;
 
 /**
  * Model class using ActiveRecord pattern
- * @todo Implements Observer functionality for sql and errors logging
+ * @todo   Implements Observer functionality for sql and errors logging
  * @author Alexander Yancharuk <alex at itvault dot info>
  */
 class ActiveRecord extends StdClass
 {
+	/**
+	 * @const string|null Table name
+	 */
+	const TBL_NAME = null;
 	/* @var iQueryBuilder */
 	protected $builder;
-
 	/**
 	 * @var int|float|string $map Data type map
 	 */
 	protected $map = [];
 
-	/**
-	 * @const string|null Table name
-	 */
-	const TBL_NAME = null;
+	use DynamicPropHandler;
 
 	public function __construct()
 	{
@@ -44,7 +45,6 @@ class ActiveRecord extends StdClass
 
 	/**
 	 * Get data type map
-	 *
 	 * @return array
 	 */
 	public function getMap()
@@ -53,33 +53,10 @@ class ActiveRecord extends StdClass
 	}
 
 	/**
-	 * Insert data in database
-	 *
-	 * @return int|bool
-	 */
-	private function insert()
-	{
-		$sql = $this->builder->insert($this);
-
-		return Db::query($sql) ? Db::getLastInsertId() : false;
-	}
-
-	/**
-	 * Update data in database
-	 *
-	 * @return bool
-	 */
-	private function update()
-	{
-		$sql = $this->builder->update($this);
-
-		return Db::query($sql);
-	}
-
-	/**
 	 * Get data by ID
 	 *
 	 * @param int $identifier Model ID
+	 *
 	 * @return bool
 	 */
 	public function getById($identifier)
@@ -100,8 +77,9 @@ class ActiveRecord extends StdClass
 	/**
 	 * Get object list by filter
 	 *
-	 * @param bool|DbFilter $filter Filter object
-	 * @param bool|DbPaginator $pager Pagination object
+	 * @param bool|DbFilter    $filter Filter object
+	 * @param bool|DbPaginator $pager  Pagination object
+	 *
 	 * @return array
 	 */
 	public function getAll($filter = false, $pager = false)
@@ -130,9 +108,32 @@ class ActiveRecord extends StdClass
 	}
 
 	/**
+	 * Update data in database
+	 * @return bool
+	 */
+	private function update()
+	{
+		$sql = $this->builder->update($this);
+
+		return Db::query($sql);
+	}
+
+	/**
+	 * Insert data in database
+	 * @return int|bool
+	 */
+	private function insert()
+	{
+		$sql = $this->builder->insert($this);
+
+		return Db::query($sql) ? Db::getLastInsertId() : false;
+	}
+
+	/**
 	 * Delete data
 	 *
 	 * @param array|bool $ids Array of ID for delete
+	 *
 	 * @return bool
 	 */
 	public function delete($ids = false)
@@ -143,38 +144,10 @@ class ActiveRecord extends StdClass
 	}
 
 	/**
-	 * Method for setting model parameters
-	 *
-	 * @param   array Array with needle parameters as keys
-	 * @return  array
-	 */
-	public function setProperties(&$properties)
-	{
-		foreach ($properties as $property_name => $value) {
-			$this->$property_name = $value;
-		}
-	}
-
-	/**
-	 * Method for getting model parameters
-	 *
-	 * @param   array Array with needle parameters as keys
-	 * @return  array
-	 */
-	public function getProperties(&$properties)
-	{
-		$tmp_props = array_keys($properties);
-		foreach ($tmp_props as $property_name) {
-			if (isset($this->$property_name)) {
-				$properties[$property_name] = $this->$property_name;
-			}
-		}
-	}
-
-	/**
 	 * Get unique object
 	 *
 	 * @param bool|DbFilter $filter Filter object
+	 *
 	 * @return bool
 	 */
 	public function find($filter = false)
