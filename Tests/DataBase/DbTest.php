@@ -11,11 +11,6 @@ use Veles\DataBase\Adapters\PdoAdapter;
  */
 class DbTest extends \PHPUnit_Framework_TestCase
 {
-	/**
-	 * @var Db
-	 */
-	protected $object;
-
 	protected static $tbl_name;
 
 	public static function setUpBeforeClass()
@@ -23,9 +18,9 @@ class DbTest extends \PHPUnit_Framework_TestCase
 		// Создаём тестовую таблицу в базе
 		$tbl_name = static::$tbl_name = 'veles_unit_test' . mt_rand(1000, 9999);
 
-		Db::unsetAdapter();
-		Db::setAdapter(PdoAdapter::instance());
-		Db::query("
+		DbCopy::unsetAdapter();
+		DbCopy::setAdapter(PdoAdapter::instance());
+		DbCopy::query("
 			CREATE TABLE IF NOT EXISTS $tbl_name (
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 				txt CHAR(50) NOT NULL DEFAULT ''
@@ -39,13 +34,13 @@ class DbTest extends \PHPUnit_Framework_TestCase
 		}
 
 		$values = implode("'),('", $arr);
-		Db::query("INSERT INTO $tbl_name (txt) VALUES ('$values')");
+		DbCopy::query("INSERT INTO $tbl_name (txt) VALUES ('$values')");
 	}
 
 	public static function tearDownAfterClass()
 	{
 		$table =& static::$tbl_name;
-		Db::query("DROP TABLE $table");
+		DbCopy::query("DROP TABLE $table");
 	}
 
 	/**
@@ -54,11 +49,11 @@ class DbTest extends \PHPUnit_Framework_TestCase
 	public function testSetAdapter()
 	{
 		$expected = PdoAdapter::instance();
-		Db::setAdapter(PdoAdapter::instance());
+		DbCopy::setAdapter(PdoAdapter::instance());
 
-		$msg = 'Wrong Db::$adapter property value!';
+		$msg = 'Wrong DbCopy::$adapter property value!';
 		$this->assertAttributeEquals(
-			$expected, 'adapter', 'Veles\Tests\DataBase\Db', $msg
+			$expected, 'adapter', 'Veles\Tests\DataBase\DbCopy', $msg
 		);
 	}
 
@@ -67,10 +62,10 @@ class DbTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testGetAdapter()
 	{
-		Db::unsetAdapter();
-		Db::setAdapter(PdoAdapter::instance());
+		DbCopy::unsetAdapter();
+		DbCopy::setAdapter(PdoAdapter::instance());
 
-		$result = Db::getAdapter();
+		$result = DbCopy::getAdapter();
 		$this->assertTrue($result instanceof iDbAdapter);
 	}
 
@@ -81,8 +76,8 @@ class DbTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testGetAdapterException()
 	{
-		Db::unsetAdapter();
-		Db::getAdapter();
+		DbCopy::unsetAdapter();
+		DbCopy::getAdapter();
 	}
 
 	/**
@@ -96,17 +91,17 @@ class DbTest extends \PHPUnit_Framework_TestCase
 			$expected,
 			'connection_name',
 			'\Veles\DataBase\Adapters\PdoAdapter',
-			'Wrong Db::connection() behavior'
+			'Wrong DbCopy::connection() behavior'
 		);
 
-		Db::setAdapter(PdoAdapter::instance());
-		Db::connection($expected);
+		DbCopy::setAdapter(PdoAdapter::instance());
+		DbCopy::connection($expected);
 
 		$this->assertAttributeEquals(
 			$expected,
 			'connection_name',
 			'\Veles\DataBase\Adapters\PdoAdapter',
-			'Wrong Db::connection() behavior'
+			'Wrong DbCopy::connection() behavior'
 		);
 	}
 
@@ -115,11 +110,11 @@ class DbTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testValue()
 	{
-		Db::setAdapter(PdoAdapter::instance());
+		DbCopy::setAdapter(PdoAdapter::instance());
 		$expected = (string) mt_rand();
-		$result = Db::value("SELECT $expected, 2, 3");
+		$result = DbCopy::value("SELECT $expected, 2, 3");
 
-		$msg = 'Wrong Db::value() result';
+		$msg = 'Wrong DbCopy::value() result';
 		$this->assertSame($expected, $result, $msg);
 	}
 
@@ -130,11 +125,11 @@ class DbTest extends \PHPUnit_Framework_TestCase
 	{
 		$tbl_name = static::$tbl_name;
 		$expected = ['id' => '1', 'txt' => 'test-value'];
-		$result = Db::row("
+		$result = DbCopy::row("
 			SELECT * FROM $tbl_name LIMIT 3
 		");
 
-		$msg = 'Wrong Db::row() result';
+		$msg = 'Wrong DbCopy::row() result';
 		$this->assertSame($expected, $result, $msg);
 	}
 
@@ -149,11 +144,11 @@ class DbTest extends \PHPUnit_Framework_TestCase
 			['id' => '2', 'txt' => 'test-value'],
 			['id' => '3', 'txt' => 'test-value'],
 		];
-		$result = Db::rows("
+		$result = DbCopy::rows("
 			SELECT * FROM $tbl_name LIMIT 3
 		");
 
-		$msg = 'Wrong Db::rows() result';
+		$msg = 'Wrong DbCopy::rows() result';
 		$this->assertSame($expected, $result, $msg);
 	}
 
@@ -167,25 +162,25 @@ class DbTest extends \PHPUnit_Framework_TestCase
 		$tbl_name = static::$tbl_name;
 		$expected = ['id' => '222', 'txt' => 'test-value'];
 
-		Db::begin();
-		Db::query("
+		DbCopy::begin();
+		DbCopy::query("
 			INSERT $tbl_name VALUES (222, 'test-value')
 		");
-		Db::commit();
-		$result = Db::row("
+		DbCopy::commit();
+		$result = DbCopy::row("
 			SELECT * FROM $tbl_name WHERE id = 222
 		");
 
-		$msg = 'Wrong Db::transaction() test result';
+		$msg = 'Wrong DbCopy::transaction() test result';
 		$this->assertSame($expected, $result, $msg);
 
 		$expected = false;
-		Db::begin();
-		Db::query("
+		DbCopy::begin();
+		DbCopy::query("
 			INSERT $tbl_name VALUES (333, 'test-value')
 		");
-		Db::rollback();
-		$result = Db::row("
+		DbCopy::rollback();
+		$result = DbCopy::row("
 			SELECT * FROM $tbl_name WHERE id = 333
 		");
 
@@ -199,11 +194,11 @@ class DbTest extends \PHPUnit_Framework_TestCase
 	{
 		$tbl_name = static::$tbl_name;
 		$expected = true;
-		$result = Db::query("
+		$result = DbCopy::query("
 			DELETE FROM $tbl_name WHERE id > :id
 		", [':id' => 8]);
 
-		$msg = 'Wrong Db::query result';
+		$msg = 'Wrong DbCopy::query result';
 		$this->assertSame($expected, $result, $msg);
 	}
 
@@ -215,12 +210,12 @@ class DbTest extends \PHPUnit_Framework_TestCase
 		$tbl_name = static::$tbl_name;
 		$expected = 11;
 
-		Db::query("
+		DbCopy::query("
 			INSERT $tbl_name VALUES (11, 'test-value')
 		");
-		$result = Db::getLastInsertId();
+		$result = DbCopy::getLastInsertId();
 
-		$msg = 'Wrong Db::getLastInsertId() result';
+		$msg = 'Wrong DbCopy::getLastInsertId() result';
 		$this->assertSame($expected, $result, $msg);
 	}
 
@@ -232,12 +227,12 @@ class DbTest extends \PHPUnit_Framework_TestCase
 		$tbl_name = static::$tbl_name;
 		$expected = 9;
 
-		Db::query("
+		DbCopy::query("
 			SELECT SQL_CALC_FOUND_ROWS * FROM $tbl_name LIMIT 0, 5
 		");
-		$result = Db::getFoundRows();
+		$result = DbCopy::getFoundRows();
 
-		$msg = 'Wrong Db::getFoundRows() result';
+		$msg = 'Wrong DbCopy::getFoundRows() result';
 		$this->assertSame($expected, $result, $msg);
 	}
 
@@ -248,9 +243,9 @@ class DbTest extends \PHPUnit_Framework_TestCase
 	{
 		$expected = '\'\\\\\\\'\"\'';
 
-		$result = Db::escape("\'\"");
+		$result = DbCopy::escape("\'\"");
 
-		$msg = 'Wrong Db::escape() result';
+		$msg = 'Wrong DbCopy::escape() result';
 		$this->assertSame($expected, $result, $msg);
 	}
 }

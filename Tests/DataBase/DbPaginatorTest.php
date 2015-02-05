@@ -1,7 +1,6 @@
 <?php
 namespace Veles\Tests\DataBase;
 
-use Symfony\Component\Yaml\Unescaper;
 use Veles\DataBase\DbFilter;
 use Veles\DataBase\DbPaginator;
 use Veles\Tests\Model\News;
@@ -28,8 +27,8 @@ class DbPaginatorTest extends \PHPUnit_Framework_TestCase
 		// Create test table
 		$tbl_name = static::$tbl_name = News::TBL_NAME;
 
-		Db::setAdapter(PdoAdapter::instance());
-		Db::query("
+		DbCopy::setAdapter(PdoAdapter::instance());
+		DbCopy::query("
 			CREATE TABLE IF NOT EXISTS $tbl_name (
 			  id int(10) unsigned NOT NULL,
 			  title char(30) NOT NULL,
@@ -39,7 +38,7 @@ class DbPaginatorTest extends \PHPUnit_Framework_TestCase
 			) ENGINE=INNODB DEFAULT CHARSET=utf8
 		");
 		for ($i = 0; $i < 20; ++$i) {
-			Db::query("
+			DbCopy::query("
 				INSERT INTO $tbl_name
 					(id, title, content, author)
 				VALUES
@@ -51,7 +50,7 @@ class DbPaginatorTest extends \PHPUnit_Framework_TestCase
 	public static function tearDownAfterClass()
 	{
 		$table =& static::$tbl_name;
-		Db::query("DROP TABLE $table");
+		DbCopy::query("DROP TABLE $table");
 	}
 
 	/**
@@ -136,7 +135,7 @@ EOL;
 	public function setLimitProvider()
 	{
 		return [
-			['lalala', 5],
+			['bad_text', 5],
 			[10, 10],
 			['200', 200]
 		];
