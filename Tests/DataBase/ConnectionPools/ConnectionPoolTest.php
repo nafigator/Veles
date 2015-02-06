@@ -63,9 +63,9 @@ class ConnectionPoolTest extends \PHPUnit_Framework_TestCase
 		$this->assertAttributeEquals($expected, 'pool', $this->object, $msg);
 
 		$expected = 'default';
-		$msg = 'Wrong value of ConnectionPool::$default_connection_name';
+		$msg = 'Wrong value of ConnectionPool::$conn_name';
 		$this->assertAttributeEquals(
-			$expected, 'default_connection_name', $this->object, $msg
+			$expected, 'conn_name', $this->object, $msg
 		);
 	}
 
