@@ -13,14 +13,14 @@ class ConnectionPool
 	/** @var array */
 	protected $pool;
 	/** @var  string */
-	protected $default_connection_name;
+	protected $conn_name;
 
 	/**
 	 * @return string
 	 */
 	public function getDefaultConnectionName()
 	{
-		return $this->default_connection_name;
+		return $this->conn_name;
 	}
 
 	/**
@@ -36,7 +36,7 @@ class ConnectionPool
 		$this->pool[$conn->getName()] = $conn;
 
 		if ($default) {
-			$this->default_connection_name = $conn->getName();
+			$this->conn_name = $conn->getName();
 		}
 		return $this;
 	}
