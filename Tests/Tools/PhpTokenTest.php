@@ -45,8 +45,8 @@ class PhpTokenTest extends \PHPUnit_Framework_TestCase
 	{
 		$obj = new PhpToken($token, $validator);
 
-		$msg = 'Wrong PhpToken::id property value';
-		$this->assertAttributeSame($expected[0], 'id', $obj, $msg);
+		$msg = 'Wrong PhpToken::identifier property value';
+		$this->assertAttributeSame($expected[0], 'identifier', $obj, $msg);
 
 		$msg = 'Wrong PhpToken::content property value';
 		$this->assertAttributeSame($expected[1], 'content', $obj, $msg);
@@ -133,7 +133,7 @@ class PhpTokenTest extends \PHPUnit_Framework_TestCase
 		$this->object->setId($expected);
 
 		$msg = 'Wrong behavior of PhpToken::setId()';
-		$this->assertAttributeSame($expected, 'id', $this->object, $msg);
+		$this->assertAttributeSame($expected, 'identifier', $this->object, $msg);
 	}
 
 	/**

@@ -23,7 +23,7 @@ use Veles\Validators\iValidator;
 class PhpToken
 {
 	/** @var  int */
-	private $id = 0;
+	private $identifier = 0;
 	/** @var  string */
 	private $name = 'UNKNOWN';
 	/** @var  int */
@@ -49,9 +49,9 @@ class PhpToken
 			return;
 		}
 
-		$this->id      = $token[0];
-		$this->content = $token[1];
-		$this->line    = $token[2];
+		$this->identifier = $token[0];
+		$this->content    = $token[1];
+		$this->line       = $token[2];
 	}
 
 	/**
@@ -71,11 +71,11 @@ class PhpToken
 	}
 
 	/**
-	 * @param int $id
+	 * @param int $identifier
 	 */
-	public function setId($id)
+	public function setId($identifier)
 	{
-		$this->id = $id;
+		$this->identifier = $identifier;
 	}
 
 	/**
@@ -83,7 +83,7 @@ class PhpToken
 	 */
 	public function getId()
 	{
-		return $this->id;
+		return $this->identifier;
 	}
 
 	/**
