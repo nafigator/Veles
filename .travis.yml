@@ -12,7 +12,7 @@ before_install:
 before_script:
   - composer install --no-interaction
   - mysql -e "SET GLOBAL sql_mode='ANSI'";
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS test'
   - phpenv config-add travisci.ini
 
 script:

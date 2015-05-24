@@ -7,7 +7,6 @@
  *
  * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    Сбт Июл 21 10:59:33 2012
- * @version
  */
 
 namespace Veles\ErrorHandler;
