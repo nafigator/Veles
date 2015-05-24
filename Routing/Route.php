@@ -13,7 +13,6 @@
 namespace Veles\Routing;
 
 use Exception;
-use Veles\Config;
 
 /**
  * Class Route
@@ -22,10 +21,13 @@ use Veles\Config;
 class Route
 {
 	protected $page_name;
+	/** @var  array Current route config */
 	protected $config;
 	protected $template;
 	protected $map = [];
 	protected static $instance;
+	/** @var  iRoutesConfig */
+	protected static $config_handler;
 
 	/**
 	 * Config parser and controller vars initialisation
@@ -34,7 +36,7 @@ class Route
 	 */
 	private function __construct()
 	{
-		$routes = Config::getParams('routes');
+		$routes = self::getConfigHandler()->getData();
 		$q_pos  = strpos($_SERVER['REQUEST_URI'], '?');
 
 		$url = ($q_pos)
@@ -186,5 +188,24 @@ class Route
 	public function getTemplate()
 	{
 		return $this->template;
+	}
+
+	/**
+	 *
+	 * @return iRoutesConfig
+	 */
+	public static function getConfigHandler()
+	{
+		return self::$config_handler;
+	}
+
+	/**
+	 * @param iRoutesConfig $config_handler
+	 *
+	 * @return $this
+	 */
+	public static function setConfigHandler($config_handler)
+	{
+		self::$config_handler = $config_handler;
 	}
 }
