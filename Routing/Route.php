@@ -83,7 +83,7 @@ class Route extends RouteBase
 			return;
 		}
 
-		throw new Exception('На AJAX-роут отправлен не ajax-запрос!');
+		throw new Exception('AJAX-route got non-AJAX request!');
 	}
 
 	/**
