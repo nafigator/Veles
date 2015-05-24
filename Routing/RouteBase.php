@@ -17,12 +17,12 @@ namespace Veles\Routing;
  */
 class RouteBase
 {
-	/** @var  iRoutesConfig */
+	/** @var  AbstractRoutesConfig */
 	protected static $config_handler;
 
 	/**
 	 *
-	 * @return iRoutesConfig
+	 * @return AbstractRoutesConfig
 	 */
 	public static function getConfigHandler()
 	{
@@ -30,12 +30,10 @@ class RouteBase
 	}
 
 	/**
-	 * @param iRoutesConfig $config_handler
-	 *
-	 * @return $this
+	 * @param AbstractRoutesConfig $handler
 	 */
-	public static function setConfigHandler($config_handler)
+	public static function setConfigHandler(AbstractRoutesConfig $handler)
 	{
-		self::$config_handler = $config_handler;
+		self::$config_handler = $handler;
 	}
 }

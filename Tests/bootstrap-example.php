@@ -28,13 +28,15 @@ use Veles\DataBase\Adapters\PdoAdapter;
 use Veles\DataBase\ConnectionPools\ConnectionPool;
 use Veles\DataBase\Connections\PdoConnection;
 use Veles\DataBase\Db;
+use Veles\Routing\IniConfigLoader;
+use Veles\Routing\Route;
+use Veles\Routing\RoutesConfig;
 use Veles\View\Adapters\NativeAdapter;
 use Veles\View\View;
 
 define('ENVIRONMENT', 'development');
 define('LIB_DIR', realpath(__DIR__ . '/../..'));
 define('TEST_DIR', realpath(LIB_DIR . '/Veles/Tests'));
-define('CONFIG_FILE', TEST_DIR . '/Project/settings.ini');
 define('TEMPLATE_PATH', TEST_DIR . '/Project/View/');
 
 date_default_timezone_set('Europe/Moscow');
@@ -81,6 +83,10 @@ $conn2->setDsn('mysql:host=localhost;dbname=test;charset=utf8')
 $pool->addConnection($conn1, true);
 $pool->addConnection($conn2);
 PdoAdapter::setPool($pool);
+
+$routes_loader = new IniConfigLoader(TEST_DIR . '/Project/settings.ini');
+$routes_config_handler = new RoutesConfig($routes_loader);
+Route::setConfigHandler($routes_config_handler);
 
 Db::setAdapter(PdoAdapter::instance());
 system('mysql -u user -p password -e "DROP DATABASE IF EXISTS test; CREATE DATABASE IF NOT EXISTS test DEFAULT CHARACTER SET utf8"');

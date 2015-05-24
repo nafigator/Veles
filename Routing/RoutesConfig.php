@@ -15,15 +15,13 @@ namespace Veles\Routing;
  * Class RoutesConfig
  * @author  Yancharuk Alexander <alex at itvault dot info>
  */
-class RoutesConfig implements iRoutesConfig
+class RoutesConfig extends AbstractRoutesConfig
 {
-	/** @var  AbstractConfigLoader */
-	protected $loader;
 	/** @var  array */
 	protected $data;
 
 	/**
-	 * Returns array that contains routes configuration
+	 * Returns array that contains project routes configuration
 	 *
 	 * @return array
 	 */
@@ -34,19 +32,5 @@ class RoutesConfig implements iRoutesConfig
 		}
 
 		return $this->data;
-	}
-
-	/**
-	 * Sets strategy for config loader
-	 *
-	 * @param AbstractConfigLoader $loader Strategy of loading
-	 *
-	 * @return $this
-	 */
-	public function setLoader(AbstractConfigLoader $loader)
-	{
-		$this->loader = $loader;
-
-		return $this;
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * @file    iRoutesConfig.php
+ * @file    AbstractRoutesConfig.php
  *
  * PHP version 5.4+
  *
@@ -12,24 +12,27 @@
 namespace Veles\Routing;
 
 /**
- * Interface iRoutesConfig
+ * Class AbstractRoutesConfig
  * @author  Yancharuk Alexander <alex at itvault dot info>
  */
-interface iRoutesConfig
+abstract class AbstractRoutesConfig
 {
+	protected $loader;
+
 	/**
 	 * Returns array that contains routes configuration
 	 *
 	 * @return array
 	 */
-	public function getData();
+	abstract public function getData();
 
 	/**
 	 * Sets strategy for config loader
 	 *
 	 * @param AbstractConfigLoader $loader Strategy of loading
-	 *
-	 * @return $this
 	 */
-	public function setLoader(AbstractConfigLoader $loader);
+	public function __construct(AbstractConfigLoader $loader)
+	{
+		$this->loader = $loader;
+	}
 }

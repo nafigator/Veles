@@ -21,6 +21,16 @@ abstract class AbstractConfigLoader
 	protected $path;
 
 	/**
+	 * Create instance and set path to config file
+	 *
+	 * @param string $path
+	 */
+	public function __construct($path)
+	{
+		$this->path = $path;
+	}
+
+	/**
 	 * Load routes data from file
 	 *
 	 * return array
@@ -35,15 +45,5 @@ abstract class AbstractConfigLoader
 	public function getPath()
 	{
 		return $this->path;
-	}
-
-	/**
-	 * Set path to config file
-	 *
-	 * @param string $path
-	 */
-	public function setPath($path)
-	{
-		$this->path = $path;
 	}
 }
