@@ -28,7 +28,7 @@ class AbstractRoutesConfigTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * @covers Veles\Routing\AbstractRoutesConfig::__construct
 	 */
-	public function testSetConfigHandler()
+	public function testConstruct()
 	{
 		$msg = 'AbstractRoutesConfig::__construct() wrong behavior!';
 		$this->assertAttributeSame($this->expected, 'loader', $this->object, $msg);
