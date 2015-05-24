@@ -80,7 +80,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * @covers Veles\Routing\Route::checkAjax
 	 * @expectedException Exception
-	 * @expectedExceptionMessage На AJAX-роут отправлен не ajax-запрос!
+	 * @expectedExceptionMessage AJAX-route got non-AJAX request!
 	 */
 	public function testCheckAjaxException()
 	{

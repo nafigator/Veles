@@ -105,7 +105,8 @@ class Route extends RouteBase
 	public static function instance()
 	{
 		if (null === static::$instance) {
-			static::$instance = new Route;
+			$class = get_called_class();
+			static::$instance = new $class;
 		}
 
 		return static::$instance;
