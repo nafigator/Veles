@@ -39,11 +39,11 @@ class IniConfigLoaderTest extends \PHPUnit_Framework_TestCase
 		$expected = [
 			'Home'     =>
 				[
-					'class'      => 'Veles\\Routing\\RouteRegex',
-					'view'       => 'Veles\\View\\Adapters\\NativeAdapter',
-					'route'      => '#^\\/(?:index.html|page\\-(\\d+)\\.html)?$#',
+					'class'      => 'Veles\Routing\RouteRegex',
+					'view'       => 'Veles\View\Adapters\NativeAdapter',
+					'route'      => '#^\/(?:index.html|page\-(\d+)\.html)?$#',
 					'tpl'        => 'Frontend/index.phtml',
-					'controller' => 'Frontend\\Home',
+					'controller' => 'Frontend\Home',
 					'action'     => 'index',
 					'map'        =>
 						[
@@ -52,11 +52,11 @@ class IniConfigLoaderTest extends \PHPUnit_Framework_TestCase
 				],
 			'TestMap'  =>
 				[
-					'class'      => 'Veles\\Routing\\RouteRegex',
-					'view'       => 'Veles\\View\\Adapters\\NativeAdapter',
-					'route'      => '#^\\/book\\/(\\d+)\\/user\\/(\\d+)$#',
+					'class'      => 'Veles\Routing\RouteRegex',
+					'view'       => 'Veles\View\Adapters\NativeAdapter',
+					'route'      => '#^\/book\/(\d+)\/user\/(\d+)$#',
 					'tpl'        => 'Frontend/index.phtml',
-					'controller' => 'Frontend\\Home',
+					'controller' => 'Frontend\Home',
 					'action'     => 'book',
 					'map'        =>
 						[
@@ -66,9 +66,9 @@ class IniConfigLoaderTest extends \PHPUnit_Framework_TestCase
 				],
 			'Contacts' =>
 				[
-					'class'      => 'Veles\\Routing\\RouteStatic',
+					'class'      => 'Veles\Routing\RouteStatic',
 					'route'      => '/contacts',
-					'controller' => 'Frontend\\Contacts',
+					'controller' => 'Frontend\Contacts',
 					'action'     => 'getAddress',
 					'ajax'       => '1',
 				],
