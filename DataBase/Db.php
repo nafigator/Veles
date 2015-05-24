@@ -1,12 +1,12 @@
 <?php
 /**
  * Класс с методами обработки и вызова запросов
- * @file    DbBase.php
+ * @file      DbBase.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Thu May 2 11:51:05 2013
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Thu May 2 11:51:05 2013
  * @copyright The BSD 3-Clause License
  */
 
