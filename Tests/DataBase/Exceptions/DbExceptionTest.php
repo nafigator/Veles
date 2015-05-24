@@ -1,5 +1,5 @@
 <?php
-namespace Tests\DataBase\Exceptions;
+namespace Veles\Tests\DataBase\Exceptions;
 
 use Veles\DataBase\Exceptions\DbException;
 

@@ -1,5 +1,5 @@
 <?php
-namespace Tests\Auth;
+namespace Veles\Tests\Auth;
 
 use Veles\Auth\UsrAuthFactory;
 

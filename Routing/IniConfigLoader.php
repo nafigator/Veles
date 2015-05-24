@@ -25,7 +25,7 @@ class IniConfigLoader extends AbstractConfigLoader
 	public function load()
 	{
 		$data = parse_ini_file($this->getPath(), true);
-		$this->buildPramsTree($data);
+		$this->buildTree($data);
 
 		return $data;
 	}
@@ -35,7 +35,7 @@ class IniConfigLoader extends AbstractConfigLoader
      *
      * @param array &$config
      */
-	private function buildPramsTree(array &$config)
+	private function buildTree(array &$config)
 	{
 		foreach ($config as $name => $value) {
 			$params = explode('.', $name);

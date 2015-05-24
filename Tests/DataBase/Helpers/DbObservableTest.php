@@ -1,7 +1,6 @@
 <?php
-namespace Tests\DataBase\Helpers;
+namespace Veles\Tests\DataBase\Helpers;
 
-use Veles\DataBase\Exceptions\DbException;
 use Veles\DataBase\Helpers\DbObservable;
 
 /**

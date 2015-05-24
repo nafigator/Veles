@@ -1,5 +1,5 @@
 <?php
-namespace Tests\Validators;
+namespace Veles\Tests\Validators;
 
 use Veles\Validators\Md5Validator;
 

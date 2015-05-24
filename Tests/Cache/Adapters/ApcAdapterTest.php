@@ -1,5 +1,5 @@
 <?php
-namespace Tests\Cache\Adapters;
+namespace Veles\Tests\Cache\Adapters;
 
 use Veles\Cache\Adapters\ApcAdapter;
 use Veles\Cache\Cache;

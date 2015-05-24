@@ -1,5 +1,5 @@
 <?php
-namespace Tests\View\Adapters;
+namespace Veles\Tests\View\Adapters;
 
 use Veles\View\Adapters\NativeAdapter;
 

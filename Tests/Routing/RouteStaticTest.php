@@ -1,5 +1,5 @@
 <?php
-namespace Tests\Routing;
+namespace Veles\Tests\Routing;
 
 use Veles\Routing\RouteStatic;
 

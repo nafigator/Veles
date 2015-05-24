@@ -1,9 +1,8 @@
 <?php
-namespace Tests\Routing;
+namespace Veles\Tests\Routing;
 
 use Controllers\Frontend\Home;
 use Veles\Routing\Route;
-use Veles\Tests\Routing\RouteCopy;
 use Exception;
 
 /**

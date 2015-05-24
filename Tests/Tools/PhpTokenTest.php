@@ -1,5 +1,5 @@
 <?php
-namespace Tests\Tools;
+namespace Veles\Tests\Tools;
 
 use Veles\Tools\PhpToken;
 use Veles\Validators\PhpTokenValidator;
