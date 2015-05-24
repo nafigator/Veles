@@ -15,6 +15,7 @@ class NativeAdapterTest extends \PHPUnit_Framework_TestCase
 	protected $object;
 	/** @var  string */
 	protected $html;
+	protected $dir;
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
@@ -23,7 +24,7 @@ class NativeAdapterTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->object = new NativeAdapter;
-
+		$this->dir = TEST_DIR . '/Project/View/';
 		$this->html = <<<EOF
 <!DOCTYPE html>
 <html>
@@ -85,7 +86,7 @@ EOF;
 	 */
 	public function testShow()
 	{
-		$this->object->setTemplateDir(TEMPLATE_PATH);
+		$this->object->setTemplateDir($this->dir);
 		$this->object->set(['a' => 'la', 'b' => 'lala', 'c' => 'Hello']);
 
 		$this->expectOutputString($this->html);
@@ -98,7 +99,7 @@ EOF;
 	 */
 	public function testGet()
 	{
-		$this->object->setTemplateDir(TEMPLATE_PATH);
+		$this->object->setTemplateDir($this->dir);
 		$this->object->set(['a' => 'la', 'b' => 'lala', 'c' => 'Hello']);
 
 		$result = $this->object->get('Frontend/index.phtml');

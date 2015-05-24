@@ -27,7 +27,6 @@ use PDO;
 define('ENVIRONMENT', 'development');
 define('LIB_DIR', realpath(__DIR__ . '/../..'));
 define('TEST_DIR', realpath(LIB_DIR . '/Veles/Tests'));
-define('TEMPLATE_PATH', TEST_DIR . '/Project/View/');
 
 date_default_timezone_set('Europe/Moscow');
 

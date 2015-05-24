@@ -62,7 +62,7 @@ class NativeAdapter extends ViewAdapterAbstract
 
 		ob_start();
 		/** @noinspection PhpIncludeInspection */
-		include TEMPLATE_PATH . $path;
+		include self::getTemplateDir() . $path;
 		ob_end_flush();
 	}
 
@@ -81,7 +81,7 @@ class NativeAdapter extends ViewAdapterAbstract
 
 		ob_start();
 		/** @noinspection PhpIncludeInspection */
-		include TEMPLATE_PATH . $path;
+		include self::getTemplateDir() . $path;
 		$output = ob_get_contents();
 		ob_end_clean();
 
