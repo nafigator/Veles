@@ -29,8 +29,6 @@ class Application
 	 */
 	public static function run()
 	{
-		self::setPhpSettings();
-
 		UsrAuth::instance();
 
 		// Get route, controller, method
@@ -55,26 +53,5 @@ class Application
 		register_shutdown_function([$error, 'fatal']);
 		set_error_handler([$error, 'usrError']);
 		set_exception_handler([$error, 'exception']);
-	}
-
-	/**
-	 * Setup PHP settings from config
-	 *
-	 * @param array $keys Макссив php-параметров и их значений
-	 */
-	protected static function setPhpSettings(array $keys = [])
-	{
-		$config = ([] === $keys)
-			? Config::getParams('php')
-			: $keys;
-
-		foreach ($config as $param => $value) {
-			if (is_array($value)) {
-				self::setPhpSettings($value);
-				continue;
-			}
-
-			ini_set($param, $value);
-		}
 	}
 }

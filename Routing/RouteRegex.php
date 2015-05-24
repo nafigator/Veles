@@ -1,6 +1,6 @@
 <?php
 /**
- * RegEx routin processing
+ * RegEx routing processing
  * @file    RouteRegex.php
  *
  * PHP version 5.4+
@@ -19,7 +19,7 @@ namespace Veles\Routing;
 class RouteRegex implements iRouteStrategy
 {
 	/**
-	 * Variable contains array of named subpatterns values
+	 * Variable contains array of named sub-patterns values
 	 *
 	 * @var array
 	 */

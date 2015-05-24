@@ -84,9 +84,8 @@ $pool->addConnection($conn1, true);
 $pool->addConnection($conn2);
 PdoAdapter::setPool($pool);
 
-$routes_loader = new IniConfigLoader(TEST_DIR . '/Project/settings.ini');
-$routes_config_handler = new RoutesConfig($routes_loader);
-Route::setConfigHandler($routes_config_handler);
+$routes_loader = new IniConfigLoader(TEST_DIR . '/Project/routes.ini');
+Route::setConfigHandler(new RoutesConfig($routes_loader));
 
 Db::setAdapter(PdoAdapter::instance());
 system('mysql -u user -p password -e "DROP DATABASE IF EXISTS test; CREATE DATABASE IF NOT EXISTS test DEFAULT CHARACTER SET utf8"');
