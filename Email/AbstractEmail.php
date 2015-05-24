@@ -49,8 +49,16 @@ abstract class AbstractEmail
 	/**
 	 * Отправка письма
 	 */
-	final protected function send()
+	protected function send()
 	{
 		mail($this->receiver, $this->subject, $this->message, $this->headers);
+	}
+
+	/**
+	 * @param string $receiver Email of receiver
+	 */
+	public function setReceiver($receiver)
+	{
+		$this->receiver = $receiver;
 	}
 }

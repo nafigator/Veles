@@ -1,10 +1,10 @@
 <?php
 namespace Veles\Tests\Model;
 
+use Veles\DataBase\Adapters\PdoAdapter;
+use Veles\DataBase\Db;
 use Veles\DataBase\DbFilter;
 use Veles\Model\ActiveRecord;
-use Veles\DataBase\Db;
-use Veles\DataBase\Adapters\PdoAdapter;
 use Veles\Model\QueryBuilder;
 use Veles\Model\User;
 

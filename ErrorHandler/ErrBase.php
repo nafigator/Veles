@@ -15,7 +15,7 @@ namespace Veles\ErrorHandler;
 use Exception;
 use SplObserver;
 use SplSubject;
-use Veles\DataBase\DbException;
+use Veles\DataBase\Exceptions\DbException;
 use Veles\View\View;
 
 /**
@@ -27,6 +27,8 @@ class ErrBase implements SplSubject
 	private $vars;
 	private $output;
 	private $observers = [];
+	/** @var  string */
+	private $environment;
 
 	/**
 	 * Handler for user errors
@@ -110,7 +112,7 @@ class ErrBase implements SplSubject
 	 */
 	public function process()
 	{
-		if ('development' === ENVIRONMENT) {
+		if ('development' === $this->environment) {
 			View::set($this->vars);
 			View::show('error/exception.phtml');
 		} else {
@@ -220,5 +222,21 @@ class ErrBase implements SplSubject
 	public function getMessage()
 	{
 		return $this->output;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getEnvironment()
+	{
+		return $this->environment;
+	}
+
+	/**
+	 * @param string $environment
+	 */
+	public function setEnvironment($environment)
+	{
+		$this->environment = $environment;
 	}
 }

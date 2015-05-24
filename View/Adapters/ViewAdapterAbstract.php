@@ -24,7 +24,7 @@ abstract class ViewAdapterAbstract
 {
 	/** @var  null|array */
 	protected static $calls;
-	/** @var $this */
+	/** @var ViewAdapterAbstract */
 	protected static $instance;
 	/** @var  mixed */
 	protected $driver;

@@ -12,7 +12,6 @@
 
 namespace Veles\Tests\Application;
 
-use Application\ApplicationChild;
 use PHPUnit_Framework_TestCase;
 use Veles\Application\Application;
 use Veles\Routing\Route;

@@ -11,21 +11,21 @@
 
 namespace Veles\Tests;
 
+use PDO;
 use Veles\AutoLoader;
-use Veles\Cache\Cache;
-use Veles\Cache\Adapters\MemcacheRaw;
 use Veles\Cache\Adapters\MemcacheAdapter;
 use Veles\Cache\Adapters\MemcachedAdapter;
+use Veles\Cache\Adapters\MemcacheRaw;
+use Veles\Cache\Cache;
+use Veles\DataBase\Adapters\PdoAdapter;
+use Veles\DataBase\ConnectionPools\ConnectionPool;
+use Veles\DataBase\Connections\PdoConnection;
+use Veles\DataBase\Db;
 use Veles\Routing\IniConfigLoader;
 use Veles\Routing\Route;
 use Veles\Routing\RoutesConfig;
 use Veles\View\Adapters\NativeAdapter;
 use Veles\View\View;
-use Veles\DataBase\Adapters\PdoAdapter;
-use Veles\DataBase\ConnectionPools\ConnectionPool;
-use Veles\DataBase\Connections\PdoConnection;
-use Veles\DataBase\Db;
-use PDO;
 
 define('LIB_DIR', realpath(__DIR__ . '/../..'));
 define('TEST_DIR', realpath(LIB_DIR . '/Veles/Tests'));

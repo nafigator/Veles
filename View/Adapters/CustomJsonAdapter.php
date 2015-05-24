@@ -14,7 +14,7 @@ namespace Veles\View\Adapters;
 /**
  * Class CustomJsonAdapter
  *
- * Class intended for output already builded json string
+ * Class intended for output already built json string
  *
  * @author  Yancharuk Alexander <alex at itvault dot info>
  */

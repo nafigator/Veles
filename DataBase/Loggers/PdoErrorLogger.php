@@ -43,10 +43,12 @@ class PdoErrorLogger implements \SplObserver
 	public function update(SplSubject $subject)
 	{
 		/** @noinspection PhpUndefinedMethodInspection */
+		/** @var \PDO $conn */
 		$conn = $subject->getConnection();
 		/** @noinspection PhpUndefinedMethodInspection */
 		$conn_err = $conn->errorCode();
 		/** @noinspection PhpUndefinedMethodInspection */
+		/** @var \PdoStatement $stmt */
 		$stmt = $subject->getStmt();
 		/** @noinspection PhpUndefinedMethodInspection */
 		$stmt_err = $stmt->errorCode();

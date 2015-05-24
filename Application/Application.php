@@ -13,7 +13,6 @@
 namespace Veles\Application;
 
 use Veles\Auth\UsrAuth;
-use Veles\Config;
 use Veles\ErrorHandler\ErrBase;
 use Veles\Routing\Route;
 use Veles\View\View;

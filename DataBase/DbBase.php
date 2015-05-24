@@ -25,7 +25,7 @@ use Veles\DataBase\Adapters\iDbAdapter;
  */
 class DbBase
 {
-	/** @var iDbAdapter */
+	/** @var iDbAdapter|DbAdapterBase */
 	protected static $adapter;
 	/** @var  mixed */
 	protected static $connection;
@@ -48,7 +48,7 @@ class DbBase
 	 * Инстанс адаптера
 	 *
 	 * @throws Exception
-	 * @return iDbAdapter
+	 * @return iDbAdapter|DbAdapterBase
 	 */
 	public static function getAdapter()
 	{

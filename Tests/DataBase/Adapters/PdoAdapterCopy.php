@@ -13,7 +13,6 @@ namespace Veles\Tests\DataBase\Adapters;
 
 use Veles\DataBase\Adapters\PdoAdapter;
 
-
 /**
  * Class PdoAdapterCopy
  * @author  Yancharuk Alexander <alex at itvault dot info>

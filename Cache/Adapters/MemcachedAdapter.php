@@ -13,9 +13,7 @@
 
 namespace Veles\Cache\Adapters;
 
-use Exception;
 use Memcached;
-use Veles\Cache\Adapters\MemcacheAdapter;
 
 /**
  * Class MemcachedAdapter

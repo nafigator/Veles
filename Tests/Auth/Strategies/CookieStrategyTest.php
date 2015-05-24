@@ -1,9 +1,9 @@
 <?php
 namespace Veles\Auth\Strategies;
 
-use Veles\Model\User;
-use Veles\DataBase\Db;
 use Veles\DataBase\Adapters\PdoAdapter;
+use Veles\DataBase\Db;
+use Veles\Model\User;
 use Veles\Tests\Auth\Strategies\CookieStrategyCopy;
 
 /**

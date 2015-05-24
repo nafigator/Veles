@@ -14,7 +14,6 @@ namespace Veles\ErrorHandler;
 
 use Exception;
 use SplObserver;
-use Veles\Config;
 use Veles\Email\AbstractEmail;
 
 /**
@@ -28,12 +27,11 @@ class ErrMail extends AbstractEmail implements SplObserver
 	 */
 	public function init()
 	{
-		if (null === ($settings = Config::getParams('error'))) {
-			$msg = 'Error notification email not found in config!';
+		if (null === $this->receiver) {
+			$msg = 'Error notification email not set!';
 			throw new Exception($msg);
 		}
 
-		$this->receiver = $settings['receiver'];
 		$this->from		= isset($_SERVER['SERVER_NAME'])
 			? $_SERVER['SERVER_NAME']
 			: $_SERVER['SERVER_ADDR'];

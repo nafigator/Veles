@@ -33,7 +33,7 @@ class Password
 	}
 
 	/**
-	 * User password check in ajax-authentification
+	 * User password check in ajax-authentication
 	 *
 	 * @param User $user User
 	 * @param string $password Password retrieved through ajax

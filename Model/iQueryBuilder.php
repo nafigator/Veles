@@ -11,8 +11,8 @@
 
 namespace Veles\Model;
 
-use Veles\DataBase\DbPaginator;
 use Veles\DataBase\DbFilter;
+use Veles\DataBase\DbPaginator;
 
 /**
  * Interface iQueryBuilder

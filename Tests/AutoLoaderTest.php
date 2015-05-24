@@ -13,7 +13,6 @@
 namespace Veles\Tests;
 
 use PHPUnit_Framework_TestCase;
-use ReflectionObject;
 use Veles\AutoLoader;
 
 /**
