@@ -34,6 +34,10 @@ use Veles\DataBase\Connections\PdoConnection;
 use Veles\DataBase\Db;
 use PDO;
 
+ini_set('error_reporting', E_ALL | E_STRICT);
+ini_set('display_errors', 'STDOUT');
+ini_set('display_startup_errors', true);
+
 define('LIB_DIR', realpath(__DIR__ . '/../..'));
 define('TEST_DIR', realpath(LIB_DIR . '/Veles/Tests'));
 
