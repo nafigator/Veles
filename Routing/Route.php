@@ -18,16 +18,15 @@ use Exception;
  * Class Route
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-class Route
+class Route extends RouteBase
 {
 	protected $page_name;
 	/** @var  array Current route config */
 	protected $config;
 	protected $template;
 	protected $map = [];
-	protected static $instance;
-	/** @var  iRoutesConfig */
-	protected static $config_handler;
+
+	private static $instance;
 
 	/**
 	 * Config parser and controller vars initialisation
@@ -106,8 +105,7 @@ class Route
 	public static function instance()
 	{
 		if (null === static::$instance) {
-			$class = get_called_class();
-			static::$instance = new $class;
+			static::$instance = new Route;
 		}
 
 		return static::$instance;
@@ -188,24 +186,5 @@ class Route
 	public function getTemplate()
 	{
 		return $this->template;
-	}
-
-	/**
-	 *
-	 * @return iRoutesConfig
-	 */
-	public static function getConfigHandler()
-	{
-		return self::$config_handler;
-	}
-
-	/**
-	 * @param iRoutesConfig $config_handler
-	 *
-	 * @return $this
-	 */
-	public static function setConfigHandler($config_handler)
-	{
-		self::$config_handler = $config_handler;
 	}
 }
