@@ -40,7 +40,5 @@ class ErrMail extends AbstractEmail implements SplObserver
 		$this->headers .= "MIME-Version: 1.0\n";
 		$this->headers .= "Content-type: text/html; charset=$this->charset \n";
 		$this->headers .= "Content-Transfer-Encoding: $this->encoding";
-		$subject 		= base64_encode('itvault.info Error');
-		$this->subject  = "=?$this->charset?B?$subject?=";
 	}
 }

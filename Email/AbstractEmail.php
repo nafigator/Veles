@@ -61,4 +61,10 @@ abstract class AbstractEmail
 	{
 		$this->receiver = $receiver;
 	}
+
+	public function setSubject($subject)
+	{
+		$encoded_subj = base64_encode($subject);
+		$this->subject = "=?$this->charset?B?$encoded_subj?=";
+	}
 }
