@@ -1,6 +1,6 @@
 <?php
 /**
- * @file    RouteConfigLoader.php
+ * @file    AbstractConfigLoader.php
  *
  * PHP version 5.4+
  *
@@ -12,10 +12,10 @@
 namespace Veles\Routing;
 
 /**
- * Class RouteConfigLoader
+ * Class AbstractConfigLoader
  * @author  Yancharuk Alexander <alex at itvault dot info>
  */
-abstract class RouteConfigLoader
+abstract class AbstractConfigLoader
 {
 	/** @var  string */
 	protected $path;

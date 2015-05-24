@@ -27,9 +27,9 @@ interface iRoutesConfig
 	/**
 	 * Sets strategy for config loader
 	 *
-	 * @param RouteConfigLoader $loader Strategy of loading
+	 * @param AbstractConfigLoader $loader Strategy of loading
 	 *
 	 * @return $this
 	 */
-	public function setLoader(RouteConfigLoader $loader);
+	public function setLoader(AbstractConfigLoader $loader);
 }

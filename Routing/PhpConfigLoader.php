@@ -15,7 +15,7 @@ namespace Veles\Routing;
  * Class PhpConfigLoader
  * @author  Yancharuk Alexander <alex at itvault dot info>
  */
-class PhpConfigLoader extends RouteConfigLoader
+class PhpConfigLoader extends AbstractConfigLoader
 {
 	/**
 	 * Load routes data from file

@@ -15,7 +15,7 @@ namespace Veles\Routing;
  * Class IniConfigLoader
  * @author  Yancharuk Alexander <alex at itvault dot info>
  */
-class IniConfigLoader extends RouteConfigLoader
+class IniConfigLoader extends AbstractConfigLoader
 {
 	/**
 	 * Load routes data from file
