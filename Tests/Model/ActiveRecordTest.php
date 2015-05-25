@@ -4,6 +4,7 @@ namespace Veles\Tests\Model;
 use Veles\DataBase\Adapters\PdoAdapter;
 use Veles\DataBase\Db;
 use Veles\DataBase\DbFilter;
+use Veles\DataBase\DbPaginator;
 use Veles\Model\ActiveRecord;
 use Veles\Model\QueryBuilder;
 use Veles\Model\User;
@@ -302,5 +303,66 @@ class ActiveRecordTest extends \PHPUnit_Framework_TestCase
 		$news->setBuilder($builder);
 		$msg = 'Wrong ActiveRecord::setBuilder behavior!';
 		$this->assertAttributeSame($builder, 'builder', $news, $msg);
+	}
+
+	/**
+	 * @covers Veles\Model\ActiveRecord::query
+	 * @dataProvider queryProvider
+	 */
+	public function testQuery($pager, $expected)
+	{
+		$tbl = (false === $pager and false === $expected)
+			? static::$user_tbl_name
+			: static::$news_tbl_name;
+
+		$sql = "SELECT * FROM $tbl";
+
+		$news = new News;
+		$result = $news->query($sql, $pager);
+		$msg = 'ActiveRecord::query() returns wrong result!';
+		$this->assertSame($expected, $result, $msg);
+	}
+
+	public function queryProvider()
+	{
+		$expected1 = [];
+
+		for ($i = 1; $i < 21; $i++) {
+			$expected1[] = [
+				'id'      => "$i",
+				'title'   => "title_$i",
+				'content' => "content_$i",
+				'author'  => "author_$i"
+			];
+		}
+
+		$expected2 = [];
+
+		for ($i = 1; $i < 6; $i++) {
+			$expected2[] = [
+				'id'      => "$i",
+				'title'   => "title_$i",
+				'content' => "content_$i",
+				'author'  => "author_$i"
+			];
+		}
+
+		$expected3 = [];
+
+		for ($i = 11; $i < 16; $i++) {
+			$expected3[] = [
+				'id'      => "$i",
+				'title'   => "title_$i",
+				'content' => "content_$i",
+				'author'  => "author_$i"
+			];
+		}
+
+		return [
+			[false, $expected1],
+			[new DbPaginator, $expected2],
+			[new DbPaginator('', 3), $expected3],
+			[false, false]
+		];
 	}
 }
