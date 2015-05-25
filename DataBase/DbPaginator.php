@@ -1,12 +1,12 @@
 <?php
 /**
  * Class for data pagination
- * @file    DbPaginator.php
+ * @file      DbPaginator.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Втр Авг 07 23:04:47 2012
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Втр Авг 07 23:04:47 2012
  * @copyright The BSD 3-Clause License
  */
 

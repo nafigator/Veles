@@ -1,12 +1,12 @@
 <?php
 /**
  * Regular expression validator
- * @file    RegExValidator.php
+ * @file      RegExValidator.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Втр Авг 14 23:50:04 2012
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Втр Авг 14 23:50:04 2012
  * @copyright The BSD 3-Clause License
  */
 

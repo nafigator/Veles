@@ -1,11 +1,11 @@
 <?php
 /**
- * @file    RoutesConfig.php
+ * @file      RoutesConfig.php
  *
  * PHP version 5.4+
  *
- * @author  Yancharuk Alexander <alex at itvault dot info>
- * @date    2015-05-24 12:39
+ * @author    Yancharuk Alexander <alex at itvault dot info>
+ * @date      2015-05-24 12:39
  * @copyright The BSD 3-Clause License
  */
 

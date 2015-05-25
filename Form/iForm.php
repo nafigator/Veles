@@ -1,12 +1,12 @@
 <?php
 /**
  * Интерфейс форм
- * @file    iForm.php
+ * @file      iForm.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Сбт Ноя 10 06:37:26 2012
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Сбт Ноя 10 06:37:26 2012
  * @copyright The BSD 3-Clause License
  */
 

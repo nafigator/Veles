@@ -1,12 +1,12 @@
 <?php
 /**
  * RegEx routing processing
- * @file    RouteRegex.php
+ * @file      RouteRegex.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Сбт Июн 23 10:47:39 2012
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Сбт Июн 23 10:47:39 2012
  * @copyright The BSD 3-Clause License
  */
 

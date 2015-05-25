@@ -1,12 +1,12 @@
 <?php
 /**
  * Фильтр для выборки моделей
- * @file    DbFilter.php
+ * @file      DbFilter.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Втр Авг 07 23:14:17 2012
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Втр Авг 07 23:14:17 2012
  * @copyright The BSD 3-Clause License
  */
 

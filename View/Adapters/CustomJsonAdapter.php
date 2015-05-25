@@ -1,11 +1,11 @@
 <?php
 /**
- * @file    CustomJsonAdapter.php
+ * @file      CustomJsonAdapter.php
  *
  * PHP version 5.4+
  *
- * @author  Yancharuk Alexander <alex at itvault dot info>
- * @date    2015-01-09 21:20
+ * @author    Yancharuk Alexander <alex at itvault dot info>
+ * @date      2015-01-09 21:20
  * @copyright The BSD 3-Clause License
  */
 

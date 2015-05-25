@@ -1,11 +1,11 @@
 <?php
 /**
- * @file    Md5Validator.php
+ * @file      Md5Validator.php
  *
  * PHP version 5.4+
  *
- * @author  Yancharuk Alexander <alex at itvault dot info>
- * @date    2015-01-06 15:30
+ * @author    Yancharuk Alexander <alex at itvault dot info>
+ * @date      2015-01-06 15:30
  * @copyright The BSD 3-Clause License
  */
 

@@ -2,12 +2,12 @@
 /**
  * Class for upload file form field
  *
- * @file    FileElement.php
+ * @file      FileElement.php
  *
  * PHP version 5.4+
  *
- * @author  Yancharuk Alexander <alex at itvault dot info>
- * @date    2013-07-21 16:55
+ * @author    Yancharuk Alexander <alex at itvault dot info>
+ * @date      2013-07-21 16:55
  * @copyright The BSD 3-Clause License
  */
 

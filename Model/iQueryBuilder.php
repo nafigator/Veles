@@ -1,11 +1,11 @@
 <?php
 /**
- * @file    iQueryBuilder.php
+ * @file      iQueryBuilder.php
  *
  * PHP version 5.4+
  *
- * @author  Yancharuk Alexander <alex at itvault dot info>
- * @date    2014-11-23 00:29
+ * @author    Yancharuk Alexander <alex at itvault dot info>
+ * @date      2014-11-23 00:29
  * @copyright The BSD 3-Clause License
  */
 

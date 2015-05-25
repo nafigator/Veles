@@ -1,12 +1,12 @@
 <?php
 /**
  * Фабрика. Содержит алогритм выбора стратегии авторизации
- * @file    UserAuthFactory.php
+ * @file      UserAuthFactory.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Вск Янв 27 17:34:29 2013
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Вск Янв 27 17:34:29 2013
  * @copyright The BSD 3-Clause License.
  */
 

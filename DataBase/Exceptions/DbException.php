@@ -1,12 +1,12 @@
 <?php
 /**
  * General db exception class
- * @file    DbException.php
+ * @file      DbException.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Птн Мар 09 01:40:46 2012
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Птн Мар 09 01:40:46 2012
  * @copyright The BSD 3-Clause License
  */
 

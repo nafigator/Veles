@@ -1,12 +1,12 @@
 <?php
 /**
  * Класс, содержащий функционал транзакций
- * @file    DbTransactionHandler.php
+ * @file      DbTransactionHandler.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Срд Апр 23 06:34:47 MSK 2014
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Срд Апр 23 06:34:47 MSK 2014
  * @copyright The BSD 3-Clause License
  */
 

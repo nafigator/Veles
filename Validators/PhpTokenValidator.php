@@ -2,12 +2,12 @@
 /**
  * PHP token validator
  *
- * @file    PhpTokenValidator.php
+ * @file      PhpTokenValidator.php
  *
  * PHP version 5.4+
  *
- * @author  Yancharuk Alexander <alex at itvault dot info>
- * @date    Tue Aug 26 18:27:04
+ * @author    Yancharuk Alexander <alex at itvault dot info>
+ * @date      Tue Aug 26 18:27:04
  * @copyright The BSD 3-Clause License
  */
 

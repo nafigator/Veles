@@ -1,12 +1,12 @@
 <?php
 /**
  * ByteValidator values validator
- * @file    ByteValidator.php
+ * @file      ByteValidator.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Вск Фев 17 10:48:43 2013
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Вск Фев 17 10:48:43 2013
  * @copyright The BSD 3-Clause License.
  */
 

@@ -1,12 +1,12 @@
 <?php
 /**
  * Стратегия авторизации пользователя по кукам
- * @file    CookieStrategy.php
+ * @file      CookieStrategy.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Вск Янв 27 17:44:08 2013
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Вск Янв 27 17:44:08 2013
  * @copyright The BSD 3-Clause License.
  */
 

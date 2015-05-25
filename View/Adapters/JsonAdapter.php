@@ -2,12 +2,12 @@
 /**
  * Json View adapter
  *
- * @file    JsonAdapter.php
+ * @file      JsonAdapter.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Втр Апр 29 22:20:05 MSK 2014
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Втр Апр 29 22:20:05 MSK 2014
  * @copyright The BSD 3-Clause License
  */
 

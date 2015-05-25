@@ -2,12 +2,12 @@
 /**
  * Adapter for Memcache
  *
- * @file    MemcacheAdapter.php
+ * @file      MemcacheAdapter.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    8/21/13 12:54
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      8/21/13 12:54
  * @copyright The BSD 3-Clause License
  */
 

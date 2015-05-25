@@ -1,11 +1,11 @@
 <?php
 /**
- * @file    CurlRequest.php
+ * @file      CurlRequest.php
  *
  * PHP version 5.4+
  *
- * @author  Yancharuk Alexander <alex at itvault dot info>
- * @date    2015-01-20 18:12
+ * @author    Yancharuk Alexander <alex at itvault dot info>
+ * @date      2015-01-20 18:12
  * @copyright The BSD 3-Clause License
  */
 

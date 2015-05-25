@@ -2,12 +2,12 @@
 /**
  * Adapter for APC cache
  *
- * @file    ApcAdapter.php
+ * @file      ApcAdapter.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Птн Ноя 16 22:09:28 2012
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Птн Ноя 16 22:09:28 2012
  * @copyright The BSD 3-Clause License
  */
 

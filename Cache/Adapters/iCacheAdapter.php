@@ -2,12 +2,12 @@
 /**
  * Cache adapters interface
  *
- * @file    iCacheAdapter.php
+ * @file      iCacheAdapter.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Чтв Ноя 15 21:36:22 2012
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Чтв Ноя 15 21:36:22 2012
  * @copyright The BSD 3-Clause License
  */
 

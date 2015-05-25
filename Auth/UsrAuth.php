@@ -1,12 +1,12 @@
 <?php
 /**
  * User authentication class
- * @file    UsrAuth.php
+ * @file      UsrAuth.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Птн Мар 16 21:45:26 2012
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Птн Мар 16 21:45:26 2012
  * @copyright The BSD 3-Clause License
  */
 

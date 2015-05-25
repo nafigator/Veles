@@ -1,12 +1,12 @@
 <?php
 /**
  * Useful functions
- * @file    Helper.php
+ * @file      Helper.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Сбт Апр 21 20:59:37 2012
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Сбт Апр 21 20:59:37 2012
  * @copyright The BSD 3-Clause License
  */
 

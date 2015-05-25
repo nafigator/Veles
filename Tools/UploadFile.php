@@ -1,12 +1,12 @@
 <?php
 /**
  * Class for organize uploads storage
- * @file    UploadFile.php
+ * @file      UploadFile.php
  *
  * PHP version 5.4+
  *
- * @author  Yancharuk Alexander <alex at itvault dot info>
- * @date    2013-07-27 22:06
+ * @author    Yancharuk Alexander <alex at itvault dot info>
+ * @date      2013-07-27 22:06
  * @copyright The BSD 3-Clause License
  */
 

@@ -2,12 +2,12 @@
 /**
  * Default View adapter
  *
- * @file    NativeAdapter.php
+ * @file      NativeAdapter.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    2013-05-15 22:06
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      2013-05-15 22:06
  * @copyright The BSD 3-Clause License
  */
 

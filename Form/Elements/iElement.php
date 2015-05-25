@@ -1,12 +1,12 @@
 <?php
 /**
  * Интерфейс элементов формы
- * @file    iElement.php
+ * @file      iElement.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Втр Авг 14 05:36:37 2012
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Втр Авг 14 05:36:37 2012
  * @copyright The BSD 3-Clause License
  */
 

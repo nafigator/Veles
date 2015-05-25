@@ -1,12 +1,12 @@
 <?php
 /**
  * Base connection class
- * @file    DbConnection.php
+ * @file      DbConnection.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    2013-12-31 15:44
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      2013-12-31 15:44
  * @copyright The BSD 3-Clause License
  */
 

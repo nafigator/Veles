@@ -1,11 +1,11 @@
 <?php
 /**
- * @file    PostCurlRequest.php
+ * @file      PostCurlRequest.php
  *
  * PHP version 5.4+
  *
- * @author  Yancharuk Alexander <alex at itvault dot info>
- * @date    2015-01-20 20:16
+ * @author    Yancharuk Alexander <alex at itvault dot info>
+ * @date      2015-01-20 20:16
  * @copyright The BSD 3-Clause License
  */
 

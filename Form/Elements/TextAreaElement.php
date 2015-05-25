@@ -1,12 +1,12 @@
 <?php
 /**
  * TextArea элемент формы
- * @file    TextAreaElement.php
+ * @file      TextAreaElement.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Сбт Ноя 10 12:14:37 2012
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Сбт Ноя 10 12:14:37 2012
  * @copyright The BSD 3-Clause License
  */
 

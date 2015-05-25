@@ -2,12 +2,12 @@
 /**
  * Class for uploaded file validation
  *
- * @file    UploadedFileValidator.php
+ * @file      UploadedFileValidator.php
  *
  * PHP version 5.4+
  *
- * @author  Yancharuk Alexander <alex at itvault dot info>
- * @date    2013-08-03 11:04
+ * @author    Yancharuk Alexander <alex at itvault dot info>
+ * @date      2013-08-03 11:04
  * @copyright The BSD 3-Clause License
  */
 

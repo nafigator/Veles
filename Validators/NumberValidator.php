@@ -1,12 +1,12 @@
 <?php
 /**
  * Integer values validator
- * @file    NumberValidator.php
+ * @file      NumberValidator.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Вск Ноя 18 12:48:50 2012
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Вск Ноя 18 12:48:50 2012
  * @copyright The BSD 3-Clause License
  */
 

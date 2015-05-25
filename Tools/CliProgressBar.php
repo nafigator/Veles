@@ -1,12 +1,12 @@
 <?php
 /**
  * Progress bar for console applications
- * @file    CliProgressBar.php
+ * @file      CliProgressBar.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Сбт Фев 16 20:07:56 2013
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Сбт Фев 16 20:07:56 2013
  * @copyright The BSD 3-Clause License.
  */
 

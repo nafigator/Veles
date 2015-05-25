@@ -1,12 +1,12 @@
 <?php
 /**
  * Базовый класс для работы с базой данных
- * @file    DbBase.php
+ * @file      DbBase.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Срд Апр 23 06:34:47 MSK 2014
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Срд Апр 23 06:34:47 MSK 2014
  * @copyright The BSD 3-Clause License
  */
 

@@ -1,11 +1,11 @@
 <?php
 /**
- * @file    DbObservable.php
+ * @file      DbObservable.php
  *
  * PHP version 5.4+
  *
- * @author  Yancharuk Alexander <alex at itvault dot info>
- * @date    2015-01-17 07:53
+ * @author    Yancharuk Alexander <alex at itvault dot info>
+ * @date      2015-01-17 07:53
  * @copyright The BSD 3-Clause License
  */
 

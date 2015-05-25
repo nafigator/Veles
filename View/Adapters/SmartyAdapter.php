@@ -2,13 +2,13 @@
 /**
  * Adapter for Smarty
  *
- * @file    SmartyAdapter.php
+ * @file      SmartyAdapter.php
  *
  * PHP version 5.4+
  * Smarty version 3+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    2013-05-18 17:59
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      2013-05-18 17:59
  * @copyright The BSD 3-Clause License
  */
 

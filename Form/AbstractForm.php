@@ -1,12 +1,12 @@
 <?php
 /**
  * Base class for forms
- * @file    AbstractForm.php
+ * @file      AbstractForm.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Вск Авг 12 10:30:52 2012
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Вск Авг 12 10:30:52 2012
  * @copyright The BSD 3-Clause License
  */
 

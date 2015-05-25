@@ -1,12 +1,12 @@
 <?php
 /**
  * Select form element
- * @file    SelectElement.php
+ * @file      SelectElement.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Чтв Ноя 29 22:09:01 2012
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Чтв Ноя 29 22:09:01 2012
  * @copyright The BSD 3-Clause License
  */
 

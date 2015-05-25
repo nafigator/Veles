@@ -1,12 +1,12 @@
 <?php
 /**
  * Submit-кнопка формы
- * @file    SubmitElement.php
+ * @file      SubmitElement.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Сбт Авг 18 21:36:33 2012
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Сбт Авг 18 21:36:33 2012
  * @copyright The BSD 3-Clause License
  */
 

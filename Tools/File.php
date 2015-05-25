@@ -2,12 +2,12 @@
 /**
  * Class for file
  *
- * @file    File.php
+ * @file      File.php
  *
  * PHP version 5.4+
  *
- * @author  Yancharuk Alexander <alex at itvault dot info>
- * @date    2013-07-27 16:15
+ * @author    Yancharuk Alexander <alex at itvault dot info>
+ * @date      2013-07-27 16:15
  * @copyright The BSD 3-Clause License
  */
 

@@ -1,12 +1,12 @@
 <?php
 /**
  * Вспомогательный класс для формирования запросов
- * @file    QueryBuilder.php
+ * @file      QueryBuilder.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Сбт Июл 07 21:55:54 2012
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Сбт Июл 07 21:55:54 2012
  * @copyright The BSD 3-Clause License
  */
 

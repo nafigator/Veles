@@ -2,12 +2,12 @@
 /**
  * Cache adapter and singleton functionality
  *
- * @file    CacheAdapterAbstract.php
+ * @file      CacheAdapterAbstract.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    8/22/13 16:20
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      8/22/13 16:20
  * @copyright The BSD 3-Clause License
  */
 

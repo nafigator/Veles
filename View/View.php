@@ -1,12 +1,12 @@
 <?php
 /**
  * Output class
- * @file    View.php
+ * @file      View.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Сбт Июл 07 07:30:30 2012
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Сбт Июл 07 07:30:30 2012
  * @copyright The BSD 3-Clause License
  */
 

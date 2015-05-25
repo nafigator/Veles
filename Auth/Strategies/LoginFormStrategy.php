@@ -1,12 +1,12 @@
 <?php
 /**
  * Стратегия авторизации пользователя через форму логина
- * @file    LoginFormStrategy.php
+ * @file      LoginFormStrategy.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Вск Янв 27 17:40:18 2013
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Вск Янв 27 17:40:18 2013
  * @copyright The BSD 3-Clause License.
  */
 

@@ -1,12 +1,12 @@
 <?php
 /**
  * Usr authentication strategy base class
- * @file    AbstractAuthStrategy.php
+ * @file      AbstractAuthStrategy.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Вск Янв 27 17:29:50 2013
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Вск Янв 27 17:29:50 2013
  * @copyright The BSD 3-Clause License.
  */
 
