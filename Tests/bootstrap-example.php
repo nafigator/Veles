@@ -7,12 +7,12 @@
  * Unit-tests skeletons generation:
  * phpunit-skelgen --bootstrap="Tests/bootstrap.php" generate-test "Veles\Cache\Adapters\ApcAdapter" "Cache\Adapters\ApcAdapter.php" "Veles\Tests\Cache\Adapters\ApcAdapterTest" "Tests/Cache/Adapters/ApcAdapterTest.php"
  *
- * @file    bootstrap.php
+ * @file      bootstrap.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Чтв Дек 20 12:22:58 2012
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Чтв Дек 20 12:22:58 2012
  * @copyright The BSD 3-Clause License
  */
 

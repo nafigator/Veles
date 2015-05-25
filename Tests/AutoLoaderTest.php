@@ -1,12 +1,12 @@
 <?php
 /**
  * Unit-test for AutoLoader class
- * @file    AutoLoaderTest.php
+ * @file      AutoLoaderTest.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Вск Янв 20 22:07:49 2013
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      Вск Янв 20 22:07:49 2013
  * @copyright The BSD 3-Clause License.
  */
 
