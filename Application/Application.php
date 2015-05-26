@@ -41,16 +41,4 @@ class Application
 
 		View::show($template);
 	}
-
-	/**
-	 * ErrorHandlers initialisation
-	 * @codeCoverageIgnore
-	 */
-	public static function setErrorHandlers()
-	{
-		$error = new ErrBase;
-		register_shutdown_function([$error, 'fatal']);
-		set_error_handler([$error, 'usrError']);
-		set_exception_handler([$error, 'exception']);
-	}
 }
