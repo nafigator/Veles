@@ -1,5 +1,7 @@
 <?php
 /**
+ * Class-loader for routes config in ini format
+ *
  * @file      IniConfigLoader.php
  *
  * PHP version 5.4+

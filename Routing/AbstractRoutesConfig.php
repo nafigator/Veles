@@ -1,5 +1,7 @@
 <?php
 /**
+ * Base class for routes config
+ *
  * @file      AbstractRoutesConfig.php
  *
  * PHP version 5.4+

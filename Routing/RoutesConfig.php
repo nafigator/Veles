@@ -1,5 +1,7 @@
 <?php
 /**
+ * Concrete config class
+ *
  * @file      RoutesConfig.php
  *
  * PHP version 5.4+

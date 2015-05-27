@@ -1,5 +1,7 @@
 <?php
 /**
+ * Class for routes config caching
+ *
  * @file      RoutesCacheDecorator.php
  *
  * PHP version 5.4+

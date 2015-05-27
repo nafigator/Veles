@@ -1,5 +1,7 @@
 <?php
 /**
+ * Class-loader for routes config in php array format
+ *
  * @file    PhpConfigLoader.php
  *
  * PHP version 5.4+
