@@ -43,7 +43,7 @@ class MemcacheRaw
 	{
 		try {
 			$this->connection = fsockopen(
-				self::$host, self::$port, $errno, $errstr, 0.01
+				self::$host, self::$port, $errno, $errstr
 			);
 		} catch (Exception $e) {
 			throw new Exception('Can not connect to Memcache. Host: '
