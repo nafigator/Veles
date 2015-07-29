@@ -26,7 +26,7 @@ before_install:
 
 before_script:
   - |
-    if [[ $TRAVIS_PHP_VERSION > "5.5" ]]
+    if [[ $TRAVIS_PHP_VERSION > "5.5" ]] || [[ $TRAVIS_PHP_VERSION = "5.5" ]]
     then
       PHPUNIT_FLAGS="--exclude-group=apc"
       PHP_EXT_FILE="travisci.ini"
