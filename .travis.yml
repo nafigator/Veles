@@ -26,14 +26,9 @@ before_script:
     if [[ $TRAVIS_PHP_VERSION > "5.5" ]] || [[ $TRAVIS_PHP_VERSION = "5.5" ]]; then
       PHPUNIT_FLAGS="--exclude-group=apc"
       phpenv config-add travisci.ini
-    elif [[ $TRAVIS_PHP_VERSION = "hhvm" ]] || [[ $TRAVIS_PHP_VERSION = "hhvm-nightly" ]]; then
+    elif [[ $TRAVIS_PHP_VERSION = "hhv*" ]]; then
       PHPUNIT_FLAGS="--exclude-group=apc"
-      if [ !-d /etc/hhvm ]; then
-        mkdir /etc/hhvm
-      fi
-      echo "extension=memcache.so" >> /etc/hhvm/php.ini
-      echo "extension=memcached.so" >> /etc/hhvm/php.ini
-      echo "short_open_tag = On" >> /etc/hhvm/php.ini
+      cat travisci.ini >> /etc/hhvm/php.ini
     else
       PHPUNIT_FLAGS=""
       phpenv config-add travisci-5.4.ini
