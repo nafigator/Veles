@@ -81,10 +81,12 @@ class MemcacheRawTest extends \PHPUnit_Framework_TestCase
 		$msg = 'MemcacheRaw::disconnect return wrong result!';
 		$this->assertSame(true, $result, $msg);
 
-		$result = get_resource_type($object->getConnection());
+		if (!defined('HHVM_VERSION')) {
+			$result = get_resource_type($object->getConnection());
 
-		$msg = 'Wrong type of MemcacheRaw::$connection!';
-		$this->assertSame('Unknown', $result, $msg);
+			$msg = 'Wrong type of MemcacheRaw::$connection!';
+			$this->assertSame('Unknown', $result, $msg);
+		}
 	}
 
 	/**
