@@ -24,7 +24,7 @@ before_install:
 
 before_script:
   - |
-    if [[ $TRAVIS_PHP_VERSION = "nightly"]]; then
+    if [[ $TRAVIS_PHP_VERSION = "nightly" ]]; then
       pecl install memcache
       pecl install memcached
     fi
