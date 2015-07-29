@@ -23,6 +23,8 @@ before_install:
   - composer install --no-interaction
   - mysql -e "SET GLOBAL sql_mode='ANSI'";
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test'
+
+before_script:
   - |
     if [[ $TRAVIS_PHP_VERSION > "5.5" ]]
     then
@@ -32,8 +34,6 @@ before_install:
       PHPUNIT_FLAGS=""
       PHP_EXT_FILE="travisci-5.4.ini"
     fi
-
-before_script:
   - phpenv config-add $PHP_EXT_FILE
 
 script:
