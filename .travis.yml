@@ -1,8 +1,5 @@
 sudo: false
 
-env:
-  - if [ "$a" -lt "$b" ]
-
 language: php
 
 php:
@@ -27,7 +24,7 @@ before_install:
   - mysql -e "SET GLOBAL sql_mode='ANSI'";
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test'
   - |
-    if [ $TRAVIS_PHP_VERSION -ge "5.5" ]
+    if [[ $TRAVIS_PHP_VERSION > "5.5" ]]
     then
       PHPUNIT_FLAGS="--exclude-group=apc"
       PHP_EXT_FILE="travisci.ini"
