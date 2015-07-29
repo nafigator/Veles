@@ -10,14 +10,14 @@ php:
 matrix:
   include:
     - php: 5.4
+      before_script: phpenv config-add travisci-5.4.ini
       script: phpunit -c travisci-phpunit.xml --stderr --coverage-clover build/logs/clover.xml
     - php: 5.5
+      before_script: phpenv config-add travisci.ini
       script: phpunit -c travisci-phpunit.xml --exclude-group=apc --stderr --coverage-clover build/logs/clover.xml
     - php: 5.6
+      before_script: phpenv config-add travisci.ini
       script: phpunit -c travisci-phpunit.xml --exclude-group=apc --stderr --coverage-clover build/logs/clover.xml
-  allow_failures:
-      - php: 5.5
-      - php: 5.6
 
 services:
   - memcached
@@ -29,7 +29,6 @@ before_script:
   - composer install --no-interaction
   - mysql -e "SET GLOBAL sql_mode='ANSI'";
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test'
-  - phpenv config-add travisci.ini
 
 after_script:
   - CODECLIMATE_REPO_TOKEN="9b68837f2ccc3206ed5d6f74fc9422423e35a4dd28ee48f161165bc0259fd692" ./vendor/bin/test-reporter --stdout > codeclimate.json
