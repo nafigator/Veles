@@ -27,9 +27,6 @@ use Veles\Routing\RoutesConfig;
 use Veles\View\Adapters\NativeAdapter;
 use Veles\View\View;
 
-ini_set('apc.enable_cli', 1);
-ini_set('short_open_tag', 1);
-
 define('LIB_DIR', realpath(__DIR__ . '/../..'));
 define('TEST_DIR', realpath(LIB_DIR . '/Veles/Tests'));
 
