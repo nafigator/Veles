@@ -120,7 +120,7 @@ class File
 
 		$this->setName($name);
 
-		$dir = rtrim(strchr($path, $name, true), DIRECTORY_SEPARATOR);
+		$dir = rtrim(strstr($path, $name, true), DIRECTORY_SEPARATOR);
 
 		$this->setDir($dir);
 
