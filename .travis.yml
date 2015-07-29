@@ -1,18 +1,22 @@
 sudo: false
 
+env:
+  - if [ "$a" -lt "$b" ]
+
 language: php
 
+php:
+  - 5.4
+  - 5.5
+  - 5.6
+  - 7.0
+  - hhvm
+  - hhvm-nightly
+
 matrix:
-  include:
-    - php: 5.4
-      before_script: phpenv config-add travisci-5.4.ini
-      script: phpunit -c travisci-phpunit.xml --stderr --coverage-clover build/logs/clover.xml
-    - php: 5.5
-      before_script: phpenv config-add travisci.ini
-      script: phpunit -c travisci-phpunit.xml --exclude-group=apc --stderr --coverage-clover build/logs/clover.xml
-    - php: 5.6
-      before_script: phpenv config-add travisci.ini
-      script: phpunit -c travisci-phpunit.xml --exclude-group=apc --stderr --coverage-clover build/logs/clover.xml
+  allow_failures:
+    - php: hhvm-nightly
+    - php: 7.0
 
 services:
   - memcached
@@ -22,6 +26,21 @@ before_install:
   - composer install --no-interaction
   - mysql -e "SET GLOBAL sql_mode='ANSI'";
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test'
+  - |
+    if [ $TRAVIS_PHP_VERSION -ge "5.5" ]
+    then
+      PHPUNIT_FLAGS="--exclude-group=apc"
+      PHP_EXT_FILE="travisci.ini"
+    else
+      PHPUNIT_FLAGS=""
+      PHP_EXT_FILE="travisci-5.4.ini"
+    fi
+
+before_script:
+  - phpenv config-add $PHP_EXT_FILE
+
+script:
+  - phpunit -c travisci-phpunit.xml $PHPUNIT_FLAGS --stderr --coverage-clover build/logs/clover.xml
 
 after_script:
   - CODECLIMATE_REPO_TOKEN="9b68837f2ccc3206ed5d6f74fc9422423e35a4dd28ee48f161165bc0259fd692" ./vendor/bin/test-reporter --stdout > codeclimate.json
