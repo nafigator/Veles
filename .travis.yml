@@ -24,22 +24,28 @@ before_install:
 
 before_script:
   - |
-    if [[ $TRAVIS_PHP_VERSION = "hhvm" ]]; then
-      PHPUNIT_FLAGS="--exclude-group=apc"
-      cat travisci.ini >> /etc/hhvm/php.ini
-    elif [[ $TRAVIS_PHP_VERSION = "nightly" ]]; then
-      PHPUNIT_FLAGS="--exclude-group=apc,cache,memcache,memcacheraw,memcached --bootstrap=Tests/travisci-nightly-bootstrap.php"
-      echo 'short_open_tag = On' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-    elif [[ $TRAVIS_PHP_VERSION = "5.5" ]]; then
-      PHPUNIT_FLAGS="--exclude-group=apc"
-      phpenv config-add travisci.ini
-    elif [[ $TRAVIS_PHP_VERSION = "5.6" ]]; then
-      PHPUNIT_FLAGS="--exclude-group=apc --coverage-clover build/logs/clover.xml"
-      phpenv config-add travisci.ini
-    else
-      PHPUNIT_FLAGS=""
-      phpenv config-add travisci-5.4.ini
-    fi
+    case $TRAVIS_PHP_VERSION in
+      5.4)
+        PHPUNIT_FLAGS=""
+        phpenv config-add travisci-5.4.ini
+        ;;
+      5.5)
+        PHPUNIT_FLAGS="--exclude-group=apc"
+        phpenv config-add travisci.ini
+        ;;
+      5.6)
+        PHPUNIT_FLAGS="--exclude-group=apc --coverage-clover build/logs/clover.xml"
+        phpenv config-add travisci.ini
+        ;;
+      nightly)
+        PHPUNIT_FLAGS="--exclude-group=apc,cache,memcache,memcacheraw,memcached --bootstrap=Tests/travisci-nightly-bootstrap.php"
+        echo 'short_open_tag = On' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+        ;;
+      hhvm)
+        PHPUNIT_FLAGS="--exclude-group=apc"
+        cat travisci.ini >> /etc/hhvm/php.ini
+        ;;
+    esac
 
 script:
   - phpunit -c travisci-phpunit.xml --stderr $PHPUNIT_FLAGS
