@@ -6,6 +6,11 @@ php:
   - 5.4
   - 5.5
   - 5.6
+  - hhvm
+
+matrix:
+  allow_failures:
+    - php: hhvm
 
 services:
   - memcached
@@ -18,15 +23,21 @@ before_install:
 
 before_script:
   - |
-    if [[ $TRAVIS_PHP_VERSION > "5.5" ]] || [[ $TRAVIS_PHP_VERSION = "5.5" ]]
-    then
+    if [[ $TRAVIS_PHP_VERSION > "5.5" ]] || [[ $TRAVIS_PHP_VERSION = "5.5" ]]; then
       PHPUNIT_FLAGS="--exclude-group=apc"
-      PHP_EXT_FILE="travisci.ini"
+      phpenv config-add travisci.ini
+    elif [[ $TRAVIS_PHP_VERSION = "hhvm" ]] || [[ $TRAVIS_PHP_VERSION = "hhvm-nightly" ]]
+      PHPUNIT_FLAGS="--exclude-group=apc"
+      if [ !-d /etc/hhvm ]; then
+        mkdir /etc/hhvm
+      fi
+      echo "extension=memcache.so" >> /etc/hhvm/php.ini
+      echo "extension=memcached.so" >> /etc/hhvm/php.ini
+      echo "short_open_tag = On" >> /etc/hhvm/php.ini
     else
       PHPUNIT_FLAGS=""
-      PHP_EXT_FILE="travisci-5.4.ini"
+      phpenv config-add travisci-5.4.ini
     fi
-  - phpenv config-add $PHP_EXT_FILE
 
 script:
   - phpunit -c travisci-phpunit.xml $PHPUNIT_FLAGS --stderr --coverage-clover build/logs/clover.xml
