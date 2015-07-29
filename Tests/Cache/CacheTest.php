@@ -4,7 +4,6 @@ namespace Veles\Tests\Cache;
 use Exception;
 use Memcached;
 use PHPUnit_Framework_TestCase;
-use Veles\Cache\Adapters\ApcAdapter;
 use Veles\Cache\Adapters\iCacheAdapter;
 use Veles\Cache\Adapters\MemcacheAdapter;
 use Veles\Cache\Adapters\MemcachedAdapter;
@@ -14,16 +13,6 @@ use Veles\Cache\Adapters\MemcachedAdapter;
  */
 class CacheTest extends PHPUnit_Framework_TestCase
 {
-	public static function setUpBeforeClass()
-	{
-		Cache::setAdapter(MemcachedAdapter::instance());
-	}
-
-	public static function tearDownAfterClass()
-	{
-		Cache::setAdapter(ApcAdapter::instance());
-	}
-
 	/**
 	 * @covers       Veles\Cache\Cache::setAdapter
 	 * @dataProvider setAdapterProvider
@@ -45,8 +34,7 @@ class CacheTest extends PHPUnit_Framework_TestCase
 	{
 		return [
 			[MemcacheAdapter::instance()],
-			[MemcachedAdapter::instance()],
-			[ApcAdapter::instance()]
+			[MemcachedAdapter::instance()]
 		];
 	}
 
@@ -56,10 +44,10 @@ class CacheTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testGetAdapter()
 	{
-		Cache::setAdapter(ApcAdapter::instance());
+		Cache::setAdapter(MemcacheAdapter::instance());
 		$result = Cache::getAdapter();
 
-		$this->assertTrue($result instanceof ApcAdapter);
+		$this->assertTrue($result instanceof MemcacheAdapter);
 
 		Cache::setAdapter(MemcachedAdapter::instance());
 		$result = Cache::getAdapter();

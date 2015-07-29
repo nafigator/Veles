@@ -16,14 +16,8 @@ class MemcachedAdapterTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected $object;
 
-	public static function setUpBeforeClass()
-	{
-		Cache::setAdapter(MemcachedAdapter::instance());
-	}
-
 	public static function tearDownAfterClass()
 	{
-		Cache::setAdapter(ApcAdapter::instance());
 		MemcacheRaw::setConnectionParams('localhost', 11211);
 	}
 

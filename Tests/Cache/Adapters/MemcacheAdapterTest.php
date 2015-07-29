@@ -1,8 +1,8 @@
 <?php
 namespace Veles\Tests\Cache\Adapters;
 
-use Veles\Cache\Adapters\ApcAdapter;
 use Veles\Cache\Adapters\MemcacheAdapter;
+use Veles\Cache\Adapters\MemcachedAdapter;
 use Veles\Cache\Adapters\MemcacheRaw;
 use Veles\Cache\Cache;
 
@@ -23,7 +23,7 @@ class MemcacheAdapterTest extends \PHPUnit_Framework_TestCase
 
 	public static function tearDownAfterClass()
 	{
-		Cache::setAdapter(ApcAdapter::instance());
+		Cache::setAdapter(MemcachedAdapter::instance());
 		MemcacheRaw::setConnectionParams('localhost', 11211);
 	}
 
