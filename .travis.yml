@@ -23,7 +23,7 @@ before_install:
 
 before_script:
   - |
-    if [[ $TRAVIS_PHP_VERSION = "hhv*" ]]; then
+    if [[ $TRAVIS_PHP_VERSION = "hhv"* ]]; then
       PHPUNIT_FLAGS="--exclude-group=apc"
       cat travisci.ini >> /etc/hhvm/php.ini
     elif [[ $TRAVIS_PHP_VERSION > "5.5" || $TRAVIS_PHP_VERSION = "5.5" ]]; then
