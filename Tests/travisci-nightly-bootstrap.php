@@ -1,11 +1,11 @@
 <?php
 /**
- * @file      travisci-bootstrap.php
+ * @file      travisci-nightly-bootstrap.php
  *
- * PHP version 5.4+
+ * PHP version 7.0+
  *
  * @author    Yancharuk Alexander <alex at itvault dot info>
- * @date      2014-12-24 09:59
+ * @date      2015-07-29 21:59
  * @copyright The BSD 3-Clause License
  */
 
