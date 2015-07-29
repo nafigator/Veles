@@ -81,6 +81,7 @@ class MemcacheRawTest extends \PHPUnit_Framework_TestCase
 		$msg = 'MemcacheRaw::disconnect return wrong result!';
 		$this->assertSame(true, $result, $msg);
 
+		 // @FIXME There is difference between PHP and HHVM in variables types cleanup at runtime. HHVM shows that $this->connection type is stream.
 		if (!defined('HHVM_VERSION')) {
 			$result = get_resource_type($object->getConnection());
 
