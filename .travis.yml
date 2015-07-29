@@ -24,14 +24,12 @@ before_install:
 
 before_script:
   - |
-    if [[ $TRAVIS_PHP_VERSION = "nightly" ]]; then
-      printf "\n" | pecl install memcache
-      pecl install memcached
-    fi
-  - |
     if [[ $TRAVIS_PHP_VERSION = "hhv"* ]]; then
       PHPUNIT_FLAGS="--exclude-group=apc"
       cat travisci.ini >> /etc/hhvm/php.ini
+    elif [[ $TRAVIS_PHP_VERSION = "nightly" ]]; then
+      PHPUNIT_FLAGS="--exclude-group=apc,cache,memcache,memcacheraw,memcached --bootstrap='Tests/travisci-nightly-bootstrap.php'"
+      echo 'short_open_tag = On' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
     elif [[ $TRAVIS_PHP_VERSION > "5.5" || $TRAVIS_PHP_VERSION = "5.5" ]]; then
       PHPUNIT_FLAGS="--exclude-group=apc"
       phpenv config-add travisci.ini
