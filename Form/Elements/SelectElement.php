@@ -25,7 +25,7 @@ class SelectElement extends AbstractElement
 	{
 		$html = '<select' . $this->attributes() . '>';
 
-		$id = isset($this->option_id)
+		$idx = isset($this->option_id)
 			? $this->option_id
 			: 'id';
 		$name = isset($this->option_name)
@@ -35,11 +35,11 @@ class SelectElement extends AbstractElement
 		foreach ($this->options as $option) {
 			$selected = '';
 
-			if (isset($this->selected) && $option[$id] === $this->selected) {
+			if (isset($this->selected) && $option[$idx] === $this->selected) {
 				$selected = ' selected="true" ';
 			}
 
-			$html .= "<option $selected value=\"{$option[$id]}\">
+			$html .= "<option $selected value=\"{$option[$idx]}\">
 						{$option[$name]}
 					  </option>";
 		}
