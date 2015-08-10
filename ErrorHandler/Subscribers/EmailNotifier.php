@@ -9,7 +9,7 @@
  * @copyright The BSD 3-Clause License
  */
 
-namespace Veles\ErrorHandler;
+namespace Veles\ErrorHandler\Subscribers;
 
 use Veles\Email\AbstractEmail;
 

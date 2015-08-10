@@ -33,7 +33,7 @@ class BaseErrorHandler extends Observable
 	}
 
 	/**
-	 * Method stub. Must be implemented in descendant classes
+	 * Method stub. Must be implemented in child classes
 	 */
 	public function run() {}
 }
