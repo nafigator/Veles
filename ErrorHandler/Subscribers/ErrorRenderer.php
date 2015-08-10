@@ -15,7 +15,7 @@ namespace Veles\ErrorHandler\Subscribers;
  * Class ErrorRenderer
  * @author  Yancharuk Alexander <alex at itvault dot info>
  */
-class ErrorRenderer
+class ErrorRenderer implements \SplObserver
 {
 	/** @var  AbstractErrorHtmlBuilder */
 	protected $builder;
