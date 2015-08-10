@@ -20,51 +20,80 @@ use SplSubject;
  */
 abstract class AbstractEmail
 {
-	protected $receiver = null;
-	protected $headers  = null;
-	protected $subject  = null;
-	protected $message  = null;
-	protected $from		= null;
-	protected $charset  = 'utf-8';
-	protected $encoding = 'base64';   //8bit
+	protected $receivers = [];
+	protected $headers   = '';
+	protected $subject   = null;
+	protected $message   = null;
+	protected $from	     = null;
+	protected $charset   = 'utf-8';
+	protected $encoding  = 'base64';   //8bit
 
 	/**
-	 * Вызов
-	 * @param SplSubject $subject
-	 * @internal param array $vars Набор переменных
-	 */
-	public function update(SplSubject $subject)
-	{
-		/** @noinspection PhpUndefinedMethodInspection */
-		$this->message = base64_encode($subject->getMessage());
-		$this->init();
-		$this->send();
-	}
-
-	/**
-	 * Создание сообщения
+	 * Create message
 	 */
 	abstract public function init();
 
 	/**
-	 * Отправка письма
+	 * Send emails
 	 */
-	protected function send()
+	public function send()
 	{
-		mail($this->receiver, $this->subject, $this->message, $this->headers);
+		foreach ($this->receivers as $receiver) {
+			mail($receiver, $this->subject, $this->message, $this->headers);
+		}
 	}
 
 	/**
-	 * @param string $receiver Email of receiver
+	 * Set message recipients
+	 *
+	 * @param array $receivers Emails of receivers
 	 */
-	public function setReceiver($receiver)
+	public function setReceivers(array $receivers)
 	{
-		$this->receiver = $receiver;
+		$this->receivers = $receivers;
 	}
 
+	/**
+	 * Set email subject
+	 *
+	 * @param string $subject Email subject
+	 */
 	public function setSubject($subject)
 	{
 		$encoded_subj = base64_encode($subject);
-		$this->subject = "=?$this->charset?B?$encoded_subj?=";
+		$charset = $this->getCharset();
+		$this->subject = "=?$charset?B?$encoded_subj?=";
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCharset()
+	{
+		return $this->charset;
+	}
+
+	/**
+	 * @param string $charset
+	 */
+	public function setCharset($charset)
+	{
+		$this->charset = $charset;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getEncoding()
+	{
+		return $this->encoding;
+	}
+
+	/**
+	 * @param string $encoding
+	 */
+	public function setEncoding($encoding)
+	{
+		$this->encoding = $encoding;
 	}
 }
