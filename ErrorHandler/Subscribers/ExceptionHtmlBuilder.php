@@ -26,6 +26,7 @@ class ExceptionHtmlBuilder extends AbstractErrorHtmlBuilder
 	{
 		$vars = $this->handler->getVars();
 		$vars['stack'] = $this->getBacktrace($vars['stack']);
+		$vars['type'] = $this->getErrorType($vars['type']);
 		View::set($vars);
 
 		return View::get($this->getTemplate());
