@@ -31,9 +31,4 @@ class BaseErrorHandler extends Observable
 	{
 		return $this->vars;
 	}
-
-	/**
-	 * Method stub. Must be implemented in child classes
-	 */
-	public function run() {}
 }
