@@ -1,6 +1,6 @@
 <?php
 /**
- * @file    AbstractErrorBuilder.php
+ * @file    AbstractBuilder.php
  *
  * PHP version 5.4+
  *
@@ -14,10 +14,10 @@ namespace Veles\ErrorHandler\HtmlBuilders;
 use Veles\ErrorHandler\BaseErrorHandler;
 
 /**
- * Interface AbstractErrorBuilder
+ * Interface AbstractBuilder
  * @author  Yancharuk Alexander <alex at itvault dot info>
  */
-abstract class AbstractErrorBuilder
+abstract class AbstractBuilder
 {
 	/** @var  BaseErrorHandler */
 	protected $handler;

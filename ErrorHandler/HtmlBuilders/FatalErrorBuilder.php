@@ -17,7 +17,7 @@ use Veles\View\View;
  * Class FatalErrorBuilder
  * @author  Yancharuk Alexander <alex at itvault dot info>
  */
-class FatalErrorBuilder  extends AbstractErrorBuilder
+class FatalErrorBuilder  extends AbstractBuilder
 {
 	/**
 	 * @return string

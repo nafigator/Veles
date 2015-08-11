@@ -17,7 +17,7 @@ use Veles\View\View;
  * Class ExceptionBuilder
  * @author  Yancharuk Alexander <alex at itvault dot info>
  */
-class ExceptionBuilder extends AbstractErrorBuilder
+class ExceptionBuilder extends AbstractBuilder
 {
 	/**
 	 * @return string

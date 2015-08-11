@@ -12,7 +12,7 @@
 namespace Veles\ErrorHandler\Subscribers;
 
 use Veles\Email\AbstractEmail;
-use Veles\ErrorHandler\HtmlBuilders\AbstractErrorBuilder;
+use Veles\ErrorHandler\HtmlBuilders\AbstractBuilder;
 
 /**
  * Class EmailNotifier
@@ -20,7 +20,7 @@ use Veles\ErrorHandler\HtmlBuilders\AbstractErrorBuilder;
  */
 class EmailNotifier extends AbstractEmail implements \SplObserver
 {
-	/** @var  AbstractErrorBuilder */
+	/** @var  AbstractBuilder */
 	protected $builder;
 
 	/**
@@ -38,7 +38,7 @@ class EmailNotifier extends AbstractEmail implements \SplObserver
 	}
 
 	/**
-	 * @return AbstractErrorBuilder
+	 * @return AbstractBuilder
 	 */
 	public function getMessageBuilder()
 	{
@@ -46,9 +46,9 @@ class EmailNotifier extends AbstractEmail implements \SplObserver
 	}
 
 	/**
-	 * @param AbstractErrorBuilder $builder
+	 * @param AbstractBuilder $builder
 	 */
-	public function setMessageBuilder(AbstractErrorBuilder $builder)
+	public function setMessageBuilder(AbstractBuilder $builder)
 	{
 		$this->builder = $builder;
 	}
