@@ -45,8 +45,6 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 			$this->bindParams($params, $types);
 			$this->stmt->execute();
 		}
-
-		$this->notify();
 	}
 
 	/**
@@ -65,10 +63,8 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 			$this->prepare($sql, $params, $types);
 			$result = $this->stmt->fetchColumn();
 		} catch (\PDOException $e) {
-			$this->setSql($sql);
-			$this->setParams($params);
-			$this->setException($e);
-			$this->notify();
+			$e->errorInfo['sql'] = $sql;
+			$e->errorInfo['params'] = $params;
 			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
 		}
 
@@ -91,10 +87,8 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 			$this->prepare($sql, $params, $types);
 			$result = $this->stmt->fetch();
 		} catch (\PDOException $e) {
-			$this->setSql($sql);
-			$this->setParams($params);
-			$this->setException($e);
-			$this->notify();
+			$e->errorInfo['sql'] = $sql;
+			$e->errorInfo['params'] = $params;
 			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
 		}
 
@@ -117,10 +111,8 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 			$this->prepare($sql, $params, $types);
 			$result = $this->stmt->fetchAll();
 		} catch (\PDOException $e) {
-			$this->setSql($sql);
-			$this->setParams($params);
-			$this->setException($e);
-			$this->notify();
+			$e->errorInfo['sql'] = $sql;
+			$e->errorInfo['params'] = $params;
 			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
 		}
 
@@ -138,8 +130,6 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 		try {
 			$result = $this->getConnection()->beginTransaction();
 		} catch (\PDOException $e) {
-			$this->setException($e);
-			$this->notify();
 			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
 		}
 		return $result;
@@ -156,8 +146,6 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 		try {
 			$result = $this->getConnection()->rollBack();
 		} catch (\PDOException $e) {
-			$this->setException($e);
-			$this->notify();
 			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
 		}
 		return $result;
@@ -174,8 +162,6 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 		try {
 			$result = $this->getConnection()->commit();
 		} catch (\PDOException $e) {
-			$this->setException($e);
-			$this->notify();
 			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
 		}
 		return $result;
@@ -207,10 +193,8 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 				$result = $this->stmt->execute();
 			}
 		} catch (\PDOException $e) {
-			$this->setSql($sql);
-			$this->setParams($params);
-			$this->setException($e);
-			$this->notify();
+			$e->errorInfo['sql'] = $sql;
+			$e->errorInfo['params'] = $params;
 			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
 		}
 
@@ -228,8 +212,6 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 		try {
 			$result = (int) $this->getConnection()->lastInsertId();
 		} catch (\PDOException $e) {
-			$this->setException($e);
-			$this->notify();
 			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
 		}
 		return $result;
@@ -239,6 +221,7 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	 * Get found rows quantity
 	 *
 	 * @return int
+	 * @throws DbException
 	 */
 	public function getFoundRows()
 	{
@@ -270,8 +253,6 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 		try {
 			$result = $this->getConnection()->quote($var);
 		} catch (\PDOException $e) {
-			$this->setException($e);
-			$this->notify();
 			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
 		}
 		return $result;

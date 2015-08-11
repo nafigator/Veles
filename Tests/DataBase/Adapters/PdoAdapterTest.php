@@ -77,18 +77,15 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 		$sql = 'Veles = ?';
 		$param = ['param'];
 		try { Db::value($sql, $param); } catch (DbException $e) {}
-		$obj = Db::getAdapter();
 
 		$msg = 'Wrong Db::value() behavior!';
-		$this->assertAttributeSame($sql, 'sql', $obj, $msg);
+		$this->assertSame($sql, $e->getSql(), $msg);
 
 		$msg = 'Wrong Db::value() behavior!';
-		$this->assertAttributeSame($param, 'params', $obj, $msg);
+		$this->assertSame($param, $e->getParams(), $msg);
 
 		$msg = 'Wrong Db::value() behavior!';
-		$this->assertAttributeInstanceOf(
-			'\PDOException', 'exception', $obj, $msg
-		);
+		$this->assertInstanceOf('\PDOException', $e->getPrevious(), $msg);
 	}
 
 	/**
@@ -115,18 +112,15 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 		$sql = 'Veles = ?';
 		$param = ['param'];
 		try { Db::row($sql, $param); } catch (DbException $e) {}
-		$obj = Db::getAdapter();
 
 		$msg = 'Wrong Db::row() behavior!';
-		$this->assertAttributeSame($sql, 'sql', $obj, $msg);
+		$this->assertSame($sql, $e->getSql(), $msg);
 
 		$msg = 'Wrong Db::row() behavior!';
-		$this->assertAttributeSame($param, 'params', $obj, $msg);
+		$this->assertSame($param, $e->getParams(), $msg);
 
 		$msg = 'Wrong Db::row() behavior!';
-		$this->assertAttributeInstanceOf(
-			'\PDOException', 'exception', $obj, $msg
-		);
+		$this->assertInstanceOf('\PDOException', $e->getPrevious(), $msg);
 	}
 
 	/**
@@ -156,18 +150,15 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 		$sql = 'Veles = ?';
 		$param = ['param'];
 		try { Db::rows($sql, $param); } catch (DbException $e) {}
-		$obj = Db::getAdapter();
 
 		$msg = 'Wrong Db::rows() behavior!';
-		$this->assertAttributeSame($sql, 'sql', $obj, $msg);
+		$this->assertSame($sql, $e->getSql(), $msg);
 
 		$msg = 'Wrong Db::rows() behavior!';
-		$this->assertAttributeSame($param, 'params', $obj, $msg);
+		$this->assertSame($param, $e->getParams(), $msg);
 
 		$msg = 'Wrong Db::rows() behavior!';
-		$this->assertAttributeInstanceOf(
-			'\PDOException', 'exception', $obj, $msg
-		);
+		$this->assertInstanceOf('\PDOException', $e->getPrevious(), $msg);
 	}
 
 	/**
@@ -255,18 +246,15 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 		$sql = 'Veles = ?';
 		$param = ['param'];
 		try { Db::query($sql, $param); } catch (DbException $e) {}
-		$obj = Db::getAdapter();
 
 		$msg = 'Wrong Db::query() behavior!';
-		$this->assertAttributeSame($sql, 'sql', $obj, $msg);
+		$this->assertSame($sql, $e->getSql(), $msg);
 
 		$msg = 'Wrong Db::query() behavior!';
-		$this->assertAttributeSame($param, 'params', $obj, $msg);
+		$this->assertSame($param, $e->getParams(), $msg);
 
 		$msg = 'Wrong Db::query() behavior!';
-		$this->assertAttributeInstanceOf(
-			'\PDOException', 'exception', $obj, $msg
-		);
+		$this->assertInstanceOf('\PDOException', $e->getPrevious(), $msg);
 	}
 
 	/**
@@ -289,12 +277,9 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 		} catch (DbException $e) {
 			Db::connection('master');
 		}
-		$obj = Db::getAdapter();
 
 		$msg = 'Wrong Db::getLastInsertId() behavior!';
-		$this->assertAttributeInstanceOf(
-			'\PDOException', 'exception', $obj, $msg
-		);
+		$this->assertInstanceOf('\PDOException', $e->getPrevious(), $msg);
 	}
 
 	/**
@@ -341,11 +326,8 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 		} catch (DbException $e) {
 			Db::connection('master');
 		}
-		$obj = Db::getAdapter();
 
 		$msg = 'Wrong Db::escape() behavior!';
-		$this->assertAttributeInstanceOf(
-			'\PDOException', 'exception', $obj, $msg
-		);
+		$this->assertInstanceOf('\PDOException', $e->getPrevious(), $msg);
 	}
 }

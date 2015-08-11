@@ -13,7 +13,6 @@
 namespace Veles\DataBase\Adapters;
 
 use Veles\DataBase\ConnectionPools\ConnectionPool;
-use Veles\DataBase\Helpers\DbObservable;
 
 /**
  * Class DbAdapterBase
@@ -22,7 +21,7 @@ use Veles\DataBase\Helpers\DbObservable;
  *
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-class DbAdapterBase extends DbObservable
+class DbAdapterBase
 {
 	/** @var ConnectionPool */
 	protected static $pool;

@@ -21,8 +21,10 @@ class DbExceptionTest extends \PHPUnit_Framework_TestCase
 	{
 		$msg = "SQLSTATE[28000] [1045] Access denied for user 'user'@'localhost' (using password: YES)";
 		$code = 28000;
-
 		$exception = new \PDOException($msg, $code);
+		$exception->errorInfo['sql'] = 'SELECT * FROM users WHERE name = ?';
+		$exception->errorInfo['params'] = ['Lola'];
+
 		$this->object = new DbException($msg, $code, $exception);
 	}
 
@@ -35,16 +37,18 @@ class DbExceptionTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\DataBase\Exceptions\DbException::__construct
+	 * @covers       Veles\DataBase\Exceptions\DbException::__construct
 	 *
-	 * @param string $message
-	 * @param string $ansi_code
-	 * @param int $code
+	 * @param string        $message
+	 * @param string        $ansi_code
+	 * @param int           $code
 	 * @param \PDOException $exception
+	 * @param string        $sql
+	 * @param array         $params
 	 *
 	 * @dataProvider constructProvider
 	 */
-	public function testConstruct($message, $ansi_code, $code, $exception)
+	public function testConstruct($message, $ansi_code, $code, $exception, $sql, $params)
 	{
 		$obj = new DbException(
 			$exception->getMessage(), (int) $exception->getCode(), $exception
@@ -61,17 +65,31 @@ class DbExceptionTest extends \PHPUnit_Framework_TestCase
 		$result = $obj->getCode();
 		$msg = 'Wrong DbException::__construct() behavior!';
 		$this->assertSame($code, $result, $msg);
+
+		$result = $obj->getSql();
+		$msg = 'Wrong DbException::__construct() behavior!';
+		$this->assertSame($sql, $result, $msg);
+
+		$result = $obj->getParams();
+		$msg = 'Wrong DbException::__construct() behavior!';
+		$this->assertSame($params, $result, $msg);
 	}
 
 	public function constructProvider()
 	{
+		$sql = 'SELECT * FROM table_name';
+		$params = [1,2,3];
+		$exception = new \PDOException("SQLSTATE[HY000] [2002] Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)", (int) 'HY000');
+		$exception->errorInfo['sql'] = $sql;
+		$exception->errorInfo['params'] = $params;
+
 		return [
-			["Unknown column 'contest' in 'where clause'", '42S22', 1054, new \PDOException("SQLSTATE[42S22]: Column not found: 1054 Unknown column 'contest' in 'where clause'", (int) '42S22')],
+			["Unknown column 'contest' in 'where clause'", '42S22', 1054, new \PDOException("SQLSTATE[42S22]: Column not found: 1054 Unknown column 'contest' in 'where clause'", (int) '42S22'), '', []],
 			["You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY minimum
 						LIMIT 1' at line 7", '42000', 1064, new \PDOException("SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY minimum
-						LIMIT 1' at line 7", (int) '42000')],
-			["Access denied for user 'root'@'localhost' (using password: YES)", '28000', 1045, new \PDOException("SQLSTATE[28000] [1045] Access denied for user 'root'@'localhost' (using password: YES)", (int) '28000')],
-			["Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)", 'HY000', 2002, new \PDOException("SQLSTATE[HY000] [2002] Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)", (int) 'HY000')]
+						LIMIT 1' at line 7", (int) '42000'), '', []],
+			["Access denied for user 'root'@'localhost' (using password: YES)", '28000', 1045, new \PDOException("SQLSTATE[28000] [1045] Access denied for user 'root'@'localhost' (using password: YES)", (int) '28000'), '', []],
+			["Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)", 'HY000', 2002, $exception, $sql, $params]
 		];
 	}
 
@@ -82,7 +100,7 @@ class DbExceptionTest extends \PHPUnit_Framework_TestCase
 	{
 		$expected = '28000';
 		$result = $this->object->getAnsiCode();
-		$msg = 'DbException::getAnsiCode returns wrong result!';
+		$msg = 'DbException::getAnsiCode() returns wrong result!';
 		$this->assertSame($expected, $result, $msg);
 	}
 
@@ -94,7 +112,53 @@ class DbExceptionTest extends \PHPUnit_Framework_TestCase
 		$expected = uniqid();
 		$this->object->setAnsiCode($expected);
 		$result = $this->object->getAnsiCode();
-		$msg = 'DbException::setAnsiCode wrong behavior!';
+		$msg = 'DbException::setAnsiCode() wrong behavior!';
+		$this->assertSame($expected, $result, $msg);
+	}
+
+	/**
+	 * @covers Veles\DataBase\Exceptions\DbException::getSql
+	 */
+	public function testGetSql()
+	{
+		$expected = 'SELECT * FROM users WHERE name = ?';
+		$result = $this->object->getSql();
+		$msg = 'DbException::getSql() returns wrong result!';
+		$this->assertSame($expected, $result, $msg);
+	}
+
+	/**
+	 * @covers Veles\DataBase\Exceptions\DbException::setSql
+	 */
+	public function testSetSql()
+	{
+		$expected = uniqid();
+		$this->object->setSql($expected);
+		$result = $this->object->getSql();
+		$msg = 'DbException::setSql() wrong behavior!';
+		$this->assertSame($expected, $result, $msg);
+	}
+
+	/**
+	 * @covers Veles\DataBase\Exceptions\DbException::getParams
+	 */
+	public function testGetParams()
+	{
+		$expected = ['Lola'];
+		$result = $this->object->getParams();
+		$msg = 'DbException::getParams() returns wrong result!';
+		$this->assertSame($expected, $result, $msg);
+	}
+
+	/**
+	 * @covers Veles\DataBase\Exceptions\DbException::setParams
+	 */
+	public function testSetParams()
+	{
+		$expected = uniqid();
+		$this->object->setParams($expected);
+		$result = $this->object->getParams();
+		$msg = 'DbException::setParams() wrong behavior!';
 		$this->assertSame($expected, $result, $msg);
 	}
 }
