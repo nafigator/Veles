@@ -24,7 +24,6 @@ class UserErrorHandler extends BaseErrorHandler
 			'%Y-%m-%d %H:%M:%S', $_SERVER['REQUEST_TIME']
 		);
 		$this->vars['message'] = $message;
-		/** @noinspection PhpUndefinedConstantInspection */
 		$this->vars['file']    = $file;
 		$this->vars['line']    = $line;
 		$this->vars['stack']   = array_reverse(debug_backtrace());
