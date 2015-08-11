@@ -12,6 +12,7 @@
 namespace Veles\ErrorHandler\Subscribers;
 
 use Veles\Email\AbstractEmail;
+use Veles\ErrorHandler\HtmlBuilders\AbstractErrorHtmlBuilder;
 
 /**
  * Class EmailNotifier

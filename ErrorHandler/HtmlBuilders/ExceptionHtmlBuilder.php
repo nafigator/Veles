@@ -9,7 +9,7 @@
  * @copyright The BSD 3-Clause License
  */
 
-namespace Veles\ErrorHandler\Subscribers;
+namespace Veles\ErrorHandler\HtmlBuilders;
 
 use Veles\View\View;
 
