@@ -25,7 +25,7 @@ class FatalErrorBuilder  extends AbstractBuilder
 	public function getHtml()
 	{
 		$vars = $this->handler->getVars();
-		$vars['type'] = $this->getErrorType($vars['type']);
+		$this->convertTypeToString($vars['type']);
 		View::set($vars);
 
 		return View::get($this->getTemplate());

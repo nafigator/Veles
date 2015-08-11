@@ -56,10 +56,10 @@ abstract class AbstractBuilder
 	/**
 	 * Get error type
 	 * @param string $type
-	 * @return string
 	 */
-	protected function getErrorType($type)
+	protected function convertTypeToString(&$type)
 	{
+		$type_copy = $type;
 		$err_types = [
 			E_ERROR             => 'FATAL ERROR',               // 1
 			E_WARNING           => 'WARNING',                   // 2
@@ -79,18 +79,17 @@ abstract class AbstractBuilder
 			0                   => 'EXCEPTION'
 		];
 
-		return (isset($err_types[$type]))
-			? $err_types[$type]
-			: "UNKNOWN ERROR TYPE: $type";
+		$type = (isset($err_types[$type_copy]))
+			? $err_types[$type_copy]
+			: "UNKNOWN ERROR TYPE: $type_copy";
 	}
 
 	/**
 	 * Calls backtrace formatting
 	 *
 	 * @param array $backtrace Calls array
-	 * @return array
 	 */
-	protected function getBacktrace(array $backtrace)
+	protected function formatBacktrace(array &$backtrace)
 	{
 		foreach ($backtrace as &$call) {
 			$call['function'] = (isset($call['class']))
@@ -101,7 +100,5 @@ abstract class AbstractBuilder
 				? $call['file'] . '<b>:</b>' . $call['line']
 				: '';
 		}
-
-		return $backtrace;
 	}
 }

@@ -25,8 +25,8 @@ class ErrorBuilder extends AbstractBuilder
 	public function getHtml()
 	{
 		$vars = $this->handler->getVars();
-		$vars['stack'] = $this->getBacktrace($vars['stack']);
-		$vars['type'] = $this->getErrorType($vars['type']);
+		$this->formatBacktrace($vars['stack']);
+		$this->convertTypeToString($vars['type']);
 		View::set($vars);
 
 		return View::get($this->getTemplate());
