@@ -12,8 +12,6 @@
 
 namespace Veles\Email;
 
-use SplSubject;
-
 /**
  * Класс AbstractEmail
  * @author  Alexander Yancharuk <alex at itvault dot info>
