@@ -44,7 +44,7 @@ class FatalErrorHandlerTest extends \PHPUnit_Framework_TestCase
 		$expected = [
 			'type' => 8,
 			'message' => 'Undefined variable: a',
-			'file' => '/home/alex/Projects/Veles/Tests/ErrorHandler/FatalErrorHandlerTest.php',
+			'file' => realpath(__FILE__),
 			'line' => 39,
 			'time' => strftime('%Y-%m-%d %H:%M:%S', $time),
 			'stack' => [],

@@ -60,7 +60,7 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
 		$expected = [
 			'time' => strftime('%Y-%m-%d %H:%M:%S', $time),
 			'message' => $msg,
-			'file' => '/home/alex/Projects/Veles/Tests/ErrorHandler/ExceptionHandlerTest.php',
+			'file' => realpath(__FILE__),
 			'line' => 55,
 			'stack' => array_reverse($e->getTrace()),
 			'type' => 0,
