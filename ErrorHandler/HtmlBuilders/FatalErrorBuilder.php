@@ -1,6 +1,6 @@
 <?php
 /**
- * @file    FatalErrorHtmlBuilder.php
+ * @file    FatalErrorBuilder.php
  *
  * PHP version 5.4+
  *
@@ -14,10 +14,10 @@ namespace Veles\ErrorHandler\HtmlBuilders;
 use Veles\View\View;
 
 /**
- * Class FatalErrorHtmlBuilder
+ * Class FatalErrorBuilder
  * @author  Yancharuk Alexander <alex at itvault dot info>
  */
-class FatalErrorHtmlBuilder  extends AbstractErrorHtmlBuilder
+class FatalErrorBuilder  extends AbstractErrorBuilder
 {
 	/**
 	 * @return string

@@ -1,6 +1,6 @@
 <?php
 /**
- * @file    ExceptionHtmlBuilder.php
+ * @file    ExceptionBuilder.php
  *
  * PHP version 5.4+
  *
@@ -14,10 +14,10 @@ namespace Veles\ErrorHandler\HtmlBuilders;
 use Veles\View\View;
 
 /**
- * Class ExceptionHtmlBuilder
+ * Class ExceptionBuilder
  * @author  Yancharuk Alexander <alex at itvault dot info>
  */
-class ExceptionHtmlBuilder extends AbstractErrorHtmlBuilder
+class ExceptionBuilder extends AbstractErrorBuilder
 {
 	/**
 	 * @return string
