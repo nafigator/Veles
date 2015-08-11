@@ -397,13 +397,17 @@ class UploadFileTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Tools\UploadFile::save
-	 * @covers Veles\Tools\UploadFile::moveUploadedFile
+	 * @covers       Veles\Tools\UploadFile::save
+	 * @covers       Veles\Tools\UploadFile::moveUploadedFile
 	 *
-	 * @group Tools
-	 * @depends testGetTmpPath
+	 * @group        Tools
+	 * @depends      testGetTmpPath
 	 * @dataProvider saveProvider
-	 * @see UploadFile::save
+	 * @see          UploadFile::save
+	 *
+	 * @param $dir
+	 * @param $file
+	 * @param $expected
 	 */
 	public function testSave($dir, $file, $expected)
 	{
@@ -449,7 +453,6 @@ class UploadFileTest extends PHPUnit_Framework_TestCase
 			[$dir, $files[2], true],
 			[$dir, $files[3], true]
 		];
-
 	}
 
 	/**
@@ -467,5 +470,11 @@ class UploadFileTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
+	}
+
+	public static function tearDownAfterClass()
+	{
+		$dir = sys_get_temp_dir() . '/VelesUploads';
+		system('rm -rf ' . $dir);
 	}
 }
