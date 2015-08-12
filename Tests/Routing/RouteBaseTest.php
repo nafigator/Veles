@@ -17,6 +17,11 @@ class RouteBaseTest extends \PHPUnit_Framework_TestCase
 		$this->object = new RouteBase;
 	}
 
+	public static function tearDownAfterClass()
+	{
+		RouteBase::setEx404('\Veles\Routing\Exceptions\NotFoundException');
+	}
+
 	/**
 	 * @covers Veles\Routing\RouteBase::setConfigHandler
 	 */
@@ -42,5 +47,17 @@ class RouteBaseTest extends \PHPUnit_Framework_TestCase
 		$result = RouteBase::getConfigHandler();
 		$msg = 'RouteBase::getConfigHandler returns wrong result!';
 		$this->assertSame($expected, $result, $msg);
+	}
+
+	/**
+	 * @covers Veles\Routing\RouteBase::setEx404
+	 */
+	public function testSetEx404()
+	{
+		$expected = '\Veles\Exceptions\HttpResponseException';
+		RouteBase::setEx404($expected);
+
+		$msg = 'RouteBase::setEx404() wrong behavior!';
+		$this->assertAttributeSame($expected, 'ex404', $this->object, $msg);
 	}
 }
