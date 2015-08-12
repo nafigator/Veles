@@ -55,6 +55,7 @@ class PdoAdapterTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * @covers Veles\DataBase\Adapters\PdoAdapter::value
 	 * @covers Veles\DataBase\Adapters\PdoAdapter::bindParams
+	 * @covers Veles\DataBase\Adapters\PdoAdapter::throwExceptionWithInfo
 	 */
 	public function testValue()
 	{

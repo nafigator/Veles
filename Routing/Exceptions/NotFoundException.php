@@ -11,13 +11,11 @@
 
 namespace Veles\Routing\Exceptions;
 
-use Veles\Exceptions\HttpResponseException;
-
 /**
  * Class NotFoundException
  * @author  Yancharuk Alexander <alex at itvault dot info>
  */
-class NotFoundException extends HttpResponseException
+class NotFoundException extends \DomainException
 {
 	public function __construct()
 	{
