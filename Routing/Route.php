@@ -36,15 +36,11 @@ class Route extends RouteBase
 	private function __construct()
 	{
 		$routes = self::getConfigHandler()->getData();
-		$q_pos  = strpos($_SERVER['REQUEST_URI'], '?');
-
-		$url = ($q_pos)
-			? urldecode(substr($_SERVER['REQUEST_URI'], 0, $q_pos))
-			: urldecode($_SERVER['REQUEST_URI']);
+		$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 		foreach ($routes as $name => $route) {
 			/** @noinspection PhpUndefinedMethodInspection */
-			if (!$route['class']::check($route['route'], $url)) {
+			if (!$route['class']::check($route['route'], $uri)) {
 				continue;
 			}
 
