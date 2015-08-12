@@ -64,7 +64,7 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
 			'line' => 55,
 			'stack' => array_reverse($e->getTrace()),
 			'type' => 0,
-			'defined' => []
+			'defined' => ['exception' => $e]
 		];
 
 		return [

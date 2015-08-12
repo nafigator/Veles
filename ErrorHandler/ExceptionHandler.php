@@ -27,7 +27,7 @@ class ExceptionHandler extends BaseErrorHandler
 		$this->vars['line']    = $exception->getLine();
 		$this->vars['stack']   = array_reverse($exception->getTrace());
 		$this->vars['type']    = $exception->getCode();
-		$this->vars['defined'] = [];
+		$this->vars['defined'] = ['exception' => $exception];
 
 		$this->notify();
 	}
