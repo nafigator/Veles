@@ -22,7 +22,6 @@ abstract class AbstractEmail
 	protected $headers   = '';
 	protected $subject   = null;
 	protected $message   = null;
-	protected $from	     = null;
 	protected $charset   = 'utf-8';
 	protected $encoding  = 'base64';   //8bit
 

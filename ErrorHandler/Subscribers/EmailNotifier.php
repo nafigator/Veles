@@ -66,9 +66,6 @@ class EmailNotifier extends AbstractEmail implements \SplObserver
 		$charset  = $this->getCharset();
 		$encoding = $this->getEncoding();
 
-		$this->from		= isset($_SERVER['SERVER_NAME'])
-			? $_SERVER['SERVER_NAME']
-			: $_SERVER['SERVER_ADDR'];
 		$this->headers .= 'X-Mailer: PHP/' . phpversion() . "\n";
 		$this->headers .= "MIME-Version: 1.0\n";
 		$this->headers .= "Content-type: text/html; charset=$charset\n";
