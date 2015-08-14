@@ -42,8 +42,8 @@ class UsrAuthFactoryTest extends \PHPUnit_Framework_TestCase
 		$msg = 'UsrAuthFactory::create() return wrong result!';
 		$this->assertInstanceOf($expected, $result, $msg);
 
-		$_REQUEST['ln'] = 'login';
-		$_REQUEST['pw'] = 'password';
+		$_POST['ln'] = 'login';
+		$_POST['pw'] = 'password';
 
 		$result = $this->object->create();
 		$expected = 'Veles\Auth\Strategies\LoginFormStrategy';
@@ -51,7 +51,7 @@ class UsrAuthFactoryTest extends \PHPUnit_Framework_TestCase
 		$msg = 'UsrAuthFactory::create() return wrong result!';
 		$this->assertInstanceOf($expected, $result, $msg);
 
-		unset($_REQUEST['ln'], $_REQUEST['pw']);
+		unset($_POST['ln'], $_POST['pw']);
 
 		$_COOKIE['id'] = 'login';
 		$_COOKIE['pw'] = 'password';

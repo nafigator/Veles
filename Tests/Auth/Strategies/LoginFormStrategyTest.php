@@ -78,8 +78,8 @@ class LoginFormStrategyTest extends \PHPUnit_Framework_TestCase
 	{
 		$_SERVER['REQUEST_TIME'] = time();
 		$_SERVER['HTTP_HOST'] = 'somehost.com';
-		$_REQUEST['ln'] = $mail;
-		$_REQUEST['pw'] = $pass;
+		$_POST['ln'] = $mail;
+		$_POST['pw'] = $pass;
 		$_COOKIE['id'] = true;
 		$_COOKIE['pw'] = true;
 
@@ -107,8 +107,8 @@ class LoginFormStrategyTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testConstruct($mail, $pass)
 	{
-		$_REQUEST['ln'] = $mail;
-		$_REQUEST['pw'] = $pass;
+		$_POST['ln'] = $mail;
+		$_POST['pw'] = $pass;
 
 		$object = new LoginFormStrategyCopy;
 

@@ -23,7 +23,7 @@ use Veles\Helper;
  */
 class LoginFormStrategy extends AbstractAuthStrategy
 {
-	const PREG_PASSWORD    = '/^[a-zA-Z0-9]{1,20}$/';
+	const PREG_PASSWORD    = '/^[a-z0-9_-]{1,20}$/i';
 
 	/**
 	 * Конструктор
@@ -31,8 +31,8 @@ class LoginFormStrategy extends AbstractAuthStrategy
 	public function __construct()
 	{
 		parent::__construct();
-		$this->email    =& $_REQUEST['ln'];
-		$this->password =& $_REQUEST['pw'];
+		$this->email    =& $_POST['ln'];
+		$this->password =& $_POST['pw'];
 	}
 
 	/**

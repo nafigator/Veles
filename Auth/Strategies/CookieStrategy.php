@@ -22,7 +22,7 @@ use Veles\DataBase\DbFilter;
 class CookieStrategy extends AbstractAuthStrategy
 {
 	const PREG_COOKIE_ID   = '/^\d{1,10}$/';
-	const PREG_COOKIE_HASH = '/^[a-zA-Z0-9\.\/]{31}$/';
+	const PREG_COOKIE_HASH = '/^[a-z0-9\.\/]{31}$/i';
 
 	private $cookie_hash;
 	private $cookie_id;

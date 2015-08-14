@@ -30,7 +30,7 @@ class UsrAuthFactory
 	public static function create()
 	{
 		switch (true) {
-			case (isset($_REQUEST['ln']) && isset($_REQUEST['pw'])):
+			case (isset($_POST['ln']) && isset($_POST['pw'])):
 				return new LoginFormStrategy;
 			case (isset($_COOKIE['id']) && isset($_COOKIE['pw'])):
 				return new CookieStrategy;
