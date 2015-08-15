@@ -19,6 +19,6 @@ class ViewDriver
 {
 	public function testExec($params)
 	{
-		return is_string($param);
+		return is_string($params);
 	}
 }
