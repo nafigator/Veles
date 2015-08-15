@@ -27,9 +27,9 @@ class JsonAdapter extends ViewAdapterAbstract
 	 */
 	public function show($path)
 	{
-		header('Content-Type: application/json');
-
 		if (empty($this->variables)) return;
+
+		header('Content-Type: application/json');
 
 		echo json_encode($this->variables);
 	}
