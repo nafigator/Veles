@@ -130,7 +130,7 @@ abstract class AbstractForm implements iForm
 	public function __toString()
 	{
 		$elements = $tpl = [];
-		$output   = View::get($this->template);
+		$output   = file_get_contents($this->template);
 
 		/** @var iElement $element */
 		foreach ($this->elements as $number => $element) {
