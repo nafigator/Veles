@@ -201,7 +201,7 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testSetPage()
 	{
-		$pager = new DbPaginator;
+		$pager = new DbPaginator('');
 		$news = new News;
 		$expected = '
 			SELECT SQL_CALC_FOUND_ROWS

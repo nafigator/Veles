@@ -13,6 +13,7 @@
 namespace Veles\DataBase;
 
 use stdClass;
+use Veles\Tools\SnippetBuilder;
 use Veles\View\View;
 
 /**
@@ -36,12 +37,9 @@ class DbPaginator extends stdClass
 	 * @param bool|string $template Path to template
 	 * @param int $curr_page Current page
 	 */
-	public function __construct($template = false, $curr_page = 1)
+	public function __construct($template, $curr_page = 1)
 	{
-		$this->template = ($template)
-			? $template
-			: 'paginator_default.phtml';
-
+		$this->template  = $template;
 		$this->curr_page = (int) $curr_page;
 	}
 
@@ -64,9 +62,9 @@ class DbPaginator extends stdClass
 			$this->page_nums = $this->curr_page + 3;
 		}
 
-		View::set($this);
+		$builder = new SnippetBuilder($this);
 
-		return View::get($this->template);
+		return $builder->build($this->template);
 	}
 
 	/**

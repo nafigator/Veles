@@ -59,7 +59,7 @@ class DbPaginatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new DbPaginator;
+		$this->object = new DbPaginator(realpath(__DIR__ . '/../Project/View/paginator_default.phtml'));
 		$this->html = <<<EOL
 	<a href="/page-1.html">&laquo;</a>
 		<a href="/page-2.html" class="pager-margin">2</a>
@@ -89,11 +89,11 @@ EOL;
 	{
 		$this->expectOutputString($this->html);
 
-		$pager = new DbPaginator(false, 5);
+		$template = realpath(__DIR__ . '/../Project/View/paginator_default.phtml');
+		$pager = new DbPaginator($template, 5);
 		$news = new News;
 		$pager->setLimit(1);
-		$filter = new DbFilter;
-		$news->getAll($filter, $pager);
+		$news->getAll(new DbFilter, $pager);
 
 		echo $pager;
 	}
@@ -216,12 +216,7 @@ EOL;
 	public function testConstruct()
 	{
 		$expected = 'paginator_default.phtml';
-		$object = new DbPaginator();
-		$msg = 'Wrong DbPaginator::__construct() behavior!';
-		$this->assertAttributeSame($expected, 'template', $object, $msg);
-
-		$expected = 'new-template.phtml';
-		$object = new DbPaginator($expected, 5);
+		$object = new DbPaginator($expected);
 		$msg = 'Wrong DbPaginator::__construct() behavior!';
 		$this->assertAttributeSame($expected, 'template', $object, $msg);
 	}

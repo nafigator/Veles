@@ -360,7 +360,7 @@ class ActiveRecordTest extends \PHPUnit_Framework_TestCase
 
 		return [
 			[false, $expected1],
-			[new DbPaginator, $expected2],
+			[new DbPaginator(''), $expected2],
 			[new DbPaginator('', 3), $expected3],
 			[false, false]
 		];
