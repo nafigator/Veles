@@ -24,8 +24,6 @@ class PhpTokenTest extends \PHPUnit_Framework_TestCase
     {
 		$validator = new PhpTokenValidator;
 		$this->object = new PhpToken(self::$content, $validator);
-		// Set T_BREAK token id
-		$this->object->setId(334);
     }
 
 	/**
@@ -45,7 +43,8 @@ class PhpTokenTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testGetName()
 	{
-		$expected = 'T_BREAK';
+		$this->object->setId(334);
+		$expected = token_name(334);
 
 		$result = $this->object->getName();
 
