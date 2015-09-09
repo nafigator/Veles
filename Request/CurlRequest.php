@@ -55,7 +55,7 @@ class CurlRequest extends CurlAbstract
 	 *
 	 * @return $this
 	 */
-	public function setRequestHeaders(array $headers)
+	public function setHeaders(array $headers)
 	{
 		$this->options[CURLOPT_HTTPHEADER] = $headers;
 		curl_setopt($this->curl, CURLOPT_HTTPHEADER, $headers);
@@ -68,7 +68,7 @@ class CurlRequest extends CurlAbstract
 	 *
 	 * @return array
 	 */
-	public function getRequestHeaders()
+	public function getHeaders()
 	{
 		return isset($this->options[CURLOPT_HTTPHEADER])
 			? $this->options[CURLOPT_HTTPHEADER]
