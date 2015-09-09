@@ -70,7 +70,7 @@ $conn1->setDsn('mysql:host=localhost;dbname=test;charset=utf8')
 	->setOptions([
 		PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
 		PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-		// PDO::MYSQL_ATTR_INIT_COMMAND => 'SET sql_mode=ANSI'
+		PDO::MYSQL_ATTR_INIT_COMMAND => 'SET sql_mode=ANSI'
 	]);
 
 // For testing exceptions thrown on connection errors
