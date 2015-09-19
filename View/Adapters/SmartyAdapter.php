@@ -9,7 +9,8 @@
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
  * @date      2013-05-18 17:59
- * @copyright The BSD 3-Clause License
+ * @license   The BSD 3-Clause License
+ *            <http://opensource.org/licenses/BSD-3-Clause>
  */
 
 namespace Veles\View\Adapters;

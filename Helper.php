@@ -1,13 +1,15 @@
 <?php
 /**
  * Useful functions
+ *
  * @file      Helper.php
  *
  * PHP version 5.4+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
  * @date      Сбт Апр 21 20:59:37 2012
- * @copyright The BSD 3-Clause License
+ * @license   The BSD 3-Clause License
+ *            <http://opensource.org/licenses/BSD-3-Clause>
  */
 
 namespace Veles;
@@ -24,8 +26,9 @@ class Helper
 	 *
 	 * By default setting is for blowfish salt generate
 	 *
-	 * @param int $length String length
+	 * @param int    $length  String length
 	 * @param string $letters Group of symbols
+	 *
 	 * @return string
 	 */
 	public static function genStr(
@@ -95,6 +98,7 @@ class Helper
 	 * Method for alias generation
 	 *
 	 * @param string $url URL для алиаса
+	 *
 	 * @return string
 	 */
 	public static function makeAlias($url)

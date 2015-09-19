@@ -8,7 +8,8 @@
  *
  * @author    Yancharuk Alexander <alex at itvault dot info>
  * @date      Tue Aug 26 18:27:04
- * @copyright The BSD 3-Clause License
+ * @license   The BSD 3-Clause License
+ *            <http://opensource.org/licenses/BSD-3-Clause>
  */
 
 namespace Veles\Validators;
@@ -19,6 +20,7 @@ class PhpTokenValidator implements iValidator
 	 * PHP token validation
 	 *
 	 * @param mixed $value Values for checking
+	 *
 	 * @return bool
 	 */
 	public function check($value)

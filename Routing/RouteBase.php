@@ -1,12 +1,15 @@
 <?php
 /**
+ * Base class for routing
+ *
  * @file      RouteBase.php
  *
  * PHP version 5.4+
  *
  * @author    Yancharuk Alexander <alex at itvault dot info>
  * @date      2015-05-24 14:01
- * @copyright The BSD 3-Clause License
+ * @license   The BSD 3-Clause License
+ *            <http://opensource.org/licenses/BSD-3-Clause>
  */
 
 namespace Veles\Routing;

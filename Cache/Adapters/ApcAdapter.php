@@ -8,7 +8,8 @@
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
  * @date      Птн Ноя 16 22:09:28 2012
- * @copyright The BSD 3-Clause License
+ * @license   The BSD 3-Clause License
+ *            <http://opensource.org/licenses/BSD-3-Clause>
  */
 
 namespace Veles\Cache\Adapters;

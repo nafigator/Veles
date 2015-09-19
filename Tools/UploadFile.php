@@ -1,13 +1,15 @@
 <?php
 /**
  * Class for organize uploads storage
+ *
  * @file      UploadFile.php
  *
  * PHP version 5.4+
  *
  * @author    Yancharuk Alexander <alex at itvault dot info>
  * @date      2013-07-27 22:06
- * @copyright The BSD 3-Clause License
+ * @license   The BSD 3-Clause License
+ *            <http://opensource.org/licenses/BSD-3-Clause>
  */
 
 namespace Veles\Tools;
@@ -31,8 +33,10 @@ class UploadFile extends File
 	 * Method created for test purpose
 	 *
 	 * @codeCoverageIgnore
-	 * @param string $filename File name
+	 *
+	 * @param string $filename    File name
 	 * @param string $destination Save destination
+	 *
 	 * @return bool
 	 */
 	protected function moveUploadedFile($filename, $destination)
@@ -44,6 +48,7 @@ class UploadFile extends File
 	 * Set upload directory mask
 	 *
 	 * @param int $dir_mask Value must be octal. Examples: 0755, 02755
+	 *
 	 * @return UploadFile
 	 */
 	public function setDirMask($dir_mask)
@@ -77,6 +82,7 @@ class UploadFile extends File
 	 * Set uploaded file origin name
 	 *
 	 * @param string $orig_name Origin file name
+	 *
 	 * @return UploadFile
 	 */
 	public function setOrigName($orig_name)
@@ -96,7 +102,7 @@ class UploadFile extends File
 			return;
 		}
 
-		$array = explode('.', $this->getOrigName());
+		$array     = explode('.', $this->getOrigName());
 		$extension = strtolower(end($array));
 
 		$this->setHash(
@@ -134,6 +140,7 @@ class UploadFile extends File
 	 * Set uploaded file name hash
 	 *
 	 * @param string $hash
+	 *
 	 * @return UploadFile
 	 */
 	public function setHash($hash)
@@ -157,6 +164,7 @@ class UploadFile extends File
 	 * Set uploaded file sub-dir
 	 *
 	 * @param string $sub_dir
+	 *
 	 * @return UploadFile
 	 */
 	public function setSubDir($sub_dir)
@@ -197,6 +205,7 @@ class UploadFile extends File
 	 * Set uploaded file temporary path
 	 *
 	 * @param string $tmp_path Uploaded file temp path
+	 *
 	 * @return UploadFile
 	 */
 	public function setTmpPath($tmp_path)
@@ -220,6 +229,7 @@ class UploadFile extends File
 	 * Set uploaded file www-path
 	 *
 	 * @param string $www_path www-path to file
+	 *
 	 * @return UploadFile
 	 */
 	public function setWwwPath($www_path)
@@ -244,6 +254,7 @@ class UploadFile extends File
 	 * Set uploaded file name hashing algorithm
 	 *
 	 * @param string $hash_algorithm Hash algorithm
+	 *
 	 * @see hash_algos()
 	 * @return UploadFile
 	 */

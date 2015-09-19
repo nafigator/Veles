@@ -1,12 +1,14 @@
 <?php
 /**
+ * Class for building errors in HTML format
+ *
  * @file    ErrorBuilder.php
  *
  * PHP version 5.4+
  *
  * @author  Yancharuk Alexander <alex at itvault dot info>
  * @date    2015-06-06 20:24
- * @copyright The BSD 3-Clause License
+ * @license The BSD 3-Clause License <http://opensource.org/licenses/BSD-3-Clause>
  */
 
 namespace Veles\ErrorHandler\HtmlBuilders;

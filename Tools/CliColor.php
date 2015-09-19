@@ -1,13 +1,15 @@
 <?php
 /**
  * Console colors
+ *
  * @file      CliColor.php
  *
  * PHP version 5.4+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
  * @date      Птн Фев 15 21:54:29 2013
- * @copyright The BSD 3-Clause License.
+ * @license   The BSD 3-Clause License
+ *            <http://opensource.org/licenses/BSD-3-Clause>.
  */
 
 namespace Veles\Tools;

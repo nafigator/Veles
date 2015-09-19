@@ -8,7 +8,8 @@
  *
  * @author    Yancharuk Alexander <alex at itvault dot info>
  * @date      2013-07-27 16:15
- * @copyright The BSD 3-Clause License
+ * @license   The BSD 3-Clause License
+ *            <http://opensource.org/licenses/BSD-3-Clause>
  */
 
 namespace Veles\Tools;

@@ -1,13 +1,15 @@
 <?php
 /**
- * Класс, содержащий функционал транзакций
+ * Class for transaction management
+ *
  * @file      DbTransactionHandler.php
  *
  * PHP version 5.4+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
  * @date      Срд Апр 23 06:34:47 MSK 2014
- * @copyright The BSD 3-Clause License
+ * @license   The BSD 3-Clause License
+ *            <http://opensource.org/licenses/BSD-3-Clause>
  */
 
 namespace Veles\DataBase;

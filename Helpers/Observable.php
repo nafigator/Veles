@@ -1,4 +1,17 @@
 <?php
+/**
+ * Class is a part of Observer pattern
+ *
+ * @file      PdoAdapter.php
+ *
+ * PHP version 5.4+
+ *
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @date      2013-12-31 15:44
+ * @license   The BSD 3-Clause License
+ *            <http://opensource.org/licenses/BSD-3-Clause>
+ */
+
 namespace Veles\Helpers;
 
 use SplObserver;

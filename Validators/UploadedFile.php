@@ -8,7 +8,8 @@
  *
  * @author    Yancharuk Alexander <alex at itvault dot info>
  * @date      2013-08-03 11:04
- * @copyright The BSD 3-Clause License
+ * @license   The BSD 3-Clause License
+ *            <http://opensource.org/licenses/BSD-3-Clause>
  */
 
 namespace Veles\Validators;

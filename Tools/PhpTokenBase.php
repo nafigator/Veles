@@ -1,6 +1,6 @@
 <?php
 /**
- * Base class for PHP token
+ * Base class for PHP token manipulation
  *
  * @file      PhpTokenBase.php
  *
@@ -8,7 +8,8 @@
  *
  * @author    Yancharuk Alexander <alex at itvault dot info>
  * @date      Tue Aug 26 17:43:40
- * @copyright The BSD 3-Clause License
+ * @license   The BSD 3-Clause License
+ *            <http://opensource.org/licenses/BSD-3-Clause>
  */
 
 namespace Veles\Tools;

@@ -1,13 +1,15 @@
 <?php
 /**
- * Базовый класс для email-сообщений
+ * Base class for email messaging
+ *
  * @file      AbstractEmail.php
  *
  * PHP version 5.4+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
  * @date      Втр Июл 17 21:58:01 2012
- * @copyright The BSD 3-Clause License
+ * @license   The BSD 3-Clause License
+ *            <http://opensource.org/licenses/BSD-3-Clause>
  */
 
 namespace Veles\Email;

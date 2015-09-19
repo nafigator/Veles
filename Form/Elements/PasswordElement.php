@@ -1,13 +1,15 @@
 <?php
 /**
  * Password элемент формы
+ *
  * @file      PasswordElement.php
  *
  * PHP version 5.4+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
  * @date      Срд Авг 15 22:35:36 2012
- * @copyright The BSD 3-Clause License
+ * @license   The BSD 3-Clause License
+ *            <http://opensource.org/licenses/BSD-3-Clause>
  */
 
 namespace Veles\Form\Elements;

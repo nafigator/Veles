@@ -1,12 +1,15 @@
 <?php
 /**
+ * Class for outputting already build JSON
+ *
  * @file      CustomJsonAdapter.php
  *
  * PHP version 5.4+
  *
  * @author    Yancharuk Alexander <alex at itvault dot info>
  * @date      2015-01-09 21:20
- * @copyright The BSD 3-Clause License
+ * @license   The BSD 3-Clause License
+ *            <http://opensource.org/licenses/BSD-3-Clause>
  */
 
 namespace Veles\View\Adapters;
@@ -14,7 +17,7 @@ namespace Veles\View\Adapters;
 /**
  * Class CustomJsonAdapter
  *
- * Class intended for output already built json string
+ * Class intended for output already built JSON string
  *
  * @author  Yancharuk Alexander <alex at itvault dot info>
  */
@@ -48,8 +51,8 @@ class CustomJsonAdapter extends ViewAdapterAbstract
 	 * Output View into buffer and save it in variable
 	 *
 	 * @param string $path Path to template
+	 *
 	 * @return string View content
-	 * @return string
 	 */
 	public function get($path)
 	{
@@ -66,6 +69,7 @@ class CustomJsonAdapter extends ViewAdapterAbstract
 	 * Check template cache status
 	 *
 	 * @param string $tpl Template file
+	 *
 	 * @return bool Cache status
 	 */
 	public function isCached($tpl)

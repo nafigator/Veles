@@ -1,13 +1,15 @@
 <?php
 /**
  * Integer values validator
+ *
  * @file      NumberValidator.php
  *
  * PHP version 5.4+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
  * @date      Вск Ноя 18 12:48:50 2012
- * @copyright The BSD 3-Clause License
+ * @license   The BSD 3-Clause License
+ *            <http://opensource.org/licenses/BSD-3-Clause>
  */
 
 namespace Veles\Validators;
@@ -34,7 +36,9 @@ class NumberValidator implements iValidator
 
 	/**
 	 * Integer validation
+	 *
 	 * @param mixed $value Value
+	 *
 	 * @return bool
 	 */
 	public function check($value)

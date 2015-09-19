@@ -1,19 +1,22 @@
 <?php
 /**
  * Class Timer
+ *
  * @file      Timer.php
  *
  * PHP version 5.4+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
  * @date      Срд Фев 06 06:18:32 2013
- * @copyright The BSD 3-Clause License.
+ * @license   The BSD 3-Clause License
+ *            <http://opensource.org/licenses/BSD-3-Clause>.
  */
 
 namespace Veles\Tools;
 
 /**
  * Class Timer
+ *
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class Timer
@@ -51,6 +54,7 @@ class Timer
 	 * Get result
 	 *
 	 * @param int $precision Result precision
+	 *
 	 * @return mixed
 	 */
 	public static function get($precision = self::MICROSECONDS)

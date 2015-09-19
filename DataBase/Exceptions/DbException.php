@@ -1,13 +1,15 @@
 <?php
 /**
  * General db exception class
+ *
  * @file      DbException.php
  *
  * PHP version 5.4+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
  * @date      Птн Мар 09 01:40:46 2012
- * @copyright The BSD 3-Clause License
+ * @license   The BSD 3-Clause License
+ *            <http://opensource.org/licenses/BSD-3-Clause>
  */
 
 namespace Veles\DataBase\Exceptions;

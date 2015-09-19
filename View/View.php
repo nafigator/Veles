@@ -1,13 +1,15 @@
 <?php
 /**
  * Output class
+ *
  * @file      View.php
  *
  * PHP version 5.4+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
  * @date      Сбт Июл 07 07:30:30 2012
- * @copyright The BSD 3-Clause License
+ * @license   The BSD 3-Clause License
+ *            <http://opensource.org/licenses/BSD-3-Clause>
  */
 
 namespace Veles\View;
@@ -88,6 +90,7 @@ class View
 	 * Output View into buffer and save it in variable
 	 *
 	 * @param string $path Path to template
+	 *
 	 * @return string View content
 	 */
 	public static function get($path)
@@ -99,6 +102,7 @@ class View
 	 * Check template cache status
 	 *
 	 * @param $tpl
+	 *
 	 * @return bool
 	 */
 	public static function isCached($tpl)

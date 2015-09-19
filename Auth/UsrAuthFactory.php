@@ -1,13 +1,15 @@
 <?php
 /**
  * Фабрика. Содержит алогритм выбора стратегии авторизации
+ *
  * @file      UserAuthFactory.php
  *
  * PHP version 5.4+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
  * @date      Вск Янв 27 17:34:29 2013
- * @copyright The BSD 3-Clause License.
+ * @license   The BSD 3-Clause License
+ *            <http://opensource.org/licenses/BSD-3-Clause>.
  */
 
 namespace Veles\Auth;

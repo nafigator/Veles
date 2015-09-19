@@ -1,13 +1,15 @@
 <?php
 /**
- * Вспомогательный класс для формирования запросов
+ * Class for query building
+ *
  * @file      QueryBuilder.php
  *
  * PHP version 5.4+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
  * @date      Сбт Июл 07 21:55:54 2012
- * @copyright The BSD 3-Clause License
+ * @license   The BSD 3-Clause License
+ *            <http://opensource.org/licenses/BSD-3-Clause>
  */
 
 namespace Veles\Model;

@@ -1,12 +1,15 @@
 <?php
 /**
+ * Class for validating MD5 hashes
+ *
  * @file      Md5Validator.php
  *
  * PHP version 5.4+
  *
  * @author    Yancharuk Alexander <alex at itvault dot info>
  * @date      2015-01-06 15:30
- * @copyright The BSD 3-Clause License
+ * @license   The BSD 3-Clause License
+ *            <http://opensource.org/licenses/BSD-3-Clause>
  */
 
 namespace Veles\Validators;
@@ -35,6 +38,7 @@ class Md5Validator implements iValidator
 	 * Md5 hash validation
 	 *
 	 * @param string $value Value
+	 *
 	 * @return bool
 	 */
 	public function check($value)

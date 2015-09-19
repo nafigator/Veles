@@ -8,7 +8,8 @@
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
  * @date      Втр Апр 29 22:20:05 MSK 2014
- * @copyright The BSD 3-Clause License
+ * @license   The BSD 3-Clause License
+ *            <http://opensource.org/licenses/BSD-3-Clause>
  */
 
 namespace Veles\View\Adapters;
@@ -38,8 +39,8 @@ class JsonAdapter extends ViewAdapterAbstract
 	 * Output View into buffer and save it in variable
 	 *
 	 * @param string $path Path to template
+	 *
 	 * @return string View content
-	 * @return string
 	 */
 	public function get($path)
 	{
@@ -59,6 +60,7 @@ class JsonAdapter extends ViewAdapterAbstract
 	 * Check template cache status
 	 *
 	 * @param string $tpl Template file
+	 *
 	 * @return bool Cache status
 	 */
 	public function isCached($tpl)
