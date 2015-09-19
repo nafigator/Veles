@@ -2,13 +2,14 @@
 /**
  * Cache class
  *
- * @file    Cache.php
+ * @file      Cache.php
  *
  * PHP version 5.4+
  *
- * @author  Alexander Yancharuk <alex at itvault dot info>
- * @date    Птн Ноя 16 20:42:01 2012
- * @license The BSD 3-Clause License
+ * @author    Alexander Yancharuk <alex at itvault dot info>
+ * @copyright © 2012-2015 Alexander Yancharuk <alex at itvault at info>
+ * @date      Птн Ноя 16 20:42:01 2012
+ * @license   The BSD 3-Clause License
  *          <http://opensource.org/licenses/BSD-3-Clause>
  */
 
