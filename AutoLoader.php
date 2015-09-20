@@ -1,6 +1,6 @@
 <?php
 /**
- * PSR-4 compatible class AutoLoader
+ * PSR-0 compatible class AutoLoader
  *
  * @file      AutoLoader.php
  *
