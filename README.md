@@ -4,6 +4,9 @@
 
 PHP micro framework
 
+### Requirements
+* PHP 5.4+
+
 ### Versioning
 
 This software follows Semantic Versioning specifications.
