@@ -19,7 +19,7 @@ Read more on [SemVer.org](http://semver.org).
   [Coverage image]: https://codeclimate.com/github/nafigator/Veles/badges/coverage.svg
   [Coverage repo]: https://codeclimate.com/github/nafigator/Veles
   [License img]: https://img.shields.io/badge/license-BSD3-brightgreen.svg
-  [License src]: https://tldrlegal.com/license/bsd-3-clause-license-%28revised%29
+  [License src]: https://tldrlegal.com/license/bsd-3-clause-license-(revised)
   [Release img]: https://img.shields.io/badge/release-0.31.1-orange.svg
   [Release src]: https://github.com/nafigator/Veles
   [Size image]: https://img.shields.io/badge/size-1.1M-blue.svg
