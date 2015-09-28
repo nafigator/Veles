@@ -7,7 +7,8 @@
  *
  * @author  Alexander Yancharuk <alex at itvault dot info>
  * @date    Птн Янв 25 05:49:20 2013
- * @license The BSD 3-Clause License <http://opensource.org/licenses/BSD-3-Clause>.
+ * @license The BSD 3-Clause License
+ *          <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>.
  */
 
 namespace Controllers\Frontend;

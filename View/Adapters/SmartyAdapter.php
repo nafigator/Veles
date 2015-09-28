@@ -11,7 +11,7 @@
  * @copyright © 2012-2015 Alexander Yancharuk <alex at itvault at info>
  * @date      2013-05-18 17:59
  * @license   The BSD 3-Clause License
- *            <http://opensource.org/licenses/BSD-3-Clause>
+ *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
  */
 
 namespace Veles\View\Adapters;

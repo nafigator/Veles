@@ -6,7 +6,8 @@
  *
  * @author  Yancharuk Alexander <alex at itvault dot info>
  * @date    2014-11-01 20:27
- * @license The BSD 3-Clause License <http://opensource.org/licenses/BSD-3-Clause>
+ * @license The BSD 3-Clause License
+ *          <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
  */
 
 namespace Application;

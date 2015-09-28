@@ -10,7 +10,7 @@
  * @copyright © 2012-2015 Alexander Yancharuk <alex at itvault at info>
  * @date      8/22/13 16:20
  * @license   The BSD 3-Clause License
- *            <http://opensource.org/licenses/BSD-3-Clause>
+ *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
  */
 
 namespace Veles\Cache\Adapters;

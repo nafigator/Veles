@@ -1,13 +1,15 @@
 <?php
 /**
  * Unit-test for ByteValidator class
+ *
  * @file    ByteValidatorTest.php
  *
  * PHP version 5.4+
  *
  * @author  Yancharuk Alexander <alex at itvault dot info>
  * @date    2013-05-24 07:54
- * @license The BSD 3-Clause License <http://opensource.org/licenses/BSD-3-Clause>
+ * @license The BSD 3-Clause License
+ *          <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
  */
 
 namespace Veles\Tests\Validators;

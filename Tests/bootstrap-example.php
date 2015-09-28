@@ -14,7 +14,8 @@
  * @author    Alexander Yancharuk <alex at itvault dot info>
  * @copyright © 2012-2015 Alexander Yancharuk <alex at itvault at info>
  * @date      Чтв Дек 20 12:22:58 2012
- * @license The BSD 3-Clause License <http://opensource.org/licenses/BSD-3-Clause>
+ * @license   The BSD 3-Clause License
+ *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
  */
 
 namespace Veles\Tests;
