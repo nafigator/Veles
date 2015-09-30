@@ -133,7 +133,7 @@ class ViewAdapterAbstractTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers Veles\View\Adapters\ViewAdapterAbstract::__call
-	 * @expectedException Exception
+	 * @expectedException \Exception
 	 */
 	public function testCallException()
 	{

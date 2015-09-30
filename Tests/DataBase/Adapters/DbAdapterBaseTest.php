@@ -16,7 +16,6 @@ class DbAdapterBaseTest extends \PHPUnit_Framework_TestCase
 	protected $object;
 
 	private static $pool_backup;
-	private static $calls_backup;
 
 	public static function setUpBeforeClass()
 	{

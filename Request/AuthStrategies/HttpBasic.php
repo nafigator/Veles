@@ -35,11 +35,11 @@ class HttpBasic implements iAuthStrategy
 	 */
 	public function apply(CurlRequest $request)
 	{
-		$headers = $request->getRequestHeaders();
+		$headers = $request->getHeaders();
 		$hash = base64_encode($this->getLogin() . ':' . $this->getPassword());
 		$headers[] = "Authorization: Basic $hash";
 
-		$request->setRequestHeaders($headers);
+		$request->setHeaders($headers);
 	}
 
 	/**

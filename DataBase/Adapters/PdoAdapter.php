@@ -84,7 +84,7 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	 * @param array       $params Query values
 	 * @param string|null $types  Placeholders types
 	 *
-	 * @return string
+	 * @return mixed
 	 */
 	public function value($sql, array $params, $types)
 	{
@@ -105,7 +105,7 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	 * @param array       $params Query values
 	 * @param string|null $types  Placeholders types
 	 *
-	 * @return array
+	 * @return mixed
 	 */
 	public function row($sql, array $params, $types)
 	{

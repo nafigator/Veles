@@ -36,7 +36,8 @@ class Db extends DbTransactionHandler
 	 * @param string $sql SQL-запрос
 	 * @param array $params Плейсхолдеры запроса
 	 * @param string|null $types Типы плейсхолдеров
-	 * @return string
+	 *
+	 * @return mixed Returns string or false on failure or empty result
 	 */
 	public static function value($sql, array $params = [], $types = null)
 	{
@@ -49,7 +50,8 @@ class Db extends DbTransactionHandler
 	 * @param string $sql SQL-запрос
 	 * @param array $params Плейсхолдеры запроса
 	 * @param string|null $types Типы плейсхолдеров
-	 * @return array
+	 *
+	 * @return mixed Returns array or false on failure or empty result
 	 */
 	public static function row($sql, array $params = [], $types = null)
 	{
@@ -62,7 +64,8 @@ class Db extends DbTransactionHandler
 	 * @param string $sql SQL-запрос
 	 * @param array $params Плейсхолдеры запроса
 	 * @param string|null $types Типы плейсхолдеров
-	 * @return mixed
+	 *
+	 * @return mixed Returns array or false on failure
 	 */
 	public static function rows($sql, array $params = [], $types = null)
 	{
@@ -75,6 +78,7 @@ class Db extends DbTransactionHandler
 	 * @param string $sql Non-SELECT SQL-запрос
 	 * @param array $params Плейсхолдеры запроса
 	 * @param string|null $types Типы плейсхолдеров
+	 *
 	 * @return bool
 	 */
 	public static function query($sql, array $params = [], $types = null)

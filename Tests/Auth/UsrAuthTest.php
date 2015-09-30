@@ -9,7 +9,7 @@ use Veles\Auth\UsrGroup;
 class UsrAuthTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * @var UsrAuth
+	 * @var \Veles\Auth\UsrAuth
 	 */
 	protected $object;
 

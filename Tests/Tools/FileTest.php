@@ -229,8 +229,6 @@ class FileTest extends PHPUnit_Framework_TestCase
 	/**
 	 * @covers Veles\Tools\File::deleteDir
 	 * @group Tools
-	 * @param $path
-	 * @param $expected
 	 * @dataProvider deleteDirProvider
 	 */
 	public function testDeleteDir($path_dir, $path_file, $expected1, $expected2, $path_file_second)

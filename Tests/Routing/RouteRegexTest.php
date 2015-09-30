@@ -7,7 +7,7 @@ namespace Veles\Tests\Routing;
 class RouteRegexTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * @var RouteRegex
+	 * @var \Veles\Routing\RouteRegex
 	 */
 	protected $object;
 

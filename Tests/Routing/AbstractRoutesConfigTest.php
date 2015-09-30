@@ -10,7 +10,7 @@ use Veles\Routing\RoutesConfig;
 class AbstractRoutesConfigTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * @var AbstractRoutesConfig
+	 * @var \Veles\Routing\AbstractRoutesConfig
 	 */
 	protected $object;
 	protected $expected;

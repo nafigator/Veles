@@ -209,7 +209,7 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
 			FROM
 				"news" LIMIT 0, 5';
 
-		$sql = $this->object->find($news, false);
+		$sql = $this->object->find($news, new DbFilter);
 		$result = $this->object->setPage($sql, $pager);
 
 		$msg = 'QueryBuilder::setPage returns wrong result!';

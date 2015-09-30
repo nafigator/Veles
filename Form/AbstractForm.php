@@ -21,7 +21,6 @@ use Veles\Form\Elements\HiddenElement;
 use Veles\Form\Elements\iElement;
 use Veles\Form\Elements\SubmitElement;
 use Veles\Validators\RegExValidator;
-use Veles\View\View;
 
 /**
  * Class AbstractForm
@@ -137,7 +136,7 @@ abstract class AbstractForm implements iForm
 
 		/** @var iElement $element */
 		foreach ($this->elements as $number => $element) {
-			$elements[] = $element->render($this);
+			$elements[] = $element->render();
 			$tpl[]      = "#$number#";
 		}
 

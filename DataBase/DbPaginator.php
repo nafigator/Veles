@@ -17,7 +17,6 @@ namespace Veles\DataBase;
 
 use stdClass;
 use Veles\Tools\SnippetBuilder;
-use Veles\View\View;
 
 /**
  * Class DbPaginator

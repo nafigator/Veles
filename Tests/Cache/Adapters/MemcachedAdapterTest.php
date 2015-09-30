@@ -1,7 +1,6 @@
 <?php
 namespace Veles\Tests\Cache\Adapters;
 
-use Veles\Cache\Adapters\ApcAdapter;
 use Veles\Cache\Adapters\MemcachedAdapter;
 use Veles\Cache\Adapters\MemcacheRaw;
 use Veles\Cache\Cache;
