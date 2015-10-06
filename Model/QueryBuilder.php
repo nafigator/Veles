@@ -66,11 +66,7 @@ class QueryBuilder implements iQueryBuilder
 			$arr['values'] .= "$value, ";
 		}
 
-		$closure = function (&$val) {
-			$val = rtrim($val, ', ');
-		};
-
-		array_walk($arr, $closure);
+		foreach($arr as &$val) { $val = rtrim($val, ', '); }
 
 		$sql = '
 			INSERT
