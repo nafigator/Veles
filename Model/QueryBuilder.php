@@ -44,12 +44,13 @@ class QueryBuilder implements iQueryBuilder
 
 		return [$where, $group, $having, $order];
 	}
+
 	/**
 	 * Построение sql-запроса для insert
+	 *
 	 * @param ActiveRecord $model Экземпляр модели
+	 *
 	 * @return string
-	 * @todo протестировать алгоритм на время.
-	 * Попробовать варианты с iterator, implode
 	 */
 	public function insert(ActiveRecord $model)
 	{
