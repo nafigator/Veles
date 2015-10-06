@@ -23,6 +23,7 @@ use Veles\Auth\Strategies\LoginFormStrategy;
 /**
  * Класс UserAuthFactory
  * @author  Alexander Yancharuk <alex at itvault dot info>
+ * @todo create method for custom auth-strategy setup. Provide system variables like POST, GET into strategy constructor during initialisation
  */
 class UsrAuthFactory
 {
