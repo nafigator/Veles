@@ -65,21 +65,15 @@ class UsrAuth
 	/**
 	 * Check for user groups
 	 *
-	 * @param   array
-	 * @return  bool
-	 * @todo переделать входящий параметр на int
+	 * @param int $groups Sum of user groups
+	 *
+	 * @return bool
 	 */
-	public static function hasAccess(array $groups)
+	public static function hasAccess($groups)
 	{
 		$user_group = self::getUser()->getGroup();
 
-		foreach ($groups as $group) {
-			if ($group === ($user_group & $group)) {
-				return true;
-			}
-		}
-
-		return false;
+		return $groups === ($user_group & $groups);
 	}
 
 	/**

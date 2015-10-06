@@ -19,7 +19,9 @@ use Exception;
 
 /**
  * Class Route
+ *
  * @author  Alexander Yancharuk <alex at itvault dot info>
+ * @TODO Decrease class responsibility by creating separate class for request
  */
 class Route extends RouteBase
 {
