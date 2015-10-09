@@ -23,7 +23,7 @@ use Veles\Model\User;
  */
 class UsrAuth
 {
-	protected $identify = false;
+	protected $identified = false;
 	protected $strategy;
 	protected static $instance;
 
@@ -48,8 +48,8 @@ class UsrAuth
 	 */
 	protected function __construct()
 	{
-		$this->strategy = UsrAuthFactory::create();
-		$this->identify = $this->strategy->identify();
+		$this->strategy   = UsrAuthFactory::create();
+		$this->identified = $this->strategy->identify();
 	}
 
 	/**
