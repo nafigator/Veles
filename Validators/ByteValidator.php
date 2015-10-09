@@ -1,6 +1,6 @@
 <?php
 /**
- * ByteValidator values validator
+ * Byte values validator
  *
  * @file      ByteValidator.php
  *
@@ -10,7 +10,7 @@
  * @copyright © 2012-2015 Alexander Yancharuk <alex at itvault at info>
  * @date      Вск Фев 17 10:48:43 2013
  * @license   The BSD 3-Clause License
- *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>.
+ *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
  */
 
 namespace Veles\Validators;
