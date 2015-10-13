@@ -24,7 +24,7 @@ class RouteBase
 	/** @var  AbstractRoutesConfig */
 	protected static $config_handler;
 	/** @var  string */
-	protected static $ex404 = '\Veles\Routing\Exceptions\NotFoundException';
+	protected static $_404 = '\Veles\Routing\Exceptions\NotFoundException';
 
 	/**
 	 * @return AbstractRoutesConfig
@@ -45,10 +45,10 @@ class RouteBase
 	/**
 	 * Set custom 404 exception class name
 	 *
-	 * @param string $ex404 Not Found exception class name
+	 * @param string $_404 Not Found exception class name
 	 */
-	public static function setEx404($ex404)
+	public static function setNotFoundException($_404)
 	{
-		self::$ex404 = $ex404;
+		self::$_404 = $_404;
 	}
 }

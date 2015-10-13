@@ -67,8 +67,8 @@ class Route extends RouteBase
 
 			break;
 		}
-		if (null === $this->config && null !== self::$ex404) {
-			throw new self::$ex404;
+		if (null === $this->config && null !== self::$_404) {
+			throw new self::$_404;
 		}
 	}
 
