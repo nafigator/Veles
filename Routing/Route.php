@@ -31,7 +31,7 @@ class Route extends RouteBase
 	protected $template;
 	protected $map = [];
 
-	private static $instance;
+	protected static $instance;
 
 	/**
 	 * Config parser and controller vars initialisation
