@@ -150,7 +150,7 @@ abstract class ViewAdapterAbstract
 	 *
 	 * @param mixed $vars Output variables or traversable class
 	 */
-	public function set($vars)
+	public function set($vars = [])
 	{
 		foreach ($vars as $prop => $value) {
 			$this->variables[$prop] = $value;
