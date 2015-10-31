@@ -53,7 +53,7 @@ class RouteBase
 	 *
 	 * @return $this
 	 */
-	public function setEx404($ex404)
+	public function setNotFoundException($ex404)
 	{
 		$this->ex404 = $ex404;
 

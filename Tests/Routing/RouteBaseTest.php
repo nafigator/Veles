@@ -56,7 +56,7 @@ class RouteBaseTest extends \PHPUnit_Framework_TestCase
 	public function testSetNotFoundException()
 	{
 		$expected = '\Veles\Exceptions\HttpResponseException';
-		$this->object->setEx404($expected);
+		$this->object->setNotFoundException($expected);
 
 		$msg = 'RouteBase::setNotFoundException() wrong behavior!';
 		$this->assertAttributeSame($expected, 'ex404', $this->object, $msg);
