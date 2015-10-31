@@ -19,36 +19,34 @@ class RouteRegexTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->object = new RouteRegexChild;
-		$this->object->setMap(null);
+		$this->object->setParams(null);
 	}
 
 	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 */
-	protected function tearDown()
-	{
-	}
-
-	/**
-	 * @covers Veles\Routing\RouteRegex::check
+	 * @covers       Veles\Routing\RouteRegex::check
+	 * @covers       Veles\Routing\RouteRegex::unsetNumericKeys
 	 * @dataProvider testCheckProvider
+	 *
+	 * @param $pattern
+	 * @param $url
+	 * @param $expected
+	 * @param $params
 	 */
-	public function testCheck($pattern, $url, $expected, $maps)
+	public function testCheck($pattern, $url, $expected, $params)
 	{
 		$result = $this->object->check($pattern, $url);
 		$msg = 'Wrong RouteRegex::check() behavior!';
 		$this->assertSame($expected, $result, $msg);
 
-		$msg = 'RouteReges doesn\'t match url params!';
-		$this->assertAttributeSame($maps, 'map', $this->object, $msg);
+		$msg = 'RouteRegex does not match url params!';
+		$this->assertAttributeSame($params, 'params', $this->object, $msg);
 	}
 
 	public function testCheckProvider()
 	{
 		return [
-			['#^\/article\/([\d\w\-]+).html$#', '/article/234.html', true, [1 => '234']],
-			['#^\/article\/([\d\w\-]+).html$#', '/article/lal-4.html', true, [1 => 'lal-4']],
+			['#^\/article\/(?<id>[\d\w\-]+).html$#', '/article/234.html', true, ['id' => '234']],
+			['#^\/article\/(?<id>[\d\w\-]+).html$#', '/article/lal-4.html', true, ['id' => 'lal-4']],
 			['#^\/article\/([\d\w\-]+).html$#', '/article/html', false, null],
 			['#^\/article\/([\d\w\-]+).html$#', 'index.html', false, null],
 			['#^\/article\/([\d\w\-]+).html$#', '/article/lal 4.html', false, null]
@@ -56,18 +54,18 @@ class RouteRegexTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Routing\RouteRegex::getMap
+	 * @covers Veles\Routing\RouteRegex::getParams
 	 */
-	public function testGetMap()
+	public function testGetParams()
 	{
-		$pattern = '#^\/article\/([\d\w\-]+).html$#';
+		$pattern = '#^\/article\/(?<id>[\d\w\-]+).html$#';
 		$url = '/article/234.html';
-		$expected = [1 => '234'];
+		$expected = ['id' => '234'];
 
 		$this->object->check($pattern, $url);
-		$result = $this->object->getMap();
+		$result = $this->object->getParams();
 
-		$msg = 'RouteRegex::getMap() returns wrong result!';
+		$msg = 'RouteRegex::getParams() returns wrong result!';
 		$this->assertSame($expected, $result, $msg);
 	}
 }

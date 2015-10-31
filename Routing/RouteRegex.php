@@ -26,7 +26,7 @@ class RouteRegex implements iRouteStrategy
 	 *
 	 * @var array
 	 */
-	protected static $map;
+	protected static $params;
 
 	/**
 	 * Check if given url matches route pattern
@@ -38,16 +38,15 @@ class RouteRegex implements iRouteStrategy
 	 */
 	public static function check($pattern, $url)
 	{
-		self::$map = null;
-		$result = (bool) preg_match($pattern, $url, $matches);
+		self::$params = null;
 
-		if (isset($matches[1])) {
-			unset($matches[0]);
+		if (1 === ($result = preg_match($pattern, $url, $matches))) {
+			self::unsetNumericKeys($matches);
 
-			self::$map = $matches;
+			self::$params = $matches;
 		}
 
-		return $result;
+		return (bool) $result;
 	}
 
 	/**
@@ -55,8 +54,17 @@ class RouteRegex implements iRouteStrategy
 	 *
 	 * @return mixed
 	 */
-	public static function getMap()
+	public static function getParams()
 	{
-		return self::$map;
+		return self::$params;
+	}
+
+	protected static function unsetNumericKeys(&$matches)
+	{
+		foreach (array_keys($matches) as $key) {
+			if (is_int($key)) {
+				unset($matches[$key]);
+			}
+		}
 	}
 }

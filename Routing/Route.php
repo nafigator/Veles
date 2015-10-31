@@ -29,7 +29,7 @@ class Route extends RouteBase
 	/** @var  array Current route config */
 	protected $config;
 	protected $template;
-	protected $map = [];
+	protected $params = [];
 
 	/**
 	 * Config parser and controller vars initialisation
@@ -56,11 +56,9 @@ class Route extends RouteBase
 
 			$this->checkAjax();
 
-			/** @noinspection PhpUndefinedMethodInspection */
-			if (isset($route['map'])
-				&& null !== ($map = $route['class']::getMap())
-			) {
-				$this->map = array_combine($route['map'], $map);
+			if ('Veles\Routing\RouteRegex' === $route['class']) {
+				/** @noinspection PhpUndefinedMethodInspection */
+				$this->params = $route['class']::getParams();
 			}
 
 			break;
@@ -165,9 +163,9 @@ class Route extends RouteBase
 	 *
 	 * @return array
 	 */
-	public function getMap()
+	public function getParams()
 	{
-		return $this->map;
+		return $this->params;
 	}
 
 	/**

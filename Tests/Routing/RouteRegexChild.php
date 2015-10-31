@@ -20,8 +20,8 @@ use Veles\Routing\RouteRegex;
  */
 class RouteRegexChild extends RouteRegex
 {
-	public static function setMap($map)
+	public static function setParams($params)
 	{
-		self::$map = $map;
+		self::$params = $params;
 	}
 }

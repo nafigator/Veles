@@ -24,14 +24,6 @@ class IniConfigLoaderTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 */
-	protected function tearDown()
-	{
-	}
-
-	/**
 	 * @covers Veles\Routing\IniConfigLoader::load
 	 * @covers Veles\Routing\IniConfigLoader::buildTree
 	 */
@@ -42,28 +34,19 @@ class IniConfigLoaderTest extends \PHPUnit_Framework_TestCase
 				[
 					'class'      => 'Veles\Routing\RouteRegex',
 					'view'       => 'Veles\View\Adapters\NativeAdapter',
-					'route'      => '#^\/(?:index.html|page\-(\d+)\.html)?$#',
+					'route'      => '#^\/(?:index.html|page\-(?<page>\d+)\.html)?$#',
 					'tpl'        => 'Frontend/index.phtml',
 					'controller' => 'Frontend\Home',
-					'action'     => 'index',
-					'map'        =>
-						[
-							1 => 'page',
-						],
+					'action'     => 'index'
 				],
 			'TestMap'  =>
 				[
 					'class'      => 'Veles\Routing\RouteRegex',
 					'view'       => 'Veles\View\Adapters\NativeAdapter',
-					'route'      => '#^\/book\/(\d+)\/user\/(\d+)$#',
+					'route'      => '#^\/book\/(?<book_id>\d+)\/user\/(?<user_id>\d+)$#',
 					'tpl'        => 'Frontend/index.phtml',
 					'controller' => 'Frontend\Home',
-					'action'     => 'book',
-					'map'        =>
-						[
-							1 => 'book_id',
-							2 => 'user_id',
-						],
+					'action'     => 'book'
 				],
 			'Contacts' =>
 				[

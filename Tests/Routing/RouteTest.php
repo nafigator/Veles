@@ -157,28 +157,28 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers       Veles\Routing\Route::getMap
+	 * @covers       Veles\Routing\Route::getParams
 	 * @covers       Veles\Routing\Route::init
-	 * @dataProvider getMapProvider
+	 * @dataProvider getParamsProvider
 	 *
 	 * @param $url
 	 * @param $expected
 	 */
-	public function testGetMap($url, $expected)
+	public function testGetParams($url, $expected)
 	{
 		$_SERVER['REQUEST_URI'] = $url;
 
 		$this->object->init();
-		$msg = 'Route::$map wrong value!';
-		$this->assertAttributeSame($expected, 'map', $this->object, $msg);
+		$msg = 'Route::$params wrong value!';
+		$this->assertAttributeSame($expected, 'params', $this->object, $msg);
 
-		$result = $this->object->init()->getMap();
+		$result = $this->object->init()->getParams();
 
-		$msg = 'Route::getMap() returns wrong result!';
+		$msg = 'Route::getParams() returns wrong result!';
 		$this->assertSame($expected, $result, $msg);
 	}
 
-	public function getMapProvider()
+	public function getParamsProvider()
 	{
 		return [
 			['/page-2.html', ['page' => '2']],

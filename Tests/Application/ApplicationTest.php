@@ -48,10 +48,10 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
 		$app = new Application;
 		$app->setRoute($route)->run();
 
-		$result = $app->getRoute()->getMap();
+		$result = $app->getRoute()->getParams();
 
-		$msg = "Wrong Route::map in $url";
-		$this->assertSame($expected['map'], $result, $msg);
+		$msg = "Wrong Route::params in $url";
+		$this->assertSame($expected['params'], $result, $msg);
 	}
 
 	/**
@@ -61,7 +61,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
 	{
 		$uri      = '/page-2.html';
 		$expected = [
-			'map'    => ['page' => '2'],
+			'params'    => ['page' => '2'],
 			'output' => <<<EOF
 <!DOCTYPE html>
 <html>
