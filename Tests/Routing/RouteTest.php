@@ -80,11 +80,21 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 	public function testGetController()
 	{
 		$_SERVER['REQUEST_URI'] = '/';
-		$expected = new Home;
+		$route = new Route;
+		$config = new RoutesConfig(
+			new IniConfigLoader(TEST_DIR . '/Project/routes.ini')
+		);
+		$route->setConfigHandler($config)->init();
+		$expected = $controller = new Home($route);
 		$result = $this->object->init()->getController();
 
 		$msg = 'Route::getController() returns wrong result!';
 		$this->assertEquals($expected, $result, $msg);
+
+		$result = $controller->getRoute();
+		$expected = $route;
+		$msg = 'Route::getController() wrong behavior!';
+		$this->assertSame($expected, $result, $msg);
 	}
 
 	/**

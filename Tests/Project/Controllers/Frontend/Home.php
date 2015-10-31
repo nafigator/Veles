@@ -13,12 +13,20 @@
 
 namespace Controllers\Frontend;
 
+use Veles\Routing\Route;
+
 /**
  * Класс Home
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class Home
 {
+	protected $route;
+
+	public function __construct(Route $route)
+	{
+		$this->setRoute($route);
+	}
 	/**
 	 * Метод вызываемый при запросе /index.html
 	 */
@@ -33,5 +41,21 @@ class Home
 	public function book()
 	{
 		return [1, 2, 3];
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getRoute()
+	{
+		return $this->route;
+	}
+
+	/**
+	 * @param mixed $route
+	 */
+	public function setRoute($route)
+	{
+		$this->route = $route;
 	}
 }
