@@ -25,22 +25,39 @@ use Veles\View\View;
  */
 class Application
 {
+	/** @var  Route */
+	protected $route;
+
 	/**
 	 * Application start
 	 */
-	public static function run()
+	public function run()
 	{
 		UsrAuth::instance();
 
 		// Get route, controller, method
-		$route       = Route::instance();
-		$controller  = $route->getController();
-		$action_name = $route->getActionName();
-		$template    = $route->getTemplate();
+		$controller  = $this->route->getController();
+		$action_name = $this->route->getActionName();
+		$template    = $this->route->getTemplate();
 
-		View::setAdapter($route->getAdapter());
+		View::setAdapter($this->route->getAdapter());
 		View::set($controller->$action_name());
 
 		View::show($template);
+	}
+
+	public function setRoute(Route $route)
+	{
+		$this->route = $route;
+
+		return $this;
+	}
+
+	/**
+	 * @return Route
+	 */
+	public function getRoute()
+	{
+		return $this->route;
 	}
 }

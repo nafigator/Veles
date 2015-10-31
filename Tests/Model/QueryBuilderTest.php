@@ -114,8 +114,14 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Model\QueryBuilder::delete
+	 * @covers       Veles\Model\QueryBuilder::delete
 	 * @dataProvider deleteProvider
+	 *
+	 * @param $ids
+	 * @param $expected
+	 * @param $user
+	 *
+	 * @throws \Exception
 	 */
 	public function testDelete($ids, $expected, $user)
 	{

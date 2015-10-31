@@ -22,33 +22,41 @@ namespace Veles\Routing;
 class RouteBase
 {
 	/** @var  AbstractRoutesConfig */
-	protected static $config_handler;
+	protected $config_handler;
 	/** @var  string */
-	protected static $_404 = '\Veles\Routing\Exceptions\NotFoundException';
+	protected $ex404 = '\Veles\Routing\Exceptions\NotFoundException';
 
 	/**
 	 * @return AbstractRoutesConfig
 	 */
-	public static function getConfigHandler()
+	public function getConfigHandler()
 	{
-		return self::$config_handler;
+		return $this->config_handler;
 	}
 
 	/**
 	 * @param AbstractRoutesConfig $handler
+	 *
+	 * @return $this
 	 */
-	public static function setConfigHandler(AbstractRoutesConfig $handler)
+	public function setConfigHandler(AbstractRoutesConfig $handler)
 	{
-		self::$config_handler = $handler;
+		$this->config_handler = $handler;
+
+		return $this;
 	}
 
 	/**
 	 * Set custom 404 exception class name
 	 *
-	 * @param string $_404 Not Found exception class name
+	 * @param string $ex404 Not Found exception class name
+	 *
+	 * @return $this
 	 */
-	public static function setNotFoundException($_404)
+	public function setEx404($ex404)
 	{
-		self::$_404 = $_404;
+		$this->ex404 = $ex404;
+
+		return $this;
 	}
 }

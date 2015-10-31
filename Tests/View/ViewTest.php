@@ -69,12 +69,9 @@ class ViewTest extends PHPUnit_Framework_TestCase
 EOF;
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 */
 	protected function tearDown()
 	{
+		View::setAdapter(NativeAdapter::instance());
 	}
 
 	/**
@@ -104,7 +101,6 @@ EOF;
 	 */
 	public function testGetAdapter()
 	{
-		View::unsetAdapter();
 		$expected = NativeAdapter::instance();
 		$_SERVER['REQUEST_URI'] = 'index.html';
 
@@ -122,10 +118,24 @@ EOF;
 	}
 
 	/**
+	 * @covers Veles\View\View::getAdapter
+	 * @expectedExceptionMessage View adapter not set!
+	 * @expectedException \Exception
+	 */
+	public function testGetAdapterException()
+	{
+		View::unsetAdapter();
+		View::getAdapter();
+	}
+
+	/**
 	 * Unit-test for View::set
-	 * @covers Veles\View\View::set
+	 *
+	 * @covers       Veles\View\View::set
 	 * @dataProvider setProvider
-	 * @see Veles\View\View::set
+	 * @see          Veles\View\View::set
+	 *
+	 * @param $vars
 	 */
 	public function testSet($vars)
 	{
@@ -150,9 +160,16 @@ EOF;
 
 	/**
 	 * Unit-test for View::del
-	 * @covers Veles\View\View::del
+	 *
+	 * @covers       Veles\View\View::del
 	 * @dataProvider delProvider
-	 * @see Veles\View\View::del
+	 * @see          Veles\View\View::del
+	 *
+	 * @param $vars
+	 * @param $del
+	 * @param $expected
+	 *
+	 * @throws \Exception
 	 */
 	public function testDel($vars, $del, $expected)
 	{

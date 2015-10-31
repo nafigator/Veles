@@ -15,7 +15,9 @@ namespace Veles\Tests\Application;
 
 use PHPUnit_Framework_TestCase;
 use Veles\Application\Application;
+use Veles\Routing\IniConfigLoader;
 use Veles\Routing\Route;
+use Veles\Routing\RoutesConfig;
 use Veles\View\View;
 
 /**
@@ -24,29 +26,6 @@ use Veles\View\View;
  */
 class ApplicationTest extends PHPUnit_Framework_TestCase
 {
-	/**
-	 * @var View
-	 */
-	protected $view;
-
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 */
-	protected function setUp()
-	{
-		$this->view = new View;
-	}
-
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 */
-	protected function tearDown()
-	{
-		$this->view->del(['a', 'b', 'c']);
-	}
-
 	/**
 	 * Unit-test for Application::run
 	 * @covers       Veles\Application\Application::run
@@ -60,10 +39,16 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
 		$_SERVER['REQUEST_URI'] = $url;
 		$this->expectOutputString($expected['output']);
 
-		Application::run();
+		$route = new Route;
+		$config = new RoutesConfig(
+			new IniConfigLoader(TEST_DIR . '/Project/routes.ini')
+		);
+		$route->setConfigHandler($config)->init();
 
-		$route  = Route::instance();
-		$result = $route->getMap();
+		$app = new Application;
+		$app->setRoute($route)->run();
+
+		$result = $app->getRoute()->getMap();
 
 		$msg = "Wrong Route::map in $url";
 		$this->assertSame($expected['map'], $result, $msg);
@@ -97,5 +82,40 @@ EOF
 		];
 
 		return [[$uri, $expected]];
+	}
+
+	/**
+	 * @covers Veles\Application\Application::setRoute
+	 */
+	public function testSetRoute()
+	{
+		$expected = new Route;
+		$config = new RoutesConfig(
+			new IniConfigLoader(TEST_DIR . '/Project/routessdfsdfsdf.ini')
+		);
+		$expected->setConfigHandler($config);
+
+		$object = new Application;
+		$object->setRoute($expected);
+
+		$msg = 'Application::setRoute() wrong behavior!';
+		$this->assertAttributeSame($expected, 'route', $object, $msg);
+	}
+
+	public function testGetRoute()
+	{
+		$expected = new Route;
+		$config = new RoutesConfig(
+			new IniConfigLoader(TEST_DIR . '/Project/routessdfsdfsdf.ini')
+		);
+		$expected->setConfigHandler($config);
+
+		$object = new Application;
+		$object->setRoute($expected);
+
+		$result = $object->getRoute();
+
+		$msg = 'Application::getRoute() returns wrong result!';
+		$this->assertSame($expected, $result, $msg);
 	}
 }

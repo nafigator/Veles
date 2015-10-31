@@ -107,8 +107,11 @@ class ActiveRecordTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Model\ActiveRecord::getById
+	 * @covers       Veles\Model\ActiveRecord::getById
 	 * @dataProvider getByIdProvider
+	 *
+	 * @param $id
+	 * @param $expected
 	 */
 	public function testGetById($id, $expected)
 	{
@@ -306,8 +309,11 @@ class ActiveRecordTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\Model\ActiveRecord::query
+	 * @covers       Veles\Model\ActiveRecord::query
 	 * @dataProvider queryProvider
+	 *
+	 * @param $pager
+	 * @param $expected
 	 */
 	public function testQuery($pager, $expected)
 	{

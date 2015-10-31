@@ -30,9 +30,6 @@ use Veles\DataBase\Adapters\PdoAdapter;
 use Veles\DataBase\ConnectionPools\ConnectionPool;
 use Veles\DataBase\Connections\PdoConnection;
 use Veles\DataBase\Db;
-use Veles\Routing\IniConfigLoader;
-use Veles\Routing\Route;
-use Veles\Routing\RoutesConfig;
 use Veles\View\Adapters\NativeAdapter;
 use Veles\View\View;
 
@@ -88,9 +85,6 @@ $conn2->setDsn('mysql:host=localhost;dbname=test;charset=utf8')
 $pool->addConnection($conn1, true);
 $pool->addConnection($conn2);
 PdoAdapter::setPool($pool);
-
-$routes_loader = new IniConfigLoader(TEST_DIR . '/Project/routes.ini');
-Route::setConfigHandler(new RoutesConfig($routes_loader));
 
 Db::setAdapter(PdoAdapter::instance());
 system('mysql -u user -p password -e "DROP DATABASE IF EXISTS test; CREATE DATABASE IF NOT EXISTS test DEFAULT CHARACTER SET utf8"');

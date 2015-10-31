@@ -11,16 +11,16 @@ use Veles\Routing\RoutesConfig;
  */
 class RouteBaseTest extends \PHPUnit_Framework_TestCase
 {
+	/** @var  RouteBase */
 	protected $object;
 
 	protected function setUp()
 	{
 		$this->object = new RouteBase;
-	}
-
-	public static function tearDownAfterClass()
-	{
-		RouteBase::setNotFoundException('\Veles\Routing\Exceptions\NotFoundException');
+		$config = new RoutesConfig(
+			new IniConfigLoader(TEST_DIR . '/Project/routes.ini')
+		);
+		$this->object->setConfigHandler($config);
 	}
 
 	/**
@@ -30,7 +30,7 @@ class RouteBaseTest extends \PHPUnit_Framework_TestCase
 	{
 		$routes_loader = new IniConfigLoader(TEST_DIR . '/Project/routes.ini');
 		$expected = new RoutesConfig($routes_loader);
-		RouteBase::setConfigHandler($expected);
+		$this->object->setConfigHandler($expected);
 
 		$msg = 'Wrong value of RouteBase::$config_handler!';
 		$this->assertAttributeSame($expected, 'config_handler', $this->object, $msg);
@@ -43,10 +43,10 @@ class RouteBaseTest extends \PHPUnit_Framework_TestCase
 	{
 		$routes_loader = new IniConfigLoader(TEST_DIR . '/Project/routes.ini');
 		$expected = new RoutesConfig($routes_loader);
-		RouteBase::setConfigHandler($expected);
+		$this->object->setConfigHandler($expected);
 
-		$result = RouteBase::getConfigHandler();
-		$msg = 'RouteBase::getConfigHandler returns wrong result!';
+		$result = $this->object->getConfigHandler();
+		$msg = 'RouteBase::getConfigHandler() returns wrong result!';
 		$this->assertSame($expected, $result, $msg);
 	}
 
@@ -56,9 +56,9 @@ class RouteBaseTest extends \PHPUnit_Framework_TestCase
 	public function testSetNotFoundException()
 	{
 		$expected = '\Veles\Exceptions\HttpResponseException';
-		RouteBase::setNotFoundException($expected);
+		$this->object->setEx404($expected);
 
 		$msg = 'RouteBase::setNotFoundException() wrong behavior!';
-		$this->assertAttributeSame($expected, '_404', $this->object, $msg);
+		$this->assertAttributeSame($expected, 'ex404', $this->object, $msg);
 	}
 }

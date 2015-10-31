@@ -65,8 +65,10 @@ class AutoLoaderTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers Veles\AutoLoader::registerPath
+	 * @covers       Veles\AutoLoader::registerPath
 	 * @dataProvider registerPathProvider
+	 *
+	 * @param $path
 	 */
 	public function testRegisterPath($path)
 	{

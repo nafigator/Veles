@@ -16,7 +16,6 @@
 namespace Veles\View;
 
 use Exception;
-use Veles\Routing\Route;
 use Veles\View\Adapters\ViewAdapterAbstract;
 
 /**
@@ -47,14 +46,11 @@ class View
 	 */
 	public static function getAdapter()
 	{
-		if (self::$adapter instanceof ViewAdapterAbstract) {
-			return self::$adapter;
+		if (!self::$adapter instanceof ViewAdapterAbstract) {
+			throw new Exception('View adapter not set!');
 		}
 
-		$adapter = Route::instance()->getAdapter();
-		self::setAdapter($adapter);
-
-		return $adapter;
+		return self::$adapter;
 	}
 
 	/**

@@ -3,7 +3,9 @@ namespace Veles\Tests\Routing;
 
 use Controllers\Frontend\Home;
 use Exception;
+use Veles\Routing\IniConfigLoader;
 use Veles\Routing\Route;
+use Veles\Routing\RoutesConfig;
 use Veles\View\Adapters\NativeAdapter;
 
 /**
@@ -12,9 +14,7 @@ use Veles\View\Adapters\NativeAdapter;
  */
 class RouteTest extends \PHPUnit_Framework_TestCase
 {
-	/**
-	 * @var Route
-	 */
+	/** @var  Route */
 	protected $object;
 
 	/**
@@ -23,45 +23,22 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
+		$this->object = new Route;
+		$config = new RoutesConfig(
+			new IniConfigLoader(TEST_DIR . '/Project/routes.ini')
+		);
+		$this->object->setConfigHandler($config);
 	}
 
 	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 */
-	protected function tearDown()
-	{
-	}
-
-	/**
-	 * @covers Veles\Routing\Route::instance
-	 * @covers Veles\Routing\Route::__construct
+	 * @covers Veles\Routing\Route::init
 	 * @expectedException \Veles\Routing\Exceptions\NotFoundException
 	 */
 	public function testNotFoundException()
 	{
 		$_SERVER['REQUEST_URI'] = '/not-found';
-		RouteCopy::instance()->unsetInstance();
 
-		RouteCopy::instance();
-	}
-
-	/**
-	 * @covers Veles\Routing\Route::instance
-	 */
-	public function testInstance()
-	{
-		$_SERVER['REQUEST_URI'] = '/';
-		RouteCopy::instance()->unsetInstance();
-		$result = RouteCopy::instance();
-
-		$msg = 'Route::instance() returns wrong result!';
-		$this->assertSame(RouteCopy::getInstance(), $result, $msg);
-
-		$result = RouteCopy::instance();
-
-		$msg = 'Route::instance() returns wrong result!';
-		$this->assertSame(RouteCopy::getInstance(), $result, $msg);
+		$this->object->init();
 	}
 
 	/**
@@ -70,25 +47,20 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testIsAjax()
 	{
-		RouteCopy::instance()->unsetInstance();
 		$_SERVER['REQUEST_URI'] = '/';
 		$expected = false;
-		$result = RouteCopy::instance()->isAjax();
+		$result = $this->object->init()->isAjax();
 
 		$msg = 'Wrong Route::isAjax() result!';
 		$this->assertSame($expected, $result, $msg);
 
-		RouteCopy::instance()->unsetInstance();
 		$_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest';
 		$_SERVER['REQUEST_URI'] = '/contacts';
 		$expected = true;
-		$result = RouteCopy::instance()->isAjax();
+		$result = $this->object->init()->isAjax();
 
 		$msg = 'Wrong Route::isAjax() result!';
 		$this->assertSame($expected, $result, $msg);
-
-		unset($_SERVER['HTTP_X_REQUESTED_WITH']);
-		RouteCopy::instance()->unsetInstance();
 	}
 
 	/**
@@ -99,7 +71,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 	public function testCheckAjaxException()
 	{
 		$_SERVER['REQUEST_URI'] = '/contacts';
-		$result = RouteCopy::instance()->getController();
+		$this->object->init()->getController();
 	}
 
 	/**
@@ -109,12 +81,10 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 	{
 		$_SERVER['REQUEST_URI'] = '/';
 		$expected = new Home;
-		$result = RouteCopy::instance()->getController();
+		$result = $this->object->init()->getController();
 
 		$msg = 'Route::getController() returns wrong result!';
 		$this->assertEquals($expected, $result, $msg);
-
-		RouteCopy::instance()->unsetInstance();
 	}
 
 	/**
@@ -124,7 +94,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 	public function testGetControllerException()
 	{
 		$_SERVER['REQUEST_URI'] = '/user';
-		RouteCopy::instance()->getController();
+		$this->object->init()->getController();
 	}
 
 	/**
@@ -134,13 +104,10 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 	{
 		$_SERVER['REQUEST_URI'] = '/';
 		$expected = 'index';
-		RouteCopy::instance()->unsetInstance();
-		$result = RouteCopy::instance()->getActionName();
+		$result = $this->object->init()->getActionName();
 
 		$msg = 'Route::getActionName() returns wrong result!';
 		$this->assertEquals($expected, $result, $msg);
-
-		RouteCopy::instance()->unsetInstance();
 	}
 
 	/**
@@ -150,7 +117,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 	public function testGetActionNameException()
 	{
 		$_SERVER['REQUEST_URI'] = '/user';
-		RouteCopy::instance()->getActionName();
+		$this->object->init()->getActionName();
 	}
 
 	/**
@@ -160,13 +127,10 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 	{
 		$_SERVER['REQUEST_URI'] = '/';
 		$expected = NativeAdapter::instance();
-		RouteCopy::instance()->unsetInstance();
-		$result = RouteCopy::instance()->getAdapter();
+		$result = $this->object->init()->getAdapter();
 
 		$msg = 'Route::getAdapter() returns wrong result!';
 		$this->assertEquals($expected, $result, $msg);
-
-		RouteCopy::instance()->unsetInstance();
 	}
 
 	/**
@@ -176,7 +140,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 	public function testGetAdapterException()
 	{
 		$_SERVER['REQUEST_URI'] = '/user';
-		RouteCopy::instance()->getAdapter();
+		$this->object->init()->getAdapter();
 	}
 
 	/**
@@ -185,36 +149,33 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 	public function testGetPageName()
 	{
 		$_SERVER['REQUEST_URI'] = '/';
-		RouteCopy::instance()->unsetInstance();
 		$expected = 'Home';
-		$result = RouteCopy::instance()->getPageName();
+		$result = $this->object->init()->getPageName();
 
 		$msg = 'Route::getPageName() returns wrong result!';
 		$this->assertSame($expected, $result, $msg);
-
-		RouteCopy::instance()->unsetInstance();
 	}
 
 	/**
-	 * @covers Veles\Routing\Route::getMap
-	 * @covers Veles\Routing\Route::__construct
+	 * @covers       Veles\Routing\Route::getMap
+	 * @covers       Veles\Routing\Route::init
 	 * @dataProvider getMapProvider
+	 *
+	 * @param $url
+	 * @param $expected
 	 */
 	public function testGetMap($url, $expected)
 	{
 		$_SERVER['REQUEST_URI'] = $url;
-		RouteCopy::instance()->unsetInstance();
 
-		$route = RouteCopy::instance();
+		$this->object->init();
 		$msg = 'Route::$map wrong value!';
-		$this->assertAttributeSame($expected, 'map', $route, $msg);
+		$this->assertAttributeSame($expected, 'map', $this->object, $msg);
 
-		$result = RouteCopy::instance()->getMap();
+		$result = $this->object->init()->getMap();
 
 		$msg = 'Route::getMap() returns wrong result!';
 		$this->assertSame($expected, $result, $msg);
-
-		RouteCopy::instance()->unsetInstance();
 	}
 
 	public function getMapProvider()
@@ -231,28 +192,15 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @covers Veles\Routing\Route::getTemplate
-	 * @covers Veles\Routing\Route::__construct
+	 * @covers Veles\Routing\Route::init
 	 */
 	public function testGetTemplate()
 	{
 		$_SERVER['REQUEST_URI'] = '/';
 		$expected = 'Frontend/index.phtml';
-		RouteCopy::instance()->unsetInstance();
-		$result = RouteCopy::instance()->getTemplate();
+		$result = $this->object->init()->getTemplate();
 
 		$msg = 'Route::getTemplate() returns wrong result!';
 		$this->assertSame($expected, $result, $msg);
-
-		RouteCopy::instance()->unsetInstance();
-
-		$_SERVER['REQUEST_URI'] = '/user';
-		$expected = null;
-		RouteCopy::instance()->unsetInstance();
-		$result = RouteCopy::instance()->getTemplate();
-
-		$msg = 'Route::getTemplate() returns wrong result!';
-		$this->assertSame($expected, $result, $msg);
-
-		RouteCopy::instance()->unsetInstance();
 	}
 }

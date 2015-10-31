@@ -31,16 +31,14 @@ class Route extends RouteBase
 	protected $template;
 	protected $map = [];
 
-	protected static $instance;
-
 	/**
 	 * Config parser and controller vars initialisation
 	 *
 	 * @throws Exception
 	 */
-	private function __construct()
+	public function init()
 	{
-		$routes = self::getConfigHandler()->getData();
+		$routes = $this->getConfigHandler()->getData();
 		$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 		foreach ($routes as $name => $route) {
@@ -67,9 +65,11 @@ class Route extends RouteBase
 
 			break;
 		}
-		if (null === $this->config && null !== self::$_404) {
-			throw new self::$_404;
+		if (null === $this->config && null !== $this->ex404) {
+			throw new $this->ex404;
 		}
+
+		return $this;
 	}
 
 	/**
@@ -99,21 +99,6 @@ class Route extends RouteBase
 	public function isAjax()
 	{
 		return isset($this->config['ajax']) ? true : false;
-	}
-
-	/**
-	 * Access to object
-	 *
-	 * @return mixed
-	 */
-	public static function instance()
-	{
-		if (null === static::$instance) {
-			$class = get_called_class();
-			static::$instance = new $class;
-		}
-
-		return static::$instance;
 	}
 
 	/**
