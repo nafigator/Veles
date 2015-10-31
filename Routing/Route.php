@@ -113,7 +113,7 @@ class Route extends RouteBase
 
 		$controller = 'Controllers\\' . $this->config['controller'];
 
-		return new $controller;
+		return new $controller($this);
 	}
 
 	/**
