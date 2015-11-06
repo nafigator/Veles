@@ -24,7 +24,7 @@ use Veles\ErrorHandler\HtmlBuilders\AbstractBuilder;
 class ErrorRenderer implements \SplObserver
 {
 	/** @var  AbstractBuilder */
-	protected $builder;
+	protected $message_builder;
 
 	/**
 	 * Receive update from subject
@@ -34,8 +34,9 @@ class ErrorRenderer implements \SplObserver
 	 */
 	public function update(\SplSubject $subject)
 	{
-		$this->builder->setHandler($subject);
-		echo $this->builder->getHtml();
+		$builder = $this->getMessageBuilder();
+		$builder->setHandler($subject);
+		echo $builder->getHtml();
 	}
 
 	/**
@@ -43,7 +44,7 @@ class ErrorRenderer implements \SplObserver
 	 */
 	public function getMessageBuilder()
 	{
-		return $this->builder;
+		return $this->message_builder;
 	}
 
 	/**
@@ -51,6 +52,6 @@ class ErrorRenderer implements \SplObserver
 	 */
 	public function setMessageBuilder(AbstractBuilder $builder)
 	{
-		$this->builder = $builder;
+		$this->message_builder = $builder;
 	}
 }

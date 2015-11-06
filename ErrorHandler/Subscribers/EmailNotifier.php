@@ -25,7 +25,7 @@ use Veles\ErrorHandler\HtmlBuilders\AbstractBuilder;
 class EmailNotifier extends AbstractEmail implements \SplObserver
 {
 	/** @var  AbstractBuilder */
-	protected $builder;
+	protected $message_builder;
 
 	/**
 	 * Receive update from subject
@@ -35,8 +35,9 @@ class EmailNotifier extends AbstractEmail implements \SplObserver
 	 */
 	public function update(\SplSubject $subject)
 	{
-		$this->builder->setHandler($subject);
-		$this->message = base64_encode($this->builder->getHtml());
+		$builder = $this->getMessageBuilder();
+		$builder->setHandler($subject);
+		$this->message = base64_encode($builder->getHtml());
 		$this->init();
 		$this->send();
 	}
@@ -46,7 +47,7 @@ class EmailNotifier extends AbstractEmail implements \SplObserver
 	 */
 	public function getMessageBuilder()
 	{
-		return $this->builder;
+		return $this->message_builder;
 	}
 
 	/**
@@ -54,7 +55,7 @@ class EmailNotifier extends AbstractEmail implements \SplObserver
 	 */
 	public function setMessageBuilder(AbstractBuilder $builder)
 	{
-		$this->builder = $builder;
+		$this->message_builder = $builder;
 	}
 
 	/**
