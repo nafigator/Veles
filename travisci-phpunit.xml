@@ -29,7 +29,9 @@
 			<directory suffix=".php">Auth</directory>
 			<directory suffix=".php">Cache</directory>
 			<directory suffix=".php">DataBase</directory>
+			<!--<directory suffix=".php">Email</directory>-->
 			<!--<directory suffix=".php">ErrorHandler</directory>-->
+			<!--<directory suffix=".php">Form</directory>-->
 			<directory suffix=".php">Helpers</directory>
 			<directory suffix=".php">Model</directory>
 			<directory suffix=".php">Routing</directory>
