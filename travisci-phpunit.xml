@@ -24,6 +24,20 @@
 			<directory suffix=".php">Tests</directory>
 			<directory suffix=".phtml">Tests</directory>
 		</blacklist>
+		<whitelist>
+			<directory suffix=".php">Application</directory>
+			<directory suffix=".php">Auth</directory>
+			<directory suffix=".php">Cache</directory>
+			<directory suffix=".php">DataBase</directory>
+			<directory suffix=".php">ErrorHandler</directory>
+			<directory suffix=".php">Helpers</directory>
+			<directory suffix=".php">Model</directory>
+			<directory suffix=".php">Routing</directory>
+			<directory suffix=".php">Tools</directory>
+			<directory suffix=".php">Traits</directory>
+			<directory suffix=".php">Validators</directory>
+			<directory suffix=".php">View</directory>
+		</whitelist>
 	</filter>
 	<testsuites>
 		<testsuite name="All">

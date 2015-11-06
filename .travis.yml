@@ -29,19 +29,19 @@ before_script:
         phpenv config-add travisci-5.4.ini
         ;;
       5.5)
-        PHPUNIT_FLAGS="--exclude-group=apc"
+        PHPUNIT_FLAGS=""
         phpenv config-add travisci.ini
         ;;
       5.6)
-        PHPUNIT_FLAGS="--exclude-group=apc --coverage-clover build/logs/clover.xml"
+        PHPUNIT_FLAGS="--coverage-clover build/logs/clover.xml"
         phpenv config-add travisci.ini
         ;;
       nightly)
-        PHPUNIT_FLAGS="--exclude-group=apc,cache,memcache,memcacheraw,memcached --bootstrap=Tests/travisci-nightly-bootstrap.php"
+        PHPUNIT_FLAGS="--exclude-group=cache,memcache,memcacheraw,memcached --bootstrap=Tests/travisci-nightly-bootstrap.php"
         echo 'short_open_tag = On' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
         ;;
       hhvm)
-        PHPUNIT_FLAGS="--exclude-group=apc"
+        PHPUNIT_FLAGS=""
         cat travisci.ini >> /etc/hhvm/php.ini
         ;;
     esac
