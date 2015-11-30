@@ -39,8 +39,21 @@ abstract class AbstractEmail
 	public function send()
 	{
 		foreach ($this->receivers as $receiver) {
-			mail($receiver, $this->subject, $this->message, $this->headers);
+			$this->realSend($receiver);
 		}
+	}
+
+	/**
+	 * Send email
+	 *
+	 * @param string $receiver
+	 * @codeCoverageIgnore
+	 *
+	 * @return bool
+	 */
+	protected function realSend($receiver)
+	{
+		return mail($receiver, $this->subject, $this->message, $this->headers);
 	}
 
 	/**
