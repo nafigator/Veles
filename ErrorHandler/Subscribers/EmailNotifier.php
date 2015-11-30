@@ -63,11 +63,6 @@ class EmailNotifier extends AbstractEmail implements \SplObserver
 	 */
 	public function init()
 	{
-		if (null === $this->receivers) {
-			$msg = 'Error notification recipients not set!';
-			throw new \Exception($msg);
-		}
-
 		$charset  = $this->getCharset();
 		$encoding = $this->getEncoding();
 

@@ -1,7 +1,8 @@
 <?php
-namespace Veles\ErrorHandler\HtmlBuilders;
+namespace Veles\Tests\ErrorHandler\HtmlBuilders;
 
 use Veles\ErrorHandler\ExceptionHandler;
+use Veles\ErrorHandler\HtmlBuilders\ErrorBuilder;
 use Veles\ErrorHandler\Subscribers\ErrorRenderer;
 
 /**
@@ -37,14 +38,6 @@ class ErrorBuilderTest extends \PHPUnit_Framework_TestCase
 </html>
 
 EOL;
-	}
-
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 */
-	protected function tearDown()
-	{
 	}
 
 	/**

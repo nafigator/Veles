@@ -1,7 +1,8 @@
 <?php
-namespace Veles\ErrorHandler\HtmlBuilders;
+namespace Veles\Tests\ErrorHandler\HtmlBuilders;
 
 use Veles\ErrorHandler\FatalErrorHandler;
+use Veles\ErrorHandler\HtmlBuilders\FatalBuilder;
 use Veles\ErrorHandler\Subscribers\ErrorRenderer;
 
 /**
