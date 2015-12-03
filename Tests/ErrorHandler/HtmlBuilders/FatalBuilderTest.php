@@ -73,7 +73,7 @@ EOL;
 		set_error_handler(array($this, 'errorHandler'));
 		ini_set('display_errors', 0);
 
-		trigger_error($this->message, E_USER_WARNING);
+		@trigger_error($this->message, E_USER_WARNING);
 		$handler = new FatalErrorHandler;
 
 		$this->object->setTemplate('Errors/exception.phtml');
