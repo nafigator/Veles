@@ -53,6 +53,7 @@ class CliColor
 	 * Encapsulate string in color esc-sequences
 	 *
 	 * @param string $string Строка
+	 *
 	 * @return string
 	 */
 	public function __invoke($string = null)
@@ -72,22 +73,14 @@ class CliColor
 	 * Constructor
 	 *
 	 * @param string $color Color
-	 * @param array $style Styles array
+	 * @param array  $style Styles array
+	 *
 	 * @throws Exception
 	 */
-	public function __construct(
-		$color = 'green', array $style = ['default']
-	) {
-		if (!is_array($style)) {
-			throw new Exception('Style parameter must be an array!');
-		}
-
-		if (!isset(self::$colors[$color])) {
-			throw new Exception('Not valid color!');
-		}
-
-		$this->color = $color;
-		$this->style = $style;
+	public function __construct($color = 'green', array $style = ['default'])
+	{
+		$this->setColor($color);
+		$this->setStyle($style);
 	}
 
 	/**
@@ -98,7 +91,7 @@ class CliColor
 	public function __toString()
 	{
 		if (null === $this->string) {
-			return null;
+			return '';
 		}
 
 		$style = $this->getStyle();
@@ -111,6 +104,7 @@ class CliColor
 	 * Add string
 	 *
 	 * @param string $string String that should be colorized
+	 *
 	 * @throws Exception
 	 * @return CliColor
 	 */
@@ -128,16 +122,13 @@ class CliColor
 	/**
 	 * Set style
 	 *
-	 * @param array $style Стиль
+	 * @param array $style Style
+	 *
 	 * @throws Exception
 	 * @return CliColor
 	 */
 	public function setStyle(array $style = [])
 	{
-		if (!is_array($style)) {
-			throw new Exception('Not valid style!');
-		}
-
 		$styles = array_flip(self::$styles);
 
 		foreach ($style as $value) {
@@ -155,6 +146,7 @@ class CliColor
 	 * Set color
 	 *
 	 * @param string $color Цвет
+	 *
 	 * @throws Exception
 	 * @return CliColor
 	 */
