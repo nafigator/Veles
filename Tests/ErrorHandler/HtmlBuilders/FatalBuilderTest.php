@@ -24,9 +24,6 @@ class FatalBuilderTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		set_error_handler(array($this, "errorHandler"));
-		ini_set("display_errors", 0);
-
 		$this->object = new FatalBuilder;
 		$this->html = <<<EOL
 <!DOCTYPE html>
@@ -49,7 +46,7 @@ EOL;
 	protected function tearDown()
 	{
 		restore_error_handler();
-		ini_set("display_errors", 1);
+		ini_set('display_errors', 1);
 	}
 
 	/**
@@ -73,6 +70,9 @@ EOL;
 	 */
 	public function testGetHtml()
 	{
+		set_error_handler(array($this, 'errorHandler'));
+		ini_set('display_errors', 0);
+
 		trigger_error($this->message, E_USER_WARNING);
 		$handler = new FatalErrorHandler;
 
