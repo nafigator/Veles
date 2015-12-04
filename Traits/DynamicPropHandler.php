@@ -46,8 +46,7 @@ trait DynamicPropHandler
 	 */
 	public function getProperties(&$properties)
 	{
-		$tmp_props = array_keys($properties);
-		foreach ($tmp_props as $property_name) {
+		foreach (array_keys($properties) as $property_name) {
 			if (isset($this->$property_name)) {
 				$properties[$property_name] = $this->$property_name;
 			}
