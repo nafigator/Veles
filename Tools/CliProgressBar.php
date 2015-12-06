@@ -19,49 +19,42 @@ use Veles\Validators\ByteValidator;
 
 /**
  * Class CliProgressBar
+ *
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class CliProgressBar
 {
-	private $bp_percent;
-	private $percent;
-	private $start_time;
-	private $final_value;
-	private $block = false;
-	private $curr_time;
-	private $last_update_time = 0;
-	private $cycle_time;
-	private $clean_process_time = 0;
-
+	protected $bp_percent;
+	protected $percent;
+	protected $start_time;
+	protected $final_value;
+	protected $curr_time;
+	protected $last_update_time = 0;
+	protected $cycle_time;
+	protected $clean_process_time = 0;
+	protected $mem_usage_func = 'memory_get_usage';
+	protected $mem_peak_func = 'memory_get_peak_usage';
 
 	/**
 	 * Constructor
 	 *
-	 * @param int $final Числовой эквивалент финального результата
-	 * @param int $width Ширина прогрессбара
-	 * @param bool $block Флаг блокирования пользовательского ввода
+	 * @param int $final Final result quantity
+	 * @param int $width ProgressBar width
 	 */
-	public function __construct($final, $width = 60, $block = false)
+	public function __construct($final, $width = 60)
 	{
-		if ($block) {
-			$this->block = true;
-			stream_set_blocking(STDIN, false);
-		}
-
 		$this->final_value = max($final, 1);
 		$this->width       = $width;
 		$this->bp_percent  = $width / 100;
 		$this->percent     = $this->final_value / 100;
 		$this->start_time  = microtime(true);
 		$this->last_update_time = $this->start_time;
-
-		$this->update(0);
 	}
 
 	/**
 	 * Progress bar update
 	 *
-	 * @param int $current Числовой эквивалент состояния процесса
+	 * @param int $current Current process quantity
 	 */
 	public function update($current)
 	{
@@ -70,10 +63,6 @@ class CliProgressBar
 		$this->clean_process_time += $this->cycle_time;
 
 		list ($end, $bar, $space_len, $status) = $this->calcParams($current);
-
-		if ($this->block) {
-			self::stdinCleanup();
-		}
 
 		echo ($space_len > 0)
 			? "\033[?25l[$bar>\033[{$space_len}C]$status$end"
@@ -85,19 +74,18 @@ class CliProgressBar
 	/**
 	 * Get string with statistic
 	 *
-	 * @param int $current Текущее значение числового эквевалента процесса
+	 * @param int $current Current process quantity
+	 *
 	 * @return string
 	 */
 	public function getStatusString($current)
 	{
 		$current   = max($current, 1);
-		$avg_speed = $current / $this->clean_process_time;
+		$avg_speed = round($current / $this->clean_process_time);
 
-		$estimated = ($this->final_value - $current)
-			/ ($current / (microtime(true) - $this->start_time));
-		$estimated = number_format($estimated, 1);
-
-		$avg_speed = round($avg_speed);
+		$estimated = number_format(
+			$this->cycle_time * ($this->final_value - $current), 1
+		);
 
 		return " $current u | $avg_speed u/s | Est: $estimated s";
 	}
@@ -107,34 +95,22 @@ class CliProgressBar
 	 *
 	 * @return string
 	 */
-	public static function getMemString()
+	public function getMemString()
 	{
-		$mem = ByteValidator::format(memory_get_usage());
-		$max_mem = ByteValidator::format(memory_get_peak_usage());
+		$mem = ByteValidator::format(call_user_func($this->mem_usage_func));
+		$max_mem = ByteValidator::format(call_user_func($this->mem_peak_func));
 
 		return " | Mem: $mem | Max: $max_mem";
 	}
 
 	/**
-	 * User input cleanup
-	 */
-	private static function stdinCleanup()
-	{
-		if (!fgets(STDIN)) {
-			return;
-		}
-
-		echo "\033[K\033[1A";
-	}
-
-	/**
 	 * Calculate bar-string params
 	 *
-	 * @param $current
+	 * @param int $current Current process quantity
 	 *
 	 * @return array
 	 */
-	private function calcParams($current)
+	protected function calcParams($current)
 	{
 		$done = $current / $this->percent;
 
@@ -149,7 +125,7 @@ class CliProgressBar
 		$bar = str_repeat('=', $position);
 		$space_len = $this->width - $position;
 
-		$status = $this->getStatusString($current) . self::getMemString();
+		$status = $this->getStatusString($current) . $this->getMemString();
 
 		return [$end, $bar, $space_len, $status];
 	}

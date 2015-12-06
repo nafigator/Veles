@@ -36,7 +36,7 @@
 			<directory suffix=".php">Helpers</directory>
 			<directory suffix=".php">Model</directory>
 			<directory suffix=".php">Routing</directory>
-			<!--<directory suffix=".php">Tools</directory>-->
+			<directory suffix=".php">Tools</directory>
 			<directory suffix=".php">Traits</directory>
 			<!--<directory suffix=".php">Validators</directory>-->
 			<!--<directory suffix=".php">View</directory>-->
