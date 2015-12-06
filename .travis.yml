@@ -39,7 +39,7 @@ before_script:
         ;;
       7.0)
         PHPUNIT_FLAGS="--exclude-group=cache,memcache,memcacheraw,memcached --bootstrap=Tests/travisci-nightly-bootstrap.php"
-        phpenv config-add travisci.ini
+        echo 'short_open_tag = On' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
         ;;
       nightly)
         PHPUNIT_FLAGS="--exclude-group=cache,memcache,memcacheraw,memcached --bootstrap=Tests/travisci-nightly-bootstrap.php"
