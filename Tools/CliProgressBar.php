@@ -84,7 +84,8 @@ class CliProgressBar
 		$avg_speed = round($current / $this->clean_process_time);
 
 		$estimated = number_format(
-			$this->cycle_time * ($this->final_value - $current), 1
+			($this->final_value - $current)
+			/ ($current / (microtime(true) - $this->start_time)), 1
 		);
 
 		return " $current u | $avg_speed u/s | Est: $estimated s";

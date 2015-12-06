@@ -130,15 +130,16 @@ class CliProgressBarTest extends \PHPUnit_Framework_TestCase
 		$clean_process_time_prop->setAccessible(true);
 		$clean_process_time_prop->setValue($this->object, 0.1);
 
-		$cycle_time_prop = $reflection->getProperty('cycle_time');
-		$cycle_time_prop->setAccessible(true);
-		$cycle_time_prop->setValue($this->object, 0.1);
-
 		$final_value_prop = $reflection->getProperty('final_value');
 		$final_value_prop->setAccessible(true);
 		$final_value_prop->setValue($this->object, 100);
 
 		$expected = " 1 u | 10 u/s | Est: 9.9 s";
+
+		$cycle_time_prop = $reflection->getProperty('start_time');
+		$cycle_time_prop->setAccessible(true);
+		$cycle_time_prop->setValue($this->object, microtime(true) - 0.1);
+
 		$result = $this->object->getStatusString(1);
 
 		$msg = 'CliProgressBar::getStatusString() returns wrong result!';
