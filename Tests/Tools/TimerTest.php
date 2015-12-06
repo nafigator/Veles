@@ -72,23 +72,27 @@ class TimerTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testStart()
 	{
+		$time_before_start = microtime(true);
 		Timer::start();
-		$expected = round(microtime(true), 1);
+		$time_after_start = microtime(true);
 
-		$object = new ReflectionObject(new Timer);
-		$prop = $object->getProperty('start_time');
+		$object = new \ReflectionClass('\Veles\Tools\Timer');
+		$start_time_prop = $object->getProperty('start_time');
 
 		$msg = 'Property Timer::$start_time not private';
-		$this->assertTrue($prop->isPrivate(), $msg);
+		$this->assertTrue($start_time_prop->isPrivate(), $msg);
 
-		$prop->setAccessible(true);
-		$result = round($prop->getValue(), 1);
+		$start_time_prop->setAccessible(true);
+		$result = $start_time_prop->getValue();
 
 		$msg = 'Wrong Timer Timer::$start_time type';
 		$this->assertInternalType('float', $result, $msg);
 
 		$msg = 'Wrong result of Timer::$start_time property';
-		$this->assertSame($expected, $result, $msg);
+		$this->assertAttributeGreaterThan($time_before_start, 'start_time', new Timer, $msg);
+
+		$msg = 'Wrong result of Timer::$start_time property';
+		$this->assertAttributeLessThan($time_after_start, 'start_time', new Timer, $msg);
 	}
 
 	/**
@@ -104,22 +108,10 @@ class TimerTest extends PHPUnit_Framework_TestCase
 		Timer::reset();
 		$expected = 0;
 
-		$object = new ReflectionObject(new Timer);
+		$msg = 'Timer::reset() wrong behavior!';
 
-		$start_time = $object->getProperty('start_time');
-		$diff = $object->getProperty('diff');
-
-		$start_time->setAccessible(true);
-		$result = $start_time->getValue();
-
-		$msg = 'Wrong result of Timer::$start_time property';
-		$this->assertSame($expected, $result, $msg);
-
-		$diff->setAccessible(true);
-		$result = $start_time->getValue();
-
-		$msg = 'Wrong result of Timer::$diff property';
-		$this->assertSame($expected, $result, $msg);
+		$this->assertAttributeSame($expected, 'start_time', new Timer, $msg);
+		$this->assertAttributeSame($expected, 'diff', new Timer, $msg);
 	}
 
 	/**
@@ -131,28 +123,30 @@ class TimerTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testStop()
 	{
+		$time_before_start = microtime(true);
+		Timer::start();
+		$time_before_stop = microtime(true);
 		Timer::stop();
-		$expected = round(microtime(true), 1);
+		$time_after_stop = microtime(true);
 
-		$object = new ReflectionObject(new Timer);
-		$prop = $object->getProperty('diff');
+		$expected = $time_after_stop - $time_before_start;
 
-		$msg = 'Property Timer::$diff not private';
-		$this->assertTrue($prop->isPrivate(), $msg);
-
-		$prop->setAccessible(true);
-		$result = round($prop->getValue(), 1);
-
-		$msg = 'Wrong result of Timer::$diff property';
-		$this->assertSame($expected, $result, $msg);
+		$msg = 'Timer::stop() wrong behavior!';
+		$this->assertAttributeGreaterThan($time_before_stop, 'stop_time', new Timer, $msg);
+		$this->assertAttributeLessThan($time_after_stop, 'stop_time', new Timer, $msg);
+		$this->assertAttributeLessThan($expected, 'diff', new Timer, $msg);
+		$this->assertAttributeSame(0, 'start_time', new Timer, $msg);
 	}
 
 	/**
-	 * @covers  Veles\Tools\Timer::get
-	 * @group Tools
+	 * @covers       Veles\Tools\Timer::get
+	 * @group        Tools
 	 * @dataProvider getProvider
-	 * @depends testStop
-	 * @see Timer::get
+	 * @depends      testStop
+	 * @see          Timer::get
+	 *
+	 * @param $timer_precision
+	 * @param $precision
 	 */
 	public function testGet($timer_precision, $precision)
 	{
@@ -192,11 +186,13 @@ class TimerTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @covers  Veles\Tools\Timer::get
-	 * @group Tools
-	 * @depends testStop
+	 * @covers       Veles\Tools\Timer::get
+	 * @group        Tools
+	 * @depends      testStop
 	 * @dataProvider getPrecisionProvider
-	 * @see Timer::get
+	 * @see          Timer::get
+	 *
+	 * @param $precision
 	 */
 	public function testGetPrecision($precision)
 	{

@@ -48,7 +48,7 @@ class Timer
 	{
 		self::$stop_time = microtime(true);
 		self::$diff += self::$stop_time - self::$start_time;
-		self::reset(false);
+		self::$start_time = 0;
 	}
 
 	/**
@@ -76,13 +76,10 @@ class Timer
 
 	/**
 	 * Reset internal timer values
-	 *
-	 * @param bool $full Flag for reset diff value
 	 */
-	public static function reset($full = true)
+	public static function reset()
 	{
 		self::$start_time = 0;
-
-		$full and self::$diff = 0;
+		self::$diff       = 0;
 	}
 }
