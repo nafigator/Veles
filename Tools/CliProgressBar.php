@@ -24,13 +24,13 @@ use Veles\Validators\ByteValidator;
  */
 class CliProgressBar
 {
-	protected $bp_percent;
+	protected $pb_percent;
 	protected $percent;
 	protected $start_time;
 	protected $final_value;
 	protected $curr_time;
 	protected $last_update_time = 0;
-	protected $cycle_time;
+	protected $full_cycle_time = 0;
 	protected $clean_process_time = 0;
 	protected $mem_usage_func = 'memory_get_usage';
 	protected $mem_peak_func = 'memory_get_peak_usage';
@@ -45,7 +45,7 @@ class CliProgressBar
 	{
 		$this->final_value = max($final, 1);
 		$this->width       = $width;
-		$this->bp_percent  = $width / 100;
+		$this->pb_percent  = $width / 100;
 		$this->percent     = $this->final_value / 100;
 		$this->start_time  = microtime(true);
 		$this->last_update_time = $this->start_time;
@@ -59,8 +59,7 @@ class CliProgressBar
 	public function update($current)
 	{
 		$this->curr_time = microtime(true);
-		$this->cycle_time = $this->curr_time - $this->last_update_time;
-		$this->clean_process_time += $this->cycle_time;
+		$this->clean_process_time += $this->curr_time - $this->last_update_time;
 
 		list ($end, $bar, $space_len, $status) = $this->calcParams($current);
 
@@ -68,6 +67,7 @@ class CliProgressBar
 			? "\033[?25l[$bar>\033[{$space_len}C]$status$end"
 			: "[$bar>]$status$end\033[?25h";
 
+		$this->full_cycle_time = microtime(true) - $this->last_update_time;
 		$this->last_update_time = microtime(true);
 	}
 
@@ -84,7 +84,7 @@ class CliProgressBar
 		$avg_speed = round($current / $this->clean_process_time);
 
 		$estimated = number_format(
-			$this->cycle_time * ($this->final_value - $current), 1
+			($this->final_value - $current) * $this->full_cycle_time, 1
 		);
 
 		return " $current u | $avg_speed u/s | Est: $estimated s";
@@ -115,7 +115,7 @@ class CliProgressBar
 		$done = $current / $this->percent;
 
 		if ($done < 100) {
-			$position = floor($this->bp_percent * $done);
+			$position = floor($this->pb_percent * $done);
 			$end = "\033[K\r";
 		} else {
 			$position = $this->width;

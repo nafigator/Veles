@@ -47,7 +47,7 @@ class CliProgressBarBlockedTest extends \PHPUnit_Framework_TestCase
 		$this->assertAttributeSame($expected, 'width', $this->object, $msg);
 
 		$expected = $this->width / 100;
-		$this->assertAttributeSame($expected, 'bp_percent', $this->object, $msg);
+		$this->assertAttributeSame($expected, 'pb_percent', $this->object, $msg);
 
 		$expected = $this->final / 100;
 		$this->assertAttributeSame($expected, 'percent', $this->object, $msg);

@@ -50,7 +50,7 @@ class CliProgressBarTest extends \PHPUnit_Framework_TestCase
 		$this->assertAttributeSame($expected, 'width', $this->object, $msg);
 
 		$expected = $this->width / 100;
-		$this->assertAttributeSame($expected, 'bp_percent', $this->object, $msg);
+		$this->assertAttributeSame($expected, 'pb_percent', $this->object, $msg);
 
 		$expected = $this->final / 100;
 		$this->assertAttributeSame($expected, 'percent', $this->object, $msg);
@@ -130,7 +130,7 @@ class CliProgressBarTest extends \PHPUnit_Framework_TestCase
 		$clean_process_time_prop->setAccessible(true);
 		$clean_process_time_prop->setValue($this->object, 0.1);
 
-		$cycle_time_prop = $reflection->getProperty('cycle_time');
+		$cycle_time_prop = $reflection->getProperty('full_cycle_time');
 		$cycle_time_prop->setAccessible(true);
 		$cycle_time_prop->setValue($this->object, 0.1);
 
