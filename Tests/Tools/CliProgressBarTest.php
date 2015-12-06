@@ -130,9 +130,13 @@ class CliProgressBarTest extends \PHPUnit_Framework_TestCase
 		$clean_process_time_prop->setAccessible(true);
 		$clean_process_time_prop->setValue($this->object, 0.1);
 
-		$cycle_time_prop = $reflection->getProperty('full_cycle_time');
+		$cycle_time_prop = $reflection->getProperty('curr_time');
 		$cycle_time_prop->setAccessible(true);
-		$cycle_time_prop->setValue($this->object, 0.1);
+		$cycle_time_prop->setValue($this->object, 1449402250.1);
+
+		$cycle_time_prop = $reflection->getProperty('start_time');
+		$cycle_time_prop->setAccessible(true);
+		$cycle_time_prop->setValue($this->object, 1449402250.0);
 
 		$final_value_prop = $reflection->getProperty('final_value');
 		$final_value_prop->setAccessible(true);

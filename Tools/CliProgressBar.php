@@ -30,7 +30,6 @@ class CliProgressBar
 	protected $final_value;
 	protected $curr_time;
 	protected $last_update_time = 0;
-	protected $full_cycle_time = 0;
 	protected $clean_process_time = 0;
 	protected $mem_usage_func = 'memory_get_usage';
 	protected $mem_peak_func = 'memory_get_peak_usage';
@@ -67,7 +66,6 @@ class CliProgressBar
 			? "\033[?25l[$bar>\033[{$space_len}C]$status$end"
 			: "[$bar>]$status$end\033[?25h";
 
-		$this->full_cycle_time = microtime(true) - $this->last_update_time;
 		$this->last_update_time = microtime(true);
 	}
 
@@ -82,9 +80,10 @@ class CliProgressBar
 	{
 		$current   = max($current, 1);
 		$avg_speed = round($current / $this->clean_process_time);
-
 		$estimated = number_format(
-			($this->final_value - $current) * $this->full_cycle_time, 1
+			($this->final_value - $current) *
+			($this->curr_time - $this->start_time) /
+			$current, 1
 		);
 
 		return " $current u | $avg_speed u/s | Est: $estimated s";

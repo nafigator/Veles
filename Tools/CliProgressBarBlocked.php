@@ -46,7 +46,6 @@ class CliProgressBarBlocked extends CliProgressBar
 			? "\033[?25l[$bar>\033[{$space_len}C]$status$end"
 			: "[$bar>]$status$end\033[?25h";
 
-		$this->full_cycle_time = microtime(true) - $this->last_update_time;
 		$this->last_update_time = microtime(true);
 	}
 }
