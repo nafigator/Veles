@@ -1,6 +1,10 @@
 build:
     environment:
-        php: '5.5.25'
+        php:
+            version: 5.5.25
+            ini:
+                'short_open_tag': 'On'
+
         memcached: true
 
     dependencies:
