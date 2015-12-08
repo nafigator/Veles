@@ -1,0 +1,3 @@
+[submodule "tests"]
+	path = Tests
+	url = git@github.com:nafigator/Veles-unit-tests.git
