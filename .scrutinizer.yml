@@ -14,11 +14,13 @@ build:
     project_setup:
         before:
             - mysql -e 'CREATE DATABASE IF NOT EXISTS test'
+        after:
+            - rm -rf *
+            - git clone https://github.com/nafigator/Veles.git
+            - cd Veles
 
     tests:
         before:
-            - ls -al
-            - ls -al ../
             - git submodule add --name tests https://github.com/nafigator/Veles-unit-tests.git Tests
             - phpunit -c Tests/travisci-phpunit.xml --stderr
 
@@ -26,7 +28,5 @@ checks:
     php: true
 
 filter:
-    paths:
-        - Veles/
     excluded_paths:
         - Tests/*
