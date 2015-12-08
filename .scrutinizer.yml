@@ -1,11 +1,11 @@
 build:
     environment:
         php: '5.5.25'
+        memcached: true
 
     dependencies:
         # Runs before inferred commands
-        before:
-            - sudo apt-get install -y memcached
+        before: []
         # Overwrites inferred commands
         override: []
         # Runs after inferred commands
