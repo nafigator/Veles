@@ -4,7 +4,8 @@ build:
 
     dependencies:
         # Runs before inferred commands
-        before: []
+        before:
+            - sudo apt-get install -y memcached
         # Overwrites inferred commands
         override: []
         # Runs after inferred commands
