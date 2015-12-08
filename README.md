@@ -1,4 +1,6 @@
-[![Build Status](https://scrutinizer-ci.com/g/nafigator/Veles/badges/build.png?b=master)](https://scrutinizer-ci.com/g/nafigator/Veles/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nafigator/Veles/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nafigator/Veles/?branch=master) [![Build status][Travis image]][Travis repo] [![Code Climate][Quality status]][Quality src] [![Coverage Status][Coverage image]][Coverage repo] [![GitHub license][License img]][License src] [![GitHub release][Release img]][Release src] [![Size status][Size image]][Release src]
+ [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nafigator/Veles/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nafigator/Veles/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/nafigator/Veles/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/nafigator/Veles/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/nafigator/Veles/badges/build.png?b=master)](https://scrutinizer-ci.com/g/nafigator/Veles/build-status/master)
+ [![Code Climate][Quality status]][Quality src] [![Coverage Status][Coverage image]][Coverage repo] [![Build status][Travis image]][Travis repo]
+ [![GitHub license][License img]][License src] [![GitHub release][Release img]][Release src] [![Size status][Size image]][Release src]
 
 # Veles
 
