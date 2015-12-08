@@ -17,6 +17,8 @@ build:
 
     tests:
         before:
+            - ls -al
+            - ls -al ../
             - git submodule add --name tests https://github.com/nafigator/Veles-unit-tests.git Tests
             - phpunit -c Tests/travisci-phpunit.xml --stderr
 
