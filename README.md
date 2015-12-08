@@ -1,4 +1,4 @@
-[![Build status][Travis image]][Travis repo] [![Code Climate][Quality status]][Quality src] [![Coverage Status][Coverage image]][Coverage repo] [![GitHub license][License img]][License src] [![GitHub release][Release img]][Release src] [![Size status][Size image]][Release src]
+[![Build Status](https://scrutinizer-ci.com/g/nafigator/Veles/badges/build.png?b=master)](https://scrutinizer-ci.com/g/nafigator/Veles/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nafigator/Veles/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nafigator/Veles/?branch=master) [![Build status][Travis image]][Travis repo] [![Code Climate][Quality status]][Quality src] [![Coverage Status][Coverage image]][Coverage repo] [![GitHub license][License img]][License src] [![GitHub release][Release img]][Release src] [![Size status][Size image]][Release src]
 
 # Veles
 
@@ -20,6 +20,6 @@ Read more on [SemVer.org](http://semver.org).
   [Coverage repo]: https://codeclimate.com/github/nafigator/Veles
   [License img]: https://img.shields.io/badge/license-BSD3-brightgreen.svg
   [License src]: https://tldrlegal.com/license/bsd-3-clause-license-(revised)
-  [Release img]: https://img.shields.io/badge/release-0.31.2-orange.svg
+  [Release img]: https://img.shields.io/badge/release-0.32.0-orange.svg
   [Release src]: https://github.com/nafigator/Veles
-  [Size image]: https://img.shields.io/badge/size-3.1M-blue.svg
+  [Size image]: https://img.shields.io/badge/size-2.7M-blue.svg
