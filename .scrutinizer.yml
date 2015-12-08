@@ -1,0 +1,27 @@
+build:
+	environment:
+		php: '5.5.25'
+
+	dependencies:
+		# Runs before inferred commands
+		before: []
+		# Overwrites inferred commands
+		override: []
+		# Runs after inferred commands
+		after: []
+
+	# Run after dependencies
+	project_setup:
+		before:
+			- mysql -e 'CREATE DATABASE IF NOT EXISTS test'
+
+	tests:
+		before:
+			- phpunit -c Tests/travisci-phpunit.xml --stderr
+
+checks:
+	php: true
+
+filter:
+	excluded_paths:
+		- Tests/*
