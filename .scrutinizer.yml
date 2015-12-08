@@ -22,7 +22,12 @@ build:
     tests:
         before:
             - git submodule add --name tests https://github.com/nafigator/Veles-unit-tests.git Tests
-            - phpunit -c Tests/scrutinizer-phpunit.xml --stderr
+        override:
+            -
+                command: phpunit -c Tests/scrutinizer-phpunit.xml --stderr --coverage-clover=coverage-report
+                coverage:
+                    file: coverage-report
+                    format: php-clover
 
 checks:
     php: true
