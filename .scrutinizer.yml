@@ -24,5 +24,7 @@ checks:
     php: true
 
 filter:
+    paths:
+        - Veles/
     excluded_paths:
         - Tests/*
