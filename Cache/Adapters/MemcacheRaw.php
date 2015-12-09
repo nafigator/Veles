@@ -106,24 +106,15 @@ class MemcacheRaw
 	{
 		$output = $this->query('stats items');
 		$lines  = explode("\r\n", trim($output));
-		$slabs  = [];
-		$regex_items = '/^STAT items:(\d+):number (\d+)$/';
-		$regex_keys  = '/ITEM ([^\s]+)/';
 
-		foreach ($lines as $line) {
-			if (1 !== preg_match($regex_items, $line, $match)) {
-				continue;
-			}
-
-			$slabs[] = "$match[1] $match[2]";
-		}
-		unset($lines, $line, $match);
+		$slabs = $this->getSlabs($lines);
+		unset($lines);
 
 		foreach ($slabs as $slab) {
 			$query = "stats cachedump $slab";
 			$output = $this->query($query);
 
-			if (preg_match_all($regex_keys, $output, $match)) {
+			if (preg_match_all('/ITEM ([^\s]+)/', $output, $match)) {
 				$this->delete($match[1], $tpl);
 			}
 		}
@@ -155,6 +146,33 @@ class MemcacheRaw
 		return $output;
 	}
 
+	/**
+	 * Get slabs array
+	 *
+	 * @param $lines
+	 *
+	 * @return array
+	 */
+	protected function getSlabs($lines)
+	{
+		$regex_items = '/^STAT items:(\d+):number (\d+)$/';
+		$slabs = [];
+
+		foreach ($lines as $line) {
+			if (1 === preg_match($regex_items, $line, $match)) {
+				$slabs[] = "$match[1] $match[2]";
+			}
+		}
+
+		return $slabs;
+	}
+
+	/**
+	 * Send delete matched keys from cache
+	 *
+	 * @param $match
+	 * @param $tpl
+	 */
 	protected function delete($match, $tpl)
 	{
 		foreach ($match as $key) {
