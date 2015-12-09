@@ -184,8 +184,8 @@ class UploadFile extends File
 	{
 		$dir = $this->getDir();
 
-		is_dir($dir) or mkdir($dir, $this->getDirMask(), true);
-		is_writable($dir) or chmod($dir, $this->getDirMask());
+		is_dir($dir) || mkdir($dir, $this->getDirMask(), true);
+		is_writable($dir) || chmod($dir, $this->getDirMask());
 
 		return file_exists($this->getPath())
 			? true

@@ -29,9 +29,9 @@ class Timer
 	const NANOSECONDS  = 9;
 	const PICOSECONDS  = 12;
 
-	private static $start_time = 0;
-	private static $stop_time  = 0;
-	private static $diff       = 0;
+	private static $start_time = 0.0;
+	private static $stop_time  = 0.0;
+	private static $diff       = 0.0;
 
 	/**
 	 * Timer start
@@ -48,7 +48,7 @@ class Timer
 	{
 		self::$stop_time = microtime(true);
 		self::$diff += self::$stop_time - self::$start_time;
-		self::$start_time = 0;
+		self::$start_time = 0.0;
 	}
 
 	/**
@@ -79,7 +79,7 @@ class Timer
 	 */
 	public static function reset()
 	{
-		self::$start_time = 0;
-		self::$diff       = 0;
+		self::$start_time = 0.0;
+		self::$diff       = 0.0;
 	}
 }

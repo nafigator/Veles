@@ -64,7 +64,7 @@ class File
 	 * Set MIME type
 	 *
 	 * @param string $mime
-	 * @return $this;
+	 * @return $this
 	 */
 	public function setMime($mime)
 	{
@@ -136,7 +136,7 @@ class File
 	 */
 	public function delete()
 	{
-		if (!file_exists($this->getPath()) or !is_writable($this->getPath())) {
+		if (!file_exists($this->getPath()) || !is_writable($this->getPath())) {
 			return false;
 		}
 

@@ -30,7 +30,7 @@ abstract class ViewAdapterAbstract
 	protected static $instance;
 	/** @var  mixed */
 	protected $driver;
-	/** @var array */
+	/** @var mixed */
 	protected $variables;
 
 	/**

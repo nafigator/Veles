@@ -24,7 +24,7 @@ class RouteRegex implements iRouteStrategy
 	/**
 	 * Variable contains array of named sub-patterns values
 	 *
-	 * @var array
+	 * @var array|null
 	 */
 	protected static $params;
 

@@ -67,7 +67,7 @@ class PdoErrorLogger implements \SplObserver
 		/** @noinspection PhpUndefinedMethodInspection */
 		$stmt_err = $stmt->errorCode();
 
-		if ('00000' === $conn_err and '00000' === $stmt_err)
+		if ('00000' === $conn_err && '00000' === $stmt_err)
 			return;
 
 		$error_info = ('00000' === $conn_err)
