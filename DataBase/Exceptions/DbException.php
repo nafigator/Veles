@@ -36,7 +36,7 @@ class DbException extends Exception
 			$pattern2 = '/SQLSTATE\[(.+)\] \[([\w\d]+)\] ([\s\S]+)/';
 
 			preg_match($pattern1, $exception->getMessage(), $match)
-			or preg_match($pattern2, $exception->getMessage(), $match);
+			|| preg_match($pattern2, $exception->getMessage(), $match);
 
 			$this->setAnsiCode($match[1]);
 			$this->code    = (int) $match[2];
@@ -94,7 +94,7 @@ class DbException extends Exception
 	/**
 	 * @param array $params
 	 */
-	public function setParams($params)
+	public function setParams(array $params)
 	{
 		$this->params = $params;
 	}

@@ -15,6 +15,7 @@
 
 namespace Veles\ErrorHandler\Subscribers;
 
+use Veles\ErrorHandler\BaseErrorHandler;
 use Veles\ErrorHandler\HtmlBuilders\AbstractBuilder;
 
 /**
@@ -34,6 +35,9 @@ class ErrorRenderer implements \SplObserver
 	 */
 	public function update(\SplSubject $subject)
 	{
+		if (!$subject instanceof BaseErrorHandler)
+			return;
+
 		$builder = $this->getMessageBuilder();
 		$builder->setHandler($subject);
 		echo $builder->getHtml();
