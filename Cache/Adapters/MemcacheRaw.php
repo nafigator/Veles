@@ -58,7 +58,7 @@ class MemcacheRaw
 	 * Save connection params
 	 *
 	 * @param string $host
-	 * @param int $port
+	 * @param int    $port
 	 */
 	public static function setConnectionParams($host, $port)
 	{
@@ -81,6 +81,7 @@ class MemcacheRaw
 	 * Run memcache console command
 	 *
 	 * @param string $command Internal console memcache command
+	 *
 	 * @return MemcacheRaw
 	 */
 	public function command($command)
@@ -123,11 +124,7 @@ class MemcacheRaw
 			$output = $this->query($query);
 
 			if (preg_match_all($regex_keys, $output, $match)) {
-				foreach ($match[1] as $key) {
-					if (false !== strpos($key, $tpl)) {
-						$this->command("delete $key");
-					}
-				}
+				$this->delete($match[1], $tpl);
 			}
 		}
 		unset($output, $slabs, $slab, $match);
@@ -139,6 +136,7 @@ class MemcacheRaw
 	 * Run console command with output returning
 	 *
 	 * @param string $command Memcache console internal command
+	 *
 	 * @return string
 	 */
 	public function query($command)
@@ -155,5 +153,15 @@ class MemcacheRaw
 		}
 
 		return $output;
+	}
+
+	protected function delete($match, $tpl)
+	{
+		foreach ($match as $key) {
+			if (false === strpos($key, $tpl))
+				continue;
+
+			$this->command("delete $key");
+		}
 	}
 }
