@@ -16,6 +16,7 @@
 namespace Veles\ErrorHandler\Subscribers;
 
 use Veles\Email\AbstractEmail;
+use Veles\ErrorHandler\BaseErrorHandler;
 use Veles\ErrorHandler\HtmlBuilders\AbstractBuilder;
 
 /**
@@ -35,6 +36,9 @@ class EmailNotifier extends AbstractEmail implements \SplObserver
 	 */
 	public function update(\SplSubject $subject)
 	{
+		if (!$subject instanceof BaseErrorHandler)
+			return;
+
 		$builder = $this->getMessageBuilder();
 		$builder->setHandler($subject);
 		$this->message = base64_encode($builder->getHtml());

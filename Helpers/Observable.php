@@ -15,25 +15,22 @@
 
 namespace Veles\Helpers;
 
-use SplObserver;
-use SplSubject;
-
 /**
  * Class Observable
  *
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-class Observable implements SplSubject
+class Observable implements \SplSubject
 {
-	/** @var SplObserver[] */
+	/** @var \SplObserver[] */
 	protected $observers = [];
 
 	/**
 	 * Добавление подписчика
 	 *
-	 * @param SplObserver $observer Подписчик
+	 * @param \SplObserver $observer Подписчик
 	 */
-	public function attach(SplObserver $observer)
+	public function attach(\SplObserver $observer)
 	{
 		$this->observers[] = $observer;
 	}
@@ -41,9 +38,9 @@ class Observable implements SplSubject
 	/**
 	 * Удаление подписчика
 	 *
-	 * @param SplObserver $observer Подписчик
+	 * @param \SplObserver $observer Подписчик
 	 */
-	public function detach(SplObserver $observer)
+	public function detach(\SplObserver $observer)
 	{
 		if (false !== ($key = array_search($observer, $this->observers, true))) {
 			unset($this->observers[$key]);

@@ -29,9 +29,9 @@ abstract class AbstractBuilder
 	protected $template;
 
 	/**
-	 * @param \SplSubject $handler
+	 * @param BaseErrorHandler $handler
 	 */
-	public function setHandler(\SplSubject $handler)
+	public function setHandler(BaseErrorHandler $handler)
 	{
 		$this->handler = $handler;
 	}
