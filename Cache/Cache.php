@@ -47,7 +47,7 @@ class Cache
 	 * @param string $key Key
 	 * @return mixed
 	 */
-	static public function get($key)
+	public static function get($key)
 	{
 		return self::getAdapter()->get($key);
 	}
