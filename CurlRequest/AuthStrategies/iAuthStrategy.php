@@ -26,7 +26,7 @@ interface iAuthStrategy
 	/**
 	 * Sets headers for request for further authentication
 	 *
-	 * @param CurlRequest $request Request class
+	 * @param CurlRequest $request CurlRequest class
 	 *
 	 * @return bool
 	 */
