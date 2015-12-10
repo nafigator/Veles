@@ -50,7 +50,7 @@ abstract class DbConnection
 	 *
 	 * @return mixed
 	 */
-	abstract function create();
+	abstract public function create();
 
 	/**
 	 * @return mixed
