@@ -47,7 +47,7 @@ abstract class AbstractAuthStrategy
 	/**
 	 * User authentication
 	 *
-	 * @return User
+	 * @return bool
 	 */
 	abstract public function identify();
 
@@ -55,7 +55,8 @@ abstract class AbstractAuthStrategy
 	 * Auth cookies setup
 	 *
 	 * @param int $identifier ID пользователя
-	 * @param int $hash Хэш пароля
+	 * @param int $hash       Хэш пароля
+	 *
 	 * @codeCoverageIgnore
 	 */
 	protected static function setCookie($identifier, $hash)
@@ -68,6 +69,7 @@ abstract class AbstractAuthStrategy
 
 	/**
 	 * Delete auth cookies
+	 *
 	 * @codeCoverageIgnore
 	 */
 	protected static function delCookie()
@@ -80,6 +82,7 @@ abstract class AbstractAuthStrategy
 	 * User search
 	 *
 	 * @param DbFilter $filter
+	 *
 	 * @return bool
 	 */
 	protected function findUser(DbFilter $filter)

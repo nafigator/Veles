@@ -1,6 +1,6 @@
 <?php
 /**
- * Стратегия авторизации пользователя по кукам
+ * User cookie auth strategy
  *
  * @file      CookieStrategy.php
  *
@@ -45,6 +45,7 @@ class CookieStrategy extends AbstractAuthStrategy
 
 	/**
 	 * Авторизация пользователя по кукам
+	 *
 	 * @return bool
 	 */
 	public function identify()

@@ -35,7 +35,7 @@ class UsrAuthFactory
 	{
 		switch (true) {
 			case (isset($_POST['ln']) && isset($_POST['pw'])):
-				return new LoginFormStrategy;
+				return new LoginFormStrategy($_POST['ln'], $_POST['pw']);
 			case (isset($_COOKIE['id']) && isset($_COOKIE['pw'])):
 				return new CookieStrategy($_COOKIE['id'], $_COOKIE['pw']);
 			default:

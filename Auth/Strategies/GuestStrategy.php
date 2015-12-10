@@ -1,6 +1,6 @@
 <?php
 /**
- * Стратегия гостевой авторизации
+ * Guest authentication strategy
  *
  * @file      GuestStrategy,php
  *
@@ -18,13 +18,15 @@ namespace Veles\Auth\Strategies;
 use Veles\Auth\UsrGroup;
 
 /**
- * Класс GuestStrategy
+ * Class GuestStrategy
+ *
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class GuestStrategy extends AbstractAuthStrategy
 {
 	/**
-	 * Гостевая авторизация
+	 * Guest authentication
+	 *
 	 * @return bool
 	 */
 	public function identify()

@@ -1,6 +1,6 @@
 <?php
 /**
- * Стратегия авторизации пользователя через форму логина
+ * User form authentication strategy
  *
  * @file      LoginFormStrategy.php
  *
@@ -21,7 +21,8 @@ use Veles\DataBase\DbFilter;
 use Veles\Helper;
 
 /**
- * Класс LoginFormStrategy
+ * Class LoginFormStrategy
+ *
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class LoginFormStrategy extends AbstractAuthStrategy
@@ -29,17 +30,19 @@ class LoginFormStrategy extends AbstractAuthStrategy
 	const PREG_PASSWORD    = '/^[a-z0-9_-]{1,20}$/i';
 
 	/**
-	 * Конструктор
+	 * @param $login
+	 * @param $password
 	 */
-	public function __construct()
+	public function __construct($login, $password)
 	{
 		parent::__construct();
-		$this->email    =& $_POST['ln'];
-		$this->password =& $_POST['pw'];
+		$this->email    = $login;
+		$this->password = $password;
 	}
 
 	/**
-	 * Авторизация пользователя через форму логина
+	 * User authentication by login form
+	 *
 	 * @return bool
 	 */
 	public function identify()
@@ -52,18 +55,15 @@ class LoginFormStrategy extends AbstractAuthStrategy
 		$filter = new DbFilter;
 		// Ищем среди не удалённых пользователей
 		$where = "
-			`email` = '$this->email'
-			&& `group` & " . UsrGroup::DELETED . ' = 0 ';
+			email = '$this->email'
+			AND \"group\" & " . UsrGroup::DELETED . ' = 0 ';
 		$filter->setWhere($where);
 
 		if (!$this->findUser($filter)) {
 			return false;
 		}
 
-		// Пользователь уже авторизовался ранее, удаляем куки
-		if (isset($_COOKIE['id']) || isset($_COOKIE['pw'])) {
-			$this->delCookie();
-		}
+		$this->delCookie();
 
 		// Если хэш пароля совпадает, устанавливаем авторизационные куки
 		if (!Password::check($this->user, $this->password)) {
