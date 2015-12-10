@@ -93,4 +93,18 @@ interface iCacheAdapter
 	 * @return bool|int
 	 */
 	public function decrement($key, $offset);
+
+	/**
+	 * Get adapter driver
+	 *
+	 * @return mixed
+	 */
+	public function getDriver();
+
+	/**
+	 * Set adapter driver
+	 *
+	 * @param mixed $driver
+	 */
+	public function setDriver($driver);
 }
