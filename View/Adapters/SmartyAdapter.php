@@ -26,8 +26,8 @@ use /** @noinspection PhpUndefinedClassInspection */ Smarty;
  */
 class SmartyAdapter extends ViewAdapterAbstract
 {
-	/** @var  null|array */
-	protected static $calls;
+	/** @var  array */
+	protected static $calls = [];
 	/** @var $this */
 	protected static $instance;
 	/**

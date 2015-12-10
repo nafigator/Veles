@@ -22,8 +22,8 @@ namespace Veles\View\Adapters;
  */
 class NativeAdapter extends ViewAdapterAbstract
 {
-	/** @var  null|array */
-	protected static $calls;
+	/** @var  array */
+	protected static $calls = [];
 	/** @var $this */
 	protected static $instance;
 	/** @var string */
