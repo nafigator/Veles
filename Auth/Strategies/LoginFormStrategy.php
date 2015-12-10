@@ -29,6 +29,9 @@ class LoginFormStrategy extends AbstractAuthStrategy
 {
 	const PREG_PASSWORD    = '/^[a-z0-9_-]{1,20}$/i';
 
+	protected $email;
+	protected $password;
+
 	/**
 	 * @param $login
 	 * @param $password

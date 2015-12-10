@@ -33,6 +33,7 @@ class CliProgressBar
 	protected $clean_process_time = 0.0;
 	protected $mem_usage_func = 'memory_get_usage';
 	protected $mem_peak_func = 'memory_get_peak_usage';
+	protected $width;
 
 	/**
 	 * Constructor

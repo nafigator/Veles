@@ -137,7 +137,7 @@ abstract class ViewAdapterAbstract
 	 * @param $method
 	 * @param $arguments
 	 */
-	private static function setCall($method, $arguments)
+	protected static function setCall($method, $arguments)
 	{
 		static::$calls[] = [
 			'method'    => $method,
