@@ -32,7 +32,7 @@ class ActiveRecord extends StdClass
 	 * @const string|null Table name
 	 */
 	const TBL_NAME = null;
-	/* @var QueryBuilder */
+	/** @var QueryBuilder */
 	protected $builder;
 	/** @var array Data type map */
 	protected $map = [];
@@ -46,6 +46,7 @@ class ActiveRecord extends StdClass
 
 	/**
 	 * Get data type map
+	 *
 	 * @return array
 	 */
 	public function getMap()
