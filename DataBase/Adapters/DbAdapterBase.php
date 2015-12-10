@@ -16,6 +16,7 @@
 namespace Veles\DataBase\Adapters;
 
 use Veles\DataBase\ConnectionPools\ConnectionPool;
+use Veles\Traits\SingletonInstance;
 
 /**
  * Class DbAdapterBase
@@ -32,8 +33,8 @@ class DbAdapterBase
 	protected static $connection;
 	/** @var  string */
 	protected static $connection_name;
-	/** @var iDbAdapter */
-	protected static $instance;
+
+	use SingletonInstance;
 
 	/**
 	 * Add connection pool
@@ -86,21 +87,5 @@ class DbAdapterBase
 		}
 
 		return static::$connection;
-	}
-
-	/**
-	 * Get adapter instance
-	 *
-	 * @return iDbAdapter
-	 */
-	public static function instance()
-	{
-		if (null === static::$instance) {
-			$class = get_called_class();
-
-			static::$instance = new $class;
-		}
-
-		return static::$instance;
 	}
 }

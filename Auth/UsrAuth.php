@@ -16,6 +16,7 @@
 namespace Veles\Auth;
 
 use Veles\Model\User;
+use Veles\Traits\SingletonInstance;
 
 /**
  * User authentication class
@@ -25,23 +26,8 @@ class UsrAuth
 {
 	protected $identified = false;
 	protected $strategy;
-	protected static $instance;
 
-	/**
-	 * User authentication
-	 *
-	 * @return UsrAuth
-	 */
-	public static function instance()
-	{
-		if (null === static::$instance) {
-			$class = get_called_class();
-
-			static::$instance = new $class;
-		}
-
-		return static::$instance;
-	}
+	use SingletonInstance;
 
 	/**
 	 * User authentication strategy initialization
