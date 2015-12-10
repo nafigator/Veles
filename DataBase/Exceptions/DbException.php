@@ -19,12 +19,15 @@ use Exception;
 
 /**
  * General db exception class
+ *
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class DbException extends Exception
 {
 	protected $ansi_code;
+	/** @var string */
 	protected $sql    = '';
+	/** @var array  */
 	protected $params = [];
 
 	public function __construct($msg, $code, $exception)
@@ -41,13 +44,6 @@ class DbException extends Exception
 			$this->setAnsiCode($match[1]);
 			$this->code    = (int) $match[2];
 			$this->message = $match[3];
-
-			if (isset($exception->errorInfo['sql'])) {
-				$this->setSql($exception->errorInfo['sql']);
-			}
-			if (isset($exception->errorInfo['params'])) {
-				$this->setParams($exception->errorInfo['params']);
-			}
 		}
 	}
 

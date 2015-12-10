@@ -38,7 +38,7 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	   'b' => PDO::PARAM_LOB
 	];
 
-	private function bindParams($params, $types)
+	private function bindParams(array $params, $types)
 	{
 		foreach ($params as $key => $param) {
 			$type = isset($this->type[$types[$key]])
@@ -70,11 +70,13 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	 *
 	 * @throws DbException
 	 */
-	private function throwExceptionWithInfo($sql, $params, \PDOException $e)
+	private function throwExceptionWithInfo($sql, array $params, \PDOException $e)
 	{
-		$e->errorInfo['sql'] = $sql;
-		$e->errorInfo['params'] = $params;
-		throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
+		$exception = new DbException($e->getMessage(), (int) $e->getCode(), $e);
+		$exception->setSql($sql);
+		$exception->setParams($params);
+
+		throw $exception;
 	}
 
 	/**
