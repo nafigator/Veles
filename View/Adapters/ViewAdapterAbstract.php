@@ -24,8 +24,8 @@ use Exception;
  */
 abstract class ViewAdapterAbstract
 {
-	/** @var  null|array */
-	protected static $calls;
+	/** @var  array */
+	protected static $calls = [];
 	/** @var ViewAdapterAbstract */
 	protected static $instance;
 	/** @var  mixed */
@@ -72,7 +72,7 @@ abstract class ViewAdapterAbstract
 			static::$instance = new $class;
 		}
 
-		if (null !== static::$calls) {
+		if ([] !== static::$calls) {
 			static::invokeLazyCalls();
 		}
 
@@ -90,7 +90,7 @@ abstract class ViewAdapterAbstract
 				$call['arguments']
 			);
 		}
-		static::$calls = null;
+		static::$calls = [];
 	}
 
 	/**
