@@ -169,7 +169,8 @@ class QueryBuilder implements iQueryBuilder
 	 * Построение sql-запроса для delete
 	 *
 	 * @param ActiveRecord $model Экземпляр модели
-	 * @param array|string $ids Массив ID для удаления
+	 * @param mixed        $ids   Массив ID для удаления
+	 *
 	 * @throws Exception
 	 * @return string $sql
 	 */
@@ -242,13 +243,9 @@ class QueryBuilder implements iQueryBuilder
 	 *
 	 * @return string
 	 */
-	public function setPage($sql, $pager)
+	public function setPage($sql, DbPaginator $pager)
 	{
-		if ($pager instanceof DbPaginator) {
-			$sql = str_replace('SELECT', 'SELECT SQL_CALC_FOUND_ROWS', $sql);
-			return $sql . $pager->getSqlLimit();
-		}
-
-		return $sql;
+		$sql = str_replace('SELECT', 'SELECT SQL_CALC_FOUND_ROWS', $sql);
+		return $sql . $pager->getSqlLimit();
 	}
 }

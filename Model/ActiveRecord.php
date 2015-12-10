@@ -88,7 +88,10 @@ class ActiveRecord extends StdClass
 	public function getAll($filter = false, $pager = false)
 	{
 		$sql = $this->builder->find($this, $filter);
-		$sql = $this->builder->setPage($sql, $pager);
+
+		if ($pager instanceof DbPaginator) {
+			$sql = $this->builder->setPage($sql, $pager);
+		}
 
 		$result = Db::rows($sql);
 
@@ -171,9 +174,9 @@ class ActiveRecord extends StdClass
 	}
 
 	/**
-	 * @param iQueryBuilder $builder
+	 * @param QueryBuilder $builder
 	 */
-	public function setBuilder($builder)
+	public function setBuilder(QueryBuilder $builder)
 	{
 		$this->builder = $builder;
 	}
@@ -189,7 +192,7 @@ class ActiveRecord extends StdClass
 	 */
 	public function query($sql, $pager = false)
 	{
-		if (false !== $pager) {
+		if ($pager instanceof DbPaginator) {
 			$sql = $this->builder->setPage($sql, $pager);
 		}
 
@@ -199,7 +202,7 @@ class ActiveRecord extends StdClass
 			return false;
 		}
 
-		if (false !== $pager) {
+		if ($pager instanceof DbPaginator) {
 			$pager->calcMaxPages();
 		}
 

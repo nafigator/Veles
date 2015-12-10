@@ -49,7 +49,7 @@ interface iQueryBuilder
 	/**
 	 * Построение sql-запроса для delete
 	 * @param ActiveRecord $model Экземпляр модели
-	 * @param array $ids Массив ID для удаления
+	 * @param mixed $ids Массив ID для удаления
 	 * @throws \Exception
 	 * @return string $sql
 	 */
@@ -69,5 +69,5 @@ interface iQueryBuilder
 	 * @param DbPaginator $pager Экземпляр постраничного вывода
 	 * @return string
 	 */
-	public function setPage($sql, $pager);
+	public function setPage($sql, DbPaginator $pager);
 }
