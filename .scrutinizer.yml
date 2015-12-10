@@ -23,6 +23,7 @@ build:
             - rm -rf *
             - git clone https://github.com/nafigator/Veles.git
             - cd Veles
+            - git checkout $SCRUTINIZER_BRANCH
 
     tests:
         before:
