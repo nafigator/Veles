@@ -88,6 +88,8 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	 */
 	public function value($sql, array $params, $types)
 	{
+		$result = '';
+
 		try {
 			$this->prepare($sql, $params, $types);
 			$result = $this->stmt->fetchColumn();
@@ -109,6 +111,8 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	 */
 	public function row($sql, array $params, $types)
 	{
+		$result = [];
+
 		try {
 			$this->prepare($sql, $params, $types);
 			$result = $this->stmt->fetch();
@@ -130,6 +134,8 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	 */
 	public function rows($sql, array $params, $types)
 	{
+		$result = [];
+
 		try {
 			$this->prepare($sql, $params, $types);
 			$result = $this->stmt->fetchAll();
@@ -199,6 +205,8 @@ class PdoAdapter extends DbAdapterBase implements iDbAdapter
 	 */
 	public function query($sql, array $params, $types)
 	{
+		$result = false;
+
 		try {
 			if (empty($params)) {
 				return (bool)$this->getConnection()->query($sql);
