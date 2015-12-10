@@ -67,10 +67,8 @@ class Timer
 			case self::NANOSECONDS:
 			case self::PICOSECONDS:
 				return round(self::$diff, $precision);
-				break;
 			default:
 				return round(self::$diff, self::MICROSECONDS);
-				break;
 		}
 	}
 

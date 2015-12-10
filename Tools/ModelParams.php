@@ -50,7 +50,6 @@ class ModelParams
 				break;
 			default:
 				throw new \RuntimeException('Unknown data type');
-				break;
 		}
 
 		return $result;

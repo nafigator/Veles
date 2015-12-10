@@ -84,7 +84,6 @@ abstract class AbstractForm implements iForm
 			switch (true) {
 				case $element instanceof ButtonElement:
 				case $element instanceof SubmitElement:
-					continue;
 					break;
 				default:
 					if (!$element->validate($this)) {
