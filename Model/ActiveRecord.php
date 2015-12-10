@@ -34,9 +34,7 @@ class ActiveRecord extends StdClass
 	const TBL_NAME = null;
 	/* @var QueryBuilder */
 	protected $builder;
-	/**
-	 * @var int|float|string $map Data type map
-	 */
+	/** @var array Data type map */
 	protected $map = [];
 
 	use DynamicPropHandler;
