@@ -32,11 +32,9 @@ class ActiveRecord extends StdClass
 	 * @const string|null Table name
 	 */
 	const TBL_NAME = null;
-	/* @var QueryBuilder */
+	/** @var QueryBuilder */
 	protected $builder;
-	/**
-	 * @var int|float|string $map Data type map
-	 */
+	/** @var array Data type map */
 	protected $map = [];
 
 	use DynamicPropHandler;
@@ -48,6 +46,7 @@ class ActiveRecord extends StdClass
 
 	/**
 	 * Get data type map
+	 *
 	 * @return array
 	 */
 	public function getMap()
