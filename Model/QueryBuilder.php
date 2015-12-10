@@ -218,7 +218,8 @@ class QueryBuilder implements iQueryBuilder
 		$where = $group = $having = $order = '';
 
 		if ($filter instanceof DbFilter) {
-			extract($this->extractParams($filter));
+			$params = $this->extractParams($filter);
+			extract($params, EXTR_IF_EXISTS);
 		}
 
 		$sql = "
