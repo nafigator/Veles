@@ -83,7 +83,7 @@ class ActiveRecord extends StdClass
 	 * @param bool|DbFilter    $filter Filter object
 	 * @param bool|DbPaginator $pager  Pagination object
 	 *
-	 * @return array
+	 * @return bool|array
 	 */
 	public function getAll($filter = false, $pager = false)
 	{
