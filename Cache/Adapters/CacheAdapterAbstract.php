@@ -22,8 +22,8 @@ namespace Veles\Cache\Adapters;
  */
 abstract class CacheAdapterAbstract
 {
-	/** @var  null|array */
-	protected static $calls;
+	/** @var  array */
+	protected static $calls = [];
 	/** @var iCacheAdapter|$this */
 	protected static $instance;
 	/** @var  mixed */
@@ -45,7 +45,7 @@ abstract class CacheAdapterAbstract
 			static::$instance = new $class;
 		}
 
-		if (null !== static::$calls) {
+		if ([] !== static::$calls) {
 			static::invokeLazyCalls();
 		}
 
@@ -63,7 +63,7 @@ abstract class CacheAdapterAbstract
 				$call['arguments']
 			);
 		}
-		static::$calls = null;
+		static::$calls = [];
 	}
 
 	/**

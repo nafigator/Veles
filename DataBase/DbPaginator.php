@@ -36,7 +36,7 @@ class DbPaginator extends stdClass
 
 	/**
 	 * Constructor
-	 * @param bool|string $template Path to template
+	 * @param string $template Path to template
 	 * @param int $curr_page Current page
 	 */
 	public function __construct($template, $curr_page = 1)
