@@ -1,19 +1,22 @@
- [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nafigator/Veles/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nafigator/Veles/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/nafigator/Veles/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/nafigator/Veles/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/nafigator/Veles/badges/build.png?b=master)](https://scrutinizer-ci.com/g/nafigator/Veles/build-status/master)
-
- [![Code Climate][Quality status]][Quality src] [![Coverage Status][Coverage image]][Coverage repo] [![Build status][Travis image]][Travis repo]
-
- [![GitHub license][License img]][License src] [![GitHub release][Release img]][Release src] [![Size status][Size image]][Release src]
-
 # Veles
 
 PHP micro framework
+
+##### Scrutinizer stable
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nafigator/Veles/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nafigator/Veles/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/nafigator/Veles/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/nafigator/Veles/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/nafigator/Veles/badges/build.png?b=master)](https://scrutinizer-ci.com/g/nafigator/Veles/build-status/master)
+##### Scrutinizer development
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nafigator/Veles/badges/quality-score.png?b=development)](https://scrutinizer-ci.com/g/nafigator/Veles/?branch=development) [![Code Coverage](https://scrutinizer-ci.com/g/nafigator/Veles/badges/coverage.png?b=development)](https://scrutinizer-ci.com/g/nafigator/Veles/?branch=development) [![Build Status](https://scrutinizer-ci.com/g/nafigator/Veles/badges/build.png?b=development)](https://scrutinizer-ci.com/g/nafigator/Veles/build-status/development)
+##### Code Climate stable
+ [![Code Climate][Quality status]][Quality src] [![Coverage Status][Coverage image]][Coverage repo] [![Build status][Travis image]][Travis repo]
+##### Stats
+ [![GitHub license][License img]][License src] [![GitHub release][Release img]][Release src] [![Size status][Size image]][Release src]
 
 ### Requirements
 * PHP 5.4+
 
 ### Versioning
 
-This software follows Semantic Versioning specifications.
+This software follows *"Semantic Versioning"* specifications.
 Read more on [SemVer.org](http://semver.org).
 
   [Travis image]: https://travis-ci.org/nafigator/Veles.svg?branch=master
