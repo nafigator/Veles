@@ -27,17 +27,20 @@ class CookieStrategy extends AbstractAuthStrategy
 	const PREG_COOKIE_ID   = '/^\d{1,10}$/';
 	const PREG_COOKIE_HASH = '/^[a-z0-9\.\/]{31}$/i';
 
-	private $cookie_hash;
-	private $cookie_id;
+	protected $cookie_hash;
+	protected $cookie_id;
 
 	/**
 	 * Конструктор
+	 *
+	 * @param string $id
+	 * @param string $password
 	 */
-	public function __construct()
+	public function __construct($id, $password)
 	{
 		parent::__construct();
-		$this->cookie_id   =& $_COOKIE['id'];
-		$this->cookie_hash =& $_COOKIE['pw'];
+		$this->cookie_id   = $id;
+		$this->cookie_hash = $password;
 	}
 
 	/**
@@ -55,8 +58,8 @@ class CookieStrategy extends AbstractAuthStrategy
 		$filter = new DbFilter;
 		// Ищем среди не удалённых пользователей
 		$where = "
-			`id` = '$this->cookie_id'
-			&& `group` & " . UsrGroup::DELETED . ' = 0 ';
+			id = '$this->cookie_id'
+			AND \"group\" & " . UsrGroup::DELETED . ' = 0 ';
 		$filter->setWhere($where);
 
 		if (!$this->findUser($filter)) {
@@ -76,7 +79,7 @@ class CookieStrategy extends AbstractAuthStrategy
 	/**
 	 * Проверка входящих значений
 	 */
-	private function checkInput()
+	protected function checkInput()
 	{
 		if (!preg_match(self::PREG_COOKIE_ID, $this->cookie_id)) {
 			$this->errors |= self::ERR_INVALID_ID;

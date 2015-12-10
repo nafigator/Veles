@@ -37,7 +37,7 @@ class UsrAuthFactory
 			case (isset($_POST['ln']) && isset($_POST['pw'])):
 				return new LoginFormStrategy;
 			case (isset($_COOKIE['id']) && isset($_COOKIE['pw'])):
-				return new CookieStrategy;
+				return new CookieStrategy($_COOKIE['id'], $_COOKIE['pw']);
 			default:
 				return new GuestStrategy;
 		}
