@@ -55,7 +55,7 @@ abstract class CacheAdapterAbstract
 	/**
 	 * Lazy calls invocation
 	 */
-	final protected static function invokeLazyCalls()
+	protected static function invokeLazyCalls()
 	{
 		foreach (static::$calls as $call) {
 			call_user_func_array(

@@ -31,18 +31,14 @@ class QueryBuilder implements iQueryBuilder
 	 *
 	 * @return array
 	 */
-	protected function extractParams($filter)
+	protected function extractParams(DbFilter $filter)
 	{
-		$where = $group = $having = $order = '';
-
-		if ($filter instanceof DbFilter) {
-			$where  = $filter->getWhere();
-			$group  = $filter->getGroup();
-			$having = $filter->getHaving();
-			$order  = $filter->getOrder();
-		}
-
-		return [$where, $group, $having, $order];
+		return [
+			'where'  => $filter->getWhere(),
+			'group'  => $filter->getGroup(),
+			'having' => $filter->getHaving(),
+			'order'  => $filter->getOrder()
+		];
 	}
 
 	/**
@@ -209,15 +205,20 @@ class QueryBuilder implements iQueryBuilder
 
 	/**
 	 * Построение запроса получения списка объектов
-	 * @param ActiveRecord $model Экземпляр модели
-	 * @param DbFilter $filter Экземпляр фильтра
+	 *
+	 * @param ActiveRecord  $model  Экземпляр модели
+	 * @param bool|DbFilter $filter Экземпляр фильтра
+	 *
 	 * @return string
 	 */
 	public function find(ActiveRecord $model, $filter)
 	{
 		$fields = '"' . implode('", "', array_keys($model->getMap())) . '"';
+		$where = $group = $having = $order = '';
 
-		list($where, $group, $having, $order) = $this->extractParams($filter);
+		if ($filter instanceof DbFilter) {
+			extract($this->extractParams($filter));
+		}
 
 		$sql = "
 			SELECT
@@ -235,8 +236,10 @@ class QueryBuilder implements iQueryBuilder
 
 	/**
 	 * Построение произвольного запроса с постраничным выводом
-	 * @param string $sql Запрос
+	 *
+	 * @param string      $sql   Запрос
 	 * @param DbPaginator $pager Экземпляр постраничного вывода
+	 *
 	 * @return string
 	 */
 	public function setPage($sql, $pager)

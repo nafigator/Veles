@@ -50,7 +50,7 @@ abstract class AbstractForm implements iForm
 	/**
 	 * Default values initialization
 	 */
-	final protected function init()
+	protected function init()
 	{
 		$this->data = ('get' === $this->method) ? $_GET : $_POST;
 		$this->sid  = md5(uniqid('', true));

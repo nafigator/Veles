@@ -32,7 +32,7 @@ class ActiveRecord extends StdClass
 	 * @const string|null Table name
 	 */
 	const TBL_NAME = null;
-	/* @var iQueryBuilder */
+	/* @var QueryBuilder */
 	protected $builder;
 	/**
 	 * @var int|float|string $map Data type map
@@ -96,7 +96,9 @@ class ActiveRecord extends StdClass
 			return false;
 		}
 
-		$pager instanceof DbPaginator && $pager->calcMaxPages();
+		if ($pager instanceof DbPaginator) {
+			$pager->calcMaxPages();
+		}
 
 		return $result;
 	}

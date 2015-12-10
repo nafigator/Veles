@@ -89,7 +89,7 @@ class UploadedFileValidator implements iValidator
 	 *
 	 * @return string
 	 */
-	final static function getMimeByExtension($ext)
+	public static function getMimeByExtension($ext)
 	{
 		$mime_types = [
 			'gif'  => 'image/gif; charset=binary',

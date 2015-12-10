@@ -58,7 +58,7 @@ interface iQueryBuilder
 	/**
 	 * Построение запроса получения списка объектов
 	 * @param ActiveRecord $model Экземпляр модели
-	 * @param DbFilter $filter Экземпляр фильтра
+	 * @param bool|DbFilter $filter Экземпляр фильтра
 	 * @return string
 	 */
 	public function find(ActiveRecord $model, $filter);
