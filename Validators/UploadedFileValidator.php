@@ -22,7 +22,8 @@ namespace Veles\Validators;
  */
 class UploadedFileValidator implements iValidator
 {
-	protected $allowable_extensions = [];
+	/** @var array */
+	protected $allowed_extensions = [];
 
 	/**
 	 * Creates validator instance
@@ -34,7 +35,7 @@ class UploadedFileValidator implements iValidator
 		$extensions = explode(',', $ext_string);
 
 		foreach ($extensions as $extension) {
-			$this->allowable_extensions[trim($extension)] = true;
+			$this->allowed_extensions[trim($extension)] = true;
 		}
 	}
 
@@ -53,33 +54,17 @@ class UploadedFileValidator implements iValidator
 			return false;
 		}
 
-		$array = explode('.', $file_name);
+		$array    = explode('.', $file_name);
 		$file_ext = strtolower(end($array));
 
-		if (!$this->allowable($file_ext)) {
+		if (!isset($this->allowed_extensions[$file_ext])) {
 			return false;
 		}
 
-		if (false === ($file_info = finfo_open(FILEINFO_MIME))) {
-			return false;
-		}
+		$real_mime = (new \finfo(FILEINFO_MIME))
+			->file($_FILES[$value]['tmp_name']);
 
-		$real_mime = finfo_file($file_info, $_FILES[$value]['tmp_name']);
-		$mime = self::getMimeByExtension($file_ext);
-
-		return $real_mime === $mime;
-	}
-
-	/**
-	 * Check is given extension valid
-	 *
-	 * @param string $ext File extension
-	 *
-	 * @return bool
-	 */
-	private function allowable($ext)
-	{
-		return isset($this->allowable_extensions[$ext]);
+		return $real_mime === $this->getMimeByExtension($file_ext);
 	}
 
 	/**
@@ -89,7 +74,7 @@ class UploadedFileValidator implements iValidator
 	 *
 	 * @return string
 	 */
-	public static function getMimeByExtension($ext)
+	public function getMimeByExtension($ext)
 	{
 		$mime_types = [
 			'gif'  => 'image/gif; charset=binary',
