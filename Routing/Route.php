@@ -39,7 +39,7 @@ class Route extends RouteBase
 	public function init()
 	{
 		$routes = $this->getConfigHandler()->getData();
-		$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+		$uri    = $this->getUri();
 
 		foreach ($routes as $name => $route) {
 			/** @noinspection PhpUndefinedMethodInspection */
@@ -60,9 +60,32 @@ class Route extends RouteBase
 				/** @noinspection PhpUndefinedMethodInspection */
 				$this->params = $route['class']::getParams();
 			}
-
-			break;
 		}
+
+		return $this->execNotFoundHandler();;
+	}
+
+	/**
+	 * Safe way to get uri
+	 *
+	 * @return string
+	 */
+	protected function getUri()
+	{
+		$uri = parse_url(
+			filter_input(INPUT_SERVER, 'REQUEST_URI'), PHP_URL_PATH
+		);
+
+		return $uri;
+	}
+
+	/**
+	 * Not found exception handler
+	 *
+	 * @return $this
+	 */
+	protected function execNotFoundHandler()
+	{
 		if (null === $this->config && null !== $this->ex404) {
 			throw new $this->ex404;
 		}
@@ -70,20 +93,19 @@ class Route extends RouteBase
 		return $this;
 	}
 
+
 	/**
 	 * Check for request is ajax
 	 */
-	private function checkAjax()
+	protected function checkAjax()
 	{
-		if (!$this->isAjax()) {
+		if (!$this->isAjax())
 			return;
-		}
 
-		if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])
-			&& 'XMLHttpRequest' === $_SERVER['HTTP_X_REQUESTED_WITH']
-		) {
+		$ajax_header = (filter_input(INPUT_SERVER, 'HTTP_X_REQUESTED_WITH'));
+
+		if ('XMLHttpRequest' === $ajax_header)
 			return;
-		}
 
 		throw new Exception('AJAX-route got non-AJAX request!');
 	}
