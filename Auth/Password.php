@@ -42,7 +42,7 @@ class Password
 	 * @param string $password Password retrieved through ajax
 	 * @return bool
 	 */
-	public static function check(User $user, &$password)
+	public static function check(User $user, $password)
 	{
 		return $user->getHash() === crypt($password, $user->getHash());
 	}

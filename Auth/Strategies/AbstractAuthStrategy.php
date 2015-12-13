@@ -21,16 +21,13 @@ use Veles\Model\User;
 
 /**
  * Class AbstractAuthStrategy
+ *
  * @author   Alexander Yancharuk <alex at itvault dot info>
  */
 abstract class AbstractAuthStrategy
 {
-	const ERR_INVALID_EMAIL    = 1;  // form login
-	const ERR_INVALID_PASSWORD = 2;
-	const ERR_INVALID_ID       = 4;  // cookie
-	const ERR_INVALID_HASH     = 8;
-	const ERR_USER_NOT_FOUND   = 16; // auth
-	const ERR_WRONG_PASSWORD   = 32;
+	const ERR_USER_NOT_FOUND   = 1;
+	const ERR_WRONG_PASSWORD   = 2;
 
 	// This var contains bit-wise error info
 	protected $errors = 0;
@@ -38,10 +35,12 @@ abstract class AbstractAuthStrategy
 
 	/**
 	 * Constructor
+	 *
+	 * @param User $user
 	 */
-	public function __construct()
+	public function __construct(User $user)
 	{
-		$this->user = new User;
+		$this->user = $user;
 	}
 
 	/**
@@ -54,28 +53,34 @@ abstract class AbstractAuthStrategy
 	/**
 	 * Auth cookies setup
 	 *
-	 * @param int $identifier ID пользователя
-	 * @param int $hash       Хэш пароля
+	 * @param array $params		Cookie params
 	 *
 	 * @codeCoverageIgnore
 	 */
-	protected static function setCookie($identifier, $hash)
+	protected function setCookie(array $params = [])
 	{
-		// Делаем куки на 1 год (3600*24*365)
-		setcookie('id', $identifier, $_SERVER['REQUEST_TIME'] + 31536000, '/', $_SERVER['HTTP_HOST'], false, false);
-		// Пароль не шифруем, т.к. передан в функцию взятый из базы хэш пароля
-		setcookie('pw', $hash, $_SERVER['REQUEST_TIME'] + 31536000, '/', $_SERVER['HTTP_HOST'], false, false);
+		$expire = $path = $domain = $secure = $http_only = null;
+		extract($params, EXTR_IF_EXISTS);
+		$user = $this->getUser();
+
+		setcookie('id', $user->id, $expire, $path, $domain, $secure, $http_only);
+		setcookie('pw', $user->hash, $expire, $path, $domain, $secure, $http_only);
 	}
 
 	/**
 	 * Delete auth cookies
 	 *
 	 * @codeCoverageIgnore
+	 *
+	 * @param array $params
 	 */
-	protected static function delCookie()
+	protected function delCookie(array $params = [])
 	{
-		setcookie('id', '', $_SERVER['REQUEST_TIME'] - 3600, '/', $_SERVER['HTTP_HOST'], false, false);
-		setcookie('pw', '', $_SERVER['REQUEST_TIME'] - 3600, '/', $_SERVER['HTTP_HOST'], false, false);
+		$expire = $path = $domain = $secure = $http_only = null;
+		extract($params, EXTR_IF_EXISTS);
+
+		setcookie('id', null, $expire, $path, $domain, $secure, $http_only);
+		setcookie('pw', null, $expire, $path, $domain, $secure, $http_only);
 	}
 
 	/**
@@ -87,16 +92,17 @@ abstract class AbstractAuthStrategy
 	 */
 	protected function findUser(DbFilter $filter)
 	{
-		if ($this->user->find($filter)) {
+		if ($this->getUser()->find($filter)) {
 			return true;
 		}
 
 		$this->delCookie();
 
 		$props = ['group' => UsrGroup::GUEST];
-		$this->user->setProperties($props);
+		$this->getUser()->setProperties($props);
 
 		$this->errors |= self::ERR_USER_NOT_FOUND;
+
 		return false;
 	}
 

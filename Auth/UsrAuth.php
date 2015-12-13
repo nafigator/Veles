@@ -34,7 +34,7 @@ class UsrAuth
 	 */
 	protected function __construct()
 	{
-		$this->strategy   = UsrAuthFactory::create();
+		$this->strategy   = (new UsrAuthFactory)->create();
 		$this->identified = $this->strategy->identify();
 	}
 

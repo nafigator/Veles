@@ -19,27 +19,77 @@ use Veles\Auth\Strategies\AbstractAuthStrategy;
 use Veles\Auth\Strategies\CookieStrategy;
 use Veles\Auth\Strategies\GuestStrategy;
 use Veles\Auth\Strategies\LoginFormStrategy;
+use Veles\Model\User;
 
 /**
- * Класс UserAuthFactory
+ * Class UserAuthFactory
+ *
  * @author  Alexander Yancharuk <alex at itvault dot info>
- * @todo create method for custom auth-strategy setup. Provide system variables like POST, GET into strategy constructor during initialisation
  */
 class UsrAuthFactory
 {
 	/**
-	 * Алгритм выбора стратегии авторизации пользователя
+	 * Algorithm for choosing auth strategy
+	 *
+	 * @todo Move validation and error handling into separate class
 	 * @return AbstractAuthStrategy
 	 */
-	public static function create()
+	public function create()
 	{
+		$post    = $this->getPost();
+		$cookies = $this->getCookies();
+
 		switch (true) {
-			case (isset($_POST['ln']) && isset($_POST['pw'])):
-				return new LoginFormStrategy($_POST['ln'], $_POST['pw']);
-			case (isset($_COOKIE['id']) && isset($_COOKIE['pw'])):
-				return new CookieStrategy($_COOKIE['id'], $_COOKIE['pw']);
+			case (isset($post['ln'], $post['pw'])):
+				return new LoginFormStrategy(
+					$post['ln'], $post['pw'], new User
+				);
+			case (isset($cookies['id'], $cookies['pw'])):
+				return new CookieStrategy(
+					$cookies['id'], $cookies['pw'], new User
+				);
 			default:
-				return new GuestStrategy;
+				return new GuestStrategy(new User);
 		}
+	}
+
+	protected function getCookies()
+	{
+		$cookie_definitions = [
+			'id' => [
+				'filter' => FILTER_VALIDATE_INT,
+				'options' => [
+					'min_range' => 1,
+					'max_range' => PHP_INT_MAX
+				]
+			],
+			'pw' => [
+				'filter' => FILTER_VALIDATE_REGEXP,
+				'options' => [
+					'regexp' => '/^[a-z0-9_-]{1,20}$/i'
+				]
+			]
+		];
+
+		$cookies = filter_input_array(INPUT_COOKIE, $cookie_definitions);
+
+		return $cookies;
+	}
+
+	protected function getPost()
+	{
+		$post_definitions = [
+			'ln' => FILTER_VALIDATE_EMAIL,
+			'pw' => [
+				'filter' => FILTER_VALIDATE_REGEXP,
+				'options' => [
+					'regexp' => '/^[a-z0-9_-]{1,20}$/i'
+				]
+			]
+		];
+
+		$post = filter_input_array(INPUT_POST, $post_definitions);
+
+		return $post;
 	}
 }
