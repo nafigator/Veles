@@ -19,6 +19,7 @@ use Veles\Auth\Password;
 use Veles\Auth\UsrGroup;
 use Veles\DataBase\DbFilter;
 use Veles\Helper;
+use Veles\Model\User;
 
 /**
  * Class LoginFormStrategy
@@ -27,20 +28,18 @@ use Veles\Helper;
  */
 class LoginFormStrategy extends AbstractAuthStrategy
 {
-	const PREG_PASSWORD    = '/^[a-z0-9_-]{1,20}$/i';
-
-	protected $email;
+	protected $login;
 	protected $password;
 
 	/**
-	 * @param $login
-	 * @param $password
+	 * @param string $login User login
+	 * @param string $password
+	 * @param User   $user
 	 */
-	public function __construct($login, $password)
+	public function __construct($login, $password, User $user)
 	{
-		parent::__construct();
-		$this->email    = $login;
-		$this->password = $password;
+		parent::__construct($user);
+		$this->setLogin($login)->setPassword($password);
 	}
 
 	/**
@@ -50,48 +49,64 @@ class LoginFormStrategy extends AbstractAuthStrategy
 	 */
 	public function identify()
 	{
-		// Некорректные $_GET
-		if (!$this->checkInput()) {
-			return false;
-		}
-
 		$filter = new DbFilter;
-		// Ищем среди не удалённых пользователей
-		$where = "
-			email = '$this->email'
-			AND \"group\" & " . UsrGroup::DELETED . ' = 0 ';
+
+		$where = 'email = \'' . $this->getLogin() . '\'
+			AND "group" & ' . UsrGroup::DELETED . ' = 0 ';
 		$filter->setWhere($where);
 
-		if (!$this->findUser($filter)) {
+		if (!$this->findUser($filter))
 			return false;
-		}
 
 		$this->delCookie();
 
-		// Если хэш пароля совпадает, устанавливаем авторизационные куки
-		if (!Password::check($this->user, $this->password)) {
+		if (!Password::check($this->getUser(), $this->getPassword())) {
 			$this->errors |= self::ERR_WRONG_PASSWORD;
 			return false;
 		}
 
-		$this->setCookie($this->user->getId(), $this->user->getCookieHash());
+		$this->setCookie(['expired' => strtotime('+365 days')]);
 
 		return true;
 	}
 
 	/**
-	 * Проверка входящих значений
+	 * @return string
 	 */
-	private function checkInput()
+	public function getLogin()
 	{
-		if (!Helper::validateEmail($this->email)) {
-			$this->errors |= self::ERR_INVALID_EMAIL;
-		}
+		return $this->login;
+	}
 
-		if (!preg_match(self::PREG_PASSWORD, $this->password)) {
-			$this->errors |= self::ERR_INVALID_PASSWORD;
-		}
+	/**
+	 * @param string $login
+	 *
+	 * @return LoginFormStrategy
+	 */
+	public function setLogin($login)
+	{
+		$this->login = $login;
 
-		return 0 === $this->errors;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getPassword()
+	{
+		return $this->password;
+	}
+
+	/**
+	 * @param string $password
+	 *
+	 * @return LoginFormStrategy
+	 */
+	public function setPassword($password)
+	{
+		$this->password = $password;
+
+		return $this;
 	}
 }
