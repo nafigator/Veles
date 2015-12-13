@@ -53,6 +53,10 @@ class UsrAuthFactory
 		}
 	}
 
+	/**
+	 * @codeCoverageIgnore
+	 * @return mixed
+	 */
 	protected function getCookies()
 	{
 		$cookie_definitions = [
@@ -76,6 +80,10 @@ class UsrAuthFactory
 		return $cookies;
 	}
 
+	/**
+	 * @codeCoverageIgnore
+	 * @return mixed
+	 */
 	protected function getPost()
 	{
 		$post_definitions = [
