@@ -17,13 +17,13 @@ namespace Veles\Traits;
 
 trait SingletonInstance
 {
-	/** @var  mixed */
+	/** @var  $this */
 	protected static $instance;
 
 	/**
 	 * Instance method for any class implements Singleton
 	 *
-	 * @return mixed
+	 * @return $this
 	 */
 	public static function instance()
 	{
