@@ -35,12 +35,11 @@ class Application
 	{
 		UsrAuth::instance();
 
-		// Get route, controller, method
-		$controller  = $this->route->getController();
-		$action_name = $this->route->getActionName();
-		$template    = $this->route->getTemplate();
+		$controller  = $this->getRoute()->getController();
+		$action_name = $this->getRoute()->getActionName();
+		$template    = $this->getRoute()->getTemplate();
 
-		View::setAdapter($this->route->getAdapter());
+		View::setAdapter($this->getRoute()->getAdapter());
 		View::set($controller->$action_name());
 
 		View::show($template);
