@@ -27,7 +27,7 @@ use Veles\Model\User;
 class CookieStrategy extends AbstractAuthStrategy
 {
 	protected $password_hash;
-	protected $id;
+	protected $identifier;
 
 	/**
 	 * Constructor
@@ -94,7 +94,7 @@ class CookieStrategy extends AbstractAuthStrategy
 	 */
 	public function getId()
 	{
-		return $this->id;
+		return $this->identifier;
 	}
 
 	/**
@@ -104,7 +104,7 @@ class CookieStrategy extends AbstractAuthStrategy
 	 */
 	public function setId($id)
 	{
-		$this->id = $id;
+		$this->identifier = $id;
 
 		return $this;
 	}
