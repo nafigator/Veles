@@ -25,9 +25,7 @@ class FatalErrorHandler extends BaseErrorHandler
 	{
 		if (null === ($this->vars = error_get_last())) return;
 
-		$this->vars['time']    = strftime(
-			'%Y-%m-%d %H:%M:%S', $_SERVER['REQUEST_TIME']
-		);
+		$this->vars['time']    = $this->getTime();
 		$this->vars['stack']   = [];
 		$this->vars['defined'] = [];
 

@@ -24,9 +24,7 @@ class UserErrorHandler extends BaseErrorHandler
 	public function run($type, $message, $file, $line, $defined)
 	{
 		$this->vars['type']    = $type;
-		$this->vars['time']    = strftime(
-			'%Y-%m-%d %H:%M:%S', $_SERVER['REQUEST_TIME']
-		);
+		$this->vars['time']    = $this->getTime();
 		$this->vars['message'] = $message;
 		$this->vars['file']    = $file;
 		$this->vars['line']    = $line;
