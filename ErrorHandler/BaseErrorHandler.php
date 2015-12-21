@@ -25,6 +25,8 @@ class BaseErrorHandler extends Observable
 {
 	/** @var array */
 	protected $vars = [];
+	/** @var  string */
+	protected $time;
 
 	/**
 	 * Get error variables
@@ -34,5 +36,29 @@ class BaseErrorHandler extends Observable
 	public function getVars()
 	{
 		return $this->vars;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTime()
+	{
+		if (null === $this->time) {
+			$this->time = strftime('%Y-%m-%d %H:%M:%S', time());
+		}
+
+		return $this->time;
+	}
+
+	/**
+	 * @param string $time
+	 *
+	 * @return $this
+	 */
+	public function setTime($time)
+	{
+		$this->time = $time;
+
+		return $this;
 	}
 }

@@ -23,9 +23,7 @@ class ExceptionHandler extends BaseErrorHandler
 {
 	public function run(\Exception $exception)
 	{
-		$this->vars['time']    = strftime(
-			'%Y-%m-%d %H:%M:%S', $_SERVER['REQUEST_TIME']
-		);
+		$this->vars['time']    = $this->getTime();
 		$this->vars['message'] = $exception->getMessage();
 		$this->vars['file']    = $exception->getFile();
 		$this->vars['line']    = $exception->getLine();
