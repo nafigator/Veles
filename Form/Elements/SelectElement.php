@@ -21,19 +21,17 @@ namespace Veles\Form\Elements;
  */
 class SelectElement extends AbstractElement
 {
+	protected $option_id   = 'id';
+	protected $option_name = 'name';
+
 	/**
 	 * Element rendering
 	 */
 	public function render()
 	{
 		$html = '<select' . $this->attributes() . '>';
-
-		$idx = isset($this->option_id)
-			? $this->option_id
-			: 'id';
-		$name = isset($this->option_name)
-			? $this->option_name
-			: 'name';
+		$idx  = $this->option_id;
+		$name = $this->option_name;
 
 		foreach ($this->options as $option) {
 			$selected = '';
