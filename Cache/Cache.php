@@ -17,7 +17,7 @@ namespace Veles\Cache;
 
 use Exception;
 use Veles\Cache\Adapters\CacheAdapterAbstract;
-use Veles\Cache\Adapters\iCacheAdapter;
+use Veles\Cache\Adapters\CacheAdapterInterface;
 
 /**
  * Class Cache
@@ -26,7 +26,7 @@ use Veles\Cache\Adapters\iCacheAdapter;
  */
 class Cache
 {
-	/** @var iCacheAdapter */
+	/** @var CacheAdapterInterface */
 	protected static $adapter;
 	/** @var  string|CacheAdapterAbstract */
 	protected static $adapter_name;
@@ -34,9 +34,9 @@ class Cache
 	/**
 	 * Cache adapter initialisation
 	 *
-	 * @param iCacheAdapter $adapter Adapter
+	 * @param CacheAdapterInterface $adapter Adapter
 	 */
-	public static function setAdapter(iCacheAdapter $adapter)
+	public static function setAdapter(CacheAdapterInterface $adapter)
 	{
 		self::$adapter = $adapter;
 	}
@@ -56,7 +56,7 @@ class Cache
 	 * Cache adapter instance
 	 *
 	 * @throws Exception
-	 * @return iCacheAdapter
+	 * @return CacheAdapterInterface
 	 */
 	public static function getAdapter()
 	{

@@ -23,11 +23,11 @@ use Memcache;
  *
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-class MemcacheAdapter extends CacheAdapterAbstract implements iCacheAdapter
+class MemcacheAdapter extends CacheAdapterAbstract implements CacheAdapterInterface
 {
 	/** @var  null|array */
 	protected static $calls;
-	/** @var iCacheAdapter */
+	/** @var CacheAdapterInterface */
 	protected static $instance;
 
 	/**

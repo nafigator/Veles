@@ -2,7 +2,7 @@
 /**
  * Cache adapters interface
  *
- * @file      iCacheAdapter.php
+ * @file      CacheAdapterInterface.php
  *
  * PHP version 5.4+
  *
@@ -16,10 +16,10 @@
 namespace Veles\Cache\Adapters;
 
 /**
- * Interface iCacheAdapter
+ * Interface CacheAdapterInterface
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-interface iCacheAdapter
+interface CacheAdapterInterface
 {
 	/**
 	 * Get data

@@ -25,7 +25,7 @@ class MemcachedAdapter extends MemcacheAdapter
 {
     /** @var  null|array */
     protected static $calls;
-    /** @var iCacheAdapter */
+    /** @var CacheAdapterInterface */
     protected static $instance;
 
 	/**
