@@ -28,6 +28,25 @@ class ErrorBuilder
 	protected $handler;
 	/** @var  string */
 	protected $template;
+	/** @var array  */
+	protected $types = [
+		E_ERROR             => 'FATAL ERROR',               // 1
+		E_WARNING           => 'WARNING',                   // 2
+		E_PARSE             => 'PARSE ERROR',               // 4
+		E_NOTICE            => 'NOTICE',                    // 8
+		E_CORE_ERROR        => 'CORE ERROR',                // 16
+		E_CORE_WARNING      => 'CORE WARNING',              // 32
+		E_CORE_ERROR        => 'COMPILE ERROR',             // 64
+		E_CORE_WARNING      => 'COMPILE WARNING',           // 128
+		E_USER_ERROR        => 'USER ERROR',                // 256
+		E_USER_WARNING      => 'USER WARNING',              // 512
+		E_USER_NOTICE       => 'USER NOTICE',               // 1024
+		E_STRICT            => 'STRICT NOTICE',             // 2048
+		E_RECOVERABLE_ERROR => 'RECOVERABLE ERROR',         // 4096
+		E_DEPRECATED        => 'DEPRECATED WARNING',        // 8192
+		E_USER_DEPRECATED   => 'USER DEPRECATED WARNING',   // 16384
+		0                   => 'EXCEPTION'
+	];
 
 	/**
 	 * Get error type
@@ -35,29 +54,9 @@ class ErrorBuilder
 	 */
 	protected function convertTypeToString(&$type)
 	{
-		$type_copy = $type;
-		$err_types = [
-			E_ERROR             => 'FATAL ERROR',               // 1
-			E_WARNING           => 'WARNING',                   // 2
-			E_PARSE             => 'PARSE ERROR',               // 4
-			E_NOTICE            => 'NOTICE',                    // 8
-			E_CORE_ERROR        => 'CORE ERROR',                // 16
-			E_CORE_WARNING      => 'CORE WARNING',              // 32
-			E_CORE_ERROR        => 'COMPILE ERROR',             // 64
-			E_CORE_WARNING      => 'COMPILE WARNING',           // 128
-			E_USER_ERROR        => 'USER ERROR',                // 256
-			E_USER_WARNING      => 'USER WARNING',              // 512
-			E_USER_NOTICE       => 'USER NOTICE',               // 1024
-			E_STRICT            => 'STRICT NOTICE',             // 2048
-			E_RECOVERABLE_ERROR => 'RECOVERABLE ERROR',         // 4096
-			E_DEPRECATED        => 'DEPRECATED WARNING',        // 8192
-			E_USER_DEPRECATED   => 'USER DEPRECATED WARNING',   // 16384
-			0                   => 'EXCEPTION'
-		];
-
-		$type = (isset($err_types[$type_copy]))
-			? $err_types[$type_copy]
-			: "UNKNOWN ERROR TYPE: $type_copy";
+		$type = (isset($this->types[$type]))
+			? $this->types[$type]
+			: "UNKNOWN ERROR TYPE: $type";
 	}
 
 	/**
