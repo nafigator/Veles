@@ -28,6 +28,31 @@ use Veles\Model\User;
  */
 class UsrAuthFactory
 {
+	protected $cookie_definitions = [
+		'id' => [
+			'filter' => FILTER_VALIDATE_INT,
+			'options' => [
+				'min_range' => 1,
+				'max_range' => PHP_INT_MAX
+			]
+		],
+		'pw' => [
+			'filter' => FILTER_VALIDATE_REGEXP,
+			'options' => [
+				'regexp' => '/^[a-z0-9_-]{1,20}$/i'
+			]
+		]
+	];
+	protected $post_definitions = [
+		'ln' => FILTER_VALIDATE_EMAIL,
+		'pw' => [
+			'filter' => FILTER_VALIDATE_REGEXP,
+			'options' => [
+				'regexp' => '/^[a-z0-9_-]{1,20}$/i'
+			]
+		]
+	];
+
 	/**
 	 * Algorithm for choosing auth strategy
 	 *
@@ -59,23 +84,7 @@ class UsrAuthFactory
 	 */
 	protected function getCookies()
 	{
-		$cookie_definitions = [
-			'id' => [
-				'filter' => FILTER_VALIDATE_INT,
-				'options' => [
-					'min_range' => 1,
-					'max_range' => PHP_INT_MAX
-				]
-			],
-			'pw' => [
-				'filter' => FILTER_VALIDATE_REGEXP,
-				'options' => [
-					'regexp' => '/^[a-z0-9_-]{1,20}$/i'
-				]
-			]
-		];
-
-		$cookies = filter_input_array(INPUT_COOKIE, $cookie_definitions);
+		$cookies = filter_input_array(INPUT_COOKIE, $this->cookie_definitions);
 
 		return $cookies;
 	}
@@ -86,17 +95,7 @@ class UsrAuthFactory
 	 */
 	protected function getPost()
 	{
-		$post_definitions = [
-			'ln' => FILTER_VALIDATE_EMAIL,
-			'pw' => [
-				'filter' => FILTER_VALIDATE_REGEXP,
-				'options' => [
-					'regexp' => '/^[a-z0-9_-]{1,20}$/i'
-				]
-			]
-		];
-
-		$post = filter_input_array(INPUT_POST, $post_definitions);
+		$post = filter_input_array(INPUT_POST, $this->post_definitions);
 
 		return $post;
 	}
