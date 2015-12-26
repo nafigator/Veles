@@ -24,7 +24,7 @@ use Veles\DataBase\DbPaginator;
  * Класс QueryBuilder
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-class QueryBuilder implements iQueryBuilder
+class QueryBuilder implements QueryBuilderInterface
 {
 	/**
 	 * @param $filter DbFilter

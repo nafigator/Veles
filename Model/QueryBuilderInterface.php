@@ -2,7 +2,7 @@
 /**
  * Query builder interface
  *
- * @file      iQueryBuilder.php
+ * @file      QueryBuilderInterface.php
  *
  * PHP version 5.4+
  *
@@ -19,10 +19,10 @@ use Veles\DataBase\DbFilter;
 use Veles\DataBase\DbPaginator;
 
 /**
- * Interface iQueryBuilder
+ * Interface QueryBuilderInterface
  * @author  Yancharuk Alexander <alex at itvault dot info>
  */
-interface iQueryBuilder
+interface QueryBuilderInterface
 {
 	/**
 	 * Построение sql-запроса для insert
