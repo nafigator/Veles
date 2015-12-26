@@ -25,7 +25,7 @@ use Veles\DataBase\Exceptions\DbException;
  *
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-class PdoAdapter extends DbAdapterBase implements iDbAdapter
+class PdoAdapter extends DbAdapterBase implements DbAdapterInterface
 {
 	// Save statement for ability to get error information
 	/** @var  \PDOStatement */

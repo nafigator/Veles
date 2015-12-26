@@ -17,7 +17,7 @@ namespace Veles\DataBase;
 
 use Exception;
 use Veles\DataBase\Adapters\DbAdapterBase;
-use Veles\DataBase\Adapters\iDbAdapter;
+use Veles\DataBase\Adapters\DbAdapterInterface;
 
 /**
  * Class DbBase
@@ -28,7 +28,7 @@ use Veles\DataBase\Adapters\iDbAdapter;
  */
 class DbBase
 {
-	/** @var iDbAdapter|DbAdapterBase */
+	/** @var DbAdapterInterface|DbAdapterBase */
 	protected static $adapter;
 	/** @var  mixed */
 	protected static $connection;
@@ -39,10 +39,10 @@ class DbBase
 	 * Сохраняем имя класса адаптера для последующей инициализации
 	 * Будет инициализирован при первом запросе данных из базы
 	 *
-	 * @param iDbAdapter $adapter Adapter
+	 * @param DbAdapterInterface $adapter Adapter
 	 * @see Db::getAdapter
 	 */
-	public static function setAdapter(iDbAdapter $adapter)
+	public static function setAdapter(DbAdapterInterface $adapter)
 	{
 		self::$adapter = $adapter;
 	}
@@ -51,7 +51,7 @@ class DbBase
 	 * Инстанс адаптера
 	 *
 	 * @throws Exception
-	 * @return iDbAdapter|DbAdapterBase
+	 * @return DbAdapterInterface|DbAdapterBase
 	 */
 	public static function getAdapter()
 	{

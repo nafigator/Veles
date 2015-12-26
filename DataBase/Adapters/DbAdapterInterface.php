@@ -2,7 +2,7 @@
 /**
  * Database adapter interface
  *
- * @file      iDbAdapter.php
+ * @file      DbAdapterInterface.php
  *
  * PHP version 5.4+
  *
@@ -16,13 +16,13 @@
 namespace Veles\DataBase\Adapters;
 
 /**
- * Interface iDbAdapter
+ * Interface DbAdapterInterface
  *
  * Db adapters interface
  *
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-interface iDbAdapter
+interface DbAdapterInterface
 {
 	/**
 	 * Get value from table row
