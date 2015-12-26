@@ -15,7 +15,7 @@
 
 namespace Veles\View\Adapters;
 
-use Exception;
+use Traits\LazyCalls;
 
 /**
  * Class ViewAdapterAbstract
@@ -24,14 +24,12 @@ use Exception;
  */
 abstract class ViewAdapterAbstract
 {
-	/** @var  array */
-	protected static $calls = [];
-	/** @var ViewAdapterAbstract */
-	protected static $instance;
 	/** @var  mixed */
 	protected $driver;
 	/** @var mixed */
 	protected $variables;
+
+	use LazyCalls;
 
 	/**
 	 * Driver initialization
@@ -62,38 +60,6 @@ abstract class ViewAdapterAbstract
 	abstract public function isCached($tpl);
 
 	/**
-	 * @return $this
-	 */
-	public static function instance()
-	{
-		if (null === static::$instance) {
-			$class = get_called_class();
-
-			static::$instance = new $class;
-		}
-
-		if ([] !== static::$calls) {
-			static::invokeLazyCalls();
-		}
-
-		return static::$instance;
-	}
-
-	/**
-	 * Lazy calls invocation
-	 */
-	protected static function invokeLazyCalls()
-	{
-		foreach (static::$calls as $call) {
-			call_user_func_array(
-				[static::$instance->getDriver(), $call['method']],
-				$call['arguments']
-			);
-		}
-		static::$calls = [];
-	}
-
-	/**
 	 * Get adapter driver
 	 *
 	 * @return mixed
@@ -111,38 +77,6 @@ abstract class ViewAdapterAbstract
 	public function setDriver($driver)
 	{
 		$this->driver = $driver;
-	}
-
-	/**
-	 * Collect calls which will be invoked during first real query
-	 *
-	 * @param $method
-	 * @param $arguments
-	 *
-	 * @return mixed
-	 * @throws \Exception
-	 */
-	public function __call($method, $arguments)
-	{
-		if (!method_exists($this->getDriver(), $method)) {
-			throw new Exception('Calling non existent method!');
-		}
-
-		static::setCall($method, $arguments);
-	}
-
-	/**
-	 * Save calls for future invocation
-	 *
-	 * @param $method
-	 * @param $arguments
-	 */
-	protected static function setCall($method, $arguments)
-	{
-		static::$calls[] = [
-			'method'    => $method,
-			'arguments' => $arguments
-		];
 	}
 
 	/**

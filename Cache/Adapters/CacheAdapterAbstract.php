@@ -15,6 +15,8 @@
 
 namespace Veles\Cache\Adapters;
 
+use Traits\LazyCalls;
+
 /**
  * Class CacheAdapterAbstract
  *
@@ -22,49 +24,15 @@ namespace Veles\Cache\Adapters;
  */
 abstract class CacheAdapterAbstract
 {
-	/** @var  array */
-	protected static $calls = [];
-	/** @var iCacheAdapter|$this */
-	protected static $instance;
 	/** @var  mixed */
 	protected $driver;
+
+	use LazyCalls;
 
 	/**
 	 * Driver initialization
 	 */
 	abstract protected function __construct();
-
-	/**
-	 * @return iCacheAdapter|$this
-	 */
-	public static function instance()
-	{
-		if (null === static::$instance) {
-			$class = get_called_class();
-
-			static::$instance = new $class;
-		}
-
-		if ([] !== static::$calls) {
-			static::invokeLazyCalls();
-		}
-
-		return static::$instance;
-	}
-
-	/**
-	 * Lazy calls invocation
-	 */
-	protected static function invokeLazyCalls()
-	{
-		foreach (static::$calls as $call) {
-			call_user_func_array(
-				[static::$instance->getDriver(), $call['method']],
-				$call['arguments']
-			);
-		}
-		static::$calls = [];
-	}
 
 	/**
 	 * Get adapter driver
@@ -84,19 +52,5 @@ abstract class CacheAdapterAbstract
 	public function setDriver($driver)
 	{
 		$this->driver = $driver;
-	}
-
-	/**
-	 * Save calls for future invocation
-	 *
-	 * @param string $method Method name that should be called
-	 * @param array $arguments Method arguments
-	 */
-	public static function addCall($method, array $arguments = [])
-	{
-		static::$calls[] = [
-			'method'    => $method,
-			'arguments' => $arguments
-		];
 	}
 }
