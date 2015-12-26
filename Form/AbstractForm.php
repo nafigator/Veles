@@ -52,7 +52,8 @@ abstract class AbstractForm implements iForm
 	 */
 	protected function init()
 	{
-		$this->data = ('get' === $this->method) ? $_GET : $_POST;
+		$input      = ('get' === $this->method) ? INPUT_GET : INPUT_POST;
+		$this->data = filter_input_array($input, FILTER_UNSAFE_RAW);
 		$this->sid  = md5(uniqid('', true));
 
 		$params = [
