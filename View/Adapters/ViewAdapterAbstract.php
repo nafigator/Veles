@@ -24,8 +24,6 @@ use Traits\LazyCalls;
  */
 abstract class ViewAdapterAbstract
 {
-	/** @var  mixed */
-	protected $driver;
 	/** @var mixed */
 	protected $variables;
 
@@ -58,26 +56,6 @@ abstract class ViewAdapterAbstract
 	 * @return bool Cache status
 	 */
 	abstract public function isCached($tpl);
-
-	/**
-	 * Get adapter driver
-	 *
-	 * @return mixed
-	 */
-	public function getDriver()
-	{
-		return $this->driver;
-	}
-
-	/**
-	 * Set adapter driver
-	 *
-	 * @param mixed $driver
-	 */
-	public function setDriver($driver)
-	{
-		$this->driver = $driver;
-	}
 
 	/**
 	 * Method for output variables setup

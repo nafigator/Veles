@@ -24,33 +24,10 @@ use Traits\LazyCalls;
  */
 abstract class CacheAdapterAbstract
 {
-	/** @var  mixed */
-	protected $driver;
-
 	use LazyCalls;
 
 	/**
 	 * Driver initialization
 	 */
 	abstract protected function __construct();
-
-	/**
-	 * Get adapter driver
-	 *
-	 * @return mixed
-	 */
-	public function getDriver()
-	{
-		return $this->driver;
-	}
-
-	/**
-	 * Set adapter driver
-	 *
-	 * @param mixed $driver
-	 */
-	public function setDriver($driver)
-	{
-		$this->driver = $driver;
-	}
 }

@@ -1,5 +1,7 @@
 <?php
 /**
+ * Save some calls of driver for future real query invocation
+ *
  * @file      LazyCalls.php
  *
  * PHP version 5.4+
@@ -21,6 +23,7 @@ trait LazyCalls
 	/** @var  array */
 	protected static $calls = [];
 
+	use Driver;
 	use SingletonInstance;
 
 	/**
@@ -28,13 +31,14 @@ trait LazyCalls
 	 */
 	protected static function invokeLazyCalls()
 	{
-		foreach (static::$calls as $call) {
+		list($calls, static::$calls) = [static::$calls, []];
+
+		foreach ($calls as $call) {
 			call_user_func_array(
-				[static::$instance->getDriver(), $call['method']],
+				[static::instance()->getDriver(), $call['method']],
 				$call['arguments']
 			);
 		}
-		static::$calls = [];
 	}
 
 	/**
