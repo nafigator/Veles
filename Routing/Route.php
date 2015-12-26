@@ -125,7 +125,7 @@ class Route extends RouteBase
 	 * Access to controller
 	 *
 	 * @throws Exception
-	 * @return mixed
+	 * @return object
 	 */
 	public function getController()
 	{
