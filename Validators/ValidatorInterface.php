@@ -2,7 +2,7 @@
 /**
  * Interface for validators
  *
- * @file      iValidator.php
+ * @file      ValidatorInterface.php
  *
  * PHP version 5.4+
  *
@@ -16,10 +16,10 @@
 namespace Veles\Validators;
 
 /**
- * Interface iValidator
+ * Interface ValidatorInterface
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-interface iValidator
+interface ValidatorInterface
 {
 	/**
 	 * Validation

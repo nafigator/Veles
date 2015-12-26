@@ -19,7 +19,7 @@ namespace Veles\Validators;
  * Class ByteValidator
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-class ByteValidator implements iValidator
+class ByteValidator implements ValidatorInterface
 {
 	/**
 	 * Check byte values

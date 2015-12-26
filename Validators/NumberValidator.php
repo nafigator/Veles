@@ -19,7 +19,7 @@ namespace Veles\Validators;
  * Class NumberValidator
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-class NumberValidator implements iValidator
+class NumberValidator implements ValidatorInterface
 {
 	protected $max;
 	protected $min;

@@ -15,7 +15,7 @@
 
 namespace Veles\Tools;
 
-use Veles\Validators\iValidator;
+use Veles\Validators\ValidatorInterface;
 
 /**
  * Class PhpTokenBase
@@ -37,11 +37,11 @@ class PhpTokenBase
 	 * Token constructor
 	 *
 	 * @param string|array $token
-	 * @param iValidator   $validator
+	 * @param ValidatorInterface   $validator
 	 *
 	 * @throws \Exception
 	 */
-	public function __construct($token, iValidator $validator)
+	public function __construct($token, ValidatorInterface $validator)
 	{
 		if (!$validator->check($token)) {
 			throw new \Exception('Not valid token value');

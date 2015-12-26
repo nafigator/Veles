@@ -20,7 +20,7 @@ namespace Veles\Validators;
  *
  * @author  Yancharuk Alexander <alex at itvault dot info>
  */
-class UploadedFileValidator implements iValidator
+class UploadedFileValidator implements ValidatorInterface
 {
 	/** @var array */
 	protected $allowed_extensions = [];

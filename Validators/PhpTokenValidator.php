@@ -15,7 +15,7 @@
 
 namespace Veles\Validators;
 
-class PhpTokenValidator implements iValidator
+class PhpTokenValidator implements ValidatorInterface
 {
 	/**
 	 * PHP token validation

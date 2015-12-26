@@ -19,7 +19,7 @@ namespace Veles\Validators;
  * Class Md5Validator
  * @author  Yancharuk Alexander <alex at itvault dot info>
  */
-class Md5Validator implements iValidator
+class Md5Validator implements ValidatorInterface
 {
 	protected $pattern;
 

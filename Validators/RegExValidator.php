@@ -19,7 +19,7 @@ namespace Veles\Validators;
  * Class RegExValidator
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-class RegExValidator implements iValidator
+class RegExValidator implements ValidatorInterface
 {
 	protected $pattern;
 
