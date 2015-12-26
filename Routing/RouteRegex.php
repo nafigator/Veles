@@ -19,7 +19,7 @@ namespace Veles\Routing;
  * Class RouteRegex
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-class RouteRegex implements iRouteStrategy
+class RouteRegex implements RouteStrategyInterface
 {
 	/**
 	 * Variable contains array of named sub-patterns values

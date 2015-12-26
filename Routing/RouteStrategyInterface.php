@@ -2,7 +2,7 @@
 /**
  * Interface for route strategies
  *
- * @file    iRouteStrategy.php
+ * @file    RouteStrategyInterface.php
  *
  * PHP version 5.4+
  *
@@ -16,11 +16,11 @@
 namespace Veles\Routing;
 
 /**
- * Class iRouteStrategy
+ * Class RouteStrategyInterface
  *
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-interface iRouteStrategy
+interface RouteStrategyInterface
 {
 	/**
 	 * Method for checking current url

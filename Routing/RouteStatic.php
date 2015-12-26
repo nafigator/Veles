@@ -19,7 +19,7 @@ namespace Veles\Routing;
  * Class RouteStatic
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-class RouteStatic implements iRouteStrategy
+class RouteStatic implements RouteStrategyInterface
 {
 	/**
 	 * Check for matching url to pattern
