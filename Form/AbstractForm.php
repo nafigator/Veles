@@ -26,7 +26,7 @@ use Veles\Validators\RegExValidator;
  * Class AbstractForm
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-abstract class AbstractForm implements iForm
+abstract class AbstractForm implements FormInterface
 {
 	protected $method   = 'post';
 	protected $template = null;

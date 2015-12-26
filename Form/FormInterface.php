@@ -2,7 +2,7 @@
 /**
  * Интерфейс форм
  *
- * @file      iForm.php
+ * @file      FormInterface.php
  *
  * PHP version 5.4+
  *
@@ -18,10 +18,10 @@ namespace Veles\Form;
 use Veles\Form\Elements\iElement;
 
 /**
- * Интерфейс iForm
+ * Интерфейс FormInterface
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-interface iForm
+interface FormInterface
 {
 	/**
 	 * Сохранение формы
