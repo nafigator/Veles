@@ -16,7 +16,7 @@
 namespace Veles\ErrorHandler\Subscribers;
 
 use Veles\ErrorHandler\BaseErrorHandler;
-use Veles\ErrorHandler\HtmlBuilders\AbstractBuilder;
+use Veles\ErrorHandler\HtmlBuilders\ErrorBuilder;
 
 /**
  * Class ErrorRenderer
@@ -24,7 +24,7 @@ use Veles\ErrorHandler\HtmlBuilders\AbstractBuilder;
  */
 class ErrorRenderer implements \SplObserver
 {
-	/** @var  AbstractBuilder */
+	/** @var  ErrorBuilder */
 	protected $message_builder;
 
 	/**
@@ -44,7 +44,7 @@ class ErrorRenderer implements \SplObserver
 	}
 
 	/**
-	 * @return AbstractBuilder
+	 * @return ErrorBuilder
 	 */
 	public function getMessageBuilder()
 	{
@@ -52,9 +52,9 @@ class ErrorRenderer implements \SplObserver
 	}
 
 	/**
-	 * @param AbstractBuilder $builder
+	 * @param ErrorBuilder $builder
 	 */
-	public function setMessageBuilder(AbstractBuilder $builder)
+	public function setMessageBuilder(ErrorBuilder $builder)
 	{
 		$this->message_builder = $builder;
 	}
