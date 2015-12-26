@@ -2,7 +2,7 @@
 /**
  * Auth strategies interface
  *
- * @file      iAuthStrategy.php
+ * @file      AuthStrategyInterface.php
  *
  * PHP version 5.4+
  *
@@ -18,10 +18,10 @@ namespace Veles\Request\AuthStrategies;
 use Veles\Request\CurlRequest;
 
 /**
- * Interface iAuthStrategy
+ * Interface AuthStrategyInterface
  * @author  Yancharuk Alexander <alex at itvault dot info>
  */
-interface iAuthStrategy
+interface AuthStrategyInterface
 {
 	/**
 	 * Sets headers for request for further authentication

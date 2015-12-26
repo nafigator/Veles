@@ -21,7 +21,7 @@ use Veles\Request\CurlRequest;
  * Class HttpBasic
  * @author  Yancharuk Alexander <alex at itvault dot info>
  */
-class HttpBasic implements iAuthStrategy
+class HttpBasic implements AuthStrategyInterface
 {
 	protected $login;
 	protected $password;

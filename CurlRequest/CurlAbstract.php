@@ -15,7 +15,7 @@
 
 namespace Veles\Request;
 
-use Veles\Request\AuthStrategies\iAuthStrategy;
+use Veles\Request\AuthStrategies\AuthStrategyInterface;
 
 /**
  * Class CurlAbstract
@@ -33,7 +33,7 @@ abstract class CurlAbstract
 	];
 	/** @var array Current options set */
 	protected $options = [];
-	/** @var iAuthStrategy Authentication strategy */
+	/** @var AuthStrategyInterface Authentication strategy */
 	protected $auth;
 
 	/**

@@ -15,7 +15,7 @@
 
 namespace Veles\Request;
 
-use Veles\Request\AuthStrategies\iAuthStrategy;
+use Veles\Request\AuthStrategies\AuthStrategyInterface;
 
 /**
  * Class CurlRequest
@@ -117,11 +117,11 @@ class CurlRequest extends CurlAbstract
 	/**
 	 * Set request authentication strategy
 	 *
-	 * @param iAuthStrategy $auth Authentication strategy
+	 * @param AuthStrategyInterface $auth Authentication strategy
 	 *
 	 * @return $this
 	 */
-	public function setAuth(iAuthStrategy $auth)
+	public function setAuth(AuthStrategyInterface $auth)
 	{
 		$auth->apply($this);
 		$this->auth = $auth;
