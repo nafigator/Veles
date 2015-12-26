@@ -2,7 +2,7 @@
 /**
  * Интерфейс элементов формы
  *
- * @file      iElement.php
+ * @file      ElementInterface.php
  *
  * PHP version 5.4+
  *
@@ -18,10 +18,10 @@ namespace Veles\Form\Elements;
 use Veles\Form\AbstractForm;
 
 /**
- * Интерфейс iElement
+ * Интерфейс ElementInterface
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-interface iElement
+interface ElementInterface
 {
 	/**
 	 * Form element validation

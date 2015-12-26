@@ -23,7 +23,7 @@ use Veles\Form\AbstractForm;
  * Class AbstractElement
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-abstract class AbstractElement extends stdClass implements iElement
+abstract class AbstractElement extends stdClass implements ElementInterface
 {
 	/**
 	 * Element constructor

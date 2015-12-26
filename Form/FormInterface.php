@@ -15,7 +15,7 @@
 
 namespace Veles\Form;
 
-use Veles\Form\Elements\iElement;
+use Veles\Form\Elements\ElementInterface;
 
 /**
  * Интерфейс FormInterface
@@ -30,10 +30,10 @@ interface FormInterface
 
 	/**
 	 * Добавление элемента формы
-	 * @param iElement $element Экземпляр элемента формы
+	 * @param ElementInterface $element Экземпляр элемента формы
 	 * @return
 	 */
-	public function addElement(iElement $element);
+	public function addElement(ElementInterface $element);
 
 	/**
 	 * Валидатор формы

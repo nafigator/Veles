@@ -18,7 +18,7 @@ namespace Veles\Form;
 use Veles\Cache\Cache;
 use Veles\Form\Elements\ButtonElement;
 use Veles\Form\Elements\HiddenElement;
-use Veles\Form\Elements\iElement;
+use Veles\Form\Elements\ElementInterface;
 use Veles\Form\Elements\SubmitElement;
 use Veles\Validators\RegExValidator;
 
@@ -66,10 +66,10 @@ abstract class AbstractForm implements FormInterface
 
 	/**
 	 * Add form element
-	 * @param iElement $element Form element
+	 * @param ElementInterface $element Form element
 	 * @return void
 	 */
-	public function addElement(iElement $element)
+	public function addElement(ElementInterface $element)
 	{
 		$this->elements[] = $element;
 	}
@@ -80,7 +80,7 @@ abstract class AbstractForm implements FormInterface
 	 */
 	public function valid()
 	{
-		/** @var iElement $element*/
+		/** @var ElementInterface $element*/
 		foreach ($this->elements as $element) {
 			switch (true) {
 				case $element instanceof ButtonElement:
@@ -134,7 +134,7 @@ abstract class AbstractForm implements FormInterface
 		$elements = $tpl = [];
 		$output   = file_get_contents($this->template);
 
-		/** @var iElement $element */
+		/** @var ElementInterface $element */
 		foreach ($this->elements as $number => $element) {
 			$elements[] = $element->render();
 			$tpl[]      = "#$number#";
