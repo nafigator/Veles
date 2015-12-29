@@ -16,7 +16,7 @@
 namespace Veles\Model;
 
 use StdClass;
-use Traits\DynamicPropHandler;
+use Veles\Traits\DynamicPropHandler;
 use Veles\DataBase\Db;
 use Veles\DataBase\DbFilter;
 use Veles\DataBase\DbPaginator;

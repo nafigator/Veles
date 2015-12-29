@@ -13,7 +13,7 @@
  *            <http://opensource.org/licenses/BSD-3-Clause>
  */
 
-namespace Traits;
+namespace Veles\Traits;
 
 trait Driver
 {

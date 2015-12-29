@@ -15,7 +15,7 @@
 
 namespace Veles\View\Adapters;
 
-use Traits\LazyCalls;
+use Veles\Traits\LazyCalls;
 
 /**
  * Class ViewAdapterAbstract

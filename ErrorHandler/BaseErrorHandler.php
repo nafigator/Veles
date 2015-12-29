@@ -15,18 +15,20 @@
 
 namespace Veles\ErrorHandler;
 
-use Veles\Helpers\Observable;
+use Veles\Traits\Observable;
 
 /**
  * Class BaseErrorHandler
  * @author  Yancharuk Alexander <alex at itvault dot info>
  */
-class BaseErrorHandler extends Observable
+class BaseErrorHandler implements \SplSubject
 {
 	/** @var array */
 	protected $vars = [];
 	/** @var  string */
 	protected $time;
+
+	use Observable;
 
 	/**
 	 * Get error variables
