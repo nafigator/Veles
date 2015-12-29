@@ -15,7 +15,7 @@
 
 namespace Veles\Cache\Adapters;
 
-use Traits\LazyCalls;
+use Veles\Traits\LazyCalls;
 
 /**
  * Class CacheAdapterAbstract

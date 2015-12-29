@@ -1,6 +1,8 @@
 <?php
 /**
- * Class is a part of Observer pattern
+ * The trait is a part of Observer pattern.
+ *
+ * Class that uses this trait must implement \SplSubject interface
  *
  * @file      PdoAdapter.php
  *
@@ -13,20 +15,20 @@
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
  */
 
-namespace Veles\Helpers;
+namespace Veles\Traits;
 
 /**
- * Class Observable
+ * Trait Observable
  *
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-class Observable implements \SplSubject
+trait Observable
 {
 	/** @var \SplObserver[] */
 	protected $observers = [];
 
 	/**
-	 * Добавление подписчика
+	 * Add subscriber
 	 *
 	 * @param \SplObserver $observer Подписчик
 	 */
@@ -36,7 +38,7 @@ class Observable implements \SplSubject
 	}
 
 	/**
-	 * Удаление подписчика
+	 * Remove subscriber
 	 *
 	 * @param \SplObserver $observer Подписчик
 	 */
@@ -48,7 +50,7 @@ class Observable implements \SplSubject
 	}
 
 	/**
-	 * Уведомление подписчиков
+	 * Notify subscribers
 	 */
 	public function notify()
 	{
