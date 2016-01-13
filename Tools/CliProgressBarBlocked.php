@@ -33,19 +33,10 @@ class CliProgressBarBlocked extends CliProgressBar
 
 	public function update($current)
 	{
-		$this->curr_time = microtime(true);
-		$this->clean_process_time += $this->curr_time - $this->last_update_time;
-
-		list ($end, $bar, $space_len, $status) = $this->calcParams($current);
-
 		if (fgets($this->stream)) {
 			echo "\033[K\033[1A";
 		}
 
-		echo ($space_len > 0)
-			? "\033[?25l[$bar>\033[{$space_len}C]$status$end"
-			: "[$bar>]$status$end\033[?25h";
-
-		$this->last_update_time = microtime(true);
+		parent::update($current);
 	}
 }

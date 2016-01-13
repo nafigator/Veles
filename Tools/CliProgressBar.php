@@ -61,7 +61,7 @@ class CliProgressBar
 		$this->curr_time = microtime(true);
 		$this->clean_process_time += $this->curr_time - $this->last_update_time;
 
-		list ($end, $bar, $space_len, $status) = $this->calcParams($current);
+		list($end, $bar, $space_len, $status) = $this->calcParams($current);
 
 		echo ($space_len > 0)
 			? "\033[?25l[$bar>\033[{$space_len}C]$status$end"
