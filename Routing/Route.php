@@ -130,12 +130,13 @@ class Route extends RouteBase
 	public function getController()
 	{
 		if (!isset($this->config['controller'])) {
-			throw new Exception('Не указан контроллер!');
+			throw new Exception('Controller name not set!');
 		}
 
 		$controller = 'Controllers\\' . $this->config['controller'];
+		$result     = new $controller($this);
 
-		return new $controller($this);
+		return $result;
 	}
 
 	/**
@@ -147,7 +148,7 @@ class Route extends RouteBase
 	public function getActionName()
 	{
 		if (!isset($this->config['action'])) {
-			throw new Exception('Не указан экшен!');
+			throw new Exception('Action not set!');
 		}
 
 		return $this->config['action'];
@@ -162,7 +163,7 @@ class Route extends RouteBase
 	public function getAdapter()
 	{
 		if (!isset($this->config['view'])) {
-			throw new Exception('Не указан адаптер!');
+			throw new Exception('Route adapter not set!');
 		}
 
 		/** @var \Veles\View\Adapters\ViewAdapterAbstract $adapter_name */
