@@ -25,6 +25,7 @@ use Veles\View\View;
 class Application
 {
 	use RouteTrait;
+	use VersionTrait;
 
 	/**
 	 * Application start
