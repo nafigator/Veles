@@ -16,7 +16,6 @@
 namespace Veles\Application;
 
 use Veles\Auth\UsrAuth;
-use Veles\Routing\Route;
 use Veles\View\View;
 
 /**
@@ -25,8 +24,7 @@ use Veles\View\View;
  */
 class Application
 {
-	/** @var  Route */
-	protected $route;
+	use RouteTrait;
 
 	/**
 	 * Application start
@@ -43,20 +41,5 @@ class Application
 		View::set($controller->$action_name());
 
 		View::show($template);
-	}
-
-	public function setRoute(Route $route)
-	{
-		$this->route = $route;
-
-		return $this;
-	}
-
-	/**
-	 * @return Route
-	 */
-	public function getRoute()
-	{
-		return $this->route;
 	}
 }
