@@ -29,13 +29,16 @@ trait DynamicPropHandler
 	 * Method for setting parameters
 	 *
 	 * @param   array Array with needle parameters as keys
-	 * @return  array
+	 *
+	 * @return  $this
 	 */
 	public function setProperties(&$properties)
 	{
 		foreach ($properties as $property_name => $value) {
 			$this->$property_name = $value;
 		}
+
+		return $this;
 	}
 
 	/**
