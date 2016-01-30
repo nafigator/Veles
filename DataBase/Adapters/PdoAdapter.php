@@ -29,16 +29,16 @@ class PdoAdapter extends DbAdapterBase implements DbAdapterInterface
 {
 	// Save statement for ability to get error information
 	/** @var  \PDOStatement */
-	private $stmt;
+	protected $stmt;
 
-	private $type = [
+	protected $type = [
 	   'i' => PDO::PARAM_INT,
 	   'd' => PDO::PARAM_STR,
 	   's' => PDO::PARAM_STR,
 	   'b' => PDO::PARAM_LOB
 	];
 
-	private function bindParams(array $params, $types)
+	protected function bindParams(array $params, $types)
 	{
 		foreach ($params as $key => $param) {
 			$type = isset($this->type[$types[$key]])
@@ -49,7 +49,7 @@ class PdoAdapter extends DbAdapterBase implements DbAdapterInterface
 		}
 	}
 
-	private function prepare($sql, array $params, $types)
+	protected function prepare($sql, array $params, $types)
 	{
 		$this->stmt = $this->getConnection()->prepare($sql);
 
@@ -70,7 +70,7 @@ class PdoAdapter extends DbAdapterBase implements DbAdapterInterface
 	 *
 	 * @throws DbException
 	 */
-	private function throwExceptionWithInfo($sql, array $params, \PDOException $e)
+	protected function throwExceptionWithInfo($sql, array $params, \PDOException $e)
 	{
 		$exception = new DbException($e->getMessage(), (int) $e->getCode(), $e);
 		$exception->setSql($sql);
