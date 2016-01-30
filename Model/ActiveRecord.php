@@ -127,13 +127,17 @@ class ActiveRecord extends StdClass
 
 	/**
 	 * Insert data in database
-	 * @return int|bool
+	 *
+	 *  @return bool
 	 */
 	private function insert()
 	{
-		$sql = $this->builder->insert($this);
+		$sql    = $this->builder->insert($this);
+		$result = Db::query($sql);
 
-		return Db::query($sql) ? Db::getLastInsertId() : false;
+		$this->id = Db::getLastInsertId();
+
+		return $result;
 	}
 
 	/**
