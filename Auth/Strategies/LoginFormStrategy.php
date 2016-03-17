@@ -18,7 +18,6 @@ namespace Veles\Auth\Strategies;
 use Veles\Auth\Password;
 use Veles\Auth\UsrGroup;
 use Veles\DataBase\DbFilter;
-use Veles\Helper;
 use Veles\Model\User;
 
 /**

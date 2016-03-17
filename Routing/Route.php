@@ -62,7 +62,7 @@ class Route extends RouteBase
 			}
 		}
 
-		return $this->execNotFoundHandler();;
+		return $this->execNotFoundHandler();
 	}
 
 	/**
