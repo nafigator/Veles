@@ -25,7 +25,7 @@ before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test'
 
 before_script:
-  - git submodule add --name tests https://github.com/nafigator/Veles-unit-tests.git Tests
+  - git submodule add -f --name tests https://github.com/nafigator/Veles-unit-tests.git Tests
   - |
     case $TRAVIS_PHP_VERSION in
       5.4)
