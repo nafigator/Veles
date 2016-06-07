@@ -24,12 +24,11 @@ build:
             - git clone https://github.com/nafigator/Veles.git
             - cd Veles
             - git checkout $SCRUTINIZER_BRANCH
-
-    tests:
-        before:
             - git submodule add -f --name tests https://github.com/nafigator/Veles-unit-tests.git Tests
             - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit.phar
             - chmod 755 phpunit.phar
+
+    tests:
         override:
             -
                 command: ./phpunit.phar -c Tests/scrutinizer-phpunit.xml --stderr --coverage-clover '../coverage-report'
