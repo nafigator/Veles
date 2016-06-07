@@ -28,9 +28,11 @@ build:
     tests:
         before:
             - git submodule add -f --name tests https://github.com/nafigator/Veles-unit-tests.git Tests
+            - wget https://phar.phpunit.de/phpunit.phar -O phpunit.phar
+            - chmod 755 phpunit.phar
         override:
             -
-                command: phpunit -c Tests/scrutinizer-phpunit.xml --stderr --coverage-clover '../coverage-report'
+                command: ./phpunit.phar -c Tests/scrutinizer-phpunit.xml --stderr --coverage-clover '../coverage-report'
                 coverage:
                     file: coverage-report
                     format: php-clover
