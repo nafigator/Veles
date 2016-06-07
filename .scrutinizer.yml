@@ -1,7 +1,7 @@
 build:
     environment:
         php:
-            version: 5.5.25
+            version: 5.6.16
             ini:
                 'short_open_tag': 'On'
 
@@ -28,7 +28,7 @@ build:
     tests:
         before:
             - git submodule add -f --name tests https://github.com/nafigator/Veles-unit-tests.git Tests
-            - wget https://phar.phpunit.de/phpunit.phar -O phpunit.phar
+            - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit.phar
             - chmod 755 phpunit.phar
         override:
             -
