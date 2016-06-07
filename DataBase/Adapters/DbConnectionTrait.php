@@ -1,8 +1,8 @@
 <?php
 /**
- * Base db-adapter class
+ * Trait for handling connections pool functionality
  *
- * @file      PdoConnection.php
+ * @file      DbConnectionTrait.php
  *
  * PHP version 5.4+
  *
@@ -16,35 +16,36 @@
 namespace Veles\DataBase\Adapters;
 
 use Veles\DataBase\ConnectionPools\ConnectionPool;
-use Veles\Traits\SingletonInstance;
 
 /**
- * Class DbAdapterBase
+ * Trait DbConnectionTrait
  *
- * Base class for Db adapters
+ * Contains connection pool getters and setters
  *
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-class DbAdapterBase
+trait DbConnectionTrait
 {
 	/** @var ConnectionPool */
-	protected static $pool;
+	protected $pool;
 	/** @var  \PDO */
-	protected static $connection;
+	protected $resource;
 	/** @var  string */
-	protected static $connection_name;
-
-	use SingletonInstance;
+	protected $connection_name;
 
 	/**
 	 * Add connection pool
 	 *
 	 * @param ConnectionPool $pool
+	 *
+	 * @return $this
 	 */
-	public static function setPool(ConnectionPool $pool)
+	public function setPool(ConnectionPool $pool)
 	{
-		static::$pool = $pool;
-		static::$connection_name = $pool->getDefaultConnectionName();
+		$this->pool = $pool;
+		$this->connection_name = $pool->getDefaultConnectionName();
+
+		return $this;
 	}
 
 	/**
@@ -52,9 +53,9 @@ class DbAdapterBase
 	 *
 	 * @return ConnectionPool $pool
 	 */
-	public static function getPool()
+	public function getPool()
 	{
-		return static::$pool;
+		return $this->pool;
 	}
 
 	/**
@@ -66,8 +67,8 @@ class DbAdapterBase
 	 */
 	public function setConnection($name)
 	{
-		static::$connection_name = $name;
-		static::$connection = null;
+		$this->connection_name = $name;
+		$this->resource = null;
 
 		return $this;
 	}
@@ -77,15 +78,14 @@ class DbAdapterBase
 	 *
 	 * return \PDO
 	 */
-	public function getConnection()
+	public function getResource()
 	{
-		if (null === static::$connection) {
-			$conn = static::$pool->getConnection(static::$connection_name);
-			static::$connection = (null === $conn->getResource())
-				? $conn->create()
-				: $conn->getResource();
+		if (null === $this->resource) {
+			$this->resource = $this->pool
+				->getConnection($this->connection_name)
+				->getResource();
 		}
 
-		return static::$connection;
+		return $this->resource;
 	}
 }

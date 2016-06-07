@@ -16,6 +16,7 @@
 namespace Veles\DataBase\Connections;
 
 use Exception;
+use Veles\Traits\Driver;
 
 /**
  * Class DbConnection
@@ -34,6 +35,8 @@ abstract class DbConnection
 	protected $name;
 	/** @var mixed */
 	protected $resource;
+
+	use Driver;
 
 	/**
 	 * @param string $name Unique connection name
@@ -57,6 +60,10 @@ abstract class DbConnection
 	 */
 	public function getResource()
 	{
+		if (null === $this->resource) {
+			$this->create();
+		}
+
 		return $this->resource;
 	}
 

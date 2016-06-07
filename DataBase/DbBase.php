@@ -16,7 +16,6 @@
 namespace Veles\DataBase;
 
 use Exception;
-use Veles\DataBase\Adapters\DbAdapterBase;
 use Veles\DataBase\Adapters\DbAdapterInterface;
 
 /**
@@ -28,7 +27,7 @@ use Veles\DataBase\Adapters\DbAdapterInterface;
  */
 class DbBase
 {
-	/** @var DbAdapterInterface|DbAdapterBase */
+	/** @var DbAdapterInterface */
 	protected static $adapter;
 	/** @var  mixed */
 	protected static $connection;
@@ -36,10 +35,10 @@ class DbBase
 	protected static $connection_name;
 
 	/**
-	 * Сохраняем имя класса адаптера для последующей инициализации
-	 * Будет инициализирован при первом запросе данных из базы
+	 * Set Db adapter
 	 *
 	 * @param DbAdapterInterface $adapter Adapter
+	 *
 	 * @see Db::getAdapter
 	 */
 	public static function setAdapter(DbAdapterInterface $adapter)
@@ -48,10 +47,11 @@ class DbBase
 	}
 
 	/**
-	 * Инстанс адаптера
+	 * Get Db adapter instance
 	 *
 	 * @throws Exception
-	 * @return DbAdapterInterface|DbAdapterBase
+	 *
+	 * @return DbAdapterInterface
 	 */
 	public static function getAdapter()
 	{
@@ -63,10 +63,11 @@ class DbBase
 	}
 
 	/**
-	 * Выбор соединения
+	 * Choose connection
 	 *
-	 * @param string $name Имя соединения
-	 * @return DbAdapterBase
+	 * @param string $name Connection name
+	 *
+	 * @return DbAdapterInterface
 	 */
 	public static function connection($name)
 	{
@@ -74,7 +75,7 @@ class DbBase
 	}
 
 	/**
-	 * Получение последнего сохранённого ID
+	 * Getting last insert id
 	 *
 	 * @return int
 	 */
@@ -84,7 +85,7 @@ class DbBase
 	}
 
 	/**
-	 * Получение кол-ва строк в результате
+	 * Getting result rows count
 	 *
 	 * @return int
 	 */
@@ -97,6 +98,7 @@ class DbBase
 	 * Escaping variable
 	 *
 	 * @param string $var
+	 *
 	 * @return string
 	 */
 	public static function escape($var)

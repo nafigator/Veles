@@ -25,7 +25,7 @@ namespace Veles\DataBase;
 class DbTransactionHandler extends DbBase
 {
 	/**
-	 * Инициализация транзакции
+	 * Transaction initialization
 	 *
 	 * @return bool
 	 */
@@ -35,7 +35,7 @@ class DbTransactionHandler extends DbBase
 	}
 
 	/**
-	 * Откат транзакции
+	 * Rollback transaction
 	 *
 	 * @return bool
 	 */
@@ -45,7 +45,7 @@ class DbTransactionHandler extends DbBase
 	}
 
 	/**
-	 * Сохранение всех запросов транзакции и её закрытие
+	 * Apply all queries and close transaction
 	 *
 	 * @return bool
 	 */

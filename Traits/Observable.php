@@ -4,7 +4,7 @@
  *
  * Class that uses this trait must implement \SplSubject interface
  *
- * @file      PdoAdapter.php
+ * @file      Observable.php
  *
  * PHP version 5.4+
  *

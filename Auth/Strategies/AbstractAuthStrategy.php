@@ -54,8 +54,6 @@ abstract class AbstractAuthStrategy
 	 * Auth cookies setup
 	 *
 	 * @param array $params		Cookie params
-	 *
-	 * @codeCoverageIgnore
 	 */
 	protected function setCookie(array $params = [])
 	{
@@ -69,8 +67,6 @@ abstract class AbstractAuthStrategy
 
 	/**
 	 * Delete auth cookies
-	 *
-	 * @codeCoverageIgnore
 	 *
 	 * @param array $params
 	 */

@@ -15,6 +15,8 @@
 
 namespace Veles\DataBase\Adapters;
 
+use Veles\DataBase\ConnectionPools\ConnectionPool;
+
 /**
  * Interface DbAdapterInterface
  *
@@ -24,6 +26,36 @@ namespace Veles\DataBase\Adapters;
  */
 interface DbAdapterInterface
 {
+	/**
+	 * Add connection pool
+	 *
+	 * @param ConnectionPool $pool
+	 */
+	public function setPool(ConnectionPool $pool);
+
+	/**
+	 * Get connection pool
+	 *
+	 * @return ConnectionPool $pool
+	 */
+	public function getPool();
+
+	/**
+	 * Set default connection
+	 *
+	 * @param string $name Connection name
+	 *
+	 * @return $this
+	 */
+	public function setConnection($name);
+
+	/**
+	 * Get default connection resource
+	 *
+	 * return \PDO
+	 */
+	public function getResource();
+
 	/**
 	 * Get value from table row
 	 *

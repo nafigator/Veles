@@ -25,7 +25,7 @@ use Veles\DataBase\Exceptions\DbException;
  *
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-class PdoAdapter extends DbAdapterBase implements DbAdapterInterface
+class PdoAdapter implements DbAdapterInterface
 {
 	// Save statement for ability to get error information
 	/** @var  \PDOStatement */
@@ -37,6 +37,8 @@ class PdoAdapter extends DbAdapterBase implements DbAdapterInterface
 	   's' => PDO::PARAM_STR,
 	   'b' => PDO::PARAM_LOB
 	];
+
+	use DbConnectionTrait;
 
 	protected function bindParams(array $params, $types)
 	{
@@ -51,7 +53,7 @@ class PdoAdapter extends DbAdapterBase implements DbAdapterInterface
 
 	protected function prepare($sql, array $params, $types)
 	{
-		$this->stmt = $this->getConnection()->prepare($sql);
+		$this->stmt = $this->getResource()->prepare($sql);
 
 		if (null === $types) {
 			$this->stmt->execute($params);
@@ -157,7 +159,7 @@ class PdoAdapter extends DbAdapterBase implements DbAdapterInterface
 	public function begin()
 	{
 		try {
-			$result = $this->getConnection()->beginTransaction();
+			$result = $this->getResource()->beginTransaction();
 		} catch (\PDOException $e) {
 			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
 		}
@@ -173,7 +175,7 @@ class PdoAdapter extends DbAdapterBase implements DbAdapterInterface
 	public function rollback()
 	{
 		try {
-			$result = $this->getConnection()->rollBack();
+			$result = $this->getResource()->rollBack();
 		} catch (\PDOException $e) {
 			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
 		}
@@ -189,7 +191,7 @@ class PdoAdapter extends DbAdapterBase implements DbAdapterInterface
 	public function commit()
 	{
 		try {
-			$result = $this->getConnection()->commit();
+			$result = $this->getResource()->commit();
 		} catch (\PDOException $e) {
 			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
 		}
@@ -211,10 +213,10 @@ class PdoAdapter extends DbAdapterBase implements DbAdapterInterface
 
 		try {
 			if (empty($params)) {
-				return (bool)$this->getConnection()->query($sql);
+				return (bool) $this->getResource()->query($sql);
 			}
 
-			$this->stmt = $this->getConnection()->prepare($sql);
+			$this->stmt = $this->getResource()->prepare($sql);
 
 			if (null === $types) {
 				$result = $this->stmt->execute($params);
@@ -238,7 +240,7 @@ class PdoAdapter extends DbAdapterBase implements DbAdapterInterface
 	public function getLastInsertId()
 	{
 		try {
-			$result = (int) $this->getConnection()->lastInsertId();
+			$result = (int) $this->getResource()->lastInsertId();
 		} catch (\PDOException $e) {
 			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
 		}
@@ -279,7 +281,7 @@ class PdoAdapter extends DbAdapterBase implements DbAdapterInterface
 	public function escape($var)
 	{
 		try {
-			$result = $this->getConnection()->quote($var);
+			$result = $this->getResource()->quote($var);
 		} catch (\PDOException $e) {
 			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
 		}

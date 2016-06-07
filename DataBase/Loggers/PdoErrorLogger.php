@@ -1,8 +1,8 @@
 <?php
 /**
- * Class for logging PDO errors
+ * Class for logging PDO errors. Subscriber for PDO-adapter
  *
- * @file      PdoAdapter.php
+ * @file      PdoErrorLogger.php
  *
  * PHP version 5.4+
  *
@@ -20,8 +20,6 @@ use SplSubject;
 /**
  * Class PdoErrorLogger
  *
- * Класс-подписчик PDO-адаптера. Предназначен для логгирования ошибок
- *
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class PdoErrorLogger implements \SplObserver
@@ -30,7 +28,7 @@ class PdoErrorLogger implements \SplObserver
 	private $path;
 
 	/**
-	 * Установка пути к логу
+	 * Set log path
 	 *
 	 * @param string $path  Путь к логу
 	 */
@@ -40,7 +38,7 @@ class PdoErrorLogger implements \SplObserver
 	}
 
 	/**
-	 * Получение пути к логу
+	 * Getting log path
 	 *
 	 * @return string
 	 */
@@ -50,7 +48,7 @@ class PdoErrorLogger implements \SplObserver
 	}
 
 	/**
-	 * Получение обновления
+	 * Update subscriber
 	 *
 	 * @param SplSubject $subject
 	 */
@@ -58,7 +56,7 @@ class PdoErrorLogger implements \SplObserver
 	{
 		/** @noinspection PhpUndefinedMethodInspection */
 		/** @var \PDO $conn */
-		$conn = $subject->getConnection();
+		$conn = $subject->getResource();
 		/** @noinspection PhpUndefinedMethodInspection */
 		$conn_err = $conn->errorCode();
 		/** @noinspection PhpUndefinedMethodInspection */

@@ -33,6 +33,8 @@ class PdoConnection extends DbConnection
 	protected $options;
 	/** @var array */
 	protected $callbacks = [];
+	/** @var string */
+	protected $driver = '\PDO';
 
 	/**
 	 * Create connection
@@ -41,7 +43,7 @@ class PdoConnection extends DbConnection
 	 */
 	public function create()
 	{
-		$this->resource = new PDO(
+		$this->resource = new $this->driver(
 			$this->getDsn(), $this->getUserName(),
 			$this->getPassword(), $this->getOptions()
 		);
