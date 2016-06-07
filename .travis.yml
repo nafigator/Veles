@@ -3,8 +3,6 @@ sudo: false
 language: php
 
 php:
-  - 5.4
-  - 5.5
   - 5.6
   - 7.0
   - hhvm
@@ -13,7 +11,6 @@ php:
 matrix:
   allow_failures:
     - php: nightly
-    - php: 7.0
     - php: hhvm
 
 services:
@@ -22,20 +19,11 @@ services:
 before_install:
   - composer self-update
   - composer install --no-interaction
-  - composer global require "phpunit/phpunit=5.4.*"
 
 before_script:
   - git submodule add -f --name tests https://github.com/nafigator/Veles-unit-tests.git Tests
   - |
     case $TRAVIS_PHP_VERSION in
-      5.4)
-        PHPUNIT_FLAGS=""
-        phpenv config-add Tests/travisci-5.4.ini
-        ;;
-      5.5)
-        PHPUNIT_FLAGS=""
-        phpenv config-add Tests/travisci.ini
-        ;;
       5.6)
         PHPUNIT_FLAGS="--coverage-clover build/logs/clover.xml"
         phpenv config-add Tests/travisci.ini

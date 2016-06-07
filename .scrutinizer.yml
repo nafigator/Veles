@@ -26,12 +26,13 @@ build:
       - cd Veles
       - git checkout $SCRUTINIZER_BRANCH
       - git submodule add -f --name tests https://github.com/nafigator/Veles-unit-tests.git Tests
-      - composer global require "phpunit/phpunit=5.4.*"
+      - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit.phar
+      - chmod 755 phpunit.phar
 
   tests:
     override:
       -
-        command: phpunit -c Tests/scrutinizer-phpunit.xml --stderr --coverage-clover '../coverage-report'
+        command: ./phpunit.phar -c Tests/scrutinizer-phpunit.xml --stderr --coverage-clover '../coverage-report'
         coverage:
           file: coverage-report
           format: php-clover
