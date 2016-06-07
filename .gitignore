@@ -1,2 +1,5 @@
+# Ignore unit-tests dir
 /Tests
+
+# Ignore coverage-report dir
 /coverage-report
