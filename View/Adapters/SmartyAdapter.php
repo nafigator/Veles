@@ -32,6 +32,8 @@ class SmartyAdapter extends ViewAdapterAbstract
 	protected static $instance;
 	/**
 	 * Constructor
+	 *
+	 * @codeCoverageIgnore
 	 */
 	public function __construct()
 	{
