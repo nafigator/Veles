@@ -22,7 +22,7 @@ services:
 before_install:
   - composer self-update
   - composer install --no-interaction
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS test'
+  - composer global require "phpunit/phpunit=5.4.*"
 
 before_script:
   - git submodule add -f --name tests https://github.com/nafigator/Veles-unit-tests.git Tests
