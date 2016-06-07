@@ -6,6 +6,8 @@ build:
                 'short_open_tag': 'On'
 
         memcached: true
+        postgresql: false
+        redis: false
 
     dependencies:
         # Runs before inferred commands
@@ -17,8 +19,6 @@ build:
 
     # Run after dependencies
     project_setup:
-        before:
-            - mysql -e 'CREATE DATABASE IF NOT EXISTS test'
         after:
             - rm -rf *
             - git clone https://github.com/nafigator/Veles.git
