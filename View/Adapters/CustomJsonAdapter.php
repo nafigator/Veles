@@ -31,9 +31,9 @@ class CustomJsonAdapter extends ViewAdapterAbstract
 	 */
 	public function show($path)
 	{
-		header('Content-Type: application/json');
-
 		if (empty($this->variables)) return;
+
+		header('Content-Type: application/json');
 
 		echo $this->variables;
 	}
@@ -43,7 +43,7 @@ class CustomJsonAdapter extends ViewAdapterAbstract
 	 *
 	 * @param mixed $vars Output variables or traversable class
 	 */
-	public function set($vars)
+	public function set($vars = [])
 	{
 		$this->variables = $vars;
 	}
@@ -57,13 +57,7 @@ class CustomJsonAdapter extends ViewAdapterAbstract
 	 */
 	public function get($path)
 	{
-		ob_start();
-		/** @noinspection PhpIncludeInspection */
-		echo $this->variables;
-		$output = ob_get_contents();
-		ob_end_clean();
-
-		return $output;
+		return $this->variables;
 	}
 
 	/**
@@ -81,7 +75,7 @@ class CustomJsonAdapter extends ViewAdapterAbstract
 	/**
 	 * Driver initialization
 	 */
-	protected function __construct()
+	public function __construct()
 	{
 		$this->setDriver($this);
 	}
