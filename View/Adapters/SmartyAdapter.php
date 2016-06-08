@@ -33,8 +33,6 @@ class SmartyAdapter extends ViewAdapterAbstract
 
 	/**
 	 * Constructor
-	 *
-	 * @codeCoverageIgnore
 	 */
 	public function __construct()
 	{
