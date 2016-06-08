@@ -38,8 +38,6 @@ class SmartyAdapter extends ViewAdapterAbstract
 	 */
 	public function __construct()
 	{
-		/** @noinspection PhpIncludeInspection */
-		include 'Smarty' . DIRECTORY_SEPARATOR . 'Smarty.class.php';
 		/** @noinspection PhpUndefinedClassInspection */
 		$this->setDriver(new Smarty);
 	}
