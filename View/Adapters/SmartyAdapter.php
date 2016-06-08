@@ -30,6 +30,7 @@ class SmartyAdapter extends ViewAdapterAbstract
 	protected static $calls = [];
 	/** @var $this */
 	protected static $instance;
+
 	/**
 	 * Constructor
 	 *
@@ -48,7 +49,7 @@ class SmartyAdapter extends ViewAdapterAbstract
 	 *
 	 * @param mixed $vars Output variables array or traversable class
 	 */
-	public function set($vars)
+	public function set($vars = [])
 	{
 		foreach ($vars as $name => $value) {
 			$this->getDriver()->assign($name, $value);
