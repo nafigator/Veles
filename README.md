@@ -9,7 +9,7 @@ PHP micro framework
 | [![Code Climate][Quality status]][Quality src] [![Coverage Status][Coverage image]][Coverage repo] [![Build status][Travis image]][Travis repo] | [![GitHub license][License img]][License src] [![GitHub release][Release img]][Release src] [![Size status][Size image]][Release src] |
 
 ### Requirements
-* PHP 5.4+
+* PHP 5.6+
 
 ### Versioning
 
@@ -24,6 +24,6 @@ Read more on [SemVer.org](http://semver.org).
   [Coverage repo]: https://codeclimate.com/github/nafigator/Veles
   [License img]: https://img.shields.io/badge/license-BSD3-brightgreen.svg
   [License src]: https://tldrlegal.com/license/bsd-3-clause-license-(revised)
-  [Release img]: https://img.shields.io/badge/release-0.37.0-orange.svg
+  [Release img]: https://img.shields.io/badge/release-0.37.1-orange.svg
   [Release src]: https://github.com/nafigator/Veles
   [Size image]: https://img.shields.io/badge/size-2.7M-blue.svg
