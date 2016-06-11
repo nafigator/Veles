@@ -23,7 +23,7 @@ use Veles\DataBase\DbPaginator;
 
 /**
  * Model class using ActiveRecord pattern
- * @todo   Implements Observer functionality for sql and errors logging
+
  * @author Alexander Yancharuk <alex at itvault dot info>
  */
 class ActiveRecord extends StdClass
