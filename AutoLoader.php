@@ -2,6 +2,9 @@
 /**
  * PSR-0 compatible class AutoLoader
  *
+ * Libraries dir must be in includes:
+ * set_include_path(implode(PATH_SEPARATOR, [$path, get_include_path()]));
+ *
  * @file      AutoLoader.php
  *
  * PHP version 5.6+
@@ -41,21 +44,5 @@ class AutoLoader
 		if (false !== ($full_path = stream_resolve_include_path($file)))
 			/** @noinspection PhpIncludeInspection */
 			require $full_path;
-	}
-
-	/**
-	 * Add path to directory contained classes that should be loaded
-	 *
-	 * @param $path
-	 */
-	public static function registerPath($path)
-	{
-		if (is_array($path)) {
-			$path = implode(PATH_SEPARATOR, $path);
-		}
-
-		set_include_path(
-			implode(PATH_SEPARATOR, [$path, get_include_path()])
-		);
 	}
 }
