@@ -6,9 +6,6 @@ build:
         'short_open_tag': 'On'
 
     memcached: true
-    postgresql: false
-    redis: false
-    mysql: false
 
   dependencies:
     # Runs before inferred commands
