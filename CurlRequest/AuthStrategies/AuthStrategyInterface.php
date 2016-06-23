@@ -13,9 +13,9 @@
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
  */
 
-namespace Veles\Request\AuthStrategies;
+namespace Veles\CurlRequest\AuthStrategies;
 
-use Veles\Request\CurlRequest;
+use Veles\CurlRequest\CurlRequest;
 
 /**
  * Interface AuthStrategyInterface
