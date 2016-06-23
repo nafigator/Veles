@@ -13,9 +13,9 @@
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
  */
 
-namespace Veles\Request;
+namespace Veles\CurlRequest;
 
-use Veles\Request\AuthStrategies\AuthStrategyInterface;
+use Veles\CurlRequest\AuthStrategies\AuthStrategyInterface;
 
 /**
  * Class CurlAbstract
@@ -44,20 +44,47 @@ abstract class CurlAbstract
 	 */
 	abstract public function __construct($url, array $options = []);
 
+	/**
+	 * Returns error code
+	 *
+	 * @return int
+	 */
 	public function getErrorCode()
 	{
 		return curl_errno($this->curl);
 	}
 
+	/**
+	 * Returns error message
+	 *
+	 * @return string
+	 */
 	public function getError()
 	{
 		return curl_error($this->curl);
 	}
 
+	/**
+	 * Returns info for given option or associative array of options values
+	 *
+	 * @param mixed $option
+	 *
+	 * @return mixed
+	 */
 	public function getInfo($option = null)
 	{
 		return null === $option
 			? curl_getinfo($this->curl)
 			: curl_getinfo($this->curl, $option);
+	}
+
+	/**
+	 * Returns curl resource
+	 *
+	 * @return resource
+	 */
+	public function getResource()
+	{
+		return $this->curl;
 	}
 }

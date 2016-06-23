@@ -13,7 +13,7 @@
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
  */
 
-namespace Veles\Request;
+namespace Veles\CurlRequest;
 
 /**
  * Class PostCurlRequest
