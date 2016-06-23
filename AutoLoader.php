@@ -2,7 +2,7 @@
 /**
  * PSR-0 compatible class AutoLoader
  *
- * Libraries dir must be in includes:
+ * ATTENTION! Libraries dir must be in includes:
  * set_include_path(implode(PATH_SEPARATOR, [$path, get_include_path()]));
  *
  * @file      AutoLoader.php
