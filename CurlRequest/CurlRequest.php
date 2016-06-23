@@ -32,6 +32,7 @@ class CurlRequest extends CurlAbstract
 	public function __construct($url, array $options = [])
 	{
 		$this->curl = curl_init();
+		$options   += $this->default_options;
 
 		$this->setOption(CURLOPT_URL, $url)
 			->setArrayOptions($options);
@@ -107,9 +108,8 @@ class CurlRequest extends CurlAbstract
 		foreach ($options as $option => $value) {
 			$this->options[$option] = $value;
 		}
-		curl_setopt_array(
-			$this->curl, $options + $this->default_options
-		);
+
+		curl_setopt_array($this->curl, $options);
 
 		return $this;
 	}
