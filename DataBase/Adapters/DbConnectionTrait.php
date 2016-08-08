@@ -42,7 +42,7 @@ trait DbConnectionTrait
 	 */
 	public function setPool(ConnectionPool $pool)
 	{
-		$this->pool = $pool;
+		$this->pool            = $pool;
 		$this->connection_name = $pool->getDefaultConnectionName();
 
 		return $this;
@@ -68,7 +68,7 @@ trait DbConnectionTrait
 	public function setConnection($name)
 	{
 		$this->connection_name = $name;
-		$this->resource = null;
+		$this->resource        = null;
 
 		return $this;
 	}

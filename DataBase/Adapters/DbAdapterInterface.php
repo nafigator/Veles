@@ -59,29 +59,32 @@ interface DbAdapterInterface
 	/**
 	 * Get value from table row
 	 *
-	 * @param string $sql SQL-query
-	 * @param array $params Query values
-	 * @param string|null $types Placeholders types
-	 * @return string
+	 * @param string      $sql    SQL-query
+	 * @param array       $params Query values
+	 * @param string|null $types  Placeholders types
+	 *
+	 * @return mixed
 	 */
 	public function value($sql, array $params, $types);
 
 	/**
 	 * Get table row
 	 *
-	 * @param string $sql SQL-query
-	 * @param array $params Query values
-	 * @param string|null $types Placeholders types
-	 * @return array
+	 * @param string      $sql    SQL-query
+	 * @param array       $params Query values
+	 * @param string|null $types  Placeholders types
+	 *
+	 * @return mixed
 	 */
 	public function row($sql, array $params, $types);
 
 	/**
 	 * Get result collection
 	 *
-	 * @param string $sql SQL-query
-	 * @param array $params Query values
-	 * @param string|null $types Placeholders types
+	 * @param string      $sql    SQL-query
+	 * @param array       $params Query values
+	 * @param string|null $types  Placeholders types
+	 *
 	 * @return mixed
 	 */
 	public function rows($sql, array $params, $types);
@@ -110,9 +113,10 @@ interface DbAdapterInterface
 	/**
 	 * Launch non-SELECT query
 	 *
-	 * @param string $sql Non-SELECT SQL-query
-	 * @param array $params Query values
-	 * @param string|null $types Placeholders types
+	 * @param string      $sql    Non-SELECT SQL-query
+	 * @param array       $params Query values
+	 * @param string|null $types  Placeholders types
+	 *
 	 * @return bool
 	 */
 	public function query($sql, array $params, $types);
@@ -144,6 +148,7 @@ interface DbAdapterInterface
 	 * Escape variable
 	 *
 	 * @param string $var
+	 *
 	 * @return string
 	 */
 	public function escape($var);

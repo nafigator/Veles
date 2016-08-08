@@ -15,7 +15,7 @@
 
 namespace Veles\DataBase\ConnectionPools;
 
-use Veles\DataBase\Connections\PdoConnection;
+use Veles\DataBase\Connections\DbConnection;
 
 /**
  * Class ConnectionPool
@@ -40,18 +40,20 @@ class ConnectionPool
 	/**
 	 * Add connection to connection pool
 	 *
-	 * @param PdoConnection $conn
-	 * @param bool $default Flag is this connection default or not
+	 * @param DbConnection $conn
+	 * @param bool         $default Flag is this connection default or not
+	 *
 	 * @return $this
 	 * @see DbConnection
 	 */
-	public function addConnection(PdoConnection $conn, $default = false)
+	public function addConnection(DbConnection $conn, $default = false)
 	{
 		$this->pool[$conn->getName()] = $conn;
 
 		if ($default) {
 			$this->conn_name = $conn->getName();
 		}
+
 		return $this;
 	}
 
@@ -59,7 +61,8 @@ class ConnectionPool
 	 * Get connection class by name
 	 *
 	 * @param string $name Connection name
-	 * @return PdoConnection|null
+	 *
+	 * @return DbConnection|null
 	 * @see DbConnection
 	 */
 	public function getConnection($name)
