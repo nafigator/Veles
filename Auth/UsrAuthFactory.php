@@ -39,7 +39,7 @@ class UsrAuthFactory
 		'pw' => [
 			'filter' => FILTER_VALIDATE_REGEXP,
 			'options' => [
-				'regexp' => '/^[a-z0-9_-]{1,20}$/i'
+				'regexp' => '/^[a-z0-9_.-]{1,20}$/i'
 			]
 		]
 	];

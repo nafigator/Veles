@@ -60,9 +60,10 @@ abstract class AbstractAuthStrategy
 		$expire = $path = $domain = $secure = $http_only = null;
 		extract($params, EXTR_IF_EXISTS);
 		$user = $this->getUser();
+		$hash = $user->getCookieHash();
 
 		setcookie('id', $user->id, $expire, $path, $domain, $secure, $http_only);
-		setcookie('pw', $user->hash, $expire, $path, $domain, $secure, $http_only);
+		setcookie('pw', $hash, $expire, $path, $domain, $secure, $http_only);
 	}
 
 	/**
