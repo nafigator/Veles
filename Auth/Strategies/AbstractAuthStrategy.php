@@ -26,8 +26,12 @@ use Veles\Model\User;
  */
 abstract class AbstractAuthStrategy
 {
-	const ERR_USER_NOT_FOUND   = 1;
-	const ERR_WRONG_PASSWORD   = 2;
+	const ERR_USER_NOT_FOUND     = 1;
+	const ERR_WRONG_PASSWORD     = 2;
+	const ERR_NOT_VALID_PASSWORD = 4;
+	const ERR_NOT_VALID_LOGIN    = 8;
+	const ERR_NOT_VALID_UID      = 16;
+	const ERR_NOT_VALID_HASH     = 32;
 
 	// This var contains bit-wise error info
 	protected $errors = 0;
@@ -59,10 +63,10 @@ abstract class AbstractAuthStrategy
 	{
 		$expire = $path = $domain = $secure = $http_only = null;
 		extract($params, EXTR_IF_EXISTS);
-		$user = $this->getUser();
-		$hash = $user->getCookieHash();
+		$id   = $this->user->id;
+		$hash = $this->user->getCookieHash();
 
-		setcookie('id', $user->id, $expire, $path, $domain, $secure, $http_only);
+		setcookie('id', $id, $expire, $path, $domain, $secure, $http_only);
 		setcookie('pw', $hash, $expire, $path, $domain, $secure, $http_only);
 	}
 
@@ -89,14 +93,14 @@ abstract class AbstractAuthStrategy
 	 */
 	protected function findUser(DbFilter $filter)
 	{
-		if ($this->getUser()->find($filter)) {
+		if ($this->user->find($filter)) {
 			return true;
 		}
 
 		$this->delCookie();
 
 		$props = ['group' => UsrGroup::GUEST];
-		$this->getUser()->setProperties($props);
+		$this->user->setProperties($props);
 
 		$this->errors |= self::ERR_USER_NOT_FOUND;
 
@@ -121,5 +125,15 @@ abstract class AbstractAuthStrategy
 	public function getErrors()
 	{
 		return $this->errors;
+	}
+
+	/**
+	 * Set error
+	 *
+	 * @param int $error
+	 */
+	public function setError($error)
+	{
+		$this->errors |= (int) $error;
 	}
 }

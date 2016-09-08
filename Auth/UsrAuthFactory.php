@@ -31,7 +31,6 @@ class UsrAuthFactory
 	protected $cookie_definitions = [
 		'id' => [
 			'filter' => FILTER_VALIDATE_INT,
-			'flags'  => FILTER_NULL_ON_FAILURE,
 			'options' => [
 				'min_range' => 1,
 				'max_range' => PHP_INT_MAX
@@ -39,7 +38,6 @@ class UsrAuthFactory
 		],
 		'pw' => [
 			'filter' => FILTER_VALIDATE_REGEXP,
-			'flags'  => FILTER_NULL_ON_FAILURE,
 			'options' => [
 				'regexp' => '/^.{31}$/'
 			]
@@ -48,11 +46,9 @@ class UsrAuthFactory
 	protected $post_definitions = [
 		'ln' => [
 			'filter' => FILTER_VALIDATE_EMAIL,
-			'flags'  => FILTER_NULL_ON_FAILURE
 		],
 		'pw' => [
 			'filter' => FILTER_VALIDATE_REGEXP,
-			'flags'  => FILTER_NULL_ON_FAILURE,
 			'options' => [
 				'regexp' => '/^[a-z0-9_-]{1,20}$/i'
 			]
@@ -69,19 +65,28 @@ class UsrAuthFactory
 	{
 		$post    = $this->getPost();
 		$cookies = $this->getCookies();
+		$auth    = null;
 
 		switch (true) {
 			case (isset($post['ln'], $post['pw'])):
-				return new LoginFormStrategy(
+				$auth = new LoginFormStrategy(
 					$post['ln'], $post['pw'], new User
 				);
+				$post['ln'] || $auth->setError($auth::ERR_NOT_VALID_LOGIN);
+				$post['pw'] || $auth->setError($auth::ERR_NOT_VALID_PASSWORD);
+				break;
 			case (isset($cookies['id'], $cookies['pw'])):
-				return new CookieStrategy(
+				$auth = new CookieStrategy(
 					$cookies['id'], $cookies['pw'], new User
 				);
+				$cookies['id'] || $auth->setError($auth::ERR_NOT_VALID_UID);
+				$cookies['pw'] || $auth->setError($auth::ERR_NOT_VALID_HASH);
+				break;
 			default:
-				return new GuestStrategy(new User);
+				$auth = new GuestStrategy(new User);
 		}
+
+		return $auth;
 	}
 
 	/**
