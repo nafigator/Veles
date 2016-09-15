@@ -25,7 +25,7 @@ use Veles\Traits\LazyCalls;
 abstract class ViewAdapterAbstract
 {
 	/** @var mixed */
-	protected $variables;
+	protected $variables = [];
 
 	use LazyCalls;
 
