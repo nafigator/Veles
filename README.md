@@ -1,12 +1,10 @@
 # Veles
 
-PHP micro framework
+PHP micro framework [![GitHub license][License img]][License src] [![GitHub release][Release img]][Release src] [![Size status][Size image]][Release src]
 
-| Scrutinizer stable | Scrutinizer development |
+| Scrutinizer stable | Code Climate stable |
 |:----------------:|:--------------------:|
-| [![Scrutinizer master code quality][Scrutinizer master quality image]][Scrutinizer master src] [![Scrutinizer master code coverage][Scrutinizer master coverage image]][Scrutinizer master coverage src] [![Scrutinizer master status][Scrutinizer master status image]][Scrutinizer master status src] | [![Scrutinizer development code quality][Scrutinizer development quality image]][Scrutinizer development src] [![Scrutinizer development code coverage][Scrutinizer development coverage image]][Scrutinizer development coverage src] [![Scrutinizer development status][Scrutinizer development status image]][Scrutinizer development status src] |
-| **Code Climate stable** | **Stats** |
-| [![Code Climate][CC Quality status]][CC Quality src] [![CC Coverage Status][CC Coverage image]][CC Coverage repo] [![Travis Build status][Travis image]][Travis repo] | [![GitHub license][License img]][License src] [![GitHub release][Release img]][Release src] [![Size status][Size image]][Release src] |
+| [![Scrutinizer master code quality][Scrutinizer master quality image]][Scrutinizer master src] [![Scrutinizer master code coverage][Scrutinizer master coverage image]][Scrutinizer master coverage src] [![Scrutinizer master status][Scrutinizer master status image]][Scrutinizer master status src] | [![Code Climate][CC Quality status]][CC Quality src] [![CC Coverage Status][CC Coverage image]][CC Coverage repo] [![Travis Build status][Travis image]][Travis repo] |
 
 ### Requirements
 * PHP 5.6+
