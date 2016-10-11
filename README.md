@@ -1,6 +1,8 @@
 # Veles
 
-PHP micro framework  [![GitHub license][License img]][License src] [![GitHub release][Release img]][Release src] [![Size status][Size image]][Release src]
+PHP micro framework
+
+[![GitHub license][License img]][License src] [![GitHub release][Release img]][Release src] [![Size status][Size image]][Release src]
 
 | Scrutinizer stable | Code Climate stable |
 |:----------------:|:--------------------:|
@@ -22,7 +24,7 @@ Read more on [SemVer.org](http://semver.org).
   [CC coverage repo]: https://codeclimate.com/github/nafigator/Veles
   [License img]: https://img.shields.io/badge/license-BSD3-brightgreen.svg
   [License src]: https://tldrlegal.com/license/bsd-3-clause-license-(revised)
-  [Release img]: https://img.shields.io/badge/release-0.37.11-orange.svg
+  [Release img]: https://img.shields.io/badge/release-0.37.12-orange.svg
   [Release src]: https://github.com/nafigator/Veles
   [Size image]: https://img.shields.io/badge/size-2.7M-blue.svg
   [Scrutinizer master quality image]: https://scrutinizer-ci.com/g/nafigator/Veles/badges/quality-score.png?b=master
