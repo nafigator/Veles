@@ -1,6 +1,6 @@
 # Veles
 
-PHP micro framework [![GitHub license][License img]][License src] [![GitHub release][Release img]][Release src] [![Size status][Size image]][Release src]
+PHP micro framework  [![GitHub license][License img]][License src] [![GitHub release][Release img]][Release src] [![Size status][Size image]][Release src]
 
 | Scrutinizer stable | Code Climate stable |
 |:----------------:|:--------------------:|
@@ -31,9 +31,3 @@ Read more on [SemVer.org](http://semver.org).
   [Scrutinizer master coverage src]: https://scrutinizer-ci.com/g/nafigator/Veles/?branch=master
   [Scrutinizer master status image]: https://scrutinizer-ci.com/g/nafigator/Veles/badges/build.png?b=master
   [Scrutinizer master status src]: https://scrutinizer-ci.com/g/nafigator/Veles/?branch=master
-  [Scrutinizer development quality image]: https://scrutinizer-ci.com/g/nafigator/Veles/badges/quality-score.png?b=development
-  [Scrutinizer development src]: https://scrutinizer-ci.com/g/nafigator/Veles/?branch=development
-  [Scrutinizer development coverage image]: https://scrutinizer-ci.com/g/nafigator/Veles/badges/coverage.png?b=development
-  [Scrutinizer development coverage src]: https://scrutinizer-ci.com/g/nafigator/Veles/?branch=development
-  [Scrutinizer development status image]: https://scrutinizer-ci.com/g/nafigator/Veles/badges/build.png?b=development
-  [Scrutinizer development status src]: https://scrutinizer-ci.com/g/nafigator/Veles/?branch=development
