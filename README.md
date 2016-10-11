@@ -1,6 +1,8 @@
 # Veles
 
-PHP micro framework  [![GitHub license][License img]][License src] [![GitHub release][Release img]][Release src] [![Size status][Size image]][Release src]
+PHP micro framework
+
+[![GitHub license][License img]][License src] [![GitHub release][Release img]][Release src] [![Size status][Size image]][Release src]
 
 | Scrutinizer stable | Code Climate stable |
 |:----------------:|:--------------------:|
