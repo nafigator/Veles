@@ -132,9 +132,8 @@ class ActiveRecord extends StdClass
 	 */
 	private function insert()
 	{
-		$sql    = $this->builder->insert($this);
-		$result = Db::query($sql);
-
+		$sql      = $this->builder->insert($this);
+		$result   = Db::query($sql);
 		$this->id = Db::getLastInsertId();
 
 		return $result;
