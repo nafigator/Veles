@@ -16,14 +16,14 @@
 namespace Veles\Model;
 
 use StdClass;
-use Veles\Traits\DynamicPropHandler;
 use Veles\DataBase\Db;
 use Veles\DataBase\DbFilter;
 use Veles\DataBase\DbPaginator;
+use Veles\Traits\DynamicPropHandler;
 
 /**
  * Model class using ActiveRecord pattern
-
+ *
  * @author Alexander Yancharuk <alex at itvault dot info>
  */
 class ActiveRecord extends StdClass
@@ -38,6 +38,45 @@ class ActiveRecord extends StdClass
 	protected $map = [];
 
 	use DynamicPropHandler;
+
+	/**
+	 * Update data in database
+	 *
+	 * @return bool
+	 */
+	protected function update()
+	{
+		$sql = $this->builder->update($this);
+
+		return Db::query($sql);
+	}
+
+	/**
+	 * Insert data in database
+	 *
+	 * @return bool
+	 */
+	protected function insert()
+	{
+		$sql      = $this->builder->insert($this);
+		$result   = Db::query($sql);
+		$this->id = Db::getLastInsertId();
+
+		return $result;
+	}
+
+	protected function getResult($sql)
+	{
+		$result = Db::row($sql);
+
+		if (empty($result)) {
+			return false;
+		}
+
+		$this->setProperties($result);
+
+		return true;
+	}
 
 	public function __construct()
 	{
@@ -65,15 +104,7 @@ class ActiveRecord extends StdClass
 	{
 		$sql = $this->builder->getById($this, $identifier);
 
-		$result = Db::row($sql);
-
-		if (empty($result)) {
-			return false;
-		}
-
-		$this->setProperties($result);
-
-		return true;
+		return $this->getResult($sql);
 	}
 
 	/**
@@ -107,37 +138,12 @@ class ActiveRecord extends StdClass
 
 	/**
 	 * Save data
+	 *
 	 * @return bool|int
 	 */
 	public function save()
 	{
 		return isset($this->id) ? $this->update() : $this->insert();
-	}
-
-	/**
-	 * Update data in database
-	 * @return bool
-	 */
-	private function update()
-	{
-		$sql = $this->builder->update($this);
-
-		return Db::query($sql);
-	}
-
-	/**
-	 * Insert data in database
-	 *
-	 *  @return bool
-	 */
-	private function insert()
-	{
-		$sql    = $this->builder->insert($this);
-		$result = Db::query($sql);
-
-		$this->id = Db::getLastInsertId();
-
-		return $result;
 	}
 
 	/**
@@ -165,15 +171,7 @@ class ActiveRecord extends StdClass
 	{
 		$sql = $this->builder->find($this, $filter);
 
-		$result = Db::row($sql);
-
-		if (empty($result)) {
-			return false;
-		}
-
-		$this->setProperties($result);
-
-		return true;
+		return $this->getResult($sql);
 	}
 
 	/**
