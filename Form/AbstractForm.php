@@ -82,8 +82,15 @@ abstract class AbstractForm implements FormInterface
 	{
 		/** @var ElementInterface $element*/
 		foreach ($this->elements as $element) {
-			if (!$element->validate($this)) {
-				return false;
+			switch (true) {
+				case $element instanceof ButtonElement:
+				case $element instanceof SubmitElement:
+					break;
+				default:
+					if (!$element->validate($this)) {
+						return false;
+					}
+					break;
 			}
 		}
 
