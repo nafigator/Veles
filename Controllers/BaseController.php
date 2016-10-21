@@ -13,18 +13,31 @@
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
  */
 
-namespace Controllers;
+namespace Veles\Controllers;
 
 use Application\ApplicationTrait;
+use Veles\Application\Application;
 
 /**
  * Class   BaseController
+ *
+ * @codeCoverageIgnore
  *
  * @author Yancharuk Alexander <alex at itvault dot info>
  */
 class BaseController
 {
 	use ApplicationTrait;
+
+	/**
+	 * Set application as internal property
+	 *
+	 * @param Application $application
+	 */
+	public function __construct(Application $application)
+	{
+		$this->setApplication($application);
+	}
 
 	/**
 	 * Getting route params
