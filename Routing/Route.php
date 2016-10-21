@@ -7,7 +7,7 @@
  * PHP version 5.6+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
- * @copyright © 2012-2016 Alexander Yancharuk <alex at itvault at info>
+ * @copyright © 2012-2016 Alexander Yancharuk <alex at itvault dot info>
  * @date      Сбт Июн 23 08:52:41 2012
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
@@ -16,6 +16,7 @@
 namespace Veles\Routing;
 
 use Exception;
+use Veles\Application\Application;
 
 /**
  * Class Route
@@ -25,7 +26,7 @@ use Exception;
  */
 class Route extends RouteBase
 {
-	protected $page_name;
+	protected $name;
 	/** @var  array Current route config */
 	protected $config;
 	protected $template;
@@ -47,8 +48,8 @@ class Route extends RouteBase
 				continue;
 			}
 
-			$this->config    = $route;
-			$this->page_name = $name;
+			$this->config = $route;
+			$this->name   = $name;
 
 			if (isset($route['tpl'])) {
 				$this->template = $route['tpl'];
@@ -122,21 +123,22 @@ class Route extends RouteBase
 	}
 
 	/**
-	 * Access to controller
+	 * Build and return controller object
 	 *
-	 * @throws Exception
+	 * @param Application $application
+	 *
 	 * @return object
+	 * @throws Exception
 	 */
-	public function getController()
+	public function getController(Application $application)
 	{
 		if (!isset($this->config['controller'])) {
 			throw new Exception('Controller name not set!');
 		}
 
 		$controller = 'Controllers\\' . $this->config['controller'];
-		$result     = new $controller($this);
 
-		return $result;
+		return new $controller($application);
 	}
 
 	/**
@@ -172,13 +174,13 @@ class Route extends RouteBase
 	}
 
 	/**
-	 * Getting page name
+	 * Getting route name
 	 *
 	 * @return string
 	 */
-	public function getPageName()
+	public function getName()
 	{
-		return $this->page_name;
+		return $this->name;
 	}
 
 	/**
