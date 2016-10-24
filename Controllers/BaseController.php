@@ -21,8 +21,6 @@ use Veles\Application\Application;
 /**
  * Class   BaseController
  *
- * @codeCoverageIgnore
- *
  * @author Yancharuk Alexander <alex at itvault dot info>
  */
 class BaseController
