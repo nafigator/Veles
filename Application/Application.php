@@ -31,12 +31,13 @@ class Application
 	 */
 	public function run()
 	{
-		$controller  = $this->getRoute()->getController($this);
-		$action_name = $this->getRoute()->getActionName();
+		$route      = $this->getRoute();
+		$controller = $route->getController($this);
+		$action     = $route->getActionName();
 
-		View::setAdapter($this->getRoute()->getAdapter());
-		View::set($controller->$action_name());
+		View::set($controller->$action());
+		View::setAdapter($route->getAdapter());
 
-		View::show($this->getRoute()->getTemplate());
+		View::show($route->getTemplate());
 	}
 }
