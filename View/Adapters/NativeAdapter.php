@@ -27,16 +27,20 @@ class NativeAdapter extends ViewAdapterAbstract
 	/** @var $this */
 	protected static $instance;
 	/** @var string */
-	private static $template_dir;
+	protected $template_dir;
 
 	/**
 	 * Set templates directory
 	 *
 	 * @param string $template_dir
+	 *
+	 * @return $this
 	 */
-	public static function setTemplateDir($template_dir)
+	public function setTemplateDir($template_dir)
 	{
-		self::$template_dir = $template_dir;
+		$this->template_dir = $template_dir;
+
+		return $this;
 	}
 
 	/**
@@ -44,9 +48,9 @@ class NativeAdapter extends ViewAdapterAbstract
 	 *
 	 * @return string
 	 */
-	public static function getTemplateDir()
+	public function getTemplateDir()
 	{
-		return self::$template_dir;
+		return $this->template_dir;
 	}
 
 	/**
@@ -62,7 +66,7 @@ class NativeAdapter extends ViewAdapterAbstract
 
 		ob_start();
 		/** @noinspection PhpIncludeInspection */
-		include self::getTemplateDir() . $path;
+		include $this->getTemplateDir() . $path;
 		ob_end_flush();
 	}
 
@@ -102,7 +106,7 @@ class NativeAdapter extends ViewAdapterAbstract
 	/**
 	 * Driver initialization
 	 */
-	public function __construct()
+	protected function __construct()
 	{
 		$this->setDriver($this);
 	}
