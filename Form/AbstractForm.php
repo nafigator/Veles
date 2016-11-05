@@ -7,7 +7,7 @@
  * PHP version 5.6+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
- * @copyright © 2012-2016 Alexander Yancharuk <alex at itvault at info>
+ * @copyright © 2012-2016 Alexander Yancharuk
  * @date      Вск Авг 12 10:30:52 2012
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
@@ -15,6 +15,7 @@
 
 namespace Veles\Form;
 
+use Form\Elements\ResetElement;
 use Veles\Cache\Cache;
 use Veles\Form\Elements\ButtonElement;
 use Veles\Form\Elements\HiddenElement;
@@ -84,6 +85,7 @@ abstract class AbstractForm implements FormInterface
 		foreach ($this->elements as $element) {
 			switch (true) {
 				case $element instanceof ButtonElement:
+				case $element instanceof ResetElement:
 				case $element instanceof SubmitElement:
 					break;
 				default:
