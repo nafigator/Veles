@@ -66,7 +66,7 @@ class NativeAdapter extends ViewAdapterAbstract
 
 		ob_start();
 		/** @noinspection PhpIncludeInspection */
-		include self::getTemplateDir() . $path;
+		include $this->getTemplateDir() . $path;
 		ob_end_flush();
 	}
 
@@ -106,7 +106,7 @@ class NativeAdapter extends ViewAdapterAbstract
 	/**
 	 * Driver initialization
 	 */
-	public function __construct()
+	protected function __construct()
 	{
 		$this->setDriver($this);
 	}
