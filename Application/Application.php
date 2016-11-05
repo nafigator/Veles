@@ -25,6 +25,7 @@ class Application
 {
 	use RouteTrait;
 	use VersionTrait;
+	use EnvironmentTrait;
 
 	/**
 	 * Application start
