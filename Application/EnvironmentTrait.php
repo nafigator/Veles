@@ -25,7 +25,7 @@ trait EnvironmentTrait
 	 *
 	 * @param Environment $environment
 	 *
-	 * @return EnvironmentTrait
+	 * @return EnvironmentTrait|Application
 	 */
 	public function setEnvironment(Environment $environment)
 	{
