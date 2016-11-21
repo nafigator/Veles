@@ -31,6 +31,15 @@ abstract class AbstractRoutesConfig
 	abstract public function getData();
 
 	/**
+	 * Returns array that contains routes configuration
+	 *
+	 * @param string $name Name of section
+	 *
+	 * @return array
+	 */
+	abstract public function getSection($name);
+
+	/**
 	 * Sets strategy for config loader
 	 *
 	 * @param AbstractConfigLoader $loader Strategy of loading

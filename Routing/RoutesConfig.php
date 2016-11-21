@@ -37,4 +37,18 @@ class RoutesConfig extends AbstractRoutesConfig
 
 		return $this->data;
 	}
+
+	/**
+	 * Returns section of routes
+	 *
+	 * @param string $name Name of section
+	 *
+	 * @return array
+	 */
+	public function getSection($name)
+	{
+		$data = $this->getData();
+
+		return isset($data[$name]) ? $data[$name] : [];
+	}
 }
