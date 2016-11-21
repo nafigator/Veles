@@ -64,4 +64,16 @@ class RoutesCacheDecorator extends AbstractRoutesConfig
 	{
 		$this->prefix = $prefix;
 	}
+
+	/**
+	 * Returns array that contains routes configuration
+	 *
+	 * @param string $name Name of section
+	 *
+	 * @return array
+	 */
+	public function getSection($name)
+	{
+		$this->config->getSection($name);
+	}
 }

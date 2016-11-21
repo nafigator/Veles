@@ -39,8 +39,8 @@ class Route extends RouteBase
 	 */
 	public function init()
 	{
-		$routes = $this->getConfigHandler()->getData();
-		$uri    = $this->getUri();
+		list($uri, $section) = $this->parseUri();
+		$routes = $this->getConfigHandler()->getSection($section);
 
 		foreach ($routes as $name => $route) {
 			/** @noinspection PhpUndefinedMethodInspection */
@@ -69,15 +69,15 @@ class Route extends RouteBase
 	/**
 	 * Safe way to get uri
 	 *
-	 * @return string
+	 * @return array
 	 */
-	protected function getUri()
+	protected function parseUri()
 	{
 		$uri = parse_url(
 			filter_input(INPUT_SERVER, 'REQUEST_URI'), PHP_URL_PATH
 		);
 
-		return $uri;
+		return [$uri, explode('/', $uri)[1]];
 	}
 
 	/**
