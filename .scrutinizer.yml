@@ -34,6 +34,8 @@ build:
           file: coverage-report
           format: php-clover
 
+      - phpcs-run --standard=.phpcs-veles.xml
+
 checks:
   php: true
 

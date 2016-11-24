@@ -22,6 +22,7 @@ before_install:
 
 before_script:
   - git submodule add -f --name tests https://github.com/nafigator/Veles-unit-tests.git Tests
+  - pyrus install pear/PHP_CodeSniffer
   - |
     case $TRAVIS_PHP_VERSION in
       5.6)
@@ -41,9 +42,11 @@ before_script:
         cat Tests/travisci.ini >> /etc/hhvm/php.ini
         ;;
     esac
+  - phpenv rehash
 
 script:
   - phpunit -c Tests/travisci-phpunit.xml --stderr $PHPUNIT_FLAGS
+  - phpcs --standard=.phpcs-veles.xml
 
 after_script:
   - |
