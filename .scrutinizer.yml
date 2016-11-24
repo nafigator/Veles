@@ -34,8 +34,6 @@ build:
           file: coverage-report
           format: php-clover
 
-
-
 checks:
   php: true
 
