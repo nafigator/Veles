@@ -35,7 +35,7 @@ build:
           file: coverage-report
           format: php-clover
 
-      - phpcs-run
+      - phpcs-run --standard=phpcs.xml --report=summary
 
 checks:
   php: true
