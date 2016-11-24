@@ -28,11 +28,14 @@ build:
 
   tests:
     override:
+
       -
         command: ./phpunit.phar -c Tests/scrutinizer-phpunit.xml --stderr --coverage-clover '../coverage-report'
         coverage:
           file: coverage-report
           format: php-clover
+
+      - phpcs-run
 
 checks:
   php: true
@@ -40,6 +43,3 @@ checks:
 filter:
   excluded_paths:
     - Tests/*
-
-tools:
-  php_code_sniffer: true
