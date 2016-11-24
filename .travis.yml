@@ -21,6 +21,8 @@ before_install:
   - composer install --no-interaction
 
 before_script:
+  - wget -q -O phpcs.phar https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
+  - chmod 755 phpcs.phar
   - git submodule add -f --name tests https://github.com/nafigator/Veles-unit-tests.git Tests
   - |
     case $TRAVIS_PHP_VERSION in
@@ -44,8 +46,7 @@ before_script:
 
 script:
   - phpunit -c Tests/travisci-phpunit.xml --stderr $PHPUNIT_FLAGS
-  - which phpcs
-  - phpcs --standard=phpcs.xml --ignore=Tests/ -w --colors
+  - ./phpcs.phar --standard=phpcs.xml --ignore=Tests/ -w --colors
 
 after_script:
   - |
