@@ -6,8 +6,8 @@ disabled:
   - no_tab_indentation
 
 finder:
-  exclude:
-    - "View/Adapters/SmartyAdapter.php"
-
   name:
     - "*.php"
+
+  not-name:
+    - "View/Adapters/SmartyAdapter.php"
