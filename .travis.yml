@@ -1,3 +1,8 @@
+branches:
+  only:
+    - master
+    - development
+
 sudo: false
 
 language: php
@@ -9,6 +14,7 @@ php:
   - nightly
 
 matrix:
+  fast_finish: true
   allow_failures:
     - php: nightly
     - php: hhvm
