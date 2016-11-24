@@ -19,29 +19,29 @@ use Veles\Routing\Route;
 
 trait RouteTrait
 {
-    /** @var  Route */
-    protected $route;
+	/** @var  Route */
+	protected $route;
 
-    /**
-     * Set route object
-     *
-     * @param Route $route
-     * @return $this
-     */
-    public function setRoute(Route $route)
-    {
-        $this->route = $route;
+	/**
+	 * Set route object
+	 *
+	 * @param Route $route
+	 * @return $this
+	 */
+	public function setRoute(Route $route)
+	{
+		$this->route = $route;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get route object
-     *
-     * @return Route
-     */
-    public function getRoute()
-    {
-        return $this->route;
-    }
+	/**
+	 * Get route object
+	 *
+	 * @return Route
+	 */
+	public function getRoute()
+	{
+		return $this->route;
+	}
 }

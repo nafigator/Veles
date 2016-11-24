@@ -36,8 +36,9 @@ class EmailNotifier extends AbstractEmail implements \SplObserver
 	 */
 	public function update(\SplSubject $subject)
 	{
-		if (!$subject instanceof BaseErrorHandler)
+		if (!$subject instanceof BaseErrorHandler) {
 			return;
+		}
 
 		$builder = $this->getMessageBuilder();
 		$builder->setHandler($subject);

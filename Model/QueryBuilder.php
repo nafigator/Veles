@@ -63,7 +63,9 @@ class QueryBuilder implements QueryBuilderInterface
 			$arr['values'] .= "$value, ";
 		}
 
-		foreach($arr as &$val) { $val = rtrim($val, ', '); }
+		foreach ($arr as &$val) {
+			$val = rtrim($val, ', ');
+		}
 
 		$sql = '
 			INSERT

@@ -17,30 +17,30 @@ namespace Veles\Application;
 
 trait VersionTrait
 {
-    /** @var  string */
-    protected $version;
+	/** @var  string */
+	protected $version;
 
-    /**
-     * Get application version
-     *
-     * @return string
-     */
-    public function getVersion()
-    {
-        return $this->version;
-    }
+	/**
+	 * Get application version
+	 *
+	 * @return string
+	 */
+	public function getVersion()
+	{
+		return $this->version;
+	}
 
-    /**
-     * Set application version
-     *
-     * @param string $version
-     *
-     * @return $this
-     */
-    public function setVersion($version)
-    {
-        $this->version = $version;
+	/**
+	 * Set application version
+	 *
+	 * @param string $version
+	 *
+	 * @return $this
+	 */
+	public function setVersion($version)
+	{
+		$this->version = $version;
 
-        return $this;
-    }
+		return $this;
+	}
 }

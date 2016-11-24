@@ -100,13 +100,15 @@ class Route extends RouteBase
 	 */
 	protected function checkAjax()
 	{
-		if (!$this->isAjax())
+		if (!$this->isAjax()) {
 			return;
+		}
 
 		$ajax_header = (filter_input(INPUT_SERVER, 'HTTP_X_REQUESTED_WITH'));
 
-		if ('XMLHttpRequest' === $ajax_header)
+		if ('XMLHttpRequest' === $ajax_header) {
 			return;
+		}
 
 		throw new Exception('AJAX-route got non-AJAX request!');
 	}

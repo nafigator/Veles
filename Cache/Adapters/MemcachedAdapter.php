@@ -23,10 +23,10 @@ use Memcached;
  */
 class MemcachedAdapter extends MemcacheAdapter
 {
-    /** @var  null|array */
-    protected static $calls;
-    /** @var CacheAdapterInterface */
-    protected static $instance;
+	/** @var  null|array */
+	protected static $calls;
+	/** @var CacheAdapterInterface */
+	protected static $instance;
 
 	/**
 	 * Create Memcached class instance and connect to memcached pool

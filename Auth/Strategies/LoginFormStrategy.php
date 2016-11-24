@@ -54,13 +54,15 @@ class LoginFormStrategy extends AbstractAuthStrategy
 			AND "group" & ' . UsrGroup::DELETED . ' = 0 ';
 		$filter->setWhere($where);
 
-		if (!$this->findUser($filter))
+		if (!$this->findUser($filter)) {
 			return false;
+		}
 
 		$this->delCookie();
 
 		if (!Password::check($this->getUser(), $this->getPassword())) {
 			$this->errors |= self::ERR_WRONG_PASSWORD;
+
 			return false;
 		}
 

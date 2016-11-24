@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<ruleset name="Veles">
+	<description>PHP CodeSniffer standard for Veles framework</description>
+
+	<!--
+		Include all PSR2 rules with some exceptions
+	-->
+	<rule ref="PSR2">
+		<exclude name="Generic.WhiteSpace.DisallowTabIndent"/>
+		<exclude name="Squiz.WhiteSpace.SuperfluousWhitespace"/>
+		<exclude name="PSR2.Methods.FunctionCallSignature"/>
+	</rule>
+
+	<!--
+		There MUST NOT be trailing whitespace at the end of non-blank lines.
+	-->
+	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace">
+		<properties>
+			<property name="ignoreBlankLines" value="false"/>
+		</properties>
+	</rule>
+	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.StartFile"/>
+	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.EndFile"/>
+	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.EmptyLines"/>
+
+	<rule ref="Squiz.Commenting.LongConditionClosingComment">
+		<properties>
+			<property name="lineLimit" value="40"/>
+		</properties>
+	</rule>
+
+	<!--
+		Code MUST use tabs as indent, and MUST NOT use spaces for indenting.
+	-->
+	<rule ref="Generic.WhiteSpace.ScopeIndent">
+		<properties>
+			<property name="ignoreIndentationTokens" type="array"
+					  value="T_COMMENT,T_DOC_COMMENT_OPEN_TAG"/>
+		</properties>
+	</rule>
+	<rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>
+
+	<!-- Warn about all founded TODOs. -->
+	<rule ref="Generic.Commenting.Todo.CommentFound">
+		<message>Please review this TODO comment: %s</message>
+	</rule>
+
+	<!-- There MUST NOT be unnecessary string contacts. -->
+	<rule ref="Generic.Strings.UnnecessaryStringConcat">
+		<properties>
+			<property name="allowMultiline" value="true"/>
+		</properties>
+	</rule>
+
+	<!-- TODO comment out all this rules -->
+	<rule ref="Squiz.Commenting.DocCommentAlignment"/>
+	<rule ref="Squiz.Commenting.EmptyCatchComment"/>
+	<rule ref="Squiz.Commenting.LongConditionClosingComment"/>
+
+	<rule ref="PEAR.Functions.FunctionCallSignature"/>
+</ruleset>
