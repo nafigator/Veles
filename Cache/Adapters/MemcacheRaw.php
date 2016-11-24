@@ -48,8 +48,8 @@ class MemcacheRaw
 				self::$host, self::$port, $errno, $errstr
 			);
 		} catch (Exception $e) {
-			throw new Exception('Can not connect to Memcache. Host: '
-				. self::$host . ' Port: ' . self::$port
+			throw new Exception(
+				'Can not connect to Memcache. Host: ' . self::$host . ' Port: ' . self::$port
 			);
 		}
 	}
@@ -176,8 +176,9 @@ class MemcacheRaw
 	protected function delete($match, $tpl)
 	{
 		foreach ($match as $key) {
-			if (false === strpos($key, $tpl))
+			if (false === strpos($key, $tpl)) {
 				continue;
+			}
 
 			$this->command("delete $key");
 		}

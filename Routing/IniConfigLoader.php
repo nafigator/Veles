@@ -35,10 +35,10 @@ class IniConfigLoader extends AbstractConfigLoader
 	}
 
 	/**
-     * Build array parameters
-     *
-     * @param array &$config
-     */
+	 * Build array parameters
+	 *
+	 * @param array &$config
+	 */
 	private function buildTree(array &$config)
 	{
 		foreach ($config as $name => $value) {

@@ -23,7 +23,9 @@ class FatalErrorHandler extends BaseErrorHandler
 {
 	public function run()
 	{
-		if (null === ($this->vars = error_get_last())) return;
+		if (null === ($this->vars = error_get_last())) {
+			return;
+		}
 
 		$this->vars['time']    = $this->getTime();
 		$this->vars['stack']   = [];

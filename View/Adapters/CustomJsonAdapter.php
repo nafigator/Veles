@@ -31,7 +31,9 @@ class CustomJsonAdapter extends ViewAdapterAbstract
 	 */
 	public function show($path)
 	{
-		if (empty($this->variables)) return;
+		if (empty($this->variables)) {
+			return;
+		}
 
 		header('Content-Type: application/json');
 

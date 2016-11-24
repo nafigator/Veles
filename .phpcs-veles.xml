@@ -8,6 +8,7 @@
 	<rule ref="PSR2">
 		<exclude name="Generic.WhiteSpace.DisallowTabIndent"/>
 		<exclude name="Squiz.WhiteSpace.SuperfluousWhitespace"/>
+		<exclude name="PSR2.Methods.FunctionCallSignature"/>
 	</rule>
 
 	<!--
@@ -21,6 +22,12 @@
 	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.StartFile"/>
 	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.EndFile"/>
 	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.EmptyLines"/>
+
+	<rule ref="Squiz.Commenting.LongConditionClosingComment">
+		<properties>
+			<property name="lineLimit" value="40"/>
+		</properties>
+	</rule>
 
 	<!--
 		Code MUST use tabs as indent, and MUST NOT use spaces for indenting.
@@ -45,7 +52,10 @@
 		</properties>
 	</rule>
 
+	<!-- TODO comment out all this rules -->
 	<rule ref="Squiz.Commenting.DocCommentAlignment"/>
 	<rule ref="Squiz.Commenting.EmptyCatchComment"/>
 	<rule ref="Squiz.Commenting.LongConditionClosingComment"/>
+
+	<rule ref="PEAR.Functions.FunctionCallSignature"/>
 </ruleset>

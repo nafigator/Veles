@@ -41,8 +41,9 @@ class AutoLoader
 	public static function load($class)
 	{
 		$file = preg_replace('/\\\|_(?!.+\\\)/', DIRECTORY_SEPARATOR, $class) . '.php';
-		if (false !== ($full_path = stream_resolve_include_path($file)))
+		if (false !== ($full_path = stream_resolve_include_path($file))) {
 			/** @noinspection PhpIncludeInspection */
 			require $full_path;
+		}
 	}
 }

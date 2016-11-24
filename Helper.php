@@ -25,7 +25,7 @@ class Helper
 	/**
 	 * Generate random symbol sequence given length
 	 *
-	 * By default setting is for blowfish salt generate
+	 * By default setting is for Blowfish salt generate
 	 *
 	 * @param int    $length  String length
 	 * @param string $letters Group of symbols
@@ -33,7 +33,7 @@ class Helper
 	 * @return string
 	 */
 	public static function genStr(
-		$length  = 22,
+		$length = 22,
 		$letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./'
 	) {
 		return substr(str_shuffle(str_repeat($letters, 5)), 0, $length);
@@ -48,7 +48,8 @@ class Helper
 	public static function validateEmail($email)
 	{
 		return (bool) preg_match(
-			'/^(?:[a-zA-Z0-9]|_|\-|\.)+@(?:(?:[a-z0-9_]|\-)+\.)+[a-z]{2,6}$/', $email
+			'/^(?:[a-zA-Z0-9]|_|\-|\.)+@(?:(?:[a-z0-9_]|\-)+\.)+[a-z]{2,6}$/',
+			$email
 		);
 	}
 
