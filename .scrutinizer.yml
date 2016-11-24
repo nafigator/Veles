@@ -24,7 +24,8 @@ build:
       - git checkout $SCRUTINIZER_BRANCH
       - git submodule add -f --name tests https://github.com/nafigator/Veles-unit-tests.git Tests
       - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit.phar
-      - chmod 755 phpunit.phar
+      - wget -q -O phpcs.phar https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
+      - chmod 755 phpunit.phar phpcs.phar
 
   tests:
     override:
@@ -34,7 +35,8 @@ build:
           file: coverage-report
           format: php-clover
 
-      - phpcs-run --standard=.phpcs-veles.xml
+      -
+        command: ./phpcs.phar --standard=.phpcs-veles.xml
 
 checks:
   php: true
