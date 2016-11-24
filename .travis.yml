@@ -52,7 +52,7 @@ before_script:
 
 script:
   - phpunit -c Tests/travisci-phpunit.xml --stderr $PHPUNIT_FLAGS
-  - ./phpcs.phar --standard=phpcs.xml --ignore=Tests/ -w --colors
+  - ./phpcs.phar --standard=phpcs.xml --ignore=Tests/ -w --colors .
 
 after_script:
   - |
