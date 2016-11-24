@@ -10,4 +10,4 @@ finder:
     - "*.php"
 
   not-name:
-    - "View/Adapters/SmartyAdapter.php"
+    - "*SmartyAdapter.php"
