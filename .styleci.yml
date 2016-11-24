@@ -4,7 +4,10 @@ risky: false
 
 finder:
   exclude:
-    - "View/Adapters"
+    - "View/Adapters/SmartyAdapter.php"
 
   name:
     - "*.php"
+
+  disabled:
+    - no_tab_indentation
