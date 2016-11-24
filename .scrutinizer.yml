@@ -37,7 +37,7 @@ build:
           file: coverage-report
           format: php-clover
 
-      - ./phpcs.phar --standard=phpcs.xml --ignore=Tests -w --colors .
+      - ./phpcs.phar --encoding=utf-8 --standard=phpcs.xml --ignore=Tests -w --colors .
 
 checks:
   php: true
