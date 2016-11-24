@@ -19,7 +19,6 @@ services:
 before_install:
   - composer self-update
   - composer install --no-interaction
-  - wget -q -O phpcs.phar https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
 
 before_script:
   - git submodule add -f --name tests https://github.com/nafigator/Veles-unit-tests.git Tests
@@ -45,8 +44,8 @@ before_script:
 
 script:
   - phpunit -c Tests/travisci-phpunit.xml --stderr $PHPUNIT_FLAGS
-  - ls -al
-  - php phpcs.phar --standard=phpcs.xml --ignore=Tests/ -w --colors
+  - which phpcs
+  - phpcs --standard=phpcs.xml --ignore=Tests/ -w --colors
 
 after_script:
   - |
