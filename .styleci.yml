@@ -2,12 +2,12 @@ preset: recommended
 
 risky: false
 
+disabled:
+  - no_tab_indentation
+
 finder:
   exclude:
     - "View/Adapters/SmartyAdapter.php"
 
   name:
     - "*.php"
-
-  disabled:
-    - no_tab_indentation
