@@ -3,5 +3,8 @@ preset: recommended
 risky: false
 
 finder:
+  exclude:
+    - "View/Adapters"
+
   name:
     - "*.php"
