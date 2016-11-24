@@ -24,8 +24,7 @@ build:
       - git checkout $SCRUTINIZER_BRANCH
       - git submodule add -f --name tests https://github.com/nafigator/Veles-unit-tests.git Tests
       - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit.phar
-      - wget -q -O phpcs.phar https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
-      - chmod 755 phpunit.phar phpcs.phar
+      - chmod 755 phpunit.phar
 
   tests:
     override:
@@ -35,7 +34,7 @@ build:
           file: coverage-report
           format: php-clover
 
-    - ./phpcs.phar --standard=.phpcs-veles.xml --ignore=Tests/ -w --colors
+
 
 checks:
   php: true
@@ -43,3 +42,6 @@ checks:
 filter:
   excluded_paths:
     - Tests/*
+
+tools:
+  php_code_sniffer: true
