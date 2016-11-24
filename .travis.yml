@@ -46,7 +46,7 @@ before_script:
 
 script:
   - phpunit -c Tests/travisci-phpunit.xml --stderr $PHPUNIT_FLAGS
-  - ./phpcs.phar --standard=.phpcs-veles.xml
+  - ./phpcs.phar --standard=.phpcs-veles.xml --ignore=Tests/ -w --colors
 
 after_script:
   - |

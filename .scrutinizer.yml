@@ -35,8 +35,7 @@ build:
           file: coverage-report
           format: php-clover
 
-      -
-        command: ./phpcs.phar --standard=.phpcs-veles.xml
+    - ./phpcs.phar --standard=.phpcs-veles.xml --ignore=Tests/ -w --colors
 
 checks:
   php: true
