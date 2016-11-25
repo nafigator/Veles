@@ -52,7 +52,7 @@ before_script:
 
 script:
   - phpunit --stderr $PHPUNIT_FLAGS
-  - ./phpcs.phar --encoding=utf-8 --standard=phpcs.xml --ignore=Tests,vendor -w --colors .
+  - ./phpcs.phar --encoding=utf-8 --standard=phpcs.xml --ignore=Tests,vendor -w --colors ./
 
 after_script:
   - |
