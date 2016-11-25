@@ -42,11 +42,11 @@ before_script:
         ;;
       nightly)
         PHPUNIT_FLAGS="--exclude-group=memcache --bootstrap=Tests/travisci-nightly-bootstrap.php"
-        echo 'short_open_tag = On' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+        phpenv config-add Tests/travisci-nightly.ini
         ;;
       hhvm)
-        PHPUNIT_FLAGS=""
-        cat Tests/travisci.ini >> /etc/hhvm/php.ini
+        PHPUNIT_FLAGS="--exclude-group=memcache --bootstrap=Tests/travisci-nightly-bootstrap.php"
+        cat Tests/travisci-nightly.ini >> /etc/hhvm/php.ini
         ;;
     esac
 
