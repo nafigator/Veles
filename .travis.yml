@@ -41,18 +41,18 @@ before_script:
         phpenv config-add Tests/travisci-7.0.1.ini
         ;;
       nightly)
-        PHPUNIT_FLAGS="--exclude-group=memcache --bootstrap=Tests/travisci-nightly-bootstrap.php"
+        PHPUNIT_FLAGS="--bootstrap=Tests/travisci-nightly-bootstrap.php --exclude-group=memcache"
         phpenv config-add Tests/travisci-nightly.ini
         ;;
       hhvm)
-        PHPUNIT_FLAGS="--exclude-group=memcache --bootstrap=Tests/travisci-nightly-bootstrap.php"
+        PHPUNIT_FLAGS="--bootstrap=Tests/travisci-nightly-bootstrap.php --exclude-group=memcache"
         cat Tests/travisci-nightly.ini >> /etc/hhvm/php.ini
         ;;
     esac
 
 script:
   - phpunit --stderr $PHPUNIT_FLAGS
-  - ./phpcs.phar --encoding=utf-8 --standard=phpcs.xml --ignore=Tests,vendor -w --colors ./
+  - ./phpcs.phar --encoding=utf-8 --standard=phpcs.xml --ignore=Tests,vendor -w --colors .
 
 after_script:
   - |
