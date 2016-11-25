@@ -54,7 +54,7 @@ script:
   - |
     if [[ $TRAVIS_PHP_VERSION = "5.6" ]]; then
       phpunit -c Tests/travisci-phpunit-5.6.xml --stderr $PHPUNIT_FLAGS
-    elif [[ $TRAVIS_PHP_VERSION = "7.0.1" ]]
+    elif [[ $TRAVIS_PHP_VERSION = "7.0.1" ]]; then
       phpunit -c Tests/travisci-phpunit-7.0.1.xml --stderr $PHPUNIT_FLAGS
     fi
   - ./phpcs.phar --encoding=utf-8 --standard=phpcs.xml --ignore=Tests,vendor -w --colors .
