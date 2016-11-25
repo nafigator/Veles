@@ -51,7 +51,12 @@ before_script:
     esac
 
 script:
-  - phpunit -c Tests/travisci-phpunit.xml --stderr $PHPUNIT_FLAGS
+  - |
+    if [[ $TRAVIS_PHP_VERSION = "5.6" ]]; then
+      phpunit -c Tests/travisci-phpunit-5.6.xml --stderr $PHPUNIT_FLAGS
+    elif [[ $TRAVIS_PHP_VERSION = "7.0.1" ]]
+      phpunit -c Tests/travisci-phpunit-7.0.1.xml --stderr $PHPUNIT_FLAGS
+    fi
   - ./phpcs.phar --encoding=utf-8 --standard=phpcs.xml --ignore=Tests,vendor -w --colors .
 
 after_script:
