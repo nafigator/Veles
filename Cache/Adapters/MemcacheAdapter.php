@@ -21,6 +21,8 @@ use Memcache;
 /**
  * Class MemcacheAdapter
  *
+ * @deprecated
+ *
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class MemcacheAdapter extends CacheAdapterAbstract implements CacheAdapterInterface
