@@ -33,15 +33,15 @@ before_script:
   - |
     case $TRAVIS_PHP_VERSION in
       5.6)
-        PHPUNIT_FLAGS="--coverage-clover build/logs/clover.xml"
+        PHPUNIT_FLAGS="-c Tests/travisci-phpunit-5.6.xml --coverage-clover build/logs/clover.xml"
         phpenv config-add Tests/travisci-5.6.ini
         ;;
       7.0.1)
-        PHPUNIT_FLAGS="--exclude-group=memcache"
+        PHPUNIT_FLAGS="-c Tests/travisci-phpunit-7.0.1.xml --exclude-group=memcache"
         phpenv config-add Tests/travisci-7.0.1.ini
         ;;
       nightly)
-        PHPUNIT_FLAGS="--exclude-group=cache,memcacheraw,memcached --bootstrap=Tests/travisci-nightly-bootstrap.php"
+        PHPUNIT_FLAGS="--exclude-group=memcache --bootstrap=Tests/travisci-nightly-bootstrap.php"
         echo 'short_open_tag = On' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
         ;;
       hhvm)
@@ -51,12 +51,7 @@ before_script:
     esac
 
 script:
-  - |
-    if [[ $TRAVIS_PHP_VERSION = "5.6" ]]; then
-      phpunit -c Tests/travisci-phpunit-5.6.xml --stderr $PHPUNIT_FLAGS
-    elif [[ $TRAVIS_PHP_VERSION = "7.0.1" ]]; then
-      phpunit -c Tests/travisci-phpunit-7.0.1.xml --stderr $PHPUNIT_FLAGS
-    fi
+  - phpunit --stderr $PHPUNIT_FLAGS
   - ./phpcs.phar --encoding=utf-8 --standard=phpcs.xml --ignore=Tests,vendor -w --colors .
 
 after_script:
