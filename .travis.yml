@@ -36,7 +36,7 @@ before_script:
         PHPUNIT_FLAGS="--coverage-clover build/logs/clover.xml"
         phpenv config-add Tests/travisci.ini
         ;;
-      7.0)
+      7.0.1)
         PHPUNIT_FLAGS="--exclude-group=cache,memcache,memcacheraw,memcached --bootstrap=Tests/travisci-nightly-bootstrap.php"
         echo 'short_open_tag = On' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
         ;;
