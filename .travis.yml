@@ -34,11 +34,10 @@ before_script:
     case $TRAVIS_PHP_VERSION in
       5.6)
         PHPUNIT_FLAGS="--coverage-clover build/logs/clover.xml"
-        phpenv config-add Tests/travisci.ini
+        phpenv config-add Tests/travisci-5.6.ini
         ;;
       7.0.1)
-        PHPUNIT_FLAGS="--exclude-group=cache,memcacheraw,memcached --bootstrap=Tests/travisci-bootstrap.php"
-        echo 'short_open_tag = On' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+        phpenv config-add Tests/travisci-7.0.1.ini
         ;;
       nightly)
         PHPUNIT_FLAGS="--exclude-group=cache,memcacheraw,memcached --bootstrap=Tests/travisci-nightly-bootstrap.php"
