@@ -41,11 +41,11 @@ before_script:
         phpenv config-add Tests/travisci-7.0.1.ini
         ;;
       nightly)
-        PHPUNIT_FLAGS="--bootstrap=Tests/travisci-nightly-bootstrap.php --exclude-group=memcache"
+        PHPUNIT_FLAGS="-c Tests/travisci-phpunit-nightly.xml --exclude-group=memcache"
         phpenv config-add Tests/travisci-nightly.ini
         ;;
       hhvm)
-        PHPUNIT_FLAGS="--bootstrap=Tests/travisci-nightly-bootstrap.php --exclude-group=memcache"
+        PHPUNIT_FLAGS="-c Tests/travisci-phpunit-nightly.xml --exclude-group=memcache"
         cat Tests/travisci-nightly.ini >> /etc/hhvm/php.ini
         ;;
     esac
