@@ -17,6 +17,7 @@ namespace Veles\Routing;
 
 /**
  * Class IniConfigLoader
+ *
  * @author  Yancharuk Alexander <alex at itvault dot info>
  */
 class IniConfigLoader extends AbstractConfigLoader
@@ -28,10 +29,16 @@ class IniConfigLoader extends AbstractConfigLoader
 	 */
 	public function load()
 	{
+		$result = [];
 		$data = parse_ini_file($this->getPath(), true);
-		$this->buildTree($data);
 
-		return $data;
+		foreach ($data as $name => $section) {
+			$this->buildTree($section);
+
+			$result[$name] = $section;
+		}
+
+		return $result;
 	}
 
 	/**
@@ -49,9 +56,10 @@ class IniConfigLoader extends AbstractConfigLoader
 			}
 
 			$ptr =& $config;
+			$last = end($params);
 
 			foreach ($params as $param) {
-				if ($param === end($params)) {
+				if ($param === $last) {
 					$ptr[$param] = $value;
 				} else {
 					$ptr =& $ptr[$param];
