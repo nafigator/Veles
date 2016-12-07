@@ -53,8 +53,9 @@
 		</properties>
 	</rule>
 
-	<!-- TODO comment out all this rules -->
+	<!-- Align doc-comments -->
 	<rule ref="Squiz.Commenting.DocCommentAlignment"/>
+	<!-- TODO comment out all this rules -->
 	<rule ref="Squiz.Commenting.EmptyCatchComment"/>
 	<rule ref="Squiz.Commenting.LongConditionClosingComment"/>
 
