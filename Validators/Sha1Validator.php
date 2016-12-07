@@ -4,7 +4,7 @@
  *
  * PHP version 5.6+
  *
- * @author    Yancharuk Alexander <ya@zerotech.ru>
+ * @author    Yancharuk Alexander <alex at itvault dot info>
  * @copyright © 2012-2016 Alexander Yancharuk
  * @date      2015-10-08 19:38
  * @license   The BSD 3-Clause License
@@ -16,7 +16,7 @@ namespace Veles\Validators;
 /**
  * Class   Sha1Validator
  *
- * @author Yancharuk Alexander <ya@zerotech.ru>
+ * @author Yancharuk Alexander <alex at itvault dot info>
  */
 class Sha1Validator
 {
