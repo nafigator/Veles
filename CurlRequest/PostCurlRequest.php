@@ -34,7 +34,7 @@ class PostCurlRequest extends CurlRequest
 	 *
 	 * @param string|array $data
 	 *
-	 * @return bool
+	 * @return $this
 	 */
 	public function setData($data)
 	{
