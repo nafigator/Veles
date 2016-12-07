@@ -70,6 +70,7 @@ class Route extends RouteBase
 	 * Safe way to get uri
 	 *
 	 * @return array
+	 * @codeCoverageIgnore
 	 */
 	protected function parseUri()
 	{

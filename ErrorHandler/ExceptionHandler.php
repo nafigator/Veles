@@ -23,13 +23,15 @@ class ExceptionHandler extends BaseErrorHandler
 {
 	public function run(\Exception $exception)
 	{
-		$this->vars['time']    = $this->getTime();
-		$this->vars['message'] = $exception->getMessage();
-		$this->vars['file']    = $exception->getFile();
-		$this->vars['line']    = $exception->getLine();
-		$this->vars['stack']   = array_reverse($exception->getTrace());
-		$this->vars['type']    = $exception->getCode();
-		$this->vars['defined'] = ['exception' => $exception];
+		$this->vars = [
+			'time'    => $this->getTime(),
+			'message' => $exception->getMessage(),
+			'file'    => $exception->getFile(),
+			'line'    => $exception->getLine(),
+			'stack'   => array_reverse($exception->getTrace()),
+			'type'    => $exception->getCode(),
+			'defined' => ['exception' => $exception]
+		];
 
 		$this->notify();
 	}
