@@ -18,7 +18,7 @@ namespace Veles\Tools;
 /**
  * Class   ModelParams
  *
- * @author Yancharuk Alexander <ya@zerotech.ru>
+ * @author Yancharuk Alexander <alex at itvault dot info>
  */
 class ModelParams
 {
