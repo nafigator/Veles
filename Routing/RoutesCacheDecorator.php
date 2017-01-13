@@ -74,6 +74,6 @@ class RoutesCacheDecorator extends AbstractRoutesConfig
 	 */
 	public function getSection($name)
 	{
-		$this->config->getSection($name);
+		return $this->config->getSection($name);
 	}
 }
