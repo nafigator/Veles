@@ -78,7 +78,10 @@ class Route extends RouteBase
 			filter_input(INPUT_SERVER, 'REQUEST_URI'), PHP_URL_PATH
 		);
 
-		return [$uri, explode('/', $uri)[1]];
+		$parts   = explode('/', $uri);
+		$section = isset($parts[2]) ? $parts[1] : '';
+
+		return [$uri, $section];
 	}
 
 	/**
