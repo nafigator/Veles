@@ -74,6 +74,12 @@ class RoutesCacheDecorator extends AbstractRoutesConfig
 	 */
 	public function getSection($name)
 	{
+		if (false !== ($data = Cache::get($this->getPrefix()))) {
+			return isset($data[$name]) ? $data[$name] : [];
+		}
+
+		Cache::set($this->getPrefix(), $this->config->getData());
+
 		return $this->config->getSection($name);
 	}
 }
