@@ -22,7 +22,7 @@ trait ApplicationTrait
 	/**
 	 * Get application object
 	 *
-	 * @return mixed
+	 * @return $this
 	 */
 	public function getApplication()
 	{
