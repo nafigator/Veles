@@ -15,7 +15,6 @@
 
 namespace Veles\Request\Validator;
 
-
 /**
  * Interface ValidatorAdapterInterface
  *
