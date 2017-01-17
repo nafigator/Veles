@@ -15,8 +15,6 @@
 
 namespace Veles\Request\Validator\Adapters;
 
-use JsonSchema\RefResolver;
-use JsonSchema\Validator;
 use Veles\Request\Validator\ValidatorInterface;
 use Veles\Traits\Driver;
 
@@ -28,6 +26,7 @@ use Veles\Traits\Driver;
 class JsonSchemaAdapter implements ValidatorInterface
 {
 	use Driver;
+
 	protected $resolver;
 
 	public function __construct($driver, $resolver)
