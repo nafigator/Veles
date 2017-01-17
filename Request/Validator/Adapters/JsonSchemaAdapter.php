@@ -28,10 +28,12 @@ use Veles\Traits\Driver;
 class JsonSchemaAdapter implements ValidatorInterface
 {
 	use Driver;
+	protected $resolver;
 
-	public function __construct()
+	public function __construct($driver, $resolver)
 	{
-		$this->driver = new Validator;
+		$this->driver   = $driver;
+		$this->resolver = $resolver;
 	}
 
 	/**
@@ -46,7 +48,7 @@ class JsonSchemaAdapter implements ValidatorInterface
 		$field = $message = '';
 		extract($error, EXTR_IF_EXISTS);
 
-		$this->getDriver()->addError($field, $message);
+		$this->driver->addError($field, $message);
 	}
 
 	/**
@@ -56,7 +58,7 @@ class JsonSchemaAdapter implements ValidatorInterface
 	 */
 	public function getErrors()
 	{
-		return $this->getDriver()->getErrors();
+		return $this->driver->getErrors();
 	}
 
 	/**
@@ -67,10 +69,9 @@ class JsonSchemaAdapter implements ValidatorInterface
 	 */
 	public function check($data, $definitions)
 	{
-		$resolver = new RefResolver();
-		$resolver->resolve($definitions);
+		$this->resolver->resolve($definitions);
 
-		$this->getDriver()->check($data, $definitions);
+		$this->driver->check($data, $definitions);
 	}
 
 	/**
@@ -80,6 +81,6 @@ class JsonSchemaAdapter implements ValidatorInterface
 	 */
 	public function isValid()
 	{
-		return $this->getDriver()->isValid();
+		return $this->driver->isValid();
 	}
 }
