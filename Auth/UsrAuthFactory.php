@@ -30,14 +30,14 @@ class UsrAuthFactory
 {
 	protected $cookie_definitions = [
 		'id' => [
-			'filter' => FILTER_VALIDATE_INT,
+			'filter'  => FILTER_VALIDATE_INT,
 			'options' => [
 				'min_range' => 1,
 				'max_range' => PHP_INT_MAX
 			]
 		],
 		'pw' => [
-			'filter' => FILTER_VALIDATE_REGEXP,
+			'filter'  => FILTER_VALIDATE_REGEXP,
 			'options' => [
 				'regexp' => '/^.{31}$/'
 			]
@@ -48,7 +48,7 @@ class UsrAuthFactory
 			'filter' => FILTER_VALIDATE_EMAIL,
 		],
 		'pw' => [
-			'filter' => FILTER_VALIDATE_REGEXP,
+			'filter'  => FILTER_VALIDATE_REGEXP,
 			'options' => [
 				'regexp' => '/^[a-z0-9_-]{1,20}$/i'
 			]
