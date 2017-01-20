@@ -24,6 +24,11 @@ namespace Veles\Exceptions\Http;
  */
 class UnprocessableException extends HttpResponseException
 {
+	/** @var string  */
+	protected $http_msg = 'HTTP/1.1 422 Bad Request';
+	/** @var int  */
+	protected $http_code = 422;
+
 	/**
 	 * Throw BadRequestException with HTTP 422 code
 	 *
@@ -32,9 +37,9 @@ class UnprocessableException extends HttpResponseException
 	public function __construct(array $errors = [])
 	{
 		parent::__construct();
-		header('HTTP/1.1 422 Bad Request', true, 422);
+		header($this->http_msg, true, $this->http_code);
 
-		if (!$errors) {
+		if ([] === $errors) {
 			return;
 		}
 
@@ -49,10 +54,10 @@ class UnprocessableException extends HttpResponseException
 	public function showErrors(array $errors)
 	{
 		header('Content-Type: application/json', true);
-		$output['errors'] = $errors;
 
 		echo json_encode(
-			$output, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+			['errors' => $errors],
+			JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
 		);
 	}
 }

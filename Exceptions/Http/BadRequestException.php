@@ -24,6 +24,10 @@ namespace Veles\Exceptions\Http;
  */
 class BadRequestException extends UnprocessableException
 {
+	/** @var string  */
+	protected $http_msg = 'HTTP/1.1 400 Bad Request';
+	/** @var int  */
+	protected $http_code = 400;
 	/**
 	 * Throw BadRequestException with HTTP 400 code
 	 *
@@ -32,9 +36,9 @@ class BadRequestException extends UnprocessableException
 	public function __construct(array $errors = [])
 	{
 		parent::__construct();
-		header('HTTP/1.1 400 Bad Request', true, 400);
+		header($this->http_msg, true, $this->http_code);
 
-		if (!$errors) {
+		if ([] === $errors) {
 			return;
 		}
 
