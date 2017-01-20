@@ -65,7 +65,6 @@ class UsrAuthFactory
 	{
 		$post    = $this->getPost();
 		$cookies = $this->getCookies();
-		$auth    = null;
 
 		switch (true) {
 			case (isset($post['ln'], $post['pw'])):
