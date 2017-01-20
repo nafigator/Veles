@@ -28,20 +28,4 @@ class BadRequestException extends UnprocessableException
 	protected $http_msg = 'HTTP/1.1 400 Bad Request';
 	/** @var int  */
 	protected $http_code = 400;
-	/**
-	 * Throw BadRequestException with HTTP 400 code
-	 *
-	 * @param array $errors
-	 */
-	public function __construct(array $errors = [])
-	{
-		parent::__construct();
-		header($this->http_msg, true, $this->http_code);
-
-		if ([] === $errors) {
-			return;
-		}
-
-		$this->showErrors($errors);
-	}
 }

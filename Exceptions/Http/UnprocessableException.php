@@ -30,7 +30,7 @@ class UnprocessableException extends HttpResponseException
 	protected $http_code = 422;
 
 	/**
-	 * Throw BadRequestException with HTTP 422 code
+	 * Throw BadRequestException with proper HTTP code
 	 *
 	 * @param array $errors
 	 */
