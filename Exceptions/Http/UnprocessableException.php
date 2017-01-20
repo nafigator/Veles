@@ -34,7 +34,7 @@ class UnprocessableException extends HttpResponseException
 		parent::__construct();
 		header('HTTP/1.1 422 Bad Request', true, 422);
 
-		if (!$errors) {
+		if ([] === $errors) {
 			return;
 		}
 
