@@ -152,9 +152,22 @@ class ActiveRecord extends StdClass
 	 * @param array|bool $ids Array of ID for delete
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
 	public function delete($ids = false)
 	{
+		if (!$ids) {
+			if (!isset($this->id)) {
+				throw new \Exception('Not found model id!');
+			}
+
+			$ids = $this->id;
+		}
+
+		if (!is_array($ids)) {
+			$ids = [$ids];
+		}
+
 		$sql = $this->builder->delete($this, $ids);
 
 		return Db::query($sql);

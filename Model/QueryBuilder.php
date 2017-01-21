@@ -170,25 +170,13 @@ class QueryBuilder implements QueryBuilderInterface
 	 * Построение sql-запроса для delete
 	 *
 	 * @param ActiveRecord $model Экземпляр модели
-	 * @param mixed        $ids   Массив ID для удаления
+	 * @param array        $ids   Массив ID для удаления
 	 *
 	 * @throws Exception
 	 * @return string $sql
 	 */
-	public function delete(ActiveRecord $model, $ids)
+	public function delete(ActiveRecord $model, array $ids)
 	{
-		if (!$ids) {
-			if (!isset($model->id)) {
-				throw new Exception('Not found model id!');
-			}
-
-			$ids = $model->id;
-		}
-
-		if (!is_array($ids)) {
-			$ids = [$ids];
-		}
-
 		foreach ($ids as &$value) {
 			$value = (int) $value;
 		};
