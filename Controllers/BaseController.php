@@ -50,4 +50,16 @@ class BaseController
 
 		return $params[$name];
 	}
+
+	/**
+	 * Getting request data
+	 *
+	 * @param $definitions
+	 *
+	 * @return array
+	 */
+	protected function getData($definitions)
+	{
+		return $this->getApplication()->getRequest()->getData($definitions);
+	}
 }
