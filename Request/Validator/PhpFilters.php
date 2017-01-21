@@ -21,8 +21,8 @@ class PhpFilters implements ValidatorInterface
 {
 	/** @var  array */
 	protected $errors = [];
-	/** @var  array */
-	protected $result = [];
+	/** @var  mixed */
+	protected $result;
 	/** @var  array */
 	protected $definitions = [];
 
@@ -55,9 +55,9 @@ class PhpFilters implements ValidatorInterface
 	public function check($data, $definitions)
 	{
 		$this->definitions = $definitions;
-		$this->result      = filter_var_array($data, $definitions);
-
-		$this->processResult();
+		if (false !== ($this->result = filter_var_array($data, $definitions))) {
+			$this->processResult();
+		}
 	}
 
 	/**
