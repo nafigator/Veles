@@ -17,6 +17,9 @@ namespace Veles\Routing;
 
 use Exception;
 use Veles\Application\Application;
+use Veles\Request\HttpRequestAbstract;
+use Veles\Request\Validator\Validator;
+use Veles\Request\Validator\ValidatorInterface;
 
 /**
  * Class Route
@@ -31,6 +34,10 @@ class Route extends RouteBase
 	protected $config;
 	protected $template;
 	protected $params = [];
+	/** @var  ValidatorInterface */
+	protected $validator;
+	/** @var  HttpRequestAbstract */
+	protected $request;
 
 	/**
 	 * Config parser and controller vars initialisation
@@ -54,8 +61,6 @@ class Route extends RouteBase
 			if (isset($route['tpl'])) {
 				$this->template = $route['tpl'];
 			}
-
-			$this->checkAjax();
 
 			if ('Veles\Routing\RouteRegex' === $route['class']) {
 				/** @noinspection PhpUndefinedMethodInspection */
@@ -98,25 +103,6 @@ class Route extends RouteBase
 		return $this;
 	}
 
-
-	/**
-	 * Check for request is ajax
-	 */
-	protected function checkAjax()
-	{
-		if (!$this->isAjax()) {
-			return;
-		}
-
-		$ajax_header = (filter_input(INPUT_SERVER, 'HTTP_X_REQUESTED_WITH'));
-
-		if ('XMLHttpRequest' === $ajax_header) {
-			return;
-		}
-
-		throw new Exception('AJAX-route got non-AJAX request!');
-	}
-
 	/**
 	 * Getting ajax-flag
 	 *
@@ -140,6 +126,13 @@ class Route extends RouteBase
 	{
 		if (!isset($this->config['controller'])) {
 			throw new Exception('Controller name not set!');
+		}
+
+		if (isset($this->config['validator'])) {
+			$validator = (new Validator)->setAdapter(new $this->config['validator']);
+			$request   = (new $this->config['request'])->setValidator($validator);
+
+			$application->setRequest($request);
 		}
 
 		$controller = 'Controllers\\' . $this->config['controller'];

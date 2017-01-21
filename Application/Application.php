@@ -23,6 +23,7 @@ use Veles\View\View;
  */
 class Application
 {
+	use RequestTrait;
 	use RouteTrait;
 	use VersionTrait;
 	use EnvironmentTrait;
