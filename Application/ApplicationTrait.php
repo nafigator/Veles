@@ -15,6 +15,8 @@
 
 namespace Application;
 
+use Veles\Application\Application;
+
 trait ApplicationTrait
 {
 	protected $application;
@@ -22,7 +24,7 @@ trait ApplicationTrait
 	/**
 	 * Get application object
 	 *
-	 * @return $this
+	 * @return Application
 	 */
 	public function getApplication()
 	{
