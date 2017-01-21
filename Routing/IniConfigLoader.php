@@ -61,9 +61,10 @@ class IniConfigLoader extends AbstractConfigLoader
 			foreach ($params as $param) {
 				if ($param === $last) {
 					$ptr[$param] = $value;
-				} else {
-					$ptr =& $ptr[$param];
+					continue;
 				}
+
+				$ptr =& $ptr[$param];
 			}
 
 			unset($config[$name]);
