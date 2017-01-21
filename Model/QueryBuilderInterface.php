@@ -20,53 +20,66 @@ use Veles\DataBase\DbPaginator;
 
 /**
  * Interface QueryBuilderInterface
+ *
  * @author  Yancharuk Alexander <alex at itvault dot info>
  */
 interface QueryBuilderInterface
 {
 	/**
-	 * Построение sql-запроса для insert
+	 * Building sql-request for insert operation
+	 *
 	 * @param ActiveRecord $model Экземпляр модели
+	 *
 	 * @return string
 	 */
 	public function insert(ActiveRecord $model);
 
 	/**
-	 * Построение sql-запроса для update
+	 * Building sql-request for update operation
+	 *
 	 * @param ActiveRecord $model Экземпляр модели
+	 *
 	 * @return string $sql
 	 */
 	public function update(ActiveRecord $model);
 
 	/**
-	 * Построение sql-запроса для select
-	 * @param ActiveRecord $model Экземпляр модели
-	 * @param int $identifier primary key
+	 * Building sql-request for select-operation
+	 *
+	 * @param ActiveRecord $model      Экземпляр модели
+	 * @param int          $identifier primary key
+	 *
 	 * @return string $sql
 	 */
 	public function getById(ActiveRecord $model, $identifier);
 
 	/**
-	 * Построение sql-запроса для delete
+	 * Building sql-request for delete-operation
+	 *
 	 * @param ActiveRecord $model Экземпляр модели
-	 * @param mixed $ids Массив ID для удаления
+	 * @param array        $ids   Массив ID для удаления
+	 *
 	 * @throws \Exception
 	 * @return string $sql
 	 */
-	public function delete(ActiveRecord $model, $ids);
+	public function delete(ActiveRecord $model, array $ids);
 
 	/**
-	 * Построение запроса получения списка объектов
-	 * @param ActiveRecord $model Экземпляр модели
+	 * Build request for array of object result
+	 *
+	 * @param ActiveRecord  $model  Экземпляр модели
 	 * @param bool|DbFilter $filter Экземпляр фильтра
+	 *
 	 * @return string
 	 */
 	public function find(ActiveRecord $model, $filter);
 
 	/**
-	 * Построение произвольного запроса с постраничным выводом
-	 * @param string $sql Запрос
+	 * Build custom request with paginated result
+	 *
+	 * @param string      $sql   Запрос
 	 * @param DbPaginator $pager Экземпляр постраничного вывода
+	 *
 	 * @return string
 	 */
 	public function setPage($sql, DbPaginator $pager);
