@@ -49,8 +49,8 @@ class PhpFilters implements ValidatorInterface
 	/**
 	 * Validate data
 	 *
-	 * @param mixed $data
-	 * @param mixed $definitions
+	 * @param array $data
+	 * @param array $definitions
 	 */
 	public function check($data, $definitions)
 	{
@@ -103,7 +103,8 @@ class PhpFilters implements ValidatorInterface
 					'message' => "$field is not a valid value"
 				]);
 				break;
-			default: break;
+			default:
+				break;
 		}
 	}
 }
