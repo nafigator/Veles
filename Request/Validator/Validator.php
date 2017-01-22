@@ -91,4 +91,12 @@ class Validator implements ValidatorInterface, ValidatorAdapterInterface
 
 		return $this;
 	}
+
+	/**
+	 * Get valid data
+	 */
+	public function getData()
+	{
+		return $this->getAdapter()->getData();
+	}
 }
