@@ -40,6 +40,9 @@ class Password
 	 *
 	 * @param User $user User
 	 * @param string $password Password retrieved through ajax
+	 *
+	 * @deprecated
+	 *
 	 * @return bool
 	 */
 	public static function check(User $user, $password)
