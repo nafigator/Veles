@@ -86,5 +86,7 @@ class JsonSchemaAdapter implements ValidatorInterface
 	/**
 	 * Method not used. Just a stub
 	 */
-	public function getData() {}
+	public function getData()
+	{
+	}
 }
