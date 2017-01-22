@@ -82,4 +82,9 @@ class JsonSchemaAdapter implements ValidatorInterface
 	{
 		return $this->driver->isValid();
 	}
+
+	/**
+	 * Method not used. Just a stub
+	 */
+	public function getData() {}
 }

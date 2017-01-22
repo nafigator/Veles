@@ -50,4 +50,9 @@ interface ValidatorInterface
 	 * @return bool
 	 */
 	public function isValid();
+
+	/**
+	 * Get valid data
+	 */
+	public function getData();
 }

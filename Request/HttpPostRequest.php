@@ -52,6 +52,6 @@ class HttpPostRequest extends HttpRequestAbstract
 			throw new UnprocessableException($validator->getErrors());
 		}
 
-		$this->setData($raw_data);
+		$this->setData($validator->getData());
 	}
 }
