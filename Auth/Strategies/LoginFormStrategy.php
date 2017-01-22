@@ -60,7 +60,7 @@ class LoginFormStrategy extends AbstractAuthStrategy
 
 		$this->delCookie();
 
-		if (!Password::check($this->getUser(), $this->getPassword())) {
+		if (!password_verify($this->password, $this->user->getHash())) {
 			$this->errors |= self::ERR_WRONG_PASSWORD;
 
 			return false;

@@ -26,17 +26,12 @@ class PhpTokenValidator implements ValidatorInterface
 	 */
 	public function check($value)
 	{
-		if (is_string($value)) {
-			return true;
-		}
-
-		if (is_array($value)
-			&& isset($value[0])
-			&& isset($value[1])
-			&& isset($value[2])
+		if (is_string($value)
+			|| (is_array($value) && isset($value[0], $value[1], $value[2]))
 		) {
 			return true;
 		}
+
 
 		return false;
 	}
