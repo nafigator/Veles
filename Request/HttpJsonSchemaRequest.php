@@ -2,7 +2,7 @@
 /**
  * Processing HTTP-request with JSON body
  *
- * @file      HttpJsonRequest.php
+ * @file      HttpJsonSchemaRequest.php
  *
  * PHP version 5.6+
  *
@@ -18,11 +18,11 @@ namespace Veles\Request;
 use Veles\Exceptions\Http\UnprocessableException;
 
 /**
- * Class   HttpJsonRequest
+ * Class   HttpJsonSchemaRequest
  *
  * @author Yancharuk Alexander <alex at itvault at info>
  */
-class HttpJsonRequest extends HttpRequestAbstract
+class HttpJsonSchemaRequest extends HttpRequestAbstract
 {
 	/**
 	 * Getting http-request body
