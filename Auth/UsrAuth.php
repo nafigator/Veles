@@ -57,9 +57,9 @@ class UsrAuth
 	 */
 	public static function hasAccess($groups)
 	{
-		$user_group = self::getUser()->getGroup();
+		$user_group = static::getUser()->getGroup();
 
-		return $groups === ($user_group & $groups);
+		return $user_group === ($user_group & $groups);
 	}
 
 	/**
