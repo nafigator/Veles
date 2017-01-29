@@ -2,14 +2,17 @@
 /**
  * Processing HTTP-request with JSON body
  *
- * This class intended for use with PhpFilters validator
+ * This class intended for use with JSON-Schema validator adapter
  *
- * @file      HttpJsonRequest.php
+ * @file      HttpJsonSchemaRequest.php
  *
  * PHP version 5.6+
  *
  * @author    Yancharuk Alexander <alex at itvault dot info>
- * @date      2017-01-29 21:21
+ * @copyright © 2012-2017 Alexander Yancharuk <alex at itvault at info>
+ * @date      2017-01-18 10:20
+ * @license   The BSD 3-Clause License
+ *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
  */
 
 namespace Veles\Request;
@@ -17,11 +20,11 @@ namespace Veles\Request;
 use Veles\Exceptions\Http\UnprocessableException;
 
 /**
- * Class   HttpJsonRequest
+ * Class   HttpJsonSchemaRequest
  *
  * @author Yancharuk Alexander <alex at itvault at info>
  */
-class HttpJsonRequest extends HttpRequestAbstract
+class HttpJsonSchemaRequest extends HttpRequestAbstract
 {
 	/**
 	 * Getting http-request body
@@ -30,7 +33,7 @@ class HttpJsonRequest extends HttpRequestAbstract
 	 */
 	public function getBody()
 	{
-		return json_decode(file_get_contents($this->stream), true);
+		return json_decode(file_get_contents($this->stream));
 	}
 
 	/**
@@ -43,14 +46,15 @@ class HttpJsonRequest extends HttpRequestAbstract
 	public function check($definitions)
 	{
 		$raw_data  = $this->getBody();
+		$schema    = json_decode($definitions);
 		$validator = $this->getValidator();
 
-		$validator->check($raw_data, $definitions);
+		$validator->check($raw_data, $schema);
 
 		if (!$validator->isValid()) {
 			throw new UnprocessableException($validator->getErrors());
 		}
 
-		$this->setData($raw_data);
+		$this->setData((array) $raw_data);
 	}
 }
