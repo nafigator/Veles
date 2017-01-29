@@ -12,10 +12,9 @@
  * @date      2017-01-29 21:21
  */
 
-namespace Request;
+namespace Veles\Request;
 
 use Veles\Exceptions\Http\UnprocessableException;
-use Veles\Request\HttpRequestAbstract;
 
 /**
  * Class   HttpJsonRequest
