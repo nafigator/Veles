@@ -32,7 +32,7 @@ trait DynamicPropHandler
 	 *
 	 * @return  $this
 	 */
-	public function setProperties(&$properties)
+	public function setProperties(array $properties)
 	{
 		foreach ($properties as $property_name => $value) {
 			$this->$property_name = $value;
@@ -45,9 +45,10 @@ trait DynamicPropHandler
 	 * Method for getting parameters
 	 *
 	 * @param   array Array with needle parameters as keys
+	 *
 	 * @return  array
 	 */
-	public function getProperties(&$properties)
+	public function getProperties(array &$properties)
 	{
 		foreach (array_keys($properties) as $property_name) {
 			if (isset($this->$property_name)) {
