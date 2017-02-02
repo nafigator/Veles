@@ -98,7 +98,7 @@ class PhpFilters implements ValidatorInterface
 	{
 		switch (true) {
 			case $value === null:
-				if (isset($this->definitions[$field]['options']['required'])) {
+				if (isset($this->definitions[$field]['required'])) {
 					$this->addError($this->buildRequiredError($field));
 				}
 				break;
