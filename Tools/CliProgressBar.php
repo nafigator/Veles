@@ -112,7 +112,7 @@ class CliProgressBar
 	 */
 	protected function calcParams($current)
 	{
-		$done = $current / $this->percent;
+		$done = number_format($current / $this->percent, 2);
 
 		if ($done < 100) {
 			$position = floor($this->pb_percent * $done);
