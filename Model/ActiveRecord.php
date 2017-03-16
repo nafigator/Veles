@@ -139,7 +139,7 @@ class ActiveRecord extends StdClass
 	/**
 	 * Save data
 	 *
-	 * @return bool|int
+	 * @return bool
 	 */
 	public function save()
 	{
