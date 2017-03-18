@@ -4,7 +4,7 @@ PHP micro framework
 
 [![GitHub license][License img]][License src] [![GitHub release][Release img]][Release src] [![Size status][Size img]][Release src]
 
-| Scrutinizer stable | Trvis CI | Code Climate |
+| Scrutinizer stable | Trvis CI stable | Code Climate |
 |:----------------:|:----------------:|:--------------------:|
 | [![Scrutinizer master code quality][Scrutinizer master quality image]][Scrutinizer master src] [![Scrutinizer master code coverage][Scrutinizer master coverage image]][Scrutinizer master coverage src] [![Scrutinizer master status][Scrutinizer master status image]][Scrutinizer master status src] | [![Travis Build status][Travis image]][Travis repo] | [![Code Climate][CC Quality status]][CC Quality src] [![CC Coverage Status][CC Coverage image]][CC Coverage repo]  |
 
