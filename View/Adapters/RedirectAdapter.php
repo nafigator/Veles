@@ -54,7 +54,7 @@ class RedirectAdapter extends ViewAdapterAbstract
 	 */
 	public function get($path)
 	{
-		return false;
+		return '';
 	}
 
 	/**
