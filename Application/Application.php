@@ -38,7 +38,10 @@ class Application
 		$action     = $route->getActionName();
 
 		View::setAdapter($route->getAdapter());
-		View::set($controller->$action());
+
+		if ($vars = $controller->$action()) {
+			View::set($vars);
+		}
 
 		View::show($route->getTemplate());
 	}
