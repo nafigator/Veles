@@ -27,7 +27,7 @@ before_install:
   - composer install --no-interaction
 
 before_script:
-  - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-5.7.phar
+  - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-5.5.phar
   - chmod 755 phpunit.phar
   - wget -q -O phpcs.phar https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
   - chmod 755 phpcs.phar
@@ -35,7 +35,6 @@ before_script:
   - |
     case $TRAVIS_PHP_VERSION in
       5.6)
-        phpenv config-rm xdebug.ini
         PHPUNIT_FLAGS="-c Tests/travisci-phpunit-5.6.xml --coverage-clover build/logs/clover.xml"
         phpenv config-add Tests/travisci-5.6.ini
         ;;
@@ -56,7 +55,21 @@ before_script:
     esac
 
 script:
-  - phpdbg -qrr ./phpunit.phar --stderr $PHPUNIT_FLAGS
+  - |
+      case $TRAVIS_PHP_VERSION in
+        5.6)
+          ./phpunit.phar --stderr $PHPUNIT_FLAGS
+          ;;
+        7.0.1)
+          phpdbg -qrr ./phpunit.phar --stderr $PHPUNIT_FLAGS
+          ;;
+        nightly)
+          phpdbg -qrr ./phpunit.phar --stderr $PHPUNIT_FLAGS
+          ;;
+        hhvm)
+          ./phpunit.phar --stderr $PHPUNIT_FLAGS
+          ;;
+      esac
   - ./phpcs.phar --encoding=utf-8 --standard=phpcs.xml --ignore=Tests,vendor -w --colors .
 
 after_script:
