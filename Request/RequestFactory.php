@@ -6,7 +6,7 @@
  * Example:
  *
  * $validator = (new Validator)->setAdapter(new PhpFilters);
- * $request = RequestFactory::create()->setValidator($validator);
+ * $request = RequestFactory::create($_SERVER['CONTENT_TYPE'])->setValidator($validator);
  *
  * @file      RequestFactory.php
  *
@@ -26,12 +26,12 @@ class RequestFactory
 	/**
 	 * Create HTTP-request object depending on Content-type HTTP-header
 	 *
+	 * @param string $type Value of Content-type HTTP-header
+	 *
 	 * @return HttpRequestAbstract
 	 */
-	public static function create()
+	public static function create($type)
 	{
-		$type =& $_SERVER['HTTP_CONTENT_TYPE'];
-
 		if (!isset($type) or 0 === strpos($type, 'text/html')) {
 			return new HttpGetRequest;
 		}
