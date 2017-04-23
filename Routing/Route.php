@@ -128,13 +128,6 @@ class Route extends RouteBase
 			throw new Exception('Controller name not set!');
 		}
 
-		if (isset($this->config['validator'])) {
-			$validator = (new Validator)->setAdapter(new $this->config['validator']);
-			$request   = (new $this->config['request'])->setValidator($validator);
-
-			$application->setRequest($request);
-		}
-
 		$controller = 'Controllers\\' . $this->config['controller'];
 
 		return new $controller($application);
