@@ -27,6 +27,8 @@ before_install:
   - composer install --no-interaction
 
 before_script:
+  - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-5.7.phar
+  - chmod 755 phpunit.phar
   - wget -q -O phpcs.phar https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
   - chmod 755 phpcs.phar
   - git submodule add -f --name tests https://github.com/nafigator/Veles-unit-tests.git Tests
@@ -51,7 +53,7 @@ before_script:
     esac
 
 script:
-  - phpunit --stderr $PHPUNIT_FLAGS
+  - ./phpunit.phar --stderr $PHPUNIT_FLAGS
   - ./phpcs.phar --encoding=utf-8 --standard=phpcs.xml --ignore=Tests,vendor -w --colors .
 
 after_script:
