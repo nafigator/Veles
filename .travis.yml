@@ -27,6 +27,7 @@ before_install:
   - composer install --no-interaction
 
 before_script:
+  - phpenv config-rm xdebug.ini
   - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-5.7.phar
   - chmod 755 phpunit.phar
   - wget -q -O phpcs.phar https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
