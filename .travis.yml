@@ -47,7 +47,7 @@ before_script:
         phpenv config-rm xdebug.ini
         PHPUNIT_FLAGS="-c Tests/travisci-phpunit-nightly.xml --exclude-group=memcache"
         phpenv config-add Tests/travisci-nightly.ini
-        wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-6.2.phar
+        wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-5.7.phar
         ;;
       hhvm)
         PHPUNIT_FLAGS="-c Tests/travisci-phpunit-nightly.xml --exclude-group=memcache"
