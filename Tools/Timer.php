@@ -22,7 +22,7 @@ namespace Veles\Tools;
  */
 class Timer
 {
-	// Точность измерения
+	// Precision
 	const SECONDS      = 0;
 	const MILLISECONDS = 3;
 	const MICROSECONDS = 6;
