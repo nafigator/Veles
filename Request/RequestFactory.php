@@ -32,7 +32,7 @@ class RequestFactory
 	 */
 	public static function create($type)
 	{
-		if (!isset($type) or 0 === strpos($type, 'text/html')) {
+		if (empty($type) || 0 === strpos($type, 'text/html')) {
 			return new HttpGetRequest;
 		}
 
