@@ -27,13 +27,6 @@ use Veles\Controllers\BaseController;
  */
 class NotAllowedException extends HttpResponseException
 {
-	protected $allowed = [
-		'get'    => true,
-		'post'   => true,
-		'put'    => true,
-		'delete' => true
-	];
-
 	/**
 	 * Throw exception with 405 HTTP-code
 	 *
@@ -66,16 +59,15 @@ class NotAllowedException extends HttpResponseException
 	protected function getMethods(BaseController $class)
 	{
 		$reflection = new ReflectionClass($class);
+		$class_name = get_class($class);
 
 		$methods = [];
 		foreach ($reflection->getMethods() as $value) {
-			if ($value->class !== get_class($class)) {
+			if ($value->class !== $class_name) {
 				continue;
 			}
 
-			if (isset($this->allowed[$value->name])) {
-				$methods[] = $value->name;
-			}
+			$methods[] = $value->name;
 		}
 
 		return strtoupper(implode(', ', $methods));

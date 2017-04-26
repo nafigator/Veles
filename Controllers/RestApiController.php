@@ -32,66 +32,20 @@ class RestApiController extends BaseController
 	 */
 	public function index()
 	{
-		switch ($_SERVER['REQUEST_METHOD']) {
-			case 'POST':
-				$result = $this->post();
-				break;
-			case 'GET':
-				$result = $this->get();
-				break;
-			case 'PUT':
-				$result = $this->put();
-				break;
-			case 'DELETE':
-				$result = $this->delete();
-				break;
-			default:
-				throw new NotAllowedException($this);
-		};
+		$method = strtolower($_SERVER['REQUEST_METHOD']);
 
-		return $result;
+		return $this->$method();
 	}
 
 	/**
-	 * The method implements functionality of HTTP POST request
+	 * For not defined methods return 405 response
 	 *
-	 * @return array
+	 * @param $name
+	 * @param $arguments
+	 *
 	 * @throws NotAllowedException
 	 */
-	public function post()
-	{
-		throw new NotAllowedException($this);
-	}
-
-	/**
-	 * The method implements functionality of HTTP GET request
-	 *
-	 * @return array
-	 * @throws NotAllowedException
-	 */
-	public function get()
-	{
-		throw new NotAllowedException($this);
-	}
-
-	/**
-	 * The method implements functionality of HTTP PUT request
-	 *
-	 * @return array
-	 * @throws NotAllowedException
-	 */
-	public function put()
-	{
-		throw new NotAllowedException($this);
-	}
-
-	/**
-	 * The method implements functionality of HTTP DELETE request
-	 *
-	 * @return array
-	 * @throws NotAllowedException
-	 */
-	public function delete()
+	public function __call($name, $arguments)
 	{
 		throw new NotAllowedException($this);
 	}
