@@ -18,7 +18,6 @@ namespace Veles\Routing;
 use Exception;
 use Veles\Application\Application;
 use Veles\Request\HttpRequestAbstract;
-use Veles\Request\Validator\Validator;
 use Veles\Request\Validator\ValidatorInterface;
 
 /**

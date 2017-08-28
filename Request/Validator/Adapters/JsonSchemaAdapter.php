@@ -39,8 +39,6 @@ class JsonSchemaAdapter implements ValidatorInterface
 	 * Add error
 	 *
 	 * @param array $error
-	 *
-	 * @return mixed
 	 */
 	public function addError(array $error)
 	{

@@ -64,7 +64,6 @@ trait LazyCalls
 	 * @param $method
 	 * @param $arguments
 	 *
-	 * @return mixed
 	 * @throws Exception
 	 */
 	public function __call($method, $arguments)

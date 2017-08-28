@@ -82,12 +82,13 @@ class MemcacheRaw
 	 *
 	 * @param string $command Internal console memcache command
 	 *
-	 * @return MemcacheRaw
+	 * @return bool|string Returns string or false on failure or empty result
 	 */
 	public function command($command)
 	{
 		fwrite($this->connection, $command . PHP_EOL);
-		fgets($this->connection);
+
+		return fgets($this->connection);
 	}
 
 	/**
