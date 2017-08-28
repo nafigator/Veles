@@ -34,8 +34,6 @@ class NotAllowedException extends HttpResponseException
 	 * header with available http-methods
 	 *
 	 * @param BaseController $controller
-	 *
-	 * @TODO implement base api contorller
 	 */
 	public function __construct(BaseController $controller)
 	{

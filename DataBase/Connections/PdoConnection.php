@@ -16,7 +16,6 @@
 namespace Veles\DataBase\Connections;
 
 use Exception;
-use PDO;
 
 /**
  * Class PdoConnection
