@@ -28,7 +28,7 @@ trait DynamicPropHandler
 	/**
 	 * Method for setting parameters
 	 *
-	 * @param   array Array with needle parameters as keys
+	 * @param   array $properties Array with needle parameters as keys
 	 *
 	 * @return  $this
 	 */
@@ -44,7 +44,7 @@ trait DynamicPropHandler
 	/**
 	 * Method for getting parameters
 	 *
-	 * @param   array Array with needle parameters as keys
+	 * @param   array $properties Array with needle parameters as keys
 	 *
 	 * @return  array
 	 */
@@ -55,5 +55,23 @@ trait DynamicPropHandler
 				$properties[$property_name] = $this->$property_name;
 			}
 		}
+	}
+
+	/**
+	 * Method for getting array filled with initialized properties
+	 *
+	 * @return array
+	 */
+	public function toArray()
+	{
+		$result = [];
+
+		foreach (array_keys($this->map) as $property_name) {
+			if (isset($this->$property_name)) {
+				$result[$property_name] = $this->$property_name;
+			}
+		}
+
+		return $result;
 	}
 }
