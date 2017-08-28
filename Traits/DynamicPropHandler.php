@@ -45,8 +45,6 @@ trait DynamicPropHandler
 	 * Method for getting parameters
 	 *
 	 * @param   array $properties Array with needle parameters as keys
-	 *
-	 * @return  array
 	 */
 	public function getProperties(array &$properties)
 	{

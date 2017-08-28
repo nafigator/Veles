@@ -29,8 +29,6 @@ class Validator implements ValidatorInterface, ValidatorAdapterInterface
 	 * Add error
 	 *
 	 * @param array $error
-	 *
-	 * @return mixed
 	 */
 	public function addError(array $error)
 	{
