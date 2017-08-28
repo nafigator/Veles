@@ -31,7 +31,7 @@ class HttpBasic implements AuthStrategyInterface
 	 *
 	 * @param CurlRequest $request
 	 *
-	 * @return bool
+	 * @return $this
 	 */
 	public function apply(CurlRequest $request)
 	{
@@ -40,6 +40,8 @@ class HttpBasic implements AuthStrategyInterface
 		$headers[] = "Authorization: Basic $hash";
 
 		$request->setHeaders($headers);
+
+		return $this;
 	}
 
 	/**

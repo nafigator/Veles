@@ -28,7 +28,7 @@ interface AuthStrategyInterface
 	 *
 	 * @param CurlRequest $request CurlRequest class
 	 *
-	 * @return bool
+	 * @return HttpBasic
 	 */
 	public function apply(CurlRequest $request);
 }
