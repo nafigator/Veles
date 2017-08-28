@@ -16,7 +16,8 @@
 namespace Veles\DataBase;
 
 /**
- * Класс DbFilter
+ * Class DbFilter
+ *
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class DbFilter
@@ -27,7 +28,8 @@ class DbFilter
 	protected $order  = '';
 
 	/**
-	 * Метод для получения where
+	 * Gets where conditions
+	 *
 	 * @return string
 	 */
 	public function getWhere()
@@ -36,7 +38,7 @@ class DbFilter
 	}
 
 	/**
-	 * Метод для получения group by
+	 * Gets group by conditions
 	 * @return string
 	 */
 	public function getGroup()
@@ -45,7 +47,8 @@ class DbFilter
 	}
 
 	/**
-	 * Метод для получения having
+	 * Gets having conditions
+	 *
 	 * @return string
 	 */
 	public function getHaving()
@@ -54,7 +57,8 @@ class DbFilter
 	}
 
 	/**
-	 * Метод для получения order by
+	 * Gets order by conditions
+	 *
 	 * @return string
 	 */
 	public function getOrder()
@@ -63,38 +67,58 @@ class DbFilter
 	}
 
 	/**
-	 * Метод для установки значения where
+	 * Sets where conditions
+	 *
 	 * @param string $where WHERE для sql-запроса
+	 *
+	 * @return $this
 	 */
 	public function setWhere($where)
 	{
 		$this->where = "WHERE $where";
+
+		return $this;
 	}
 
 	/**
-	 * Метод для установки значения group by
+	 * Sets group by conditions
+	 *
 	 * @param string $group GROUP BY для sql-запроса
+	 *
+	 * @return $this
 	 */
 	public function setGroup($group)
 	{
 		$this->group = "GROUP BY $group";
+
+		return $this;
 	}
 
 	/**
-	 * Метод для установки значения having
+	 * Sets having conditions
+	 *
 	 * @param string $having HAVING для sql-запроса
+	 *
+	 * @return $this
 	 */
 	public function setHaving($having)
 	{
 		$this->having = "HAVING $having";
+
+		return $this;
 	}
 
 	/**
-	 * Метод для установки значения order by
+	 * Sets order by conditions
+	 *
 	 * @param string $order ORDER BY для sql-запроса
+	 *
+	 * @return $this
 	 */
 	public function setOrder($order)
 	{
 		$this->order = "ORDER BY $order";
+
+		return $this;
 	}
 }
