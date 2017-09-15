@@ -28,16 +28,6 @@ class BaseController
 	use ApplicationTrait;
 
 	/**
-	 * Set application as internal property
-	 *
-	 * @param Application $application
-	 */
-	public function __construct(Application $application)
-	{
-		$this->setApplication($application);
-	}
-
-	/**
 	 * Getting route params
 	 *
 	 * @param string $name
