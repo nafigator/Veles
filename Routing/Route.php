@@ -16,7 +16,7 @@
 namespace Veles\Routing;
 
 use Exception;
-use Veles\Application\Application;
+use Veles\Controllers\BaseController;
 use Veles\Request\HttpRequestAbstract;
 use Veles\Request\Validator\ValidatorInterface;
 
@@ -116,12 +116,10 @@ class Route extends RouteBase
 	/**
 	 * Build and return controller object
 	 *
-	 * @param Application $application
-	 *
-	 * @return object
+	 * @return BaseController
 	 * @throws Exception
 	 */
-	public function getController(Application $application)
+	public function getController()
 	{
 		if (!isset($this->config['controller'])) {
 			throw new Exception('Controller name not set!');
@@ -129,7 +127,7 @@ class Route extends RouteBase
 
 		$controller = 'Controllers\\' . $this->config['controller'];
 
-		return new $controller($application);
+		return new $controller;
 	}
 
 	/**

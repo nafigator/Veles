@@ -34,12 +34,12 @@ class Application
 	public function run()
 	{
 		$route      = $this->getRoute();
-		$controller = $route->getController($this);
+		$controller = $route->getController();
 		$action     = $route->getActionName();
 
 		View::setAdapter($route->getAdapter());
 
-		if ($vars = $controller->$action()) {
+		if ($vars = $controller->setApplication($this)->$action()) {
 			View::set($vars);
 		}
 
