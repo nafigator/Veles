@@ -3,7 +3,6 @@ build:
     memcached:  true
     postgresql: false
     redis:      false
-    composer:   false
 
   nodes:
     php56:
