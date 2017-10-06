@@ -43,7 +43,8 @@ build:
     # Runs before inferred commands
     before: []
     # Overwrites inferred commands
-    override: []
+    override:
+      - true
     # Runs after inferred commands
     after: []
 
