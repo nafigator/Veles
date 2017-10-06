@@ -64,10 +64,10 @@ script:
           ./phpunit.phar --stderr $PHPUNIT_FLAGS
           ;;
         7.0.1)
-          phpdbg -qrr ./phpunit.phar --stderr $PHPUNIT_FLAGS
+          ./phpunit.phar --stderr $PHPUNIT_FLAGS
           ;;
         nightly)
-          phpdbg -qrr ./phpunit.phar --stderr $PHPUNIT_FLAGS
+          ./phpunit.phar --stderr $PHPUNIT_FLAGS
           ;;
         hhvm)
           ./phpunit.phar --stderr $PHPUNIT_FLAGS
