@@ -5,22 +5,25 @@ build:
     redis:      false
 
   nodes:
-    php:
+    php56:
       environment:
-        version: 5.6.16
-        ini:
-          'short_open_tag': 'On'
-    php:
+        php:
+          version: 5.6.16
+          ini:
+            'short_open_tag': 'On'
+    php70:
       environment:
-        version: 7.0.20
-        ini:
-          'short_open_tag': 'On'
+        php:
+          version: 7.0.20
+          ini:
+            'short_open_tag': 'On'
 
-    php:
+    php71:
       environment:
-        version: 7.1.6
-        ini:
-          'short_open_tag': 'On'
+        php:
+          version: 7.1.6
+          ini:
+            'short_open_tag': 'On'
 
   dependencies:
     # Runs before inferred commands
