@@ -51,7 +51,7 @@ before_script:
         ;;
       hhvm)
         PHPUNIT_FLAGS="-c Tests/travisci-phpunit-nightly.xml --exclude-group=memcache"
-        cat Tests/travisci-nightly.ini >> /etc/hhvm/php.ini
+        cat Tests/travisci-hhvm.ini >> /etc/hhvm/php.ini
         wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-6.4.phar
         ;;
     esac
