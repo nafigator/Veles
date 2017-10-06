@@ -33,20 +33,20 @@ before_script:
   - |
     case $TRAVIS_PHP_VERSION in
       5.6)
-        PHPUNIT_FLAGS="-c Tests/travisci-phpunit-5.6.xml --coverage-clover build/logs/clover.xml"
-        phpenv config-add Tests/travisci-5.6.ini
+        PHPUNIT_FLAGS="-c Tests/travisci-phpunit.xml --coverage-clover build/logs/clover.xml"
+        phpenv config-add Tests/travisci.ini
         wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-5.7.phar
         ;;
       7.0.1)
         phpenv config-rm xdebug.ini
-        PHPUNIT_FLAGS="-c Tests/travisci-phpunit-7.0.1.xml --exclude-group=memcache"
-        phpenv config-add Tests/travisci-7.0.1.ini
+        PHPUNIT_FLAGS="-c Tests/travisci-phpunit.xml --exclude-group=memcache"
+        phpenv config-add Tests/travisci.ini
         wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-6.4.phar
         ;;
       nightly)
         phpenv config-rm xdebug.ini
-        PHPUNIT_FLAGS="-c Tests/travisci-phpunit-nightly.xml --exclude-group=memcache"
-        phpenv config-add Tests/travisci-nightly.ini
+        PHPUNIT_FLAGS="-c Tests/travisci-phpunit.xml --exclude-group=memcache"
+        phpenv config-add Tests/travisci.ini
         wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-6.4.phar
         ;;
       hhvm)
