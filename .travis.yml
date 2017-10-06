@@ -38,7 +38,13 @@ before_script:
         phpenv config-add Tests/travisci.ini
         wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-5.7.phar
         ;;
-      7.0.1)
+      7.0)
+        phpenv config-rm xdebug.ini
+        PHPUNIT_FLAGS="-c Tests/travisci-phpunit.xml"
+        phpenv config-add Tests/travisci.ini
+        wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-6.4.phar
+        ;;
+      7.1)
         phpenv config-rm xdebug.ini
         PHPUNIT_FLAGS="-c Tests/travisci-phpunit.xml"
         phpenv config-add Tests/travisci.ini
