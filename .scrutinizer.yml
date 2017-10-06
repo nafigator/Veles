@@ -33,6 +33,7 @@ build:
           version: 7.1.6
           ini:
             'short_open_tag': 'On'
+
       project_setup:
         after:
           - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit.phar
@@ -48,12 +49,12 @@ build:
 
   # Run after dependencies
   project_setup:
-    after:
-      - rm -rf *
+    override:
       - git clone https://github.com/nafigator/Veles.git
       - cd Veles
       - git checkout $SCRUTINIZER_BRANCH
       - git submodule add -f --name tests https://github.com/nafigator/Veles-unit-tests.git Tests
+    after:
       - wget -q -O phpcs.phar https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
       - chmod 755 phpcs.phar
 
