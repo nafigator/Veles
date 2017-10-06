@@ -23,7 +23,7 @@ build:
       - cd Veles
       - git checkout $SCRUTINIZER_BRANCH
       - git submodule add -f --name tests https://github.com/nafigator/Veles-unit-tests.git Tests
-      - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-5.7.phar
+      - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-6.1.phar
       - chmod 755 phpunit.phar
       - wget -q -O phpcs.phar https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
       - chmod 755 phpcs.phar
