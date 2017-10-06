@@ -1,13 +1,23 @@
 build:
   environment:
-    php:
-      version: 5.6.16, 7.0.20, 7.1.6
-      ini:
-        'short_open_tag': 'On'
-
     memcached:  true
     postgresql: false
     redis:      false
+
+  nodes:
+    php:
+      version: 5.6.16
+      ini:
+        'short_open_tag': 'On'
+    php:
+      version: 7.0.20
+      ini:
+        'short_open_tag': 'On'
+
+    php:
+      version: 7.1.6
+      ini:
+        'short_open_tag': 'On'
 
   dependencies:
     # Runs before inferred commands
