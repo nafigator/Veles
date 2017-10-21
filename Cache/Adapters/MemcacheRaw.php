@@ -43,6 +43,8 @@ class MemcacheRaw
 	 */
 	public function __construct()
 	{
+		$errno = $errstr = null;
+
 		try {
 			$this->connection = fsockopen(
 				self::$host, self::$port, $errno, $errstr
