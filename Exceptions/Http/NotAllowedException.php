@@ -6,7 +6,7 @@
  *
  * @file      UserErrorHandler.php
  *
- * PHP version 5.6+
+ * PHP version 7.0+
  *
  * @author    Yancharuk Alexander <alex at itvault dot info>
  * @copyright © 2012-2017 Alexander Yancharuk
