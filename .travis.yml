@@ -36,7 +36,6 @@ before_script:
         wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-6.4.phar
         ;;
       7.1)
-        phpenv config-rm xdebug.ini
         PHPUNIT_FLAGS="-c Tests/travisci-phpunit.xml --coverage-clover build/logs/clover.xml"
         phpenv config-add Tests/travisci.ini
         wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-6.4.phar
@@ -48,6 +47,7 @@ before_script:
         wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-6.4.phar
         ;;
       hhvm)
+        phpenv config-rm xdebug.ini
         PHPUNIT_FLAGS="-c Tests/travisci-phpunit.xml"
         cat Tests/travisci-hhvm.ini >> /etc/hhvm/php.ini
         wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-5.7.phar
