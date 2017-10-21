@@ -5,17 +5,6 @@ build:
     redis:      false
 
   nodes:
-    php56:
-      environment:
-        php:
-          version: 5.6.16
-          ini:
-            'short_open_tag': 'On'
-      project_setup:
-        after:
-          - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-5.7.phar
-          - chmod 755 phpunit.phar
-
     php70:
       environment:
         php:
