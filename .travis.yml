@@ -19,9 +19,6 @@ matrix:
     - php: nightly
     - php: hhvm
 
-services:
-  - memcached
-
 before_install:
   - composer self-update
   - composer install --no-interaction
@@ -59,7 +56,7 @@ before_script:
   - chmod 755 phpunit.phar
 
 script:
-  - php -m
+  - php --version
   - ./phpunit.phar --stderr $PHPUNIT_FLAGS
   - ./phpcs.phar --encoding=utf-8 --standard=phpcs.xml --ignore=Tests,vendor -w --colors .
 
