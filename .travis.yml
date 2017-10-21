@@ -56,13 +56,12 @@ before_script:
   - chmod 755 phpunit.phar
 
 script:
-  - php --version
   - ./phpunit.phar --stderr $PHPUNIT_FLAGS
   - ./phpcs.phar --encoding=utf-8 --standard=phpcs.xml --ignore=Tests,vendor -w --colors .
 
 after_script:
   - |
-    if [[ $TRAVIS_PHP_VERSION = "7.0" ]]; then
+    if [[ $TRAVIS_PHP_VERSION = "7.1" ]]; then
       CODECLIMATE_REPO_TOKEN="9b68837f2ccc3206ed5d6f74fc9422423e35a4dd28ee48f161165bc0259fd692" ./vendor/bin/test-reporter --stdout > codeclimate.json
       curl -X POST -d @codeclimate.json -H 'Content-Type: application/json' -H 'User-Agent: Code Climate (PHP Test Reporter v0.1.2-dev)' https://codeclimate.com/test_reports
     fi
