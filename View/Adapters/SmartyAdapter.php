@@ -4,7 +4,7 @@
  *
  * @file      SmartyAdapter.php
  *
- * PHP version 5.6+
+ * PHP version 7.0+
  * Smarty version 3+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
