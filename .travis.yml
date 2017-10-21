@@ -32,11 +32,6 @@ before_script:
   - git submodule add -f --name tests https://github.com/nafigator/Veles-unit-tests.git Tests
   - |
     case $TRAVIS_PHP_VERSION in
-      5.6)
-        PHPUNIT_FLAGS="-c Tests/travisci-phpunit.xml --coverage-clover build/logs/clover.xml"
-        phpenv config-add Tests/travisci.ini
-        wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-5.7.phar
-        ;;
       7.0)
         phpenv config-rm xdebug.ini
         PHPUNIT_FLAGS="-c Tests/travisci-phpunit.xml"
@@ -64,26 +59,12 @@ before_script:
   - chmod 755 phpunit.phar
 
 script:
-  - |
-      case $TRAVIS_PHP_VERSION in
-        5.6)
-          ./phpunit.phar --stderr $PHPUNIT_FLAGS
-          ;;
-        7.0.1)
-          ./phpunit.phar --stderr $PHPUNIT_FLAGS
-          ;;
-        nightly)
-          ./phpunit.phar --stderr $PHPUNIT_FLAGS
-          ;;
-        hhvm)
-          ./phpunit.phar --stderr $PHPUNIT_FLAGS
-          ;;
-      esac
+  - ./phpunit.phar --stderr $PHPUNIT_FLAGS
   - ./phpcs.phar --encoding=utf-8 --standard=phpcs.xml --ignore=Tests,vendor -w --colors .
 
 after_script:
   - |
-    if [[ $TRAVIS_PHP_VERSION = "5.6" ]]; then
+    if [[ $TRAVIS_PHP_VERSION = "7.0" ]]; then
       CODECLIMATE_REPO_TOKEN="9b68837f2ccc3206ed5d6f74fc9422423e35a4dd28ee48f161165bc0259fd692" ./vendor/bin/test-reporter --stdout > codeclimate.json
       curl -X POST -d @codeclimate.json -H 'Content-Type: application/json' -H 'User-Agent: Code Climate (PHP Test Reporter v0.1.2-dev)' https://codeclimate.com/test_reports
     fi
