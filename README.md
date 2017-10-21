@@ -4,7 +4,7 @@ PHP micro framework
 
 [![GitHub license][License img]][License src] [![GitHub release][Release img]][Release src] [![Size status][Size img]][Release src]
 
-| Scrutinizer stable | Trvis CI stable | Code Climate |
+| Scrutinizer stable | Travis CI stable | Code Climate |
 |:----------------:|:----------------:|:--------------------:|
 | [![Scrutinizer master code quality][Scrutinizer master quality image]][Scrutinizer master src] [![Scrutinizer master code coverage][Scrutinizer master coverage image]][Scrutinizer master coverage src] [![Scrutinizer master status][Scrutinizer master status image]][Scrutinizer master status src] | [![Travis Build status][Travis image]][Travis repo] | [![Code Climate][CC Quality status]][CC Quality src] [![CC Coverage Status][CC Coverage image]][CC Coverage repo]  |
 
@@ -24,7 +24,7 @@ Read more on [SemVer.org](http://semver.org).
   [CC coverage repo]: https://codeclimate.com/github/nafigator/Veles
   [License img]: https://img.shields.io/badge/license-BSD3-brightgreen.svg
   [License src]: https://tldrlegal.com/license/bsd-3-clause-license-(revised)
-  [Release img]: https://img.shields.io/badge/release-0.56.0-orange.svg
+  [Release img]: https://img.shields.io/badge/release-0.56.1-orange.svg
   [Release src]: https://github.com/nafigator/Veles
   [Size img]: https://img.shields.io/badge/size-4.3M-blue.svg
   [Scrutinizer master quality image]: https://scrutinizer-ci.com/g/nafigator/Veles/badges/quality-score.png?b=master

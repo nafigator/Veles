@@ -55,6 +55,7 @@ trait Observable
 	public function notify()
 	{
 		foreach ($this->observers as $value) {
+			/** @noinspection PhpParamsInspection */
 			$value->update($this);
 		}
 	}
