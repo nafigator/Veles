@@ -16,7 +16,6 @@
 namespace Veles\Controllers;
 
 use Application\ApplicationTrait;
-use Veles\Application\Application;
 
 /**
  * Class   BaseController

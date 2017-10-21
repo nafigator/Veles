@@ -1,6 +1,6 @@
 <?php
 /**
- * Adapter for JsonSchema library
+ * Adapter for JsonSchema library https://github.com/justinrainbow/json-schema
  *
  * @file      JsonSchemaAdapter.php
  *
