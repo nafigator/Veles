@@ -13,9 +13,7 @@
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
  */
 
-namespace Application;
-
-use Veles\Application\Application;
+namespace Veles\Application;
 
 trait ApplicationTrait
 {
