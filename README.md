@@ -9,7 +9,7 @@ PHP micro framework
 | [![Scrutinizer master code quality][Scrutinizer master quality image]][Scrutinizer master src] [![Scrutinizer master code coverage][Scrutinizer master coverage image]][Scrutinizer master coverage src] [![Scrutinizer master status][Scrutinizer master status image]][Scrutinizer master status src] | [![Travis Build status][Travis image]][Travis repo] | [![Code Climate][CC Quality status]][CC Quality src] [![CC Coverage Status][CC Coverage image]][CC Coverage repo]  |
 
 ### Requirements
-* PHP 5.6+
+* PHP 7.0+
 
 ### Versioning
 
