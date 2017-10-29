@@ -50,7 +50,7 @@ build:
   tests:
     override:
       -
-        command: ./phpunit.phar -c Tests/scrutinizer-phpunit.xml --stderr --coverage-clover=/home/scrutinizer/build/coverage-report.xml
+        command: ./phpunit.phar -c Tests/scrutinizer-phpunit.xml --coverage-clover=/home/scrutinizer/build/coverage-report.xml
         coverage:
           file: coverage-report.xml
           format: php-clover

@@ -56,7 +56,7 @@ before_script:
   - chmod 755 phpunit.phar
 
 script:
-  - ./phpunit.phar --stderr $PHPUNIT_FLAGS
+  - ./phpunit.phar $PHPUNIT_FLAGS
   - ./phpcs.phar --encoding=utf-8 --standard=phpcs.xml --ignore=Tests,vendor -w --colors .
 
 after_script:
