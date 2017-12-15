@@ -19,10 +19,17 @@
 			<property name="ignoreBlankLines" value="false"/>
 		</properties>
 	</rule>
+
+	<!--
+		Checks that no whitespace precedes the first content of the file, exists
+		after the last content of the file, resides after content on any line, or
+		are two empty lines in functions.
+	-->
 	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.StartFile"/>
 	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.EndFile"/>
 	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.EmptyLines"/>
 
+	<!-- Ensures long conditions have a comment at the end. -->
 	<rule ref="Squiz.Commenting.LongConditionClosingComment">
 		<properties>
 			<property name="lineLimit" value="40"/>
@@ -38,6 +45,8 @@
 					  value="T_COMMENT,T_DOC_COMMENT_OPEN_TAG"/>
 		</properties>
 	</rule>
+
+	<!-- Throws errors if spaces are used for indentation other than precision indentation. -->
 	<rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>
 
 	<!-- Warn about all founded TODOs. -->
@@ -55,9 +64,10 @@
 
 	<!-- Align doc-comments -->
 	<rule ref="Squiz.Commenting.DocCommentAlignment"/>
-	<!-- TODO comment out all this rules -->
+	<!-- Checks for empty Catch clause. Catch clause must at least have comment -->
 	<rule ref="Squiz.Commenting.EmptyCatchComment"/>
+	<!-- Ensures long conditions have a comment at the end. -->
 	<rule ref="Squiz.Commenting.LongConditionClosingComment"/>
-
+	<!-- Ensures function calls are formatted correctly. -->
 	<rule ref="PEAR.Functions.FunctionCallSignature"/>
 </ruleset>
