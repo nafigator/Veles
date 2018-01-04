@@ -15,6 +15,8 @@
 
 namespace Veles\Application;
 
+use Application\EnvironmentAwareInterface;
+
 trait EnvironmentTrait
 {
 	/** @var  Environment */
@@ -25,7 +27,7 @@ trait EnvironmentTrait
 	 *
 	 * @param Environment $environment
 	 *
-	 * @return $this
+	 * @return EnvironmentAwareInterface|EnvironmentTrait
 	 */
 	public function setEnvironment(Environment $environment)
 	{
