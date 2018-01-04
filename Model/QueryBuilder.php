@@ -82,7 +82,6 @@ class QueryBuilder implements QueryBuilderInterface
 	 * Функция безопасности переменных
 	 * @param ActiveRecord $model
 	 * @param $property
-	 * @throws Exception
 	 * @return mixed
 	 */
 	private function sanitize(ActiveRecord $model, $property)
@@ -113,12 +112,11 @@ class QueryBuilder implements QueryBuilderInterface
 	 * Построение sql-запроса для update
 	 * @param ActiveRecord $model Экземпляр модели
 	 * @return string $sql
-	 * @todo протестировать алгоритм на время.
-	 * Попробовать варианты с iterator, implode
 	 */
 	public function update(ActiveRecord $model)
 	{
 		$params = '';
+		$table  = $model::TBL_NAME;
 
 		foreach (array_keys($model->getMap()) as $property) {
 			$value = $this->sanitize($model, $property);
@@ -132,9 +130,9 @@ class QueryBuilder implements QueryBuilderInterface
 
 		$params = rtrim($params, ', ');
 
-		$sql = '
+		$sql = "
 			UPDATE
-				"' . $model::TBL_NAME . "\"
+				\"$table\"
 			SET
 				$params
 			WHERE
@@ -153,11 +151,12 @@ class QueryBuilder implements QueryBuilderInterface
 	public function getById(ActiveRecord $model, $identifier)
 	{
 		$identifier = (int) $identifier;
+		$table      = $model::TBL_NAME;
 
-		$sql = '
+		$sql = "
 			SELECT *
 			FROM
-				"' . $model::TBL_NAME . "\"
+				\"$table\"
 			WHERE
 				id = $identifier
 			LIMIT 1
@@ -181,11 +180,12 @@ class QueryBuilder implements QueryBuilderInterface
 			$value = (int) $value;
 		};
 
-		$ids = implode(',', $ids);
+		$ids   = implode(',', $ids);
+		$table = $model::TBL_NAME;
 
-		$sql = '
+		$sql = "
 			DELETE FROM
-				"' . $model::TBL_NAME . "\"
+				\"$table\"
 			WHERE
 				id IN ($ids)
 		";
