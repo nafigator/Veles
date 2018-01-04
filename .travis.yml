@@ -39,6 +39,9 @@ before_script:
         PHPUNIT_FLAGS="-c Tests/travisci-phpunit.xml --coverage-clover build/logs/clover.xml"
         phpenv config-add Tests/travisci.ini
         wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-6.4.phar
+        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        chmod +x ./cc-test-reporter
+        ./cc-test-reporter before-build
         ;;
       nightly)
         phpenv config-rm xdebug.ini
@@ -62,6 +65,6 @@ script:
 after_script:
   - |
     if [[ $TRAVIS_PHP_VERSION = '7.1' && $TRAVIS_BRANCH = 'master' ]]; then
-      CODECLIMATE_REPO_TOKEN="9b68837f2ccc3206ed5d6f74fc9422423e35a4dd28ee48f161165bc0259fd692" ./vendor/bin/test-reporter --stdout > codeclimate.json
-      curl -X POST -d @codeclimate.json -H 'Content-Type: application/json' -H 'User-Agent: Code Climate (PHP Test Reporter v0.1.2-dev)' https://codeclimate.com/test_reports
+      CC_TEST_REPORTER_ID=9b68837f2ccc3206ed5d6f74fc9422423e35a4dd28ee48f161165bc0259fd692 \
+      ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
     fi
