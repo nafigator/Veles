@@ -58,7 +58,6 @@ class UsrAuthFactory
 	/**
 	 * Algorithm for choosing auth strategy
 	 *
-	 * @todo Move validation and error handling into separate class
 	 * @return AbstractAuthStrategy
 	 */
 	public function create()

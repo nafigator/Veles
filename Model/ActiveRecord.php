@@ -201,7 +201,6 @@ class ActiveRecord extends StdClass
 	 * @param string           $sql   Query
 	 * @param bool|DbPaginator $pager Pagination object
 	 *
-	 * @todo Add Pager type hints
 	 * @return array|bool
 	 */
 	public function query($sql, $pager = false)
