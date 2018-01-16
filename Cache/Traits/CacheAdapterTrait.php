@@ -13,7 +13,7 @@
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
  */
 
-namespace Cache\Traits;
+namespace Veles\Cache\Traits;
 
 use Exception;
 use Veles\Cache\Adapters\CacheAdapterAbstract;
