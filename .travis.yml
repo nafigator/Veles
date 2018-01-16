@@ -49,7 +49,7 @@ before_script:
         phpenv config-rm xdebug.ini
         PHPUNIT_FLAGS="-c Tests/travisci-phpunit.xml"
         cat Tests/travisci-hhvm.ini >> /etc/hhvm/php.ini
-        wget -q -O phpunit.phar https://phar.phpunit.de/phpunit.phar
+        wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-5.7.phar
         ;;
     esac
   - chmod 755 phpunit.phar
