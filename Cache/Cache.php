@@ -56,6 +56,21 @@ class Cache
 	}
 
 	/**
+	 * Save date if key not exists
+	 *
+	 * @param string $key   Key
+	 * @param mixed  $value Data
+	 * @param int    $ttl   Time to live
+	 *
+	 * @return bool
+	 * @throws Exception
+	 */
+	public static function add($key, $value, $ttl = 0)
+	{
+		return self::getAdapter()->add($key, $value, $ttl);
+	}
+
+	/**
 	 * Check if data stored in cache
 	 *
 	 * @param string $key Key

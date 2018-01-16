@@ -41,6 +41,16 @@ interface CacheAdapterInterface extends DriverInterface
 	public function set($key, $value, $ttl);
 
 	/**
+	 * Save data if key not exists
+	 *
+	 * @param string $key Key
+	 * @param mixed $value Data
+	 * @param int $ttl Time to live
+	 * @return mixed
+	 */
+	public function add($key, $value, $ttl);
+
+	/**
 	 * Check if data stored in cache
 	 *
 	 * @param string $key Key

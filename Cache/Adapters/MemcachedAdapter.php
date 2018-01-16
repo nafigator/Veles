@@ -57,6 +57,20 @@ class MemcachedAdapter extends CacheAdapterAbstract implements CacheAdapterInter
 	}
 
 	/**
+	 * Save data if key not exists
+	 *
+	 * @param string $key   Key
+	 * @param mixed  $value Data
+	 * @param int    $ttl   Time to live
+	 *
+	 * @return mixed
+	 */
+	public function add($key, $value, $ttl)
+	{
+		return $this->getDriver()->add($key, $value, $ttl);
+	}
+
+	/**
 	 * Check if data stored in cache
 	 *
 	 * @param string $key Key
