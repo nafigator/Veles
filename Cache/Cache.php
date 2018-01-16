@@ -15,9 +15,8 @@
 
 namespace Veles\Cache;
 
+use Cache\Traits\CacheAdapterTrait;
 use Exception;
-use Veles\Cache\Adapters\CacheAdapterAbstract;
-use Veles\Cache\Adapters\CacheAdapterInterface;
 
 /**
  * Class Cache
@@ -26,26 +25,15 @@ use Veles\Cache\Adapters\CacheAdapterInterface;
  */
 class Cache
 {
-	/** @var CacheAdapterInterface */
-	protected static $adapter;
-	/** @var  string|CacheAdapterAbstract */
-	protected static $adapter_name;
-
-	/**
-	 * Cache adapter initialisation
-	 *
-	 * @param CacheAdapterInterface $adapter Adapter
-	 */
-	public static function setAdapter(CacheAdapterInterface $adapter)
-	{
-		self::$adapter = $adapter;
-	}
+	use CacheAdapterTrait;
 
 	/**
 	 * Get data
 	 *
 	 * @param string $key Key
+	 *
 	 * @return mixed
+	 * @throws Exception
 	 */
 	public static function get($key)
 	{
@@ -53,27 +41,14 @@ class Cache
 	}
 
 	/**
-	 * Cache adapter instance
-	 *
-	 * @throws Exception
-	 * @return CacheAdapterInterface
-	 */
-	public static function getAdapter()
-	{
-		if (null === self::$adapter) {
-			throw new Exception('Adapter not set!');
-		}
-
-		return self::$adapter;
-	}
-
-	/**
 	 * Save date
 	 *
-	 * @param string $key Key
-	 * @param mixed $value Data
-	 * @param int $ttl Time to live
+	 * @param string $key   Key
+	 * @param mixed  $value Data
+	 * @param int    $ttl   Time to live
+	 *
 	 * @return bool
+	 * @throws Exception
 	 */
 	public static function set($key, $value, $ttl = 0)
 	{
@@ -81,10 +56,27 @@ class Cache
 	}
 
 	/**
+	 * Save date if key not exists
+	 *
+	 * @param string $key   Key
+	 * @param mixed  $value Data
+	 * @param int    $ttl   Time to live
+	 *
+	 * @return bool
+	 * @throws Exception
+	 */
+	public static function add($key, $value, $ttl = 0)
+	{
+		return self::getAdapter()->add($key, $value, $ttl);
+	}
+
+	/**
 	 * Check if data stored in cache
 	 *
 	 * @param string $key Key
+	 *
 	 * @return bool
+	 * @throws Exception
 	 */
 	public static function has($key)
 	{
@@ -95,7 +87,9 @@ class Cache
 	 * Delete data
 	 *
 	 * @param string $key Key
+	 *
 	 * @return bool
+	 * @throws Exception
 	 */
 	public static function del($key)
 	{
@@ -112,7 +106,9 @@ class Cache
 	 * '_KEY::ID'.
 	 *
 	 * @param string $tpl Substring containing in needed keys
+	 *
 	 * @return bool
+	 * @throws Exception
 	 */
 	public static function delByTemplate($tpl)
 	{
@@ -123,6 +119,7 @@ class Cache
 	 * Cache cleanup
 	 *
 	 * @return bool
+	 * @throws Exception
 	 */
 	public static function clear()
 	{
@@ -136,6 +133,7 @@ class Cache
 	 * @param int    $offset
 	 *
 	 * @return mixed
+	 * @throws Exception
 	 */
 	public static function increment($key, $offset = 1)
 	{
@@ -147,7 +145,9 @@ class Cache
 	 *
 	 * @param string $key
 	 * @param int    $offset
+	 *
 	 * @return mixed
+	 * @throws Exception
 	 */
 	public static function decrement($key, $offset = 1)
 	{
