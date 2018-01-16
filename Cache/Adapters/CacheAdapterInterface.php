@@ -15,11 +15,13 @@
 
 namespace Veles\Cache\Adapters;
 
+use Traits\DriverInterface;
+
 /**
  * Interface CacheAdapterInterface
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-interface CacheAdapterInterface
+interface CacheAdapterInterface extends DriverInterface
 {
 	/**
 	 * Get data
@@ -93,18 +95,4 @@ interface CacheAdapterInterface
 	 * @return bool|int
 	 */
 	public function decrement($key, $offset);
-
-	/**
-	 * Get adapter driver
-	 *
-	 * @return mixed
-	 */
-	public function getDriver();
-
-	/**
-	 * Set adapter driver
-	 *
-	 * @param mixed $driver
-	 */
-	public function setDriver($driver);
 }

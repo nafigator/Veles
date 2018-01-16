@@ -68,6 +68,7 @@ class DbBase
 	 * @param string $name Connection name
 	 *
 	 * @return DbAdapterInterface
+	 * @throws Exception
 	 */
 	public static function connection($name)
 	{
@@ -78,6 +79,7 @@ class DbBase
 	 * Getting last insert id
 	 *
 	 * @return int
+	 * @throws Exception
 	 */
 	public static function getLastInsertId()
 	{
@@ -88,6 +90,7 @@ class DbBase
 	 * Getting result rows count
 	 *
 	 * @return int
+	 * @throws Exception
 	 */
 	public static function getFoundRows()
 	{
@@ -100,6 +103,7 @@ class DbBase
 	 * @param string $var
 	 *
 	 * @return string
+	 * @throws Exception
 	 */
 	public static function escape($var)
 	{

@@ -28,6 +28,7 @@ class DbTransactionHandler extends DbBase
 	 * Transaction initialization
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
 	public static function begin()
 	{
@@ -38,6 +39,7 @@ class DbTransactionHandler extends DbBase
 	 * Rollback transaction
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
 	public static function rollback()
 	{
@@ -48,6 +50,7 @@ class DbTransactionHandler extends DbBase
 	 * Apply all queries and close transaction
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
 	public static function commit()
 	{
