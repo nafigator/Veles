@@ -7,7 +7,7 @@
  * PHP version 7.0+
  *
  * @author    Yancharuk Alexander <alex at itvault dot info>
- * @copyright © 2012-2017 Alexander Yancharuk <alex at itvault at info>
+ * @copyright © 2012-2018 Alexander Yancharuk <alex at itvault at info>
  * @date      2016-12-07 18:54
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
@@ -28,7 +28,6 @@ class RestApiController extends BaseController
 	 * Call specific method depending on request method
 	 *
 	 * @return array|null
-	 * @throws NotAllowedException
 	 */
 	public function index()
 	{

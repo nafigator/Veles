@@ -7,7 +7,7 @@
  * PHP version 7.0+
  *
  * @author    Yancharuk Alexander <alex at itvault dot info>
- * @copyright © 2012-2017 Alexander Yancharuk
+ * @copyright © 2012-2018 Alexander Yancharuk
  * @date      2015-08-10 11:32
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
@@ -29,9 +29,13 @@ class ErrorRenderer implements \SplObserver
 
 	/**
 	 * Receive update from subject
+	 *
 	 * @link http://php.net/manual/en/splobserver.update.php
 	 *
-	 * @param \SplSubject $subject The SplSubject notifying the observer of an update.
+	 * @param \SplSubject $subject The SplSubject notifying the observer of an
+	 *                             update.
+	 *
+	 * @throws \Exception
 	 */
 	public function update(\SplSubject $subject)
 	{

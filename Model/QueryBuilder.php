@@ -7,7 +7,7 @@
  * PHP version 7.0+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
- * @copyright © 2012-2017 Alexander Yancharuk
+ * @copyright © 2012-2018 Alexander Yancharuk
  * @date      Сбт Июл 07 21:55:54 2012
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
@@ -47,6 +47,7 @@ class QueryBuilder implements QueryBuilderInterface
 	 * @param ActiveRecord $model Экземпляр модели
 	 *
 	 * @return string
+	 * @throws Exception
 	 */
 	public function insert(ActiveRecord $model)
 	{
@@ -80,9 +81,12 @@ class QueryBuilder implements QueryBuilderInterface
 
 	/**
 	 * Функция безопасности переменных
+	 *
 	 * @param ActiveRecord $model
-	 * @param $property
+	 * @param mixed        $property
+	 *
 	 * @return mixed
+	 * @throws Exception
 	 */
 	private function sanitize(ActiveRecord $model, $property)
 	{
@@ -110,8 +114,11 @@ class QueryBuilder implements QueryBuilderInterface
 
 	/**
 	 * Построение sql-запроса для update
+	 *
 	 * @param ActiveRecord $model Экземпляр модели
+	 *
 	 * @return string $sql
+	 * @throws Exception
 	 */
 	public function update(ActiveRecord $model)
 	{
