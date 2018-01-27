@@ -31,7 +31,7 @@ class BaseController
 	 *
 	 * @param string $name
 	 *
-	 * return string
+	 * @return string
 	 */
 	protected function getParam($name)
 	{

@@ -28,7 +28,6 @@ class RestApiController extends BaseController
 	 * Call specific method depending on request method
 	 *
 	 * @return array|null
-	 * @throws NotAllowedException
 	 */
 	public function index()
 	{
