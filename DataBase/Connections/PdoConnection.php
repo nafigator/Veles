@@ -39,6 +39,7 @@ class PdoConnection extends DbConnection
 	 * Create connection
 	 *
 	 * @return \PDO
+	 * @throws Exception
 	 */
 	public function create()
 	{

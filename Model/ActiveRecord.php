@@ -43,6 +43,7 @@ class ActiveRecord extends StdClass
 	 * Update data in database
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
 	protected function update()
 	{
@@ -55,6 +56,7 @@ class ActiveRecord extends StdClass
 	 * Insert data in database
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
 	protected function insert()
 	{
@@ -65,6 +67,14 @@ class ActiveRecord extends StdClass
 		return $result;
 	}
 
+	/**
+	 * Method with true|false return and setting properties for current object
+	 *
+	 * @param $sql
+	 *
+	 * @return bool
+	 * @throws \Exception
+	 */
 	protected function getResult($sql)
 	{
 		$result = Db::row($sql);
@@ -99,6 +109,7 @@ class ActiveRecord extends StdClass
 	 * @param int $identifier Model ID
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
 	public function getById($identifier)
 	{
@@ -114,6 +125,7 @@ class ActiveRecord extends StdClass
 	 * @param bool|DbPaginator $pager  Pagination object
 	 *
 	 * @return bool|array
+	 * @throws \Exception
 	 */
 	public function getAll($filter = false, $pager = false)
 	{
@@ -140,6 +152,7 @@ class ActiveRecord extends StdClass
 	 * Save data
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
 	public function save()
 	{
@@ -179,6 +192,7 @@ class ActiveRecord extends StdClass
 	 * @param bool|DbFilter $filter Filter object
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
 	public function find($filter = false)
 	{
@@ -202,6 +216,7 @@ class ActiveRecord extends StdClass
 	 * @param bool|DbPaginator $pager Pagination object
 	 *
 	 * @return array|bool
+	 * @throws \Exception
 	 */
 	public function query($sql, $pager = false)
 	{

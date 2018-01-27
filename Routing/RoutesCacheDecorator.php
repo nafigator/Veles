@@ -36,6 +36,7 @@ class RoutesCacheDecorator extends AbstractRoutesConfig
 	 * Returns array that contains routes configuration
 	 *
 	 * @return array
+	 * @throws \Exception
 	 */
 	public function getData()
 	{
@@ -71,6 +72,7 @@ class RoutesCacheDecorator extends AbstractRoutesConfig
 	 * @param string $name Name of section
 	 *
 	 * @return array
+	 * @throws \Exception
 	 */
 	public function getSection($name)
 	{

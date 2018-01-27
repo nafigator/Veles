@@ -30,6 +30,8 @@ class Application
 
 	/**
 	 * Application start
+	 *
+	 * @throws \Exception
 	 */
 	public function run()
 	{

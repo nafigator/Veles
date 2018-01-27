@@ -33,11 +33,12 @@ class Db extends DbTransactionHandler
 	/**
 	 * Получение значения столбца таблицы
 	 *
-	 * @param string $sql SQL-запрос
-	 * @param array $params Плейсхолдеры запроса
-	 * @param string|null $types Типы плейсхолдеров
+	 * @param string      $sql    SQL-запрос
+	 * @param array       $params Плейсхолдеры запроса
+	 * @param string|null $types  Типы плейсхолдеров
 	 *
 	 * @return mixed Returns string or false on failure or empty result
+	 * @throws \Exception
 	 */
 	public static function value($sql, array $params = [], $types = null)
 	{
@@ -47,11 +48,12 @@ class Db extends DbTransactionHandler
 	/**
 	 * Получение строки таблицы в виде ассоциативного массива
 	 *
-	 * @param string $sql SQL-запрос
-	 * @param array $params Плейсхолдеры запроса
-	 * @param string|null $types Типы плейсхолдеров
+	 * @param string      $sql    SQL-запрос
+	 * @param array       $params Плейсхолдеры запроса
+	 * @param string|null $types  Типы плейсхолдеров
 	 *
 	 * @return mixed Returns array or false on failure or empty result
+	 * @throws \Exception
 	 */
 	public static function row($sql, array $params = [], $types = null)
 	{
@@ -61,11 +63,12 @@ class Db extends DbTransactionHandler
 	/**
 	 * Получение результата в виде коллекции ассоциативных массивов
 	 *
-	 * @param string $sql SQL-запрос
-	 * @param array $params Плейсхолдеры запроса
-	 * @param string|null $types Типы плейсхолдеров
+	 * @param string      $sql    SQL-запрос
+	 * @param array       $params Плейсхолдеры запроса
+	 * @param string|null $types  Типы плейсхолдеров
 	 *
 	 * @return mixed Returns array or false on failure
+	 * @throws \Exception
 	 */
 	public static function rows($sql, array $params = [], $types = null)
 	{
@@ -75,11 +78,12 @@ class Db extends DbTransactionHandler
 	/**
 	 * Запуск произвольного не SELECT запроса
 	 *
-	 * @param string $sql Non-SELECT SQL-запрос
-	 * @param array $params Плейсхолдеры запроса
-	 * @param string|null $types Типы плейсхолдеров
+	 * @param string      $sql    Non-SELECT SQL-запрос
+	 * @param array       $params Плейсхолдеры запроса
+	 * @param string|null $types  Типы плейсхолдеров
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
 	public static function query($sql, array $params = [], $types = null)
 	{

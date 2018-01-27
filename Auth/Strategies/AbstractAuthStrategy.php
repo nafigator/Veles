@@ -90,6 +90,7 @@ abstract class AbstractAuthStrategy
 	 * @param DbFilter $filter
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
 	protected function findUser(DbFilter $filter)
 	{

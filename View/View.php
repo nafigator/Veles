@@ -57,6 +57,8 @@ class View
 	 * Method for output variables setup
 	 *
 	 * @param mixed $vars Output variables
+	 *
+	 * @throws Exception
 	 */
 	public static function set($vars)
 	{
@@ -67,6 +69,8 @@ class View
 	 * Output variables cleanup
 	 *
 	 * @param array $vars Variables array for cleanup
+	 *
+	 * @throws Exception
 	 */
 	public static function del(array $vars)
 	{
@@ -77,6 +81,8 @@ class View
 	 * Output method
 	 *
 	 * @param string $path Path to template
+	 *
+	 * @throws Exception
 	 */
 	public static function show($path)
 	{
@@ -89,6 +95,7 @@ class View
 	 * @param string $path Path to template
 	 *
 	 * @return string View content
+	 * @throws Exception
 	 */
 	public static function get($path)
 	{
@@ -101,6 +108,7 @@ class View
 	 * @param $tpl
 	 *
 	 * @return bool
+	 * @throws Exception
 	 */
 	public static function isCached($tpl)
 	{

@@ -89,6 +89,7 @@ class PdoAdapter implements DbAdapterInterface
 	 * @param string|null $types  Placeholders types
 	 *
 	 * @return mixed
+	 * @throws DbException
 	 */
 	public function value($sql, array $params, $types)
 	{
@@ -112,6 +113,7 @@ class PdoAdapter implements DbAdapterInterface
 	 * @param string|null $types  Placeholders types
 	 *
 	 * @return mixed              Depends on fetch type
+	 * @throws DbException
 	 */
 	public function row($sql, array $params, $types)
 	{
@@ -135,6 +137,7 @@ class PdoAdapter implements DbAdapterInterface
 	 * @param string|null $types  Placeholders types
 	 *
 	 * @return mixed              Depends on fetch type
+	 * @throws DbException
 	 */
 	public function rows($sql, array $params, $types)
 	{
@@ -206,6 +209,7 @@ class PdoAdapter implements DbAdapterInterface
 	 * @param string|null $types  Placeholders types
 	 *
 	 * @return bool
+	 * @throws DbException
 	 */
 	public function query($sql, array $params, $types)
 	{

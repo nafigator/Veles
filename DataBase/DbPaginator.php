@@ -113,6 +113,8 @@ class DbPaginator extends stdClass
 
 	/**
 	 * Pages quantity
+	 *
+	 * @throws \Exception
 	 */
 	public function getMaxPages()
 	{
@@ -127,6 +129,8 @@ class DbPaginator extends stdClass
 
 	/**
 	 * Pages quantity calculation
+	 *
+	 * @throws \Exception
 	 */
 	public function calcMaxPages()
 	{

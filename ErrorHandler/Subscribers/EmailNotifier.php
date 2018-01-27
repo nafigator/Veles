@@ -30,9 +30,13 @@ class EmailNotifier extends AbstractEmail implements \SplObserver
 
 	/**
 	 * Receive update from subject
+	 *
 	 * @link http://php.net/manual/en/splobserver.update.php
 	 *
-	 * @param \SplSubject $subject The SplSubject notifying the observer of an update.
+	 * @param \SplSubject $subject The SplSubject notifying the observer of an
+	 *                             update.
+	 *
+	 * @throws \Exception
 	 */
 	public function update(\SplSubject $subject)
 	{

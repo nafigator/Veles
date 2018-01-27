@@ -47,6 +47,7 @@ class QueryBuilder implements QueryBuilderInterface
 	 * @param ActiveRecord $model Экземпляр модели
 	 *
 	 * @return string
+	 * @throws Exception
 	 */
 	public function insert(ActiveRecord $model)
 	{
@@ -80,9 +81,12 @@ class QueryBuilder implements QueryBuilderInterface
 
 	/**
 	 * Функция безопасности переменных
+	 *
 	 * @param ActiveRecord $model
-	 * @param $property
+	 * @param mixed        $property
+	 *
 	 * @return mixed
+	 * @throws Exception
 	 */
 	private function sanitize(ActiveRecord $model, $property)
 	{
@@ -110,8 +114,11 @@ class QueryBuilder implements QueryBuilderInterface
 
 	/**
 	 * Построение sql-запроса для update
+	 *
 	 * @param ActiveRecord $model Экземпляр модели
+	 *
 	 * @return string $sql
+	 * @throws Exception
 	 */
 	public function update(ActiveRecord $model)
 	{

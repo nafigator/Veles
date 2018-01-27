@@ -110,7 +110,10 @@ class ErrorBuilder
 	}
 
 	/**
+	 * Build error in HTML format
+	 *
 	 * @return string
+	 * @throws \Exception
 	 */
 	public function getHtml()
 	{
