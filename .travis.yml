@@ -29,12 +29,12 @@ before_script:
         phpenv config-rm xdebug.ini
         PHPUNIT_FLAGS="-c Tests/travisci-phpunit.xml"
         phpenv config-add Tests/travisci.ini
-        wget -q -O phpunit.phar https://phar.phpunit.de/phpunit.phar
+        wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-6.5.phar
         ;;
       7.1)
         PHPUNIT_FLAGS="-c Tests/travisci-phpunit.xml --coverage-clover build/logs/clover.xml"
         phpenv config-add Tests/travisci.ini
-        wget -q -O phpunit.phar https://phar.phpunit.de/phpunit.phar
+        wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-6.5.phar
         curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         chmod +x ./cc-test-reporter
         ./cc-test-reporter before-build
