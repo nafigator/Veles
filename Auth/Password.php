@@ -30,7 +30,7 @@ class Password
 	 * @param $cookie_hash
 	 * @return bool
 	 */
-	public static function checkCookieHash(User $user, &$cookie_hash)
+	public static function checkCookieHash(User $user, $cookie_hash)
 	{
 		return $user->getCookieHash() === $cookie_hash;
 	}
