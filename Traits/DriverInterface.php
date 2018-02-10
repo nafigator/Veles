@@ -28,6 +28,8 @@ interface DriverInterface
 	 * Set adapter driver
 	 *
 	 * @param mixed $driver
+	 *
+	 * @return static
 	 */
 	public function setDriver($driver);
 }

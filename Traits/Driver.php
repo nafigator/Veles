@@ -34,9 +34,13 @@ trait Driver
 	 * Set adapter driver
 	 *
 	 * @param mixed $driver
+	 *
+	 * @return Driver
 	 */
 	public function setDriver($driver)
 	{
 		$this->driver = $driver;
+
+		return $this;
 	}
 }
