@@ -51,8 +51,6 @@ class Application implements
 		$controller = $route->getController();
 		$action     = $route->getActionName();
 
-		View::setAdapter($route->getAdapter());
-
 		if ($vars = $controller->setApplication($this)->$action()) {
 			View::set($vars);
 		}
