@@ -13,7 +13,9 @@
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
  */
 
-namespace Veles\Application;
+namespace Veles\Application\Traits;
+
+use Veles\Application\Application;
 
 trait ApplicationTrait
 {
@@ -32,11 +34,11 @@ trait ApplicationTrait
 	/**
 	 * Set application
 	 *
-	 * @param mixed $application
+	 * @param Application $application
 	 *
 	 * @return $this
 	 */
-	public function setApplication($application)
+	public function setApplication(Application $application)
 	{
 		$this->application = $application;
 
