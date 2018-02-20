@@ -13,9 +13,9 @@
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
  */
 
-namespace Veles\Application;
+namespace Veles\Application\Traits;
 
-use Application\EnvironmentAwareInterface;
+use Veles\Application\Environment;
 
 trait EnvironmentTrait
 {
@@ -27,7 +27,7 @@ trait EnvironmentTrait
 	 *
 	 * @param Environment $environment
 	 *
-	 * @return EnvironmentAwareInterface|EnvironmentTrait
+	 * @return $this
 	 */
 	public function setEnvironment(Environment $environment)
 	{
