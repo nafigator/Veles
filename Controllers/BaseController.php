@@ -15,14 +15,15 @@
 
 namespace Veles\Controllers;
 
-use Veles\Application\ApplicationTrait;
+use Application\Interfaces\ApplicationAwareInterface;
+use Veles\Application\Traits\ApplicationTrait;
 
 /**
  * Class   BaseController
  *
  * @author Yancharuk Alexander <alex at itvault dot info>
  */
-class BaseController
+class BaseController implements ApplicationAwareInterface
 {
 	use ApplicationTrait;
 

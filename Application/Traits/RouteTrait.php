@@ -13,7 +13,7 @@
  *            <http://opensource.org/licenses/BSD-3-Clause>
  */
 
-namespace Veles\Application;
+namespace Veles\Application\Traits;
 
 use Veles\Routing\Route;
 
