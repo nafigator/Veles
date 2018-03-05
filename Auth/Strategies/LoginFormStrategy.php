@@ -44,6 +44,7 @@ class LoginFormStrategy extends AbstractAuthStrategy
 	 * User authentication by login form
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
 	public function identify()
 	{

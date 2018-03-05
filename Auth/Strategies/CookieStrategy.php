@@ -47,6 +47,7 @@ class CookieStrategy extends AbstractAuthStrategy
 	 * User authentication by cookies
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
 	public function identify()
 	{
