@@ -35,6 +35,7 @@ class DbPaginator extends stdClass
 	public $template;
 	public $first_link;
 	public $last_link;
+	public $index;
 
 	/**
 	 * Constructor
