@@ -16,6 +16,7 @@
 namespace Veles\DataBase\Loggers;
 
 use SplSubject;
+use Veles\DataBase\Adapters\DbAdapterInterface;
 
 /**
  * Class PdoErrorLogger
@@ -54,15 +55,12 @@ class PdoErrorLogger implements \SplObserver
 	 */
 	public function update(SplSubject $subject)
 	{
-		/** @noinspection PhpUndefinedMethodInspection */
 		/** @var \PDO $conn */
-		$conn = $subject->getResource();
-		/** @noinspection PhpUndefinedMethodInspection */
-		$conn_err = $conn->errorCode();
-		/** @noinspection PhpUndefinedMethodInspection */
+		/** @var DbAdapterInterface $subject */
 		/** @var \PdoStatement $stmt */
-		$stmt = $subject->getStmt();
-		/** @noinspection PhpUndefinedMethodInspection */
+		$conn     = $subject->getResource();
+		$stmt     = $subject->getStmt();
+		$conn_err = $conn->errorCode();
 		$stmt_err = $stmt->errorCode();
 
 		if ('00000' === $conn_err && '00000' === $stmt_err) {
