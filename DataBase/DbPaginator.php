@@ -33,6 +33,8 @@ class DbPaginator extends stdClass
 	public $page_nums;
 	public $curr_page;
 	public $template;
+	public $first_link;
+	public $last_link;
 
 	/**
 	 * Constructor
