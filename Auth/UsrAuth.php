@@ -15,6 +15,7 @@
 
 namespace Veles\Auth;
 
+use Traits\SingletonInstanceInterface;
 use Veles\Model\User;
 use Veles\Traits\SingletonInstance;
 
@@ -22,7 +23,7 @@ use Veles\Traits\SingletonInstance;
  * User authentication class
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-class UsrAuth
+class UsrAuth implements SingletonInstanceInterface
 {
 	protected $identified = false;
 	protected $strategy;

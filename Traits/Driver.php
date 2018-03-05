@@ -35,7 +35,7 @@ trait Driver
 	 *
 	 * @param mixed $driver
 	 *
-	 * @return Driver
+	 * @return $this
 	 */
 	public function setDriver($driver)
 	{

@@ -15,7 +15,7 @@
 
 namespace Veles\Model;
 
-use StdClass;
+use Traits\DynamicPropHandlerInterface;
 use Veles\DataBase\Db;
 use Veles\DataBase\DbFilter;
 use Veles\DataBase\DbPaginator;
@@ -26,7 +26,7 @@ use Veles\Traits\DynamicPropHandler;
  *
  * @author Alexander Yancharuk <alex at itvault dot info>
  */
-class ActiveRecord extends StdClass
+class ActiveRecord implements DynamicPropHandlerInterface
 {
 	/**
 	 * @const string|null Table name

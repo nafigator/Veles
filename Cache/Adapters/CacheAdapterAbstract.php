@@ -15,6 +15,9 @@
 
 namespace Veles\Cache\Adapters;
 
+use Traits\DriverInterface;
+use Traits\LazyCallsInterface;
+use Traits\SingletonInstanceInterface;
 use Veles\Traits\LazyCalls;
 
 /**
@@ -22,7 +25,10 @@ use Veles\Traits\LazyCalls;
  *
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-abstract class CacheAdapterAbstract
+abstract class CacheAdapterAbstract implements
+	LazyCallsInterface,
+	DriverInterface,
+	SingletonInstanceInterface
 {
 	use LazyCalls;
 

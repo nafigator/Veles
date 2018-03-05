@@ -16,6 +16,7 @@
 namespace Veles\DataBase\Connections;
 
 use Exception;
+use Traits\DriverInterface;
 use Veles\Traits\Driver;
 
 /**
@@ -25,7 +26,7 @@ use Veles\Traits\Driver;
  *
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-abstract class DbConnection
+abstract class DbConnection implements DriverInterface
 {
 	/** @var string */
 	protected $user_name;

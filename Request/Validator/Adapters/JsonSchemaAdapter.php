@@ -15,6 +15,7 @@
 
 namespace Veles\Request\Validator\Adapters;
 
+use Traits\DriverInterface;
 use Veles\Request\Validator\ValidatorInterface;
 use Veles\Traits\Driver;
 
@@ -23,7 +24,7 @@ use Veles\Traits\Driver;
  *
  * @author Yancharuk Alexander <alex at itvault at info>
  */
-class JsonSchemaAdapter implements ValidatorInterface
+class JsonSchemaAdapter implements ValidatorInterface, DriverInterface
 {
 	use Driver;
 
