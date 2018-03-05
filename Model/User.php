@@ -32,10 +32,10 @@ class User extends ActiveRecord
 		'group'      => 'int',
 		'last_login' => 'string'
 	];
-	protected $id;
-	protected $email;
-	protected $hash;
-	protected $group;
+	public $id;
+	public $email;
+	public $hash;
+	public $group;
 
 	/**
 	 * Метод для получения ID пользователя
