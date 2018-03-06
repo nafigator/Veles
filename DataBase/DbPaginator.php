@@ -92,7 +92,7 @@ class DbPaginator extends stdClass
 
 	/**
 	 * Elements per page setting
-	 * @param int $limit Кол-во выводимых элементов на странице
+	 * @param mixed $limit Кол-во выводимых элементов на странице
 	 */
 	public function setLimit($limit)
 	{
