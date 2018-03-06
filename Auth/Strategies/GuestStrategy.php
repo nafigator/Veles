@@ -36,4 +36,16 @@ class GuestStrategy extends AbstractAuthStrategy
 
 		return false;
 	}
+
+	/**
+	 * Stub
+	 *
+	 * @param array $input
+	 *
+	 * @return void
+	 */
+	public function errorHandle(array $input)
+	{
+		unset($input);
+	}
 }
