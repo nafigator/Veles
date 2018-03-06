@@ -61,7 +61,7 @@ abstract class AbstractAuthStrategy
 	 *
 	 * @return void
 	 */
-	abstract function errorHandle(array $input);
+	abstract public function errorHandle(array $input);
 
 	/**
 	 * Auth cookies setup
