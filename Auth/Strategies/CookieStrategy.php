@@ -111,4 +111,17 @@ class CookieStrategy extends AbstractAuthStrategy
 
 		return $this;
 	}
+
+	/**
+	 * Error handling for current auth strategy
+	 *
+	 * @param array $input
+	 *
+	 * @return void
+	 */
+	public function errorHandle(array $input)
+	{
+		$input['id'] || $this->setError(static::ERR_NOT_VALID_UID);
+		$input['pw'] || $this->setError(static::ERR_NOT_VALID_HASH);
+	}
 }

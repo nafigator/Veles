@@ -110,4 +110,17 @@ class LoginFormStrategy extends AbstractAuthStrategy
 
 		return $this;
 	}
+
+	/**
+	 * Error handling for current auth strategy
+	 *
+	 * @param array $input
+	 *
+	 * @return void
+	 */
+	public function errorHandle(array $input)
+	{
+		$input['ln'] || $this->setError(static::ERR_NOT_VALID_LOGIN);
+		$input['pw'] || $this->setError(static::ERR_NOT_VALID_PASSWORD);
+	}
 }

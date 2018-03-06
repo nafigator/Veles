@@ -55,6 +55,17 @@ abstract class AbstractAuthStrategy
 	abstract public function identify();
 
 	/**
+	 * Error handling for current auth strategy
+	 *
+	 * @param array $input
+	 *
+	 * @return void
+	 */
+	public function errorHandle(array $input)
+	{
+	}
+
+	/**
 	 * Auth cookies setup
 	 *
 	 * @param array $params		Cookie params

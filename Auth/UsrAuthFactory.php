@@ -70,15 +70,15 @@ class UsrAuthFactory
 				$auth = new LoginFormStrategy(
 					$post['ln'], $post['pw'], new User
 				);
-				$post['ln'] || $auth->setError($auth::ERR_NOT_VALID_LOGIN);
-				$post['pw'] || $auth->setError($auth::ERR_NOT_VALID_PASSWORD);
+				$auth->errorHandle($post);
+
 				break;
 			case (isset($cookies['id'], $cookies['pw'])):
 				$auth = new CookieStrategy(
 					$cookies['id'], $cookies['pw'], new User
 				);
-				$cookies['id'] || $auth->setError($auth::ERR_NOT_VALID_UID);
-				$cookies['pw'] || $auth->setError($auth::ERR_NOT_VALID_HASH);
+				$auth->errorHandle($cookies);
+
 				break;
 			default:
 				$auth = new GuestStrategy(new User);
