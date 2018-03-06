@@ -24,13 +24,7 @@ class ModelParams
 {
 	public static function getType($type)
 	{
-		$string_pattern = '/(:?(?:var)?char\(\d+\)'
-			. '|(?:medium)?text'
-			. '|(?:enum).*'
-			. '|(?:date)?time(?:stamp)?'
-			. '|date'
-			. '|bit\(\d+\)'
-			. ')/i';
+		$string_pattern = static::getStringPattern();
 		$int_pattern    = '/.*int(?:eger)?\(\d+\).*/i';
 		$float_pattern  = '/(?:dec(?:imal)?'
 			. '|float'
@@ -53,5 +47,21 @@ class ModelParams
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Get string pattern
+	 *
+	 * @return string
+	 */
+	protected static function getStringPattern()
+	{
+		return '/(:?(?:var)?char\(\d+\)'
+			. '|(?:medium)?text'
+			. '|(?:enum).*'
+			. '|(?:date)?time(?:stamp)?'
+			. '|date'
+			. '|bit\(\d+\)'
+			. ')/i';
 	}
 }
