@@ -15,6 +15,8 @@
 
 namespace Veles\Tools;
 
+use Model\Type;
+
 /**
  * Class   ModelParams
  *
@@ -26,31 +28,22 @@ class ModelParams
 	{
 		$string_pattern = static::getStringPattern();
 		$int_pattern    = '/.*int(?:eger)?\(\d+\).*/i';
-		$float_pattern  = '/(?:dec(?:imal)?'
-			. '|float'
-			. '|real'
-			. '|double'
-			. ')/i';
+		$float_pattern  = static::getFloatPattern();
 
 		switch (1) {
 			case preg_match($string_pattern, $type):
-				$result = 'string';
-				break;
+				return Type::STRING;
 			case preg_match($int_pattern, $type):
-				$result = 'int';
-				break;
+				return Type::INT;
 			case preg_match($float_pattern, $type):
-				$result = 'float';
-				break;
-			default:
-				throw new \RuntimeException('Unknown data type');
+				return Type::FLOAT;
 		}
 
-		return $result;
+		throw new \RuntimeException('Unknown data type');
 	}
 
 	/**
-	 * Get string pattern
+	 * Getting string pattern
 	 *
 	 * @return string
 	 */
@@ -62,6 +55,20 @@ class ModelParams
 			. '|(?:date)?time(?:stamp)?'
 			. '|date'
 			. '|bit\(\d+\)'
+			. ')/i';
+	}
+
+	/**
+	 * Getting float pattern
+	 *
+	 * @return string
+	 */
+	protected static function getFloatPattern()
+	{
+		return '/(?:dec(?:imal)?'
+			. '|float'
+			. '|real'
+			. '|double'
 			. ')/i';
 	}
 }
