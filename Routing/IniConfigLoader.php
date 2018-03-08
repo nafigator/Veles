@@ -46,7 +46,7 @@ class IniConfigLoader extends AbstractConfigLoader
 	 *
 	 * @param array &$config
 	 */
-	private function buildTree(array &$config)
+	protected function buildTree(array &$config)
 	{
 		foreach ($config as $name => $value) {
 			$params = explode('.', $name);
@@ -55,19 +55,31 @@ class IniConfigLoader extends AbstractConfigLoader
 				continue;
 			}
 
-			$ptr =& $config;
-			$last = end($params);
-
-			foreach ($params as $param) {
-				if ($param === $last) {
-					$ptr[$param] = $value;
-					continue;
-				}
-
-				$ptr =& $ptr[$param];
-			}
+			$this->processConfig($config, $params, $value);
 
 			unset($config[$name]);
+		}
+	}
+
+	/**
+	 * Processing config line
+	 *
+	 * @param array  $config
+	 * @param array  $params
+	 * @param string $value
+	 */
+	protected function processConfig(array &$config, array $params, $value)
+	{
+		$ptr =& $config;
+		$last = end($params);
+
+		foreach ($params as $param) {
+			if ($param === $last) {
+				$ptr[$param] = $value;
+				continue;
+			}
+
+			$ptr =& $ptr[$param];
 		}
 	}
 }
