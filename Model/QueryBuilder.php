@@ -133,7 +133,7 @@ class QueryBuilder implements QueryBuilderInterface
 		foreach ($properties as $property) {
 			$value = $this->sanitize($model, $property);
 
-			if (null === $value || 'id' === $property) {
+			if (null === $value) {
 				continue;
 			}
 
