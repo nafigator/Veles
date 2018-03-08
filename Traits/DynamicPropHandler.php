@@ -15,6 +15,8 @@
 
 namespace Veles\Traits;
 
+use Model\Type;
+
 /**
  * Trait DynamicPropHandler
  *
@@ -25,7 +27,14 @@ namespace Veles\Traits;
  */
 trait DynamicPropHandler
 {
-	protected $map = [];
+	/**
+	 * Keys - property names, values - proper values of \Model\Type constants
+	 *
+	 * @var array
+	 */
+	protected $map = [
+		'id' => Type::INT,
+	];
 
 	/**
 	 * Method for setting parameters
