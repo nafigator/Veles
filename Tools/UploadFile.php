@@ -106,24 +106,17 @@ class UploadFile extends File
 		$array     = explode('.', $this->getOrigName());
 		$extension = strtolower(end($array));
 
-		$this->setHash(
-			hash_file($this->getHashAlgorithm(), $this->getTmpPath())
-		)
+		$this->setHash(hash_file($this->getHashAlgorithm(), $this->getTmpPath()))
 			->setSubDir(substr($this->getHash(), 0, 2))
 			->setName(substr($this->getHash(), 2) . '.' . $extension)
 			->setWwwPath(
 				str_replace($_SERVER['DOCUMENT_ROOT'], '', $this->getDir())
-				. DIRECTORY_SEPARATOR
-				. $this->getSubDir()
-				. DIRECTORY_SEPARATOR
+				. DIRECTORY_SEPARATOR . $this->getSubDir() . DIRECTORY_SEPARATOR
 				. $this->getName()
 			)
 			->setPath(
-				$this->getDir()
-				. DIRECTORY_SEPARATOR
-				. $this->getSubDir()
-				. DIRECTORY_SEPARATOR
-				. $this->getName()
+				$this->getDir() . DIRECTORY_SEPARATOR . $this->getSubDir()
+				. DIRECTORY_SEPARATOR . $this->getName()
 			);
 	}
 
