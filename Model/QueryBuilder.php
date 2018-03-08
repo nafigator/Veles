@@ -97,19 +97,14 @@ class QueryBuilder implements QueryBuilderInterface
 			return null;
 		}
 
-		switch ($model->getMap()[$property]) {
-			case 'int':
-				$value = (int) $model->$property;
-				break;
-			case 'float':
-				$value = (float) $model->$property;
-				break;
-			case 'string':
-				$value = Db::escape($model->$property);
-				break;
-			default:
-				$value = null;
-				break;
+		$value = null;
+		$type  = $model->getMap()[$property];
+
+		if ('string' === $type) {
+			$value = Db::escape($model->$property);
+		} else {
+			$value = $model->$property;
+			settype($value, $type);
 		}
 
 		return $value;

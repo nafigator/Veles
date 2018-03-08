@@ -15,6 +15,7 @@
 
 namespace Veles\Model;
 
+use Model\Type;
 use Veles\Auth\UsrGroup;
 
 /**
@@ -26,11 +27,11 @@ class User extends ActiveRecord
 	const TBL_USER_INFO = 'users_info';
 
 	protected $map = [
-		'id'         => 'int',
-		'email'      => 'string',
-		'hash'       => 'string',
-		'group'      => 'int',
-		'last_login' => 'string'
+		'id'         => Type::INT,
+		'email'      => Type::STRING,
+		'hash'       => Type::STRING,
+		'group'      => Type::INT,
+		'last_login' => Type::STRING,
 	];
 	public $email;
 	public $hash;

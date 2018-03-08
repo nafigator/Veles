@@ -15,6 +15,7 @@
 
 namespace Veles\Model;
 
+use Model\Type;
 use Traits\DynamicPropHandlerInterface;
 use Veles\DataBase\Db;
 use Veles\DataBase\DbFilter;
