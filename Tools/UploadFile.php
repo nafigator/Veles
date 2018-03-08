@@ -23,7 +23,7 @@ namespace Veles\Tools;
 class UploadFile extends File
 {
 	protected $tmp_path;
-	protected $hash;
+	protected $hash = '';
 	protected $sub_dir;
 	protected $orig_name;
 	protected $www_path;
@@ -130,7 +130,7 @@ class UploadFile extends File
 	/**
 	 * Get uploaded file name hash
 	 *
-	 * @return null|string
+	 * @return string
 	 */
 	public function getHash()
 	{
