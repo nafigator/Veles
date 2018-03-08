@@ -64,20 +64,13 @@ class QueryBuilder implements QueryBuilderInterface
 			$arr['values'] .= "$value, ";
 		}
 
-		$arr = array_map(
-			function ($val) {
-				return rtrim($val, ', ');
-			},
-			$arr
-		);
+		$callback = function ($val) {
+			return rtrim($val, ', ');
+		};
 
-		$sql = '
-			INSERT
-				"' . $model::TBL_NAME . "\"
-				($arr[fields])
-			VALUES
-				($arr[values])
-		";
+		$table = $model::TBL_NAME;
+		$arr   = array_map($callback, $arr);
+		$sql   = "INSERT \"$table\" ($arr[fields]) VALUES ($arr[values])";
 
 		return $sql;
 	}
@@ -136,14 +129,7 @@ class QueryBuilder implements QueryBuilderInterface
 
 		$params = rtrim($params, ', ');
 
-		$sql = "
-			UPDATE
-				\"$table\"
-			SET
-				$params
-			WHERE
-				id = $model->id
-		";
+		$sql = "UPDATE \"$table\" SET $params WHERE id = $model->id";
 
 		return $sql;
 	}
