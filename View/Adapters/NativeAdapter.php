@@ -85,7 +85,7 @@ class NativeAdapter extends ViewAdapterAbstract
 
 		ob_start();
 		/** @noinspection PhpIncludeInspection */
-		include self::getTemplateDir() . $path;
+		include $this->getTemplateDir() . $path;
 		$output = ob_get_contents();
 		ob_end_clean();
 
