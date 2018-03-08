@@ -124,8 +124,10 @@ class QueryBuilder implements QueryBuilderInterface
 	{
 		$params = '';
 		$table  = $model::TBL_NAME;
+		$properties = array_keys($model->getMap());
+		unset($properties['id']);
 
-		foreach (array_keys($model->getMap()) as $property) {
+		foreach ($properties as $property) {
 			$value = $this->sanitize($model, $property);
 
 			if (null === $value || 'id' === $property) {
