@@ -26,12 +26,16 @@ use Veles\DataBase\Adapters\DbAdapterInterface;
 class PdoErrorLogger implements \SplObserver
 {
 	/** @var  string */
-	private $path;
+	protected $path;
+	/** @var \PDO */
+	protected $conn;
+	/** @var \PDOStatement */
+	protected $stmt;
 
 	/**
 	 * Set log path
 	 *
-	 * @param string $path  Путь к логу
+	 * @param string $path
 	 */
 	public function setPath($path)
 	{
@@ -55,22 +59,34 @@ class PdoErrorLogger implements \SplObserver
 	 */
 	public function update(SplSubject $subject)
 	{
-		/** @var \PDO $conn */
-		/** @var DbAdapterInterface $subject */
-		/** @var \PdoStatement $stmt */
-		$conn     = $subject->getResource();
-		$stmt     = $subject->getStmt();
-		$conn_err = $conn->errorCode();
-		$stmt_err = $stmt->errorCode();
+		$this->updateConnParams($subject);
+		$conn_err = $this->conn->errorCode();
+		$stmt_err = $this->stmt->errorCode();
 
 		if ('00000' === $conn_err && '00000' === $stmt_err) {
 			return;
 		}
 
 		$error_info = ('00000' === $conn_err)
-			? implode('; ', $stmt->errorInfo()) . PHP_EOL
-			: implode('; ', $conn->errorInfo()) . PHP_EOL;
+			? implode('; ', $this->stmt->errorInfo()) . PHP_EOL
+			: implode('; ', $this->conn->errorInfo()) . PHP_EOL;
 
 		error_log($error_info, 3, $this->getPath());
+	}
+
+	/**
+	 * Set connection and statement properties
+	 *
+	 * @param SplSubject $subject
+	 */
+	protected function updateConnParams(SplSubject $subject)
+	{
+		if (!$subject instanceof DbAdapterInterface) {
+			$msg = '$subject must be instance of InvalidArgumentException';
+			throw new \InvalidArgumentException($msg);
+		}
+
+		$this->conn = $subject->getResource();
+		$this->stmt = $subject->getStmt();
 	}
 }

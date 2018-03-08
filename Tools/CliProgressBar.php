@@ -115,7 +115,7 @@ class CliProgressBar
 		$done = number_format($current / $this->percent, 2);
 
 		if ($done < 100) {
-			$position = floor($this->pb_percent * $done);
+			$position = (int) floor($this->pb_percent * $done);
 			$end = "\033[K\r";
 		} else {
 			$position = $this->width;
