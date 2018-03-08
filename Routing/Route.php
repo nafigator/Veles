@@ -53,20 +53,31 @@ class Route extends RouteBase
 				continue;
 			}
 
-			$this->config = $route;
-			$this->name   = $name;
-
-			if (isset($route['tpl'])) {
-				$this->template = $route['tpl'];
-			}
-
-			if ('Veles\Routing\RouteRegex' === $route['class']) {
-				/** @noinspection PhpUndefinedMethodInspection */
-				$this->params = $route['class']::getParams();
-			}
+			$this->process($name, $route);
 		}
 
 		return $this->execNotFoundHandler();
+	}
+
+	/**
+	 * Process route
+	 *
+	 * @param $name
+	 * @param array $config
+	 */
+	protected function process($name, array $config)
+	{
+		$this->config = $config;
+		$this->name   = $name;
+
+		if (isset($config['tpl'])) {
+			$this->template = $config['tpl'];
+		}
+
+		if ('Veles\Routing\RouteRegex' === $config['class']) {
+			/** @noinspection PhpUndefinedMethodInspection */
+			$this->params = $config['class']::getParams();
+		}
 	}
 
 	/**
