@@ -53,7 +53,7 @@ build:
           file: coverage-report.xml
           format: php-clover
 
-      - phpcs-run --encoding=utf-8 --standard=phpcs.xml --ignore=Tests,vendor -w --colors
+      - phpcs-run -p --encoding=utf-8 --standard=phpcs.xml --ignore=Tests,vendor -w --colors
       - php-scrutinizer-run
 
 checks:
