@@ -36,6 +36,8 @@ class ActiveRecord implements DynamicPropHandlerInterface
 	protected $builder;
 	/** @var array Data type map */
 	protected $map = [];
+	/** @var int|null */
+	public $id;
 
 	use DynamicPropHandler;
 
