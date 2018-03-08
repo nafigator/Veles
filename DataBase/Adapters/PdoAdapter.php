@@ -63,6 +63,19 @@ class PdoAdapter implements DbAdapterInterface
 		}
 	}
 
+	protected function execute($sql, array $params, $types)
+	{
+		$this->stmt = $this->getResource()->prepare($sql);
+
+		if (null !== $types) {
+			$this->bindParams($params, $types);
+		}
+
+		return null === $types
+			? $this->stmt->execute($params)
+			: $this->stmt->execute();
+	}
+
 	/**
 	 * Throw DbException with query info
 	 *
@@ -220,14 +233,7 @@ class PdoAdapter implements DbAdapterInterface
 				return (bool) $this->getResource()->query($sql);
 			}
 
-			$this->stmt = $this->getResource()->prepare($sql);
-
-			if (null === $types) {
-				$result = $this->stmt->execute($params);
-			} else {
-				$this->bindParams($params, $types);
-				$result = $this->stmt->execute();
-			}
+			$result = $this->execute($sql, $params, $types);
 		} catch (\PDOException $e) {
 			$this->throwExceptionWithInfo($sql, $params, $e);
 		}
