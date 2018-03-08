@@ -25,7 +25,7 @@ use Veles\View\Adapters\ViewAdapterAbstract;
  */
 class View
 {
-	/** @var ViewAdapterAbstract */
+	/** @var ViewAdapterAbstract|null */
 	protected static $adapter;
 
 	/**
