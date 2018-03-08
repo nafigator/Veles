@@ -52,7 +52,6 @@ class QueryBuilder implements QueryBuilderInterface
 	public function insert(ActiveRecord $model)
 	{
 		$arr = ['fields' => '', 'values' => ''];
-
 		foreach ($model->getMap() as $property => $value) {
 			$value = $this->sanitize($model, $property);
 
@@ -68,9 +67,8 @@ class QueryBuilder implements QueryBuilderInterface
 			return rtrim($val, ', ');
 		};
 
-		$table = $model::TBL_NAME;
 		$arr   = array_map($callback, $arr);
-		$sql   = "INSERT \"$table\" ($arr[fields]) VALUES ($arr[values])";
+		$sql   = 'INSERT "' . $model::TBL_NAME . "\" ($arr[fields]) VALUES ($arr[values])";
 
 		return $sql;
 	}
