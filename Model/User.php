@@ -32,7 +32,6 @@ class User extends ActiveRecord
 		'group'      => 'int',
 		'last_login' => 'string'
 	];
-	public $id;
 	public $email;
 	public $hash;
 	public $group;
