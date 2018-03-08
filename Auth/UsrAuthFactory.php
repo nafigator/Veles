@@ -67,16 +67,12 @@ class UsrAuthFactory
 
 		switch (true) {
 			case (isset($post['ln'], $post['pw'])):
-				$auth = new LoginFormStrategy(
-					$post['ln'], $post['pw'], new User
-				);
+				$auth = new LoginFormStrategy($post['ln'], $post['pw'], new User);
 				$auth->errorHandle($post);
 
 				break;
 			case (isset($cookies['id'], $cookies['pw'])):
-				$auth = new CookieStrategy(
-					$cookies['id'], $cookies['pw'], new User
-				);
+				$auth = new CookieStrategy($cookies['id'], $cookies['pw'], new User);
 				$auth->errorHandle($cookies);
 
 				break;
