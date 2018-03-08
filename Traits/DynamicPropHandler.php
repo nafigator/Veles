@@ -25,6 +25,8 @@ namespace Veles\Traits;
  */
 trait DynamicPropHandler
 {
+	protected $map = [];
+
 	/**
 	 * Method for setting parameters
 	 *

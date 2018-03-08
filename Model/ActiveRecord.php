@@ -34,8 +34,6 @@ class ActiveRecord implements DynamicPropHandlerInterface
 	const TBL_NAME = null;
 	/** @var QueryBuilder */
 	protected $builder;
-	/** @var array Data type map */
-	protected $map = [];
 	/** @var int|null */
 	public $id;
 
