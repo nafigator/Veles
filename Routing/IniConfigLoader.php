@@ -55,7 +55,7 @@ class IniConfigLoader extends AbstractConfigLoader
 				continue;
 			}
 
-			$this->processConfig($config, $params, $value);
+			$this->processLine($config, $params, $value);
 
 			unset($config[$name]);
 		}
@@ -68,7 +68,7 @@ class IniConfigLoader extends AbstractConfigLoader
 	 * @param array  $params
 	 * @param string $value
 	 */
-	protected function processConfig(array &$config, array $params, $value)
+	protected function processLine(array &$config, array $params, $value)
 	{
 		$ptr =& $config;
 		$last = end($params);
