@@ -1,6 +1,7 @@
 filter:
   excluded_paths:
     - "*/Tests/*"
+    - "Tests/*"
 
 build:
   environment:
@@ -31,17 +32,17 @@ build:
 #          - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-6.5.phar
 #          - chmod 755 phpunit.phar
 
-    php71:
-      environment:
-        php:
-          version: 7.1.12
-          ini:
-            'short_open_tag': 'On'
-
-      project_setup:
-        after:
-          - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-6.5.phar
-          - chmod 755 phpunit.phar
+#    php71:
+#      environment:
+#        php:
+#          version: 7.1.12
+#          ini:
+#            'short_open_tag': 'On'
+#
+#      project_setup:
+#        after:
+#          - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-6.5.phar
+#          - chmod 755 phpunit.phar
 
 #    php72:
 #      environment:
