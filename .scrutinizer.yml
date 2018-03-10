@@ -1,6 +1,6 @@
 filter:
   excluded_paths:
-    - "Tests/"
+    - "*/Tests/*"
 
 build:
   environment:
@@ -81,6 +81,4 @@ build:
           format: php-clover
 
 checks:
-  php:
-    excluded_dependencies:
-      - "Tests/"
+  php: true
