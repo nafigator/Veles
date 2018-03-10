@@ -1,13 +1,14 @@
 filter:
   excluded_paths:
-    - Tests/
-    - vendor/
+    - "Tests/"
+    - "vendor/"
 
 build:
   environment:
     memcached:  true
     postgresql: false
     redis:      false
+    mysql:      false
 
   nodes:
     analysis:
@@ -22,6 +23,7 @@ build:
           version: 7.0.20
           ini:
             'short_open_tag': 'On'
+
       project_setup:
         after:
           - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-6.5.phar
