@@ -1,6 +1,6 @@
 filter:
   excluded_paths:
-    - /home/scrutinizer/build/Veles/Tests/*
+    - Tests
 
 build:
   environment:
