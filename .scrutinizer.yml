@@ -14,6 +14,7 @@ build:
       tests:
         override:
           - phpcs-run -p --encoding=utf-8 --standard=phpcs.xml --ignore=Tests,vendor -w --colors
+          - pwd
           - php-scrutinizer-run --enable-security-analysis
 
     php70:
@@ -54,6 +55,7 @@ build:
     override:
       - git clone https://github.com/nafigator/Veles.git
       - cd Veles
+      - pwd
       - git checkout $SCRUTINIZER_BRANCH
       - git clone https://github.com/nafigator/Veles-unit-tests.git Tests
 
