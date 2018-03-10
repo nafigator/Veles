@@ -24,7 +24,7 @@ Read more on [SemVer.org](http://semver.org).
   [CC coverage repo]: https://codeclimate.com/github/nafigator/Veles
   [License img]: https://img.shields.io/badge/license-BSD3-brightgreen.svg
   [License src]: https://tldrlegal.com/license/bsd-3-clause-license-(revised)
-  [Release img]: https://img.shields.io/badge/release-0.60.22-dev-46-dev-43-dev-40-dev-37-dev-34-dev-31-dev-28-dev-25-dev-22-dev-19-dev-16-dev-13-dev-10-dev-7-dev-4-dev-1-orange.svg
+  [Release img]: https://img.shields.io/badge/release-0.60.22-dev-49-dev-46-dev-43-dev-40-dev-37-dev-34-dev-31-dev-28-dev-25-dev-22-dev-19-dev-16-dev-13-dev-10-dev-7-dev-4-dev-1-orange.svg
   [Release src]: https://github.com/nafigator/Veles
   [Size img]: https://img.shields.io/badge/size-564K-blue.svg
   [Scrutinizer master quality image]: https://scrutinizer-ci.com/g/nafigator/Veles/badges/quality-score.png?b=master
