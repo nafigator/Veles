@@ -1,7 +1,7 @@
 filter:
   excluded_paths:
-    - Tests/*
-    - vendor/*
+    - Tests/
+    - vendor/
 
 build:
   environment:
@@ -56,8 +56,6 @@ build:
       - git checkout $SCRUTINIZER_BRANCH
       - git clone https://github.com/nafigator/Veles-unit-tests.git Tests
 
-
-
   tests:
     override:
       -
@@ -68,7 +66,3 @@ build:
 
 checks:
   php: true
-
-filter:
-  excluded_paths:
-    - Tests/*
