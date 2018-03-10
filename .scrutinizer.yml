@@ -14,6 +14,7 @@ build:
       tests:
         override:
           - phpcs-run -p --encoding=utf-8 --standard=phpcs.xml --ignore=Tests,vendor -w --colors
+          - ls -al Tests
           - php-scrutinizer-run --enable-security-analysis
 
     php70:
