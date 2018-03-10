@@ -1,3 +1,8 @@
+filter:
+  excluded_paths:
+    - Tests/*
+    - vendor/*
+
 build:
   environment:
     memcached:  true
@@ -45,6 +50,12 @@ build:
       - git checkout $SCRUTINIZER_BRANCH
       - git clone https://github.com/nafigator/Veles-unit-tests.git Tests
 
+  analysis:
+    tests:
+      override:
+        - phpcs-run -p --encoding=utf-8 --standard=phpcs.xml --ignore=Tests,vendor -w --colors
+        - php-scrutinizer-run
+
   tests:
     override:
       -
@@ -52,9 +63,6 @@ build:
         coverage:
           file: coverage-report.xml
           format: php-clover
-
-      - phpcs-run -p --encoding=utf-8 --standard=phpcs.xml --ignore=Tests,vendor -w --colors
-      - php-scrutinizer-run
 
 checks:
   php: true
