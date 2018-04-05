@@ -57,10 +57,12 @@ class PdoAdapter implements DbAdapterInterface
 
 		if (null === $types) {
 			$this->stmt->execute($params);
-		} else {
-			$this->bindParams($params, $types);
-			$this->stmt->execute();
+
+			return;
 		}
+
+		$this->bindParams($params, $types);
+		$this->stmt->execute();
 	}
 
 	protected function execute($sql, array $params, $types)
