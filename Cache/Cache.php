@@ -15,8 +15,8 @@
 
 namespace Veles\Cache;
 
-use Veles\Cache\Traits\CacheAdapterTrait;
 use Exception;
+use Veles\Cache\Traits\CacheAdapterTrait;
 
 /**
  * Class Cache
