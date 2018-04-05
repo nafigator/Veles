@@ -7,7 +7,7 @@
  * PHP version 7.0+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
- * @copyright © 2012-2017 Alexander Yancharuk
+ * @copyright © 2012-2018 Alexander Yancharuk
  * @date      Вск Янв 27 17:34:29 2013
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>.
@@ -58,7 +58,6 @@ class UsrAuthFactory
 	/**
 	 * Algorithm for choosing auth strategy
 	 *
-	 * @todo Move validation and error handling into separate class
 	 * @return AbstractAuthStrategy
 	 */
 	public function create()
@@ -68,18 +67,14 @@ class UsrAuthFactory
 
 		switch (true) {
 			case (isset($post['ln'], $post['pw'])):
-				$auth = new LoginFormStrategy(
-					$post['ln'], $post['pw'], new User
-				);
-				$post['ln'] || $auth->setError($auth::ERR_NOT_VALID_LOGIN);
-				$post['pw'] || $auth->setError($auth::ERR_NOT_VALID_PASSWORD);
+				$auth = new LoginFormStrategy($post['ln'], $post['pw'], new User);
+				$auth->errorHandle($post);
+
 				break;
 			case (isset($cookies['id'], $cookies['pw'])):
-				$auth = new CookieStrategy(
-					$cookies['id'], $cookies['pw'], new User
-				);
-				$cookies['id'] || $auth->setError($auth::ERR_NOT_VALID_UID);
-				$cookies['pw'] || $auth->setError($auth::ERR_NOT_VALID_HASH);
+				$auth = new CookieStrategy($cookies['id'], $cookies['pw'], new User);
+				$auth->errorHandle($cookies);
+
 				break;
 			default:
 				$auth = new GuestStrategy(new User);

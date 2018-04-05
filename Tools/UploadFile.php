@@ -7,7 +7,7 @@
  * PHP version 7.0+
  *
  * @author    Yancharuk Alexander <alex at itvault dot info>
- * @copyright © 2012-2017 Alexander Yancharuk
+ * @copyright © 2012-2018 Alexander Yancharuk
  * @date      2013-07-27 22:06
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
@@ -23,7 +23,7 @@ namespace Veles\Tools;
 class UploadFile extends File
 {
 	protected $tmp_path;
-	protected $hash;
+	protected $hash = '';
 	protected $sub_dir;
 	protected $orig_name;
 	protected $www_path;
@@ -99,31 +99,24 @@ class UploadFile extends File
 	public function initStorageName()
 	{
 		// initialize storage name only once
-		if (null !== $this->getHash()) {
+		if ('' !== $this->getHash()) {
 			return;
 		}
 
 		$array     = explode('.', $this->getOrigName());
 		$extension = strtolower(end($array));
 
-		$this->setHash(
-			hash_file($this->getHashAlgorithm(), $this->getTmpPath())
-		)
+		$this->setHash(hash_file($this->getHashAlgorithm(), $this->getTmpPath()))
 			->setSubDir(substr($this->getHash(), 0, 2))
 			->setName(substr($this->getHash(), 2) . '.' . $extension)
 			->setWwwPath(
 				str_replace($_SERVER['DOCUMENT_ROOT'], '', $this->getDir())
-				. DIRECTORY_SEPARATOR
-				. $this->getSubDir()
-				. DIRECTORY_SEPARATOR
+				. DIRECTORY_SEPARATOR . $this->getSubDir() . DIRECTORY_SEPARATOR
 				. $this->getName()
 			)
 			->setPath(
-				$this->getDir()
-				. DIRECTORY_SEPARATOR
-				. $this->getSubDir()
-				. DIRECTORY_SEPARATOR
-				. $this->getName()
+				$this->getDir() . DIRECTORY_SEPARATOR . $this->getSubDir()
+				. DIRECTORY_SEPARATOR . $this->getName()
 			);
 	}
 

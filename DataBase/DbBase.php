@@ -7,7 +7,7 @@
  * PHP version 7.0+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
- * @copyright © 2012-2017 Alexander Yancharuk
+ * @copyright © 2012-2018 Alexander Yancharuk
  * @date      Срд Апр 23 06:34:47 MSK 2014
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
@@ -68,6 +68,7 @@ class DbBase
 	 * @param string $name Connection name
 	 *
 	 * @return DbAdapterInterface
+	 * @throws Exception
 	 */
 	public static function connection($name)
 	{
@@ -78,6 +79,7 @@ class DbBase
 	 * Getting last insert id
 	 *
 	 * @return int
+	 * @throws Exception
 	 */
 	public static function getLastInsertId()
 	{
@@ -88,6 +90,7 @@ class DbBase
 	 * Getting result rows count
 	 *
 	 * @return int
+	 * @throws Exception
 	 */
 	public static function getFoundRows()
 	{
@@ -100,6 +103,7 @@ class DbBase
 	 * @param string $var
 	 *
 	 * @return string
+	 * @throws Exception
 	 */
 	public static function escape($var)
 	{

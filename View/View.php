@@ -7,7 +7,7 @@
  * PHP version 7.0+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
- * @copyright © 2012-2017 Alexander Yancharuk
+ * @copyright © 2012-2018 Alexander Yancharuk
  * @date      Сбт Июл 07 07:30:30 2012
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
@@ -25,7 +25,7 @@ use Veles\View\Adapters\ViewAdapterAbstract;
  */
 class View
 {
-	/** @var ViewAdapterAbstract */
+	/** @var ViewAdapterAbstract|null */
 	protected static $adapter;
 
 	/**
@@ -57,6 +57,8 @@ class View
 	 * Method for output variables setup
 	 *
 	 * @param mixed $vars Output variables
+	 *
+	 * @throws Exception
 	 */
 	public static function set($vars)
 	{
@@ -67,6 +69,8 @@ class View
 	 * Output variables cleanup
 	 *
 	 * @param array $vars Variables array for cleanup
+	 *
+	 * @throws Exception
 	 */
 	public static function del(array $vars)
 	{
@@ -77,6 +81,8 @@ class View
 	 * Output method
 	 *
 	 * @param string $path Path to template
+	 *
+	 * @throws Exception
 	 */
 	public static function show($path)
 	{
@@ -89,6 +95,7 @@ class View
 	 * @param string $path Path to template
 	 *
 	 * @return string View content
+	 * @throws Exception
 	 */
 	public static function get($path)
 	{
@@ -101,6 +108,7 @@ class View
 	 * @param $tpl
 	 *
 	 * @return bool
+	 * @throws Exception
 	 */
 	public static function isCached($tpl)
 	{

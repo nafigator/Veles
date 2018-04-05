@@ -7,7 +7,7 @@
  * PHP version 7.0+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
- * @copyright © 2012-2017 Alexander Yancharuk
+ * @copyright © 2012-2018 Alexander Yancharuk
  * @date      Чтв Ноя 15 21:36:22 2012
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
@@ -15,11 +15,13 @@
 
 namespace Veles\Cache\Adapters;
 
+use Traits\DriverInterface;
+
 /**
  * Interface CacheAdapterInterface
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-interface CacheAdapterInterface
+interface CacheAdapterInterface extends DriverInterface
 {
 	/**
 	 * Get data
@@ -37,6 +39,16 @@ interface CacheAdapterInterface
 	 * @return mixed
 	 */
 	public function set($key, $value, $ttl);
+
+	/**
+	 * Save data if key not exists
+	 *
+	 * @param string $key Key
+	 * @param mixed $value Data
+	 * @param int $ttl Time to live
+	 * @return mixed
+	 */
+	public function add($key, $value, $ttl);
 
 	/**
 	 * Check if data stored in cache
@@ -93,18 +105,4 @@ interface CacheAdapterInterface
 	 * @return bool|int
 	 */
 	public function decrement($key, $offset);
-
-	/**
-	 * Get adapter driver
-	 *
-	 * @return mixed
-	 */
-	public function getDriver();
-
-	/**
-	 * Set adapter driver
-	 *
-	 * @param mixed $driver
-	 */
-	public function setDriver($driver);
 }

@@ -7,7 +7,7 @@
  * PHP version 7.0+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
- * @copyright © 2012-2017 Alexander Yancharuk
+ * @copyright © 2012-2018 Alexander Yancharuk
  * @date      2013-05-15 22:06
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
@@ -85,7 +85,7 @@ class NativeAdapter extends ViewAdapterAbstract
 
 		ob_start();
 		/** @noinspection PhpIncludeInspection */
-		include self::getTemplateDir() . $path;
+		include $this->getTemplateDir() . $path;
 		$output = ob_get_contents();
 		ob_end_clean();
 

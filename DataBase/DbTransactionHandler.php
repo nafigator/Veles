@@ -7,7 +7,7 @@
  * PHP version 7.0+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
- * @copyright © 2012-2017 Alexander Yancharuk
+ * @copyright © 2012-2018 Alexander Yancharuk
  * @date      Срд Апр 23 06:34:47 MSK 2014
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
@@ -28,6 +28,7 @@ class DbTransactionHandler extends DbBase
 	 * Transaction initialization
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
 	public static function begin()
 	{
@@ -38,6 +39,7 @@ class DbTransactionHandler extends DbBase
 	 * Rollback transaction
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
 	public static function rollback()
 	{
@@ -48,6 +50,7 @@ class DbTransactionHandler extends DbBase
 	 * Apply all queries and close transaction
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
 	public static function commit()
 	{

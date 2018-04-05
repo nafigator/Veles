@@ -7,7 +7,7 @@
  * PHP version 7.0+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
- * @copyright © 2012-2017 Alexander Yancharuk
+ * @copyright © 2012-2018 Alexander Yancharuk
  * @date      Чтв Сен  5 15:10:46 MSK 2013
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
@@ -15,6 +15,9 @@
 
 namespace Veles\View\Adapters;
 
+use Traits\DriverInterface;
+use Traits\LazyCallsInterface;
+use Traits\SingletonInstanceInterface;
 use Veles\Traits\LazyCalls;
 
 /**
@@ -22,7 +25,10 @@ use Veles\Traits\LazyCalls;
  *
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-abstract class ViewAdapterAbstract
+abstract class ViewAdapterAbstract implements
+	LazyCallsInterface,
+	DriverInterface,
+	SingletonInstanceInterface
 {
 	/** @var mixed */
 	protected $variables = [];

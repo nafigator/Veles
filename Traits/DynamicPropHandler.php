@@ -7,13 +7,15 @@
  * PHP version 7.0+
  *
  * @author    Yancharuk Alexander <alex at itvault dot info>
- * @copyright © 2012-2017 Alexander Yancharuk
+ * @copyright © 2012-2018 Alexander Yancharuk
  * @date      2015-02-05 06:34
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
  */
 
 namespace Veles\Traits;
+
+use Model\Type;
 
 /**
  * Trait DynamicPropHandler
@@ -25,6 +27,15 @@ namespace Veles\Traits;
  */
 trait DynamicPropHandler
 {
+	/**
+	 * Keys - property names, values - proper values of \Model\Type constants
+	 *
+	 * @var array
+	 */
+	protected $map = [
+		'id' => Type::INT,
+	];
+
 	/**
 	 * Method for setting parameters
 	 *

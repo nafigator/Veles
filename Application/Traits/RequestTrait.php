@@ -10,7 +10,7 @@
  * @date      2017-01-21 17:55
  */
 
-namespace Veles\Application;
+namespace Veles\Application\Traits;
 
 use Veles\Request\HttpRequestAbstract;
 

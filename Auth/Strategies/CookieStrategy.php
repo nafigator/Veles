@@ -7,7 +7,7 @@
  * PHP version 7.0+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
- * @copyright © 2012-2017 Alexander Yancharuk
+ * @copyright © 2012-2018 Alexander Yancharuk
  * @date      Вск Янв 27 17:44:08 2013
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>.
@@ -47,6 +47,7 @@ class CookieStrategy extends AbstractAuthStrategy
 	 * User authentication by cookies
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
 	public function identify()
 	{
@@ -109,5 +110,18 @@ class CookieStrategy extends AbstractAuthStrategy
 		$this->identifier = $id;
 
 		return $this;
+	}
+
+	/**
+	 * Error handling for current auth strategy
+	 *
+	 * @param array $input
+	 *
+	 * @return void
+	 */
+	public function errorHandle(array $input)
+	{
+		$input['id'] || $this->setError(static::ERR_NOT_VALID_UID);
+		$input['pw'] || $this->setError(static::ERR_NOT_VALID_HASH);
 	}
 }

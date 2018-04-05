@@ -7,7 +7,7 @@
  * PHP version 7.0+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
- * @copyright © 2012-2017 Alexander Yancharuk
+ * @copyright © 2012-2018 Alexander Yancharuk
  * @date      2013-12-31 15:44
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
@@ -63,6 +63,19 @@ class PdoAdapter implements DbAdapterInterface
 		}
 	}
 
+	protected function execute($sql, array $params, $types)
+	{
+		$this->stmt = $this->getResource()->prepare($sql);
+
+		if (null !== $types) {
+			$this->bindParams($params, $types);
+		}
+
+		return null === $types
+			? $this->stmt->execute($params)
+			: $this->stmt->execute();
+	}
+
 	/**
 	 * Throw DbException with query info
 	 *
@@ -89,6 +102,7 @@ class PdoAdapter implements DbAdapterInterface
 	 * @param string|null $types  Placeholders types
 	 *
 	 * @return mixed
+	 * @throws DbException
 	 */
 	public function value($sql, array $params, $types)
 	{
@@ -112,6 +126,7 @@ class PdoAdapter implements DbAdapterInterface
 	 * @param string|null $types  Placeholders types
 	 *
 	 * @return mixed              Depends on fetch type
+	 * @throws DbException
 	 */
 	public function row($sql, array $params, $types)
 	{
@@ -135,6 +150,7 @@ class PdoAdapter implements DbAdapterInterface
 	 * @param string|null $types  Placeholders types
 	 *
 	 * @return mixed              Depends on fetch type
+	 * @throws DbException
 	 */
 	public function rows($sql, array $params, $types)
 	{
@@ -206,6 +222,7 @@ class PdoAdapter implements DbAdapterInterface
 	 * @param string|null $types  Placeholders types
 	 *
 	 * @return bool
+	 * @throws DbException
 	 */
 	public function query($sql, array $params, $types)
 	{
@@ -216,14 +233,7 @@ class PdoAdapter implements DbAdapterInterface
 				return (bool) $this->getResource()->query($sql);
 			}
 
-			$this->stmt = $this->getResource()->prepare($sql);
-
-			if (null === $types) {
-				$result = $this->stmt->execute($params);
-			} else {
-				$this->bindParams($params, $types);
-				$result = $this->stmt->execute();
-			}
+			$result = $this->execute($sql, $params, $types);
 		} catch (\PDOException $e) {
 			$this->throwExceptionWithInfo($sql, $params, $e);
 		}

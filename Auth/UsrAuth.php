@@ -7,7 +7,7 @@
  * PHP version 7.0+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
- * @copyright © 2012-2017 Alexander Yancharuk
+ * @copyright © 2012-2018 Alexander Yancharuk
  * @date      Птн Мар 16 21:45:26 2012
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
@@ -15,6 +15,7 @@
 
 namespace Veles\Auth;
 
+use Traits\SingletonInstanceInterface;
 use Veles\Model\User;
 use Veles\Traits\SingletonInstance;
 
@@ -22,7 +23,7 @@ use Veles\Traits\SingletonInstance;
  * User authentication class
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-class UsrAuth
+class UsrAuth implements SingletonInstanceInterface
 {
 	protected $identified = false;
 	protected $strategy;

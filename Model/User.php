@@ -7,7 +7,7 @@
  * PHP version 7.0+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
- * @copyright © 2012-2017 Alexander Yancharuk
+ * @copyright © 2012-2018 Alexander Yancharuk
  * @date      Пнд Мар 05 21:39:43 2012
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
@@ -15,6 +15,7 @@
 
 namespace Veles\Model;
 
+use Model\Type;
 use Veles\Auth\UsrGroup;
 
 /**
@@ -26,12 +27,15 @@ class User extends ActiveRecord
 	const TBL_USER_INFO = 'users_info';
 
 	protected $map = [
-		'id'         => 'int',
-		'email'      => 'string',
-		'hash'       => 'string',
-		'group'      => 'int',
-		'last_login' => 'string'
+		'id'         => Type::INT,
+		'email'      => Type::STRING,
+		'hash'       => Type::STRING,
+		'group'      => Type::INT,
+		'last_login' => Type::STRING,
 	];
+	public $email;
+	public $hash;
+	public $group;
 
 	/**
 	 * Метод для получения ID пользователя

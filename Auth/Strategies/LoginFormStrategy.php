@@ -7,7 +7,7 @@
  * PHP version 7.0+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
- * @copyright © 2012-2017 Alexander Yancharuk
+ * @copyright © 2012-2018 Alexander Yancharuk
  * @date      Вск Янв 27 17:40:18 2013
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>.
@@ -44,6 +44,7 @@ class LoginFormStrategy extends AbstractAuthStrategy
 	 * User authentication by login form
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
 	public function identify()
 	{
@@ -108,5 +109,18 @@ class LoginFormStrategy extends AbstractAuthStrategy
 		$this->password = $password;
 
 		return $this;
+	}
+
+	/**
+	 * Error handling for current auth strategy
+	 *
+	 * @param array $input
+	 *
+	 * @return void
+	 */
+	public function errorHandle(array $input)
+	{
+		$input['ln'] || $this->setError(static::ERR_NOT_VALID_LOGIN);
+		$input['pw'] || $this->setError(static::ERR_NOT_VALID_PASSWORD);
 	}
 }

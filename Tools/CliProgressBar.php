@@ -7,7 +7,7 @@
  * PHP version 7.0+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
- * @copyright © 2012-2017 Alexander Yancharuk
+ * @copyright © 2012-2018 Alexander Yancharuk
  * @date      Сбт Фев 16 20:07:56 2013
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>.
@@ -115,7 +115,7 @@ class CliProgressBar
 		$done = number_format($current / $this->percent, 2);
 
 		if ($done < 100) {
-			$position = floor($this->pb_percent * $done);
+			$position = (int) floor($this->pb_percent * $done);
 			$end = "\033[K\r";
 		} else {
 			$position = $this->width;

@@ -7,7 +7,7 @@
  * PHP version 7.0+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
- * @copyright © 2012-2017 Alexander Yancharuk
+ * @copyright © 2012-2018 Alexander Yancharuk
  * @date      Втр Апр 24 21:53:04 2012
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
@@ -15,7 +15,8 @@
 
 namespace Veles\Model;
 
-use StdClass;
+use Model\Type;
+use Traits\DynamicPropHandlerInterface;
 use Veles\DataBase\Db;
 use Veles\DataBase\DbFilter;
 use Veles\DataBase\DbPaginator;
@@ -26,7 +27,7 @@ use Veles\Traits\DynamicPropHandler;
  *
  * @author Alexander Yancharuk <alex at itvault dot info>
  */
-class ActiveRecord extends StdClass
+class ActiveRecord implements DynamicPropHandlerInterface
 {
 	/**
 	 * @const string|null Table name
@@ -34,8 +35,8 @@ class ActiveRecord extends StdClass
 	const TBL_NAME = null;
 	/** @var QueryBuilder */
 	protected $builder;
-	/** @var array Data type map */
-	protected $map = [];
+	/** @var int|null */
+	public $id;
 
 	use DynamicPropHandler;
 
@@ -43,6 +44,7 @@ class ActiveRecord extends StdClass
 	 * Update data in database
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
 	protected function update()
 	{
@@ -55,6 +57,7 @@ class ActiveRecord extends StdClass
 	 * Insert data in database
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
 	protected function insert()
 	{
@@ -65,6 +68,14 @@ class ActiveRecord extends StdClass
 		return $result;
 	}
 
+	/**
+	 * Method with true|false return and setting properties for current object
+	 *
+	 * @param $sql
+	 *
+	 * @return bool
+	 * @throws \Exception
+	 */
 	protected function getResult($sql)
 	{
 		$result = Db::row($sql);
@@ -99,6 +110,7 @@ class ActiveRecord extends StdClass
 	 * @param int $identifier Model ID
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
 	public function getById($identifier)
 	{
@@ -114,6 +126,7 @@ class ActiveRecord extends StdClass
 	 * @param bool|DbPaginator $pager  Pagination object
 	 *
 	 * @return bool|array
+	 * @throws \Exception
 	 */
 	public function getAll($filter = false, $pager = false)
 	{
@@ -140,6 +153,7 @@ class ActiveRecord extends StdClass
 	 * Save data
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
 	public function save()
 	{
@@ -179,6 +193,7 @@ class ActiveRecord extends StdClass
 	 * @param bool|DbFilter $filter Filter object
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
 	public function find($filter = false)
 	{
@@ -201,8 +216,8 @@ class ActiveRecord extends StdClass
 	 * @param string           $sql   Query
 	 * @param bool|DbPaginator $pager Pagination object
 	 *
-	 * @todo Add Pager type hints
 	 * @return array|bool
+	 * @throws \Exception
 	 */
 	public function query($sql, $pager = false)
 	{

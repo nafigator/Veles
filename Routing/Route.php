@@ -7,7 +7,7 @@
  * PHP version 7.0+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
- * @copyright © 2012-2017 Alexander Yancharuk
+ * @copyright © 2012-2018 Alexander Yancharuk
  * @date      Сбт Июн 23 08:52:41 2012
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
@@ -24,7 +24,6 @@ use Veles\Request\Validator\ValidatorInterface;
  * Class Route
  *
  * @author  Alexander Yancharuk <alex at itvault dot info>
- * @TODO Decrease class responsibility by creating separate class for request
  */
 class Route extends RouteBase
 {
@@ -54,20 +53,31 @@ class Route extends RouteBase
 				continue;
 			}
 
-			$this->config = $route;
-			$this->name   = $name;
-
-			if (isset($route['tpl'])) {
-				$this->template = $route['tpl'];
-			}
-
-			if ('Veles\Routing\RouteRegex' === $route['class']) {
-				/** @noinspection PhpUndefinedMethodInspection */
-				$this->params = $route['class']::getParams();
-			}
+			$this->process($name, $route);
 		}
 
 		return $this->execNotFoundHandler();
+	}
+
+	/**
+	 * Process route
+	 *
+	 * @param $name
+	 * @param array $config
+	 */
+	protected function process($name, array $config)
+	{
+		$this->config = $config;
+		$this->name   = $name;
+
+		if (isset($config['tpl'])) {
+			$this->template = $config['tpl'];
+		}
+
+		if ('Veles\Routing\RouteRegex' === $config['class']) {
+			/** @noinspection PhpUndefinedMethodInspection */
+			$this->params = $config['class']::getParams();
+		}
 	}
 
 	/**

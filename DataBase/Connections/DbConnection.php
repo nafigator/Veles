@@ -7,7 +7,7 @@
  * PHP version 7.0+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
- * @copyright © 2012-2017 Alexander Yancharuk
+ * @copyright © 2012-2018 Alexander Yancharuk
  * @date      2013-12-31 15:44
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
@@ -16,6 +16,7 @@
 namespace Veles\DataBase\Connections;
 
 use Exception;
+use Traits\DriverInterface;
 use Veles\Traits\Driver;
 
 /**
@@ -25,7 +26,7 @@ use Veles\Traits\Driver;
  *
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
-abstract class DbConnection
+abstract class DbConnection implements DriverInterface
 {
 	/** @var string */
 	protected $user_name;

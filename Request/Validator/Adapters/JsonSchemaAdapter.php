@@ -7,7 +7,7 @@
  * PHP version 7.0+
  *
  * @author    Yancharuk Alexander <alex at itvault dot info>
- * @copyright © 2012-2017 Alexander Yancharuk <alex at itvault at info>
+ * @copyright © 2012-2018 Alexander Yancharuk <alex at itvault at info>
  * @date      2017-01-17 14:54
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
@@ -15,6 +15,7 @@
 
 namespace Veles\Request\Validator\Adapters;
 
+use Traits\DriverInterface;
 use Veles\Request\Validator\ValidatorInterface;
 use Veles\Traits\Driver;
 
@@ -23,7 +24,7 @@ use Veles\Traits\Driver;
  *
  * @author Yancharuk Alexander <alex at itvault at info>
  */
-class JsonSchemaAdapter implements ValidatorInterface
+class JsonSchemaAdapter implements ValidatorInterface, DriverInterface
 {
 	use Driver;
 

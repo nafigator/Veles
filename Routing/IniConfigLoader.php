@@ -7,7 +7,7 @@
  * PHP version 7.0+
  *
  * @author    Yancharuk Alexander <alex at itvault dot info>
- * @copyright © 2012-2017 Alexander Yancharuk
+ * @copyright © 2012-2018 Alexander Yancharuk
  * @date      2015-05-24 12:08
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
@@ -46,7 +46,7 @@ class IniConfigLoader extends AbstractConfigLoader
 	 *
 	 * @param array &$config
 	 */
-	private function buildTree(array &$config)
+	protected function buildTree(array &$config)
 	{
 		foreach ($config as $name => $value) {
 			$params = explode('.', $name);
@@ -55,19 +55,31 @@ class IniConfigLoader extends AbstractConfigLoader
 				continue;
 			}
 
-			$ptr =& $config;
-			$last = end($params);
-
-			foreach ($params as $param) {
-				if ($param === $last) {
-					$ptr[$param] = $value;
-					continue;
-				}
-
-				$ptr =& $ptr[$param];
-			}
+			$this->processLine($config, $params, $value);
 
 			unset($config[$name]);
+		}
+	}
+
+	/**
+	 * Processing config line
+	 *
+	 * @param array  $config
+	 * @param array  $params
+	 * @param string $value
+	 */
+	protected function processLine(array &$config, array $params, $value)
+	{
+		$ptr =& $config;
+		$last = end($params);
+
+		foreach ($params as $param) {
+			if ($param === $last) {
+				$ptr[$param] = $value;
+				continue;
+			}
+
+			$ptr =& $ptr[$param];
 		}
 	}
 }

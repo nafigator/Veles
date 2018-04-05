@@ -7,7 +7,7 @@
  * PHP version 7.0+
  *
  * @author    Yancharuk Alexander <alex at itvault dot info>
- * @copyright © 2012-2017 Alexander Yancharuk
+ * @copyright © 2012-2018 Alexander Yancharuk
  * @date      2015-05-24 20:14
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
@@ -36,6 +36,7 @@ class RoutesCacheDecorator extends AbstractRoutesConfig
 	 * Returns array that contains routes configuration
 	 *
 	 * @return array
+	 * @throws \Exception
 	 */
 	public function getData()
 	{
@@ -71,6 +72,7 @@ class RoutesCacheDecorator extends AbstractRoutesConfig
 	 * @param string $name Name of section
 	 *
 	 * @return array
+	 * @throws \Exception
 	 */
 	public function getSection($name)
 	{

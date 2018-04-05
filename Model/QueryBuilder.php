@@ -7,7 +7,7 @@
  * PHP version 7.0+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
- * @copyright © 2012-2017 Alexander Yancharuk
+ * @copyright © 2012-2018 Alexander Yancharuk
  * @date      Сбт Июл 07 21:55:54 2012
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
@@ -47,11 +47,11 @@ class QueryBuilder implements QueryBuilderInterface
 	 * @param ActiveRecord $model Экземпляр модели
 	 *
 	 * @return string
+	 * @throws Exception
 	 */
 	public function insert(ActiveRecord $model)
 	{
 		$arr = ['fields' => '', 'values' => ''];
-
 		foreach ($model->getMap() as $property => $value) {
 			$value = $this->sanitize($model, $property);
 
@@ -63,27 +63,24 @@ class QueryBuilder implements QueryBuilderInterface
 			$arr['values'] .= "$value, ";
 		}
 
-		foreach ($arr as &$val) {
-			$val = rtrim($val, ', ');
-		}
+		$callback = function ($val) {
+			return rtrim($val, ', ');
+		};
 
-		$sql = '
-			INSERT
-				"' . $model::TBL_NAME . "\"
-				($arr[fields])
-			VALUES
-				($arr[values])
-		";
+		$arr   = array_map($callback, $arr);
+		$sql   = 'INSERT "' . $model::TBL_NAME . "\" ($arr[fields]) VALUES ($arr[values])";
 
 		return $sql;
 	}
 
 	/**
 	 * Функция безопасности переменных
+	 *
 	 * @param ActiveRecord $model
-	 * @param $property
-	 * @throws Exception
+	 * @param mixed        $property
+	 *
 	 * @return mixed
+	 * @throws Exception
 	 */
 	private function sanitize(ActiveRecord $model, $property)
 	{
@@ -91,19 +88,14 @@ class QueryBuilder implements QueryBuilderInterface
 			return null;
 		}
 
-		switch ($model->getMap()[$property]) {
-			case 'int':
-				$value = (int) $model->$property;
-				break;
-			case 'float':
-				$value = (float) $model->$property;
-				break;
-			case 'string':
-				$value = Db::escape($model->$property);
-				break;
-			default:
-				$value = null;
-				break;
+		$value = null;
+		$type  = $model->getMap()[$property];
+
+		if ('string' === $type) {
+			$value = Db::escape($model->$property);
+		} else {
+			$value = $model->$property;
+			settype($value, $type);
 		}
 
 		return $value;
@@ -111,19 +103,22 @@ class QueryBuilder implements QueryBuilderInterface
 
 	/**
 	 * Построение sql-запроса для update
+	 *
 	 * @param ActiveRecord $model Экземпляр модели
+	 *
 	 * @return string $sql
-	 * @todo протестировать алгоритм на время.
-	 * Попробовать варианты с iterator, implode
+	 * @throws Exception
 	 */
 	public function update(ActiveRecord $model)
 	{
 		$params = '';
+		$table  = $model::TBL_NAME;
+		$properties = array_diff_key($model->getMap(), ['id' => 1]);
 
-		foreach (array_keys($model->getMap()) as $property) {
+		foreach (array_keys($properties) as $property) {
 			$value = $this->sanitize($model, $property);
 
-			if (null === $value || 'id' === $property) {
+			if (null === $value) {
 				continue;
 			}
 
@@ -132,14 +127,7 @@ class QueryBuilder implements QueryBuilderInterface
 
 		$params = rtrim($params, ', ');
 
-		$sql = '
-			UPDATE
-				"' . $model::TBL_NAME . "\"
-			SET
-				$params
-			WHERE
-				id = $model->id
-		";
+		$sql = "UPDATE \"$table\" SET $params WHERE id = $model->id";
 
 		return $sql;
 	}
@@ -153,11 +141,12 @@ class QueryBuilder implements QueryBuilderInterface
 	public function getById(ActiveRecord $model, $identifier)
 	{
 		$identifier = (int) $identifier;
+		$table      = $model::TBL_NAME;
 
-		$sql = '
+		$sql = "
 			SELECT *
 			FROM
-				"' . $model::TBL_NAME . "\"
+				\"$table\"
 			WHERE
 				id = $identifier
 			LIMIT 1
@@ -181,11 +170,12 @@ class QueryBuilder implements QueryBuilderInterface
 			$value = (int) $value;
 		};
 
-		$ids = implode(',', $ids);
+		$ids   = implode(',', $ids);
+		$table = $model::TBL_NAME;
 
-		$sql = '
+		$sql = "
 			DELETE FROM
-				"' . $model::TBL_NAME . "\"
+				\"$table\"
 			WHERE
 				id IN ($ids)
 		";

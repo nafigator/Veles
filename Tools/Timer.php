@@ -7,13 +7,15 @@
  * PHP version 7.0+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
- * @copyright © 2012-2017 Alexander Yancharuk
+ * @copyright © 2012-2018 Alexander Yancharuk
  * @date      Срд Фев 06 06:18:32 2013
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>.
  */
 
 namespace Veles\Tools;
+
+use Veles\Validators\TimerPrecisionValidator;
 
 /**
  * Class Timer
@@ -22,13 +24,6 @@ namespace Veles\Tools;
  */
 class Timer
 {
-	// Precision
-	const SECONDS      = 0;
-	const MILLISECONDS = 3;
-	const MICROSECONDS = 6;
-	const NANOSECONDS  = 9;
-	const PICOSECONDS  = 12;
-
 	private static $start_time = 0.0;
 	private static $stop_time  = 0.0;
 	private static $diff       = 0.0;
@@ -58,18 +53,11 @@ class Timer
 	 *
 	 * @return mixed
 	 */
-	public static function get($precision = self::MICROSECONDS)
+	public static function get($precision = Precision::MICROSECONDS)
 	{
-		switch ($precision) {
-			case self::SECONDS:
-			case self::MILLISECONDS:
-			case self::MICROSECONDS:
-			case self::NANOSECONDS:
-			case self::PICOSECONDS:
-				return round(self::$diff, $precision);
-			default:
-				return round(self::$diff, self::MICROSECONDS);
-		}
+		return (new TimerPrecisionValidator)->check($precision)
+			? round(self::$diff, $precision)
+			: round(self::$diff, Precision::MICROSECONDS);
 	}
 
 	/**
