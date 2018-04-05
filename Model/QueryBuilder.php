@@ -92,11 +92,11 @@ class QueryBuilder implements QueryBuilderInterface
 		$type  = $model->getMap()[$property];
 
 		if ('string' === $type) {
-			$value = Db::escape($model->$property);
-		} else {
-			$value = $model->$property;
-			settype($value, $type);
+			return Db::escape($model->$property);
 		}
+
+		$value = $model->$property;
+		settype($value, $type);
 
 		return $value;
 	}
