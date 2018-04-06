@@ -1,0 +1,33 @@
+engines:
+  rubocop:
+    enabled: false
+    #checks:
+    #  Rubocop/Metrics/ClassLength:
+    #    enabled: false
+  brakeman:
+    enabled: false
+  eslint:
+    enabled: false
+  csslint:
+    enabled: false
+  duplication:
+    enabled: true
+    config:
+      languages:
+        - php:
+  phpmd:
+    enabled: true
+    checks:
+      Controversial/CamelCasePropertyName:
+        enabled: false
+      Naming/ShortVariable:
+        enabled: false
+  sonar-php:
+    enabled: true
+
+ratings:
+  paths:
+    - "**.php"
+
+exclude_paths:
+  - Tests/**/*

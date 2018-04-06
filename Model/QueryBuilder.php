@@ -51,26 +51,24 @@ class QueryBuilder implements QueryBuilderInterface
 	 */
 	public function insert(ActiveRecord $model)
 	{
-		$arr = ['fields' => '', 'values' => ''];
-		foreach ($model->getMap() as $property => $value) {
+		$fields = $values = '';
+		$table  = $model->getEscapedTableName();
+
+		foreach (array_keys($model->getMap()) as $property) {
 			$value = $this->sanitize($model, $property);
 
 			if (null === $value) {
 				continue;
 			}
 
-			$arr['fields'] .= "\"$property\", ";
-			$arr['values'] .= "$value, ";
+			$fields .= "\"$property\", ";
+			$values .= "$value, ";
 		}
 
-		$callback = function ($val) {
-			return rtrim($val, ', ');
-		};
+		$fields = rtrim($fields, ', ');
+		$values = rtrim($values, ', ');
 
-		$arr   = array_map($callback, $arr);
-		$sql   = 'INSERT "' . $model::TBL_NAME . "\" ($arr[fields]) VALUES ($arr[values])";
-
-		return $sql;
+		return "INSERT $table ($fields) VALUES ($values)";
 	}
 
 	/**
@@ -88,8 +86,7 @@ class QueryBuilder implements QueryBuilderInterface
 			return null;
 		}
 
-		$value = null;
-		$type  = $model->getMap()[$property];
+		$type = $model->getMap()[$property];
 
 		if ('string' === $type) {
 			return Db::escape($model->$property);
@@ -112,7 +109,7 @@ class QueryBuilder implements QueryBuilderInterface
 	public function update(ActiveRecord $model)
 	{
 		$params = '';
-		$table  = $model::TBL_NAME;
+		$table  = $model->getEscapedTableName();
 		$properties = array_diff_key($model->getMap(), ['id' => 1]);
 
 		foreach (array_keys($properties) as $property) {
@@ -127,9 +124,7 @@ class QueryBuilder implements QueryBuilderInterface
 
 		$params = rtrim($params, ', ');
 
-		$sql = "UPDATE \"$table\" SET $params WHERE id = $model->id";
-
-		return $sql;
+		return "UPDATE $table SET $params WHERE id = $model->id";
 	}
 
 	/**
@@ -141,18 +136,9 @@ class QueryBuilder implements QueryBuilderInterface
 	public function getById(ActiveRecord $model, $identifier)
 	{
 		$identifier = (int) $identifier;
-		$table      = $model::TBL_NAME;
+		$table      = $model->getEscapedTableName();
 
-		$sql = "
-			SELECT *
-			FROM
-				\"$table\"
-			WHERE
-				id = $identifier
-			LIMIT 1
-		";
-
-		return $sql;
+		return "SELECT * FROM $table WHERE id = $identifier LIMIT 1";
 	}
 
 	/**
@@ -171,16 +157,9 @@ class QueryBuilder implements QueryBuilderInterface
 		};
 
 		$ids   = implode(',', $ids);
-		$table = $model::TBL_NAME;
+		$table = $model->getEscapedTableName();
 
-		$sql = "
-			DELETE FROM
-				\"$table\"
-			WHERE
-				id IN ($ids)
-		";
-
-		return $sql;
+		return "DELETE FROM $table WHERE id IN ($ids)";
 	}
 
 	/**
@@ -195,24 +174,14 @@ class QueryBuilder implements QueryBuilderInterface
 	{
 		$fields = '"' . implode('", "', array_keys($model->getMap())) . '"';
 		$where = $group = $having = $order = '';
+		$table = $model->getEscapedTableName();
 
 		if ($filter instanceof DbFilter) {
 			$params = $this->extractParams($filter);
 			extract($params, EXTR_IF_EXISTS);
 		}
 
-		$sql = "
-			SELECT
-				$fields
-			FROM
-				\"" . $model::TBL_NAME . "\"
-			$where
-			$group
-			$having
-			$order
-		";
-
-		return rtrim($sql);
+		return rtrim("SELECT $fields FROM $table $where $group $having $order");
 	}
 
 	/**
@@ -226,6 +195,7 @@ class QueryBuilder implements QueryBuilderInterface
 	public function setPage($sql, DbPaginator $pager)
 	{
 		$sql = str_replace('SELECT', 'SELECT SQL_CALC_FOUND_ROWS', $sql);
+
 		return $sql . $pager->getSqlLimit();
 	}
 }
