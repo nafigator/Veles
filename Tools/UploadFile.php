@@ -22,12 +22,19 @@ namespace Veles\Tools;
  */
 class UploadFile extends File
 {
+	/** @var string Temporary file path */
 	protected $tmp_path;
-	protected $hash = '';
+	/** @var string|null File content hash */
+	protected $hash;
+	/** @var string Sub dir in upload dir */
 	protected $sub_dir;
+	/** @var string Original file name */
 	protected $orig_name;
+	/** @var string Path for www usage */
 	protected $www_path;
+	/** @var int Upload dir access mask */
 	protected $dir_mask = 0755;
+	/** @var string Hash algorithm */
 	protected $hash_algorithm = 'sha1';
 
 	/**
@@ -99,7 +106,7 @@ class UploadFile extends File
 	public function initStorageName()
 	{
 		// initialize storage name only once
-		if ('' !== $this->getHash()) {
+		if (null !== $this->getHash()) {
 			return;
 		}
 
@@ -109,15 +116,31 @@ class UploadFile extends File
 		$this->setHash(hash_file($this->getHashAlgorithm(), $this->getTmpPath()))
 			->setSubDir(substr($this->getHash(), 0, 2))
 			->setName(substr($this->getHash(), 2) . '.' . $extension)
-			->setWwwPath(
-				str_replace($_SERVER['DOCUMENT_ROOT'], '', $this->getDir())
-				. DIRECTORY_SEPARATOR . $this->getSubDir() . DIRECTORY_SEPARATOR
-				. $this->getName()
-			)
-			->setPath(
-				$this->getDir() . DIRECTORY_SEPARATOR . $this->getSubDir()
-				. DIRECTORY_SEPARATOR . $this->getName()
-			);
+			->setWwwPath($this->buildWwwPath())
+			->setPath($this->buildPath());
+	}
+
+	/**
+	 * Build WWW-path
+	 *
+	 * @return string
+	 */
+	protected function buildWwwPath()
+	{
+		return str_replace($_SERVER['DOCUMENT_ROOT'], '', $this->getDir())
+			. DIRECTORY_SEPARATOR . $this->getSubDir() . DIRECTORY_SEPARATOR
+			. $this->getName();
+	}
+
+	/**
+	 * Build absolute file path
+	 *
+	 * @return string
+	 */
+	protected function buildPath()
+	{
+		return $this->getDir() . DIRECTORY_SEPARATOR . $this->getSubDir()
+			. DIRECTORY_SEPARATOR . $this->getName();
 	}
 
 	/**
