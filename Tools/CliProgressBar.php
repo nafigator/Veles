@@ -24,15 +24,25 @@ use Veles\Validators\ByteValidator;
  */
 class CliProgressBar
 {
+	/** @var float Progress bar percent */
 	protected $pb_percent;
+	/** @var float Current progress bar percent  */
 	protected $percent;
+	/** @var float Progress bar initialization time  */
 	protected $start_time;
+	/** @var int Progress bar final value */
 	protected $final_value;
+	/** @var float Time when update calculation started */
 	protected $curr_time;
+	/** @var float Time when last update calculation finished */
 	protected $last_update_time = 0.0;
+	/** @var float Time between finishing last update and starting current update */
 	protected $clean_process_time = 0.0;
+	/** @var string Function for memory usage */
 	protected $mem_usage_func = 'memory_get_usage';
+	/** @var string Function for max memory usage */
 	protected $mem_peak_func = 'memory_get_peak_usage';
+	/** @var int Progress bar width */
 	protected $width;
 
 	/**
@@ -72,6 +82,9 @@ class CliProgressBar
 
 	/**
 	 * Get string with statistic
+	 *
+	 * This method is public only for testing purposes. Logic with calculation
+	 * must be moved into builder or class-calculator.
 	 *
 	 * @param int $current Current process quantity
 	 *
@@ -113,20 +126,27 @@ class CliProgressBar
 	protected function calcParams($current)
 	{
 		$done = number_format($current / $this->percent, 2);
+		list($position, $end) = $this->getPosition($done);
 
-		if ($done < 100) {
-			$position = (int) floor($this->pb_percent * $done);
-			$end = "\033[K\r";
-		} else {
-			$position = $this->width;
-			$end = "\033[K" . PHP_EOL;
-		}
+		return [
+			$end,
+			str_repeat('=', $position),
+			$this->width - $position,
+			$this->getStatusString($current) . $this->getMemString()
+		];
+	}
 
-		$bar = str_repeat('=', $position);
-		$space_len = $this->width - $position;
-
-		$status = $this->getStatusString($current) . $this->getMemString();
-
-		return [$end, $bar, $space_len, $status];
+	/**
+	 * Returns cursor position and last string-part for bar
+	 *
+	 * @param $done
+	 *
+	 * @return array
+	 */
+	protected function getPosition($done)
+	{
+		return ($done < 100)
+			? [(int) floor($this->pb_percent * $done), "\033[K\r"]
+			: [$this->width, "\033[K" . PHP_EOL];
 	}
 }

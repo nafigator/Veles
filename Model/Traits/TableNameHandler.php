@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Interface for ActiveRecord SQL-table names handler
  *
@@ -18,6 +17,11 @@ namespace Veles\Model\Traits;
 
 trait TableNameHandler
 {
+	/**
+	 * Get table name prepared for sql usage
+	 *
+	 * @return string
+	 */
 	public function getEscapedTableName()
 	{
 		return '"' . static::TBL_NAME . '"';

@@ -15,6 +15,9 @@
 
 namespace Model;
 
+/**
+ * Class-container for model data types values
+ */
 class Type
 {
 	const STRING = 'string';
