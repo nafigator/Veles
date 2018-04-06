@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="Veles">
+<ruleset name="Veles" xmlns="http://exslt.org/sets">
 	<description>PHP CodeSniffer standard for Veles framework</description>
 
 	<!--

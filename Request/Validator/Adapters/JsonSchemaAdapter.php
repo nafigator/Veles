@@ -67,6 +67,7 @@ class JsonSchemaAdapter implements ValidatorInterface, DriverInterface
 	 */
 	public function check($data, $definitions)
 	{
+		/** @noinspection PhpUndefinedMethodInspection */
 		$this->resolver->resolve($definitions);
 
 		$this->driver->check($data, $definitions);
