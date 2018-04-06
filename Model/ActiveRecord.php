@@ -19,6 +19,8 @@ use Traits\DynamicPropHandlerInterface;
 use Veles\DataBase\Db;
 use Veles\DataBase\DbFilter;
 use Veles\DataBase\DbPaginator;
+use Veles\Model\Traits\TableNameHandler;
+use Veles\Model\Traits\TableNameHandlerInterface;
 use Veles\Traits\DynamicPropHandler;
 
 /**
@@ -26,7 +28,7 @@ use Veles\Traits\DynamicPropHandler;
  *
  * @author Alexander Yancharuk <alex at itvault dot info>
  */
-class ActiveRecord implements DynamicPropHandlerInterface
+class ActiveRecord implements DynamicPropHandlerInterface, TableNameHandlerInterface
 {
 	/**
 	 * @const string|null Table name
@@ -38,6 +40,7 @@ class ActiveRecord implements DynamicPropHandlerInterface
 	public $id;
 
 	use DynamicPropHandler;
+	use TableNameHandler;
 
 	/**
 	 * Update data in database
