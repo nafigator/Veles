@@ -26,7 +26,11 @@ class RoutesCacheDecorator extends AbstractRoutesConfig
 	protected $config;
 	/** @var  string */
 	protected $prefix;
+	/** @noinspection PhpMissingParentConstructorInspection */
 
+	/**
+	 * @param RoutesConfig $config
+	 */
 	public function __construct(RoutesConfig $config)
 	{
 		$this->config = $config;
