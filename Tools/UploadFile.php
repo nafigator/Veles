@@ -146,7 +146,7 @@ class UploadFile extends File
 	/**
 	 * Get uploaded file name hash
 	 *
-	 * @return null|string
+	 * @return string|null
 	 */
 	public function getHash()
 	{
