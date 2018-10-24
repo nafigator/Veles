@@ -52,7 +52,6 @@ class QueryBuilder implements QueryBuilderInterface
 	public function insert(ActiveRecord $model)
 	{
 		$fields = $values = '';
-		$table  = $model->getEscapedTableName();
 
 		foreach (array_keys($model->getMap()) as $property) {
 			$value = $this->sanitize($model, $property);
@@ -68,7 +67,7 @@ class QueryBuilder implements QueryBuilderInterface
 		$fields = rtrim($fields, ', ');
 		$values = rtrim($values, ', ');
 
-		return "INSERT $table ($fields) VALUES ($values)";
+		return "INSERT \"" . $model::TBL_NAME . "\" ($fields) VALUES ($values)";
 	}
 
 	/**
@@ -109,7 +108,6 @@ class QueryBuilder implements QueryBuilderInterface
 	public function update(ActiveRecord $model)
 	{
 		$params = '';
-		$table  = $model->getEscapedTableName();
 		$properties = array_diff_key($model->getMap(), ['id' => 1]);
 
 		foreach (array_keys($properties) as $property) {
@@ -124,7 +122,7 @@ class QueryBuilder implements QueryBuilderInterface
 
 		$params = rtrim($params, ', ');
 
-		return "UPDATE $table SET $params WHERE id = $model->id";
+		return "UPDATE \"" . $model::TBL_NAME . "\" SET $params WHERE id = $model->id";
 	}
 
 	/**
@@ -136,9 +134,8 @@ class QueryBuilder implements QueryBuilderInterface
 	public function getById(ActiveRecord $model, $identifier)
 	{
 		$identifier = (int) $identifier;
-		$table      = $model->getEscapedTableName();
 
-		return "SELECT * FROM $table WHERE id = $identifier LIMIT 1";
+		return "SELECT * FROM \"" . $model::TBL_NAME . "\" WHERE id = $identifier LIMIT 1";
 	}
 
 	/**
@@ -157,9 +154,8 @@ class QueryBuilder implements QueryBuilderInterface
 		};
 
 		$ids   = implode(',', $ids);
-		$table = $model->getEscapedTableName();
 
-		return "DELETE FROM $table WHERE id IN ($ids)";
+		return "DELETE FROM \"" . $model::TBL_NAME . "\" WHERE id IN ($ids)";
 	}
 
 	/**
@@ -174,14 +170,13 @@ class QueryBuilder implements QueryBuilderInterface
 	{
 		$fields = '"' . implode('", "', array_keys($model->getMap())) . '"';
 		$where = $group = $having = $order = '';
-		$table = $model->getEscapedTableName();
 
 		if ($filter instanceof DbFilter) {
 			$params = $this->extractParams($filter);
 			extract($params, EXTR_IF_EXISTS);
 		}
 
-		return rtrim("SELECT $fields FROM $table $where $group $having $order");
+		return rtrim("SELECT $fields FROM \"" . $model::TBL_NAME . "\" $where $group $having $order");
 	}
 
 	/**

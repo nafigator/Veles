@@ -28,7 +28,7 @@ use Veles\Traits\DynamicPropHandler;
  *
  * @author Alexander Yancharuk <alex at itvault dot info>
  */
-class ActiveRecord implements DynamicPropHandlerInterface, TableNameHandlerInterface
+class ActiveRecord implements DynamicPropHandlerInterface
 {
 	/**
 	 * @const string|null Table name
@@ -40,7 +40,6 @@ class ActiveRecord implements DynamicPropHandlerInterface, TableNameHandlerInter
 	public $id;
 
 	use DynamicPropHandler;
-	use TableNameHandler;
 
 	/**
 	 * Update data in database
