@@ -24,7 +24,7 @@ class UploadFile extends File
 {
 	/** @var string Temporary file path */
 	protected $tmp_path;
-	/** @var string|null File content hash */
+	/** @var string File content hash */
 	protected $hash;
 	/** @var string Sub dir in upload dir */
 	protected $sub_dir;
@@ -106,7 +106,7 @@ class UploadFile extends File
 	public function initStorageName()
 	{
 		// initialize storage name only once
-		if (null !== $this->getHash()) {
+		if (!$this->getHash()) {
 			return;
 		}
 
@@ -146,7 +146,7 @@ class UploadFile extends File
 	/**
 	 * Get uploaded file name hash
 	 *
-	 * @return string|null
+	 * @return string
 	 */
 	public function getHash()
 	{
