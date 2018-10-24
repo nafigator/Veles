@@ -106,7 +106,7 @@ class UploadFile extends File
 	public function initStorageName()
 	{
 		// initialize storage name only once
-		if (!$this->getHash()) {
+		if (!empty($this->getHash())) {
 			return;
 		}
 

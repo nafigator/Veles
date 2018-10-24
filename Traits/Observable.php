@@ -17,6 +17,8 @@
 
 namespace Veles\Traits;
 
+use SplObserver;
+
 /**
  * Trait Observable
  *
@@ -24,15 +26,15 @@ namespace Veles\Traits;
  */
 trait Observable
 {
-	/** @var \SplObserver[] */
+	/** @var SplObserver[] */
 	protected $observers = [];
 
 	/**
 	 * Add subscriber
 	 *
-	 * @param \SplObserver $observer Подписчик
+	 * @param SplObserver $observer Подписчик
 	 */
-	public function attach(\SplObserver $observer)
+	public function attach(SplObserver $observer)
 	{
 		$this->observers[] = $observer;
 	}
@@ -40,9 +42,9 @@ trait Observable
 	/**
 	 * Remove subscriber
 	 *
-	 * @param \SplObserver $observer Подписчик
+	 * @param SplObserver $observer Подписчик
 	 */
-	public function detach(\SplObserver $observer)
+	public function detach(SplObserver $observer)
 	{
 		if (false !== ($key = array_search($observer, $this->observers, true))) {
 			unset($this->observers[$key]);
@@ -56,7 +58,7 @@ trait Observable
 	{
 		foreach ($this->observers as $value) {
 			/** @noinspection PhpParamsInspection */
-			$value->update($this);
+			$value->update(/** @scrutinizer ignore-type */$this);
 		}
 	}
 }

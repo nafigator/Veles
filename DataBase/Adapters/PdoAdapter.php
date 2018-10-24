@@ -16,6 +16,7 @@
 namespace Veles\DataBase\Adapters;
 
 use PDO;
+use PDOStatement;
 use Veles\DataBase\Exceptions\DbException;
 
 /**
@@ -28,7 +29,7 @@ use Veles\DataBase\Exceptions\DbException;
 class PdoAdapter implements DbAdapterInterface
 {
 	// Save statement for ability to get error information
-	/** @var  \PDOStatement */
+	/** @var  PDOStatement|bool */
 	protected $stmt;
 
 	protected $type = [
@@ -55,6 +56,10 @@ class PdoAdapter implements DbAdapterInterface
 	{
 		$this->stmt = $this->getResource()->prepare($sql);
 
+		if (!$this->stmt) {
+			return;
+		}
+
 		if (null === $types) {
 			$this->stmt->execute($params);
 
@@ -68,6 +73,10 @@ class PdoAdapter implements DbAdapterInterface
 	protected function execute($sql, array $params, $types)
 	{
 		$this->stmt = $this->getResource()->prepare($sql);
+
+		if (!$this->stmt) {
+			return false;
+		}
 
 		if (null !== $types) {
 			$this->bindParams($params, $types);
