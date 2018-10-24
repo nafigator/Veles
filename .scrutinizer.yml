@@ -5,7 +5,7 @@ filter:
 
 build:
   environment:
-    memcached: true
+    memcached: false
     postgresql: false
     redis: false
     mysql: false
