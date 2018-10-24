@@ -19,8 +19,6 @@ use Traits\DynamicPropHandlerInterface;
 use Veles\DataBase\Db;
 use Veles\DataBase\DbFilter;
 use Veles\DataBase\DbPaginator;
-use Veles\Model\Traits\TableNameHandler;
-use Veles\Model\Traits\TableNameHandlerInterface;
 use Veles\Traits\DynamicPropHandler;
 
 /**
