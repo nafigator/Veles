@@ -26,6 +26,10 @@ engines:
         enabled: false
       CleanCode/StaticAccess:
         enabled: false
+  phan:
+    enabled: true
+    config:
+      file_extensions: php
   sonar-php:
     enabled: true
 
