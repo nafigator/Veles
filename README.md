@@ -18,10 +18,10 @@ Read more on [SemVer.org](http://semver.org).
 
   [Travis image]: https://travis-ci.org/nafigator/Veles.svg?branch=master
   [Travis repo]: https://travis-ci.org/nafigator/Veles
-  [CC quality status]: https://codeclimate.com/github/nafigator/Veles/badges/gpa.svg
-  [CC quality src]: https://codeclimate.com/github/nafigator/Veles
-  [CC coverage image]: https://codeclimate.com/github/nafigator/Veles/badges/coverage.svg
-  [CC coverage repo]: https://codeclimate.com/github/nafigator/Veles
+  [CC quality status]: https://api.codeclimate.com/v1/badges/2eefff871ca704c3d18c/maintainability
+  [CC quality src]: https://codeclimate.com/github/nafigator/Veles/maintainability
+  [CC coverage image]: https://api.codeclimate.com/v1/badges/2eefff871ca704c3d18c/test_coverage
+  [CC coverage repo]: https://codeclimate.com/github/nafigator/Veles/test_coverage
   [License img]: https://img.shields.io/badge/license-BSD3-brightgreen.svg
   [License src]: https://tldrlegal.com/license/bsd-3-clause-license-(revised)
   [Release img]: https://img.shields.io/badge/release-0.61.4-orange.svg
