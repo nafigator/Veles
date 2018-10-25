@@ -16,6 +16,7 @@
 namespace Veles\DataBase\Adapters;
 
 use PDO;
+use PDOException;
 use PDOStatement;
 use Veles\DataBase\Exceptions\DbException;
 
@@ -57,7 +58,7 @@ class PdoAdapter implements DbAdapterInterface
 		$this->stmt = $this->getResource()->prepare($sql);
 
 		if (!$this->stmt) {
-			return;
+			throw new PDOException('SQLSTATE[HY000]: Unknown error: 1105 PDOStatement Creating failure');
 		}
 
 		if (null === $types) {
@@ -90,13 +91,13 @@ class PdoAdapter implements DbAdapterInterface
 	/**
 	 * Throw DbException with query info
 	 *
-	 * @param string        $sql
-	 * @param array         $params
-	 * @param \PDOException $e
+	 * @param string       $sql
+	 * @param array        $params
+	 * @param PDOException $e
 	 *
 	 * @throws DbException
 	 */
-	protected function throwExceptionWithInfo($sql, array $params, \PDOException $e)
+	protected function throwExceptionWithInfo($sql, array $params, PDOException $e)
 	{
 		$exception = new DbException($e->getMessage(), (int) $e->getCode(), $e);
 		$exception->setSql($sql);
@@ -122,7 +123,7 @@ class PdoAdapter implements DbAdapterInterface
 		try {
 			$this->prepare($sql, $params, $types);
 			$result = $this->stmt->fetchColumn();
-		} catch (\PDOException $e) {
+		} catch (PDOException $e) {
 			$this->throwExceptionWithInfo($sql, $params, $e);
 		}
 
@@ -146,7 +147,7 @@ class PdoAdapter implements DbAdapterInterface
 		try {
 			$this->prepare($sql, $params, $types);
 			$result = $this->stmt->fetch();
-		} catch (\PDOException $e) {
+		} catch (PDOException $e) {
 			$this->throwExceptionWithInfo($sql, $params, $e);
 		}
 
@@ -170,7 +171,7 @@ class PdoAdapter implements DbAdapterInterface
 		try {
 			$this->prepare($sql, $params, $types);
 			$result = $this->stmt->fetchAll();
-		} catch (\PDOException $e) {
+		} catch (PDOException $e) {
 			$this->throwExceptionWithInfo($sql, $params, $e);
 		}
 
@@ -187,7 +188,7 @@ class PdoAdapter implements DbAdapterInterface
 	{
 		try {
 			$result = $this->getResource()->beginTransaction();
-		} catch (\PDOException $e) {
+		} catch (PDOException $e) {
 			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
 		}
 		return $result;
@@ -203,7 +204,7 @@ class PdoAdapter implements DbAdapterInterface
 	{
 		try {
 			$result = $this->getResource()->rollBack();
-		} catch (\PDOException $e) {
+		} catch (PDOException $e) {
 			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
 		}
 		return $result;
@@ -219,7 +220,7 @@ class PdoAdapter implements DbAdapterInterface
 	{
 		try {
 			$result = $this->getResource()->commit();
-		} catch (\PDOException $e) {
+		} catch (PDOException $e) {
 			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
 		}
 		return $result;
@@ -245,7 +246,7 @@ class PdoAdapter implements DbAdapterInterface
 			}
 
 			$result = $this->execute($sql, $params, $types);
-		} catch (\PDOException $e) {
+		} catch (PDOException $e) {
 			$this->throwExceptionWithInfo($sql, $params, $e);
 		}
 
@@ -262,7 +263,7 @@ class PdoAdapter implements DbAdapterInterface
 	{
 		try {
 			$result = (int) $this->getResource()->lastInsertId();
-		} catch (\PDOException $e) {
+		} catch (PDOException $e) {
 			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
 		}
 		return $result;
@@ -303,7 +304,7 @@ class PdoAdapter implements DbAdapterInterface
 	{
 		try {
 			$result = $this->getResource()->quote($var);
-		} catch (\PDOException $e) {
+		} catch (PDOException $e) {
 			throw new DbException($e->getMessage(), (int) $e->getCode(), $e);
 		}
 		return $result;
