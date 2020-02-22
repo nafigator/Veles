@@ -29,6 +29,9 @@
 	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.EndFile"/>
 	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.EmptyLines"/>
 
+	<!-- Check that there is not whitespaces before semicolon -->
+	<rule ref="Squiz.WhiteSpace.SemicolonSpacing.Incorrect"/>
+
 	<!-- Ensures long conditions have a comment at the end. -->
 	<rule ref="Squiz.Commenting.LongConditionClosingComment">
 		<properties>
