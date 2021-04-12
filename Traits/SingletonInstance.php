@@ -29,7 +29,7 @@ trait SingletonInstance
 	{
 		// This line fixes phpunit 5.0.5 "last parenthesis" coverage bug
 		if (null === static::$instance) {
-			$class = get_called_class();
+			$class = static::class;
 
 			static::$instance = new $class;
 		}

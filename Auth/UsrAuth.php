@@ -60,7 +60,7 @@ class UsrAuth implements SingletonInstanceInterface
 	{
 		$user_group = static::getUser()->getGroup();
 
-		return $user_group === ($user_group & $groups);
+		return $groups === ($user_group & $groups);
 	}
 
 	/**
