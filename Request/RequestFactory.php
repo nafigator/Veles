@@ -36,6 +36,10 @@ class RequestFactory
 			return new HttpGetRequest;
 		}
 
+		if (0 === strpos($type, 'application/json')) {
+			return new HttpJsonRequest;
+		}
+
 		return new HttpPostRequest;
 	}
 }
