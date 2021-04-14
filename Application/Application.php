@@ -17,10 +17,9 @@ namespace Veles\Application;
 
 use Application\Interfaces\RequestAwareInterface;
 use Application\Interfaces\RouteAwareInterface;
-use Application\Interfaces\VersionAwareInterface;
+use Exception;
 use Veles\Application\Traits\RequestTrait;
 use Veles\Application\Traits\RouteTrait;
-use Veles\Application\Traits\VersionTrait;
 use Veles\View\View;
 
 /**
@@ -29,17 +28,15 @@ use Veles\View\View;
  */
 class Application implements
 	RequestAwareInterface,
-	RouteAwareInterface,
-	VersionAwareInterface
+	RouteAwareInterface
 {
 	use RequestTrait;
 	use RouteTrait;
-	use VersionTrait;
 
 	/**
 	 * Application start
 	 *
-	 * @throws \Exception
+	 * @throws Exception
 	 */
 	public function run()
 	{
