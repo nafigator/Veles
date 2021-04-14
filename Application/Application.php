@@ -30,7 +30,6 @@ use Veles\View\View;
  * @author  Alexander Yancharuk <alex at itvault dot info>
  */
 class Application implements
-	EnvironmentAwareInterface,
 	RequestAwareInterface,
 	RouteAwareInterface,
 	VersionAwareInterface
@@ -38,7 +37,6 @@ class Application implements
 	use RequestTrait;
 	use RouteTrait;
 	use VersionTrait;
-	use EnvironmentTrait;
 
 	/**
 	 * Application start
