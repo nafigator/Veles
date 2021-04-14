@@ -15,11 +15,9 @@
 
 namespace Veles\Application;
 
-use Application\Interfaces\EnvironmentAwareInterface;
 use Application\Interfaces\RequestAwareInterface;
 use Application\Interfaces\RouteAwareInterface;
 use Application\Interfaces\VersionAwareInterface;
-use Veles\Application\Traits\EnvironmentTrait;
 use Veles\Application\Traits\RequestTrait;
 use Veles\Application\Traits\RouteTrait;
 use Veles\Application\Traits\VersionTrait;
