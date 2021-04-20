@@ -17,6 +17,7 @@ namespace Veles\Routing;
 
 use Exception;
 use Veles\Controllers\BaseController;
+use Veles\Controllers\RestApiController;
 use Veles\Request\HttpRequestAbstract;
 use Veles\Request\Validator\ValidatorInterface;
 
@@ -44,7 +45,7 @@ class Route extends RouteBase
 	 */
 	public function init()
 	{
-		list($uri, $section) = $this->parseUri();
+		[$uri, $section] = $this->parseUri();
 		$routes = $this->getConfigHandler()->getSection($section);
 
 		foreach ($routes as $name => $route) {
@@ -126,7 +127,7 @@ class Route extends RouteBase
 	/**
 	 * Build and return controller object
 	 *
-	 * @return BaseController
+	 * @return BaseController|RestApiController
 	 * @throws Exception
 	 */
 	public function getController()

@@ -29,7 +29,7 @@ class RestApiController extends BaseController
 	 *
 	 * @return array|null
 	 */
-	public function index()
+	public function index(): ?array
 	{
 		$method = strtolower($_SERVER['REQUEST_METHOD']);
 
