@@ -13,7 +13,7 @@
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
  */
 
-namespace Application;
+namespace Veles\Application;
 
 use Application\Interfaces\ApplicationInterface;
 use Application\Interfaces\RequestAwareInterface;
