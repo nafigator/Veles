@@ -37,7 +37,7 @@ class RouteBase
 	/**
 	 * @param AbstractRoutesConfig $handler
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function setConfigHandler(AbstractRoutesConfig $handler)
 	{
@@ -51,7 +51,7 @@ class RouteBase
 	 *
 	 * @param string $ex404 Not Found exception class name
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function setNotFoundException($ex404)
 	{
