@@ -14,14 +14,12 @@ language: php
 php:
   - 7.1
   - 7.2
-  - hhvm
   - nightly
 
 matrix:
   fast_finish: true
   allow_failures:
     - php: nightly
-    - php: hhvm
 
 before_script:
   - wget -q -O phpcs.phar https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
@@ -37,7 +35,7 @@ before_script:
         chmod +x ./cc-test-reporter
         ./cc-test-reporter before-build
         ;;
-      7.1)
+      7.2)
         PHPUNIT_FLAGS="-c Tests/travisci-phpunit.xml --coverage-clover build/logs/clover.xml"
         phpenv config-add Tests/travisci.ini
         wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-6.5.phar
@@ -49,12 +47,6 @@ before_script:
         phpenv config-rm xdebug.ini
         PHPUNIT_FLAGS="-c Tests/travisci-phpunit.xml"
         phpenv config-add Tests/travisci.ini
-        wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-6.5.phar
-        ;;
-      hhvm)
-        phpenv config-rm xdebug.ini
-        PHPUNIT_FLAGS="-c Tests/travisci-phpunit.xml"
-        cat Tests/travisci-hhvm.ini >> /etc/hhvm/php.ini
         wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-6.5.phar
         ;;
     esac
