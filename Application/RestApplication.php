@@ -15,9 +15,9 @@
 
 namespace Veles\Application;
 
-use Application\Interfaces\ApplicationInterface;
-use Application\Interfaces\RequestAwareInterface;
-use Application\Interfaces\RouteAwareInterface;
+use Veles\Application\Interfaces\ApplicationInterface;
+use Veles\Application\Interfaces\RequestAwareInterface;
+use Veles\Application\Interfaces\RouteAwareInterface;
 use Exception;
 use Veles\Application\Traits\RequestTrait;
 use Veles\Application\Traits\RouteTrait;

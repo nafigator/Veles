@@ -12,7 +12,7 @@
 
 namespace Veles\Application\Traits;
 
-use Application\Interfaces\ApplicationInterface;
+use Veles\Application\Interfaces\ApplicationInterface;
 use Veles\Request\HttpRequestAbstract;
 
 trait RequestTrait

@@ -15,7 +15,7 @@
 
 namespace Veles\Application\Traits;
 
-use Application\Interfaces\ApplicationInterface;
+use Veles\Application\Interfaces\ApplicationInterface;
 use Veles\Routing\Route;
 
 trait RouteTrait

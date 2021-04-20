@@ -15,7 +15,7 @@
 
 namespace Veles\Controllers;
 
-use Application\Interfaces\ApplicationAwareInterface;
+use Veles\Application\Interfaces\ApplicationAwareInterface;
 use Veles\Application\Traits\ApplicationTrait;
 
 /**
