@@ -4,7 +4,7 @@
  *
  * @file      RedirectAdapter.php
  *
- * PHP version 7.0+
+ * PHP version 7.1+
  *
  * @author    Yancharuk Alexander <alex at itvault dot info>
  * @date      2017-02-19 23:16
