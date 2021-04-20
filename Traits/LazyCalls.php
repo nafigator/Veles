@@ -30,7 +30,7 @@ trait LazyCalls
 	 */
 	protected static function invokeLazyCalls()
 	{
-		list($calls, static::$calls) = [static::$calls, []];
+		[$calls, static::$calls] = [static::$calls, []];
 
 		foreach ($calls as $call) {
 			call_user_func_array(
@@ -46,7 +46,7 @@ trait LazyCalls
 	public static function instance()
 	{
 		if (null === static::$instance) {
-			$class = get_called_class();
+			$class = static::class;
 
 			static::$instance = new $class;
 		}
