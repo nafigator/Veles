@@ -15,7 +15,7 @@
 
 namespace Veles\Application\Traits;
 
-use Veles\Application\Application;
+use Veles\Application\Interfaces\ApplicationInterface;
 
 trait ApplicationTrait
 {
@@ -24,9 +24,9 @@ trait ApplicationTrait
 	/**
 	 * Get application object
 	 *
-	 * @return Application
+	 * @return ApplicationInterface|static
 	 */
-	public function getApplication()
+	public function getApplication(): ApplicationInterface
 	{
 		return $this->application;
 	}
@@ -34,11 +34,11 @@ trait ApplicationTrait
 	/**
 	 * Set application
 	 *
-	 * @param Application $application
+	 * @param ApplicationInterface $application
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function setApplication(Application $application)
+	public function setApplication(ApplicationInterface $application)
 	{
 		$this->application = $application;
 

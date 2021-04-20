@@ -13,25 +13,23 @@
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
  */
 
-namespace Application\Interfaces;
-
-use Veles\Application\Application;
+namespace Veles\Application\Interfaces;
 
 interface ApplicationAwareInterface
 {
 	/**
 	 * Get application object
 	 *
-	 * @return Application
+	 * @return ApplicationInterface
 	 */
-	public function getApplication();
+	public function getApplication(): ApplicationInterface;
 
 	/**
 	 * Set application
 	 *
-	 * @param Application $application
+	 * @param ApplicationInterface $application
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function setApplication(Application $application);
+	public function setApplication(ApplicationInterface $application);
 }

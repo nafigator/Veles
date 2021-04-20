@@ -15,7 +15,7 @@
 
 namespace Veles\Controllers;
 
-use Application\Interfaces\ApplicationAwareInterface;
+use Veles\Application\Interfaces\ApplicationAwareInterface;
 use Veles\Application\Traits\ApplicationTrait;
 
 /**
@@ -34,7 +34,7 @@ class BaseController implements ApplicationAwareInterface
 	 *
 	 * @return string
 	 */
-	protected function getParam($name)
+	protected function getParam(string $name): string
 	{
 		$params = $this->getApplication()->getRoute()->getParams();
 
@@ -48,7 +48,7 @@ class BaseController implements ApplicationAwareInterface
 	 *
 	 * @return array
 	 */
-	protected function getData($definitions)
+	protected function getData($definitions): array
 	{
 		return $this->getApplication()->getRequest()->getData($definitions);
 	}

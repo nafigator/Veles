@@ -4,7 +4,7 @@
  *
  * @file      RestApiController.php
  *
- * PHP version 7.0+
+ * PHP version 7.1+
  *
  * @author    Yancharuk Alexander <alex at itvault dot info>
  * @copyright © 2012-2020 Alexander Yancharuk <alex at itvault at info>
@@ -29,7 +29,7 @@ class RestApiController extends BaseController
 	 *
 	 * @return array|null
 	 */
-	public function index()
+	public function index(): ?array
 	{
 		$method = strtolower($_SERVER['REQUEST_METHOD']);
 

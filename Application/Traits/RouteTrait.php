@@ -4,7 +4,7 @@
  *
  * @file    RouteTrait.php
  *
- * PHP version 7.0+
+ * PHP version 7.1+
  *
  * @author    Yancharuk Alexander <alex at itvault dot info>
  * @copyright © 2012-2020 Alexander Yancharuk
@@ -15,6 +15,7 @@
 
 namespace Veles\Application\Traits;
 
+use Veles\Application\Interfaces\ApplicationInterface;
 use Veles\Routing\Route;
 
 trait RouteTrait
@@ -26,9 +27,10 @@ trait RouteTrait
 	 * Set route object
 	 *
 	 * @param Route $route
-	 * @return $this
+	 *
+	 * @return ApplicationInterface|static
 	 */
-	public function setRoute(Route $route)
+	public function setRoute(Route $route): self
 	{
 		$this->route = $route;
 
@@ -40,7 +42,7 @@ trait RouteTrait
 	 *
 	 * @return Route
 	 */
-	public function getRoute()
+	public function getRoute(): Route
 	{
 		return $this->route;
 	}

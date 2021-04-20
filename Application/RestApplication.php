@@ -1,14 +1,14 @@
 <?php
 /**
- * Class with MVC implementation
+ * Application class intended for use with RestApiController
  *
- * @file      Application.php
+ * @file      RestApplication.php
  *
  * PHP version 7.1+
  *
- * @author    Alexander Yancharuk <alex at itvault dot info>
- * @copyright © 2012-2020 Alexander Yancharuk
- * @date      Птн Июн 08 18:10:37 2012
+ * @author    Yancharuk Alexander <alex at itvault dot info>
+ * @copyright © 2012-2021 Alexander Yancharuk <alex at itvault at info>
+ * @date      2021-04-20 07:03
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
  */
@@ -24,10 +24,11 @@ use Veles\Application\Traits\RouteTrait;
 use Veles\View\View;
 
 /**
- * Class Application
- * @author  Alexander Yancharuk <alex at itvault dot info>
+ * Class   RestApplication
+ *
+ * @author Yancharuk Alexander <alex at itvault dot info>
  */
-class Application implements
+class RestApplication implements
 	ApplicationInterface,
 	RequestAwareInterface,
 	RouteAwareInterface
@@ -44,9 +45,8 @@ class Application implements
 	{
 		$route      = $this->getRoute();
 		$controller = $route->getController();
-		$action     = $route->getActionName();
 
-		if ($vars = $controller->setApplication($this)->$action()) {
+		if ($vars = $controller->setApplication($this)->index()) {
 			View::set($vars);
 		}
 
