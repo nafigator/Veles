@@ -15,7 +15,18 @@
 
 namespace Veles\Application\Interfaces;
 
+use Veles\Request\HttpRequestAbstract;
+use Veles\Routing\Route;
+
 interface ApplicationInterface
 {
 	public function run(): void;
+
+	public function getRoute(): Route;
+
+	public function setRequest(HttpRequestAbstract $request);
+
+	public function getRequest(): HttpRequestAbstract;
+
+	public function setRoute(Route $route);
 }

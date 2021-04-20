@@ -23,6 +23,11 @@ use Veles\Application\Traits\RequestTrait;
 use Veles\Application\Traits\RouteTrait;
 use Veles\View\View;
 
+/**
+ * Class   RestApplication
+ *
+ * @author Yancharuk Alexander <alex at itvault dot info>
+ */
 class RestApplication implements
 	ApplicationInterface,
 	RequestAwareInterface,
