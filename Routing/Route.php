@@ -20,6 +20,7 @@ use Veles\Controllers\BaseController;
 use Veles\Controllers\RestApiController;
 use Veles\Request\HttpRequestAbstract;
 use Veles\Request\Validator\ValidatorInterface;
+use Veles\View\Adapters\ViewAdapterAbstract;
 
 /**
  * Class Route
@@ -37,19 +38,21 @@ class Route extends RouteBase
 	protected $validator;
 	/** @var  HttpRequestAbstract */
 	protected $request;
+	/** @var string */
+	protected $uri = '';
 
 	/**
 	 * Config parser and controller vars initialisation
 	 *
 	 * @throws Exception
 	 */
-	public function init()
+	public function init(): self
 	{
 		[$uri, $section] = $this->parseUri();
-		$routes = $this->getConfigHandler()->getSection($section);
+		$this->uri = $uri;
+		$routes    = $this->getConfigHandler()->getSection($section);
 
 		foreach ($routes as $name => $route) {
-			/** @noinspection PhpUndefinedMethodInspection */
 			if (!$route['class']::check($route['route'], $uri)) {
 				continue;
 			}
@@ -61,12 +64,22 @@ class Route extends RouteBase
 	}
 
 	/**
+	 * Get current URI
+	 *
+	 * @return string
+	 */
+	public function getUri(): string
+	{
+		return $this->uri;
+	}
+
+	/**
 	 * Process route
 	 *
 	 * @param $name
 	 * @param array $config
 	 */
-	protected function process($name, array $config)
+	protected function process($name, array $config): void
 	{
 		$this->config = $config;
 		$this->name   = $name;
@@ -75,7 +88,7 @@ class Route extends RouteBase
 			$this->template = $config['tpl'];
 		}
 
-		if ('Veles\Routing\RouteRegex' === $config['class']) {
+		if (RouteRegex::class === $config['class']) {
 			/** @noinspection PhpUndefinedMethodInspection */
 			$this->params = $config['class']::getParams();
 		}
@@ -87,10 +100,11 @@ class Route extends RouteBase
 	 * @return array
 	 * @codeCoverageIgnore
 	 */
-	protected function parseUri()
+	protected function parseUri(): array
 	{
 		$uri = parse_url(
-			filter_input(INPUT_SERVER, 'REQUEST_URI'), PHP_URL_PATH
+			filter_input(INPUT_SERVER, 'REQUEST_URI'),
+			PHP_URL_PATH
 		);
 
 		$parts   = explode('/', $uri);
@@ -104,7 +118,7 @@ class Route extends RouteBase
 	 *
 	 * @return $this
 	 */
-	protected function execNotFoundHandler()
+	protected function execNotFoundHandler(): self
 	{
 		if (null === $this->config && null !== $this->ex404) {
 			throw new $this->ex404;
@@ -116,12 +130,12 @@ class Route extends RouteBase
 	/**
 	 * Getting ajax-flag
 	 *
-	 * @throws Exception
 	 * @return bool
+	 * @throws Exception
 	 */
-	public function isAjax()
+	public function isAjax(): bool
 	{
-		return isset($this->config['ajax']) ? true : false;
+		return isset($this->config['ajax']);
 	}
 
 	/**
@@ -144,10 +158,10 @@ class Route extends RouteBase
 	/**
 	 * Get controller method name
 	 *
-	 * @throws Exception
 	 * @return string
+	 * @throws Exception
 	 */
-	public function getActionName()
+	public function getActionName(): string
 	{
 		if (!isset($this->config['action'])) {
 			throw new Exception('Action not set!');
@@ -159,8 +173,8 @@ class Route extends RouteBase
 	/**
 	 * Get View adapter class
 	 *
-	 * @return \Veles\View\Adapters\ViewAdapterAbstract
-	 * @throws \Exception
+	 * @return ViewAdapterAbstract
+	 * @throws Exception
 	 */
 	public function getAdapter()
 	{
@@ -168,8 +182,9 @@ class Route extends RouteBase
 			throw new Exception('Route adapter not set!');
 		}
 
-		/** @var \Veles\View\Adapters\ViewAdapterAbstract $adapter_name */
+		/** @var ViewAdapterAbstract $adapter_name */
 		$adapter_name = $this->config['view'];
+
 		return $adapter_name::instance();
 	}
 
@@ -178,7 +193,7 @@ class Route extends RouteBase
 	 *
 	 * @return string
 	 */
-	public function getName()
+	public function getName(): string
 	{
 		return $this->name;
 	}
@@ -188,15 +203,17 @@ class Route extends RouteBase
 	 *
 	 * @return array
 	 */
-	public function getParams()
+	public function getParams(): array
 	{
 		return $this->params;
 	}
 
 	/**
 	 * Return template path
+	 *
+	 * @return string
 	 */
-	public function getTemplate()
+	public function getTemplate(): string
 	{
 		return $this->template;
 	}
