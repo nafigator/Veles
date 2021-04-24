@@ -52,7 +52,7 @@ class User extends ActiveRecord
 	 */
 	public function getHash()
 	{
-		return isset($this->hash) ? $this->hash : null;
+		return $this->hash ?? null;
 	}
 
 	/**
