@@ -15,6 +15,7 @@
 
 namespace Veles\Auth\Strategies;
 
+use Exception;
 use Veles\Auth\UsrGroup;
 use Veles\DataBase\DbFilter;
 use Veles\Model\User;
@@ -44,9 +45,9 @@ class LoginFormStrategy extends AbstractAuthStrategy
 	 * User authentication by login form
 	 *
 	 * @return bool
-	 * @throws \Exception
+	 * @throws Exception
 	 */
-	public function identify()
+	public function identify(): bool
 	{
 		$filter = new DbFilter;
 
