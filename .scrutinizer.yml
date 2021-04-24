@@ -20,28 +20,32 @@ build:
           - phpcs-run -p --encoding=utf-8 --standard=phpcs.xml --ignore=Tests,vendor -w --colors
           - php-scrutinizer-run --enable-security-analysis
 
-    php71:
+    php74:
       environment:
         php:
-          version: 7.1.12
+          version: 7.4.16
+          pecl_extensions:
+            - memcached
           ini:
-            'short_open_tag': 'On'
+            short_open_tag: On
 
       project_setup:
         after:
-          - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-6.5.phar
+          - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-9.phar
           - chmod 755 phpunit.phar
 
-    php72:
+    php80:
       environment:
         php:
-          version: 7.2.0
+          version: 8.0.3
+          pecl_extensions:
+            - memcached
           ini:
-            'short_open_tag': 'On'
+            short_open_tag: On
 
       project_setup:
         after:
-          - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-7.phar
+          - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-9.phar
           - chmod 755 phpunit.phar
 
   dependencies:
