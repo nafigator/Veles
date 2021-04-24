@@ -11,6 +11,9 @@ sudo: false
 
 language: php
 
+services:
+  - memcached
+
 php:
   - 7.4
   - 8.0
