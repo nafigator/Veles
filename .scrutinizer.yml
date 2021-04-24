@@ -24,6 +24,8 @@ build:
       environment:
         php:
           version: 7.4.16
+          pecl_extensions:
+            - memcached
           ini:
             short_open_tag: On
 
@@ -36,6 +38,8 @@ build:
       environment:
         php:
           version: 8.0.3
+          pecl_extensions:
+            - memcached
           ini:
             short_open_tag: On
 
