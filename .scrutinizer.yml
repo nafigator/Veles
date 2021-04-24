@@ -25,7 +25,7 @@ build:
         php:
           version: 7.4.16
           ini:
-            'short_open_tag': 'On'
+            short_open_tag: On
 
       project_setup:
         after:
@@ -37,7 +37,7 @@ build:
         php:
           version: 8.0.3
           ini:
-            'short_open_tag': 'On'
+            short_open_tag: On
 
       project_setup:
         after:
