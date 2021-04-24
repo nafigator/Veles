@@ -12,14 +12,13 @@ sudo: false
 language: php
 
 php:
-  - 7.1
-  - 7.2
-  - nightly
+  - 7.4
+  - 8.0
 
 matrix:
   fast_finish: true
   allow_failures:
-    - php: nightly
+    - php: 8.0
 
 before_script:
   - wget -q -O phpcs.phar https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
@@ -27,27 +26,19 @@ before_script:
   - git submodule add -f --name tests https://github.com/nafigator/Veles-unit-tests.git Tests
   - |
     case $TRAVIS_PHP_VERSION in
-      7.1)
-        PHPUNIT_FLAGS="-c Tests/travisci-phpunit.xml --coverage-clover build/logs/clover.xml"
-        phpenv config-add Tests/travisci.ini
-        wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-6.5.phar
-        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-        chmod +x ./cc-test-reporter
-        ./cc-test-reporter before-build
-        ;;
-      7.2)
-        PHPUNIT_FLAGS="-c Tests/travisci-phpunit.xml --coverage-clover build/logs/clover.xml"
-        phpenv config-add Tests/travisci.ini
-        wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-6.5.phar
-        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-        chmod +x ./cc-test-reporter
-        ./cc-test-reporter before-build
-        ;;
-      nightly)
+      7.4)
+          PHPUNIT_FLAGS="-c Tests/travisci-phpunit.xml --coverage-clover build/logs/clover.xml"
+          phpenv config-add Tests/travisci.ini
+          wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-9.phar
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter before-build
+          ;;
+      8.0)
         phpenv config-rm xdebug.ini
         PHPUNIT_FLAGS="-c Tests/travisci-phpunit.xml"
         phpenv config-add Tests/travisci.ini
-        wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-6.5.phar
+        wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-9.phar
         ;;
     esac
   - chmod 755 phpunit.phar
@@ -58,6 +49,6 @@ script:
 
 after_script:
   - |
-    if [[ $TRAVIS_PHP_VERSION = '7.1' && $TRAVIS_BRANCH = 'master' ]]; then
+    if [[ $TRAVIS_PHP_VERSION = '7.4' && $TRAVIS_BRANCH = 'master' ]]; then
       ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
     fi

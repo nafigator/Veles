@@ -7,7 +7,7 @@
  * PHP version 7.1+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
- * @copyright © 2012-2020 Alexander Yancharuk
+ * @copyright © 2012-2021 Alexander Yancharuk
  * @date      Вск Янв 27 17:40:18 2013
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>.
@@ -15,6 +15,7 @@
 
 namespace Veles\Auth\Strategies;
 
+use Exception;
 use Veles\Auth\UsrGroup;
 use Veles\DataBase\DbFilter;
 use Veles\Model\User;
@@ -44,9 +45,9 @@ class LoginFormStrategy extends AbstractAuthStrategy
 	 * User authentication by login form
 	 *
 	 * @return bool
-	 * @throws \Exception
+	 * @throws Exception
 	 */
-	public function identify()
+	public function identify(): bool
 	{
 		$filter = new DbFilter;
 

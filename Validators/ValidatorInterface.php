@@ -7,7 +7,7 @@
  * PHP version 7.1+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
- * @copyright © 2012-2020 Alexander Yancharuk
+ * @copyright © 2012-2021 Alexander Yancharuk
  * @date      Втр Авг 14 23:58:56 2012
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>

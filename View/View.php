@@ -7,7 +7,7 @@
  * PHP version 7.1+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
- * @copyright © 2012-2020 Alexander Yancharuk
+ * @copyright © 2012-2021 Alexander Yancharuk
  * @date      Сбт Июл 07 07:30:30 2012
  * @license   The BSD 3-Clause License
  *            <https://tldrlegal.com/license/bsd-3-clause-license-(revised)>
@@ -110,7 +110,7 @@ class View
 	 * @return bool
 	 * @throws Exception
 	 */
-	public static function isCached($tpl)
+	public static function isCached($tpl): bool
 	{
 		return self::getAdapter()->isCached($tpl);
 	}
