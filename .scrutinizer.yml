@@ -29,7 +29,7 @@ build:
 
       project_setup:
         after:
-          - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-7.phar
+          - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-9.phar
           - chmod 755 phpunit.phar
 
     php83:
@@ -41,7 +41,7 @@ build:
 
       project_setup:
         after:
-          - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-7.phar
+          - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-9.phar
           - chmod 755 phpunit.phar
 
   dependencies:
