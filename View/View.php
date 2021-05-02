@@ -110,7 +110,7 @@ class View
 	 * @return bool
 	 * @throws Exception
 	 */
-	public static function isCached($tpl)
+	public static function isCached($tpl): bool
 	{
 		return self::getAdapter()->isCached($tpl);
 	}
