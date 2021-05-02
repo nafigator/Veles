@@ -34,7 +34,7 @@ build:
           - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-9.phar
           - chmod 755 phpunit.phar
 
-    php83:
+    php80:
       environment:
         php:
           version: 8.0.3
