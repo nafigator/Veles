@@ -34,20 +34,6 @@ build:
           - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-9.phar
           - chmod 755 phpunit.phar
 
-    php80:
-      environment:
-        php:
-          version: 8.0.3
-          pecl_extensions:
-            - memcached
-          ini:
-            short_open_tag: On
-
-      project_setup:
-        after:
-          - wget -q -O phpunit.phar https://phar.phpunit.de/phpunit-9.phar
-          - chmod 755 phpunit.phar
-
   dependencies:
     # Runs before inferred commands
     before: []
