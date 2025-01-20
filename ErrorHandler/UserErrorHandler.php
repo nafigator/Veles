@@ -4,7 +4,7 @@
  *
  * @file      UserErrorHandler.php
  *
- * PHP version 7.1+
+ * PHP version 8.0+
  *
  * @author    Yancharuk Alexander <alex at itvault dot info>
  * @copyright © 2012-2021 Alexander Yancharuk
@@ -21,7 +21,7 @@ namespace Veles\ErrorHandler;
  */
 class UserErrorHandler extends BaseErrorHandler
 {
-	public function run($type, $message, $file, $line, $defined)
+	public function run($type, $message, $file, $line)
 	{
 		$this->vars['type']    = $type;
 		$this->vars['time']    = $this->getTime();
@@ -29,7 +29,6 @@ class UserErrorHandler extends BaseErrorHandler
 		$this->vars['file']    = $file;
 		$this->vars['line']    = $line;
 		$this->vars['stack']   = array_reverse(debug_backtrace());
-		$this->vars['defined'] = $defined;
 
 		$this->notify();
 	}

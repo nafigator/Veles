@@ -4,7 +4,7 @@
  *
  * @file      BaseErrorHandler.php
  *
- * PHP version 7.1+
+ * PHP version 8.0+
  *
  * @author    Yancharuk Alexander <alex at itvault dot info>
  * @copyright © 2012-2021 Alexander Yancharuk
@@ -46,7 +46,7 @@ class BaseErrorHandler implements \SplSubject
 	public function getTime()
 	{
 		if (null === $this->time) {
-			$this->time = strftime('%Y-%m-%d %H:%M:%S', time());
+			$this->time = date('Y-m-d H:i:s', time());
 		}
 
 		return $this->time;

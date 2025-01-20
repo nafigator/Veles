@@ -4,7 +4,7 @@
  *
  * @file      PhpFilters.php
  *
- * PHP version 7.1+
+ * PHP version 8.0+
  *
  * @author    Yancharuk Alexander <alex at itvault dot info>
  * @date      2017-01-21 16:11

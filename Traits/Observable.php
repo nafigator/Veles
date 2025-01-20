@@ -6,7 +6,7 @@
  *
  * @file      Observable.php
  *
- * PHP version 7.1+
+ * PHP version 8.0+
  *
  * @author    Alexander Yancharuk <alex at itvault dot info>
  * @copyright © 2012-2021 Alexander Yancharuk
