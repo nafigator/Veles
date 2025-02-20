@@ -37,7 +37,7 @@ class ErrorRenderer implements \SplObserver
 	 *
 	 * @throws \Exception
 	 */
-	public function update(\SplSubject $subject)
+	public function update(\SplSubject $subject): void
 	{
 		if (!$subject instanceof BaseErrorHandler) {
 			return;
