@@ -33,8 +33,10 @@ trait Observable
 	 * Add subscriber
 	 *
 	 * @param SplObserver $observer Подписчик
+     *
+     * @return void
 	 */
-	public function attach(SplObserver $observer)
+	public function attach(SplObserver $observer): void
 	{
 		$this->observers[] = $observer;
 	}
@@ -43,8 +45,10 @@ trait Observable
 	 * Remove subscriber
 	 *
 	 * @param SplObserver $observer Подписчик
+     *
+     * @return void
 	 */
-	public function detach(SplObserver $observer)
+	public function detach(SplObserver $observer): void
 	{
 		if (false !== ($key = array_search($observer, $this->observers, true))) {
 			unset($this->observers[$key]);
@@ -53,8 +57,10 @@ trait Observable
 
 	/**
 	 * Notify subscribers
+     *
+     * @return void
 	 */
-	public function notify()
+	public function notify(): void
 	{
 		foreach ($this->observers as $value) {
 			/** @noinspection PhpParamsInspection */
