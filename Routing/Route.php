@@ -48,7 +48,16 @@ class Route extends RouteBase
 	 */
 	public function init(): self
 	{
-		[$uri, $section] = $this->parseUri();
+		$path = parse_url(
+			filter_input(INPUT_SERVER, 'REQUEST_URI'),
+			PHP_URL_PATH
+		);
+
+		if (!is_string($path)) {
+			return $this->execNotFoundHandler();
+		}
+
+		[$uri, $section] = $this->parseUri($path);
 		$this->uri = $uri;
 		$routes    = $this->getConfigHandler()->getSection($section);
 
@@ -97,16 +106,13 @@ class Route extends RouteBase
 	/**
 	 * Safe way to get uri
 	 *
+	 * @param  string  $uri
+	 *
 	 * @return array
 	 * @codeCoverageIgnore
 	 */
-	protected function parseUri(): array
+	protected function parseUri(string $uri): array
 	{
-		$uri = parse_url(
-			filter_input(INPUT_SERVER, 'REQUEST_URI'),
-			PHP_URL_PATH
-		);
-
 		$parts   = explode('/', $uri);
 		$section = isset($parts[2]) ? $parts[1] : '';
 
