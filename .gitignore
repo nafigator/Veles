@@ -3,3 +3,6 @@
 
 # Ignore coverage-report dir
 /coverage-report
+
+coverage.sh
+tests.sh
