@@ -45,6 +45,10 @@ class NotAllowedException extends HttpResponseException
 		if ('' !== $methods) {
 			header("Allowed: $methods", true);
 		}
+
+		$method = filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_ENCODED);
+
+		$this->message = "Method $method not allowed";
 	}
 
 	/**

@@ -24,8 +24,7 @@ namespace Veles\Exceptions\Http;
  */
 class BadRequestException extends UnprocessableException
 {
-	/** @var string  */
 	protected $http_msg = 'HTTP/1.1 400 Bad Request';
-	/** @var int  */
 	protected $http_code = 400;
+	protected $message = 'Bad request';
 }

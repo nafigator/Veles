@@ -24,10 +24,9 @@ namespace Veles\Exceptions\Http;
  */
 class UnprocessableException extends HttpResponseException
 {
-	/** @var string  */
-	protected $http_msg = 'HTTP/1.1 422 Bad Request';
-	/** @var int  */
+	protected $http_msg = 'HTTP/1.1 422 Unprocessable';
 	protected $http_code = 422;
+	protected $message = 'Unprocessable request';
 
 	/**
 	 * Throw BadRequestException with proper HTTP code

@@ -28,5 +28,8 @@ class NotFoundException extends HttpResponseException
 	{
 		parent::__construct();
 		header('HTTP/1.1 404 Not Found', true, 404);
+
+		$uri = filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_ENCODED);
+		$this->message = "URI '$uri' not found";
 	}
 }

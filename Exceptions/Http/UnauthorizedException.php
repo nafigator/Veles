@@ -26,6 +26,7 @@ class UnauthorizedException extends HttpResponseException
 {
 	protected $realm = 'Application Name';
 	protected $type  = 'Basic';
+	protected $message = 'Unauthorized request';
 
 	public function __construct()
 	{

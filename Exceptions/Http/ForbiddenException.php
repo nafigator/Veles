@@ -24,6 +24,8 @@ namespace Veles\Exceptions\Http;
  */
 class ForbiddenException extends HttpResponseException
 {
+	protected $message = 'Request forbidden';
+
 	public function __construct()
 	{
 		parent::__construct();

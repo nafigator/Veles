@@ -24,6 +24,8 @@ namespace Veles\Exceptions\Http;
  */
 class NotImplementedException extends HttpResponseException
 {
+	protected $message = 'Not implemented';
+
 	public function __construct()
 	{
 		parent::__construct();

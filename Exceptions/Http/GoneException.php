@@ -24,6 +24,8 @@ namespace Veles\Exceptions\Http;
  */
 class GoneException extends HttpResponseException
 {
+	protected $message = 'Request gone';
+
 	public function __construct()
 	{
 		parent::__construct();
