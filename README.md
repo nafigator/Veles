@@ -2,7 +2,7 @@
 
 PHP micro framework
 
-[![GitHub license][License img]][License src] [![GitHub release][Release img]][Release src] [![Size status][Size img]][Release src]
+[![GitHub license][License img]][License src] [![GitHub release][Release img]][Release src] [![Size status][Size img]][Release src] [![Conventional Commits][Conventional commits badge]][Conventional commits src]
 
 | Scrutinizer stable | Travis CI stable | Code Climate |
 |:----------------:|:----------------:|:--------------------:|
@@ -24,12 +24,14 @@ Read more on [SemVer.org](http://semver.org).
   [CC coverage repo]: https://codeclimate.com/github/nafigator/Veles/test_coverage
   [License img]: https://img.shields.io/badge/license-BSD3-brightgreen.svg
   [License src]: https://tldrlegal.com/license/bsd-3-clause-license-(revised)
-  [Release img]: https://img.shields.io/badge/release-0.69.3-orange.svg
+  [Release img]: https://img.shields.io/github/v/tag/nafigator/Veles?logo=github&labelColor=orange
   [Release src]: https://github.com/nafigator/Veles
-  [Size img]: https://img.shields.io/badge/size-7.0M-blue.svg
+  [Size img]: https://img.shields.io/github/repo-size/nafigator/Veles?logo=github&color=blue
   [Scrutinizer master quality image]: https://scrutinizer-ci.com/g/nafigator/Veles/badges/quality-score.png?b=master
   [Scrutinizer master src]: https://scrutinizer-ci.com/g/nafigator/Veles/?branch=master
   [Scrutinizer master coverage image]: https://scrutinizer-ci.com/g/nafigator/Veles/badges/coverage.png?b=master
   [Scrutinizer master coverage src]: https://scrutinizer-ci.com/g/nafigator/Veles/?branch=master
   [Scrutinizer master status image]: https://scrutinizer-ci.com/g/nafigator/Veles/badges/build.png?b=master
   [Scrutinizer master status src]: https://scrutinizer-ci.com/g/nafigator/Veles/?branch=master
+  [Conventional commits src]: https://conventionalcommits.org
+  [Conventional commits badge]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-blue.svg
